@@ -1,3 +1,3 @@
 # project_acg
-follow me  
-環境:unity 4.6.3  
+專案名稱 : follow me  
+開發環境 : unity 4.6.3  
