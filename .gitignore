@@ -15,3 +15,7 @@
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
+Client/Assembly-CSharp-Editor-vs.csproj
+*.csproj
+Client/Client-csharp.sln
+*.sln
