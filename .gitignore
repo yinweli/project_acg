@@ -19,3 +19,6 @@ Client/Assembly-CSharp-Editor-vs.csproj
 *.csproj
 Client/Client-csharp.sln
 *.sln
+Client/Assembly-CSharp-vs.csproj
+Client/Assembly-CSharp-vs.csproj
+Client/Client.userprefs
