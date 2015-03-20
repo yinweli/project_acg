@@ -42,6 +42,8 @@ public class EnemyCreater : MonoBehaviour
     {
         GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/" + Name) as GameObject);
         pObj.transform.localPosition = new Vector3(fPosX, fPosY);
+
+        SysMain.pthis.Enemy.Add(pObj,1);
         return pObj;
     }
     // ------------------------------------------------------------------
@@ -52,18 +54,6 @@ public class EnemyCreater : MonoBehaviour
         EnemyList.Clear();
 
         // 測試用資料先.
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");

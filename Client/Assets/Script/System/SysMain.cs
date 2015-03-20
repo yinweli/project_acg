@@ -11,9 +11,9 @@ public class SysMain : MonoBehaviour
     public int iStage = 1;
 
     // 人物佇列.
-    public List<GameObject> Role = new List<GameObject>();
+    public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 敵人佇列.
-    public List<GameObject> Enemy = new List<GameObject>();
+    public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -22,7 +22,7 @@ public class SysMain : MonoBehaviour
 
     void OnDestroy()
     {
-        pthis = null;
+        //pthis = null;
     }
     // ------------------------------------------------------------------
 	// Use this for initialization

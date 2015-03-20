@@ -4,23 +4,17 @@ using System.Collections;
 public class BtnDragLight : MonoBehaviour
 {
     public GameObject ObjLight;
+    public GameObject ObjRange;
 
     void OnDrag(Vector2 delta)
     {
-        float fFinalDeg = 0;
-        float fDeg = Mathf.Atan(transform.localPosition.x / transform.localPosition.y) * Mathf.Rad2Deg;
+        Vector3 diff = transform.position - ObjLight.transform.position;
+        float rot_x = Mathf.Atan2(diff.x, diff.y) * Mathf.Rad2Deg;
+        ObjLight.transform.rotation = Quaternion.Euler(rot_x - 90, 90, 90);
 
-        if (transform.localPosition.x > 0 && (int)Mathf.Abs(fDeg) == 90)
-            fFinalDeg = 0;
-        else if (transform.localPosition.x < 0 && (int)Mathf.Abs(fDeg) == 90)
-            fFinalDeg = 180;
-        else if (transform.localPosition.y > 0) // 第一象限.第三象限
-            fFinalDeg = fDeg - 90;
-        else
-            fFinalDeg = fDeg + 90;
-
-        Debug.Log("fDeg: " + fDeg + ", fFinalDeg: " + fFinalDeg);
-        ObjLight.transform.localEulerAngles = new Vector3(fFinalDeg, 90, 90);
+        diff = transform.position - ObjRange.transform.position;
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        ObjRange.transform.rotation = Quaternion.Euler(0, 0, rot_z - 90);
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AIEnemy : MonoBehaviour 
 {
@@ -14,14 +15,21 @@ public class AIEnemy : MonoBehaviour
 
     // 是否已抓了人.
     public bool bHasTarget = false;
-
+    
 	// Use this for initialization
 	void Start () 
     {
         //測試先指定目標.
-        ObjTarget = SysMain.pthis.Role[Random.Range(0, SysMain.pthis.Role.Count)];
+        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomDictionary(SysMain.pthis.Role, new System.Random());
+        ObjTarget = pTemp.Key;
 	}
-
+    // ------------------------------------------------------------------
+    void OnDestroy()
+    {
+        if (SysMain.pthis.Enemy.ContainsKey(gameObject))
+            SysMain.pthis.Enemy.Remove(gameObject);
+    }
+    // ------------------------------------------------------------------
     void Update()
     {
         // 沒血消失.
@@ -38,7 +46,34 @@ public class AIEnemy : MonoBehaviour
         //if (!ObjTarget && !bHasTarget)
             Chace();
     }
+    // ------------------------------------------------------------------
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Light")
+        {
+            if (!SysMain.pthis.Enemy.ContainsKey(gameObject))
+                SysMain.pthis.Enemy.Add(gameObject, iThreat);
+        }
+    }
+    // ------------------------------------------------------------------
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Light")
+        {
+            if (SysMain.pthis.Enemy.ContainsKey(gameObject))
+                SysMain.pthis.Enemy.Remove(gameObject);
+        }
+    }
+    // ------------------------------------------------------------------
+    public void AddHP(int iValue)
+    {
+        iHP += iValue;
 
+        // 沒血消失.
+        if (iHP <= 0)
+            Destroy(gameObject);
+    }
+    // ------------------------------------------------------------------
     void FindTarget()
     {
         // 如果已經抓了人就不用再找目標了.

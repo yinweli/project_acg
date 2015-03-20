@@ -5,3 +5,11 @@
 
     EnemyCount,
 }
+
+public enum WeaponType
+{
+    Weapon_001,
+    Weapon_002,
+
+    WeaponCount,
+}
