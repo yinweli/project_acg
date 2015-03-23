@@ -3,6 +3,8 @@ using System.Collections;
 
 public class AIBullet : MonoBehaviour 
 {
+    // 傷害.
+    public int iDamage = 1;
     // 移動速度
     public float fSpeed = 1.0f;
     // 目標
@@ -11,13 +13,22 @@ public class AIBullet : MonoBehaviour
     void Update()
     {
         Chace();
+
+        if (ObjTarget && Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.01f)
+        {
+            ObjTarget.GetComponent<AIEnemy>().AddHP(-iDamage);
+            Destroy(gameObject);
+        }
     }
 
     void Chace()
     {
         // 沒有目標就把自己刪掉.
         if (!ObjTarget)
+        {
             Destroy(gameObject);
+            return;
+        }
        
         Vector3 diff = ObjTarget.transform.position - transform.position;
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;

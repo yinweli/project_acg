@@ -4,10 +4,15 @@ using System.Collections.Generic;
 
 public class EnemyCreater : MonoBehaviour
 {
+    //public static EnemyCreater pthis = null;
     // 波數能量.
     public int iEnegry = 0;
     // 本關敵人與機率列表<敵人名稱,機率>.
     public Dictionary<string, int> StageEnemy = new Dictionary<string, int>();
+    void Awake()
+    {
+        //pthis = this;
+    }
     // ------------------------------------------------------------------
     void Start()
     {
@@ -43,7 +48,6 @@ public class EnemyCreater : MonoBehaviour
         GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/" + Name) as GameObject);
         pObj.transform.localPosition = new Vector3(fPosX, fPosY);
 
-        SysMain.pthis.Enemy.Add(pObj,1);
         return pObj;
     }
     // ------------------------------------------------------------------
