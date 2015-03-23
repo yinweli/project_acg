@@ -4,37 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-// 地圖方向類別
-public class MapDir
-{
-	public enum ENUM_Dir { Up, Left, Right, }
-	
-	private CDice<ENUM_Dir> Data = new CDice<ENUM_Dir>();
-	private int DirCount = Enum.GetValues(typeof(ENUM_Dir)).Length;
-	
-	public MapDir(int count)
-	{
-		Data.Set(ENUM_Dir.Up, count * DirCount);
-		Data.Set(ENUM_Dir.Left, count * DirCount);
-		Data.Set(ENUM_Dir.Right, count * DirCount);
-	}
-	// 取得下個方向
-	public ENUM_Dir Next()
-	{
-		ENUM_Dir emDir = Data.Roll();
-		
-		foreach(KeyValuePair<ENUM_Dir, int> Itor in Data)
-		{
-			if(Itor.Key == emDir)
-				Data.Set(Itor.Key, Itor.Value - Math.Max(0, DirCount - 1));
-			else
-				Data.Set(Itor.Key, Itor.Value + 1);
-		}//for
-		
-		return emDir;
-	}
-}
-
 // 地圖座標類別
 public class MapCoor
 {
@@ -74,89 +43,201 @@ public class MapBlock
 	public const char ModeRoad = 'R';
 	public const char ModeBlock = 'B';
 
-	public MapCoor Pos = new MapCoor();
 	public MapCoor Next = new MapCoor();
 	public char Mode = ModeNormal;
-
-	public MapBlock(MapCoor pos, char mode)
-	{
-		Pos = pos;
-		Mode = mode;
-	}
-}
-
-// 地圖資料類別
-public class MapData : IEnumerable
-{
-	private Dictionary<MapCoor, MapBlock> Data = new Dictionary<MapCoor, MapBlock>();
-	private int SizeX = 0;
-	private int SizeY = 0;
-
-	public IEnumerator GetEnumerator()
-	{
-		return Data.GetEnumerator();
-	}
-	// 新增地圖格
-	public MapBlock Add(int iX, int iY, char Mode)
-	{
-		MapCoor Pos = new MapCoor(iX, iY);
-		MapBlock Result = null;
-		
-		if(Data.ContainsKey(Pos))
-			Result = Data[Pos];
-		else
-		{
-			SizeX = Math.Max(SizeX, iX + 1);
-			SizeY = Math.Max(SizeY, iY + 1);
-			Result = Data[Pos] = new MapBlock(Pos, Mode);
-		}
-		
-		return Result;
-	}
-	// 取得地圖格
-	public MapBlock Get(int iX, int iY)
-	{
-		MapCoor Pos = new MapCoor(iX, iY);
-
-		return Data.ContainsKey(Pos) ? Data[Pos] : null;
-	}
-	// 取得地圖X軸長度
-	public int GetSizeX()
-	{
-		return SizeX;
-	}
-	// 取得地圖Y軸長度
-	public int GetSizeY()
-	{
-		return SizeY;
-	}
 }
 
 // 建立地圖類別
 public class MapCreater : MonoBehaviour
 {
-	public const int Width = 80;
-	public const int Border = 10;
-	public const int Interval = 7;
-	public const int RoadBase = 200;
-	public const int RoadAdd = 2;
+	private const int RoadSizeBase = 500; // 地圖道路基礎長度
+	private const int RoadSizeAdd = 10; // 地圖道路增加長度
+	private const int MapWidth = 80; // 地圖寬度
+	private const int MapBorderX = 20; // 地圖X軸邊框長度
+	private const int MapBorderY = 10; // 地圖Y軸邊框長度
+	private const int PathStart = 10; // 起點路徑長度
+	private const int PathMin = 5; // 最小路徑長度
+	private const int PathMax = 20; // 最長路徑長度
+	private enum ENUM_Dir { Up, Left, Right, }
 
-	// 建立地圖
-	public static MapData Create(int iStage)
+	private System.Random m_Rand = new System.Random();
+	private Dictionary<MapCoor, MapBlock> m_Data = new Dictionary<MapCoor, MapBlock>();
+	private ENUM_Dir m_emDir = ENUM_Dir.Up;
+	private int m_iSizeX = 0;
+	private int m_iSizeY = 0;
+
+	// 取得道路長度
+	private int RoadSize(int iStage)
 	{
-		int iRoad = RoadBase + iStage / 5 * RoadAdd; // 道路長度
-		MapDir Dir = new MapDir(iRoad);
-		MapData Result = new MapData();
+		return RoadSizeBase + iStage / 5 * RoadSizeAdd;
+	}
+	// 取得最小地圖寬度
+	private int MapWidthMin()
+	{
+		return MapBorderX;
+	}
+	// 取得最大地圖寬度
+	private int MapWidthMax()
+	{
+		return MapWidth - MapBorderX;
+	}
+	// 取得路徑長度
+	private int PathLength(bool bStart)
+	{
+		return bStart ? PathStart : m_Rand.Next(PathMin, PathMax);
+	}
+	// 取得起點座標
+	private MapCoor StartPos()
+	{
+		return new MapCoor(m_Rand.Next(MapWidthMin(), MapWidthMax()), MapBorderY);
+	}
+	// 檢查座標是否正確
+	private bool CheckCoor(MapCoor Pos)
+	{
+		return Pos.X >= MapWidthMin() && Pos.X < MapWidthMax() && Pos.Y >= 1;
+	}
+	// 依方向取得座標
+	private MapCoor NextCoor(ENUM_Dir Dir, MapCoor Pos)
+	{
+		if(CheckCoor(Pos) == false)
+			return null;
 
-		MapBlock Last = Result.Add(UnityEngine.Random.Range(Border, Width - Border), Border, MapBlock.ModeStart); // 新增起點
-		MapBlock Next = null;
-
-		// 產生道路
-		while(iRoad > 0)
+		MapCoor Result = new MapCoor(Pos.X, Pos.Y);
+		
+		switch(Dir)
 		{
+		case ENUM_Dir.Up: ++Result.Y; break;
+		case ENUM_Dir.Left: --Result.X; break;
+		case ENUM_Dir.Right: ++Result.X; break;
+		default: break;
+		}//switch
 
+		return CheckCoor(Result) ? Result : null;
+	}
+	// 依方向取得座標列表
+	private List<MapCoor> NextPath(ENUM_Dir Dir, MapCoor Pos, bool bStart)
+	{
+		int iLength = PathLength(bStart);
+		List<MapCoor> Result = new List<MapCoor>();
+
+		while(iLength > 0)
+		{
+			if((Pos = NextCoor(Dir, Pos)) != null)
+			{
+				Result.Add(Pos);
+				--iLength;
+			}
+			else
+				iLength = 0;
 		}//while
 
 		return Result;
+	}
+	// 建立地圖道路
+	private void CreateRoad(int iStage)
+	{
+		int iRoadSize = RoadSize(iStage); // 取得道路長度
+		bool bStart = true; // 起點旗標
+		List<MapCoor> Road = new List<MapCoor>(); // 道路總表
+		
+		while(iRoadSize > 0)
+		{
+			// 建立骰子
+			CDice<ENUM_Dir> Dice = new CDice<ENUM_Dir>();
+			
+			if(bStart)
+				Dice.Set(ENUM_Dir.Up, 1);
+			else
+			{
+				switch(m_emDir)
+				{
+				case ENUM_Dir.Up:
+					Dice.Set(ENUM_Dir.Up, 1);
+					Dice.Set(ENUM_Dir.Left, 1);
+					Dice.Set(ENUM_Dir.Right, 1);
+					break;
+					
+				case ENUM_Dir.Left:
+					Dice.Set(ENUM_Dir.Up, 1);
+					Dice.Set(ENUM_Dir.Left, 1);
+					break;
+					
+				case ENUM_Dir.Right:
+					Dice.Set(ENUM_Dir.Up, 1);
+					Dice.Set(ENUM_Dir.Right, 1);
+					break;
+					
+				default:
+					break;
+				}//switch
+			}//if
+
+			// 取得起點/上次的終點
+			MapCoor Coor = bStart ? StartPos() : Road[Road.Count - 1];
+			// 取得道路列表
+			List<MapCoor> Temp = NextPath(m_emDir = Dice.Roll(m_Rand), Coor, bStart);
+
+			// 把道路列表新增回道路總表
+			foreach(MapCoor Itor in Temp)
+			{
+				if(iRoadSize > 0)
+				{
+					Road.Add(Itor);
+					--iRoadSize; // 減少還需要產生的道路長度
+				}//if
+			}//for
+
+			// 關閉起點旗標
+			if(bStart)
+				bStart = false;
+		}//while
+
+		// 把道路設定到地圖上
+		foreach(MapCoor Itor in Road)
+		{
+			MapBlock Block = new MapBlock();
+			
+			Block.Mode = MapBlock.ModeRoad;
+			
+			m_iSizeX = Math.Max(MapWidth, Itor.X + 1);
+			m_iSizeY = Math.Max(m_iSizeY, Itor.Y + 1);
+			m_Data[Itor] = Block;
+		}//for
+	}
+	// 建立地圖
+	public void Create(int iStage)
+	{
+		// 清除資料
+		m_Data.Clear();
+		m_iSizeX = 0;
+		m_iSizeY = 0;
+
+		// 建立道路
+		CreateRoad(iStage);
+
+		// 測試用的輸出
+		List<string> MapData = new List<string>();
+
+		for(int iY = m_iSizeY - 1; iY >= 0; --iY)
+		{
+			string szOutput = "";
+
+			for(int iX = 0; iX < m_iSizeX; ++iX)
+			{
+				MapCoor Pos = new MapCoor(iX, iY);
+
+				szOutput += m_Data.ContainsKey(Pos) ? m_Data[Pos].Mode : ' ';
+			}//for
+
+			MapData.Add(szOutput);
+		}//for
+
+		Tool.SaveTextFile("d:\\map.txt", MapData);
+		Debug.Log("Road : " + RoadSize(iStage));
+	}
+
+	void Start()
+	{
+		Create(100);
 	}
 }

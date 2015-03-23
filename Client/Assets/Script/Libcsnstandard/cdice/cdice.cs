@@ -20,6 +20,11 @@ namespace LibCSNStandard
 		private Dictionary<T, int> m_Data = new Dictionary<T, int>(); // 骰子列表<內容值, 機率值>
 		private int m_iMax = 0; // 最大機率值
 		//-------------------------------------
+		public CDice() {}
+		public CDice(Dictionary<T, int> data)
+		{
+			m_Data = data;
+		}
 		public IEnumerator GetEnumerator()
 		{
 			return m_Data.GetEnumerator();
@@ -44,6 +49,14 @@ namespace LibCSNStandard
 			
 			foreach(KeyValuePair<T, int> Itor in m_Data)
 				m_iMax += Itor.Value;
+		}
+		/**
+		 * @brief 刪除內容
+		 * @param Data 內容值
+		 */
+		public void Del(T Data)
+		{
+			m_Data.Remove(Data);
 		}
 		/**
 		 * @brief 丟骰子
