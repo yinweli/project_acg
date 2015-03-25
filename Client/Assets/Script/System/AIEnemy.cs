@@ -7,7 +7,7 @@ public class AIEnemy : MonoBehaviour
     // HP
     public int iHP = 5;
     // 移動速度
-    public float fSpeed = 0.05f;
+    public float fMoveSpeed = 0.05f;
     // 威脅程度(越高成為玩家優先選擇)
     public int iThreat = 1;
     // 目標
@@ -15,10 +15,17 @@ public class AIEnemy : MonoBehaviour
 
     // 是否已抓了人.
     public bool bHasTarget = false;
+
+    public AudioClip ClipHurt;
+    public AudioClip ClipDead;
+
+    // 記住起點.
+    Vector3 PosStart = new Vector3();
     
 	// Use this for initialization
 	void Start () 
     {
+        PosStart = transform.position;
         //測試先指定目標.
         KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomDictionary(SysMain.pthis.Role, new System.Random());
         ObjTarget = pTemp.Key;
@@ -32,9 +39,19 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        // 沒血消失.
+        // 沒血逃跑.
         if (iHP <= 0)
-            Destroy(gameObject);
+        {
+            // 取向量.
+            MoveTo(PosStart - transform.position, fMoveSpeed * 4);
+            // 跑出畫面外就刪掉
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            if (screenPosition.y > Screen.height || screenPosition.y < 0)
+                Destroy(gameObject);
+            if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
+                Destroy(gameObject);
+            return;
+        }       
 
         // 確認目標.
         FindTarget();
@@ -49,7 +66,7 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Light")
+        if (iHP > 0 && other.gameObject.tag == "Light")
         {
             if (!SysMain.pthis.Enemy.ContainsKey(gameObject))
                 SysMain.pthis.Enemy.Add(gameObject, iThreat);
@@ -58,7 +75,7 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Light")
+        if (iHP > 0 && other.gameObject.tag == "Light")
         {
             if (SysMain.pthis.Enemy.ContainsKey(gameObject))
                 SysMain.pthis.Enemy.Remove(gameObject);
@@ -69,9 +86,16 @@ public class AIEnemy : MonoBehaviour
     {
         iHP += iValue;
 
-        // 沒血消失.
+        // 沒血逃跑.
         if (iHP <= 0)
-            Destroy(gameObject);
+        {
+            NGUITools.PlaySound(ClipDead, 0.8f);
+            // 從可攻擊陣列移除.
+            if (SysMain.pthis.Enemy.ContainsKey(gameObject))
+                SysMain.pthis.Enemy.Remove(gameObject);       
+        }
+        else
+            NGUITools.PlaySound(ClipHurt, 0.8f);
     }
     // ------------------------------------------------------------------
     void FindTarget()
@@ -83,7 +107,7 @@ public class AIEnemy : MonoBehaviour
         // 清空目標.
         //ObjTarget = null;        
     }
-
+    // ------------------------------------------------------------------
     void Chace()
     {
         // 沒有目標就放棄追蹤.
@@ -91,7 +115,11 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 取向量.
-        Vector3 vecDirection = ObjTarget.transform.position - transform.position;
+        MoveTo(ObjTarget.transform.position - transform.position, fMoveSpeed);
+    }
+    // ------------------------------------------------------------------
+    void MoveTo(Vector3 vecDirection, float fSpeed)
+    {        
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
         // 把物件位置朝目標向量(玩家方向)移動.

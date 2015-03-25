@@ -1,6 +1,25 @@
 fileFormatVersion: 2
 guid: 9d4bd776db8f7014ea3cee635dfafc79
 TextureImporter:
+  fileIDToRecycleName:
+    8900000: generatedCubemap
+    21300000: Chr_0
+    21300002: Chr_1
+    21300004: Chr_2
+    21300006: Chr_3
+    21300008: Chr_4
+    21300010: Chr_5
+    21300012: Chr_6
+    21300014: Chr_7
+    21300016: Chr_8
+    21300018: Chr_9
+    21300020: Chr_10
+    21300022: Chr_11
+    21300024: Chr_12
+    21300026: Chr_13
+    21300028: Chr_14
+    21300030: Chr_15
+    21300032: Chr_16
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -20,17 +39,17 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: 5
+  textureFormat: -3
   maxTextureSize: 4096
   textureSettings:
     filterMode: 2
-    aniso: 4
+    aniso: 1
     mipBias: -1
     wrapMode: 1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -41,6 +60,176 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Chr_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 197
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 184
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_2
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 160
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 130
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 57
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 61
+        width: 59
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_6
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 61
+        width: 58
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_7
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 100
+        width: 58
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 74
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_9
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 50
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_10
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 50
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_11
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 54
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_12
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 50
+        width: 16
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_13
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 42
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_14
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 24
+        width: 34
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_15
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 24
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_16
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 0
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
