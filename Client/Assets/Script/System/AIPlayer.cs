@@ -22,6 +22,8 @@ public class AIPlayer : MonoBehaviour
     // 武器冷卻.
     public float fCoolDown = 0;
 
+    public AudioClip audioClip;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -43,6 +45,8 @@ public class AIPlayer : MonoBehaviour
             // 播放射擊.
             if (pAni)
                 pAni.Play("Shot");
+
+            NGUITools.PlaySound(audioClip, 0.8f);
             // 發射子彈.
             CreateBullet();
             // 計算冷卻.

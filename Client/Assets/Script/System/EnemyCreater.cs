@@ -63,6 +63,9 @@ public class EnemyCreater : MonoBehaviour
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
+
+        EnemyList.Add("Enemy_001");
+        EnemyList.Add("Enemy_001");
     }
     // ------------------------------------------------------------------
     // 偕同程序

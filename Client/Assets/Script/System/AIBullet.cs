@@ -9,6 +9,8 @@ public class AIBullet : MonoBehaviour
     public float fSpeed = 1.0f;
     // 目標
     public GameObject ObjTarget = null;
+    // 擊中音效
+    public AudioClip audioClip;
 
     void Update()
     {
@@ -16,6 +18,7 @@ public class AIBullet : MonoBehaviour
 
         if (ObjTarget && Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.01f)
         {
+            NGUITools.PlaySound(audioClip, 0.8f);
             ObjTarget.GetComponent<AIEnemy>().AddHP(-iDamage);
             Destroy(gameObject);
         }
