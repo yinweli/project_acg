@@ -3,303 +3,38 @@ using LibCSNStandard;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
-// 地圖座標類別
-public class MapCoor
+// 隨機方向類別
+public class RandDir
 {
-	public int X = 0;
-	public int Y = 0;
+	private CDice<ENUM_Dir> m_Data = new CDice<ENUM_Dir>();
+	private ENUM_Dir m_LastDir = ENUM_Dir.Null;
 
-	public MapCoor() {}
-	public MapCoor(int x, int y)
+	public ENUM_Dir Get(System.Random Rand)
 	{
-		X = x;
-		Y = y;
-	}
-	public override string ToString()
-	{
-		return string.Format("({0}, {1})", X, Y);
-	}	
-	public override int GetHashCode()
-	{
-		return ToString().GetHashCode();
-	}	
-	public override bool Equals(object obj)
-	{
-		return Equals(obj as MapCoor);
-	}	
-	public bool Equals(MapCoor obj)
-	{
-		return obj != null && this.X == obj.X && this.Y == obj.Y;
-	}
-}
+		m_Data.Clear();
 
-// 地圖單元類別
-public class MapUnit
-{
-	public const char Null = 'N';
-	public const char Start = 'S';
-	public const char End = 'E';
-	public const char Normal = ' ';
-	public const char Road = 'R';
-	public const char Block = 'B';
-
-	private Dictionary<MapCoor, char> m_Data = new Dictionary<MapCoor, char>();
-	private int m_iSizeX = 0;
-	private int m_iSizeY = 0;
-
-	public int X
-	{
-		get
-		{
-			return m_iSizeX;
-		}
-	}
-	public int Y
-	{
-		get
-		{
-			return m_iSizeY;
-		}
-	}
-	public void Add(MapCoor Pos, char Mode)
-	{
-		m_Data[Pos] = Mode;
-		m_iSizeX = Math.Max(m_iSizeX, Pos.X + 1);
-		m_iSizeY = Math.Max(m_iSizeY, Pos.Y + 1);
-	}
-	public char Get(MapCoor Pos)
-	{
-		return m_Data.ContainsKey(Pos) ? m_Data[Pos] : Null;
-	}
-}
-
-// 地圖道路類別
-public class MapRoad
-{
-	private List<MapCoor> m_Data = new List<MapCoor>();
-
-	public int Count
-	{
-		get
-		{
-			return m_Data.Count;
-		}
-	}
-	public void Add(MapCoor Pos)
-	{
-		m_Data.Add(Pos);
-	}
-	public void Add(List<MapCoor> Data)
-	{
-		m_Data.AddRange(Data);
-	}
-	public void Add(List<MapCoor> Data, int iCount)
-	{
-		m_Data.AddRange(Data.GetRange(0, iCount));
-	}
-	public MapCoor Get(int iPos)
-	{
-		return iPos >= 0 && iPos < m_Data.Count ? m_Data[iPos] : null;
-	}
-}
-
-// 地圖障礙物類別
-public class MapBlock
-{
-	public class Block
-	{
-		public MapCoor Pos = new MapCoor();
-		public int Width = 0;
-		public int Height = 0;
-
-		public Block() {}
-		public Block(MapCoor pos, int width, int height)
-		{
-			Pos = pos;
-			Width = width;
-			Height = height;
-		}
-		public bool Empty()
-		{
-			return Pos.X < 0 || Pos.Y < 0 || Width <= 0 || Height <= 0;
-		}
-		public bool Cover(Block Data)
-		{
-			int x1 = Pos.X;
-			int y1 = Pos.Y;
-			int w1 = Width;
-			int h1 = Height;
-
-			int x2 = Data.Pos.X;
-			int y2 = Data.Pos.Y;
-			int w2 = Data.Width;
-			int h2 = Data.Height;
-
-			if(x1 >= x2 && x1 >= x2 + w2)
-				return false;
-			else if(x1 <= x2 && x1 + w1 <= x2)
-				return false;
-			else if(y1 >= y2 && y1 >= y2 + h2)
-				return false;
-			else if(y1 <= y2 && y1 + h1 <= y2)
-				return false;
-
-			return true;
-		}
-	}
-
-	private List<Block> m_Data = new List<Block>();
-
-	public int Count
-	{
-		get
-		{
-			return m_Data.Count;
-		}
-	}
-	public bool Add(Block Data)
-	{
-		if(Data.Empty())
-			return false;
-
-		foreach(Block Itor in m_Data)
-		{
-			if(Data.Cover(Itor))
-				return false;
-		}//for
-
-		m_Data.Add(Data);
-
-		return true;
-	}
-	public Block Get(int iPos)
-	{
-		return iPos >= 0 && iPos < m_Data.Count ? m_Data[iPos] : null;
-	}
-}
-
-// 地圖資料類別
-public class MapData
-{
-	public MapUnit Unit = new MapUnit();
-	public MapRoad Road = new MapRoad();
-	public MapBlock Block = new MapBlock();
-}
-
-// 建立地圖類別
-public class MapCreater : MonoBehaviour
-{
-	private const int RoadSizeBase = 500; // 地圖道路基礎長度
-	private const int RoadSizeAdd = 10; // 地圖道路增加長度
-	private const int MapWidth = 80; // 地圖寬度
-	private const int MapBorderX = 12; // 地圖X軸邊框長度
-	private const int MapBorderY = 10; // 地圖Y軸邊框長度
-	private const int PathStart = 10; // 起點路徑長度
-	private const int PathMin = 6; // 最小路徑長度
-	private const int PathMax = 16; // 最長路徑長度
-	private const int BlockScaleMin = 1; // 最小障礙物尺寸
-	private const int BlockScaleMax = 3; // 最大障礙物尺寸
-	private const int BlockSpaceMin = 3; // 最小障礙物與道路距離
-	private const int BlockSpaceMax = 5; // 最大障礙物與道路距離
-	private enum ENUM_Dir { Up, Left, Right, }
-
-	private System.Random m_Rand = new System.Random();
-
-	[SerializeField] private int Stage = 0;
-
-	// 取得道路長度
-	private int RoadSize(int iStage)
-	{
-		return RoadSizeBase + iStage / 5 * RoadSizeAdd;
-	}
-	// 取得最小道路寬度
-	private int RoadWidthMin()
-	{
-		return MapBorderX;
-	}
-	// 取得最大道路寬度
-	private int RoadWidthMax()
-	{
-		return MapWidth - MapBorderX;
-	}
-	// 取得路徑長度
-	private int PathLength(bool bStart)
-	{
-		return bStart ? PathStart : m_Rand.Next(PathMin, PathMax);
-	}
-	// 檢查座標是否正確
-	private bool CheckCoor(MapCoor Pos)
-	{
-		return Pos.X >= RoadWidthMin() && Pos.X < RoadWidthMax() && Pos.Y >= 1;
-	}
-	// 取得起點座標
-	private MapCoor StartPos()
-	{
-		return new MapCoor(m_Rand.Next(RoadWidthMin(), RoadWidthMax()), MapBorderY);
-	}
-	// 依方向取得座標
-	private MapCoor NextCoor(ENUM_Dir Dir, MapCoor Pos)
-	{
-		if(CheckCoor(Pos) == false)
-			return null;
-
-		MapCoor Result = new MapCoor(Pos.X, Pos.Y);
-		
-		switch(Dir)
-		{
-		case ENUM_Dir.Up: ++Result.Y; break;
-		case ENUM_Dir.Left: --Result.X; break;
-		case ENUM_Dir.Right: ++Result.X; break;
-		default: break;
-		}//switch
-
-		return CheckCoor(Result) ? Result : null;
-	}
-	// 依方向取得座標列表
-	private List<MapCoor> NextPath(ENUM_Dir Dir, MapCoor Pos, bool bStart)
-	{
-		int iLength = PathLength(bStart);
-		List<MapCoor> Result = new List<MapCoor>();
-
-		while(iLength > 0)
-		{
-			if((Pos = NextCoor(Dir, Pos)) != null)
-			{
-				Result.Add(Pos);
-				--iLength;
-			}
-			else
-				iLength = 0;
-		}//while
-
-		return Result;
-	}
-	// 建立方向骰子
-	private CDice<ENUM_Dir> DiceDir(ENUM_Dir emDir, bool bStart)
-	{
-		CDice<ENUM_Dir> Result = new CDice<ENUM_Dir>();
-		
-		if(bStart)
-			Result.Set(ENUM_Dir.Up, 1);
+		if(m_LastDir == ENUM_Dir.Null)
+			m_Data.Set(ENUM_Dir.Up, 1);
 		else
 		{
-			switch(emDir)
+			switch(m_LastDir)
 			{
 			case ENUM_Dir.Up:
-				Result.Set(ENUM_Dir.Up, 1);
-				Result.Set(ENUM_Dir.Left, 1);
-				Result.Set(ENUM_Dir.Right, 1);
+				m_Data.Set(ENUM_Dir.Up, 2);
+				m_Data.Set(ENUM_Dir.Left, 3);
+				m_Data.Set(ENUM_Dir.Right, 3);
 				break;
 				
 			case ENUM_Dir.Left:
-				Result.Set(ENUM_Dir.Up, 1);
-				Result.Set(ENUM_Dir.Left, 1);
+				m_Data.Set(ENUM_Dir.Up, 3);
+				m_Data.Set(ENUM_Dir.Left, 2);
 				break;
 				
 			case ENUM_Dir.Right:
-				Result.Set(ENUM_Dir.Up, 1);
-				Result.Set(ENUM_Dir.Right, 1);
+				m_Data.Set(ENUM_Dir.Up, 3);
+				m_Data.Set(ENUM_Dir.Right, 2);
 				break;
 				
 			default:
@@ -307,115 +42,264 @@ public class MapCreater : MonoBehaviour
 			}//switch
 		}//if
 
+		return m_LastDir = m_Data.Roll(Rand);
+	}
+}
+
+// 地圖座標類別
+public class MapCoor
+{
+	public int X = 0;
+	public int Y = 0;
+	
+	public MapCoor() {}
+	public MapCoor(int x, int y)
+	{
+		X = x;
+		Y = y;
+	}
+	public MapCoor Add(ENUM_Dir emDir, int iInterval)
+	{
+		MapCoor Result = new MapCoor(X, Y);
+
+		switch(emDir)
+		{
+		case ENUM_Dir.Up: Result.Y += iInterval; break;
+		case ENUM_Dir.Left: Result.X -= iInterval; break;
+		case ENUM_Dir.Right: Result.X += iInterval; break;
+		case ENUM_Dir.Down: Result.Y -= iInterval; break;
+		default: break;
+		}//switch
+
 		return Result;
 	}
-	// 建立地圖道路
-	private void CreateRoad(MapData Data, int iStage)
+	public Vector2 ToVector2()
 	{
-		int iRoadSize = RoadSize(iStage); // 取得道路長度
-		bool bStart = true; // 起點旗標
-		ENUM_Dir emDir = ENUM_Dir.Up; // 上次方向
+		return new Vector2(X * GameDefine.iBlockWidth, Y * GameDefine.iBlockHeight);
+	}
+}
+
+// 地圖道路類別
+public class MapRoad
+{
+	public MapCoor Pos = new MapCoor();
+	public GameObject Obj = null;
+}
+
+// 地圖物件類別
+public class MapObjt
+{
+	public MapCoor Pos = new MapCoor();
+	public int Width = 0;
+	public int Height = 0;
+	public GameObject Obj = null;
+
+	public bool Cover(MapCoor Data, int W, int H)
+	{
+		int x1 = Pos.X, y1 = Pos.Y, w1 = Width, h1 = Height;
+		int x2 = Data.X, y2 = Data.Y, w2 = W, h2 = H;
+		
+		if(x1 >= x2 && x1 >= x2 + w2)
+			return false;
+		else if(x1 <= x2 && x1 + w1 <= x2)
+			return false;
+		else if(y1 >= y2 && y1 >= y2 + h2)
+			return false;
+		else if(y1 <= y2 && y1 + h1 <= y2)
+			return false;
+		
+		return true;
+	}
+	public bool Cover(MapRoad Data)
+	{
+		return Cover(Data.Pos, 1, 1);
+	}
+	public bool Cover(MapObjt Data)
+	{
+		return Cover(Data.Pos, Data.Width, Data.Height);
+	}
+}
+
+// 建立地圖類別
+public class MapCreater : MonoBehaviour
+{
+	private System.Random m_Rand = new System.Random();
+	private List<MapCoor> DataList = new List<MapCoor>() { new MapCoor(1, 1), new MapCoor(2, 2), new MapCoor(2, 1), new MapCoor(1, 2), new MapCoor(3, 1) }; // 物件資料列表
+
+	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
+	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
+	public int Stage = 0; // 關卡編號
+	public int Style = 0; // 風格編號
+
+	public static MapCreater This = null;
+	
+	void Awake()
+	{
+		This = this;
+	}
+	void Start()
+	{
+		//Create();
+	}
+
+	// 取得地圖道路預製物件名稱
+	private string PrefabRoad()
+	{
+		return "MapRoad";
+	}
+	// 取得地圖物件預製物件名稱
+	private string PrefabObjt(int iIndex)
+	{
+		return "MapObjt_" + iIndex;
+	}
+	// 取得地圖道路長度
+	private int RoadSize()
+	{
+		return GameDefine.iRoadSizeBase + Stage / GameDefine.iStageLevel * GameDefine.iRoadSizeAdd;
+	}
+	// 取得最小地圖道路寬度
+	private int RoadWidthMin()
+	{
+		return GameDefine.iMapBorderX;
+	}
+	// 取得最大地圖道路寬度
+	private int RoadWidthMax()
+	{
+		return GameDefine.iMapWidth - GameDefine.iMapBorderX;
+	}
+	// 依方向取得座標列表
+	private List<MapCoor> NextPath(ENUM_Dir emDir, MapCoor Pos)
+	{
+		List<MapCoor> Result = new List<MapCoor>();
+		int iLength = Pos == null ? GameDefine.iPathStart : m_Rand.Next(GameDefine.iPathMin, GameDefine.iPathMax);
+
+		while(iLength > 0)
+		{
+			if(Pos == null)
+				Pos = new MapCoor(m_Rand.Next(RoadWidthMin(), RoadWidthMax()), GameDefine.iMapBorderY);
+			else
+				Pos = Pos.Add(emDir, 1);
+
+			if(Pos.X >= RoadWidthMin() && Pos.X < RoadWidthMax() && Pos.Y >= 1)
+			{
+				Result.Add(Pos);
+				--iLength;
+			}
+			else
+				iLength = 0;
+		}//while
+		
+		return Result;
+	}
+	// 建立物件
+	private GameObject CreateObject(string szName, Vector2 Pos)
+	{
+		return UITool.pthis.CreateUIByPos(gameObject, szName, Pos.x, Pos.y);
+	}
+	// 建立地圖道路
+	private void CreateRoad()
+	{
+		int iRoadSize = RoadSize(); // 取得地圖道路長度
+		RandDir Dir = new RandDir();
 		
 		while(iRoadSize > 0)
 		{
-			// 建立骰子
-			CDice<ENUM_Dir> Dice = DiceDir(emDir, bStart);
-			// 取得起點/上次的終點
-			MapCoor Coor = bStart ? StartPos() : Data.Road.Get(Data.Road.Count - 1);
-			// 取得道路列表
-			List<MapCoor> Temp = NextPath(emDir = Dice.Roll(m_Rand), Coor, bStart);
-			// 取得可增加的數量
-			int iCount = Math.Min(Temp.Count, iRoadSize);
+			foreach(MapCoor Itor in NextPath(Dir.Get(m_Rand), RoadList.Count > 0 ? RoadList[RoadList.Count - 1].Pos : null))
+			{
+				if(iRoadSize > 0)
+				{
+					MapRoad Data = new MapRoad();
 
-			Data.Road.Add(Temp, iCount); // 把道路列表新增回地圖道路
-			iRoadSize -= iCount; // 減少還需要產生的道路長度
+					Data.Pos = Itor;
+					Data.Obj = CreateObject(PrefabRoad(), Data.Pos.ToVector2());
 
-			// 關閉起點旗標
-			if(bStart)
-				bStart = false;
+					RoadList.Add(Data);
+					--iRoadSize; // 減少還需要產生的地圖道路長度
+				}//if
+			}//for
 		}//while
 	}
-	// 建立地圖障礙物
-	public void CreateBlock(MapData Data)
+	// 建立地圖物件
+	private void CreateObjt()
 	{
-
-	}
-	// 建立地圖單元
-	public void CreateUnit(MapData Data)
-	{
-		// 把道路設定到地圖單元上
-		for(int iPos = 0; iPos < Data.Road.Count; ++iPos)
+		foreach(MapRoad Itor in RoadList)
 		{
-			MapCoor Pos = Data.Road.Get(iPos);
-
-			if(iPos == 0)
-				Data.Unit.Add(Pos, MapUnit.Start);
-			else if(iPos >= Data.Road.Count - 1)
-				Data.Unit.Add(Pos, MapUnit.End);
-			else
-				Data.Unit.Add(Pos, MapUnit.Road);
-		}//for
-
-		// 把障礙物設定到地圖單元上
-		for(int iPos = 0; iPos < Data.Block.Count; ++iPos)
-		{
-			MapBlock.Block Block = Data.Block.Get(iPos);
-
-			for(int iY = 0; iY < Block.Height; ++iY)
+			foreach(ENUM_Dir ItorDir in Enum.GetValues(typeof(ENUM_Dir)))
 			{
-				for(int iX = 0; iX < Block.Width; ++iX)
-					Data.Unit.Add(new MapCoor(Block.Pos.X + iX, Block.Pos.Y + iY), MapUnit.Block);
-			}//for
-		}//for
+				int iProb = GameDefine.iObjtProb;
+				int iInterval = 1;
 
-		// 填充剩餘單元
-		int iSizeX = MapWidth;
-		int iSizeY = Data.Unit.Y + MapBorderY;
+				while(iProb > 0)
+				{
+					if(m_Rand.Next(100) < iProb)
+					{
+						MapCoor Pos = Itor.Pos.Add(ItorDir, iInterval);
 
-		for(int iY = 0; iY < iSizeY; ++iY)
-		{
-			for(int iX = 0; iX < iSizeX; ++iX)
-			{
-				MapCoor Pos = new MapCoor(iX, iY);
+						if(Pos.X >= 0 && Pos.X < GameDefine.iMapWidth && Pos.Y >= 0)
+						{
+							int iIndex = m_Rand.Next(DataList.Count - 1);
+							MapCoor Coor = DataList[iIndex];
+							MapObjt Data = new MapObjt();
 
-				if(Data.Unit.Get(Pos) == MapUnit.Null)
-					Data.Unit.Add(Pos, MapUnit.Normal);
+							Data.Pos = Pos;
+							Data.Width = Coor.X;
+							Data.Height = Coor.Y;
+
+							bool bCheck = true;
+							
+							foreach(MapRoad ItorRoad in RoadList)
+							{
+								if(Data.Cover(ItorRoad))
+									bCheck &= false;
+							}//for
+							
+							foreach(MapObjt ItorObjt in ObjtList)
+							{
+								if(Data.Cover(ItorObjt))
+									bCheck &= false;
+							}//for
+							
+							if(bCheck)
+							{
+								Data.Obj = CreateObject(PrefabObjt(iIndex), Data.Pos.ToVector2());
+								ObjtList.Add(Data);
+							}//if
+						}//if
+					}//if
+
+					iProb -= GameDefine.iObjtDec;
+					iInterval++;
+				}//while
 			}//for
 		}//for
 	}
 	// 建立地圖
-	public MapData Create(int iStage)
+	public void Create()
 	{
-		MapData Data = new MapData();
+		Clear();
+		CreateRoad();
+		CreateObjt();
 
-		// 建立地圖道路
-		CreateRoad(Data, iStage);
-		// 建立地圖障礙物
-		CreateBlock(Data);
-		// 建立地圖單元
-		CreateUnit(Data);
-
-		// 測試用的輸出
-		List<string> MapText = new List<string>();
-
-		for(int iY = Data.Unit.Y - 1; iY >= 0; --iY)
-		{
-			string szOutput = "";
-
-			for(int iX = 0; iX < Data.Unit.X; ++iX)
-				szOutput += Data.Unit.Get(new MapCoor(iX, iY));
-
-			MapText.Add(szOutput);
-		}//for
-
-		Tool.SaveTextFile("d:\\map.txt", MapText);
-		Debug.Log("Road : " + RoadSize(iStage));
-
-		return Data;
+		Debug.Log("map road : " + RoadList.Count);
+		Debug.Log("map objt : " + ObjtList.Count);
 	}
-
-	void Start()
+	// 清除地圖
+	public void Clear()
 	{
-		Create(Stage);
+		foreach(MapRoad Itor in RoadList)
+		{
+			if(Itor.Obj != null)
+				Destroy(Itor.Obj);
+		}//for
+		
+		RoadList.Clear();
+		
+		foreach(MapObjt Itor in ObjtList)
+		{
+			if(Itor.Obj != null)
+				Destroy(Itor.Obj);
+		}//for
+		
+		ObjtList.Clear();
 	}
 }
