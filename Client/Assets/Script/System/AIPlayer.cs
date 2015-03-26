@@ -101,6 +101,6 @@ public class AIPlayer : MonoBehaviour
         GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/S_Bullet") as GameObject);
         pObj.transform.parent = transform.parent;
         pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
-        pObj.GetComponent<AIBullet>().ObjTarget = ObjTarget;
+        pObj.GetComponent<AIBullet>().Chace(ObjTarget);
     }        
 }

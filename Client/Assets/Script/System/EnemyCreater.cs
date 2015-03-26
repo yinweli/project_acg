@@ -42,15 +42,6 @@ public class EnemyCreater : MonoBehaviour
             StageEnemy[itor.Key] = StageEnemy.Count * 10;
     }
     // ------------------------------------------------------------------
-    // 建立怪物函式.
-    public GameObject CreateUI(string Name, float fPosX, float fPosY)
-    {
-        GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/" + Name) as GameObject);
-        pObj.transform.localPosition = new Vector3(fPosX, fPosY);
-
-        return pObj;
-    }
-    // ------------------------------------------------------------------
     // 敵人佇列產生函式.
     public void ListEnemyCreater(List<string> EnemyList)
     {
@@ -84,13 +75,13 @@ public class EnemyCreater : MonoBehaviour
                 switch (Random.Range(1, 4))
                 {
                     case 1: //上方.
-                        CreateUI(ListEnemy[i], Random.Range(-500.0f, 500.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(375.0f, 430.0f));
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(-500.0f, 500.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(375.0f, 430.0f));
                         break;
                     case 2: //左方.
-                        CreateUI(ListEnemy[i], Random.Range(-470.0f, -520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(-470.0f, -520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
                         break;
                     case 3: //右方.
-                        CreateUI(ListEnemy[i], Random.Range(470.0f, 520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(470.0f, 520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
                         break;
                 }                
             }
