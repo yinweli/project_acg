@@ -3,12 +3,12 @@ guid: 9d4bd776db8f7014ea3cee635dfafc79
 TextureImporter:
   fileIDToRecycleName:
     8900000: generatedCubemap
-    21300000: Chr_0
-    21300002: Chr_1
-    21300004: Chr_2
+    21300000: Mouse001
+    21300002: Foot001
+    21300004: Hand001
     21300006: Chr_3
     21300008: Chr_4
-    21300010: Chr_5
+    21300010: Face001
     21300012: Chr_6
     21300014: Chr_7
     21300016: Chr_8
@@ -17,8 +17,8 @@ TextureImporter:
     21300022: Chr_11
     21300024: Chr_12
     21300026: Chr_13
-    21300028: Chr_14
-    21300030: Chr_15
+    21300028: Body001
+    21300030: MouseBg001
     21300032: Chr_16
   serializedVersion: 2
   mipmaps:
@@ -61,7 +61,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Chr_0
+    - name: Mouse001
       rect:
         serializedVersion: 2
         x: 0
@@ -71,7 +71,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Chr_1
+    - name: Foot001
       rect:
         serializedVersion: 2
         x: 0
@@ -81,7 +81,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Chr_2
+    - name: Hand001
       rect:
         serializedVersion: 2
         x: 12
@@ -111,7 +111,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Chr_5
+    - name: Face001
       rect:
         serializedVersion: 2
         x: 0
@@ -201,7 +201,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Chr_14
+    - name: Body001
       rect:
         serializedVersion: 2
         x: 76
@@ -211,7 +211,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Chr_15
+    - name: MouseBg001
       rect:
         serializedVersion: 2
         x: 111
