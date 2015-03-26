@@ -14,3 +14,12 @@ public enum WeaponType
 
     WeaponCount,
 }
+
+public enum ENUM_Dir
+{
+	Null, 
+	Up, 
+	Left, 
+	Right, 
+	Down, 
+}
