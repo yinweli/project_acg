@@ -1,6 +1,21 @@
 fileFormatVersion: 2
 guid: 3bc63111d73ff034399584a4708e7ce8
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Mon_0
+    21300002: Mon_1
+    21300004: Mon_2
+    21300006: Mon_3
+    21300008: Mon_4
+    21300010: Mon_5
+    21300012: Mon_6
+    21300014: Mon_7
+    21300016: Mon_8
+    21300018: Mon_9
+    21300020: Mon_10
+    21300022: Mon_14
+    21300024: Mon_12
+    21300026: Mon_13
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -24,10 +39,10 @@ TextureImporter:
   maxTextureSize: 4096
   textureSettings:
     filterMode: 2
-    aniso: 4
+    aniso: 1
     mipBias: -1
     wrapMode: 1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
