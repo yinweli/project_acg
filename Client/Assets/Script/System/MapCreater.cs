@@ -90,6 +90,7 @@ public class MapRoad
 public class MapObjt
 {
 	public MapCoor Pos = new MapCoor();
+	public int Index = 0;
 	public int Width = 0;
 	public int Height = 0;
 	public GameObject Obj = null;
@@ -124,7 +125,7 @@ public class MapObjt
 public class MapCreater : MonoBehaviour
 {
 	private System.Random m_Rand = new System.Random();
-	private List<MapCoor> DataList = new List<MapCoor>() { new MapCoor(1, 1), new MapCoor(2, 2), new MapCoor(2, 1), new MapCoor(1, 2), new MapCoor(3, 1) }; // 物件資料列表
+	private Vector2 m_LastPos = new Vector2();
 
 	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
@@ -145,7 +146,7 @@ public class MapCreater : MonoBehaviour
 	// 取得地圖道路預製物件名稱
 	private string PrefabRoad()
 	{
-		return "MapRoad";
+		return "MapRoad_";
 	}
 	// 取得地圖物件預製物件名稱
 	private string PrefabObjt(int iIndex)
@@ -191,6 +192,13 @@ public class MapCreater : MonoBehaviour
 		
 		return Result;
 	}
+	// 取得隨機物件
+	private Tuple<int, MapCoor> NextObjt()
+	{
+		int iIndex = m_Rand.Next(2, GameDefine.ObjtScale.Count - 1);
+
+		return new Tuple<int, MapCoor>(iIndex, GameDefine.ObjtScale[iIndex]);
+	}
 	// 建立物件
 	private GameObject CreateObject(string szName, Vector2 Pos)
 	{
@@ -211,7 +219,7 @@ public class MapCreater : MonoBehaviour
 					MapRoad Data = new MapRoad();
 
 					Data.Pos = Itor;
-					Data.Obj = CreateObject(PrefabRoad(), Data.Pos.ToVector2());
+					Data.Obj = null;
 
 					RoadList.Add(Data);
 					--iRoadSize; // 減少還需要產生的地圖道路長度
@@ -237,13 +245,14 @@ public class MapCreater : MonoBehaviour
 
 						if(Pos.X >= 0 && Pos.X < GameDefine.iMapWidth && Pos.Y >= 0)
 						{
-							int iIndex = m_Rand.Next(DataList.Count - 1);
-							MapCoor Coor = DataList[iIndex];
+							Tuple<int, MapCoor> Objt = NextObjt();
 							MapObjt Data = new MapObjt();
 
 							Data.Pos = Pos;
-							Data.Width = Coor.X;
-							Data.Height = Coor.Y;
+							Data.Index = Objt.Item1;
+							Data.Width = Objt.Item2.X;
+							Data.Height = Objt.Item2.Y;
+							Data.Obj = null;
 
 							bool bCheck = true;
 							
@@ -260,10 +269,7 @@ public class MapCreater : MonoBehaviour
 							}//for
 							
 							if(bCheck)
-							{
-								Data.Obj = CreateObject(PrefabObjt(iIndex), Data.Pos.ToVector2());
 								ObjtList.Add(Data);
-							}//if
 						}//if
 					}//if
 
@@ -286,20 +292,27 @@ public class MapCreater : MonoBehaviour
 	// 清除地圖
 	public void Clear()
 	{
+		RoadList.Clear();
+		ObjtList.Clear();
+	}
+	// 更新地圖
+	public void Refresh(Vector2 Pos)
+	{
+		if(Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
+			return;
+
+		m_LastPos = Pos;
+
 		foreach(MapRoad Itor in RoadList)
 		{
-			if(Itor.Obj != null)
-				Destroy(Itor.Obj);
+
 		}//for
-		
-		RoadList.Clear();
-		
+
 		foreach(MapObjt Itor in ObjtList)
 		{
-			if(Itor.Obj != null)
-				Destroy(Itor.Obj);
+
 		}//for
-		
-		ObjtList.Clear();
+		//CreateObject(PrefabRoad(), Itor.ToVector2());
+		//Data.Obj = CreateObject(PrefabObjt(Data.Index), Data.Pos.ToVector2());
 	}
 }

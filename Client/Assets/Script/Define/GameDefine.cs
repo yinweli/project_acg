@@ -1,4 +1,8 @@
-﻿public class GameDefine
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class GameDefine
 {
     public const int iWeightEngry = 2;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 100;  // 怪物出怪能量基礎值.
@@ -18,4 +22,15 @@
 	public const int iPathMax = 12; // 最長路徑長度
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 8; // 物件遞減機率
+	public const float fRangeUpdate = 50.0f; // 地圖更新距離
+	public const float fRangeRadius = 3000.0f; // 地圖更新半徑
+
+	public static readonly List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
+	{
+		new MapCoor(1, 1), // 物件(1x1)
+		new MapCoor(2, 2), // 物件(2x2)
+		new MapCoor(2, 1), // 物件(2x1)
+		new MapCoor(1, 2), // 物件(1x2)
+		new MapCoor(3, 1), // 物件(3x1)
+	};
 }
