@@ -14,7 +14,7 @@ public class GameDefine
 	public const int iStageLevel = 5; // 關卡升階值
 	public const int iRoadSizeBase = 500; // 地圖道路基礎長度
 	public const int iRoadSizeAdd = 10; // 地圖道路增加長度
-	public const int iMapWidth = 41; // 地圖寬度
+	public const int iMapWidth = 21; // 地圖寬度
 	public const int iMapBorderX = 4; // 地圖X軸邊框長度
 	public const int iMapBorderY = 6; // 地圖Y軸邊框長度
 	public const int iPathStart = 10; // 起點路徑長度
@@ -23,7 +23,7 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 8; // 物件遞減機率
 	public const float fRangeUpdate = 50.0f; // 地圖更新距離
-	public const float fRangeRadius = 3000.0f; // 地圖更新半徑
+	public const float fRangeRadius = 2000.0f; // 地圖更新半徑
 
 	public static readonly List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
 	{

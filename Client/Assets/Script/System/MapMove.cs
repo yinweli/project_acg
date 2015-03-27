@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class MapMove : MonoBehaviour 
-{    
-    // Update is called once per frame
+{
 	void Update () 
     {
 	    if(SysMain.pthis.bIsGaming)

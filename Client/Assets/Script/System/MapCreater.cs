@@ -95,11 +95,8 @@ public class MapObjt
 	public int Height = 0;
 	public GameObject Obj = null;
 
-	public bool Cover(MapCoor Data, int W, int H)
+	public bool Cover(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
 	{
-		int x1 = Pos.X, y1 = Pos.Y, w1 = Width, h1 = Height;
-		int x2 = Data.X, y2 = Data.Y, w2 = W, h2 = H;
-		
 		if(x1 >= x2 && x1 >= x2 + w2)
 			return false;
 		else if(x1 <= x2 && x1 + w1 <= x2)
@@ -111,6 +108,10 @@ public class MapObjt
 		
 		return true;
 	}
+	public bool Cover(MapCoor Data, int W, int H)
+	{
+		return Cover(Pos.X, Pos.Y, Width, Height, Data.X, Data.Y, W, H);
+	}
 	public bool Cover(MapRoad Data)
 	{
 		return Cover(Data.Pos, 1, 1);
@@ -118,6 +119,12 @@ public class MapObjt
 	public bool Cover(MapObjt Data)
 	{
 		return Cover(Data.Pos, Data.Width, Data.Height);
+	}
+	public bool Cover(Vector2 Data, int W, int H)
+	{
+		Vector2 Temp = Pos.ToVector2();
+
+		return Cover((int)Temp.x, (int)Temp.y, Width, Height, (int)Data.x, (int)Data.y, W, H);
 	}
 }
 
@@ -133,7 +140,7 @@ public class MapCreater : MonoBehaviour
 	public int Style = 0; // 風格編號
 
 	public static MapCreater This = null;
-	
+
 	void Awake()
 	{
 		This = this;
@@ -146,12 +153,12 @@ public class MapCreater : MonoBehaviour
 	// 取得地圖道路預製物件名稱
 	private string PrefabRoad()
 	{
-		return "MapRoad_";
+		return "MapRoad_" + Style;
 	}
 	// 取得地圖物件預製物件名稱
 	private string PrefabObjt(int iIndex)
 	{
-		return "MapObjt_" + iIndex;
+		return "MapObjt_" + Style + "_" + iIndex;
 	}
 	// 取得地圖道路長度
 	private int RoadSize()
@@ -296,23 +303,65 @@ public class MapCreater : MonoBehaviour
 		ObjtList.Clear();
 	}
 	// 更新地圖
-	public void Refresh(Vector2 Pos)
+	public Vector2 Refresh(int iRoad)
 	{
-		if(Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
-			return;
+		if(RoadList.Count <= iRoad)
+			return new Vector2();
 
-		m_LastPos = Pos;
+		Vector2 Pos = RoadList[iRoad].Pos.ToVector2();
+
+		Pos.x += GameDefine.iBlockWidth / 2;
+		Pos.y += GameDefine.iBlockHeight / 2;
+
+		if(iRoad > 0 && Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
+			return Pos;
+
+		Vector2 RealPos = new Vector2(Pos.x - GameDefine.fRangeRadius, Pos.y - GameDefine.fRangeRadius);
+		int iRealWidth = (int)GameDefine.fRangeRadius * 2;
+		int iRealHeight = (int)GameDefine.fRangeRadius * 2;
 
 		foreach(MapRoad Itor in RoadList)
 		{
-
+			MapObjt Temp = new MapObjt();
+			
+			Temp.Pos = Itor.Pos;
+			Temp.Width = 1;
+			Temp.Height = 1;
+			
+			if(Temp.Cover(RealPos, iRealWidth, iRealHeight))
+			{
+				if(Itor.Obj == null)
+					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2());
+			}
+			else
+			{
+				if(Itor.Obj != null)
+				{
+					Destroy(Itor.Obj);
+					Itor.Obj = null;
+				}//if
+			}//if
 		}//for
-
+		
 		foreach(MapObjt Itor in ObjtList)
 		{
-
+			if(Itor.Cover(RealPos, iRealWidth, iRealHeight))
+			{
+				if(Itor.Obj == null)
+					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2());
+			}
+			else
+			{
+				if(Itor.Obj != null)
+				{
+					Destroy(Itor.Obj);
+					Itor.Obj = null;
+				}//if
+			}//if
 		}//for
-		//CreateObject(PrefabRoad(), Itor.ToVector2());
-		//Data.Obj = CreateObject(PrefabObjt(Data.Index), Data.Pos.ToVector2());
+		
+		m_LastPos = Pos;
+
+		return Pos;
 	}
 }
