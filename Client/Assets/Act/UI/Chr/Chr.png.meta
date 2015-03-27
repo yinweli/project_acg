@@ -1,25 +1,6 @@
 fileFormatVersion: 2
 guid: 9d4bd776db8f7014ea3cee635dfafc79
 TextureImporter:
-  fileIDToRecycleName:
-    8900000: generatedCubemap
-    21300000: Mouse001
-    21300002: Foot001
-    21300004: Hand001
-    21300006: Chr_3
-    21300008: Chr_4
-    21300010: Face001
-    21300012: Chr_6
-    21300014: Chr_7
-    21300016: Chr_8
-    21300018: Chr_9
-    21300020: Chr_10
-    21300022: Chr_11
-    21300024: Chr_12
-    21300026: Chr_13
-    21300028: Body001
-    21300030: MouseBg001
-    21300032: Chr_16
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -194,10 +175,10 @@ TextureImporter:
     - name: Chr_13
       rect:
         serializedVersion: 2
-        x: 111
+        x: 112
         y: 42
-        width: 14
-        height: 14
+        width: 13
+        height: 12
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,6 +209,66 @@ TextureImporter:
         y: 0
         width: 49
         height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_17
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 131
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 156
+        width: 39
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_19
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 181
+        width: 63
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_20
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 121
+        width: 48
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212
+        width: 13
+        height: 2
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Chr_22
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 56
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
