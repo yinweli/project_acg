@@ -1,6 +1,30 @@
 fileFormatVersion: 2
 guid: 9d4bd776db8f7014ea3cee635dfafc79
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Mouse001
+    21300002: Foot001
+    21300004: Hand001
+    21300006: Chr_3
+    21300008: Chr_4
+    21300010: Face001
+    21300012: Chr_6
+    21300014: Chr_7
+    21300016: Chr_8
+    21300018: Chr_9
+    21300020: Chr_10
+    21300022: Chr_11
+    21300024: Chr_12
+    21300026: Chr_13
+    21300028: Body001
+    21300030: MouseBg001
+    21300032: Chr_16
+    21300034: Chr_17
+    21300036: Chr_18
+    21300038: Chr_19
+    21300040: Chr_20
+    21300042: Chr_21
+    21300044: Chr_22
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -364,4 +364,8 @@ public class MapCreater : MonoBehaviour
 
 		return Pos;
 	}
+	public int RoadCount()
+	{
+		return RoadList.Count;
+	}
 }
