@@ -132,10 +132,10 @@ public class MapObjt
 public class MapCreater : MonoBehaviour
 {
 	private System.Random m_Rand = new System.Random();
+	private List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
+	private List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
 	private Vector2 m_LastPos = new Vector2();
 
-	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
-	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
 	public int Stage = 0; // 關卡編號
 	public int Style = 0; // 風格編號
 
@@ -207,9 +207,9 @@ public class MapCreater : MonoBehaviour
 		return new Tuple<int, MapCoor>(iIndex, GameDefine.ObjtScale[iIndex]);
 	}
 	// 建立物件
-	private GameObject CreateObject(string szName, Vector2 Pos)
+	private GameObject CreateObject(string szName, Vector2 Pos, int iWidth, int iHeight)
 	{
-		return UITool.pthis.CreateUIByPos(gameObject, szName, Pos.x, Pos.y);
+		return UITool.pthis.CreateUIByPos(gameObject, szName, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
 	}
 	// 建立地圖道路
 	private void CreateRoad()
@@ -303,18 +303,10 @@ public class MapCreater : MonoBehaviour
 		ObjtList.Clear();
 	}
 	// 更新地圖
-	public Vector2 Refresh(int iRoad)
+	public void Refresh(Vector2 Pos)
 	{
-		if(RoadList.Count <= iRoad)
-			return new Vector2();
-
-		Vector2 Pos = RoadList[iRoad].Pos.ToVector2();
-
-		Pos.x += GameDefine.iBlockWidth / 2;
-		Pos.y += GameDefine.iBlockHeight / 2;
-
-		if(iRoad > 0 && Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
-			return Pos;
+		if(Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
+			return;
 
 		Vector2 RealPos = new Vector2(Pos.x - GameDefine.fRangeRadius, Pos.y - GameDefine.fRangeRadius);
 		int iRealWidth = (int)GameDefine.fRangeRadius * 2;
@@ -331,7 +323,7 @@ public class MapCreater : MonoBehaviour
 			if(Temp.Cover(RealPos, iRealWidth, iRealHeight))
 			{
 				if(Itor.Obj == null)
-					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2());
+					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2(), GameDefine.iBlockWidth, GameDefine.iBlockHeight);
 			}
 			else
 			{
@@ -348,7 +340,7 @@ public class MapCreater : MonoBehaviour
 			if(Itor.Cover(RealPos, iRealWidth, iRealHeight))
 			{
 				if(Itor.Obj == null)
-					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2());
+					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2(), Itor.Width * GameDefine.iBlockWidth, Itor.Height * GameDefine.iBlockHeight);
 			}
 			else
 			{
@@ -361,11 +353,21 @@ public class MapCreater : MonoBehaviour
 		}//for
 		
 		m_LastPos = Pos;
-
-		return Pos;
 	}
 	public int RoadCount()
 	{
 		return RoadList.Count;
+	}
+	public Vector3 RoadPosition(int iRoad)
+	{
+		if(RoadList.Count <= iRoad)
+			return Vector3.zero;
+
+		GameObject Obj = RoadList[iRoad].Obj;
+
+		if(Obj == null)
+			return Vector3.zero;
+
+		return Obj.transform.position;
 	}
 }
