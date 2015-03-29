@@ -8,7 +8,7 @@ public class MapMove : MonoBehaviour
 
 	void Start()
 	{
-		MapCreater.This.Create();
+		//MapCreater.This.Create();
 	}
 	void Update()
     {
