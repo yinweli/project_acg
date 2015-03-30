@@ -75,7 +75,7 @@ public class MapCoor
 	}
 	public Vector2 ToVector2()
 	{
-		return new Vector2(X * GameDefine.iBlockWidth, Y * GameDefine.iBlockHeight);
+		return new Vector2(X * GameDefine.iBlockSize, Y * GameDefine.iBlockSize);
 	}
 }
 
@@ -202,7 +202,7 @@ public class MapCreater : MonoBehaviour
 	// 取得隨機物件
 	private Tuple<int, MapCoor> NextObjt()
 	{
-		int iIndex = m_Rand.Next(2, GameDefine.ObjtScale.Count - 1);
+		int iIndex = m_Rand.Next(GameDefine.ObjtScale.Count);
 
 		return new Tuple<int, MapCoor>(iIndex, GameDefine.ObjtScale[iIndex]);
 	}
@@ -323,7 +323,7 @@ public class MapCreater : MonoBehaviour
 			if(Temp.Cover(RealPos, iRealWidth, iRealHeight))
 			{
 				if(Itor.Obj == null)
-					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2(), GameDefine.iBlockWidth, GameDefine.iBlockHeight);
+					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2(), GameDefine.iBlockSize, GameDefine.iBlockSize);
 			}
 			else
 			{
@@ -340,7 +340,7 @@ public class MapCreater : MonoBehaviour
 			if(Itor.Cover(RealPos, iRealWidth, iRealHeight))
 			{
 				if(Itor.Obj == null)
-					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2(), Itor.Width * GameDefine.iBlockWidth, Itor.Height * GameDefine.iBlockHeight);
+					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2(), Itor.Width * GameDefine.iBlockSize, Itor.Height * GameDefine.iBlockSize);
 			}
 			else
 			{
