@@ -1,0 +1,6 @@
+{"GUID":"1", "StrID":"2001", "Mode":"1", "Group":"0", "Chances":"30", "Cooldown":"5", "Effect":"2", "Value":"1"}
+{"GUID":"2", "StrID":"2002", "Mode":"1", "Group":"0", "Chances":"10", "Cooldown":"20", "Effect":"2", "Value":"-10"}
+{"GUID":"3", "StrID":"2003", "Mode":"1", "Group":"0", "Chances":"5", "Cooldown":"30", "Effect":"4", "Value":"5"}
+{"GUID":"4", "StrID":"2004", "Mode":"2", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-1"}
+{"GUID":"5", "StrID":"2005", "Mode":"2", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"1"}
+{"GUID":"6", "StrID":"2006", "Mode":"2", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"2"}

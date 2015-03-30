@@ -1,0 +1,4 @@
+{"GUID":"1", "StrID":"1001", "Mode":"1", "Damage":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
+{"GUID":"2", "StrID":"1002", "Mode":"2", "Damage":"1", "FireRate":"0.5", "Range":"1", "Resource":"0"}
+{"GUID":"3", "StrID":"1003", "Mode":"2", "Damage":"6", "FireRate":"1.5", "Range":"2", "Resource":"2"}
+{"GUID":"4", "StrID":"1004", "Mode":"2", "Damage":"2", "FireRate":"0.25", "Range":"2", "Resource":"3"}
