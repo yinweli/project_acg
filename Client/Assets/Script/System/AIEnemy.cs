@@ -26,9 +26,6 @@ public class AIEnemy : MonoBehaviour
 	void Start () 
     {
         PosStart = transform.position;
-        //測試先指定目標.
-        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomDictionary(SysMain.pthis.Role, new System.Random());
-        ObjTarget = pTemp.Key;
 	}
     // ------------------------------------------------------------------
     void OnDestroy()
@@ -42,6 +39,13 @@ public class AIEnemy : MonoBehaviour
         // 沒血逃跑.
         if (iHP <= 0)
         {
+            // 如果有抓目標就丟下目標.
+            if (bHasTarget)
+            {
+                bHasTarget = false;
+                if (ObjTarget.GetComponent<AIPlayer>())
+                    ObjTarget.GetComponent<AIPlayer>().BeFree();                
+            }
             // 取向量.
             MoveTo(PosStart - transform.position, fMoveSpeed * 4);
             // 跑出畫面外就刪掉
@@ -51,13 +55,30 @@ public class AIEnemy : MonoBehaviour
             if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
                 Destroy(gameObject);
             return;
-        }       
-
-        // 確認目標.
-        FindTarget();
+        }
 
         // 已有抓人逃跑模式.
-        //if (bHasTarget)
+        if (bHasTarget)
+        {
+            // 取向量.
+            MoveTo(PosStart - transform.position, fMoveSpeed * 0.5f);
+            // 跑出畫面外就刪掉
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            if (screenPosition.y > Screen.height || screenPosition.y < 0)
+            {
+                Destroy(ObjTarget);
+                Destroy(gameObject);
+            }
+            if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
+            {
+                Destroy(ObjTarget);
+                Destroy(gameObject);
+            }
+            return;
+        }
+
+        // 確認目標.
+        FindTarget();        
 
         // 如果有目標且沒抓人時，追蹤目標
         //if (!ObjTarget && !bHasTarget)
@@ -104,6 +125,14 @@ public class AIEnemy : MonoBehaviour
         if (bHasTarget)
             return;
 
+        // 如果已經有目標要檢查目標是否被抓了.
+        if (ObjTarget && ObjTarget.GetComponent<AIPlayer>() && !ObjTarget.GetComponent<AIPlayer>().bBeCaught)
+            return;
+
+        //測試先指定目標.
+        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomDictionary(SysMain.pthis.Role, new System.Random());
+        ObjTarget = pTemp.Key;
+
         // 清空目標.
         //ObjTarget = null;        
     }
@@ -113,6 +142,14 @@ public class AIEnemy : MonoBehaviour
         // 沒有目標就放棄追蹤.
         if (!ObjTarget)
             return;
+
+        // 檢查距離是否可抓抓.
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.1f)
+        {
+            bHasTarget = true;
+            if (ObjTarget.GetComponent<AIPlayer>())
+                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
+        }
 
         // 取向量.
         MoveTo(ObjTarget.transform.position - transform.position, fMoveSpeed);

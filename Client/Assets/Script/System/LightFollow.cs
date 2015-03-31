@@ -3,15 +3,18 @@ using System.Collections;
 
 public class LightFollow : MonoBehaviour 
 {
-    public GameObject pTarget = null;
+    public GameObject ObjTarget = null;
 
     public float zPos = -0.5f;
 	// Update is called once per frame
 	void Update () {
-        if(!pTarget)
+        if (!ObjTarget)
+        {
             Destroy(gameObject);
+            return;
+        }
 
-        Vector3 pPos = new Vector3(pTarget.transform.position.x, pTarget.transform.position.y, zPos);
+        Vector3 pPos = new Vector3(ObjTarget.transform.position.x, ObjTarget.transform.position.y, zPos);
         transform.position = pPos;
 	}
 }

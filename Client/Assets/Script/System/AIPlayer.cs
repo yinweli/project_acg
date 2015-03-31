@@ -64,6 +64,10 @@ public class AIPlayer : MonoBehaviour
             // 播放角色走路.
         }
 
+        // 如果被抓了，目標就定在抓人的怪物身上.
+        if (bBeCaught)
+            return;
+
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
             // 確認現在是否有目標.
@@ -102,5 +106,20 @@ public class AIPlayer : MonoBehaviour
         pObj.transform.parent = transform.parent;
         pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
         pObj.GetComponent<AIBullet>().Chace(ObjTarget);
-    }        
+    }
+    // ------------------------------------------------------------------
+    // 被抓函式.
+    public void BeCaught(GameObject ObjMonster)
+    {
+        bBeCaught = true;
+        ObjTarget = ObjMonster;
+        gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
+    }
+    // ------------------------------------------------------------------
+    // 自由函式.
+    public void BeFree()
+    {
+        bBeCaught = false;
+        Destroy(gameObject.GetComponent<PlayerFollow>());
+    }
 }
