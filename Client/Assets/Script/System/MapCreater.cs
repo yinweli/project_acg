@@ -120,12 +120,6 @@ public class MapObjt
 	{
 		return Cover(Data.Pos, Data.Width, Data.Height);
 	}
-	public bool Cover(Vector2 Data, int W, int H)
-	{
-		Vector2 Temp = Pos.ToVector2();
-
-		return Cover((int)Temp.x, (int)Temp.y, Width, Height, (int)Data.x, (int)Data.y, W, H);
-	}
 }
 
 // 建立地圖類別
@@ -134,7 +128,6 @@ public class MapCreater : MonoBehaviour
 	private System.Random m_Rand = new System.Random();
 	private List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
 	private List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
-	private Vector2 m_LastPos = new Vector2();
 
 	public int Stage = 0; // 關卡編號
 	public int Style = 0; // 風格編號
@@ -144,10 +137,6 @@ public class MapCreater : MonoBehaviour
 	void Awake()
 	{
 		This = this;
-	}
-	void Start()
-	{
-		//Create();
 	}
 
 	// 取得地圖道路預製物件名稱
@@ -292,6 +281,7 @@ public class MapCreater : MonoBehaviour
 		Clear();
 		CreateRoad();
 		CreateObjt();
+		Refresh(0);
 
 		Debug.Log("map road : " + RoadList.Count);
 		Debug.Log("map objt : " + ObjtList.Count);
@@ -303,14 +293,10 @@ public class MapCreater : MonoBehaviour
 		ObjtList.Clear();
 	}
 	// 更新地圖
-	public void Refresh(Vector2 Pos)
+	public void Refresh(int iRoad)
 	{
-		if(Vector2.Distance(Pos, m_LastPos) <= GameDefine.fRangeUpdate)
-			return;
-
-		Vector2 RealPos = new Vector2(Pos.x - GameDefine.fRangeRadius, Pos.y - GameDefine.fRangeRadius);
-		int iRealWidth = (int)GameDefine.fRangeRadius * 2;
-		int iRealHeight = (int)GameDefine.fRangeRadius * 2;
+		MapCoor RoadPos = RoadList.Count > iRoad ? RoadList[iRoad].Pos : new MapCoor();
+		MapCoor ChkPos = new MapCoor(RoadPos.X - GameDefine.iBlockUpdate / 2, RoadPos.Y - GameDefine.iBlockUpdate / 2);
 
 		foreach(MapRoad Itor in RoadList)
 		{
@@ -319,8 +305,8 @@ public class MapCreater : MonoBehaviour
 			Temp.Pos = Itor.Pos;
 			Temp.Width = 1;
 			Temp.Height = 1;
-			
-			if(Temp.Cover(RealPos, iRealWidth, iRealHeight))
+
+			if(Temp.Cover(ChkPos, GameDefine.iBlockUpdate, GameDefine.iBlockUpdate))
 			{
 				if(Itor.Obj == null)
 					Itor.Obj = CreateObject(PrefabRoad(), Itor.Pos.ToVector2(), GameDefine.iBlockSize, GameDefine.iBlockSize);
@@ -337,7 +323,7 @@ public class MapCreater : MonoBehaviour
 		
 		foreach(MapObjt Itor in ObjtList)
 		{
-			if(Itor.Cover(RealPos, iRealWidth, iRealHeight))
+			if(Itor.Cover(ChkPos, GameDefine.iBlockUpdate, GameDefine.iBlockUpdate))
 			{
 				if(Itor.Obj == null)
 					Itor.Obj = CreateObject(PrefabObjt(Itor.Index), Itor.Pos.ToVector2(), Itor.Width * GameDefine.iBlockSize, Itor.Height * GameDefine.iBlockSize);
@@ -351,8 +337,6 @@ public class MapCreater : MonoBehaviour
 				}//if
 			}//if
 		}//for
-		
-		m_LastPos = Pos;
 	}
 	public int RoadCount()
 	{

@@ -13,7 +13,6 @@ public class MapMove : MonoBehaviour
 	void Start()
 	{        
 		MapCreater.This.Create();
-        MapCreater.This.Refresh(new Vector2(-100, -100));
         NewGame();
 	}
     // ------------------------------------------------------------------
@@ -23,7 +22,7 @@ public class MapMove : MonoBehaviour
             NextRoad++;
 
         MoveTo(NextRoad);
-        MapCreater.This.Refresh(new Vector2(transform.localPosition.x, transform.localPosition.y));
+		MapCreater.This.Refresh(NextRoad);
 	}
     // ------------------------------------------------------------------
     void NewGame()

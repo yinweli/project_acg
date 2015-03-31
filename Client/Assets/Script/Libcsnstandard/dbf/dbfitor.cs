@@ -49,7 +49,7 @@ namespace LibCSNStandard
          */
         public void Next()
         {
-            if (Check() && m_iPos < m_List.Count - 1)
+            if (Check() && m_iPos < m_List.Count)
                 ++m_iPos;
         }
         /**
@@ -58,7 +58,7 @@ namespace LibCSNStandard
          */
         public bool IsEnd()
         {
-            return Check() == false || m_iPos >= m_List.Count - 1;
+            return Check() == false || m_iPos >= m_List.Count;
         }
         //-------------------------------------
     }
