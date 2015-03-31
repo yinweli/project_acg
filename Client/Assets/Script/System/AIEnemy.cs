@@ -42,6 +42,7 @@ public class AIEnemy : MonoBehaviour
             // 如果有抓目標就丟下目標.
             if (bHasTarget)
             {
+                iThreat = 0;
                 bHasTarget = false;
                 if (ObjTarget.GetComponent<AIPlayer>())
                     ObjTarget.GetComponent<AIPlayer>().BeFree();                
@@ -147,6 +148,7 @@ public class AIEnemy : MonoBehaviour
         if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.1f)
         {
             bHasTarget = true;
+            iThreat += 5;
             if (ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
         }

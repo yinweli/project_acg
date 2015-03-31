@@ -358,16 +358,11 @@ public class MapCreater : MonoBehaviour
 	{
 		return RoadList.Count;
 	}
-	public Vector3 RoadPosition(int iRoad)
+    public GameObject GetRoadObj(int iRoad)
 	{
 		if(RoadList.Count <= iRoad)
-			return Vector3.zero;
+			return null;
 
-		GameObject Obj = RoadList[iRoad].Obj;
-
-		if(Obj == null)
-			return Vector3.zero;
-
-		return Obj.transform.position;
+        return RoadList[iRoad].Obj;
 	}
 }
