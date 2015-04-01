@@ -23,6 +23,10 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 8; // 物件遞減機率
 
+	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
+	public const string szDBFFeature = "Feature"; // 特性dbf名稱
+	public const string szDBFLanguage = "Language"; // 語言dbf名稱
+	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
 
 	public static readonly List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
 	{
