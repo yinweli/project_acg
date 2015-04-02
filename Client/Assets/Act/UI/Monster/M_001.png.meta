@@ -1,0 +1,286 @@
+fileFormatVersion: 2
+guid: 3944e0b17f3afb44dbdfde1667545a58
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: M_000_eye
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 505
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_brow1
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 507
+        width: 15
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_eye2
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 498
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b03
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 494
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b02
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 494
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_eye1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 494
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_brow2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 495
+        width: 16
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_brow3
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 495
+        width: 17
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_hp_bg
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 486
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_hp_hp
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 486
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b01
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 459
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b05
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 477
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b06
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 459
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_002_b05
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 459
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 406
+        width: 59
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_light
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 355
+        width: 38
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_Adorn_A_000
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 335
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_002_b03
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 263
+        width: 83
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_Adorn_B_000
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 335
+        width: 60
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_002_b02
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 273
+        width: 83
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_002_b01
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 287
+        width: 83
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_002_b00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 83
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b07
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 470
+        width: 3
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_001_b08
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 470
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
