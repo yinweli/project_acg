@@ -4,15 +4,18 @@ using System.Collections.Generic;
 
 public class AIEnemy : MonoBehaviour 
 {
-    // HP
-    public int iHP = 5;
-    // 移動速度
-    public float fMoveSpeed = 0.05f;
-    // 威脅程度(越高成為玩家優先選擇)
-    public int iThreat = 1;
+	// 怪物編號
+	public int iMonster = 1;
+	// 怪物模式
+	public ENUM_ModeMonster emMode = ENUM_ModeMonster.Null;
+	// HP
+	public int iHP = 0;
+	// 移動速度
+	public float fMoveSpeed = 0.0f;
+	// 威脅
+	public int iThreat = 0;
     // 目標
     public GameObject ObjTarget = null;
-
     // 是否已抓了人.
     public bool bHasTarget = false;
 
@@ -25,6 +28,19 @@ public class AIEnemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+		DBFMonster DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
+
+		if(DBFData == null)
+		{
+			Debug.Log("DBFMonster(" + iMonster + ") null");
+			return;
+		}//if
+
+		emMode = (ENUM_ModeMonster)DBFData.Mode;
+		iHP = DBFData.HP;
+		fMoveSpeed = DBFData.MoveSpeed;
+		iThreat = DBFData.Threat;
+
         PosStart = transform.position;
 	}
     // ------------------------------------------------------------------
@@ -164,4 +180,5 @@ public class AIEnemy : MonoBehaviour
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
+	// ------------------------------------------------------------------
 }

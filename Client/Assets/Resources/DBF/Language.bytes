@@ -1,13 +1,16 @@
 {"GUID":"1001", "enUS":"Flashlight", "zhTW":"\u624b\u96fb\u7b52"}
 {"GUID":"1002", "enUS":"Knife", "zhTW":"\u5c0f\u5200"}
-{"GUID":"1003", "enUS":"Pistol", "zhTW":"\u624b\u69cd"}
-{"GUID":"1004", "enUS":"Machine gun", "zhTW":"\u6a5f\u69cd"}
+{"GUID":"1003", "enUS":"Katana", "zhTW":"\u6b66\u58eb\u5200"}
+{"GUID":"1004", "enUS":"Chainsaw", "zhTW":"\u96fb\u92f8"}
+{"GUID":"1005", "enUS":"Pistol", "zhTW":"\u624b\u69cd"}
+{"GUID":"1006", "enUS":"Revolver", "zhTW":"\u5de6\u8f2a\u624b\u69cd"}
+{"GUID":"1007", "enUS":"Desert Eagle", "zhTW":"\u6c99\u6f20\u4e4b\u9df9"}
+{"GUID":"1008", "enUS":"Submachine", "zhTW":"\u885d\u92d2\u69cd"}
+{"GUID":"1009", "enUS":"Assault Rifle", "zhTW":"\u7a81\u64ca\u6b65\u69cd"}
+{"GUID":"1010", "enUS":"Light machine gun", "zhTW":"\u8f15\u6a5f\u69cd"}
 {"GUID":"2001", "enUS":"Nervous", "zhTW":"\u7dca\u5f35\u4e0d\u5b89"}
 {"GUID":"2002", "enUS":"Good appease", "zhTW":"\u5584\u65bc\u5b89\u64ab"}
 {"GUID":"2003", "enUS":"The scavengers", "zhTW":"\u62fe\u8352\u8005"}
 {"GUID":"2004", "enUS":"Clumsy shooter", "zhTW":"\u7b28\u62d9\u7684\u69cd\u624b"}
 {"GUID":"2005", "enUS":"Veteran shooter", "zhTW":"\u8001\u7df4\u7684\u69cd\u624b"}
 {"GUID":"2006", "enUS":"Gifted shooter", "zhTW":"\u5929\u624d\u7684\u69cd\u624b"}
-{"GUID":"3001", "enUS":"Zombie", "zhTW":"\u6bad\u5c4d"}
-{"GUID":"3002", "enUS":"Monster2", "zhTW":"\u602a\u72692"}
-{"GUID":"3003", "enUS":"Monster3", "zhTW":"\u602a\u72693"}
