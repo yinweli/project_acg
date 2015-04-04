@@ -73,10 +73,11 @@ public enum ENUM_Effect
 	Currency, // 通貨
 	Pressure, // 壓力
 	Stamina, // 耐力
+	StaminaLimit, // 耐力上限
+	StaminaRecovery, // 耐力回復
 	Battery, // 電池
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
-	Recovery, // 回復
 	CriticalStrike, // 致命
 	Damage, // 增傷
 }

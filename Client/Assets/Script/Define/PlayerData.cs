@@ -32,7 +32,7 @@ public class Member
 public class PlayerData
 {
 	/* [Save] */ public int iStage = 0; // 關卡編號
-	/* [Save] */ public int iMoney = 0; // 通貨
+	/* [Save] */ public int iCurrency = 0; // 通貨
 	/* [    ] */ public int iPressure = 0; // 壓力
 	/* [    ] */ public int iStamina = 0; // 耐力
 	/* [    ] */ public int iStaminaLimit = 0; // 耐力上限
