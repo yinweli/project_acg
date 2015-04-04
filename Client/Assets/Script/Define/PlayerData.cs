@@ -10,7 +10,7 @@ public class Looks
 
 public class Member
 {
-	/* [Save] */ public PlayerLooks Looks = new PlayerLooks(); // 外型資料 [Save]
+	/* [Save] */ public Looks Looks = new Looks(); // 外型資料 [Save]
 	/* [Save] */ public int iEquip = 0; // 裝備編號
 	/* [Save] */ public List<int> Feature = new List<int>(); // 特性列表
 	/* [Save] */ public List<int> Behavior = new List<int>(); // 行為列表
@@ -29,5 +29,5 @@ public class PlayerData
 	/* [Save] */ public int iBattery = 0; // 電池
 	/* [Save] */ public int iLightAmmo = 0; // 輕型彈藥
 	/* [Save] */ public int iHeavyAmmo = 0; // 重型彈藥
-	/* [Save] */ public List<PlayerMember> Member = new List<PlayerMember>(); // 成員列表
+	/* [Save] */ public List<Member> Data = new List<Member>(); // 成員列表
 }
