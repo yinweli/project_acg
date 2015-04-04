@@ -57,11 +57,21 @@ public class SysMain : MonoBehaviour
 			Data.iBattery = 100;
 			Data.iLightAmmo = 999;
 			Data.iHeavyAmmo = 999;
-			// 建立兩名成員
-			Data.Data.Add(new Member());
-			Data.Data.Add(new Member());
+			AddMember(new Looks(), 1);
+			AddMember(new Looks(), 2);
+			AddMember(new Looks(), 3);
 		}//if
 
 		Debug.Log("game load");
+	}
+	// 建立成員
+	public Member AddMember(Looks Looks, int iEquip)
+	{
+		Member Data = new Member();
+
+		Data.Looks = Looks;
+		Data.iEquip = iEquip;
+
+		return Data;
 	}
 }
