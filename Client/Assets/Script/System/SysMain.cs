@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ public class SysMain : MonoBehaviour
 
     public bool bIsGaming = true;
 
-    public PlayerData Data;
+    public PlayerData Data = new PlayerData();
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 敵人佇列.
@@ -32,5 +33,35 @@ public class SysMain : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	// 存檔
+	public void GameSave()
+	{
+		PlayerPrefs.SetString(GameDefine.szSave, Json.ToString(Data));
+		PlayerPrefs.Save();
+		Debug.Log("game save");
+	}
+	// 讀檔
+	public void GameLoad()
+	{
+		if(PlayerPrefs.HasKey(GameDefine.szSave))
+			Data = Json.ToObject<PlayerData>(PlayerPrefs.GetString(GameDefine.szSave));
+		else
+		{
+			// 沒有遊戲紀錄, 建立一個新的
+			Data = new PlayerData();
+
+			// 以下是測試資料, 以後要改
+			Data.iStage = 1;
+			Data.iBattery = 100;
+			Data.iLightAmmo = 999;
+			Data.iHeavyAmmo = 999;
+			// 建立兩名成員
+			Data.Data.Add(new Member());
+			Data.Data.Add(new Member());
+		}//if
+
+		Debug.Log("game load");
 	}
 }
