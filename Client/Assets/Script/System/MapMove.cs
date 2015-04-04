@@ -6,8 +6,6 @@ public class MapMove : MonoBehaviour
 	public int RoadIndex = 0;
 	public Vector3 NextPos = new Vector3();
 
-    public float fSpeed = 20.0f;
-
     public int NextRoad = 1;
     // ------------------------------------------------------------------
 	void Start()
@@ -17,12 +15,12 @@ public class MapMove : MonoBehaviour
 	}
     // ------------------------------------------------------------------
 	void Update()
-    {
+    {/*
         if (Vector2.Distance(Vector3.zero, MapCreater.This.GetRoadObj(NextRoad).transform.position) < 0.01f)
             NextRoad++;
 
         MoveTo(NextRoad);
-		MapCreater.This.Refresh(NextRoad);
+		MapCreater.This.Refresh(NextRoad);*/
 	}
     // ------------------------------------------------------------------
     void NewGame()
@@ -38,6 +36,6 @@ public class MapMove : MonoBehaviour
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
         // 把物件位置朝目標向量(玩家方向)移動.
-        transform.localPosition += vecDirection.normalized * fSpeed * Time.deltaTime;
+        transform.localPosition += vecDirection.normalized * GameDefine.fMoveSpeed * 2 * Time.deltaTime;
     }
 }

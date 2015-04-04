@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GameDefine
 {
+    public const float fMoveSpeed = 50f; // 玩家移動速度.
+
     public const int iWeightEngry = 2;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 100;  // 怪物出怪能量基礎值.
     public const int iMINWaitSec = 5;   // 怪物出怪最小間隔秒數.

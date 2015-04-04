@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class AIPlayer : MonoBehaviour 
 {
+    public int iPlayerID = 0;
     // 角色動畫.
     public Animator pAni = null;
     // 手上武器type.
@@ -15,6 +16,8 @@ public class AIPlayer : MonoBehaviour
 
     // 目標
     public GameObject ObjTarget = null;
+    // 武器物件.
+    public GameObject pSWeapon = null;
     // 是否被抓住.
     public bool bBeCaught = false;
     // 無敵狀態剩餘秒數.
@@ -26,16 +29,29 @@ public class AIPlayer : MonoBehaviour
 
 	// Use this for initialization
 	void Start ()
-    {
-        SysMain.pthis.Role.Add(gameObject, 1);
+    {        
+        // 初始化角色.
+        if (pWeapon == WeaponType.Weapon_Light)
+        {
+            GameObject pObj = UITool.pthis.CreateUI(gameObject, "Prefab/G_Light");
+            pObj.GetComponent<G_Light>().SetLightFollow(pSWeapon);
+        }
+
+        GetComponent<G_Player>().InitPlayer(pWeapon);
 	}
     // ------------------------------------------------------------------
 	// Update is called once per frame
 	void Update () 
     {
-        if (pWeapon == WeaponType.Weapon_null)
+        Attack();
+	}
+    // ------------------------------------------------------------------
+    // 射擊函式.
+    void Attack()
+    {
+        if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_Light)
             return;
-
+        
         // 確認目標.
         GetTarget();
 
@@ -51,8 +67,9 @@ public class AIPlayer : MonoBehaviour
             CreateBullet();
             // 計算冷卻.
             fCoolDown = Time.time + fShotSpeed;
-        }       
-	}
+        }
+        
+    }
     // ------------------------------------------------------------------
     // 取得目標.
     void GetTarget()

@@ -23,7 +23,7 @@ public class EnemyCreater : MonoBehaviour
     public void StartNew()
     {
         // 計算總波數能量.
-        iEnegry = SysMain.pthis.iStage * GameDefine.iWeightEngry + GameDefine.iBaseEngry;
+        iEnegry = SysMain.pthis.Data.iStage * GameDefine.iWeightEngry + GameDefine.iBaseEngry;
 
         StartCoroutine(Creater());
     }

@@ -9,6 +9,7 @@
 public enum WeaponType
 {
     Weapon_null,
+    Weapon_Light,
     Weapon_001,
     Weapon_002,
 

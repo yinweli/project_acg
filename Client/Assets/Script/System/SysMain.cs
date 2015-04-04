@@ -8,8 +8,7 @@ public class SysMain : MonoBehaviour
 
     public bool bIsGaming = true;
 
-    public int iStage = 1;
-
+    public PlayerData Data;
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 敵人佇列.
