@@ -73,7 +73,11 @@ public class SysMain : MonoBehaviour
 		Temp.Looks = Looks;
 		Temp.iEquip = iEquip;
 
-
         Data.Data.Add(Temp);
+	}
+	// 刪除成員
+	public void DelMember(int iPos)
+	{
+		Data.Data.RemoveAt(iPos);
 	}
 }
