@@ -7,8 +7,11 @@ public class AIPlayer : MonoBehaviour
     public int iPlayerID = 0;
     // 角色動畫.
     public Animator pAni = null;
+    // 武器動畫.
+    public Animator pWAni = null;
     // 手上武器type.
     public WeaponType pWeapon = WeaponType.Weapon_null;
+
     // 攻擊範圍.
     public float fRange = 1;
     // 射速.
@@ -37,6 +40,7 @@ public class AIPlayer : MonoBehaviour
 	void Update () 
     {
         Attack();
+        Debug.Log(Camera.mainCamera.WorldToScreenPoint(transform.position));
 	}
     // ------------------------------------------------------------------
     // 射擊函式.
@@ -54,6 +58,8 @@ public class AIPlayer : MonoBehaviour
             // 播放射擊.
             if (pAni)
                 pAni.Play("Shot");
+            if (pWAni)
+                pWAni.Play("Fire");
 
             NGUITools.PlaySound(audioClip, 0.8f);
             // 發射子彈.

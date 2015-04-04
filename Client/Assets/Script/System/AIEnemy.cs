@@ -38,7 +38,7 @@ public class AIEnemy : MonoBehaviour
 
 		emMode = (ENUM_ModeMonster)DBFData.Mode;
 		iHP = DBFData.HP;
-		fMoveSpeed = DBFData.MoveSpeed;
+		fMoveSpeed = DBFData.MoveSpeed * 10;
 		iThreat = DBFData.Threat;
 
         PosStart = transform.position;
@@ -65,8 +65,9 @@ public class AIEnemy : MonoBehaviour
             }
             // 取向量.
             MoveTo(PosStart - transform.position, fMoveSpeed * 4);
-            // 跑出畫面外就刪掉
+            // 跑出畫面外就刪掉            
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Debug.Log(screenPosition);
             if (screenPosition.y > Screen.height || screenPosition.y < 0)
                 Destroy(gameObject);
             if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
@@ -81,6 +82,7 @@ public class AIEnemy : MonoBehaviour
             MoveTo(PosStart - transform.position, fMoveSpeed * 0.5f);
             // 跑出畫面外就刪掉
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Debug.Log(screenPosition);
             if (screenPosition.y > Screen.height || screenPosition.y < 0)
             {
                 Destroy(ObjTarget);

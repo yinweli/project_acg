@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyCreater : MonoBehaviour
 {
+    public GameObject CameraCtrl;
     //public static EnemyCreater pthis = null;
     // 波數能量.
     public int iEnegry = 0;
@@ -53,10 +54,6 @@ public class EnemyCreater : MonoBehaviour
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
     }
     // ------------------------------------------------------------------
     // 偕同程序
@@ -75,13 +72,19 @@ public class EnemyCreater : MonoBehaviour
                 switch (Random.Range(1, 4))
                 {
                     case 1: //上方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(-500.0f, 500.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(375.0f, 430.0f));
-                        break;
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], 
+                            CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), 
+                            CameraCtrl.transform.localPosition.y + Random.Range(375.0f, 430.0f));
+                         break;
                     case 2: //左方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(-470.0f, -520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                            CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
+                            /*Mathf.Abs(transform.parent.localPosition.y)*/CameraCtrl.transform.localPosition.y + +Random.Range(-395.0f, 395.0f));
                         break;
                     case 3: //右方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], Random.Range(470.0f, 520.0f), Mathf.Abs(transform.parent.localPosition.y) + Random.Range(-395.0f, 395.0f));
+                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                            CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
+                            /*Mathf.Abs(transform.parent.localPosition.y)*/CameraCtrl.transform.localPosition.y + +Random.Range(-395.0f, 395.0f));
                         break;
                 }                
             }
