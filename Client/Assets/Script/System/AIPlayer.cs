@@ -30,14 +30,7 @@ public class AIPlayer : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {        
-        // 初始化角色.
-        if (pWeapon == WeaponType.Weapon_Light)
-        {
-            GameObject pObj = UITool.pthis.CreateUI(gameObject, "Prefab/G_Light");
-            pObj.GetComponent<G_Light>().SetLightFollow(pSWeapon);
-        }
-
-        GetComponent<G_Player>().InitPlayer(pWeapon);
+        GetComponent<G_Player>().InitPlayer();
 	}
     // ------------------------------------------------------------------
 	// Update is called once per frame
@@ -49,7 +42,7 @@ public class AIPlayer : MonoBehaviour
     // 射擊函式.
     void Attack()
     {
-        if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_Light)
+        if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_000)
             return;
         
         // 確認目標.

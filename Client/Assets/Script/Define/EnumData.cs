@@ -9,7 +9,7 @@
 public enum WeaponType
 {
     Weapon_null,
-    Weapon_Light,
+    Weapon_000,
     Weapon_001,
     Weapon_002,
 
@@ -79,4 +79,29 @@ public enum ENUM_Effect
 	Recovery, // 回復
 	CriticalStrike, // 致命
 	Damage, // 增傷
+}
+
+// 角色外觀列舉.
+public enum ENUM_Role
+{
+    HairA,
+    HairB,    
+    Adorn,    
+    BrowR,
+    BrowL,    
+    EyeR,
+    EyeL,
+    EyeBgR,
+    EyeBgL,    
+    Mouth,
+    Face_Bg,
+    Face_BR,
+    Face_BL,    
+    Body,
+    HandR,
+    HandL,    
+    FootR,
+    FootL,
+
+    Role_Count,
 }

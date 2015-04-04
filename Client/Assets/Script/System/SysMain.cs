@@ -18,6 +18,7 @@ public class SysMain : MonoBehaviour
     void Awake()
     {
         pthis = this;
+        GameLoad();
     }
 
     void OnDestroy()
@@ -65,13 +66,14 @@ public class SysMain : MonoBehaviour
 		Debug.Log("game load");
 	}
 	// 建立成員
-	public Member AddMember(Looks Looks, int iEquip)
+	public void AddMember(Looks Looks, int iEquip)
 	{
-		Member Data = new Member();
+		Member Temp = new Member();
 
-		Data.Looks = Looks;
-		Data.iEquip = iEquip;
+		Temp.Looks = Looks;
+		Temp.iEquip = iEquip;
 
-		return Data;
+
+        Data.Data.Add(Temp);
 	}
 }
