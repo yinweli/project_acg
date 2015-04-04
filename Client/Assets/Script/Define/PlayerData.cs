@@ -21,7 +21,7 @@ public class Looks
 
 public class Member
 {
-	/* [Save] */ public Looks Looks = new Looks(); // 外型資料 [Save]
+	/* [Save] */ public Looks Looks = new Looks(); // 外型資料
 	/* [Save] */ public int iEquip = 0; // 裝備編號
 	/* [Save] */ public List<int> Feature = new List<int>(); // 特性列表
 	/* [Save] */ public List<int> Behavior = new List<int>(); // 行為列表
@@ -33,6 +33,7 @@ public class Member
 public class PlayerData
 {
 	/* [Save] */ public int iStage = 0; // 關卡編號
+	/* [Save] */ public int iMoney = 0; // 通貨
 	/* [    ] */ public int iPressure = 0; // 壓力
 	/* [    ] */ public int iStamina = 0; // 耐力
 	/* [    ] */ public int iStaminaLimit = 0; // 耐力上限
