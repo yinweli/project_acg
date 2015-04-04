@@ -41,5 +41,7 @@ public class PlayerData
 	/* [Save] */ public int iBattery = 0; // 電池
 	/* [Save] */ public int iLightAmmo = 0; // 輕型彈藥
 	/* [Save] */ public int iHeavyAmmo = 0; // 重型彈藥
+	/* [Save] */ public int iEnemyKill = 0; // 殺怪數量
+	/* [Save] */ public int iPlayTime = 0; // 遊戲時間
 	/* [Save] */ public List<Member> Data = new List<Member>(); // 成員列表
 }
