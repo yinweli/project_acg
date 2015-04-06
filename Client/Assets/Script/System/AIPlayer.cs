@@ -45,7 +45,7 @@ public class AIPlayer : MonoBehaviour
     // 射擊函式.
     void Attack()
     {
-        if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_000)
+        if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_001)
             return;
         
         // 確認目標.

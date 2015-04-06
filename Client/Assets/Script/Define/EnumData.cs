@@ -9,9 +9,16 @@
 public enum WeaponType
 {
     Weapon_null,
-    Weapon_000,
-    Weapon_001,
-    Weapon_002,
+    Weapon_001, // 手電筒.
+    Weapon_002, // 小刀
+    Weapon_003, // 武士刀.
+    Weapon_004, // 電鋸.
+    Weapon_005, // 手槍.
+    Weapon_006, // 左輪手槍.
+    Weapon_007, // 沙漠之鷹.
+    Weapon_008, // 衝鋒槍.
+    Weapon_009, // 突擊步槍.
+    Weapon_010, // 輕機槍.
 
     WeaponCount,
 }
