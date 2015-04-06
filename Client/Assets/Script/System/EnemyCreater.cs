@@ -4,15 +4,16 @@ using System.Collections.Generic;
 
 public class EnemyCreater : MonoBehaviour
 {
+    public static EnemyCreater pthis = null;
+
     public GameObject CameraCtrl;
-    //public static EnemyCreater pthis = null;
     // 波數能量.
     public int iEnegry = 0;
     // 本關敵人與機率列表<敵人名稱,機率>.
     public Dictionary<string, int> StageEnemy = new Dictionary<string, int>();
     void Awake()
     {
-        //pthis = this;
+        pthis = this;
     }
     // ------------------------------------------------------------------
     void Start()
@@ -53,7 +54,6 @@ public class EnemyCreater : MonoBehaviour
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
         EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
     }
     // ------------------------------------------------------------------
     // 偕同程序
@@ -86,11 +86,20 @@ public class EnemyCreater : MonoBehaviour
                             CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
                             /*Mathf.Abs(transform.parent.localPosition.y)*/CameraCtrl.transform.localPosition.y + +Random.Range(-395.0f, 395.0f));
                         break;
-                }                
+                }
+                yield return new WaitForSeconds(0.05f);
             }
             //上方出敵.
             //pObj = CreateUI(Random.Range(-500.0f, 500.0f), Mathf.Abs(transform.parent.localPosition.y) + 400);
         }        
     }
     // ------------------------------------------------------------------
+    public bool CheckPos(GameObject pObj)
+    {
+        if (Vector2.Distance(CameraCtrl.transform.position, pObj.transform.position) > 2.8f)
+            return true;
+        else
+            return false;
+    }
+
 }

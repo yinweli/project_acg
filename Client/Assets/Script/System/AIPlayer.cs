@@ -40,7 +40,6 @@ public class AIPlayer : MonoBehaviour
 	void Update () 
     {
         Attack();
-        Debug.Log(Camera.mainCamera.WorldToScreenPoint(transform.position));
 	}
     // ------------------------------------------------------------------
     // 射擊函式.
