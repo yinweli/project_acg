@@ -26,4 +26,12 @@ public class UITool : MonoBehaviour {
 
         return pObj;
     }
+
+    public GameObject CreateMap(GameObject Parent, string Name,int iStyle, float fPosX, float fPosY)
+    {
+        GameObject pObj = NGUITools.AddChild(Parent, Resources.Load(string.Format("Prefab/Scene{0:00}/", iStyle) + Name) as GameObject);
+        pObj.transform.localPosition = new Vector3(fPosX, fPosY);
+
+        return pObj;
+    }
 }

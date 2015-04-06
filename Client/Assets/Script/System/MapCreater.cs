@@ -142,12 +142,12 @@ public class MapCreater : MonoBehaviour
 	// 取得地圖道路預製物件名稱
 	private string PrefabRoad()
 	{
-		return "MapRoad_" + Style;
+		return "MapRoad";
 	}
 	// 取得地圖物件預製物件名稱
 	private string PrefabObjt(int iIndex)
 	{
-		return "MapObjt_" + Style + "_" + iIndex;
+		return "MapObjt_" + iIndex;
 	}
 	// 取得地圖道路長度
 	private int RoadSize()
@@ -198,7 +198,7 @@ public class MapCreater : MonoBehaviour
 	// 建立物件
 	private GameObject CreateObject(string szName, Vector2 Pos, int iWidth, int iHeight)
 	{
-		return UITool.pthis.CreateUIByPos(gameObject, szName, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
+        return UITool.pthis.CreateMap(gameObject, szName, Style, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
 	}
 	// 建立地圖道路
 	private void CreateRoad()
