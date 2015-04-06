@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class P_UI : MonoBehaviour {
-
+public class P_UI : MonoBehaviour 
+{
     static public P_UI pthis = null;
+
+    public int iBattery = 100;
 
     public UISprite[] pSBattery = new UISprite[5];
     public UILabel[] pLbBullet = new UILabel[(int)ENUM_Resource.Resource_Count-1];
+
+    float fCoolDown = 1;
 
     void Awake()
     {
@@ -15,6 +19,18 @@ public class P_UI : MonoBehaviour {
     void Start()
     {
         UpdateBullet();
+    }
+
+    void Update()
+    {
+        if (fCoolDown <= Time.time)
+        {
+            SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery]--;
+            // 計算冷卻.
+            fCoolDown = Time.time + 1.0f;
+            UpdateBattery();
+            UpdateBullet();
+        }        
     }
 
     public bool UseBullet(WeaponType pType)
@@ -42,9 +58,16 @@ public class P_UI : MonoBehaviour {
 
     public void UpdateBattery()
     {
-        //if()
-        //SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery];
-        //iMaxBattery
+        // 先關掉.
+        for (int i = 0; i < pSBattery.Length; i++)
+            pSBattery[i].gameObject.SetActive(false);
+
+        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5)) + 1;
+        if (iActive > pSBattery.Length)
+            iActive = pSBattery.Length;
+
+        for (int i = 0; i < iActive; i++)
+            pSBattery[i].gameObject.SetActive(true);
     }
  
 }
