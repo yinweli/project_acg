@@ -19,6 +19,8 @@ public class AIEnemy : MonoBehaviour
     // 是否已抓了人.
     public bool bHasTarget = false;
 
+    public Animator pAni = null;
+
     public AudioClip ClipHurt;
     public AudioClip ClipDead;
 
@@ -65,6 +67,9 @@ public class AIEnemy : MonoBehaviour
                 if (ObjTarget.GetComponent<AIPlayer>())
                     ObjTarget.GetComponent<AIPlayer>().BeFree();                
             }
+            // 播放逃跑動作.
+            if (pAni)
+                pAni.Play("Escape");
             // 取向量.
             if (vecRunDir == Vector3.zero)
                 vecRunDir = PosStart - transform.position;
@@ -78,6 +83,9 @@ public class AIEnemy : MonoBehaviour
         // 已有抓人逃跑模式.
         if (bHasTarget)
         {
+            // 播放逃跑動作.
+            if (pAni)
+                pAni.Play("Catch");
             // 取向量.
             if (vecRunDir == Vector3.zero)
                 vecRunDir = PosStart - transform.position;
@@ -97,7 +105,7 @@ public class AIEnemy : MonoBehaviour
 
         // 如果有目標且沒抓人時，追蹤目標
         //if (!ObjTarget && !bHasTarget)
-            Chace();
+        Chace();
     }
     // ------------------------------------------------------------------
     void OnTriggerStay2D(Collider2D other)
@@ -178,6 +186,8 @@ public class AIEnemy : MonoBehaviour
 
         if (vecDirection.x < 0)
             transform.rotation = new Quaternion(0, 180, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }

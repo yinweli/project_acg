@@ -37,7 +37,7 @@ public class P_UI : MonoBehaviour {
     {
         for (int i = 0; i < (int)ENUM_Resource.Resource_Count - 1; i++)
             if (pLbBullet[i])
-                pLbBullet[i].text = SysMain.pthis.Data.Resource[i].ToString();
+                pLbBullet[i].text = SysMain.pthis.Data.Resource[i+1].ToString();
     }
 
     public void UpdateBattery()
