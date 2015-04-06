@@ -183,11 +183,11 @@ public class Rule
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
-				int iDamage = DataMember.iAddDamage + DataEquip.Damage;
-				float fCriticalStrik = DataMember.fCriticalStrike + DataEquip.CriticalStrike;
+				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) > (DataMember.fCriticalStrike + DataEquip.CriticalStrike))
+					iResult = (DataMember.iAddDamage + DataEquip.Damage);
+				else
+					iResult = (DataMember.iAddDamage + DataEquip.Damage) * GameDefine.iCriticalStrik;
 
-				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) <= fCriticalStrik)
-					iDamage *= GameDefine.iCriticalStrik;
 			}//if
 		}//if
 
