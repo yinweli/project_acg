@@ -24,6 +24,8 @@ public class AIEnemy : MonoBehaviour
 
     // 記住起點.
     Vector3 PosStart = new Vector3();
+
+    Vector3 vecRunDir = Vector3.zero;
     
 	// Use this for initialization
 	void Start () 
@@ -64,13 +66,11 @@ public class AIEnemy : MonoBehaviour
                     ObjTarget.GetComponent<AIPlayer>().BeFree();                
             }
             // 取向量.
-            MoveTo(PosStart - transform.position, fMoveSpeed * 4);
-            // 跑出畫面外就刪掉            
-            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            Debug.Log(screenPosition);
-            if (screenPosition.y > Screen.height || screenPosition.y < 0)
-                Destroy(gameObject);
-            if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
+            if (vecRunDir == Vector3.zero)
+                vecRunDir = PosStart - transform.position;
+
+            MoveTo(vecRunDir, fMoveSpeed * 4);
+            if (EnemyCreater.pthis.CheckPos(gameObject))
                 Destroy(gameObject);
             return;
         }
@@ -79,16 +79,12 @@ public class AIEnemy : MonoBehaviour
         if (bHasTarget)
         {
             // 取向量.
-            MoveTo(PosStart - transform.position, fMoveSpeed * 0.5f);
-            // 跑出畫面外就刪掉
-            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            Debug.Log(screenPosition);
-            if (screenPosition.y > Screen.height || screenPosition.y < 0)
-            {
-                Destroy(ObjTarget);
-                Destroy(gameObject);
-            }
-            if (screenPosition.x > Screen.width - 10 || screenPosition.x < 10)
+            if (vecRunDir == Vector3.zero)
+                vecRunDir = PosStart - transform.position;
+
+            MoveTo(vecRunDir, fMoveSpeed * 0.5f);
+            
+            if (EnemyCreater.pthis.CheckPos(gameObject))
             {
                 Destroy(ObjTarget);
                 Destroy(gameObject);
@@ -163,7 +159,7 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 檢查距離是否可抓抓.
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.1f)
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.05f)
         {
             bHasTarget = true;
             iThreat += 5;
@@ -179,6 +175,9 @@ public class AIEnemy : MonoBehaviour
     {        
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
+
+        if (vecDirection.x < 0)
+            transform.rotation = new Quaternion(0, 180, 0, 0);
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
