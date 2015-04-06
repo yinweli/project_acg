@@ -125,7 +125,7 @@ public class Rule
 	{
 		int iIndex = 0;
 		
-		while(iIndex <= (int)emResource)
+		while(iIndex++ <= (int)emResource)
 			SysMain.pthis.Data.Resource.Add(0);
 
 		int iResult = SysMain.pthis.Data.Resource[(int)emResource];
