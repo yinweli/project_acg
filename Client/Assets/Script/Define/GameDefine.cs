@@ -5,7 +5,14 @@ using System.Collections.Generic;
 public class GameDefine
 {
     public const float fMoveSpeed = 50f; // 玩家移動速度.
-
+	public const int iMaxCurrency = 9999; // 最大通貨值
+	public const int iMaxPressure = 100; // 最大壓力值
+	public const int iMaxBattery = 9999; // 最大電池值
+	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
+	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
+	public const int iStaminaLimit = 100; // 基礎耐力上限值
+	public const int iStaminaRecovery = 10; // 基礎耐力回復值
+	
     public const int iWeightEngry = 2;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 100;  // 怪物出怪能量基礎值.
     public const int iMINWaitSec = 5;   // 怪物出怪最小間隔秒數.
