@@ -47,8 +47,8 @@ public class SysMain : MonoBehaviour
 		Data.iLightAmmo = 999;
 		Data.iHeavyAmmo = 999;
 		AddMember(new Looks(), 1);
-		AddMember(new Looks(), 2);
-		AddMember(new Looks(), 3);
+		AddMember(new Looks(), 5);
+		AddMember(new Looks(), 8);
 
 		GameCalculate();
 		GameSave();
