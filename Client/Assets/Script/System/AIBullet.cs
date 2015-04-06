@@ -14,10 +14,7 @@ public class AIBullet : MonoBehaviour
         transform.Translate(0, fSpeed * Time.deltaTime, 0);
 
         // 跑出畫面外就刪掉
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        if (screenPosition.y > Screen.height || screenPosition.y < 0)
-            Destroy(gameObject);
-        if (screenPosition.x > Screen.width || screenPosition.x < 0)
+        if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
     }
     // ------------------------------------------------------------------
