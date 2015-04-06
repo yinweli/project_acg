@@ -20,7 +20,7 @@ public class G_Player : MonoBehaviour
             GameObject pSWeapon = UITool.pthis.CreateUI(Role[(int)ENUM_Role.HandR].gameObject, "Prefab/" + pAI.pWeapon);
 
             // 拿手電筒需替玩家加上光源.
-            if (pAI.pWeapon == WeaponType.Weapon_000)
+            if (pAI.pWeapon == WeaponType.Weapon_001)
             {
                 GameObject pObj = UITool.pthis.CreateUI(gameObject, "Prefab/G_Light");
                 pObj.GetComponent<G_Light>().SetLightFollow(pSWeapon);
