@@ -100,7 +100,7 @@ public class AIEnemy : MonoBehaviour
             Chace();
     }
     // ------------------------------------------------------------------
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (iHP > 0 && other.gameObject.tag == "Light")
         {
