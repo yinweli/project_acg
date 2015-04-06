@@ -79,7 +79,7 @@ public enum ENUM_Effect
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
 	CriticalStrike, // 致命
-	Damage, // 增傷
+	AddDamage, // 增傷
 }
 
 // 角色外觀列舉.
