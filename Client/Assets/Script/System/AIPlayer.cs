@@ -63,9 +63,9 @@ public class AIPlayer : MonoBehaviour
             // 發射子彈.
             CreateBullet();
             // 計算冷卻.
-            fCoolDown = Time.time + fShotSpeed;
-        }
-        
+			fCoolDown = Time.time + Rule.EquipFireRate(GetComponent<G_Player>().iPlayer);
+		}
+		
     }
     // ------------------------------------------------------------------
     // 取得目標.

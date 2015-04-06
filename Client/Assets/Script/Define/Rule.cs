@@ -187,10 +187,25 @@ public class Rule
 					iResult = (DataMember.iAddDamage + DataEquip.Damage);
 				else
 					iResult = (DataMember.iAddDamage + DataEquip.Damage) * GameDefine.iCriticalStrik;
-
 			}//if
 		}//if
 
 		return iResult;
+	}
+	// 取得裝備攻擊間隔時間
+	public static float EquipFireRate(int iPos)
+	{
+		float fResult = 0;
+		
+		if(SysMain.pthis.Data.Data.Count > iPos)
+		{
+			Member DataMember = SysMain.pthis.Data.Data[iPos];
+			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+			
+			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
+				fResult = DataEquip.FireRate;
+		}//if
+		
+		return fResult;
 	}
 }
