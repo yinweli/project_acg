@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class AIPlayer : MonoBehaviour 
 {
-    public int iPlayerID = 0;
     // 角色動畫.
     public Animator pAni = null;
     // 武器動畫.
@@ -52,7 +51,7 @@ public class AIPlayer : MonoBehaviour
         GetTarget();
 
         // 射擊.
-        if (ObjTarget && fCoolDown <= Time.time)
+        if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
         {
             // 播放射擊.
             if (pAni)
@@ -121,7 +120,7 @@ public class AIPlayer : MonoBehaviour
         pObj.transform.parent = transform.parent;
         pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
         pObj.GetComponent<AIBullet>().Chace(ObjTarget);
-		pObj.GetComponent<AIBullet>().iDamage = Rule.BulletDamage(iPlayerID);
+        pObj.GetComponent<AIBullet>().iDamage = Rule.BulletDamage(GetComponent<G_Player>().iPlayer);
     }
     // ------------------------------------------------------------------
     // 被抓函式.

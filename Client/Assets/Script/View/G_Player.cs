@@ -18,8 +18,9 @@ public class G_Player : MonoBehaviour
         if (pAI.pWeapon != WeaponType.Weapon_null)
         {
             GameObject pSWeapon = UITool.pthis.CreateUI(Role[(int)ENUM_Role.HandR].gameObject, "Prefab/" + pAI.pWeapon);
-            pSWeapon.GetComponent<UI2DSprite>().depth = pSWeapon.GetComponent<UI2DSprite>().depth + (iPlayer * 15);
-            pSWeapon.GetComponentInChildren<UI2DSprite>().depth = pSWeapon.GetComponentInChildren<UI2DSprite>().depth + (iPlayer * 15);
+            UI2DSprite[] p2DS = pSWeapon.GetComponentsInChildren<UI2DSprite>();
+            for (int i = 0; i < p2DS.Length; i++)
+                p2DS[i].depth = p2DS[i].depth + (iPlayer * 15);
 
             // 拿手電筒需替玩家加上光源.
             if (pAI.pWeapon == WeaponType.Weapon_001)

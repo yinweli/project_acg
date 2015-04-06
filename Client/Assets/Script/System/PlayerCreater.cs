@@ -16,6 +16,11 @@ public class PlayerCreater : MonoBehaviour
 
     void Create()
     {
+        if (SysMain.pthis.Data.Data.Count <= 0)
+        {
+            Debug.Log("No Player Data!!");
+            return;
+        }
         // 建立第一個玩家.
         pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
         pPrePlayer.name = string.Format("Role{0:000}", iCount);

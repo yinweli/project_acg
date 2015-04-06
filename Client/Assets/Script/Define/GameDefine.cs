@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class GameDefine
 {
-    public const int iBulletType = 2; // 子彈種類數.
     public const float fMoveSpeed = 50f; // 玩家移動速度.
 	public const float fStaminaConsumeTime = 1.0f; // 耐力消耗時間
 	public const float fStaminaRecoveryTime = 1.0f; // 耐力回復時間
