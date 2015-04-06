@@ -18,7 +18,7 @@ public class SysMain : MonoBehaviour
     void Awake()
     {
         pthis = this;
-        GameLoad();
+		GameNew();
     }
 
     void OnDestroy()
@@ -36,34 +36,49 @@ public class SysMain : MonoBehaviour
 	
 	}
 
-	// 存檔
+	// 新遊戲
+	public void GameNew()
+	{
+		Data = new PlayerData();
+
+		// 以下是測試資料, 以後要改
+		Data.iStage = 1;
+		Data.iBattery = 100;
+		Data.iLightAmmo = 999;
+		Data.iHeavyAmmo = 999;
+		AddMember(new Looks(), 1);
+		AddMember(new Looks(), 2);
+		AddMember(new Looks(), 3);
+
+		GameCalculate();
+		GameSave();
+	}
+	// 讀取遊戲
+	public void GameLoad()
+	{
+		if(PlayerPrefs.HasKey(GameDefine.szSave))
+		{
+			Data = Json.ToObject<PlayerData>(PlayerPrefs.GetString(GameDefine.szSave));
+			GameCalculate();
+		}
+		else
+			GameNew();
+	}
+	// 儲存遊戲
 	public void GameSave()
 	{
 		PlayerPrefs.SetString(GameDefine.szSave, Json.ToString(Data));
 		PlayerPrefs.Save();
-		Debug.Log("game save");
 	}
-	// 讀檔
-	public void GameLoad()
+	// 遊戲資料計算
+	public void GameCalculate()
 	{
-		if(PlayerPrefs.HasKey(GameDefine.szSave))
-			Data = Json.ToObject<PlayerData>(PlayerPrefs.GetString(GameDefine.szSave));
-		else
-		{
-			// 沒有遊戲紀錄, 建立一個新的
-			Data = new PlayerData();
-
-			// 以下是測試資料, 以後要改
-			Data.iStage = 1;
-			Data.iBattery = 100;
-			Data.iLightAmmo = 999;
-			Data.iHeavyAmmo = 999;
-			AddMember(new Looks(), 1);
-			AddMember(new Looks(), 2);
-			AddMember(new Looks(), 3);
-		}//if
-
-		Debug.Log("game load");
+		Rule.PressureReset();
+		Rule.StaminaReset();
+		Rule.StaminaLimit();
+		Rule.StaminaRecovery();
+		Rule.CriticalStrikeReset();
+		Rule.AddDamageReset();
 	}
 	// 建立成員
 	public void AddMember(Looks Looks, int iEquip)
