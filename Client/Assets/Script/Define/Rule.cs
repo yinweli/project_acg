@@ -164,4 +164,26 @@ public class Rule
 		for(int iPos = 0; iPos < SysMain.pthis.Data.Data.Count; ++iPos)
 			AddDamageReset(iPos);
 	}
+	// 取得子彈傷害值
+	public static int BulletDamage(int iPos)
+	{
+		int iResult = 0;
+
+		if(SysMain.pthis.Data.Data.Count > iPos)
+		{
+			Member DataMember = SysMain.pthis.Data.Data[iPos];
+			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+
+			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
+			{
+				int iDamage = DataMember.iAddDamage + DataEquip.Damage;
+				float fCriticalStrik = DataMember.fCriticalStrike + DataEquip.CriticalStrike;
+
+				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) <= fCriticalStrik)
+					iDamage *= GameDefine.iCriticalStrik;
+			}//if
+		}//if
+
+		return iResult;
+	}
 }

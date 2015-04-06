@@ -121,6 +121,7 @@ public class AIPlayer : MonoBehaviour
         pObj.transform.parent = transform.parent;
         pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
         pObj.GetComponent<AIBullet>().Chace(ObjTarget);
+		pObj.GetComponent<AIBullet>().iDamage = Rule.BulletDamage(iPlayerID);
     }
     // ------------------------------------------------------------------
     // 被抓函式.

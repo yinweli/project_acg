@@ -9,6 +9,8 @@ public class GameDefine
 	public const float fStaminaConsumeTime = 1.0f; // 耐力消耗時間
 	public const float fStaminaRecoveryTime = 1.0f; // 耐力回復時間
 	public const float fBatteryConsumeTime = 1.0f; // 電池消耗時間
+	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
+	public const int iCriticalStrik = 2; // 致命傷害倍數
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxPressure = 100; // 最大壓力值
 	public const int iMaxBattery = 9999; // 最大電池值
