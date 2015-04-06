@@ -43,9 +43,9 @@ public class SysMain : MonoBehaviour
 
 		// 以下是測試資料, 以後要改
 		Data.iStage = 1;
-		Data.iBattery = 100;
-		Data.iLightAmmo = 999;
-		Data.iHeavyAmmo = 999;
+		Rule.ResourceAdd(ENUM_Resource.Battery, 100);
+		Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
+		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
 		AddMember(new Looks(), 1);
 		AddMember(new Looks(), 5);
 		AddMember(new Looks(), 8);

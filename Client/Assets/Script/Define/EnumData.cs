@@ -71,6 +71,8 @@ public enum ENUM_Resource
 	Battery, // 電池
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
+
+    Resource_Count,
 }
 
 // 效果列舉

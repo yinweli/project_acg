@@ -110,35 +110,42 @@ public class Rule
 	{
 		return PassiveI(ENUM_Effect.StaminaRecovery) + GameDefine.iStaminaRecovery;
 	}
-	// 重置電池值
-	public static void BatteryReset()
+	// 重置資源
+	public static void ResourceReset(ENUM_Resource emResource)
 	{
-		SysMain.pthis.Data.iBattery = PassiveI(ENUM_Effect.Battery);
+		int iIndex = 0;
+
+		while(iIndex <= (int)emResource)
+			SysMain.pthis.Data.Resource.Add(0);
+
+		SysMain.pthis.Data.Resource[(int)emResource] = emResource == ENUM_Resource.Battery ? PassiveI(ENUM_Effect.Battery) : 0;
 	}
-	// 增加電池值
-	public static void BatteryAdd(int iValue)
+	// 增加資源
+	public static void ResourceAdd(ENUM_Resource emResource, int iValue)
 	{
-		SysMain.pthis.Data.iBattery = ValueI(PassiveI(ENUM_Effect.Battery), GameDefine.iMaxBattery, SysMain.pthis.Data.iBattery + iValue);
+		int iIndex = 0;
+		
+		while(iIndex++ <= (int)emResource)
+			SysMain.pthis.Data.Resource.Add(0);
+
+		int iResult = SysMain.pthis.Data.Resource[(int)emResource];
+
+		switch(emResource)
+		{
+		case ENUM_Resource.Battery: iResult = ValueI(PassiveI(ENUM_Effect.Battery), GameDefine.iMaxBattery, iResult + iValue); break;
+		case ENUM_Resource.LightAmmo: iResult = ValueI(0, GameDefine.iMaxLightAmmo, iResult + iValue); break;
+		case ENUM_Resource.HeavyAmmo: iResult = ValueI(0, GameDefine.iMaxHeavyAmmo, iResult + iValue); break;
+		default: break;
+		}//switch
+
+		SysMain.pthis.Data.Resource[(int)emResource] = iResult;
 	}
-	// 重置輕型彈藥值
-	public static void LightAmmoReset()
+	// 檢查是否資源足夠
+	public static bool ResourceChk(ENUM_Resource emResource, int iValue)
 	{
-		SysMain.pthis.Data.iLightAmmo = 0;
-	}
-	// 增加輕型彈藥值
-	public static void LightAmmoAdd(int iValue)
-	{
-		SysMain.pthis.Data.iLightAmmo = ValueI(0, GameDefine.iMaxLightAmmo, SysMain.pthis.Data.iLightAmmo + iValue);
-	}
-	// 重置重型彈藥值
-	public static void HeavyAmmoReset()
-	{
-		SysMain.pthis.Data.iHeavyAmmo = 0;
-	}
-	// 增加重型彈藥值
-	public static void HeavyAmmoAdd(int iValue)
-	{
-		SysMain.pthis.Data.iHeavyAmmo = ValueI(0, GameDefine.iMaxHeavyAmmo, SysMain.pthis.Data.iHeavyAmmo + iValue);
+		int iIndex = (int)emResource;
+
+		return SysMain.pthis.Data.Resource.Count > iIndex ? SysMain.pthis.Data.Resource[iIndex] >= iValue : false;
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset(int iPos)
@@ -176,14 +183,29 @@ public class Rule
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
-				int iDamage = DataMember.iAddDamage + DataEquip.Damage;
-				float fCriticalStrik = DataMember.fCriticalStrike + DataEquip.CriticalStrike;
-
-				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) <= fCriticalStrik)
-					iDamage *= GameDefine.iCriticalStrik;
+				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) > (DataMember.fCriticalStrike + DataEquip.CriticalStrike))
+					iResult = (DataMember.iAddDamage + DataEquip.Damage);
+				else
+					iResult = (DataMember.iAddDamage + DataEquip.Damage) * GameDefine.iCriticalStrik;
 			}//if
 		}//if
 
 		return iResult;
+	}
+	// 取得裝備攻擊間隔時間
+	public static float EquipFireRate(int iPos)
+	{
+		float fResult = 0;
+		
+		if(SysMain.pthis.Data.Data.Count > iPos)
+		{
+			Member DataMember = SysMain.pthis.Data.Data[iPos];
+			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+			
+			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
+				fResult = DataEquip.FireRate;
+		}//if
+		
+		return fResult;
 	}
 }

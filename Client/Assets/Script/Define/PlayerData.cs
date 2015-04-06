@@ -37,10 +37,8 @@ public class PlayerData
 	/* [    ] */ public int iStamina = 0; // 耐力
 	/* [    ] */ public int iStaminaLimit = 0; // 耐力上限
 	/* [    ] */ public int iStaminaRecovery = 0; // 耐力回復
-	/* [Save] */ public int iBattery = 0; // 電池
-	/* [Save] */ public int iLightAmmo = 0; // 輕型彈藥
-	/* [Save] */ public int iHeavyAmmo = 0; // 重型彈藥
 	/* [Save] */ public int iEnemyKill = 0; // 殺怪數量
 	/* [Save] */ public int iPlayTime = 0; // 遊戲時間
+	/* [Save] */ public List<int> Resource = new List<int>(); // 資源列表
 	/* [Save] */ public List<Member> Data = new List<Member>(); // 成員列表
 }
