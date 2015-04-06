@@ -19,8 +19,20 @@ public class G_UIBullet : MonoBehaviour
             //pLbBullet[i].text = SysMain.pthis.Data.iAmmo[i];
 	}
 
-    public void UseBullet(WeaponType pType)
+    public bool UseBullet(WeaponType pType)
     {
-        // 從DBF中取得需要消耗資源.
+		DBFEquip DataEquip = GameDBF.This.GetEquip((int)pType) as DBFEquip;
+
+		if(DataEquip == null)
+			return false;
+
+		ENUM_Resource emResource = (ENUM_Resource)DataEquip.Resource;
+
+		if(Rule.ResourceChk(emResource, 1) == false)
+			return false;
+
+		Rule.ResourceAdd(emResource, -1);
+
+		return true;
     }
 }
