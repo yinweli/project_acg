@@ -1,3 +1,3 @@
 {"GUID":"1", "Mode":"1", "HP":"6", "MoveSpeed":"0.25", "Threat":"1", "StageID":"1"}
-{"GUID":"2", "Mode":"1", "HP":"10", "MoveSpeed":"0.25", "Threat":"2", "StageID":"1"}
-{"GUID":"3", "Mode":"1", "HP":"18", "MoveSpeed":"0.25", "Threat":"3", "StageID":"1"}
+{"GUID":"2", "Mode":"1", "HP":"10", "MoveSpeed":"0.25", "Threat":"2", "StageID":"99"}
+{"GUID":"3", "Mode":"1", "HP":"18", "MoveSpeed":"0.25", "Threat":"3", "StageID":"99"}
