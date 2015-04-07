@@ -1,6 +1,23 @@
 fileFormatVersion: 2
 guid: 462c1069f5044d34b85dac2f11d519d8
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: S_000_Road
+    21300002: S_000_0
+    21300004: S_000_1
+    21300006: S_000_2
+    21300008: S_000_3
+    21300010: S_000_7
+    21300012: S_000_8
+    21300014: S_000_9
+    21300016: S_000_4
+    21300018: S_000_5
+    21300020: S_000_6
+    21300022: S_000_10
+    21300024: S_000_11
+    21300026: S_000_Base
+    21300028: S_000_End
+    21300030: S_000_Start
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -42,10 +59,20 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: S_000_0
+    - name: S_000_Road
       rect:
         serializedVersion: 2
         x: 0
+        y: 448
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: S_000_0
+      rect:
+        serializedVersion: 2
+        x: 64
         y: 448
         width: 64
         height: 64
@@ -55,7 +82,7 @@ TextureImporter:
     - name: S_000_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 128
         y: 448
         width: 64
         height: 64
@@ -65,7 +92,7 @@ TextureImporter:
     - name: S_000_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 448
         width: 64
         height: 64
@@ -75,16 +102,6 @@ TextureImporter:
     - name: S_000_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 448
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_4
-      rect:
-        serializedVersion: 2
         x: 256
         y: 448
         width: 64
@@ -92,7 +109,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_5
+    - name: S_000_7
       rect:
         serializedVersion: 2
         x: 0
@@ -102,7 +119,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_6
+    - name: S_000_8
       rect:
         serializedVersion: 2
         x: 64
@@ -112,7 +129,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_7
+    - name: S_000_9
       rect:
         serializedVersion: 2
         x: 128
@@ -122,7 +139,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_13
+    - name: S_000_4
       rect:
         serializedVersion: 2
         x: 0
@@ -132,7 +149,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_15
+    - name: S_000_5
       rect:
         serializedVersion: 2
         x: 128
@@ -142,7 +159,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_17
+    - name: S_000_6
       rect:
         serializedVersion: 2
         x: 256
@@ -152,7 +169,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_19
+    - name: S_000_10
       rect:
         serializedVersion: 2
         x: 0
@@ -162,7 +179,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_21
+    - name: S_000_11
       rect:
         serializedVersion: 2
         x: 128
@@ -172,7 +189,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_16
+    - name: S_000_Base
       rect:
         serializedVersion: 2
         x: 320
@@ -182,13 +199,23 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_14
+    - name: S_000_End
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 192
         height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: S_000_Start
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
