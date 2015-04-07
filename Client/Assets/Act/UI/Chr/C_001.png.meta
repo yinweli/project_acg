@@ -1,6 +1,32 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: C_eye_000
+    21300002: C_brow_001
+    21300004: C_foot_000
+    21300006: C_brow_500
+    21300008: C_brow_000
+    21300010: C_body_000
+    21300012: C_mouth_000
+    21300014: C_mouth_500
+    21300016: C_Hair_A_000
+    21300018: C_Hair_B_000
+    21300020: C_Hair_A_001
+    21300022: C_Adorn_A_000
+    21300024: W_000
+    21300026: W_001
+    21300028: E_001
+    21300030: E_100
+    21300032: C_hand_000
+    21300034: C_eyeline_000
+    21300036: C_face_000
+    21300038: C_Adorn_B_000
+    21300040: C_hr_000
+    21300042: W_002
+    21300044: W_100
+    21300046: C_Hair_A_001
+    21300048: C_Hair_A_002
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
