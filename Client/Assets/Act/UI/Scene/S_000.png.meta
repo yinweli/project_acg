@@ -172,7 +172,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: S_000_13
+    - name: S_000_16
       rect:
         serializedVersion: 2
         x: 320
@@ -187,7 +187,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 172
+        width: 192
         height: 128
       alignment: 0
       pivot: {x: .5, y: .5}
