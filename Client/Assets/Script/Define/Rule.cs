@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using LibCSNStandard;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Rule
 {
@@ -207,5 +208,23 @@ public class Rule
 		}//if
 		
 		return fResult;
+	}
+	// 取得關卡內可產生怪物列表
+	public static List<int> MonsterList(int iStage)
+	{
+		List<int> Result = new List<int>();
+		DBFItor Itor = GameDBF.This.GetMonster();
+
+		while(Itor.IsEnd() == false)
+		{
+			DBFMonster Data = Itor.Data() as DBFMonster;
+
+			if(Data != null && Data.StageID <= iStage)
+				Result.Add(System.Convert.ToInt32(Data.GUID));
+
+			Itor.Next();
+		}//while
+
+		return Result;
 	}
 }
