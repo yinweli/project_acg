@@ -41,7 +41,8 @@ public class AIEnemy : MonoBehaviour
 		}//if
 
 		emMode = (ENUM_ModeMonster)DBFData.Mode;
-		iHP = DBFData.HP;
+        iHP = 50;
+        //iHP = DBFData.HP;
 		fMoveSpeed = DBFData.MoveSpeed;
 		iThreat = DBFData.Threat;
 

@@ -29,16 +29,23 @@ public class AIPlayer : MonoBehaviour
 
     public AudioClip audioClip;
 
+    G_Player pPlayer;
+
 	// Use this for initialization
 	void Start ()
-    {        
-        GetComponent<G_Player>().InitPlayer();
+    {
+        pPlayer = GetComponent<G_Player>(); 
+        pPlayer.InitPlayer();
 	}
     // ------------------------------------------------------------------
 	// Update is called once per frame
 	void Update () 
     {
         Attack();
+
+        // 移動.
+        if (!bBeCaught)
+            MoveTo(CameraCtrl.pthis.iNextRoad - pPlayer.iPlayer);
 	}
     // ------------------------------------------------------------------
     // 射擊函式.
@@ -53,11 +60,14 @@ public class AIPlayer : MonoBehaviour
         // 射擊.
         if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
         {
-            // 播放射擊.
-            if (pAni)
-                pAni.Play("Shot");
-            if (pWAni)
-                pWAni.Play("Fire");
+            if (!bBeCaught)
+            {
+                // 播放射擊.
+                if (pAni)
+                    pAni.Play("Shot");
+                if (pWAni)
+                    pWAni.Play("Fire");
+            }            
 
             NGUITools.PlaySound(audioClip, 0.8f);
             // 發射子彈.
@@ -77,10 +87,6 @@ public class AIPlayer : MonoBehaviour
             ObjTarget = null;
             // 播放角色走路.
         }
-
-        // 如果被抓了，目標就定在抓人的怪物身上.
-        if (bBeCaught)
-            return;
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
@@ -129,6 +135,8 @@ public class AIPlayer : MonoBehaviour
         bBeCaught = true;
         ObjTarget = ObjMonster;
         gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
+        if (pAni)
+            pAni.Play("Break");
     }
     // ------------------------------------------------------------------
     // 自由函式.
@@ -136,5 +144,29 @@ public class AIPlayer : MonoBehaviour
     {
         bBeCaught = false;
         Destroy(gameObject.GetComponent<PlayerFollow>());
+        if (pAni)
+            pAni.Play("Run");
+    }
+
+    public void MoveTo(int iRoad)
+    {
+        float fMyMoveSpeed = GameDefine.fMoveSpeed;
+
+        if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iRoad).transform.position) > 0.205f)
+            fMyMoveSpeed = fMyMoveSpeed * 3; 
+
+        Vector3 vecDirection = MapCreater.This.GetRoadObj(iRoad).transform.position - transform.position;
+
+        // 把z歸零, 因為沒有要動z值.
+        vecDirection.z = 0;
+        // 把物件位置朝目標向量(玩家方向)移動.
+        transform.localPosition += vecDirection.normalized * fMyMoveSpeed * Time.deltaTime;
+
+        if (pPlayer.iPlayer == 0)
+        {
+            // 檢查距離.
+            if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iRoad).transform.position) < 0.005f)
+                CameraCtrl.pthis.iLeaderRoad++;
+        }
     }
 }

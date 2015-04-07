@@ -10,6 +10,9 @@ public class SysMain : MonoBehaviour
     public bool bIsGaming = true;
 
     public PlayerData Data = new PlayerData();
+
+    public int iRoleCount = 0;
+    public int iEnemyCount = 0;
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 敵人佇列.
@@ -26,14 +29,11 @@ public class SysMain : MonoBehaviour
         //pthis = null;
     }
     // ------------------------------------------------------------------
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+    {
+        iRoleCount = Role.Count;
+        iEnemyCount = Enemy.Count;
 	}
 
 	// 新遊戲

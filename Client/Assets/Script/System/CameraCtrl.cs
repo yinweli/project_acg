@@ -1,19 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMove : MonoBehaviour 
+public class CameraCtrl : MonoBehaviour 
 {
-    public GameObject CameraCtrl;
+    static public CameraCtrl pthis = null;
+
     public int iNextRoad = 1;
+    public int iLeaderRoad = 1;
+    public bool bCanMove = true;
+    // ------------------------------------------------------------------
+    void Awake()
+    {
+        pthis = this;
+    }
     // ------------------------------------------------------------------
     // Update is called once per frame
     void Update()
     {
-        // 如果沒路當做勝利.
+        // 如果沒路就是勝利.
         if (!MapCreater.This.GetRoadObj(iNextRoad))
         {
             return;
         }
+
+        // 檢查隊伍是否為停滯狀態.
+        if (!bCanMove)
+            return;
 
         // 檢查距離.
         if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iNextRoad).transform.position) < 0.005f)
@@ -31,10 +43,7 @@ public class PlayerMove : MonoBehaviour
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.localPosition += vecDirection.normalized * GameDefine.fMoveSpeed * Time.deltaTime;
 
-        if (CameraCtrl)
-        {
-            Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * GameDefine.fMoveSpeed * Time.deltaTime;
-            MapCreater.This.Refresh(iNextRoad);
-        }
+        Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * GameDefine.fMoveSpeed * Time.deltaTime;
+        MapCreater.This.Refresh(iNextRoad);
     }
 }
