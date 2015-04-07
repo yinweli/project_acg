@@ -1,6 +1,31 @@
 fileFormatVersion: 2
 guid: 3944e0b17f3afb44dbdfde1667545a58
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: M_000_eye
+    21300002: M_000_brow1
+    21300004: M_000_eye2
+    21300006: M_001_b03
+    21300008: M_001_b02
+    21300010: M_000_eye1
+    21300012: M_000_brow2
+    21300014: M_000_brow3
+    21300016: ui_hp_bg
+    21300018: ui_hp_hp
+    21300020: M_001_b01
+    21300022: M_001_b05
+    21300024: M_001_b06
+    21300026: M_002_b05
+    21300028: M_001_b00
+    21300030: M_000_light
+    21300032: M_Adorn_A_000
+    21300034: M_002_b03
+    21300036: M_Adorn_B_000
+    21300038: M_002_b02
+    21300040: M_002_b01
+    21300042: M_002_b00
+    21300044: M_001_b07
+    21300046: M_001_b08
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
