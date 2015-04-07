@@ -33,6 +33,28 @@ public enum ENUM_Dir
 	Down, // 下
 }
 
+// 地圖元件列舉
+public enum ENUM_Map
+{
+	Null = 0, 
+	MapObjt_0, 
+	MapObjt_1, 
+	MapObjt_2, 
+	MapObjt_3, 
+	MapObjt_4, 
+	MapObjt_5, 
+	MapObjt_6, 
+	MapObjt_7, 
+	MapObjt_8, 
+	MapObjt_9, 
+	MapObjt_10, 
+	MapObjt_11, 
+	MapStart, // 起點
+	MapEnd, // 終點
+	MapRoad, // 道路
+	MapBase, // 底圖
+}
+
 // 裝備模式列舉
 public enum ENUM_ModeEquip
 {

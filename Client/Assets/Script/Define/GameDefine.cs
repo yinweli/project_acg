@@ -31,8 +31,8 @@ public class GameDefine
 	public const int iStageLevel = 5; // 關卡升階值
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iRoadSizeAdd = 2; // 地圖道路增加長度
-	public const int iMapWidth = 21; // 地圖寬度
-	public const int iMapBorderX = 4; // 地圖X軸邊框長度
+	public const int iMapWidth = 25; // 地圖寬度
+	public const int iMapBorderX = 6; // 地圖X軸邊框長度
 	public const int iMapBorderY = 6; // 地圖Y軸邊框長度
 	public const int iPathStart = 10; // 起點路徑長度
 	public const int iPathMin = 4; // 最小路徑長度
@@ -52,10 +52,17 @@ public class GameDefine
 		new MapCoor(1, 1), // 物件(1x1)
 		new MapCoor(1, 1), // 物件(1x1)
 		new MapCoor(1, 1), // 物件(1x1)
+		new MapCoor(1, 1), // 物件(1x1)
 		new MapCoor(2, 1), // 物件(2x1)
 		new MapCoor(2, 1), // 物件(2x1)
+		new MapCoor(2, 1), // 物件(2x1)
+		new MapCoor(1, 2), // 物件(1x2)
 		new MapCoor(1, 2), // 物件(1x2)
 		new MapCoor(1, 2), // 物件(1x2)
 		new MapCoor(2, 2), // 物件(2x2)
+		new MapCoor(2, 2), // 物件(2x2)
 	};
+	public static readonly MapCoor ObjtStart = new MapCoor(1, 1); // 起點物件尺寸
+	public static readonly MapCoor ObjtEnd = new MapCoor(3, 2); // 終點物件尺寸
+	public static readonly MapCoor ObjtBase = new MapCoor(1, 1); // 底圖物件尺寸
 }
