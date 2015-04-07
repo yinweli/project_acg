@@ -60,14 +60,11 @@ public class AIPlayer : MonoBehaviour
         // 射擊.
         if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
         {
-            if (!bBeCaught)
-            {
-                // 播放射擊.
-                if (pAni)
-                    pAni.Play("Shot");
-                if (pWAni)
-                    pWAni.Play("Fire");
-            }            
+            // 播放射擊.
+            if (!bBeCaught && pAni)
+                pAni.Play("Shot");
+            if (pWAni)
+                pWAni.Play("Fire");                  
 
             NGUITools.PlaySound(audioClip, 0.8f);
             // 發射子彈.
