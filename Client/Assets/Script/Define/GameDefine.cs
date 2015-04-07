@@ -31,8 +31,8 @@ public class GameDefine
 	public const int iStageLevel = 5; // 關卡升階值
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iRoadSizeAdd = 2; // 地圖道路增加長度
-	public const int iMapWidth = 25; // 地圖寬度
-	public const int iMapBorderX = 6; // 地圖X軸邊框長度
+	public const int iMapWidth = 31; // 地圖寬度
+	public const int iMapBorderX = 8; // 地圖X軸邊框長度
 	public const int iMapBorderY = 6; // 地圖Y軸邊框長度
 	public const int iPathStart = 10; // 起點路徑長度
 	public const int iPathMin = 4; // 最小路徑長度
