@@ -1,0 +1,46 @@
+{"GUID":"1001", "enUS":"Flashlight", "zhTW":"\u624b\u96fb\u7b52"}
+{"GUID":"1002", "enUS":"Knife", "zhTW":"\u5c0f\u5200"}
+{"GUID":"1003", "enUS":"Katana", "zhTW":"\u6b66\u58eb\u5200"}
+{"GUID":"1004", "enUS":"Chainsaw", "zhTW":"\u96fb\u92f8"}
+{"GUID":"1005", "enUS":"Pistol", "zhTW":"\u624b\u69cd"}
+{"GUID":"1006", "enUS":"Revolver", "zhTW":"\u5de6\u8f2a\u624b\u69cd"}
+{"GUID":"1007", "enUS":"Desert Eagle", "zhTW":"\u6c99\u6f20\u4e4b\u9df9"}
+{"GUID":"1008", "enUS":"Submachine", "zhTW":"\u885d\u92d2\u69cd"}
+{"GUID":"1009", "enUS":"Assault Rifle", "zhTW":"\u7a81\u64ca\u6b65\u69cd"}
+{"GUID":"1010", "enUS":"Light machine gun", "zhTW":"\u8f15\u6a5f\u69cd"}
+{"GUID":"2001", "enUS":"Stubborn", "zhTW":"\u56fa\u57f7"}
+{"GUID":"2002", "enUS":"Nervous", "zhTW":"\u7dca\u5f35"}
+{"GUID":"2003", "enUS":"Anxiety", "zhTW":"\u7126\u616e"}
+{"GUID":"2004", "enUS":"Paranoia", "zhTW":"\u504f\u57f7\u72c2"}
+{"GUID":"2005", "enUS":"Annoying chatters", "zhTW":"\u788e\u788e\u5ff5"}
+{"GUID":"2006", "enUS":"Neurotic", "zhTW":"\u795e\u7d93\u8cea"}
+{"GUID":"2007", "enUS":"Ill temper", "zhTW":"\u58de\u813e\u6c23"}
+{"GUID":"2008", "enUS":"Goodness", "zhTW":"\u5584\u826f"}
+{"GUID":"2009", "enUS":"Listen", "zhTW":"\u50be\u807d"}
+{"GUID":"2010", "enUS":"Brave", "zhTW":"\u52c7\u6562"}
+{"GUID":"2011", "enUS":"Leadership", "zhTW":"\u9818\u8896"}
+{"GUID":"2012", "enUS":"Appease", "zhTW":"\u5b89\u64ab"}
+{"GUID":"2013", "enUS":"Inspire", "zhTW":"\u9f13\u821e"}
+{"GUID":"2014", "enUS":"Chef", "zhTW":"\u5eda\u5e2b"}
+{"GUID":"2015", "enUS":"Dietitians", "zhTW":"\u71df\u990a\u5e2b"}
+{"GUID":"2016", "enUS":"Doctor", "zhTW":"\u91ab\u751f"}
+{"GUID":"2017", "enUS":"Obesity", "zhTW":"\u80a5\u80d6"}
+{"GUID":"2018", "enUS":"Aging", "zhTW":"\u8001\u5316"}
+{"GUID":"2019", "enUS":"Disability", "zhTW":"\u6b98\u75be"}
+{"GUID":"2020", "enUS":"Healthy", "zhTW":"\u5065\u5eb7"}
+{"GUID":"2021", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
+{"GUID":"2022", "enUS":"Flu", "zhTW":"\u611f\u5192"}
+{"GUID":"2023", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
+{"GUID":"2024", "enUS":"Careless battery scavengers", "zhTW":"\u7c97\u5fc3\u7684\u96fb\u6c60\u62fe\u8352\u8005"}
+{"GUID":"2025", "enUS":"Careless light ammo scavengers", "zhTW":"\u7c97\u5fc3\u7684\u8f15\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
+{"GUID":"2026", "enUS":"Careless heavy ammo scavengers", "zhTW":"\u7c97\u5fc3\u7684\u91cd\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
+{"GUID":"2027", "enUS":"Careful battery scavengers", "zhTW":"\u7d30\u5fc3\u7684\u96fb\u6c60\u62fe\u8352\u8005"}
+{"GUID":"2028", "enUS":"Careful light ammo scavengers", "zhTW":"\u7d30\u5fc3\u7684\u8f15\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
+{"GUID":"2029", "enUS":"Careful heavy ammo scavengers", "zhTW":"\u7d30\u5fc3\u7684\u91cd\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
+{"GUID":"2030", "enUS":"Benevolent warrior", "zhTW":"\u4ec1\u6148\u7684\u6230\u58eb"}
+{"GUID":"2031", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
+{"GUID":"2032", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
+{"GUID":"2033", "enUS":"Cool soldier", "zhTW":"\u51b7\u975c\u7684\u6230\u58eb"}
+{"GUID":"2034", "enUS":"Elite soldier", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
+{"GUID":"2035", "enUS":"Genius soldier", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
+{"GUID":"2036", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
