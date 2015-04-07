@@ -1,6 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+/*  關卡有關卡編號、怪物間隔、怪物能量這三個屬性
+ * 關卡編號
+    表示這是第幾個關卡，同時也表示這個關卡的難度。
+ * 怪物間隔
+    每波怪物產生的間隔。
+    每波怪物出現後就重新計算怪物間隔。
+    怪物間隔為隨機值，最短為２０秒，最長為４０秒。
+ * 怪物能量
+    每波怪物產生的數量與種類的計算根據。
+    能量基礎值為１００。
+    能量增加值為１０。
+    怪物能量 = 能量基礎值 + 關卡編號 / ５ * 能量增加值。
+*/
 
 public class EnemyCreater : MonoBehaviour
 {
@@ -24,8 +37,8 @@ public class EnemyCreater : MonoBehaviour
     // 開始新的關卡.
     public void StartNew()
     {
-        // 計算總波數能量.
-        iEnegry = SysMain.pthis.Data.iStage * GameDefine.iWeightEngry + GameDefine.iBaseEngry;
+        // 計算總波數能量：怪物能量 = 能量基礎值 + 關卡編號 / 每多少關增加難度 * 能量增加值。.
+        iEnegry = GameDefine.iBaseEngry + (SysMain.pthis.Data.iStage / GameDefine.iStageCount * GameDefine.iWeightEngry);
 
         StartCoroutine(Creater());
     }
@@ -47,13 +60,44 @@ public class EnemyCreater : MonoBehaviour
     // 敵人佇列產生函式.
     public void ListEnemyCreater(List<string> EnemyList)
     {
+        // 基礎小怪.
+        int itemp = 1;
+        DBFMonster DBFBase = GameDBF.This.GetMonster(itemp) as DBFMonster;
+        if (DBFBase == null)
+        {
+            Debug.Log("DBFMonster No.1");
+            return;
+        }//if
         // 先清理List.
         EnemyList.Clear();
+        // 取得可使用的怪物列表.
+        List<int> pEnemy = Rule.MonsterList(SysMain.pthis.Data.iStage);
+        
+        int iTempE = iEnegry;
+        while (iTempE > 0)
+        {
+            if (iTempE > DBFBase.HP)
+            {
+                EnemyList.Add(string.Format("Enemy_{0:000}", 1));
+                break;
+            }
 
-        // 測試用資料先.
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
-        EnemyList.Add("Enemy_001");
+            int iEnemy = Random.Range(0, pEnemy.Count);
+
+            DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
+
+            if (DBFData == null)
+            {
+                Debug.Log("DBFMonster(" + iEnemy + ") null");
+                return;
+            }//if
+
+            if (DBFData.HP <= iTempE)
+            {
+                iTempE = iTempE - DBFData.HP;
+                EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
+            } 
+        }
     }
     // ------------------------------------------------------------------
     // 偕同程序
@@ -61,12 +105,13 @@ public class EnemyCreater : MonoBehaviour
     {
         while (SysMain.pthis.bIsGaming)
         {
-            // 計算等待間隔.
-            yield return new WaitForSeconds(Random.Range(GameDefine.iMINWaitSec, GameDefine.iMAXWaitSec));
             // 計算要出的敵人佇列.
             List<string> ListEnemy = new List<string>();
             ListEnemyCreater(ListEnemy);
 
+            // 計算等待間隔.
+            yield return new WaitForSeconds(Random.Range(GameDefine.iMINWaitSec, GameDefine.iMAXWaitSec));
+            
             for (int i = 0; i < ListEnemy.Count; i++)
             {
                 switch (Random.Range(1, 4))

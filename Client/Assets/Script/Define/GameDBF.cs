@@ -11,15 +11,13 @@ public class GameDBF : MonoBehaviour
 	void Awake()
 	{
 		This = this;
+        Add<DBFEquip>(GameDefine.szDBFEquip);
+        Add<DBFFeature>(GameDefine.szDBFFeature);
+        Add<DBFLanguage>(GameDefine.szDBFLanguage);
+        Add<DBFMonster>(GameDefine.szDBFMonster);
 	}
-	void Start()
-	{
-		Add<DBFEquip>(GameDefine.szDBFEquip);
-		Add<DBFFeature>(GameDefine.szDBFFeature);
-		Add<DBFLanguage>(GameDefine.szDBFLanguage);
-		Add<DBFMonster>(GameDefine.szDBFMonster);
-	}
-	public void Add<T>(string szDBFName) where T : DBF
+
+    public void Add<T>(string szDBFName) where T : DBF
 	{
 		Debug.Log("load dbf " + szDBFName + " " + (m_DBF.Add<T>(szDBFName, "DBF/" + szDBFName) ? "success" : "failed"));
 	}

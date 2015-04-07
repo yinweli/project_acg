@@ -4,7 +4,6 @@ using System.Collections;
 public class MapMove : MonoBehaviour 
 {
     public GameObject pCamCtrl;
-    public GameObject pObjBg;
 	public int RoadIndex = 0;
 	public Vector3 NextPos = new Vector3();
 
@@ -15,10 +14,6 @@ public class MapMove : MonoBehaviour
 		MapCreater.This.Create();
         NewGame();
 	}
-    void Update()
-    {
-        pObjBg.transform.position = pCamCtrl.transform.position;
-    }
     // ------------------------------------------------------------------
     void NewGame()
     {
