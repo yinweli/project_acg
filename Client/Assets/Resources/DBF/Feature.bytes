@@ -24,10 +24,10 @@
 {"GUID":"24", "StrID":"2024", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"20"}
 {"GUID":"25", "StrID":"2025", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"40"}
 {"GUID":"26", "StrID":"2026", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"60"}
-{"GUID":"27", "StrID":"2030", "Mode":"2", "StageID":"1", "Gain":"4", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.3"}
-{"GUID":"28", "StrID":"2031", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.2"}
-{"GUID":"29", "StrID":"2032", "Mode":"2", "StageID":"1", "Gain":"2", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.1"}
-{"GUID":"30", "StrID":"2033", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.1"}
-{"GUID":"31", "StrID":"2034", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.2"}
-{"GUID":"32", "StrID":"2035", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.3"}
-{"GUID":"33", "StrID":"2036", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"10", "Value":"1"}
+{"GUID":"27", "StrID":"2027", "Mode":"2", "StageID":"1", "Gain":"4", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.3"}
+{"GUID":"28", "StrID":"2028", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.2"}
+{"GUID":"29", "StrID":"2029", "Mode":"2", "StageID":"1", "Gain":"2", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.1"}
+{"GUID":"30", "StrID":"2030", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.1"}
+{"GUID":"31", "StrID":"2031", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.2"}
+{"GUID":"32", "StrID":"2032", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.3"}
+{"GUID":"33", "StrID":"2033", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"10", "Value":"1"}

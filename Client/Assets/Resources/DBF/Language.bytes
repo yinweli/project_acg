@@ -31,16 +31,13 @@
 {"GUID":"2021", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
 {"GUID":"2022", "enUS":"Flu", "zhTW":"\u611f\u5192"}
 {"GUID":"2023", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
-{"GUID":"2024", "enUS":"Careless battery scavengers", "zhTW":"\u7c97\u5fc3\u7684\u96fb\u6c60\u62fe\u8352\u8005"}
-{"GUID":"2025", "enUS":"Careless light ammo scavengers", "zhTW":"\u7c97\u5fc3\u7684\u8f15\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
-{"GUID":"2026", "enUS":"Careless heavy ammo scavengers", "zhTW":"\u7c97\u5fc3\u7684\u91cd\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
-{"GUID":"2027", "enUS":"Careful battery scavengers", "zhTW":"\u7d30\u5fc3\u7684\u96fb\u6c60\u62fe\u8352\u8005"}
-{"GUID":"2028", "enUS":"Careful light ammo scavengers", "zhTW":"\u7d30\u5fc3\u7684\u8f15\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
-{"GUID":"2029", "enUS":"Careful heavy ammo scavengers", "zhTW":"\u7d30\u5fc3\u7684\u91cd\u578b\u5f48\u85e5\u62fe\u8352\u8005"}
-{"GUID":"2030", "enUS":"Benevolent warrior", "zhTW":"\u4ec1\u6148\u7684\u6230\u58eb"}
-{"GUID":"2031", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
-{"GUID":"2032", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
-{"GUID":"2033", "enUS":"Cool soldier", "zhTW":"\u51b7\u975c\u7684\u6230\u58eb"}
-{"GUID":"2034", "enUS":"Elite soldier", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
-{"GUID":"2035", "enUS":"Genius soldier", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
-{"GUID":"2036", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
+{"GUID":"2024", "enUS":"Careless scavengers", "zhTW":"\u7c97\u5fc3\u7684\u62fe\u8352\u8005"}
+{"GUID":"2025", "enUS":"Careful scavengers", "zhTW":"\u7d30\u5fc3\u7684\u62fe\u8352\u8005"}
+{"GUID":"2026", "enUS":"Lucky scavengers", "zhTW":"\u5e78\u904b\u7684\u62fe\u8352\u8005"}
+{"GUID":"2027", "enUS":"Benevolent warrior", "zhTW":"\u4ec1\u6148\u7684\u6230\u58eb"}
+{"GUID":"2028", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
+{"GUID":"2029", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
+{"GUID":"2030", "enUS":"Cool soldier", "zhTW":"\u51b7\u975c\u7684\u6230\u58eb"}
+{"GUID":"2031", "enUS":"Elite soldier", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
+{"GUID":"2032", "enUS":"Genius soldier", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
+{"GUID":"2033", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
