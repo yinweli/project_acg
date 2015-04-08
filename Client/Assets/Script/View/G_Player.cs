@@ -8,7 +8,7 @@ public class G_Player : MonoBehaviour
     public UI2DSprite[] Role = new UI2DSprite[(int)ENUM_Role.Role_Count];
 
     public AIPlayer pAI;
-
+    // ------------------------------------------------------------------
     public void InitPlayer()
     {
         pAI = GetComponent<AIPlayer>();
@@ -27,6 +27,7 @@ public class G_Player : MonoBehaviour
             {
                 GameObject pObj = UITool.pthis.CreateUI(gameObject, "Prefab/G_Light");
                 pObj.GetComponent<G_Light>().SetLightFollow(pSWeapon);
+                GetComponent<AIPlayer>().ObjTarget = pObj.GetComponent<G_Light>().pDrag.gameObject;
             }
             else
                 pAI.pWAni = pSWeapon.GetComponent<Animator>();

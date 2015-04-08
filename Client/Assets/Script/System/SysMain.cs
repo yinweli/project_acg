@@ -35,7 +35,7 @@ public class SysMain : MonoBehaviour
         iRoleCount = Role.Count;
         iEnemyCount = Enemy.Count;
 	}
-
+    // ------------------------------------------------------------------
 	// 新遊戲
 	public void GameNew()
 	{
@@ -43,7 +43,7 @@ public class SysMain : MonoBehaviour
 
 		// 以下是測試資料, 以後要改
 		Data.iStage = 1;
-		Rule.ResourceAdd(ENUM_Resource.Battery, 100);
+        Rule.ResourceAdd(ENUM_Resource.Battery, 500);
 		Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
 		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
 		AddMember(new Looks(), 1);
@@ -53,6 +53,7 @@ public class SysMain : MonoBehaviour
 		GameCalculate();
 		GameSave();
 	}
+    // ------------------------------------------------------------------
 	// 讀取遊戲
 	public void GameLoad()
 	{
@@ -64,6 +65,7 @@ public class SysMain : MonoBehaviour
 		else
 			GameNew();
 	}
+    // ------------------------------------------------------------------
 	// 儲存遊戲
 	public void GameSave()
 	{

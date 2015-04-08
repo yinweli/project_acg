@@ -43,12 +43,24 @@ public class AIPlayer : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        Attack();
+        if (pWeapon == WeaponType.Weapon_001)
+            ChackLight();
+        else
+            Attack();
 
         // 移動.
         if (!bBeCaught)
             MoveTo(CameraCtrl.pthis.iNextRoad - pPlayer.iPlayer);
 	}
+    // ------------------------------------------------------------------
+    // 燈光轉向.
+    void ChackLight()
+    {
+        if (ObjTarget.transform.localPosition.x > 0)
+            FaceTo(0);
+        else
+            FaceTo(180);
+    }
     // ------------------------------------------------------------------
     // 射擊函式.
     void Attack()
