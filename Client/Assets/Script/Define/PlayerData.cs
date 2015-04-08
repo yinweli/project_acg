@@ -42,13 +42,3 @@ public class PlayerData
 	/* [Save] */ public List<int> Resource = new List<int>(); // 資源列表
 	/* [Save] */ public List<Member> Data = new List<Member>(); // 成員列表
 }
-
-public class MapData
-{
-	/* [Save] */ public MapRoad[] RoadList = new MapRoad[0]; // 地圖道路列表
-	/* [Save] */ public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
-	/* [Save] */ public int Width = 0; // 地圖寬度
-	/* [Save] */ public int Height = 0; // 地圖高度
-	/* [Save] */ public int Stage = 0; // 關卡編號
-	/* [Save] */ public int Style = 0; // 風格編號
-}

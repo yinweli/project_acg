@@ -7,7 +7,6 @@ public class MapMove : MonoBehaviour
 	public int RoadIndex = 0;
 	public Vector3 NextPos = new Vector3();
 
-    public int NextRoad = 1;
     // ------------------------------------------------------------------
 	void Start()
 	{        
@@ -17,7 +16,6 @@ public class MapMove : MonoBehaviour
     // ------------------------------------------------------------------
     void NewGame()
     {
-        NextRoad = 1;
         transform.localPosition = new Vector3(-MapCreater.This.GetRoadObj(0).transform.localPosition.x, -MapCreater.This.GetRoadObj(0).transform.localPosition.y, 0);
     }
     // ------------------------------------------------------------------
