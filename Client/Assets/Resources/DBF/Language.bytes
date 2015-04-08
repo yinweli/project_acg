@@ -22,22 +22,17 @@
 {"GUID":"2012", "enUS":"Appease", "zhTW":"\u5b89\u64ab"}
 {"GUID":"2013", "enUS":"Inspire", "zhTW":"\u9f13\u821e"}
 {"GUID":"2014", "enUS":"Chef", "zhTW":"\u5eda\u5e2b"}
-{"GUID":"2015", "enUS":"Dietitians", "zhTW":"\u71df\u990a\u5e2b"}
-{"GUID":"2016", "enUS":"Doctor", "zhTW":"\u91ab\u751f"}
-{"GUID":"2017", "enUS":"Obesity", "zhTW":"\u80a5\u80d6"}
-{"GUID":"2018", "enUS":"Aging", "zhTW":"\u8001\u5316"}
-{"GUID":"2019", "enUS":"Disability", "zhTW":"\u6b98\u75be"}
-{"GUID":"2020", "enUS":"Healthy", "zhTW":"\u5065\u5eb7"}
-{"GUID":"2021", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
-{"GUID":"2022", "enUS":"Flu", "zhTW":"\u611f\u5192"}
-{"GUID":"2023", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
-{"GUID":"2024", "enUS":"Careless scavengers", "zhTW":"\u7c97\u5fc3\u7684\u62fe\u8352\u8005"}
-{"GUID":"2025", "enUS":"Careful scavengers", "zhTW":"\u7d30\u5fc3\u7684\u62fe\u8352\u8005"}
-{"GUID":"2026", "enUS":"Lucky scavengers", "zhTW":"\u5e78\u904b\u7684\u62fe\u8352\u8005"}
-{"GUID":"2027", "enUS":"Benevolent warrior", "zhTW":"\u4ec1\u6148\u7684\u6230\u58eb"}
-{"GUID":"2028", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
-{"GUID":"2029", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
-{"GUID":"2030", "enUS":"Cool soldier", "zhTW":"\u51b7\u975c\u7684\u6230\u58eb"}
-{"GUID":"2031", "enUS":"Elite soldier", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
-{"GUID":"2032", "enUS":"Genius soldier", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
-{"GUID":"2033", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
+{"GUID":"2015", "enUS":"Doctor", "zhTW":"\u91ab\u751f"}
+{"GUID":"2016", "enUS":"Obesity", "zhTW":"\u80a5\u80d6"}
+{"GUID":"2017", "enUS":"Disability", "zhTW":"\u6b98\u75be"}
+{"GUID":"2018", "enUS":"Health", "zhTW":"\u5065\u5eb7"}
+{"GUID":"2019", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
+{"GUID":"2020", "enUS":"Flu", "zhTW":"\u611f\u5192"}
+{"GUID":"2021", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
+{"GUID":"2022", "enUS":"Careless scavengers", "zhTW":"\u7c97\u5fc3\u7684\u62fe\u8352\u8005"}
+{"GUID":"2023", "enUS":"Lucky scavengers", "zhTW":"\u5e78\u904b\u7684\u62fe\u8352\u8005"}
+{"GUID":"2024", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
+{"GUID":"2025", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
+{"GUID":"2026", "enUS":"Elite soldiers", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
+{"GUID":"2027", "enUS":"Talented fighters", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
+{"GUID":"2028", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
