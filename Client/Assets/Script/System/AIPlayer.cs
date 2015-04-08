@@ -16,7 +16,9 @@ public class AIPlayer : MonoBehaviour
     // 射速.
     public float fShotSpeed = 1;
 
-    // 目標
+    // 角色.
+    public GameObject ObjHuman = null;
+    // 目標.
     public GameObject ObjTarget = null;
     // 武器物件.
     public GameObject pSWeapon = null;
@@ -64,7 +66,16 @@ public class AIPlayer : MonoBehaviour
             if (!bBeCaught && pAni)
                 pAni.Play("Shot");
             if (pWAni)
-                pWAni.Play("Fire");                  
+                pWAni.Play("Fire");
+
+            // 轉面向.
+            if (!bBeCaught)
+            {
+                if (transform.position.x < ObjTarget.transform.position.x)
+                    FaceTo(0);
+                else
+                    FaceTo(180);
+            }
 
             NGUITools.PlaySound(audioClip, 0.8f);
             // 發射子彈.
@@ -165,5 +176,10 @@ public class AIPlayer : MonoBehaviour
             if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iRoad).transform.position) < 0.005f)
                 CameraCtrl.pthis.iLeaderRoad++;
         }
+    }
+
+    public void FaceTo(int iRotation)
+    {
+        ObjHuman.transform.rotation = new Quaternion(0, iRotation, 0, 0);
     }
 }

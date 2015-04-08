@@ -88,7 +88,11 @@ public class AIEnemy : MonoBehaviour
                 pAni.Play("Catch");
             // 取向量.
             if (vecRunDir == Vector3.zero)
+            {
                 vecRunDir = PosStart - transform.position;
+                if (ObjTarget.GetComponent<PlayerFollow>())
+                    ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
+            }
 
             MoveTo(vecRunDir, fMoveSpeed * 0.5f);
             
@@ -167,7 +171,7 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 檢查距離是否可抓抓.
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.05f)
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.055f)
         {
             bHasTarget = true;
             iThreat += 5;
@@ -191,5 +195,4 @@ public class AIEnemy : MonoBehaviour
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
-	// ------------------------------------------------------------------
 }
