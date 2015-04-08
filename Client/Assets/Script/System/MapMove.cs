@@ -11,7 +11,7 @@ public class MapMove : MonoBehaviour
     // ------------------------------------------------------------------
 	void Start()
 	{        
-		MapCreater.This.Create();
+		MapCreater.This.Create(SysMain.pthis.Data.iStage, 0);
         NewGame();
 	}
     // ------------------------------------------------------------------
