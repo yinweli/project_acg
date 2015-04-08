@@ -380,6 +380,20 @@ public class MapCreater : MonoBehaviour
 
 		Debug.Log(string.Format("map create (stage:{0}, style:{1}, road:{2}, objt:{3}, width:{4}, height:{5})", m_iStage, m_iStyle, m_RoadList.Count, m_ObjtList.Count, m_iWidth, m_iHeight));
 	}
+	// 建立地圖
+	public void Create(MapData Data)
+	{
+		Clear ();
+
+		m_RoadList = new List<MapRoad>(Data.RoadList);
+		m_ObjtList = new List<MapObjt>(Data.ObjtList);
+		m_iWidth = Data.Width;
+		m_iHeight = Data.Height;
+		m_iStage = Data.Stage;
+		m_iStyle = Data.Style;
+
+		Debug.Log(string.Format("map create (stage:{0}, style:{1}, road:{2}, objt:{3}, width:{4}, height:{5})", m_iStage, m_iStyle, m_RoadList.Count, m_ObjtList.Count, m_iWidth, m_iHeight));
+	}
 	// 清除地圖
 	public void Clear()
 	{

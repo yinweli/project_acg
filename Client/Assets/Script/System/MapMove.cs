@@ -21,5 +21,4 @@ public class MapMove : MonoBehaviour
         transform.localPosition = new Vector3(-MapCreater.This.GetRoadObj(0).transform.localPosition.x, -MapCreater.This.GetRoadObj(0).transform.localPosition.y, 0);
     }
     // ------------------------------------------------------------------
-    
 }
