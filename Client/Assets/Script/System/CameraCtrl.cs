@@ -41,9 +41,9 @@ public class CameraCtrl : MonoBehaviour
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
         // 把物件位置朝目標向量(玩家方向)移動.
-        transform.localPosition += vecDirection.normalized * GameDefine.fMoveSpeed * Time.deltaTime;
+        transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
 
-        Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * GameDefine.fMoveSpeed * Time.deltaTime;
+        Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
         MapCreater.This.Refresh(iNextRoad);
     }
 }

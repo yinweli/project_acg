@@ -9,6 +9,7 @@ public class P_UI : MonoBehaviour
     public int iBattery = 100;
 
     public UILabel pLbCurrency = null;
+    public UILabel pLbStamina = null;
     public UISprite[] pSBattery = new UISprite[5];
     public UILabel[] pLbBullet = new UILabel[(int)ENUM_Resource.Resource_Count-1];
     public List<G_Light> pListLight = new List<G_Light>();
@@ -23,6 +24,7 @@ public class P_UI : MonoBehaviour
     {
         UpdateResource();
         UpdateCurrency();
+        UpdateStamina();
     }
     // ------------------------------------------------------------------
     void Update()
@@ -133,6 +135,11 @@ public class P_UI : MonoBehaviour
     public void UpdateCurrency()
     {
         pLbCurrency.text = SysMain.pthis.Data.iCurrency.ToString();
+    }
+    // ------------------------------------------------------------------
+    public void UpdateStamina()
+    {
+        pLbStamina.text = SysMain.pthis.Data.iStamina.ToString();
     }
     // ------------------------------------------------------------------
 }

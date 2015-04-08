@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameDefine
 {
-    public const float fMoveSpeed = 64f; // 玩家移動速度.
+    public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fStaminaConsumeTime = 1.0f; // 耐力消耗時間
 	public const float fStaminaRecoveryTime = 1.0f; // 耐力回復時間
 	public const float fBatteryConsumeTime = 1.0f; // 電池消耗時間
