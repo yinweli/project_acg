@@ -209,7 +209,7 @@ public class Rule
 		
 		return fResult;
 	}
-	// 取得關卡內可產生怪物列表
+	// 取得可產生怪物列表
 	public static List<int> MonsterList(int iStage)
 	{
 		List<int> Result = new List<int>();
@@ -225,6 +225,42 @@ public class Rule
 			Itor.Next();
 		}//while
 
+		return Result;
+	}
+	// 取得可獲得裝備列表
+	public static List<int> EquipList(int iStage)
+	{
+		List<int> Result = new List<int>();
+		DBFItor Itor = GameDBF.This.GetEquip();
+		
+		while(Itor.IsEnd() == false)
+		{
+			DBFEquip Data = Itor.Data() as DBFEquip;
+			
+			if(Data != null && Data.StageID <= iStage)
+				Result.Add(System.Convert.ToInt32(Data.GUID));
+			
+			Itor.Next();
+		}//while
+		
+		return Result;
+	}
+	// 取得可獲得特性列表
+	public static List<int> FeatureList(int iStage)
+	{
+		List<int> Result = new List<int>();
+		DBFItor Itor = GameDBF.This.GetEquip();
+		
+		while(Itor.IsEnd() == false)
+		{
+			DBFFeature Data = Itor.Data() as DBFFeature;
+			
+			if(Data != null && Data.StageID <= iStage)
+				Result.Add(System.Convert.ToInt32(Data.GUID));
+			
+			Itor.Next();
+		}//while
+		
 		return Result;
 	}
 }
