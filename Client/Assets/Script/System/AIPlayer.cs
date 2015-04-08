@@ -153,7 +153,9 @@ public class AIPlayer : MonoBehaviour
     public void BeCaught(GameObject ObjMonster)
     {
         bBeCaught = true;
-        ObjTarget = ObjMonster;
+        // 拿手電筒的不需要改目標.
+        if((pWeapon != WeaponType.Weapon_001)
+            ObjTarget = ObjMonster;
         gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
         if (pAni)
             pAni.Play("Break");
