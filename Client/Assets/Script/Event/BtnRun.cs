@@ -20,10 +20,7 @@ public class BtnRun : MonoBehaviour
             StartCoroutine(StaCost());
         }
         else
-        {
             bIsRun = false;
-            StartCoroutine(StaRecovery());
-        }
     }
     // ------------------------------------------------------------------
     IEnumerator StaCost()
@@ -44,7 +41,10 @@ public class BtnRun : MonoBehaviour
         }
 
         if (!SysMain.pthis.bCanRun && SysMain.pthis.Data.iStamina < 10)
+        {
+            GetComponent<UIButton>().isEnabled = false;
             SysMain.pthis.fRunDouble = 0;
+        }
         else
             SysMain.pthis.fRunDouble = 1.0f;
 
@@ -61,14 +61,20 @@ public class BtnRun : MonoBehaviour
 
         while (SysMain.pthis.bIsGaming)
         {
-            if (fCoolDown > Time.time)
+            if (bIsRun && SysMain.pthis.bCanRun)
+            {
+                Debug.Log("Recovery Pause!");
                 yield return new WaitForEndOfFrame();
-            else if (bIsRun && !SysMain.pthis.bCanRun)
+            }
+            else if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
-            else 
+            else
             {
                 SysMain.pthis.AddStamina(SysMain.pthis.Data.iStaminaRecovery);
                 fCoolDown = Time.time + 1.0f;
+
+                if (SysMain.pthis.bCanRun && SysMain.pthis.Data.iStamina >= 20)
+                    GetComponent<UIButton>().isEnabled = true;
             }
         }        
     }
