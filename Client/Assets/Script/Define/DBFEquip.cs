@@ -6,6 +6,8 @@ public class DBFEquip : DBF
 {
 	public int StrID = 0; // 字串編號
 	public int Mode = 0; // 模式
+	public int StageID = 0; // 關卡編號
+	public int Gain = 0; // 獲得機率
 	public int Damage = 0; // 傷害
 	public float CriticalStrike = 0; // 致命
 	public float FireRate = 0.0f; // 射速

@@ -1,10 +1,10 @@
-{"GUID":"1", "StrID":"1001", "Mode":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
-{"GUID":"2", "StrID":"1002", "Mode":"2", "Damage":"1", "CriticalStrike":"0", "FireRate":"1", "Range":"1", "Resource":"0"}
-{"GUID":"3", "StrID":"1003", "Mode":"2", "Damage":"2", "CriticalStrike":"0.5", "FireRate":"2", "Range":"1", "Resource":"0"}
-{"GUID":"4", "StrID":"1004", "Mode":"2", "Damage":"1", "CriticalStrike":"0.1", "FireRate":"0.5", "Range":"1", "Resource":"1"}
-{"GUID":"5", "StrID":"1005", "Mode":"2", "Damage":"3", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"6", "StrID":"1006", "Mode":"2", "Damage":"3", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"7", "StrID":"1007", "Mode":"2", "Damage":"6", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
-{"GUID":"8", "StrID":"1008", "Mode":"2", "Damage":"2", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
-{"GUID":"9", "StrID":"1009", "Mode":"2", "Damage":"4", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
-{"GUID":"10", "StrID":"1010", "Mode":"2", "Damage":"2", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}
+{"GUID":"1", "StrID":"1001", "Mode":"1", "StageID":"1", "Gain":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
+{"GUID":"2", "StrID":"1002", "Mode":"2", "StageID":"1", "Gain":"1", "Damage":"1", "CriticalStrike":"0", "FireRate":"1", "Range":"1", "Resource":"0"}
+{"GUID":"3", "StrID":"1003", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"2", "CriticalStrike":"0.5", "FireRate":"2", "Range":"1", "Resource":"0"}
+{"GUID":"4", "StrID":"1004", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"1", "CriticalStrike":"0.1", "FireRate":"0.5", "Range":"1", "Resource":"1"}
+{"GUID":"5", "StrID":"1005", "Mode":"2", "StageID":"1", "Gain":"1", "Damage":"3", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"6", "StrID":"1006", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"3", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"7", "StrID":"1007", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"6", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
+{"GUID":"8", "StrID":"1008", "Mode":"2", "StageID":"1", "Gain":"1", "Damage":"2", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
+{"GUID":"9", "StrID":"1009", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"4", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
+{"GUID":"10", "StrID":"1010", "Mode":"2", "StageID":"99999", "Gain":"0", "Damage":"2", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}

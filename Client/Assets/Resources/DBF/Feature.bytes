@@ -1,36 +1,33 @@
-{"GUID":"1", "StrID":"2001", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"5"}
-{"GUID":"2", "StrID":"2002", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"10"}
-{"GUID":"3", "StrID":"2003", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"15"}
-{"GUID":"4", "StrID":"2004", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"20"}
-{"GUID":"5", "StrID":"2005", "Mode":"1", "Group":"0", "Chances":"0.8", "Cooldown":"5", "Effect":"2", "Value":"3"}
-{"GUID":"6", "StrID":"2006", "Mode":"1", "Group":"0", "Chances":"0.3", "Cooldown":"30", "Effect":"2", "Value":"55"}
-{"GUID":"7", "StrID":"2007", "Mode":"1", "Group":"0", "Chances":"0.5", "Cooldown":"20", "Effect":"2", "Value":"25"}
-{"GUID":"8", "StrID":"2008", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-4"}
-{"GUID":"9", "StrID":"2009", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-8"}
-{"GUID":"10", "StrID":"2010", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-12"}
-{"GUID":"11", "StrID":"2011", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-16"}
-{"GUID":"12", "StrID":"2012", "Mode":"1", "Group":"0", "Chances":"0.4", "Cooldown":"10", "Effect":"2", "Value":"-10"}
-{"GUID":"13", "StrID":"2013", "Mode":"1", "Group":"0", "Chances":"0.1", "Cooldown":"15", "Effect":"2", "Value":"-60"}
-{"GUID":"14", "StrID":"2014", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"10"}
-{"GUID":"15", "StrID":"2015", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"30"}
-{"GUID":"16", "StrID":"2016", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"50"}
-{"GUID":"17", "StrID":"2017", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-10"}
-{"GUID":"18", "StrID":"2018", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-30"}
-{"GUID":"19", "StrID":"2019", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-50"}
-{"GUID":"20", "StrID":"2020", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"1"}
-{"GUID":"21", "StrID":"2021", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"2"}
-{"GUID":"22", "StrID":"2022", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"-1"}
-{"GUID":"23", "StrID":"2023", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"-2"}
-{"GUID":"24", "StrID":"2024", "Mode":"1", "Group":"1", "Chances":"0.2", "Cooldown":"30", "Effect":"6", "Value":"30"}
-{"GUID":"25", "StrID":"2025", "Mode":"1", "Group":"2", "Chances":"0.2", "Cooldown":"30", "Effect":"7", "Value":"15"}
-{"GUID":"26", "StrID":"2026", "Mode":"1", "Group":"3", "Chances":"0.2", "Cooldown":"30", "Effect":"8", "Value":"10"}
-{"GUID":"27", "StrID":"2027", "Mode":"1", "Group":"1", "Chances":"0.4", "Cooldown":"30", "Effect":"6", "Value":"30"}
-{"GUID":"28", "StrID":"2028", "Mode":"1", "Group":"2", "Chances":"0.4", "Cooldown":"30", "Effect":"7", "Value":"15"}
-{"GUID":"29", "StrID":"2029", "Mode":"1", "Group":"3", "Chances":"0.4", "Cooldown":"30", "Effect":"8", "Value":"10"}
-{"GUID":"30", "StrID":"2030", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.3"}
-{"GUID":"31", "StrID":"2031", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.2"}
-{"GUID":"32", "StrID":"2032", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.1"}
-{"GUID":"33", "StrID":"2033", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.1"}
-{"GUID":"34", "StrID":"2034", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.2"}
-{"GUID":"35", "StrID":"2035", "Mode":"2", "Group":"4", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.3"}
-{"GUID":"36", "StrID":"2036", "Mode":"2", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"10", "Value":"1"}
+{"GUID":"1", "StrID":"2001", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"5"}
+{"GUID":"2", "StrID":"2002", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"10"}
+{"GUID":"3", "StrID":"2003", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"15"}
+{"GUID":"4", "StrID":"2004", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"20"}
+{"GUID":"5", "StrID":"2005", "Mode":"1", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0.8", "Cooldown":"5", "Effect":"2", "Value":"3"}
+{"GUID":"6", "StrID":"2006", "Mode":"1", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0.3", "Cooldown":"30", "Effect":"2", "Value":"55"}
+{"GUID":"7", "StrID":"2007", "Mode":"1", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0.5", "Cooldown":"20", "Effect":"2", "Value":"25"}
+{"GUID":"8", "StrID":"2008", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-4"}
+{"GUID":"9", "StrID":"2009", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-8"}
+{"GUID":"10", "StrID":"2010", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-12"}
+{"GUID":"11", "StrID":"2011", "Mode":"2", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0", "Cooldown":"0", "Effect":"2", "Value":"-16"}
+{"GUID":"12", "StrID":"2012", "Mode":"1", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0.4", "Cooldown":"10", "Effect":"2", "Value":"-10"}
+{"GUID":"13", "StrID":"2013", "Mode":"1", "StageID":"99999", "Gain":"0", "Group":"0", "Chances":"0.1", "Cooldown":"15", "Effect":"2", "Value":"-60"}
+{"GUID":"14", "StrID":"2014", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"10"}
+{"GUID":"15", "StrID":"2015", "Mode":"2", "StageID":"1", "Gain":"2", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"30"}
+{"GUID":"16", "StrID":"2016", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"1", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"50"}
+{"GUID":"17", "StrID":"2017", "Mode":"2", "StageID":"1", "Gain":"4", "Group":"2", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-10"}
+{"GUID":"18", "StrID":"2018", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"2", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-30"}
+{"GUID":"19", "StrID":"2019", "Mode":"2", "StageID":"1", "Gain":"2", "Group":"2", "Chances":"0", "Cooldown":"0", "Effect":"4", "Value":"-50"}
+{"GUID":"20", "StrID":"2020", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"3", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"1"}
+{"GUID":"21", "StrID":"2021", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"3", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"2"}
+{"GUID":"22", "StrID":"2022", "Mode":"2", "StageID":"1", "Gain":"4", "Group":"3", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"-1"}
+{"GUID":"23", "StrID":"2023", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"3", "Chances":"0", "Cooldown":"0", "Effect":"5", "Value":"-2"}
+{"GUID":"24", "StrID":"2024", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"20"}
+{"GUID":"25", "StrID":"2025", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"40"}
+{"GUID":"26", "StrID":"2026", "Mode":"1", "StageID":"1", "Gain":"1", "Group":"4", "Chances":"0.2", "Cooldown":"30", "Effect":"1", "Value":"60"}
+{"GUID":"27", "StrID":"2030", "Mode":"2", "StageID":"1", "Gain":"4", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.3"}
+{"GUID":"28", "StrID":"2031", "Mode":"2", "StageID":"1", "Gain":"3", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.2"}
+{"GUID":"29", "StrID":"2032", "Mode":"2", "StageID":"1", "Gain":"2", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"-0.1"}
+{"GUID":"30", "StrID":"2033", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.1"}
+{"GUID":"31", "StrID":"2034", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.2"}
+{"GUID":"32", "StrID":"2035", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"9", "Value":"0.3"}
+{"GUID":"33", "StrID":"2036", "Mode":"2", "StageID":"1", "Gain":"1", "Group":"5", "Chances":"0", "Cooldown":"0", "Effect":"10", "Value":"1"}
