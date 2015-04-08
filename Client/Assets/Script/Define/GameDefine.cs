@@ -27,18 +27,18 @@ public class GameDefine
     public const int iMAXWaitSec = 21;  // 怪物出怪最大間隔秒數.
 
 	public const int iBlockSize = 64; // 格子尺寸
-	public const int iBlockUpdate = 20; // 格子更新距離
+	public const int iBlockUpdate = 40; // 格子更新距離
 	public const int iStageLevel = 5; // 關卡升階值
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iRoadSizeAdd = 2; // 地圖道路增加長度
-	public const int iMapWidth = 31; // 地圖寬度
-	public const int iMapBorderX = 8; // 地圖X軸邊框長度
-	public const int iMapBorderY = 6; // 地圖Y軸邊框長度
-	public const int iPathStart = 10; // 起點路徑長度
+	public const int iMapWidth = 41; // 地圖寬度
+	public const int iMapBorderX = 12; // 地圖X軸邊框長度
+	public const int iMapBorderY = 12; // 地圖Y軸邊框長度
+	public const int iPathStart = 12; // 起點路徑長度
 	public const int iPathMin = 4; // 最小路徑長度
 	public const int iPathMax = 12; // 最長路徑長度
 	public const int iObjtProb = 50; // 物件出現機率
-	public const int iObjtDec = 8; // 物件遞減機率
+	public const int iObjtDec = 2; // 物件遞減機率
 
 	public const string szSave = "save"; // 存檔名稱
 
