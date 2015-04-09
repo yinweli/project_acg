@@ -1,10 +1,4 @@
-﻿public enum ENUM_Game
-{
-	New, // 新遊戲
-	Continue, // 繼續遊戲
-}
-
-public enum EnemyType
+﻿public enum EnemyType
 {
     Enemy_001,
     Enemy_002,
