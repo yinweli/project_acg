@@ -110,7 +110,7 @@ public class P_UI : MonoBehaviour
         if (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] <= 0)
             return;
 
-        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));\
+        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));
 
         if (iActive > pSBattery.Length)
             iActive = pSBattery.Length;
