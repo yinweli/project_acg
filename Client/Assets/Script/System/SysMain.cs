@@ -28,7 +28,7 @@ public class SysMain : MonoBehaviour
     void Awake()
     {
         pthis = this;
-		GameNew();
+		GameLoad.Load();
     }
 
     void OnDestroy()
@@ -41,75 +41,6 @@ public class SysMain : MonoBehaviour
     {
         iRoleCount = Role.Count;
         iEnemyCount = Enemy.Count;
-	}
-    // ------------------------------------------------------------------
-	// 新遊戲
-	public void GameNew()
-	{
-		Data = new PlayerData();
-
-        iStaminaCost = GameDefine.iStaminaConsume;
-        Data.iStaminaLimit = GameDefine.iStaminaLimit;
-        Data.iStaminaRecovery = GameDefine.iStaminaRecovery;
-
-		// 以下是測試資料, 以後要改
-		Data.iStage = 1;
-        Rule.ResourceAdd(ENUM_Resource.Battery, 500);
-		Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
-		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
-		AddMember(new Looks(), 1);
-		AddMember(new Looks(), 5);
-		AddMember(new Looks(), 8);
-
-		GameCalculate();
-		GameSave();
-	}
-    // ------------------------------------------------------------------
-	// 讀取遊戲
-	public void GameLoad()
-	{
-		if(PlayerPrefs.HasKey(GameDefine.szSave))
-		{
-			Data = Json.ToObject<PlayerData>(PlayerPrefs.GetString(GameDefine.szSave));
-			GameCalculate();
-		}
-		else
-			GameNew();
-	}
-    // ------------------------------------------------------------------
-	// 儲存遊戲
-	public void GameSave()
-	{
-		PlayerPrefs.SetString(GameDefine.szSave, Json.ToString(Data));
-		PlayerPrefs.Save();
-	}
-    // ------------------------------------------------------------------
-	// 遊戲資料計算
-	public void GameCalculate()
-	{
-		Rule.PressureReset();
-		Rule.StaminaReset();
-		Rule.StaminaLimit();
-		Rule.StaminaRecovery();
-		Rule.CriticalStrikeReset();
-		Rule.AddDamageReset();
-	}
-    // ------------------------------------------------------------------
-	// 建立成員
-	public void AddMember(Looks Looks, int iEquip)
-	{
-		Member Temp = new Member();
-
-		Temp.Looks = Looks;
-		Temp.iEquip = iEquip;
-
-        Data.Data.Add(Temp);
-	}
-    // ------------------------------------------------------------------
-	// 刪除成員
-	public void DelMember(int iPos)
-	{
-		Data.Data.RemoveAt(iPos);
 	}
     // ------------------------------------------------------------------
     public float GetMoveSpeed()

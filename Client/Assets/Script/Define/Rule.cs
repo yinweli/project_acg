@@ -94,22 +94,22 @@ public class Rule
 	// 重置耐力值
 	public static void StaminaReset()
 	{
-		SysMain.pthis.Data.iStamina = PassiveI(ENUM_Effect.Stamina);
+		SysMain.pthis.Data.iStamina = PassiveI(ENUM_Effect.Stamina) + SysMain.pthis.Data.iStaminaLimit;
 	}
 	// 增加耐力值
 	public static void StaminaAdd(int iValue)
 	{
-		SysMain.pthis.Data.iStamina = ValueI(PassiveI(ENUM_Effect.Stamina), StaminaLimit(), SysMain.pthis.Data.iStamina + iValue);
+		SysMain.pthis.Data.iStamina = ValueI(PassiveI(ENUM_Effect.Stamina), SysMain.pthis.Data.iStaminaLimit, SysMain.pthis.Data.iStamina + iValue);
 	}
-	// 取得耐力上限值
-	public static int StaminaLimit()
+	// 重置耐力上限值
+	public static void StaminaLimit()
 	{
-		return PassiveI(ENUM_Effect.StaminaLimit) + GameDefine.iStaminaLimit;
+		SysMain.pthis.Data.iStaminaLimit = PassiveI(ENUM_Effect.StaminaLimit) + GameDefine.iStaminaLimit;
 	}
-	// 取得耐力回復值
-	public static int StaminaRecovery()
+	// 重置耐力回復值
+	public static void StaminaRecovery()
 	{
-		return PassiveI(ENUM_Effect.StaminaRecovery) + GameDefine.iStaminaRecovery;
+		SysMain.pthis.Data.iStaminaRecovery = PassiveI(ENUM_Effect.StaminaRecovery) + GameDefine.iStaminaRecovery;
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
@@ -147,6 +147,21 @@ public class Rule
 		int iIndex = (int)emResource;
 
 		return SysMain.pthis.Data.Resource.Count > iIndex ? SysMain.pthis.Data.Resource[iIndex] >= iValue : false;
+	}
+	// 建立成員
+	public static void MemberAdd(Looks Looks, int iEquip)
+	{
+		Member MemberTemp = new Member();
+		
+		MemberTemp.Looks = Looks;
+		MemberTemp.iEquip = iEquip;
+
+		SysMain.pthis.Data.Data.Add(MemberTemp);
+	}
+	// 刪除成員
+	public void MemberDel(int iPos)
+	{
+		SysMain.pthis.Data.Data.RemoveAt(iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset(int iPos)

@@ -455,26 +455,9 @@ public class MapCreater : MonoBehaviour
 	{
 		return RoadList.Count > iRoad ? RoadList[iRoad].Obj : null;
 	}
-	// 取得存檔物件
-	public SaveMap GetSaveObj()
+	// 檢查是否為空
+	public bool IsEmpty()
 	{
-		SaveMap Result = new SaveMap();
-		List<MapRoad> RoadList = new List<MapRoad>();
-		List<MapObjt> ObjtList = new List<MapObjt>();
-
-		foreach(MapRoad Itor in RoadList)
-			RoadList.Add(new MapRoad(Itor));
-
-		foreach(MapObjt Itor in ObjtList)
-			ObjtList.Add(new MapObjt(Itor));
-
-		Result.RoadList = RoadList.ToArray();
-		Result.ObjtList = ObjtList.ToArray();
-		Result.iWidth = iWidth;
-		Result.iHeight = iHeight;
-		Result.iStage = iStage;
-		Result.iStyle = iStyle;
-
-		return Result;
+		return RoadList.Count <= 0 || ObjtList.Count <= 0;
 	}
 }
