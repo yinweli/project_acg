@@ -41,6 +41,8 @@ public class GameDefine
 	public const int iObjtDec = 2; // 物件遞減機率
 
 	public const string szSave = "save"; // 存檔名稱
+	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
+	public const string szSaveMap = "save_map"; // 地圖資料存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
