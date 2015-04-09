@@ -172,6 +172,9 @@ public class AIPlayer : MonoBehaviour
 
     public void MoveTo(int iRoad)
     {
+        if (!MapCreater.This.GetRoadObj(iRoad))
+            return;
+
         float fMyMoveSpeed = SysMain.pthis.GetMoveSpeed();
 
         if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iRoad).transform.position) > 0.205f)

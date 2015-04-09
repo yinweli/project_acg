@@ -11,6 +11,7 @@ public class P_UI : MonoBehaviour
     public UILabel pLbCurrency = null;
     public UILabel pLbStamina = null;
     public UISprite[] pSBattery = new UISprite[5];
+    public UISprite[] pSStamina = new UISprite[10];
     public UILabel[] pLbBullet = new UILabel[(int)ENUM_Resource.Resource_Count-1];
     public List<G_Light> pListLight = new List<G_Light>();
 
@@ -109,9 +110,12 @@ public class P_UI : MonoBehaviour
         if (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] <= 0)
             return;
 
-        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5)) + 1;
+        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));\
+
         if (iActive > pSBattery.Length)
             iActive = pSBattery.Length;
+        else if (iActive == 0 && SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] > 0)
+            iActive = 1;
 
         for (int i = 0; i < iActive; i++)
         {
@@ -139,7 +143,20 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateStamina()
     {
-        pLbStamina.text = SysMain.pthis.Data.iStamina.ToString();
+        pLbStamina.text = SysMain.pthis.Data.iStamina.ToString() + "/" + SysMain.pthis.Data.iStaminaLimit;
+
+        for (int i = 0; i < pSStamina.Length; i++)
+            pSStamina[i].gameObject.SetActive(false);
+
+        int iActive = (SysMain.pthis.Data.iStamina / (SysMain.pthis.Data.iStaminaLimit / pSStamina.Length));
+
+        if (iActive > pSStamina.Length)
+            iActive = pSStamina.Length;
+        else if (iActive == 0 && SysMain.pthis.Data.iStamina > 0)
+            iActive = 1;
+
+        for (int i = 0; i < iActive; i++)
+            pSStamina[i].gameObject.SetActive(true);
     }
     // ------------------------------------------------------------------
 }
