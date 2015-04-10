@@ -128,8 +128,8 @@ public class MapCreater : MonoBehaviour
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
 	public int iWidth = GameDefine.iMapWidth; // 地圖寬度
 	public int iHeight = 0; // 地圖高度
-	public int iStage = 0; // 關卡編號
-	public int iStyle = 0; // 風格編號
+	public int iStage = 1; // 關卡編號
+	public int iStyle = 1; // 風格編號
 
 	public GameObject MapBaseObject = null;
 
