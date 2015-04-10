@@ -20,7 +20,7 @@ public class Rule
 	{
 		int iResult = 0;
 
-		for(int iPos = 0; iPos < SysMain.pthis.Data.Data.Count; ++iPos)
+		for(int iPos = 0; iPos < PlayerData.pthis.Data.Count; ++iPos)
 			iResult += PassiveI(emEffect, iPos);
 		
 		return Mathf.Max(0, iResult);
@@ -30,9 +30,9 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(SysMain.pthis.Data.Data.Count > iPos)
+		if(PlayerData.pthis.Data.Count > iPos)
 		{
-			foreach(int Itor in SysMain.pthis.Data.Data[iPos].Feature)
+			foreach(int Itor in PlayerData.pthis.Data[iPos].Feature)
 			{
 				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
 				
@@ -48,9 +48,9 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(SysMain.pthis.Data.Data.Count > iPos)
+		if(PlayerData.pthis.Data.Count > iPos)
 		{
-			foreach(int Itor in SysMain.pthis.Data.Data[iPos].Feature)
+			foreach(int Itor in PlayerData.pthis.Data[iPos].Feature)
 			{
 				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
 				
@@ -66,7 +66,7 @@ public class Rule
 	{
 		float fResult = 0.0f;
 
-		for(int iPos = 0; iPos < SysMain.pthis.Data.Data.Count; ++iPos)
+		for(int iPos = 0; iPos < PlayerData.pthis.Data.Count; ++iPos)
 			fResult += PassiveF(emEffect, iPos);
 
 		return Mathf.Max(0.0f, fResult);
@@ -74,42 +74,42 @@ public class Rule
 	// 重置通貨值
 	public static void CurrencyReset()
 	{
-		SysMain.pthis.Data.iCurrency = PassiveI(ENUM_Effect.Currency);
+		PlayerData.pthis.iCurrency = PassiveI(ENUM_Effect.Currency);
 	}
 	// 增加通貨值
 	public static void CurrencyAdd(int iValue)
 	{
-		SysMain.pthis.Data.iCurrency = ValueI(PassiveI(ENUM_Effect.Currency), GameDefine.iMaxCurrency, SysMain.pthis.Data.iCurrency + iValue);
+		PlayerData.pthis.iCurrency = ValueI(PassiveI(ENUM_Effect.Currency), GameDefine.iMaxCurrency, PlayerData.pthis.iCurrency + iValue);
 	}
 	// 重置壓力值
 	public static void PressureReset()
 	{
-		SysMain.pthis.Data.iPressure = PassiveI(ENUM_Effect.Pressure);
+		PlayerData.pthis.iPressure = PassiveI(ENUM_Effect.Pressure);
 	}
 	// 增加壓力值
 	public static void PressureAdd(int iValue)
 	{
-		SysMain.pthis.Data.iPressure = ValueI(PassiveI(ENUM_Effect.Pressure), GameDefine.iMaxPressure, SysMain.pthis.Data.iPressure + iValue);
+		PlayerData.pthis.iPressure = ValueI(PassiveI(ENUM_Effect.Pressure), GameDefine.iMaxPressure, PlayerData.pthis.iPressure + iValue);
 	}
 	// 重置耐力值
 	public static void StaminaReset()
 	{
-		SysMain.pthis.Data.iStamina = PassiveI(ENUM_Effect.Stamina) + SysMain.pthis.Data.iStaminaLimit;
+		PlayerData.pthis.iStamina = PassiveI(ENUM_Effect.Stamina) + PlayerData.pthis.iStaminaLimit;
 	}
 	// 增加耐力值
 	public static void StaminaAdd(int iValue)
 	{
-		SysMain.pthis.Data.iStamina = ValueI(PassiveI(ENUM_Effect.Stamina), SysMain.pthis.Data.iStaminaLimit, SysMain.pthis.Data.iStamina + iValue);
+		PlayerData.pthis.iStamina = ValueI(PassiveI(ENUM_Effect.Stamina), PlayerData.pthis.iStaminaLimit, PlayerData.pthis.iStamina + iValue);
 	}
 	// 重置耐力上限值
 	public static void StaminaLimit()
 	{
-		SysMain.pthis.Data.iStaminaLimit = PassiveI(ENUM_Effect.StaminaLimit) + GameDefine.iStaminaLimit;
+		PlayerData.pthis.iStaminaLimit = PassiveI(ENUM_Effect.StaminaLimit) + GameDefine.iStaminaLimit;
 	}
 	// 重置耐力回復值
 	public static void StaminaRecovery()
 	{
-		SysMain.pthis.Data.iStaminaRecovery = PassiveI(ENUM_Effect.StaminaRecovery) + GameDefine.iStaminaRecovery;
+		PlayerData.pthis.iStaminaRecovery = PassiveI(ENUM_Effect.StaminaRecovery) + GameDefine.iStaminaRecovery;
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
@@ -117,9 +117,9 @@ public class Rule
 		int iIndex = 0;
 
 		while(iIndex <= (int)emResource)
-			SysMain.pthis.Data.Resource.Add(0);
+			PlayerData.pthis.Resource.Add(0);
 
-		SysMain.pthis.Data.Resource[(int)emResource] = emResource == ENUM_Resource.Battery ? PassiveI(ENUM_Effect.Battery) : 0;
+		PlayerData.pthis.Resource[(int)emResource] = emResource == ENUM_Resource.Battery ? PassiveI(ENUM_Effect.Battery) : 0;
 	}
 	// 增加資源
 	public static void ResourceAdd(ENUM_Resource emResource, int iValue)
@@ -127,9 +127,9 @@ public class Rule
 		int iIndex = 0;
 		
 		while(iIndex++ <= (int)emResource)
-			SysMain.pthis.Data.Resource.Add(0);
+			PlayerData.pthis.Resource.Add(0);
 
-		int iResult = SysMain.pthis.Data.Resource[(int)emResource];
+		int iResult = PlayerData.pthis.Resource[(int)emResource];
 
 		switch(emResource)
 		{
@@ -139,14 +139,14 @@ public class Rule
 		default: break;
 		}//switch
 
-		SysMain.pthis.Data.Resource[(int)emResource] = iResult;
+		PlayerData.pthis.Resource[(int)emResource] = iResult;
 	}
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)
 	{
 		int iIndex = (int)emResource;
 
-		return SysMain.pthis.Data.Resource.Count > iIndex ? SysMain.pthis.Data.Resource[iIndex] >= iValue : false;
+		return PlayerData.pthis.Resource.Count > iIndex ? PlayerData.pthis.Resource[iIndex] >= iValue : false;
 	}
 	// 建立成員
 	public static void MemberAdd(Looks Looks, int iEquip)
@@ -156,35 +156,35 @@ public class Rule
 		MemberTemp.Looks = Looks;
 		MemberTemp.iEquip = iEquip;
 
-		SysMain.pthis.Data.Data.Add(MemberTemp);
+		PlayerData.pthis.Data.Add(MemberTemp);
 	}
 	// 刪除成員
 	public void MemberDel(int iPos)
 	{
-		SysMain.pthis.Data.Data.RemoveAt(iPos);
+		PlayerData.pthis.Data.RemoveAt(iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset(int iPos)
 	{
-		if(SysMain.pthis.Data.Data.Count > iPos)
-			SysMain.pthis.Data.Data[iPos].fCriticalStrike = PassiveF(ENUM_Effect.CriticalStrike, iPos);
+		if(PlayerData.pthis.Data.Count > iPos)
+			PlayerData.pthis.Data[iPos].fCriticalStrike = PassiveF(ENUM_Effect.CriticalStrike, iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset()
 	{
-		for(int iPos = 0; iPos < SysMain.pthis.Data.Data.Count; ++iPos)
+		for(int iPos = 0; iPos < PlayerData.pthis.Data.Count; ++iPos)
 			CriticalStrikeReset(iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset(int iPos)
 	{
-		if(SysMain.pthis.Data.Data.Count > iPos)
-			SysMain.pthis.Data.Data[iPos].iAddDamage = PassiveI(ENUM_Effect.AddDamage, iPos);
+		if(PlayerData.pthis.Data.Count > iPos)
+			PlayerData.pthis.Data[iPos].iAddDamage = PassiveI(ENUM_Effect.AddDamage, iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset()
 	{
-		for(int iPos = 0; iPos < SysMain.pthis.Data.Data.Count; ++iPos)
+		for(int iPos = 0; iPos < PlayerData.pthis.Data.Count; ++iPos)
 			AddDamageReset(iPos);
 	}
 	// 取得子彈傷害值
@@ -192,9 +192,9 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(SysMain.pthis.Data.Data.Count > iPos)
+		if(PlayerData.pthis.Data.Count > iPos)
 		{
-			Member DataMember = SysMain.pthis.Data.Data[iPos];
+			Member DataMember = PlayerData.pthis.Data[iPos];
 			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
@@ -213,9 +213,9 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(SysMain.pthis.Data.Data.Count > iPos)
+		if(PlayerData.pthis.Data.Count > iPos)
 		{
-			Member DataMember = SysMain.pthis.Data.Data[iPos];
+			Member DataMember = PlayerData.pthis.Data[iPos];
 			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 			
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)

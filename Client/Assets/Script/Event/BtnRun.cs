@@ -26,7 +26,7 @@ public class BtnRun : MonoBehaviour
     IEnumerator StaCost()
     {
         if (SysMain.pthis.bCanRun)
-            SysMain.pthis.fRunDouble = 3.0f;
+            GameData.pthis.fRunDouble = 3.0f;
 
         while (bIsRun && SysMain.pthis.bCanRun)
         {            
@@ -34,19 +34,19 @@ public class BtnRun : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             else
             {
-                if (SysMain.pthis.AddStamina(-SysMain.pthis.iStaminaCost))
-                    SysMain.pthis.fRunDouble = 3.0f;
+                if (SysMain.pthis.AddStamina(-GameData.pthis.iStaminaCost))
+                    GameData.pthis.fRunDouble = 3.0f;
                 fCoolDown = Time.time + 1.0f;
             }
         }
 
-        if (!SysMain.pthis.bCanRun && SysMain.pthis.Data.iStamina < 10)
+        if (!SysMain.pthis.bCanRun && PlayerData.pthis.iStamina < 10)
         {
             GetComponent<UIButton>().isEnabled = false;
-            SysMain.pthis.fRunDouble = 0;
+            GameData.pthis.fRunDouble = 0;
         }
         else
-            SysMain.pthis.fRunDouble = 1.0f;
+            GameData.pthis.fRunDouble = 1.0f;
 
         bIsRun = false;
         fCoolDown = Time.time + 1.0f;
@@ -54,10 +54,10 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
     {
-        if (!SysMain.pthis.bCanRun && SysMain.pthis.Data.iStamina < 10)
-            SysMain.pthis.fRunDouble = 0;
+        if (!SysMain.pthis.bCanRun && PlayerData.pthis.iStamina < 10)
+            GameData.pthis.fRunDouble = 0;
         else
-            SysMain.pthis.fRunDouble = 1.0f;
+            GameData.pthis.fRunDouble = 1.0f;
 
         while (SysMain.pthis.bIsGaming)
         {
@@ -70,10 +70,10 @@ public class BtnRun : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             else
             {
-                SysMain.pthis.AddStamina(SysMain.pthis.Data.iStaminaRecovery);
+                SysMain.pthis.AddStamina(PlayerData.pthis.iStaminaRecovery);
                 fCoolDown = Time.time + 1.0f;
 
-                if (SysMain.pthis.bCanRun && SysMain.pthis.Data.iStamina >= 20)
+                if (SysMain.pthis.bCanRun && PlayerData.pthis.iStamina >= 20)
                     GetComponent<UIButton>().isEnabled = true;
             }
         }        

@@ -43,15 +43,15 @@ public class GameSave
 	{
 		SavePlayer Data = new SavePlayer();
 
-		Data.iStage = SysMain.pthis.Data.iStage;
-		Data.iCurrency = SysMain.pthis.Data.iCurrency;
-		Data.iEnemyKill = SysMain.pthis.Data.iEnemyKill;
-		Data.iPlayTime = SysMain.pthis.Data.iPlayTime;
-		Data.Resource = SysMain.pthis.Data.Resource.ToArray();
+		Data.iStage = PlayerData.pthis.iStage;
+		Data.iCurrency = PlayerData.pthis.iCurrency;
+		Data.iEnemyKill = PlayerData.pthis.iEnemyKill;
+		Data.iPlayTime = PlayerData.pthis.iPlayTime;
+		Data.Resource = PlayerData.pthis.Resource.ToArray();
 
 		List<SaveMember> MemberList = new List<SaveMember>();
 		
-		foreach(Member Itor in SysMain.pthis.Data.Data)
+		foreach(Member Itor in PlayerData.pthis.Data)
 		{
 			SaveMember Temp = new SaveMember();
 			
@@ -128,14 +128,14 @@ public class GameLoad
 		if(Data == null)
 			return false;
 
-		SysMain.pthis.Data = new PlayerData();
+		PlayerData.pthis = new PlayerData();
 
-		SysMain.pthis.Data.iStage = Data.iStage;
-		SysMain.pthis.Data.iCurrency = Data.iCurrency;
-		SysMain.pthis.Data.iEnemyKill = Data.iEnemyKill;
-		SysMain.pthis.Data.iPlayTime = Data.iPlayTime;
-		SysMain.pthis.Data.Resource = new List<int>(Data.Resource);
-		SysMain.pthis.Data.Data = new List<Member>();
+		PlayerData.pthis.iStage = Data.iStage;
+		PlayerData.pthis.iCurrency = Data.iCurrency;
+		PlayerData.pthis.iEnemyKill = Data.iEnemyKill;
+		PlayerData.pthis.iPlayTime = Data.iPlayTime;
+		PlayerData.pthis.Resource = new List<int>(Data.Resource);
+		PlayerData.pthis.Data = new List<Member>();
 
 		foreach(SaveMember Itor in Data.Data)
 		{
@@ -146,7 +146,7 @@ public class GameLoad
 			MemberTemp.Feature = new List<int>(Itor.Feature);
 			MemberTemp.Behavior = new List<int>(Itor.Behavior);
 
-			SysMain.pthis.Data.Data.Add(MemberTemp);
+			PlayerData.pthis.Data.Add(MemberTemp);
 		}//for
 
 		return true;
@@ -184,12 +184,12 @@ public class GameLoad
 		// 如果讀取失敗, 就建立新遊戲
 		if(bResult == false)
 		{
-			SysMain.pthis.Data = new PlayerData();
+			PlayerData.pthis = new PlayerData();
 
-			SysMain.pthis.Data.iStage = 1;
-			SysMain.pthis.Data.iCurrency = 100;
-			SysMain.pthis.Data.iEnemyKill = 0;
-			SysMain.pthis.Data.iPlayTime = 0;
+			PlayerData.pthis.iStage = 1;
+			PlayerData.pthis.iCurrency = 100;
+			PlayerData.pthis.iEnemyKill = 0;
+			PlayerData.pthis.iPlayTime = 0;
 
 			// 以下是測試資料, 以後要改
 			Rule.ResourceAdd(ENUM_Resource.Battery, 500);
@@ -201,7 +201,7 @@ public class GameLoad
 			Rule.MemberAdd(new Looks(), 8);
 
 			// 建立地圖
-			MapCreater.This.Create(SysMain.pthis.Data.iStage, 0);
+			MapCreater.This.Create(PlayerData.pthis.iStage, 0);
 		}//if
 
 		Rule.PressureReset();
@@ -211,6 +211,6 @@ public class GameLoad
 		Rule.CriticalStrikeReset();
 		Rule.AddDamageReset();
 
-		Debug.Log(SysMain.pthis.Data.iStamina + ", " + SysMain.pthis.Data.iStaminaLimit + ", " + SysMain.pthis.Data.iStaminaRecovery);
+		Debug.Log(PlayerData.pthis.iStamina + ", " + PlayerData.pthis.iStaminaLimit + ", " + PlayerData.pthis.iStaminaRecovery);
 	}
 }

@@ -33,7 +33,7 @@ public class EnemyCreater : MonoBehaviour
     public void StartNew()
     {
         // 計算總波數能量：怪物能量 = 能量基礎值 + 關卡編號 / 每多少關增加難度 * 能量增加值。.
-        iEnegry = GameDefine.iBaseEngry + (SysMain.pthis.Data.iStage / GameDefine.iStageCount * GameDefine.iWeightEngry);
+        iEnegry = GameDefine.iBaseEngry + (PlayerData.pthis.iStage / GameDefine.iStageCount * GameDefine.iWeightEngry);
 
         StartCoroutine(Creater());
     }
@@ -66,7 +66,7 @@ public class EnemyCreater : MonoBehaviour
         // 先清理List.
         EnemyList.Clear();
         // 取得可使用的怪物列表.
-        List<int> pEnemy = Rule.MonsterList(SysMain.pthis.Data.iStage);
+        List<int> pEnemy = Rule.MonsterList(PlayerData.pthis.iStage);
         
         int iTempE = iEnegry;
         while (iTempE > 0)

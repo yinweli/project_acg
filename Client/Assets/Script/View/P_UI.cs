@@ -59,16 +59,16 @@ public class P_UI : MonoBehaviour
     {
         for (int i = 0; i < (int)ENUM_Resource.Resource_Count - 1; i++)
             if (pLbBullet[i])
-                pLbBullet[i].text = SysMain.pthis.Data.Resource[i+1].ToString();
+                pLbBullet[i].text = PlayerData.pthis.Resource[i+1].ToString();
     }
 
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-        float fBattery = SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery];
+        float fBattery = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery];
         float fMaxBattery = GameDefine.iMaxBattery;
 
-        if (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] + iValue < 0)
+        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] + iValue < 0)
         {
             // 沒電時關掉燈光.
             for (int i = 0; i < pListLight.Count; i++)
@@ -110,14 +110,14 @@ public class P_UI : MonoBehaviour
             pSBattery[i].gameObject.SetActive(false);
         }
 
-        if (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] <= 0)
+        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] <= 0)
             return;
 
-        int iActive = (SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));
+        int iActive = (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));
 
         if (iActive > pSBattery.Length)
             iActive = pSBattery.Length;
-        else if (iActive == 0 && SysMain.pthis.Data.Resource[(int)ENUM_Resource.Battery] > 0)
+        else if (iActive == 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
             iActive = 1;
 
         for (int i = 0; i < iActive; i++)
@@ -131,7 +131,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddCurrency(int iValue)
     {
-        if(iValue < 0 && SysMain.pthis.Data.iCurrency + iValue < 0)
+        if(iValue < 0 && PlayerData.pthis.iCurrency + iValue < 0)
             return false;
 
         Rule.CurrencyAdd(iValue);
@@ -141,21 +141,21 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateCurrency()
     {
-        pLbCurrency.text = SysMain.pthis.Data.iCurrency.ToString();
+        pLbCurrency.text = PlayerData.pthis.iCurrency.ToString();
     }
     // ------------------------------------------------------------------
     public void UpdateStamina()
     {
-        pLbStamina.text = SysMain.pthis.Data.iStamina.ToString() + "/" + SysMain.pthis.Data.iStaminaLimit;
+        pLbStamina.text = PlayerData.pthis.iStamina.ToString() + "/" + PlayerData.pthis.iStaminaLimit;
 
         for (int i = 0; i < pSStamina.Length; i++)
             pSStamina[i].gameObject.SetActive(false);
 
-        int iActive = (SysMain.pthis.Data.iStamina / (SysMain.pthis.Data.iStaminaLimit / pSStamina.Length));
+        int iActive = (PlayerData.pthis.iStamina / (PlayerData.pthis.iStaminaLimit / pSStamina.Length));
 
         if (iActive > pSStamina.Length)
             iActive = pSStamina.Length;
-        else if (iActive == 0 && SysMain.pthis.Data.iStamina > 0)
+        else if (iActive == 0 && PlayerData.pthis.iStamina > 0)
             iActive = 1;
 
         for (int i = 0; i < iActive; i++)

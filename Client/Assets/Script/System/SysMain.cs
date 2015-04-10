@@ -9,12 +9,9 @@ public class SysMain : MonoBehaviour
 
     public bool bIsGaming = false;
 
-    public PlayerData Data = new PlayerData();
-
+    // 地圖樣式.
     public int iRoleCount = 0;
     public int iEnemyCount = 0;
-    // 跑步速度倍率.
-    public float fRunDouble = 1;
     // 耐力消耗值.
     public int iStaminaCost= 5;
     // 跑步是否為冷卻中
@@ -47,7 +44,7 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
     {
         // 建立地圖.
-
+        MapCreater.This.Create(PlayerData.pthis.iStage, GameData.pthis.iStyle);
         // 確認是否為新遊戲.
         
         // 新遊戲 - 淡出淡入天數後開始遊戲.
@@ -62,9 +59,10 @@ public class SysMain : MonoBehaviour
         EnemyCreater.pthis.StartNew();
     }
     // ------------------------------------------------------------------
+    // 取得真實跑速
     public float GetMoveSpeed()
     {
-        return GameDefine.fBaseSpeed * fRunDouble;
+        return GameDefine.fBaseSpeed * GameData.pthis.fRunDouble;
     }
     // ------------------------------------------------------------------
     // 增加耐力.
@@ -74,10 +72,10 @@ public class SysMain : MonoBehaviour
             return false;
 
         // 當扣除後低於0進入冷卻狀態.
-        if (bCanRun && SysMain.pthis.Data.iStamina + iValue <= 0)
+        if (bCanRun && PlayerData.pthis.iStamina + iValue <= 0)
         {
-            SysMain.pthis.Data.iStamina = 0;
-            SysMain.pthis.fRunDouble = 0;
+            PlayerData.pthis.iStamina = 0;
+            GameData.pthis.fRunDouble = 0;
             bCanRun = false;
             P_UI.pthis.UpdateStamina();
             return true;
@@ -85,10 +83,10 @@ public class SysMain : MonoBehaviour
         
         Rule.StaminaAdd(iValue);
 
-        if (iValue > 0 && !bCanRun && SysMain.pthis.Data.iStamina + iValue > 20)
+        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > 20)
             bCanRun = true;
-        if (iValue > 0 && !bCanRun && SysMain.pthis.Data.iStamina + iValue > 10)
-            SysMain.pthis.fRunDouble = 1.0f;
+        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > 10)
+            GameData.pthis.fRunDouble = 1.0f;
 
         P_UI.pthis.UpdateStamina();
         return true;
