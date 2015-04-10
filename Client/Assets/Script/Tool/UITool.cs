@@ -16,7 +16,7 @@ public class UITool : MonoBehaviour {
 
     public GameObject CreateUI(GameObject Parent, string Path)
     {
-        return NGUITools.AddChild(Parent, Resources.Load(Path) as GameObject);
+		return NGUITools.AddChild(Parent, Resources.Load(Path) as GameObject);
     }
 
     public GameObject CreateUIByPos(GameObject Parent, string Name, float fPosX, float fPosY)
