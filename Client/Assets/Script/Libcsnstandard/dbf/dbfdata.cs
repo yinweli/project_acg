@@ -5,10 +5,10 @@
  */
 //-----------------------------------------------------------------------------
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_IPHONE || UNITY_ANDROID
-#define DBF_UNITY
+#define UNITY
 #endif
 //-----------------------------------------------------------------------------
-#if DBF_UNITY
+#if UNITY
 using UnityEngine;
 #endif
 using System.Collections.Generic;
@@ -89,7 +89,7 @@ namespace LibCSNStandard
             if (m_szFilePath.Length <= 0)
                 return Output.Error(this, "dbf filepath empty");
 
-#if DBF_UNITY
+#if UNITY
             TextAsset FileReader = Resources.Load(m_szFilePath) as TextAsset;
 
             if (FileReader == null)

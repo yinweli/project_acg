@@ -166,6 +166,9 @@ public class GameLoad
 			Rule.MemberAdd(new Looks(), 1);
 			Rule.MemberAdd(new Looks(), 5);
 			Rule.MemberAdd(new Looks(), 8);
+
+			// 建立地圖
+			//MapCreater.This.Create(SysMain.pthis.Data.iStage, 0);
 		}//if
 
 		Rule.PressureReset();

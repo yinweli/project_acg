@@ -88,21 +88,12 @@ namespace LibCSNStandard
          */
         public static void RandomShuffle<T>(T[] array)
         {
-            RandomShuffle(array, new Random());
-        }
-        /**
-         * @brief 隨機排列陣列元素
-         * @param array 陣列物件
-         * @param rand 亂數物件
-         */
-        public static void RandomShuffle<T>(T[] array, Random rand)
-        {
             int iCount = array.Length;
 
             while (iCount > 1)
             {
                 iCount--;
-                Swap(ref array[iCount], ref array[rand.Next(iCount + 1)]);
+				Swap(ref array[iCount], ref array[Rand.Next(iCount + 1)]);
             }//while
         }
         /**
@@ -111,22 +102,13 @@ namespace LibCSNStandard
          */
         public static void RandomShuffle<T>(List<T> list)
         {
-            RandomShuffle(list, new Random());
-        }
-        /**
-         * @brief 隨機排列列表元素
-         * @param list 列表物件
-         * @param rand 亂數物件
-         */
-        public static void RandomShuffle<T>(List<T> list, Random rand)
-        {
             int iCount = list.Count;
             int iRand = 0;
 
             while (iCount > 1)
             {
                 iCount--;
-                iRand = rand.Next(iCount + 1);
+				iRand = Rand.Next(iCount + 1);
 
                 T v = list[iCount];
 
@@ -138,35 +120,17 @@ namespace LibCSNStandard
          * @brief 隨機取得列表內容
          * @param list 列表物件
          */
-        public static T RandomList<T>(List<T> list)
+        public static T RandomPick<T>(List<T> list)
         {
-            return RandomList(list, new Random());
-        }
-        /**
-         * @brief 隨機取得列表內容
-         * @param list 列表物件
-         * @param rand 亂數物件
-         */
-        public static T RandomList<T>(List<T> list, Random rand)
-        {
-            return list.Count > 0 ? list[rand.Next(list.Count)] : default(T);
+			return list.Count > 0 ? list[Rand.Next(list.Count)] : default(T);
         }
         /**
          * @brief 隨機取得列表內容
          * @param set 列表物件
          */
-        public static T RandomSet<T>(HashSet<T> set)
+        public static T RandomPick<T>(HashSet<T> set)
         {
-            return RandomSet(set, new Random());
-        }
-        /**
-         * @brief 隨機取得列表內容
-         * @param set 列表物件
-         * @param rand 亂數物件
-         */
-        public static T RandomSet<T>(HashSet<T> set, Random rand)
-        {
-            int iRand = rand.Next(set.Count);
+            int iRand = Rand.Next(set.Count);
             int iPos = 0;
 
             foreach (T Itor in set)
@@ -183,18 +147,9 @@ namespace LibCSNStandard
          * @brief 隨機取得列表內容
          * @param dir 列表物件
          */
-        public static KeyValuePair<K, V> RandomDictionary<K, V>(Dictionary<K, V> dir)
+        public static KeyValuePair<K, V> RandomPick<K, V>(Dictionary<K, V> dir)
         {
-            return RandomDictionary(dir, new Random());
-        }
-        /**
-         * @brief 隨機取得列表內容
-         * @param dir 列表物件
-         * @param rand 亂數物件
-         */
-        public static KeyValuePair<K, V> RandomDictionary<K, V>(Dictionary<K, V> dir, Random rand)
-        {
-            int iRand = rand.Next(dir.Count);
+            int iRand = Rand.Next(dir.Count);
             int iPos = 0;
 
             foreach (KeyValuePair<K, V> Itor in dir)
