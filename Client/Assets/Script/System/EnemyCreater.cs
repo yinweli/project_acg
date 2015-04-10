@@ -29,11 +29,6 @@ public class EnemyCreater : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
-    void Start()
-    {
-        StartNew();
-    }
-    // ------------------------------------------------------------------
     // 開始新的關卡.
     public void StartNew()
     {
@@ -76,27 +71,30 @@ public class EnemyCreater : MonoBehaviour
         int iTempE = iEnegry;
         while (iTempE > 0)
         {
-            if (iTempE > DBFBase.HP)
+            if (SysMain.pthis.bIsGaming)
             {
-                EnemyList.Add(string.Format("Enemy_{0:000}", 1));
-                break;
+                if (iTempE > DBFBase.HP)
+                {
+                    EnemyList.Add(string.Format("Enemy_{0:000}", 1));
+                    break;
+                }
+
+                int iEnemy = Random.Range(0, pEnemy.Count);
+
+                DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
+
+                if (DBFData == null)
+                {
+                    Debug.Log("DBFMonster(" + iEnemy + ") null");
+                    return;
+                }//if
+
+                if (DBFData.HP <= iTempE)
+                {
+                    iTempE = iTempE - DBFData.HP;
+                    EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
+                }
             }
-
-            int iEnemy = Random.Range(0, pEnemy.Count);
-
-            DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
-
-            if (DBFData == null)
-            {
-                Debug.Log("DBFMonster(" + iEnemy + ") null");
-                return;
-            }//if
-
-            if (DBFData.HP <= iTempE)
-            {
-                iTempE = iTempE - DBFData.HP;
-                EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
-            } 
         }
     }
     // ------------------------------------------------------------------
@@ -119,23 +117,21 @@ public class EnemyCreater : MonoBehaviour
                     case 1: //上方.
                         UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], 
                             CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), 
-                            CameraCtrl.transform.localPosition.y + Random.Range(375.0f, 430.0f));
+                            CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
                          break;
                     case 2: //左方.
                         UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
-                            /*Mathf.Abs(transform.parent.localPosition.y)*/CameraCtrl.transform.localPosition.y + +Random.Range(-395.0f, 395.0f));
+                            CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
                         break;
                     case 3: //右方.
                         UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
-                            /*Mathf.Abs(transform.parent.localPosition.y)*/CameraCtrl.transform.localPosition.y + +Random.Range(-395.0f, 395.0f));
+                            CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
                         break;
                 }
                 yield return new WaitForSeconds(0.05f);
             }
-            //上方出敵.
-            //pObj = CreateUI(Random.Range(-500.0f, 500.0f), Mathf.Abs(transform.parent.localPosition.y) + 400);
         }        
     }
     // ------------------------------------------------------------------

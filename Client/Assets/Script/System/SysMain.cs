@@ -7,7 +7,7 @@ public class SysMain : MonoBehaviour
 {
     public static SysMain pthis = null;
 
-    public bool bIsGaming = true;
+    public bool bIsGaming = false;
 
     public PlayerData Data = new PlayerData();
 
@@ -42,6 +42,25 @@ public class SysMain : MonoBehaviour
         iRoleCount = Role.Count;
         iEnemyCount = Enemy.Count;
 	}
+    // ------------------------------------------------------------------
+    // 準備開始遊戲.
+    public void ReadyStart()
+    {
+        // 建立地圖.
+
+        // 確認是否為新遊戲.
+        
+        // 新遊戲 - 淡出淡入天數後開始遊戲.
+    }
+    // ------------------------------------------------------------------
+    // 開始遊戲.
+    public void NewGame()
+    {
+        // 創建人物.
+        PlayerCreater.pthis.StartNew();
+        // 開始出怪.
+        EnemyCreater.pthis.StartNew();
+    }
     // ------------------------------------------------------------------
     public float GetMoveSpeed()
     {

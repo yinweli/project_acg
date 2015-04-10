@@ -43,6 +43,9 @@ public class AIPlayer : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        if (!SysMain.pthis.bIsGaming)
+            return;
+
         if (pWeapon == WeaponType.Weapon_001)
             ChackLight();
         else
