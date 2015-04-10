@@ -93,7 +93,7 @@ namespace LibCSNStandard
             while (iCount > 1)
             {
                 iCount--;
-				Swap(ref array[iCount], ref array[Rand.Next(iCount + 1)]);
+				Swap(ref array[iCount], ref array[RandObject.Next(iCount + 1)]);
             }//while
         }
         /**
@@ -108,7 +108,7 @@ namespace LibCSNStandard
             while (iCount > 1)
             {
                 iCount--;
-				iRand = Rand.Next(iCount + 1);
+				iRand = RandObject.Next(iCount + 1);
 
                 T v = list[iCount];
 
@@ -122,7 +122,7 @@ namespace LibCSNStandard
          */
         public static T RandomPick<T>(List<T> list)
         {
-			return list.Count > 0 ? list[Rand.Next(list.Count)] : default(T);
+			return list.Count > 0 ? list[RandObject.Next(list.Count)] : default(T);
         }
         /**
          * @brief 隨機取得列表內容
@@ -130,7 +130,7 @@ namespace LibCSNStandard
          */
         public static T RandomPick<T>(HashSet<T> set)
         {
-            int iRand = Rand.Next(set.Count);
+            int iRand = RandObject.Next(set.Count);
             int iPos = 0;
 
             foreach (T Itor in set)
@@ -149,7 +149,7 @@ namespace LibCSNStandard
          */
         public static KeyValuePair<K, V> RandomPick<K, V>(Dictionary<K, V> dir)
         {
-            int iRand = Rand.Next(dir.Count);
+            int iRand = RandObject.Next(dir.Count);
             int iPos = 0;
 
             foreach (KeyValuePair<K, V> Itor in dir)
@@ -161,20 +161,6 @@ namespace LibCSNStandard
             }//for
 
             return new KeyValuePair<K, V>();
-        }
-        /**
-         * @brief 陣列轉換為列表
-         * @param array 陣列
-         * @return 列表
-         */
-        public static List<T> ArrayToList<T>(T[] array)
-        {
-            List<T> Result = new List<T>();
-
-            foreach (T Itor in array)
-                Result.Add(Itor);
-
-            return Result;
         }
         /**
          * @brief 組合列表

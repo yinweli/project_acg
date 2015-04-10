@@ -83,12 +83,6 @@ public class MapRoad
 {
 	public MapCoor Pos = new MapCoor();
 	public GameObject Obj = null;
-
-	public MapRoad() {}
-	public MapRoad(MapRoad data)
-	{
-		Pos = new MapCoor(data.Pos.X, data.Pos.Y);
-	}
 }
 
 // 地圖物件類別
@@ -100,14 +94,6 @@ public class MapObjt
 	public int Height = 0;
 	public GameObject Obj = null;
 
-	public MapObjt() {}
-	public MapObjt(MapObjt data)
-	{
-		Pos = new MapCoor(data.Pos.X, data.Pos.Y);
-		Type = data.Type;
-		Width = data.Width;
-		Height = data.Height;
-	}
 	public bool Cover(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
 	{
 		if(x1 >= x2 && x1 >= x2 + w2)
@@ -144,6 +130,8 @@ public class MapCreater : MonoBehaviour
 	public int iHeight = 0; // 地圖高度
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 風格編號
+
+	public GameObject MapBaseObject = null;
 
 	public static MapCreater This = null;
 
@@ -201,7 +189,7 @@ public class MapCreater : MonoBehaviour
 	// 建立物件
 	private GameObject CreateObject(ENUM_Map emMap, Vector2 Pos, int iWidth, int iHeight)
 	{
-		return UITool.pthis.CreateMap(gameObject, emMap.ToString(), iStyle, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
+		return UITool.pthis.CreateMap(MapBaseObject, emMap.ToString(), iStyle, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
 	}
 	// 更新地圖尺寸
 	private void UpdateSize(MapCoor Pos)
@@ -377,22 +365,6 @@ public class MapCreater : MonoBehaviour
 		CreateObjt();
 		Fill();
 		Refresh(0);
-
-		Debug.Log(string.Format("map create (stage:{0}, style:{1}, road:{2}, objt:{3}, width:{4}, height:{5})", iStage, iStyle, RoadList.Count, ObjtList.Count, iWidth, iHeight));
-	}
-	// 建立地圖
-	public void Create(SaveMap Data)
-	{
-		Clear ();
-
-		RoadList = new List<MapRoad>(Data.RoadList);
-		ObjtList = new List<MapObjt>(Data.ObjtList);
-		iWidth = Data.iWidth;
-		iHeight = Data.iHeight;
-		iStage = Data.iStage;
-		iStyle = Data.iStyle;
-
-		Debug.Log(string.Format("map create (stage:{0}, style:{1}, road:{2}, objt:{3}, width:{4}, height:{5})", iStage, iStyle, RoadList.Count, ObjtList.Count, iWidth, iHeight));
 	}
 	// 清除地圖
 	public void Clear()

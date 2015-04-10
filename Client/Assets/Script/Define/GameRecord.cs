@@ -29,6 +29,7 @@ public class SaveMap
 	public int iHeight = 0; // 地圖高度
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 風格編號
+	public int iRoad = 0; // 目前位置
 	
 	public bool IsEmpty()
 	{
@@ -40,44 +41,72 @@ public class GameSave
 {
 	private static void GameSavePlayer()
 	{
-		SavePlayer Temp = new SavePlayer();
+		SavePlayer Data = new SavePlayer();
 
-		Temp.iStage = SysMain.pthis.Data.iStage;
-		Temp.iCurrency = SysMain.pthis.Data.iCurrency;
-		Temp.iEnemyKill = SysMain.pthis.Data.iEnemyKill;
-		Temp.iPlayTime = SysMain.pthis.Data.iPlayTime;
-		Temp.Resource = SysMain.pthis.Data.Resource.ToArray();
+		Data.iStage = SysMain.pthis.Data.iStage;
+		Data.iCurrency = SysMain.pthis.Data.iCurrency;
+		Data.iEnemyKill = SysMain.pthis.Data.iEnemyKill;
+		Data.iPlayTime = SysMain.pthis.Data.iPlayTime;
+		Data.Resource = SysMain.pthis.Data.Resource.ToArray();
 
 		List<SaveMember> MemberList = new List<SaveMember>();
 		
 		foreach(Member Itor in SysMain.pthis.Data.Data)
 		{
-			SaveMember MemberTemp = new SaveMember();
+			SaveMember Temp = new SaveMember();
 			
-			MemberTemp.Looks = Itor.Looks;
-			MemberTemp.iEquip = Itor.iEquip;
-			MemberTemp.Feature = Itor.Feature.ToArray();
-			MemberTemp.Behavior = Itor.Behavior.ToArray();
+			Temp.Looks = Itor.Looks;
+			Temp.iEquip = Itor.iEquip;
+			Temp.Feature = Itor.Feature.ToArray();
+			Temp.Behavior = Itor.Behavior.ToArray();
 			
-			MemberList.Add(MemberTemp);
+			MemberList.Add(Temp);
 		}//for
 
-		Temp.Data = MemberList.ToArray();
+		Data.Data = MemberList.ToArray();
 
-		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Temp));
+		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Data));
 	}
 	private static void GameSaveMap()
 	{
-		SaveMap Temp = new SaveMap();
+		SaveMap Data = new SaveMap();
 
-		Temp.RoadList = MapCreater.This.RoadList.ToArray();
-		Temp.ObjtList = MapCreater.This.ObjtList.ToArray();
-		Temp.iWidth = MapCreater.This.iWidth;
-		Temp.iHeight = MapCreater.This.iHeight;
-		Temp.iStage = MapCreater.This.iStage;
-		Temp.iStyle = MapCreater.This.iStyle;
+		List<MapRoad> RoadList = new List<MapRoad>();
 
-		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Temp));
+		foreach(MapRoad Itor in MapCreater.This.RoadList)
+		{
+			MapRoad Temp = new MapRoad();
+
+			Temp.Pos = Itor.Pos;
+			Temp.Obj = null;
+
+			RoadList.Add(Temp);
+		}//for
+
+		List<MapObjt> ObjtList = new List<MapObjt>();
+		
+		foreach(MapObjt Itor in MapCreater.This.ObjtList)
+		{
+			MapObjt Temp = new MapObjt();
+			
+			Temp.Pos = Itor.Pos;
+			Temp.Type = Itor.Type;
+			Temp.Width = Itor.Width;
+			Temp.Height = Itor.Height;
+			Temp.Obj = null;
+			
+			ObjtList.Add(Temp);
+		}//for
+
+		Data.RoadList = RoadList.ToArray();
+		Data.ObjtList = ObjtList.ToArray();
+		Data.iWidth = MapCreater.This.iWidth;
+		Data.iHeight = MapCreater.This.iHeight;
+		Data.iStage = MapCreater.This.iStage;
+		Data.iStyle = MapCreater.This.iStyle;
+		Data.iRoad = CameraCtrl.pthis.iNextRoad;
+
+		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Data));
 	}
 	public static void Save()
 	{
@@ -138,6 +167,7 @@ public class GameLoad
 		MapCreater.This.iHeight = Data.iHeight;
 		MapCreater.This.iStage = Data.iStage;
 		MapCreater.This.iStyle = Data.iStyle;
+		CameraCtrl.pthis.iNextRoad = Data.iRoad;
 
 		return true;
 	}
@@ -147,6 +177,9 @@ public class GameLoad
 
 		bResult &= GameLoadPlayer();
 		bResult &= GameLoadMap();
+
+		bResult = false;
+		CameraCtrl.pthis.iNextRoad = 1;
 
 		// 如果讀取失敗, 就建立新遊戲
 		if(bResult == false)
@@ -168,7 +201,7 @@ public class GameLoad
 			Rule.MemberAdd(new Looks(), 8);
 
 			// 建立地圖
-			//MapCreater.This.Create(SysMain.pthis.Data.iStage, 0);
+			MapCreater.This.Create(SysMain.pthis.Data.iStage, 0);
 		}//if
 
 		Rule.PressureReset();

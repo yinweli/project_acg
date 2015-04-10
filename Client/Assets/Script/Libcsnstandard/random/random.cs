@@ -18,7 +18,7 @@ using System;
 //-----------------------------------------------------------------------------
 namespace LibCSNStandard
 {
-	public class Rand
+	public class RandObject
 	{
 #if UNITY
 		//-------------------------------------
