@@ -10,6 +10,9 @@ public class AIBullet : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
+        if (!SysMain.pthis.bIsGaming)
+            return;
+
         // 把物件朝目標(玩家方向)移動.
         transform.Translate(0, fSpeed * Time.deltaTime, 0);
 

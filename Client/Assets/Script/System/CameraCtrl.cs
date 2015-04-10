@@ -17,6 +17,9 @@ public class CameraCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!SysMain.pthis.bIsGaming)
+            return;
+
         // 如果沒路就是勝利.
         if (!MapCreater.This.GetRoadObj(iNextRoad))
         {

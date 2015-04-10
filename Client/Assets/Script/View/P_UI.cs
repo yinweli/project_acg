@@ -30,6 +30,9 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
+        if (!SysMain.pthis.bIsGaming)
+            return;
+
         // 電源冷卻計算.
         if (fCoolDown <= Time.time && AddBattery(-1))
             fCoolDown = Time.time + 1.0f;

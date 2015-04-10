@@ -56,6 +56,9 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
+        if (!SysMain.pthis.bIsGaming)
+            return;
+
         // 沒血逃跑.
         if (iHP <= 0)
         {
