@@ -44,19 +44,25 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
     {
         // 建立地圖.
-        MapCreater.This.Create(PlayerData.pthis.iStage, GameData.pthis.iStyle);
+        MapCreater.This.Create();
+        MapMove.pthis.StartNew();
         // 確認是否為新遊戲.
-        
+
         // 新遊戲 - 淡出淡入天數後開始遊戲.
+        SysUI.pthis.ShowDay();
+
+        NewGame();
     }
     // ------------------------------------------------------------------
     // 開始遊戲.
     public void NewGame()
     {
+        bIsGaming = true;
         // 創建人物.
         PlayerCreater.pthis.StartNew();
         // 開始出怪.
         EnemyCreater.pthis.StartNew();
+        
     }
     // ------------------------------------------------------------------
     // 取得真實跑速

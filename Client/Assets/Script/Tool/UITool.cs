@@ -9,11 +9,6 @@ public class UITool : MonoBehaviour {
         pthis = this;
     }
 
-    public GameObject CreatePanel(string Path)
-    {
-        return NGUITools.AddChild(gameObject, Resources.Load(Path) as GameObject);
-    }
-
     public GameObject CreateUI(GameObject Parent, string Path)
     {
 		return NGUITools.AddChild(Parent, Resources.Load(Path) as GameObject);

@@ -21,6 +21,7 @@ public class P_UI : MonoBehaviour
     {
         pthis = this;
     }
+    // ------------------------------------------------------------------
     void Start()
     {
         UpdateResource();

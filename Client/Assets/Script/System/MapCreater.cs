@@ -129,7 +129,6 @@ public class MapCreater : MonoBehaviour
 	public int iWidth = GameDefine.iMapWidth; // 地圖寬度
 	public int iHeight = 0; // 地圖高度
 	public int iStage = 1; // 關卡編號
-	public int iStyle = 1; // 風格編號
 
 	public GameObject MapBaseObject = null;
 
@@ -189,7 +188,7 @@ public class MapCreater : MonoBehaviour
 	// 建立物件
 	private GameObject CreateObject(ENUM_Map emMap, Vector2 Pos, int iWidth, int iHeight)
 	{
-		return UITool.pthis.CreateMap(MapBaseObject, emMap.ToString(), iStyle, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
+		return UITool.pthis.CreateMap(gameObject, emMap.ToString(), GameData.pthis.iStyle, Pos.x + iWidth / 2, Pos.y + iHeight / 2);
 	}
 	// 更新地圖尺寸
 	private void UpdateSize(MapCoor Pos)
@@ -352,12 +351,9 @@ public class MapCreater : MonoBehaviour
 		}//for
 	}
 	// 建立地圖
-	public void Create(int iStage, int iStyle)
+	public void Create()
 	{
 		Clear();
-
-		this.iStage = iStage;
-		this.iStyle = iStyle;
 
 		CreateRoad();
 		CreateStart();
@@ -373,8 +369,6 @@ public class MapCreater : MonoBehaviour
 		ObjtList.Clear();
 		iWidth = 0;
 		iHeight = 0;
-		iStage = 0;
-		iStyle = 0;
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)

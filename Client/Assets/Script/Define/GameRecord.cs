@@ -103,7 +103,6 @@ public class GameSave
 		Data.iWidth = MapCreater.This.iWidth;
 		Data.iHeight = MapCreater.This.iHeight;
 		Data.iStage = MapCreater.This.iStage;
-		Data.iStyle = MapCreater.This.iStyle;
 		Data.iRoad = CameraCtrl.pthis.iNextRoad;
 
 		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Data));
@@ -166,7 +165,6 @@ public class GameLoad
 		MapCreater.This.iWidth = Data.iWidth;
 		MapCreater.This.iHeight = Data.iHeight;
 		MapCreater.This.iStage = Data.iStage;
-		MapCreater.This.iStyle = Data.iStyle;
 		CameraCtrl.pthis.iNextRoad = Data.iRoad;
 
 		return true;
@@ -201,7 +199,7 @@ public class GameLoad
 			Rule.MemberAdd(new Looks(), 8);
 
 			// 建立地圖
-			MapCreater.This.Create(PlayerData.pthis.iStage, 0);
+			//MapCreater.This.Create(PlayerData.pthis.iStage, 0);
 		}//if
 
 		Rule.PressureReset();
