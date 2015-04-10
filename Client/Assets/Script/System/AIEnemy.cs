@@ -157,7 +157,7 @@ public class AIEnemy : MonoBehaviour
             return;
 
         //測試先指定目標.
-        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomDictionary(SysMain.pthis.Role, new System.Random());
+        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.Role);
         ObjTarget = pTemp.Key;
 
         // 清空目標.
