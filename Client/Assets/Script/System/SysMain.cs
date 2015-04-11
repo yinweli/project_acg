@@ -9,11 +9,10 @@ public class SysMain : MonoBehaviour
 
     public bool bIsGaming = false;
 
-    // 地圖樣式.
+    // 角色數量
     public int iRoleCount = 0;
+	// 怪物數量
     public int iEnemyCount = 0;
-    // 耐力消耗值.
-    public int iStaminaCost= 5;
     // 跑步是否為冷卻中
     public bool bCanRun = true;
 
@@ -44,7 +43,7 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
     {
         // 建立地圖.
-        MapCreater.This.Create();
+        MapCreater.pthis.Create();
         MapMove.pthis.StartNew();
         // 確認是否為新遊戲.
 

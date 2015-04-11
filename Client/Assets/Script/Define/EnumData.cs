@@ -67,8 +67,14 @@ public enum ENUM_ModeEquip
 public enum ENUM_ModeFeature
 {
 	Null = 0, 
-	Random, // 隨機
-	Passive, // 被動
+	Random_Currency, // 隨機增加通貨
+	Random_Battery, // 隨機增加電池
+	Random_LightAmmo, // 隨機增加輕型彈藥
+	Random_HeavyAmmo, // 隨機增加重型彈藥
+	Passive_StaminaLimit, // 被動增加耐力上限
+	Passive_StaminaRecovery, // 被動增加耐力回復
+	Passive_CriticalStrike, // 被動增加致命
+	Passive_AddDamage, // 被動增加增傷
 }
 
 // 怪物模式列舉
@@ -95,22 +101,6 @@ public enum ENUM_Resource
 	HeavyAmmo, // 重型彈藥
 
     Resource_Count,
-}
-
-// 效果列舉
-public enum ENUM_Effect
-{
-	Null = 0, 
-	Currency, // 通貨
-	Pressure, // 壓力
-	Stamina, // 耐力
-	StaminaLimit, // 耐力上限
-	StaminaRecovery, // 耐力回復
-	Battery, // 電池
-	LightAmmo, // 輕型彈藥
-	HeavyAmmo, // 重型彈藥
-	CriticalStrike, // 致命
-	AddDamage, // 增傷
 }
 
 // 角色外觀列舉.

@@ -21,7 +21,7 @@ public class CameraCtrl : MonoBehaviour
             return;
 
         // 如果沒路就是勝利.
-        if (!MapCreater.This.GetRoadObj(iNextRoad))
+        if (!MapCreater.pthis.GetRoadObj(iNextRoad))
         {
             return;
         }
@@ -31,7 +31,7 @@ public class CameraCtrl : MonoBehaviour
             return;
 
         // 檢查距離.
-        if (Vector2.Distance(transform.position, MapCreater.This.GetRoadObj(iNextRoad).transform.position) < 0.005f)
+        if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.005f)
             iNextRoad++;
 
         MoveTo(iNextRoad);
@@ -39,7 +39,7 @@ public class CameraCtrl : MonoBehaviour
     // ------------------------------------------------------------------
     void MoveTo(int iRoad)
     {
-        Vector3 vecDirection = MapCreater.This.GetRoadObj(iRoad).transform.position - transform.position;
+        Vector3 vecDirection = MapCreater.pthis.GetRoadObj(iRoad).transform.position - transform.position;
 
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
@@ -47,6 +47,6 @@ public class CameraCtrl : MonoBehaviour
         transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
 
         Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
-        MapCreater.This.Refresh(iNextRoad);
+        MapCreater.pthis.Refresh(iNextRoad);
     }
 }

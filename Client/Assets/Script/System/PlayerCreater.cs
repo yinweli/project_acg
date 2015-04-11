@@ -49,7 +49,7 @@ public class PlayerCreater : MonoBehaviour
             {
                 yield return new WaitForEndOfFrame();
                 // 檢查上一個玩家是否距離已到.
-                if (Vector2.Distance(pPrePlayer.transform.position, MapCreater.This.GetRoadObj(0).transform.position) > 0.195f)
+                if (Vector2.Distance(pPrePlayer.transform.position, MapCreater.pthis.GetRoadObj(0).transform.position) > 0.195f)
                     Create();
             }
         }       

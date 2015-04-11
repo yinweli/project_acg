@@ -11,6 +11,5 @@ public class DBFFeature : DBF
 	public int Group = 0; // 群組
 	public float Chances = 0; // 機率
 	public float Cooldown = 0; // 冷卻時間
-	public int Effect = 0; // 效果
 	public string Value = ""; // 效果值
 }

@@ -25,10 +25,6 @@ public class SaveMap
 {
 	public MapRoad[] RoadList = new MapRoad[0]; // 地圖道路列表
 	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
-	public int iWidth = 0; // 地圖寬度
-	public int iHeight = 0; // 地圖高度
-	public int iStage = 0; // 關卡編號
-	public int iStyle = 0; // 風格編號
 	public int iRoad = 0; // 目前位置
 	
 	public bool IsEmpty()
@@ -73,7 +69,7 @@ public class GameSave
 
 		List<MapRoad> RoadList = new List<MapRoad>();
 
-		foreach(MapRoad Itor in MapCreater.This.RoadList)
+		foreach(MapRoad Itor in GameData.pthis.RoadList)
 		{
 			MapRoad Temp = new MapRoad();
 
@@ -85,7 +81,7 @@ public class GameSave
 
 		List<MapObjt> ObjtList = new List<MapObjt>();
 		
-		foreach(MapObjt Itor in MapCreater.This.ObjtList)
+		foreach(MapObjt Itor in GameData.pthis.ObjtList)
 		{
 			MapObjt Temp = new MapObjt();
 			
@@ -100,9 +96,6 @@ public class GameSave
 
 		Data.RoadList = RoadList.ToArray();
 		Data.ObjtList = ObjtList.ToArray();
-		Data.iWidth = MapCreater.This.iWidth;
-		Data.iHeight = MapCreater.This.iHeight;
-		Data.iStage = MapCreater.This.iStage;
 		Data.iRoad = CameraCtrl.pthis.iNextRoad;
 
 		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Data));
@@ -160,11 +153,8 @@ public class GameLoad
 		if(Data == null)
 			return false;
 
-		MapCreater.This.RoadList = new List<MapRoad>(Data.RoadList);
-		MapCreater.This.ObjtList = new List<MapObjt>(Data.ObjtList);
-		MapCreater.This.iWidth = Data.iWidth;
-		MapCreater.This.iHeight = Data.iHeight;
-		MapCreater.This.iStage = Data.iStage;
+		GameData.pthis.RoadList = new List<MapRoad>(Data.RoadList);
+		GameData.pthis.ObjtList = new List<MapObjt>(Data.ObjtList);
 		CameraCtrl.pthis.iNextRoad = Data.iRoad;
 
 		return true;
@@ -190,6 +180,7 @@ public class GameLoad
 			PlayerData.pthis.iPlayTime = 0;
 
 			// 以下是測試資料, 以後要改
+			GameData.pthis.iStyle = 1;
 			Rule.ResourceAdd(ENUM_Resource.Battery, 500);
 			Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
 			Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
@@ -197,12 +188,8 @@ public class GameLoad
 			Rule.MemberAdd(new Looks(), 1);
 			Rule.MemberAdd(new Looks(), 5);
 			Rule.MemberAdd(new Looks(), 8);
-
-			// 建立地圖
-			//MapCreater.This.Create(PlayerData.pthis.iStage, 0);
 		}//if
 
-		Rule.PressureReset();
 		Rule.StaminaLimit();
 		Rule.StaminaReset();
 		Rule.StaminaRecovery();

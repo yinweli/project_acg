@@ -124,26 +124,16 @@ public class MapObjt
 // 建立地圖類別
 public class MapCreater : MonoBehaviour
 {
-	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
-	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
-	public int iWidth = GameDefine.iMapWidth; // 地圖寬度
-	public int iHeight = 0; // 地圖高度
-	public int iStage = 1; // 關卡編號
+	public static MapCreater pthis = null;
 
-	public GameObject MapBaseObject = null;
-
-	public static MapCreater This = null;
+	private int iWidth = 0;
+	private int iHeight = 0;
 
 	void Awake()
 	{
-		This = this;
+		pthis = this;
 	}
 
-	// 取得地圖道路長度
-	private int RoadSize()
-	{
-		return GameDefine.iRoadSizeBase + iStage / GameDefine.iStageLevel * GameDefine.iRoadSizeAdd;
-	}
 	// 取得最小地圖道路寬度
 	private int RoadWidthMin()
 	{
@@ -199,12 +189,12 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖道路
 	private void CreateRoad()
 	{
-		int iRoadSize = RoadSize(); // 取得地圖道路長度
+		int iRoadSize = GameDefine.iRoadSizeBase + PlayerData.pthis.iStage / GameDefine.iStageLevel * GameDefine.iRoadSizeAdd; // 取得地圖道路長度
 		RandDir Dir = new RandDir();
 		
 		while(iRoadSize > 0)
 		{
-			foreach(MapCoor Itor in NextPath(Dir.Get(), RoadList.Count > 0 ? RoadList[RoadList.Count - 1].Pos : null))
+			foreach(MapCoor Itor in NextPath(Dir.Get(), GameData.pthis.RoadList.Count > 0 ? GameData.pthis.RoadList[GameData.pthis.RoadList.Count - 1].Pos : null))
 			{
 				if(iRoadSize > 0)
 				{
@@ -214,7 +204,7 @@ public class MapCreater : MonoBehaviour
 					Data.Obj = null;
 
 					UpdateSize(Itor);
-					RoadList.Add(Data);
+					GameData.pthis.RoadList.Add(Data);
 					--iRoadSize; // 減少還需要產生的地圖道路長度
 				}//if
 			}//for
@@ -223,9 +213,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖起點
 	private void CreateStart()
 	{
-		if(RoadList.Count > 0)
+		if(GameData.pthis.RoadList.Count > 0)
 		{
-			MapRoad Road = RoadList[0];
+			MapRoad Road = GameData.pthis.RoadList[0];
 
 			if(Road.Pos.Y > 0)
 			{
@@ -237,7 +227,7 @@ public class MapCreater : MonoBehaviour
 				Data.Height = GameDefine.ObjtStart.Y;
 				Data.Obj = null;
 
-				ObjtList.Add(Data);
+				GameData.pthis.ObjtList.Add(Data);
 				UpdateSize(Data.Pos);
 			}//if
 		}//if
@@ -245,9 +235,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖終點
 	private void CreateEnd()
 	{
-		if(RoadList.Count > 0)
+		if(GameData.pthis.RoadList.Count > 0)
 		{
-			MapRoad Road = RoadList[RoadList.Count - 1];
+			MapRoad Road = GameData.pthis.RoadList[GameData.pthis.RoadList.Count - 1];
 			
 			MapObjt Data = new MapObjt();
 			
@@ -257,14 +247,14 @@ public class MapCreater : MonoBehaviour
 			Data.Height = GameDefine.ObjtEnd.Y;
 			Data.Obj = null;
 			
-			ObjtList.Add(Data);
+			GameData.pthis.ObjtList.Add(Data);
 			UpdateSize(Data.Pos);
 		}//if
 	}
 	// 建立地圖物件
 	private void CreateObjt()
 	{
-		foreach(MapRoad Itor in RoadList)
+		foreach(MapRoad Itor in GameData.pthis.RoadList)
 		{
 			foreach(ENUM_Dir ItorDir in System.Enum.GetValues(typeof(ENUM_Dir)))
 			{
@@ -290,13 +280,13 @@ public class MapCreater : MonoBehaviour
 
 							bool bCheck = true;
 							
-							foreach(MapRoad ItorRoad in RoadList)
+							foreach(MapRoad ItorRoad in GameData.pthis.RoadList)
 							{
 								if(Data.Cover(ItorRoad))
 									bCheck &= false;
 							}//for
 							
-							foreach(MapObjt ItorObjt in ObjtList)
+							foreach(MapObjt ItorObjt in GameData.pthis.ObjtList)
 							{
 								if(Data.Cover(ItorObjt))
 									bCheck &= false;
@@ -304,7 +294,7 @@ public class MapCreater : MonoBehaviour
 							
 							if(bCheck)
 							{
-								ObjtList.Add(Data);
+								GameData.pthis.ObjtList.Add(Data);
 								UpdateSize(Data.Pos);
 							}//if
 						}//if
@@ -333,28 +323,30 @@ public class MapCreater : MonoBehaviour
 				
 				bool bCheck = true;
 				
-				foreach(MapRoad ItorRoad in RoadList)
+				foreach(MapRoad ItorRoad in GameData.pthis.RoadList)
 				{
 					if(Data.Cover(ItorRoad))
 						bCheck &= false;
 				}//for
 				
-				foreach(MapObjt ItorObjt in ObjtList)
+				foreach(MapObjt ItorObjt in GameData.pthis.ObjtList)
 				{
 					if(Data.Cover(ItorObjt))
 						bCheck &= false;
 				}//for
 				
 				if(bCheck)
-					ObjtList.Add(Data);
+					GameData.pthis.ObjtList.Add(Data);
 			}//for
 		}//for
 	}
 	// 建立地圖
 	public void Create()
 	{
-		Clear();
+		iWidth = GameDefine.iMapWidth;
+		iHeight = 0;
 
+		Clear();
 		CreateRoad();
 		CreateStart();
 		CreateEnd();
@@ -365,18 +357,16 @@ public class MapCreater : MonoBehaviour
 	// 清除地圖
 	public void Clear()
 	{
-		RoadList.Clear();
-		ObjtList.Clear();
-		iWidth = 0;
-		iHeight = 0;
+		GameData.pthis.RoadList.Clear();
+		GameData.pthis.ObjtList.Clear();
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
-		MapCoor RoadPos = RoadList.Count > iRoad ? RoadList[iRoad].Pos : new MapCoor();
+		MapCoor RoadPos = GameData.pthis.RoadList.Count > iRoad ? GameData.pthis.RoadList[iRoad].Pos : new MapCoor();
 		MapCoor ChkPos = new MapCoor(RoadPos.X - GameDefine.iBlockUpdate / 2, RoadPos.Y - GameDefine.iBlockUpdate / 2);
 
-		foreach(MapRoad Itor in RoadList)
+		foreach(MapRoad Itor in GameData.pthis.RoadList)
 		{
 			MapObjt Temp = new MapObjt();
 			
@@ -399,7 +389,7 @@ public class MapCreater : MonoBehaviour
 			}//if
 		}//for
 		
-		foreach(MapObjt Itor in ObjtList)
+		foreach(MapObjt Itor in GameData.pthis.ObjtList)
 		{
 			if(Itor.Cover(ChkPos, GameDefine.iBlockUpdate, GameDefine.iBlockUpdate))
 			{
@@ -419,11 +409,11 @@ public class MapCreater : MonoBehaviour
 	// 取得道路物件
     public GameObject GetRoadObj(int iRoad)
 	{
-		return RoadList.Count > iRoad ? RoadList[iRoad].Obj : null;
+		return GameData.pthis.RoadList.Count > iRoad ? GameData.pthis.RoadList[iRoad].Obj : null;
 	}
 	// 檢查是否為空
 	public bool IsEmpty()
 	{
-		return RoadList.Count <= 0 || ObjtList.Count <= 0;
+		return GameData.pthis.RoadList.Count <= 0 || GameData.pthis.ObjtList.Count <= 0;
 	}
 }

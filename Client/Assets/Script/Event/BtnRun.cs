@@ -34,7 +34,7 @@ public class BtnRun : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             else
             {
-                if (SysMain.pthis.AddStamina(-GameData.pthis.iStaminaCost))
+				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
                     GameData.pthis.fRunDouble = 3.0f;
                 fCoolDown = Time.time + 1.0f;
             }
