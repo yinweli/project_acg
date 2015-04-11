@@ -24,7 +24,6 @@ public class SysMain : MonoBehaviour
     void Awake()
     {
         pthis = this;
-		GameLoad.Load();
     }
 
     void OnDestroy()
@@ -42,16 +41,59 @@ public class SysMain : MonoBehaviour
     // 準備開始遊戲.
     public void ReadyStart()
     {
-        // 建立地圖.
-        MapCreater.pthis.Create();
+		bool bResult = true;
+
+		// 讀取遊戲
+		bResult &= PlayerData.pthis.Load();
+		bResult &= GameData.pthis.Load();
+
+		// 測試用
+		bResult = false;
+
+		// 確認是否為新遊戲.
+		if(bResult == false)
+		{
+			PlayerData.pthis.iStage = 1;
+			PlayerData.pthis.iCurrency = 100;
+			PlayerData.pthis.iEnemyKill = 0;
+			PlayerData.pthis.iPlayTime = 0;
+			PlayerData.pthis.Resource = new List<int>();
+			PlayerData.pthis.Members = new List<Member>();
+
+			// 以下是測試資料, 以後要改
+			GameData.pthis.iStyle = 1;
+			Rule.ResourceAdd(ENUM_Resource.Battery, 500);
+			Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
+			Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
+			// 以下是測試資料, 以後要改
+			Rule.MemberAdd(new Looks(), 1);
+			Rule.MemberAdd(new Looks(), 5);
+			Rule.MemberAdd(new Looks(), 8);
+
+			// 建立地圖.
+			MapCreater.pthis.Create();
+		}//if
+
+		Rule.StaminaLimit();
+		Rule.StaminaReset();
+		Rule.StaminaRecovery();
+		Rule.CriticalStrikeReset();
+		Rule.AddDamageReset();
         MapMove.pthis.StartNew();
-        // 確認是否為新遊戲.
 
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
 
         NewGame();
     }
+	// ------------------------------------------------------------------
+	// 儲存遊戲.
+	public void SaveGame()
+	{
+		PlayerData.pthis.Save();
+		GameData.pthis.Save();
+		PlayerPrefs.Save();
+	}
     // ------------------------------------------------------------------
     // 開始遊戲.
     public void NewGame()
@@ -61,7 +103,6 @@ public class SysMain : MonoBehaviour
         PlayerCreater.pthis.StartNew();
         // 開始出怪.
         EnemyCreater.pthis.StartNew();
-        
     }
     // ------------------------------------------------------------------
     // 取得真實跑速

@@ -59,7 +59,7 @@ public class P_UI : MonoBehaviour
     public void UpdateResource()
     {
         for (int i = 0; i < (int)ENUM_Resource.Resource_Count - 1; i++)
-            if (pLbBullet[i])
+			if (pLbBullet[i] && PlayerData.pthis.Resource.Count > (i + 1))
                 pLbBullet[i].text = PlayerData.pthis.Resource[i+1].ToString();
     }
 

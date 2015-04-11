@@ -26,7 +26,7 @@ public class PlayerData : MonoBehaviour
     }
 
     // 讀檔.
-	private bool GameLoadPlayer()
+	public bool Load()
 	{
 		if(PlayerPrefs.HasKey(GameDefine.szSavePlayer) == false)
 			return false;
@@ -59,7 +59,7 @@ public class PlayerData : MonoBehaviour
 	}
 
     // 存檔.
-	private void GameSavePlayer()
+	public void Save()
 	{
 		SavePlayer Data = new SavePlayer();
 		
