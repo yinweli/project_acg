@@ -28,7 +28,7 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
     void Create()
     {
-        if (PlayerData.pthis.Data.Count <= 0)
+        if (PlayerData.pthis.Members.Count <= 0)
         {
             Debug.Log("No Player Data!!");
             return;
@@ -43,7 +43,7 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator WaitCreate()
     {
-        while (iCount < PlayerData.pthis.Data.Count)
+		while (iCount < PlayerData.pthis.Members.Count)
         {
             if (SysMain.pthis.bIsGaming)
             {

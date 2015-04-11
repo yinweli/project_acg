@@ -3,36 +3,6 @@ using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SaveMember
-{
-	public Looks Looks = new Looks(); // 外型資料
-	public int iEquip = 0; // 裝備編號
-	public int[] Feature = new int[0]; // 特性列表
-	public int[] Behavior = new int[0]; // 行為列表
-}
-
-public class SavePlayer
-{
-	public int iStage = 0; // 關卡編號
-	public int iCurrency = 0; // 通貨
-	public int iEnemyKill = 0; // 殺怪數量
-	public int iPlayTime = 0; // 遊戲時間
-	public int[] Resource = new int[0]; // 資源列表
-	public SaveMember[] Data = new SaveMember[0]; // 成員列表
-}
-
-public class SaveMap
-{
-	public MapRoad[] RoadList = new MapRoad[0]; // 地圖道路列表
-	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
-	public int iRoad = 0; // 目前位置
-	
-	public bool IsEmpty()
-	{
-		return RoadList.Length <= 0 && ObjtList.Length <= 0;
-	}
-}
-
 public class GameSave
 {
 	private static void GameSavePlayer()
@@ -47,7 +17,7 @@ public class GameSave
 
 		List<SaveMember> MemberList = new List<SaveMember>();
 		
-		foreach(Member Itor in PlayerData.pthis.Data)
+		foreach(Member Itor in PlayerData.pthis.Members)
 		{
 			SaveMember Temp = new SaveMember();
 			
@@ -127,7 +97,7 @@ public class GameLoad
 		PlayerData.pthis.iEnemyKill = Data.iEnemyKill;
 		PlayerData.pthis.iPlayTime = Data.iPlayTime;
 		PlayerData.pthis.Resource = new List<int>(Data.Resource);
-		PlayerData.pthis.Data = new List<Member>();
+		PlayerData.pthis.Members = new List<Member>();
 
 		foreach(SaveMember Itor in Data.Data)
 		{
@@ -138,7 +108,7 @@ public class GameLoad
 			MemberTemp.Feature = new List<int>(Itor.Feature);
 			MemberTemp.Behavior = new List<int>(Itor.Behavior);
 
-			PlayerData.pthis.Data.Add(MemberTemp);
+			PlayerData.pthis.Members.Add(MemberTemp);
 		}//for
 
 		return true;

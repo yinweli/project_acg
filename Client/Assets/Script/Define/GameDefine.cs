@@ -16,7 +16,6 @@ public class GameDefine
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 1; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
-
 	
     public const int iWeightEngry = 2;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 100;  // 怪物出怪能量基礎值.

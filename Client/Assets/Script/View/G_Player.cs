@@ -12,7 +12,7 @@ public class G_Player : MonoBehaviour
     public void InitPlayer()
     {
         pAI = GetComponent<AIPlayer>();
-        pAI.pWeapon = (WeaponType)PlayerData.pthis.Data[iPlayer].iEquip;
+        pAI.pWeapon = (WeaponType)PlayerData.pthis.Members[iPlayer].iEquip;
 
         // 實例化武器.
         if (pAI.pWeapon != WeaponType.Weapon_null)
