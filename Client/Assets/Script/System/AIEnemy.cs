@@ -75,7 +75,10 @@ public class AIEnemy : MonoBehaviour
                 pAni.Play("Escape");
             // 取向量.
             if (vecRunDir == Vector3.zero)
+            {
                 vecRunDir = PosStart - transform.position;
+                GameData.pthis.iKill++;
+            }
 
             MoveTo(vecRunDir, fMoveSpeed * 4);
             if (EnemyCreater.pthis.CheckPos(gameObject))

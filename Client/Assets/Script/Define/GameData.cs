@@ -8,13 +8,18 @@ public class GameData : MonoBehaviour
     static public GameData pthis = null;
 
 	/* Save */
+    public int iStageTime = 0;    // 關卡時間.
+    public int iKill = 0;   // 殺怪數.
+    public int iAlive = 0;  // 存活數.
+    public int iDead = 0;   // 死亡數.
+
 	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
 
 	/* Not Save */
 	public int iStyle = 1; // 風格編號
 	public float fRunDouble = 1.0f; // 跑步速度倍率.
-
+    
     void Awake()
     {
         pthis = this;
@@ -76,4 +81,12 @@ public class GameData : MonoBehaviour
 		
 		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Data));
 	}
+
+    public void ClearData()
+    {
+        iStageTime = 0;
+        iKill = 0;
+        iAlive = 0;
+        iDead = 0;
+    }
 }

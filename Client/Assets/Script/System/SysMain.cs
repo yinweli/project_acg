@@ -9,10 +9,6 @@ public class SysMain : MonoBehaviour
 
     public bool bIsGaming = false;
 
-    // 角色數量
-    public int iRoleCount = 0;
-	// 怪物數量
-    public int iEnemyCount = 0;
     // 跑步是否為冷卻中
     public bool bCanRun = true;
 
@@ -20,6 +16,10 @@ public class SysMain : MonoBehaviour
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 敵人佇列.
     public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
+
+    bool bResult = true;
+
+    public float fSaveTime = 0;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -28,8 +28,6 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
-        bool bResult = true;
-
         // 讀取遊戲
         bResult &= PlayerData.pthis.Load();
         bResult &= GameData.pthis.Load();
@@ -67,8 +65,12 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
 	void Update () 
     {
-        iRoleCount = Role.Count;
-        iEnemyCount = Enemy.Count;
+        // 記錄遊戲時間.
+        if (bIsGaming && fSaveTime <= Time.time)
+        {
+            GameData.pthis.iStageTime += GameDefine.iSaveSec;
+            fSaveTime = Time.time + GameDefine.iSaveSec;
+        }
 	}
     // ------------------------------------------------------------------
     // 準備開始遊戲.
@@ -91,13 +93,18 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     // 開始遊戲.
     public void NewGame()
-    {
+    {        
         // UI初始化.
         P_UI.pthis.StartNew();
         // 新遊戲 - 淡出淡入天數後開始遊戲.
-        SysUI.pthis.ShowDay();
+        if (!bResult)
+        {
+            SysUI.pthis.ShowDay();
+            GameData.pthis.ClearData();
+        }        
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
+        // 到數開始.
         StartCoroutine(CountStart());
     }
     // ------------------------------------------------------------------
@@ -110,6 +117,7 @@ public class SysMain : MonoBehaviour
             iCount--;
         }
         bIsGaming = true;
+        P_UI.pthis.StartRecoverSta();
         // 創建人物.
         PlayerCreater.pthis.StartNew();
         // 開始出怪.
@@ -147,5 +155,11 @@ public class SysMain : MonoBehaviour
 
         P_UI.pthis.UpdateStamina();
         return true;
+    }
+    // ------------------------------------------------------------------
+    public void Victory()
+    {
+        bIsGaming = false;
+        SysUI.pthis.CreatePanel("Prefab/P_Victory");
     }
 }

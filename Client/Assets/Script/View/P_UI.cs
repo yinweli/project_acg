@@ -8,6 +8,7 @@ public class P_UI : MonoBehaviour
 
     public int iBattery = 100;
 
+    public BtnRun pBtn = null;
     public UILabel pLbCurrency = null;
     public UILabel pLbStamina = null;
     public UISprite[] pSBattery = new UISprite[5];
@@ -38,6 +39,11 @@ public class P_UI : MonoBehaviour
         UpdateResource();
         UpdateCurrency();
         UpdateStamina();
+    }
+    public void StartRecoverSta()
+    {
+        if (pBtn)
+            pBtn.StartNew();
     }
     // ------------------------------------------------------------------
     public bool UseBullet(WeaponType pType)

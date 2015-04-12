@@ -6,7 +6,7 @@ public class BtnRun : MonoBehaviour
     public bool bIsRun = false;
     public float fCoolDown = 1;
     // ------------------------------------------------------------------
-    void Start()
+    public void StartNew()
     {
         fCoolDown = Time.time + 1.0f;
         StartCoroutine(StaRecovery());
@@ -62,10 +62,7 @@ public class BtnRun : MonoBehaviour
         while (SysMain.pthis.bIsGaming)
         {
             if (bIsRun && SysMain.pthis.bCanRun)
-            {
-                Debug.Log("Recovery Pause!");
                 yield return new WaitForEndOfFrame();
-            }
             else if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
             else
