@@ -90,7 +90,7 @@ public class EnemyCreater : MonoBehaviour
 
                 if (DBFData.HP <= iTempE)
                 {
-                    iTempE = iTempE - DBFData.HP;
+                    iTempE = iTempE - DBFData.Enegry;
                     EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
                 }
             }
