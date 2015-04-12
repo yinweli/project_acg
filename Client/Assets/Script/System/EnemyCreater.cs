@@ -55,46 +55,45 @@ public class EnemyCreater : MonoBehaviour
     // 敵人佇列產生函式.
     public void ListEnemyCreater(List<string> EnemyList)
     {
-        // 基礎小怪.
-        int itemp = 1;
-        DBFMonster DBFBase = GameDBF.This.GetMonster(itemp) as DBFMonster;
-        if (DBFBase == null)
-        {
-            Debug.Log("DBFMonster No.1");
-            return;
-        }//if
         // 先清理List.
         EnemyList.Clear();
+
+		if (SysMain.pthis.bIsGaming == false)
+			return;
+
         // 取得可使用的怪物列表.
         List<int> pEnemy = Rule.MonsterList(PlayerData.pthis.iStage);
         
-        int iTempE = iEnegry;
-        while (iTempE > 0)
-        {
-            if (SysMain.pthis.bIsGaming)
-            {
-                if (iTempE < DBFBase.HP)
-                {
-                    EnemyList.Add(string.Format("Enemy_{0:000}", 1));
-                    break;
-                }
+        int iTempEnegry = iEnegry;
+		string szReport = "";
+		
+		while (iTempEnegry > 0)
+		{
+			int iEnemy = LibCSNStandard.Tool.RandomPick(pEnemy);
+			DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
+			
+			if (DBFData == null)
+			{
+				Debug.Log("DBFMonster(" + iEnemy + ") null");
+				return;
+			}//if
+			
+			if (iTempEnegry > 0 && iTempEnegry <= 1)
+			{
+				iTempEnegry -= 1;
+				EnemyList.Add(string.Format("Enemy_{0:000}", 1));
+				szReport += string.Format("({0}, {1}) ", 1, 1);
+			}
 
-                int iEnemy = LibCSNStandard.Tool.RandomPick(pEnemy);
-                DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
-
-                if (DBFData == null)
-                {
-                    Debug.Log("DBFMonster(" + iEnemy + ") null");
-                    return;
-                }//if
-
-                if (DBFData.HP <= iTempE)
-                {
-                    iTempE = iTempE - DBFData.Enegry;
-                    EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
-                }
-            }
-        }
+			if (iTempEnegry > 0 && iTempEnegry >= DBFData.Enegry)
+			{
+				iTempEnegry -= DBFData.Enegry;
+				EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
+				szReport += string.Format("({0}, {1}) ", iEnemy, DBFData.Enegry);
+			}
+		}
+		
+		Debug.Log("enegry " + iEnegry + " " + szReport);
     }
     // ------------------------------------------------------------------
     // 偕同程序
