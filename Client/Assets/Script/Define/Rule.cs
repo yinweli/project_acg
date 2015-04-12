@@ -104,9 +104,7 @@ public class Rule
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
 	{
-		int iIndex = 0;
-
-		while(iIndex <= (int)emResource)
+		while(PlayerData.pthis.Resource.Count <= (int)emResource)
 			PlayerData.pthis.Resource.Add(0);
 
 		PlayerData.pthis.Resource[(int)emResource] = 0;
@@ -114,9 +112,7 @@ public class Rule
 	// 增加資源
 	public static void ResourceAdd(ENUM_Resource emResource, int iValue)
 	{
-		int iIndex = 0;
-		
-		while(iIndex++ <= (int)emResource)
+		while(PlayerData.pthis.Resource.Count <= (int)emResource)
 			PlayerData.pthis.Resource.Add(0);
 
 		int iResult = PlayerData.pthis.Resource[(int)emResource];
