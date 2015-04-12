@@ -45,14 +45,15 @@ public class SysMain : MonoBehaviour
             PlayerData.pthis.Resource = new List<int>();
             PlayerData.pthis.Members = new List<Member>();
 
-            // 以下是測試資料, 以後要改
-            GameData.pthis.iStyle = 1;
-            Rule.ResourceAdd(ENUM_Resource.Battery, 300);
-            Rule.ResourceAdd(ENUM_Resource.LightAmmo, 200);
-            Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 150);
+			// 給與初始資源
+            Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
+			Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iInitLightAmmo);
+			Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
+
             // 以下是測試資料, 以後要改
             Rule.MemberAdd(new Looks(), 1);
             Rule.MemberAdd(new Looks(), 5);
+			GameData.pthis.iStyle = 1;
         }//if
         // 建立地圖.
         MapCreater.pthis.Create();
