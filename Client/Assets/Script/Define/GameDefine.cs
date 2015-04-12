@@ -19,8 +19,8 @@ public class GameDefine
 	public const int iBaseStaminaRecovery = 1; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
 	
-    public const int iWeightEngry = 6;  // 怪物出怪能量關卡加權.
-    public const int iBaseEngry = 18;  // 怪物出怪能量基礎值.
+    public const int iWeightEngry = 5;  // 怪物出怪能量關卡加權.
+    public const int iBaseEngry = 5;  // 怪物出怪能量基礎值.
     public const int iStageCount = 5;   // 每多少關增加難度.
     public const int iMINWaitSec = 5;   // 怪物出怪最小間隔秒數.
     public const int iMAXWaitSec = 21;  // 怪物出怪最大間隔秒數.
