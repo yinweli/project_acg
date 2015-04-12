@@ -39,7 +39,7 @@ public class SysMain : MonoBehaviour
         if (bResult == false)
         {
             PlayerData.pthis.iStage = 1;
-            PlayerData.pthis.iCurrency = 100;
+            PlayerData.pthis.iCurrency = 0;
             PlayerData.pthis.iEnemyKill = 0;
             PlayerData.pthis.iPlayTime = 0;
             PlayerData.pthis.Resource = new List<int>();
