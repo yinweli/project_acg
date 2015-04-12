@@ -59,12 +59,10 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateResource()
     {
-        Debug.Log("Resource.Count: " + PlayerData.pthis.Resource.Count);
         for (int i = 1; i < PlayerData.pthis.Resource.Count; i++)
 			if (pLbBullet[i-1])
                 pLbBullet[i-1].text = PlayerData.pthis.Resource[i].ToString();
     }
-
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
