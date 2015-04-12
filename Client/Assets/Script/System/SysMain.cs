@@ -47,13 +47,12 @@ public class SysMain : MonoBehaviour
 
             // 以下是測試資料, 以後要改
             GameData.pthis.iStyle = 1;
-            Rule.ResourceAdd(ENUM_Resource.Battery, 500);
-            Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
-            Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
+            Rule.ResourceAdd(ENUM_Resource.Battery, 300);
+            Rule.ResourceAdd(ENUM_Resource.LightAmmo, 200);
+            Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 150);
             // 以下是測試資料, 以後要改
             Rule.MemberAdd(new Looks(), 1);
             Rule.MemberAdd(new Looks(), 5);
-            Rule.MemberAdd(new Looks(), 8);
         }//if
         // 建立地圖.
         MapCreater.pthis.Create();
