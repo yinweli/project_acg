@@ -105,6 +105,11 @@ public class AIEnemy : MonoBehaviour
             if (EnemyCreater.pthis.CheckPos(gameObject))
             {
                 Destroy(ObjTarget);
+                if (ObjTarget)
+                {
+                    GameData.pthis.iDead++;
+                    Destroy(ObjTarget);
+                }  
                 Destroy(gameObject);
             }
             return;

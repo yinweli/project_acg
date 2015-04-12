@@ -160,6 +160,7 @@ public class SysMain : MonoBehaviour
     public void Victory()
     {
         bIsGaming = false;
+        //Time.timeScale = 0;
         SysUI.pthis.CreatePanel("Prefab/P_Victory");
     }
 }

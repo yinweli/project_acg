@@ -27,7 +27,11 @@ public class CameraCtrl : MonoBehaviour
         {
             // 測試模式下重頭走過.
             if (bTestMove)
-                StartCoroutine(ReStart());            
+                StartCoroutine(ReStart());
+            else
+            {
+                SysMain.pthis.Victory();
+            }
             return;
         }
 
