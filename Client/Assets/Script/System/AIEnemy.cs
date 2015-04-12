@@ -139,7 +139,7 @@ public class AIEnemy : MonoBehaviour
     public void AddHP(int iValue)
     {
         iHP += iValue;
-        Debug.Log(name + " HP: "+ iHP);
+
         // 沒血逃跑.
         if (iHP <= 0)
         {
