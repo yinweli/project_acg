@@ -34,6 +34,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void StartNew()
     {
+        GetComponent<UIPanel>().alpha = 1;
         UpdateResource();
         UpdateCurrency();
         UpdateStamina();
