@@ -73,14 +73,13 @@ public class EnemyCreater : MonoBehaviour
         {
             if (SysMain.pthis.bIsGaming)
             {
-                if (iTempE > DBFBase.HP)
+                if (iTempE < DBFBase.HP)
                 {
                     EnemyList.Add(string.Format("Enemy_{0:000}", 1));
                     break;
                 }
 
-                int iEnemy = Random.Range(0, pEnemy.Count);
-
+                int iEnemy = LibCSNStandard.Tool.RandomPick(pEnemy);
                 DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
 
                 if (DBFData == null)
