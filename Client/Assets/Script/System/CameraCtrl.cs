@@ -8,6 +8,8 @@ public class CameraCtrl : MonoBehaviour
     public int iNextRoad = 1;
     public int iLeaderRoad = 1;
     public bool bCanMove = true;
+
+    public bool bTestMove = false;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -17,12 +19,15 @@ public class CameraCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!SysMain.pthis.bIsGaming)
+        if (!bTestMove && !SysMain.pthis.bIsGaming)
             return;
 
         // 如果沒路就是勝利.
         if (!MapCreater.pthis.GetRoadObj(iNextRoad))
         {
+            // 測試模式下重頭走過.
+            if (bTestMove)
+                StartCoroutine(ReStart());            
             return;
         }
 
@@ -37,8 +42,33 @@ public class CameraCtrl : MonoBehaviour
         MoveTo(iNextRoad);
     }
     // ------------------------------------------------------------------
+    public void StartNew()
+    {
+        bTestMove = false;
+        ResetPos();
+        // 有舊位子就先移動到舊位子上去.
+
+    }
+    // ------------------------------------------------------------------
+    public void LoginMove()
+    {
+        bTestMove = true;
+        ResetPos();
+    }
+    // ------------------------------------------------------------------
+    void ResetPos()
+    {
+        iNextRoad = 1;
+        MapCreater.pthis.Refresh(iNextRoad);
+        transform.localPosition = Vector3.zero;
+        Camera.main.gameObject.transform.localPosition = Vector3.zero;
+    }
+    // ------------------------------------------------------------------
     void MoveTo(int iRoad)
     {
+        if (!MapCreater.pthis.GetRoadObj(iRoad))
+            return;
+
         Vector3 vecDirection = MapCreater.pthis.GetRoadObj(iRoad).transform.position - transform.position;
 
         // 把z歸零, 因為沒有要動z值.
@@ -48,5 +78,11 @@ public class CameraCtrl : MonoBehaviour
 
         Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
         MapCreater.pthis.Refresh(iNextRoad);
+    }
+    // ------------------------------------------------------------------
+    IEnumerator ReStart()
+    {
+        yield return new WaitForSeconds(2);
+        ResetPos();
     }
 }

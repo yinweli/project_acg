@@ -22,13 +22,6 @@ public class P_UI : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
-    void Start()
-    {
-        UpdateResource();
-        UpdateCurrency();
-        UpdateStamina();
-    }
-    // ------------------------------------------------------------------
     void Update()
     {
         if (!SysMain.pthis.bIsGaming)
@@ -37,6 +30,13 @@ public class P_UI : MonoBehaviour
         // 電源冷卻計算.
         if (fCoolDown <= Time.time && AddBattery(-1))
             fCoolDown = Time.time + 1.0f;
+    }
+    // ------------------------------------------------------------------
+    public void StartNew()
+    {
+        UpdateResource();
+        UpdateCurrency();
+        UpdateStamina();
     }
     // ------------------------------------------------------------------
     public bool UseBullet(WeaponType pType)
@@ -58,9 +58,10 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateResource()
     {
-        for (int i = 0; i < (int)ENUM_Resource.Resource_Count - 1; i++)
-			if (pLbBullet[i])
-                pLbBullet[i].text = PlayerData.pthis.Resource[i+1].ToString();
+        Debug.Log("Resource.Count: " + PlayerData.pthis.Resource.Count);
+        for (int i = 1; i < PlayerData.pthis.Resource.Count; i++)
+			if (pLbBullet[i-1])
+                pLbBullet[i-1].text = PlayerData.pthis.Resource[i].ToString();
     }
 
     // ------------------------------------------------------------------

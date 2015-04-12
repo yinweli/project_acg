@@ -25,13 +25,46 @@ public class SysMain : MonoBehaviour
     {
         pthis = this;
     }
-
-    void OnDestroy()
+    // ------------------------------------------------------------------
+    void Start()
     {
-        //pthis = null;
+        bool bResult = true;
+
+        // 讀取遊戲
+        bResult &= PlayerData.pthis.Load();
+        bResult &= GameData.pthis.Load();
+
+        // 測試用
+        bResult = false;
+
+        // 確認是否為新遊戲.
+        if (bResult == false)
+        {
+            PlayerData.pthis.iStage = 1;
+            PlayerData.pthis.iCurrency = 100;
+            PlayerData.pthis.iEnemyKill = 0;
+            PlayerData.pthis.iPlayTime = 0;
+            PlayerData.pthis.Resource = new List<int>();
+            PlayerData.pthis.Members = new List<Member>();
+
+            // 以下是測試資料, 以後要改
+            GameData.pthis.iStyle = 1;
+            Rule.ResourceAdd(ENUM_Resource.Battery, 500);
+            Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
+            Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
+            // 以下是測試資料, 以後要改
+            Rule.MemberAdd(new Looks(), 1);
+            Rule.MemberAdd(new Looks(), 5);
+            Rule.MemberAdd(new Looks(), 8);
+        }//if
+        // 建立地圖.
+        MapCreater.pthis.Create();
+        // 移動地圖.
+        MapMove.pthis.StartNew();
+        // 開始行走
+        CameraCtrl.pthis.LoginMove();
     }
     // ------------------------------------------------------------------
-	// Update is called once per frame
 	void Update () 
     {
         iRoleCount = Role.Count;
@@ -41,50 +74,11 @@ public class SysMain : MonoBehaviour
     // 準備開始遊戲.
     public void ReadyStart()
     {
-		bool bResult = true;
-
-		// 讀取遊戲
-		bResult &= PlayerData.pthis.Load();
-		bResult &= GameData.pthis.Load();
-
-		// 測試用
-		bResult = false;
-
-		// 確認是否為新遊戲.
-		if(bResult == false)
-		{
-			PlayerData.pthis.iStage = 1;
-			PlayerData.pthis.iCurrency = 100;
-			PlayerData.pthis.iEnemyKill = 0;
-			PlayerData.pthis.iPlayTime = 0;
-			PlayerData.pthis.Resource = new List<int>();
-			PlayerData.pthis.Members = new List<Member>();
-
-			// 以下是測試資料, 以後要改
-			GameData.pthis.iStyle = 1;
-			Rule.ResourceAdd(ENUM_Resource.Battery, 500);
-			Rule.ResourceAdd(ENUM_Resource.LightAmmo, 999);
-			Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, 999);
-			// 以下是測試資料, 以後要改
-			Rule.MemberAdd(new Looks(), 1);
-			Rule.MemberAdd(new Looks(), 5);
-			Rule.MemberAdd(new Looks(), 8);
-
-			// 建立地圖.
-			MapCreater.pthis.Create();
-		}//if
-
-		Rule.StaminaLimit();
+        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
 		Rule.StaminaReset();
 		Rule.StaminaRecovery();
 		Rule.CriticalStrikeReset();
 		Rule.AddDamageReset();
-        MapMove.pthis.StartNew();
-
-        // 新遊戲 - 淡出淡入天數後開始遊戲.
-        SysUI.pthis.ShowDay();
-
-        NewGame();
     }
 	// ------------------------------------------------------------------
 	// 儲存遊戲.
@@ -98,6 +92,23 @@ public class SysMain : MonoBehaviour
     // 開始遊戲.
     public void NewGame()
     {
+        // UI初始化.
+        P_UI.pthis.StartNew();
+        // 新遊戲 - 淡出淡入天數後開始遊戲.
+        SysUI.pthis.ShowDay();
+        // 鏡頭位置調整.
+        CameraCtrl.pthis.StartNew();
+        StartCoroutine(CountStart());
+    }
+    // ------------------------------------------------------------------
+    IEnumerator CountStart()
+    {
+        int iCount = 3;
+        while (iCount > 0)
+        {
+            yield return new WaitForSeconds(1);
+            iCount--;
+        }
         bIsGaming = true;
         // 創建人物.
         PlayerCreater.pthis.StartNew();

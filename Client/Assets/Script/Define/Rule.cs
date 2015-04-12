@@ -92,9 +92,9 @@ public class Rule
 		PlayerData.pthis.iStamina = Value(0, PlayerData.pthis.iStaminaLimit, PlayerData.pthis.iStamina + iValue);
 	}
 	// 重置耐力上限值
-	public static void StaminaLimit()
+	public static int StaminaLimit()
 	{
-		PlayerData.pthis.iStaminaLimit = Value(0, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.Passive_StaminaLimit) + GameDefine.iBaseStaminaLimit);
+		return Value(0, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.Passive_StaminaLimit) + GameDefine.iBaseStaminaLimit);
 	}
 	// 重置耐力回復值
 	public static void StaminaRecovery()

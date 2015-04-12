@@ -8,7 +8,7 @@ public class Btn_StartGame : MonoBehaviour
     void Start()
     {
         GetComponent<UIButton>().isEnabled = true;
-    }
+    }    
 
 	void OnClick()
     {
