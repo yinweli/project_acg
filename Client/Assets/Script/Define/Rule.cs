@@ -228,48 +228,71 @@ public class Rule
 
 		return Result;
 	}
-	// 執行獲得裝備流程
-	public int GainEquip(int iPos)
+	// 執行獲得裝備
+	public static int GainEquip(int iPos)
 	{
 		if(PlayerData.pthis.Members.Count <= iPos)
 			return 0;
 
-		return 0;
-	}
-	// 取得可獲得裝備列表
-	public static List<int> EquipList(int iStage)
-	{
-		List<int> Result = new List<int>();
+		if(PlayerData.pthis.Members[iPos].iEquip > 0)
+			return 0;
+
+		// 建立獲得裝備骰子
+		CDice<int> Dice = new CDice<int>();
 		DBFItor Itor = GameDBF.This.GetEquip();
 		
 		while(Itor.IsEnd() == false)
 		{
 			DBFEquip Data = Itor.Data() as DBFEquip;
 			
-			if(Data != null && Data.StageID <= iStage)
-				Result.Add(System.Convert.ToInt32(Data.GUID));
+			if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
 			
 			Itor.Next();
 		}//while
-		
-		return Result;
+
+		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+
+		return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
 	}
-	// 取得可獲得特性列表
-	public static List<int> FeatureList(int iStage)
+	// 執行獲得特性
+	public static int GainFeature(int iPos)
 	{
-		List<int> Result = new List<int>();
-		DBFItor Itor = GameDBF.This.GetEquip();
+		if(PlayerData.pthis.Members.Count <= iPos)
+			return 0;
+
+		// 建立特性群組列表
+		HashSet<int> Group = new HashSet<int>();
+
+		foreach(int ItorFeature in PlayerData.pthis.Members[iPos].Feature)
+		{
+			DBFFeature Data = GameDBF.This.GetFeature(ItorFeature) as DBFFeature;
+				
+			if(Data != null)
+				Group.Add(Data.Group);
+		}//for
+
+		// 建立獲得特性骰子
+		CDice<int> Dice = new CDice<int>();
+		DBFItor Itor = GameDBF.This.GetFeature();
 		
 		while(Itor.IsEnd() == false)
 		{
 			DBFFeature Data = Itor.Data() as DBFFeature;
 			
-			if(Data != null && Data.StageID <= iStage)
-				Result.Add(System.Convert.ToInt32(Data.GUID));
+			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
+				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
 			
 			Itor.Next();
 		}//while
 		
-		return Result;
+		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+
+		int iFeature = Dice.Roll();
+
+		if(iFeature > 0)
+			PlayerData.pthis.Members[iPos].Feature.Add(iFeature);
+		
+		return iFeature;
 	}
 }

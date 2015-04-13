@@ -51,4 +51,9 @@ public class CDice<T> : IEnumerable
 		
 		return default(T);
 	}
+	// 取得最大機率值
+	public int Max()
+	{
+		return m_iMax;
+	}
 }
