@@ -22,6 +22,10 @@ public class P_UI : MonoBehaviour
     {
         pthis = this;
     }
+    void Start()
+    {
+        GetComponent<UIPanel>().alpha = 0;
+    }
     // ------------------------------------------------------------------
     void Update()
     {
