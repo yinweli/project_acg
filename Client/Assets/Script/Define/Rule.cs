@@ -211,7 +211,7 @@ public class Rule
 		return fResult;
 	}
 	// 取得可產生怪物列表
-	public static List<int> MonsterList(int iStage)
+	public static List<int> MonsterList()
 	{
 		List<int> Result = new List<int>();
 		DBFItor Itor = GameDBF.This.GetMonster();
@@ -220,13 +220,21 @@ public class Rule
 		{
 			DBFMonster Data = Itor.Data() as DBFMonster;
 
-			if(Data != null && Data.StageID <= iStage)
+			if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
 				Result.Add(System.Convert.ToInt32(Data.GUID));
 
 			Itor.Next();
 		}//while
 
 		return Result;
+	}
+	// 執行獲得裝備流程
+	public int GainEquip(int iPos)
+	{
+		if(PlayerData.pthis.Members.Count <= iPos)
+			return 0;
+
+		return 0;
 	}
 	// 取得可獲得裝備列表
 	public static List<int> EquipList(int iStage)

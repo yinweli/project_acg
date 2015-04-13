@@ -62,7 +62,7 @@ public class EnemyCreater : MonoBehaviour
 			return;
 
         // 取得可使用的怪物列表.
-        List<int> pEnemy = Rule.MonsterList(PlayerData.pthis.iStage);
+        List<int> pEnemy = Rule.MonsterList();
         
         int iTempEnegry = iEnegry;
 		string szReport = "";
