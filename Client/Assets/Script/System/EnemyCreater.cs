@@ -65,7 +65,6 @@ public class EnemyCreater : MonoBehaviour
         List<int> pEnemy = Rule.MonsterList();
         
         int iTempEnegry = iEnegry;
-		string szReport = "";
 		
 		while (iTempEnegry > 0)
 		{
@@ -82,18 +81,14 @@ public class EnemyCreater : MonoBehaviour
 			{
 				iTempEnegry -= 1;
 				EnemyList.Add(string.Format("Enemy_{0:000}", 1));
-				szReport += string.Format("({0}, {1}) ", 1, 1);
 			}
 
 			if (iTempEnegry > 0 && iTempEnegry >= DBFData.Enegry)
 			{
 				iTempEnegry -= DBFData.Enegry;
 				EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
-				szReport += string.Format("({0}, {1}) ", iEnemy, DBFData.Enegry);
 			}
 		}
-		
-		Debug.Log("enegry " + iEnegry + " " + szReport);
     }
     // ------------------------------------------------------------------
     // 偕同程序
