@@ -10,6 +10,15 @@ public class GameDefine
 	public const int iInitLightAmmo = 200; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 150; // 初始重型彈藥值
 
+    public const int iBatteryCount = 30; // 電池值購買一單位數量.
+    public const int iBatteryCost = 30; // 電池值價格.
+
+    public const int iLightAmmoCount = 100; // 輕型彈藥購買一單位數量.
+    public const int iLightAmmoCost = 200; // 輕型彈藥價格.
+
+    public const int iHeavyAmmoCount = 100; // 重型彈藥購買一單位數量.
+    public const int iHeavyAmmoCost = 300; // 重型彈藥價格.
+
     public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
