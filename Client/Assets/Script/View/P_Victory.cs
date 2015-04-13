@@ -3,6 +3,7 @@ using System.Collections;
 
 public class P_Victory : MonoBehaviour 
 {
+    public GameObject[] ObjPage = new GameObject[3];
     public UILabel[] pLb = new UILabel[5];
 	
     void Start()
@@ -17,5 +18,11 @@ public class P_Victory : MonoBehaviour
         pLb[3].text = SysMain.pthis.Role.Count.ToString();
         // 死亡人數.
         pLb[4].text = GameData.pthis.iDead.ToString();
+    }
+
+    public void ChangePage(int iPage)
+    {
+        ObjPage[iPage].SetActive(false);
+        ObjPage[iPage + 1].SetActive(true);
     }
 }
