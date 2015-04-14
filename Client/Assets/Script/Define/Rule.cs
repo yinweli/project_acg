@@ -119,7 +119,7 @@ public class Rule
 
 		switch(emResource)
 		{
-		case ENUM_Resource.Battery: iResult = Value(0, GameDefine.iMaxBattery, iResult + iValue); break;
+		case ENUM_Resource.Battery: iResult = Value(0, System.Int32.MaxValue, iResult + iValue); break;
 		case ENUM_Resource.LightAmmo: iResult = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue); break;
 		case ENUM_Resource.HeavyAmmo: iResult = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue); break;
 		default: break;

@@ -23,7 +23,7 @@ public class GameDefine
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
 	public const int iMaxCurrency = 9999; // 最大通貨值
-	public const int iMaxBattery = 9999; // 最大電池值
+	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
 	public const int iMaxStaminaRecovery = 10; // 最大耐力回復值
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
