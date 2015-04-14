@@ -130,9 +130,15 @@ public class Rule
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)
 	{
+		if(emResource == ENUM_Resource.Null)
+			return true;
+
 		int iIndex = (int)emResource;
 
-		return PlayerData.pthis.Resource.Count > iIndex ? PlayerData.pthis.Resource[iIndex] >= iValue : false;
+		if(PlayerData.pthis.Resource.Count <= iIndex)
+			return false;
+
+		return PlayerData.pthis.Resource[iIndex] >= iValue;
 	}
 	// 建立成員
 	public static void MemberAdd(Looks Looks, int iEquip)
