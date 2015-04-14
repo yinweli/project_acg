@@ -9,6 +9,8 @@ public class P_UI : MonoBehaviour
     public int iBattery = 100;
 
     public BtnRun pBtn = null;
+    public UILabel pLbDayNum = null;
+    public UILabel pLbDis = null;
     public UILabel pLbCurrency = null;
     public UILabel pLbStamina = null;
     public UISprite[] pSBattery = new UISprite[5];
@@ -29,6 +31,8 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
+        pLbDis.text = string.Format("{0}m",(GameData.pthis.RoadList.Count - CameraCtrl.pthis.iLeaderRoad) * 10);
+
         if (!SysMain.pthis.bIsGaming)
             return;
 
@@ -39,6 +43,9 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void StartNew()
     {
+        // 設定關卡Title.
+        pLbDayNum.text = PlayerData.pthis.iStage.ToString();
+
         GetComponent<UIPanel>().alpha = 1;
         UpdateResource();
         UpdateCurrency();
