@@ -51,8 +51,8 @@ public class SysMain : MonoBehaviour
 			Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
 
             // 以下是測試資料, 以後要改
-            Rule.MemberAdd(new Looks(), 1);
-            Rule.MemberAdd(new Looks(), 5);
+            Rule.MemberAdd(0, 0, 1);
+			Rule.MemberAdd(0, 0, 10);
 			GameData.pthis.iStyle = 1;
         }//if
         // 建立地圖.

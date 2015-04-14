@@ -47,7 +47,8 @@ public class PlayerData : MonoBehaviour
 		{
 			Member MemberTemp = new Member();
 			
-			MemberTemp.Looks = Itor.Looks;
+			MemberTemp.iSex = Itor.iSex;
+			MemberTemp.iLook = Itor.iLook;
 			MemberTemp.iEquip = Itor.iEquip;
 			MemberTemp.Feature = new List<int>(Itor.Feature);
 			MemberTemp.Behavior = new List<int>(Itor.Behavior);
@@ -75,7 +76,8 @@ public class PlayerData : MonoBehaviour
 		{
 			SaveMember Temp = new SaveMember();
 			
-			Temp.Looks = Itor.Looks;
+			Temp.iSex = Itor.iSex;
+			Temp.iLook = Itor.iLook;
 			Temp.iEquip = Itor.iEquip;
 			Temp.Feature = Itor.Feature.ToArray();
 			Temp.Behavior = Itor.Behavior.ToArray();
