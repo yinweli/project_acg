@@ -80,7 +80,7 @@ public class CameraCtrl : MonoBehaviour
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
 
-        Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
+		Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime * Camera.main.gameObject.transform.localScale.x;
         MapCreater.pthis.Refresh(iNextRoad);
     }
     // ------------------------------------------------------------------

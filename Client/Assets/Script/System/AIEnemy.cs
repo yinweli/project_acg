@@ -145,6 +145,12 @@ public class AIEnemy : MonoBehaviour
     {
         iHP += iValue;
 
+		// 播放受擊特效.
+		if(iValue < 0)
+		{
+			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
+		}
+
         // 沒血逃跑.
         if (iHP <= 0)
         {
