@@ -75,10 +75,7 @@ public class AIEnemy : MonoBehaviour
                 pAni.Play("Escape");
             // 取向量.
             if (vecRunDir == Vector3.zero)
-            {
-                vecRunDir = PosStart - transform.position;
-                GameData.pthis.iKill++;
-            }
+                vecRunDir = PosStart - transform.position;                
 
             MoveTo(vecRunDir, fMoveSpeed * 4);
             if (EnemyCreater.pthis.CheckPos(gameObject))
@@ -143,18 +140,20 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     public void AddHP(int iValue)
     {
+        if (iHP <= 0 && iValue < 0)
+            return;
+
         iHP += iValue;
 
 		// 播放受擊特效.
 		if(iValue < 0)
-		{
 			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
-		}
 
         // 沒血逃跑.
         if (iHP <= 0)
         {
             NGUITools.PlaySound(ClipDead, 0.8f);
+            GameData.pthis.iKill++;
             // 從可攻擊陣列移除.
             if (SysMain.pthis.Enemy.ContainsKey(gameObject))
                 SysMain.pthis.Enemy.Remove(gameObject);       

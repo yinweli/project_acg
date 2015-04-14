@@ -16,6 +16,7 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
 	public void StartNew() 
     {
+        iCount = 0;
         Create();
         StartCoroutine(WaitCreate());
 	}

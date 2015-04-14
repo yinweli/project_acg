@@ -357,8 +357,13 @@ public class MapCreater : MonoBehaviour
 	// 清除地圖
 	public void Clear()
 	{
+        foreach (MapRoad itor in GameData.pthis.RoadList)
+            Destroy(itor.Obj);
 		GameData.pthis.RoadList.Clear();
-		GameData.pthis.ObjtList.Clear();
+
+        foreach (MapObjt itor in GameData.pthis.ObjtList)
+            Destroy(itor.Obj);
+        GameData.pthis.ObjtList.Clear();
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)

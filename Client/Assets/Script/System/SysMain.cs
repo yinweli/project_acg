@@ -93,7 +93,15 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     // 開始遊戲.
     public void NewGame()
-    {        
+    {
+        // 清空地圖.
+        MapCreater.pthis.Clear();
+        // 建立地圖.
+        MapCreater.pthis.Create();
+        // 移動地圖.
+        MapMove.pthis.StartNew();
+        // 清空物件.
+        ClearObj();
         // UI初始化.
         P_UI.pthis.StartNew();
         // 新遊戲 - 淡出淡入天數後開始遊戲.
@@ -161,6 +169,21 @@ public class SysMain : MonoBehaviour
     {
         bIsGaming = false;
         //Time.timeScale = 0;
-        SysUI.pthis.CreatePanel("Prefab/P_Victory");
+        SysUI.pthis.CreatePanel("Prefab/P_Victory");        
+    }
+    // ------------------------------------------------------------------
+    void ClearObj()
+    {
+        // 刪除人物.
+        foreach (KeyValuePair<GameObject, int> itor in Role)
+            Destroy(itor.Key);
+        // 清空人物佇列.
+        Role.Clear();
+
+        // 刪除 敵人.
+        foreach (KeyValuePair<GameObject, int> itor in Enemy)
+            Destroy(itor.Key);
+        // 清空 敵人佇列.
+        Enemy.Clear();
     }
 }
