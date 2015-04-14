@@ -141,11 +141,12 @@ public class Rule
 		return PlayerData.pthis.Resource[iIndex] >= iValue;
 	}
 	// 建立成員
-	public static void MemberAdd(Looks Looks, int iEquip)
+	public static void MemberAdd(int iSex, int iLook, int iEquip)
 	{
 		Member MemberTemp = new Member();
 		
-		MemberTemp.Looks = Looks;
+		MemberTemp.iSex = iSex;
+		MemberTemp.iLook = iLook;
 		MemberTemp.iEquip = iEquip;
 
 		PlayerData.pthis.Members.Add(MemberTemp);
@@ -243,23 +244,41 @@ public class Rule
 		if(PlayerData.pthis.Members[iPos].iEquip > 0)
 			return 0;
 
-		// 建立獲得裝備骰子
-		CDice<int> Dice = new CDice<int>();
-		DBFItor Itor = GameDBF.This.GetEquip();
-		
-		while(Itor.IsEnd() == false)
+		// 檢查隊伍裡是否沒有光源裝備
+		bool bLight = false;
+
+		foreach(Member ItorMember in PlayerData.pthis.Members)
 		{
-			DBFEquip Data = Itor.Data() as DBFEquip;
-			
-			if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
-				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
-			
-			Itor.Next();
-		}//while
+			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
 
-		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+			if(Data != null && Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
 
-		return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
+		// 有光源裝備的話, 就照一般規則獲得裝備
+		// 否則就一定拿到光源裝備
+		if(bLight)
+		{
+			// 建立獲得裝備骰子
+			CDice<int> Dice = new CDice<int>();
+			DBFItor Itor = GameDBF.This.GetEquip();
+			
+			while(Itor.IsEnd() == false)
+			{
+				DBFEquip Data = Itor.Data() as DBFEquip;
+				
+				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+					Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+				
+				Itor.Next();
+			}//while
+			
+			Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+			
+			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
+		}
+		else
+			return PlayerData.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
 	}
 	// 執行獲得特性
 	public static int GainFeature(int iPos)
