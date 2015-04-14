@@ -96,7 +96,7 @@ public class AIEnemy : MonoBehaviour
             if (vecRunDir == Vector3.zero)
             {
                 vecRunDir = PosStart - transform.position;
-                if (ObjTarget.GetComponent<PlayerFollow>())
+				if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
                     ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
             }
 
@@ -188,7 +188,7 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 檢查距離是否可抓抓.
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.055f)
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.2f)
         {
             bHasTarget = true;
             iThreat += 5;
