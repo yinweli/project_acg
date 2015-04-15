@@ -151,6 +151,16 @@ public class Rule
 
 		PlayerData.pthis.Members.Add(MemberTemp);
 	}
+	// 建立成員
+	public static void MemberAdd(int iEquip)
+	{
+		MemberAdd(Random.Range(0, GameDefine.iMaxSex), Random.Range(0, GameDefine.iMaxLook), iEquip);
+	}
+	// 建立成員
+	public static void MemberAdd()
+	{
+		MemberAdd(0);
+	}
 	// 刪除成員
 	public void MemberDel(int iPos)
 	{
@@ -179,6 +189,184 @@ public class Rule
 	{
 		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
 			AddDamageReset(iPos);
+	}
+	// 依方向取得座標列表
+	public static List<MapCoor> NextPath(ENUM_Dir emDir, MapCoor Pos)
+	{
+		List<MapCoor> Result = new List<MapCoor>();
+		int iRoadWidthMin = GameDefine.iMapBorderX;
+		int iRoadWidthMax = GameDefine.iMapWidth - GameDefine.iMapBorderX;
+		int iLength = Pos == null ? GameDefine.iPathStart : Random.Range(GameDefine.iPathMin, GameDefine.iPathMax);
+		
+		while(iLength > 0)
+		{
+			if(Pos == null)
+				Pos = new MapCoor(Random.Range(iRoadWidthMin, iRoadWidthMax), GameDefine.iMapBorderY);
+			else
+				Pos = Pos.Add(emDir, 1);
+			
+			if(Pos.X >= iRoadWidthMin && Pos.X < iRoadWidthMax && Pos.Y >= 1)
+			{
+				Result.Add(Pos);
+				--iLength;
+			}
+			else
+				iLength = 0;
+		}//while
+		
+		return Result;
+	}
+	// 取得隨機物件
+	public static Tuple<ENUM_Map, MapCoor> NextObjt()
+	{
+		int iIndex = Random.Range(0, GameDefine.ObjtScale.Count);
+		
+		return new Tuple<ENUM_Map, MapCoor>((ENUM_Map)(iIndex + ENUM_Map.MapObjt_0), GameDefine.ObjtScale[iIndex]);
+	}
+	// 取得隨機地圖拾取位置
+	public static MapCoor NextPickup()
+	{
+		if(GameData.pthis.RoadList.Count <= 0)
+			return new MapCoor();
+
+		MapRoad Road = GameData.pthis.RoadList[Random.Range(0, GameData.pthis.RoadList.Count)];
+		int iRangeX = Random.Range(GameDefine.iMinPickupRange, GameDefine.iMaxPickupRange);
+		int iRangeY = Random.Range(GameDefine.iMinPickupRange, GameDefine.iMaxPickupRange);
+
+		return new MapCoor(Road.Pos.X + Random.Range(-iRangeX, iRangeX), Road.Pos.Y + Random.Range(-iRangeY, iRangeY));
+	}
+	// 執行建立地圖拾取
+	public static void CreatePickup()
+	{
+		GameData.pthis.PickupList.Clear();
+
+		// 成員拾取
+		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
+		{
+			for(int iCount = 0; iCount < GameDefine.iMaxPickupMember; ++iCount)
+			{
+				Pickup Data = new Pickup();
+
+				Data.Pos = NextPickup();
+				Data.iType = (int)ENUM_Pickup.Member;
+				Data.iCount = 1;
+				Data.iSex = Random.Range(0, GameDefine.iMaxSex);
+				Data.iLook = Random.Range(0, GameDefine.iMaxLook);
+				Data.bPickup = false;
+
+				GameData.pthis.PickupList.Add(Data);
+			}//for
+		}//if
+
+		// 物品拾取
+		for(int iCount = 0, iMax = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems); iCount < iMax; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			int iValue = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue);
+			
+			Data.Pos = NextPickup();
+			Data.iType = Random.Range((int)ENUM_Pickup.Currency, System.Enum.GetValues(typeof(ENUM_Pickup)).Length);
+
+			switch((ENUM_Pickup)Data.iType)
+			{
+			case ENUM_Pickup.Currency: Data.iCount = iValue; break;
+			case ENUM_Pickup.Battery: Data.iCount = iValue / GameDefine.iPriceBattery; break;
+			case ENUM_Pickup.LightAmmo: Data.iCount = iValue / GameDefine.iPriceLightAmmo; break;
+			case ENUM_Pickup.HeavyAmmo: Data.iCount = iValue / GameDefine.iPriceHeavyAmmo; break;
+			default: Data.iCount = 0; break;
+			}//switch
+
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
+		}//for
+	}
+	// 執行獲得裝備
+	public static int GainEquip(int iPos)
+	{
+		if(PlayerData.pthis.Members.Count <= iPos)
+			return 0;
+		
+		if(PlayerData.pthis.Members[iPos].iEquip > 0)
+			return 0;
+		
+		// 檢查隊伍裡是否沒有光源裝備
+		bool bLight = false;
+		
+		foreach(Member ItorMember in PlayerData.pthis.Members)
+		{
+			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+			
+			if(Data != null && Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
+		
+		// 有光源裝備的話, 就照一般規則獲得裝備
+		// 否則就一定拿到光源裝備
+		if(bLight)
+		{
+			// 建立獲得裝備骰子
+			CDice<int> Dice = new CDice<int>();
+			DBFItor Itor = GameDBF.This.GetEquip();
+			
+			while(Itor.IsEnd() == false)
+			{
+				DBFEquip Data = Itor.Data() as DBFEquip;
+				
+				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+					Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+				
+				Itor.Next();
+			}//while
+			
+			Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+			
+			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
+		}
+		else
+			return PlayerData.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
+	}
+	// 執行獲得特性
+	public static int GainFeature(int iPos)
+	{
+		if(PlayerData.pthis.Members.Count <= iPos)
+			return 0;
+		
+		// 建立特性群組列表
+		HashSet<int> Group = new HashSet<int>();
+		
+		foreach(int ItorFeature in PlayerData.pthis.Members[iPos].Feature)
+		{
+			DBFFeature Data = GameDBF.This.GetFeature(ItorFeature) as DBFFeature;
+			
+			if(Data != null)
+				Group.Add(Data.Group);
+		}//for
+		
+		// 建立獲得特性骰子
+		CDice<int> Dice = new CDice<int>();
+		DBFItor Itor = GameDBF.This.GetFeature();
+		
+		while(Itor.IsEnd() == false)
+		{
+			DBFFeature Data = Itor.Data() as DBFFeature;
+			
+			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
+				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+			
+			Itor.Next();
+		}//while
+		
+		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+		
+		int iFeature = Dice.Roll();
+		
+		if(iFeature > 0)
+			PlayerData.pthis.Members[iPos].Feature.Add(iFeature);
+		
+		return iFeature;
 	}
 	// 取得子彈傷害值
 	public static int BulletDamage(int iPos)
@@ -234,90 +422,5 @@ public class Rule
 		}//while
 
 		return Result;
-	}
-	// 執行獲得裝備
-	public static int GainEquip(int iPos)
-	{
-		if(PlayerData.pthis.Members.Count <= iPos)
-			return 0;
-
-		if(PlayerData.pthis.Members[iPos].iEquip > 0)
-			return 0;
-
-		// 檢查隊伍裡是否沒有光源裝備
-		bool bLight = false;
-
-		foreach(Member ItorMember in PlayerData.pthis.Members)
-		{
-			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
-
-			if(Data != null && Data.Mode == (int)ENUM_ModeEquip.Light)
-				bLight = true;
-		}//for
-
-		// 有光源裝備的話, 就照一般規則獲得裝備
-		// 否則就一定拿到光源裝備
-		if(bLight)
-		{
-			// 建立獲得裝備骰子
-			CDice<int> Dice = new CDice<int>();
-			DBFItor Itor = GameDBF.This.GetEquip();
-			
-			while(Itor.IsEnd() == false)
-			{
-				DBFEquip Data = Itor.Data() as DBFEquip;
-				
-				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
-					Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
-				
-				Itor.Next();
-			}//while
-			
-			Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
-			
-			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
-		}
-		else
-			return PlayerData.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
-	}
-	// 執行獲得特性
-	public static int GainFeature(int iPos)
-	{
-		if(PlayerData.pthis.Members.Count <= iPos)
-			return 0;
-
-		// 建立特性群組列表
-		HashSet<int> Group = new HashSet<int>();
-
-		foreach(int ItorFeature in PlayerData.pthis.Members[iPos].Feature)
-		{
-			DBFFeature Data = GameDBF.This.GetFeature(ItorFeature) as DBFFeature;
-				
-			if(Data != null)
-				Group.Add(Data.Group);
-		}//for
-
-		// 建立獲得特性骰子
-		CDice<int> Dice = new CDice<int>();
-		DBFItor Itor = GameDBF.This.GetFeature();
-		
-		while(Itor.IsEnd() == false)
-		{
-			DBFFeature Data = Itor.Data() as DBFFeature;
-			
-			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
-				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
-			
-			Itor.Next();
-		}//while
-		
-		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
-
-		int iFeature = Dice.Roll();
-
-		if(iFeature > 0)
-			PlayerData.pthis.Members[iPos].Feature.Add(iFeature);
-		
-		return iFeature;
 	}
 }

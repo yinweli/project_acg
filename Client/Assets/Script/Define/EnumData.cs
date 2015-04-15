@@ -1,4 +1,12 @@
-﻿public enum WeaponType
+﻿public enum EnemyType
+{
+    Enemy_001,
+    Enemy_002,
+
+    EnemyCount,
+}
+
+public enum WeaponType
 {
     Weapon_null,
     Weapon_001, // 手電筒.
@@ -95,10 +103,36 @@ public enum ENUM_Resource
     Resource_Count,
 }
 
+// 角色外觀列舉.
+public enum ENUM_Role
+{
+    HairA,
+    HairB,    
+    Adorn,    
+    BrowR,
+    BrowL,    
+    EyeR,
+    EyeL,
+    EyeBgR,
+    EyeBgL,    
+    Mouth,
+    Face_Bg,
+    Face_BR,
+    Face_BL,    
+    Body,
+    HandR,
+    HandL,    
+    FootR,
+    FootL,
+
+    Role_Count,
+}
+
 // 地圖拾取列舉
 public enum ENUM_Pickup
 {
 	Member, // 成員
+	Currency, // 通貨
 	Battery, // 電池
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥

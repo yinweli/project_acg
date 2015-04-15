@@ -10,18 +10,23 @@ public class GameDefine
 	public const int iInitLightAmmo = 200; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 150; // 初始重型彈藥值
 
+	public const int iPriceBattery = 1; // 電池價格
+	public const int iPriceLightAmmo = 2; // 輕型彈藥價格
+	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
+
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
-    public const int iBatteryCost = 30; // 電池值價格.
-
-    public const int iLightAmmoCount = 100; // 輕型彈藥購買一單位數量.
-    public const int iLightAmmoCost = 200; // 輕型彈藥價格.
-
+	public const int iBatteryCost = iPriceBattery * iBatteryCount; // 電池值價格.
+	public const int iLightAmmoCount = 100; // 輕型彈藥購買一單位數量.
+	public const int iLightAmmoCost = iPriceLightAmmo * iLightAmmoCount; // 輕型彈藥價格.
     public const int iHeavyAmmoCount = 100; // 重型彈藥購買一單位數量.
-    public const int iHeavyAmmoCost = 300; // 重型彈藥價格.
+	public const int iHeavyAmmoCost = iPriceHeavyAmmo * iHeavyAmmoCount; // 重型彈藥價格.
 
     public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
+	public const int iMaxMember = 6; // 最大成員數
+	public const int iMaxSex = 2; // 最大性別數
+	public const int iMaxLook = 8; // 最大外觀數
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
@@ -53,8 +58,16 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 2; // 物件遞減機率
 
+	public const int iMaxPickupRange = 5; // 最大拾取範圍
+	public const int iMinPickupRange = 1; // 最小拾取範圍
+	public const int iMaxPickupMember = 1; // 最大拾取成員次數
+	public const int iMaxPickupItems = 16; // 最大拾取物品次數
+	public const int iMinPickupItems = 8; // 最小拾取物品次數
+	public const int iMaxPickupValue = 60; // 最大拾取物品價值
+	public const int iMinPickupValue = 30; // 最小拾取物品價值
+
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
-	public const string szSaveMap = "save_map"; // 地圖資料存檔名稱
+	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱

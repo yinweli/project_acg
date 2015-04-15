@@ -24,7 +24,36 @@ public class PlayerData : MonoBehaviour
     {
         pthis = this;
     }
-
+	// 存檔.
+	public void Save()
+	{
+		SavePlayer Data = new SavePlayer();
+		
+		Data.iStage = iStage;
+		Data.iCurrency = iCurrency;
+		Data.iEnemyKill = iEnemyKill;
+		Data.iPlayTime = iPlayTime;
+		Data.Resource = Resource.ToArray();
+		
+		List<SaveMember> MemberList = new List<SaveMember>();
+		
+		foreach(Member Itor in Members)
+		{
+			SaveMember Temp = new SaveMember();
+			
+			Temp.iSex = Itor.iSex;
+			Temp.iLook = Itor.iLook;
+			Temp.iEquip = Itor.iEquip;
+			Temp.Feature = Itor.Feature.ToArray();
+			Temp.Behavior = Itor.Behavior.ToArray();
+			
+			MemberList.Add(Temp);
+		}//for
+		
+		Data.Data = MemberList.ToArray();
+		
+		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Data));
+	}
     // 讀檔.
 	public bool Load()
 	{
@@ -57,36 +86,5 @@ public class PlayerData : MonoBehaviour
 		}//for
 		
 		return true;
-	}
-
-    // 存檔.
-	public void Save()
-	{
-		SavePlayer Data = new SavePlayer();
-		
-		Data.iStage = iStage;
-		Data.iCurrency = iCurrency;
-		Data.iEnemyKill = iEnemyKill;
-		Data.iPlayTime = iPlayTime;
-		Data.Resource = Resource.ToArray();
-		
-		List<SaveMember> MemberList = new List<SaveMember>();
-		
-		foreach(Member Itor in Members)
-		{
-			SaveMember Temp = new SaveMember();
-			
-			Temp.iSex = Itor.iSex;
-			Temp.iLook = Itor.iLook;
-			Temp.iEquip = Itor.iEquip;
-			Temp.Feature = Itor.Feature.ToArray();
-			Temp.Behavior = Itor.Behavior.ToArray();
-			
-			MemberList.Add(Temp);
-		}//for
-		
-		Data.Data = MemberList.ToArray();
-		
-		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Data));
 	}
 }
