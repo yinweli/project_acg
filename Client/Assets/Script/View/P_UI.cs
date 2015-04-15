@@ -168,7 +168,10 @@ public class P_UI : MonoBehaviour
         pLbStamina.text = PlayerData.pthis.iStamina.ToString() + "/" + PlayerData.pthis.iStaminaLimit;
 
         for (int i = 0; i < pSStamina.Length; i++)
+        {
+            pSBattery[i].spriteName = "ui_com_005";
             pSStamina[i].gameObject.SetActive(false);
+        }
 
         int iActive = (PlayerData.pthis.iStamina / (PlayerData.pthis.iStaminaLimit / pSStamina.Length));
 
@@ -178,7 +181,12 @@ public class P_UI : MonoBehaviour
             iActive = 1;
 
         for (int i = 0; i < iActive; i++)
+        {
+            if (iActive <= 2)
+                pSBattery[i].spriteName = "ui_com_003";
+
             pSStamina[i].gameObject.SetActive(true);
+        }
     }
     // ------------------------------------------------------------------
 }
