@@ -83,9 +83,6 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-        float fBattery = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery];
-        float fMaxBattery = GameDefine.iMaxBattery;
-
         if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] + iValue < 0)
         {
             // 沒電時關掉燈光.
@@ -105,13 +102,13 @@ public class P_UI : MonoBehaviour
         }
 
         // 增加電量時要確認是否需要閃爍.
-        if (iValue > 0 && fBattery > 30)
+        if (iValue > 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 30)
         {
             for (int i = 0; i < pListLight.Count; i++)
                 pListLight[i].pAni.Play("Wait");
         }
-        // 電量低於5%，燈光開始閃爍.
-        else if (fBattery / fMaxBattery < 30)
+        // 電量低於30，燈光開始閃爍.
+        else if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] < 30)
         {
             for (int i = 0; i < pListLight.Count; i++)
                 pListLight[i].pAni.Play("NoPower");

@@ -174,11 +174,13 @@ public class AIEnemy : MonoBehaviour
             ObjTarget = CameraCtrl.pthis.gameObject;
             return;
         }
-        else if (ObjTarget && SysMain.pthis.CatchRole.ContainsKey(ObjTarget))
+
+        // 沒有目標或目標已不存在可抓佇列就給新目標.
+        if (!ObjTarget || !SysMain.pthis.CatchRole.ContainsKey(ObjTarget))
         {
             KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.CatchRole);
             ObjTarget = pTemp.Key;
-        }
+        }       
     }
     // ------------------------------------------------------------------
     void Chace()
