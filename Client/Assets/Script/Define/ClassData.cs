@@ -76,13 +76,6 @@ public class MapCoor
 	}
 }
 
-// 地圖道路類別
-public class MapRoad
-{
-	/* [Save] */ public MapCoor Pos = new MapCoor(); // 地圖座標
-	/*        */ public GameObject Obj = null;
-}
-
 // 地圖物件類別
 public class MapObjt
 {
@@ -90,7 +83,6 @@ public class MapObjt
 	/* [Save] */ public int Type = 0; // 物件型態
 	/* [Save] */ public int Width = 0; // 物件寬度
 	/* [Save] */ public int Height = 0; // 物件高度
-	/*        */ public GameObject Obj = null;
 	
 	public bool Cover(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2)
 	{
@@ -109,9 +101,9 @@ public class MapObjt
 	{
 		return Cover(Pos.X, Pos.Y, Width, Height, Data.X, Data.Y, W, H);
 	}
-	public bool Cover(MapRoad Data)
+	public bool Cover(MapCoor Data)
 	{
-		return Cover(Data.Pos, 1, 1);
+		return Cover(Data, 1, 1);
 	}
 	public bool Cover(MapObjt Data)
 	{
@@ -166,7 +158,8 @@ public class SaveGame
 	public int iKill = 0; // 殺怪數.
 	public int iAlive = 0; // 存活數.
 	public int iDead = 0; // 死亡數.
-	public MapRoad[] RoadList = new MapRoad[0]; // 地圖道路列表
+	public MapCoor[] RoadList = new MapCoor[0]; // 地圖道路列表
 	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
+	public Pickup[] PickupList = new Pickup[0]; // 地圖拾取列表
 	public int iRoad = 0; // 目前位置
 }

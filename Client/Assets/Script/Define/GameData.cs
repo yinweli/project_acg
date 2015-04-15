@@ -13,7 +13,7 @@ public class GameData : MonoBehaviour
     public int iAlive = 0; // 存活數.
     public int iDead = 0; // 死亡數.
 
-	public List<MapRoad> RoadList = new List<MapRoad>(); // 地圖道路列表
+	public List<MapCoor> RoadList = new List<MapCoor>(); // 地圖道路列表
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
 	public List<Pickup> PickupList = new List<Pickup>(); // 地圖拾取列表
 
@@ -34,36 +34,9 @@ public class GameData : MonoBehaviour
 		Data.iKill = iKill;
 		Data.iAlive = iAlive;
 		Data.iDead = iDead;
-		
-		List<MapRoad> TempRoadList = new List<MapRoad>();
-		
-		foreach(MapRoad Itor in RoadList)
-		{
-			MapRoad Temp = new MapRoad();
-			
-			Temp.Pos = Itor.Pos;
-			Temp.Obj = null;
-			
-			TempRoadList.Add(Temp);
-		}//for
-		
-		List<MapObjt> TempObjtList = new List<MapObjt>();
-		
-		foreach(MapObjt Itor in ObjtList)
-		{
-			MapObjt Temp = new MapObjt();
-			
-			Temp.Pos = Itor.Pos;
-			Temp.Type = Itor.Type;
-			Temp.Width = Itor.Width;
-			Temp.Height = Itor.Height;
-			Temp.Obj = null;
-			
-			TempObjtList.Add(Temp);
-		}//for
-
-		Data.RoadList = TempRoadList.ToArray();
-		Data.ObjtList = TempObjtList.ToArray();
+		Data.RoadList = RoadList.ToArray();
+		Data.ObjtList = ObjtList.ToArray();
+		Data.PickupList = PickupList.ToArray();
 		Data.iRoad = CameraCtrl.pthis.iNextRoad;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Data));
@@ -83,8 +56,9 @@ public class GameData : MonoBehaviour
 		iKill = Data.iKill;
 		iAlive = Data.iAlive;
 		iDead = Data.iDead;
-		RoadList = new List<MapRoad>(Data.RoadList);
+		RoadList = new List<MapCoor>(Data.RoadList);
 		ObjtList = new List<MapObjt>(Data.ObjtList);
+		PickupList = new List<Pickup>(Data.PickupList);
 		CameraCtrl.pthis.iNextRoad = Data.iRoad;
 		
 		return true;

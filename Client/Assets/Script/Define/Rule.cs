@@ -229,11 +229,11 @@ public class Rule
 		if(GameData.pthis.RoadList.Count <= 0)
 			return new MapCoor();
 
-		MapRoad Road = GameData.pthis.RoadList[Random.Range(0, GameData.pthis.RoadList.Count)];
+		MapCoor Road = GameData.pthis.RoadList[Random.Range(0, GameData.pthis.RoadList.Count)];
 		int iRangeX = Random.Range(GameDefine.iMinPickupRange, GameDefine.iMaxPickupRange);
 		int iRangeY = Random.Range(GameDefine.iMinPickupRange, GameDefine.iMaxPickupRange);
 
-		return new MapCoor(Road.Pos.X + Random.Range(-iRangeX, iRangeX), Road.Pos.Y + Random.Range(-iRangeY, iRangeY));
+		return new MapCoor(Road.X + Random.Range(-iRangeX, iRangeX), Road.Y + Random.Range(-iRangeY, iRangeY));
 	}
 	// 執行建立地圖拾取
 	public static void CreatePickup()
