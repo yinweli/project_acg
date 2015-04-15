@@ -156,6 +156,8 @@ public class AIPlayer : MonoBehaviour
 	public void BeCaught(GameObject ObjMonster)
 	{
 		bBeCaught = true;
+        // 從可抓佇列中移除.
+        SysMain.pthis.CatchRole.Remove(gameObject);
 		// 拿手電筒的不需要改目標.
 		if(pWeapon != WeaponType.Weapon_001)
 			ObjTarget = ObjMonster;
@@ -168,11 +170,13 @@ public class AIPlayer : MonoBehaviour
 	public void BeFree()
 	{
 		bBeCaught = false;
+        // 重新加入可抓佇列中.
+        SysMain.pthis.CatchRole.Add(gameObject, GetComponent<G_Player>().iPlayer);
 		Destroy(gameObject.GetComponent<PlayerFollow>());
 		if (pAni)
 			pAni.Play("Run");
 	}
-	
+    // ------------------------------------------------------------------
 	public void MoveTo(int iRoad)
 	{
 		if (!MapCreater.pthis.GetRoadObj(iRoad))
@@ -180,8 +184,8 @@ public class AIPlayer : MonoBehaviour
 		
 		float fMyMoveSpeed = SysMain.pthis.GetMoveSpeed();
 		
-		if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iRoad).transform.position) > 0.205f)
-			fMyMoveSpeed = fMyMoveSpeed * 3; 
+		if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iRoad).transform.position) > 0.206f)
+            fMyMoveSpeed = GameDefine.fBaseSpeed * 3; 
 		
 		Vector3 vecDirection = MapCreater.pthis.GetRoadObj(iRoad).transform.position - transform.position;
 		
@@ -197,7 +201,7 @@ public class AIPlayer : MonoBehaviour
 				CameraCtrl.pthis.iLeaderRoad++;
 		}
 	}
-	
+    // ------------------------------------------------------------------
 	public void FaceTo(int iRotation)
 	{
 		ObjHuman.transform.rotation = new Quaternion(0, iRotation, 0, 0);

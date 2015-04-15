@@ -168,16 +168,17 @@ public class AIEnemy : MonoBehaviour
         if (bHasTarget)
             return;
 
-        // 如果已經有目標要檢查目標是否被抓了.
-        if (ObjTarget && ObjTarget.GetComponent<AIPlayer>() && !ObjTarget.GetComponent<AIPlayer>().bBeCaught)
+        // 如果可抓佇列無人就走向CamCtrl.
+        if(SysMain.pthis.CatchRole.Count <= 0)
+        {
+            ObjTarget = CameraCtrl.pthis.gameObject;
             return;
-
-        //測試先指定目標.
-        KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.Role);
-        ObjTarget = pTemp.Key;
-
-        // 清空目標.
-        //ObjTarget = null;        
+        }
+        else if (ObjTarget && SysMain.pthis.CatchRole.ContainsKey(ObjTarget))
+        {
+            KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.CatchRole);
+            ObjTarget = pTemp.Key;
+        }
     }
     // ------------------------------------------------------------------
     void Chace()
@@ -187,7 +188,7 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 檢查距離是否可抓抓.
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.2f)
+        if (ObjTarget != CameraCtrl.pthis.gameObject && Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.18f)
         {
             bHasTarget = true;
             iThreat += 5;

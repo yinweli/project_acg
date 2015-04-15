@@ -39,6 +39,7 @@ public class PlayerCreater : MonoBehaviour
         pPrePlayer.name = string.Format("Role{0:000}", iCount);
         pPrePlayer.GetComponent<G_Player>().iPlayer = iCount;
         SysMain.pthis.Role.Add(pPrePlayer, iCount);
+        SysMain.pthis.CatchRole.Add(pPrePlayer, iCount);
         iCount ++;
     }
     // ------------------------------------------------------------------

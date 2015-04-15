@@ -14,6 +14,8 @@ public class SysMain : MonoBehaviour
 
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
+    // 可抓人物佇列.
+    public Dictionary<GameObject, int> CatchRole = new Dictionary<GameObject, int>();
     // 敵人佇列.
     public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
 
