@@ -4,17 +4,14 @@ using System.Collections.Generic;
 
 public class AIPlayer : MonoBehaviour 
 {
+    // 角色編號.
+    public int iPlayer;
 	// 角色動畫.
 	public Animator pAni = null;
 	// 武器動畫.
 	public Animator pWAni = null;
 	// 手上武器type.
 	public WeaponType pWeapon = WeaponType.Weapon_null;
-	
-	// 攻擊範圍.
-	public float fRange = 1;
-	// 射速.
-	public float fShotSpeed = 1;
 	
 	// 角色.
 	public GameObject ObjHuman = null;
@@ -24,23 +21,24 @@ public class AIPlayer : MonoBehaviour
 	public GameObject pSWeapon = null;
 	// 是否被抓住.
 	public bool bBeCaught = false;
-	// 無敵狀態剩餘秒數.
-	public float fInvincibleSec = 0;
 	// 武器冷卻.
 	public float fCoolDown = 0;
 	
 	public AudioClip audioClip;
-	
-	G_Player pPlayer;
-	
-	// Use this for initialization
+    // ------------------------------------------------------------------
 	void Start ()
 	{
-		pPlayer = GetComponent<G_Player>(); 
-		pPlayer.InitPlayer();
+        pWeapon = (WeaponType)PlayerData.pthis.Members[iPlayer].iEquip;
+        // 建立外觀.
+        ObjHuman = UITool.pthis.CreateRole(gameObject, PlayerData.pthis.Members[iPlayer].iSex, PlayerData.pthis.Members[iPlayer].iLook);
+        // 設定武器.
+        if (ObjHuman && ObjHuman.GetComponent<G_PLook>())
+            ObjHuman.GetComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
+        // 設定武器音效
+        if (pWeapon != WeaponType.Weapon_null && pWeapon != WeaponType.Weapon_001)
+            audioClip = Resources.Load("Sound/FX/" + pWeapon) as AudioClip;
 	}
 	// ------------------------------------------------------------------
-	// Update is called once per frame
 	void Update () 
 	{
 		if (!SysMain.pthis.bIsGaming)
@@ -53,7 +51,7 @@ public class AIPlayer : MonoBehaviour
 		
 		// 移動.
 		if (!bBeCaught)
-			MoveTo(CameraCtrl.pthis.iNextRoad - pPlayer.iPlayer);
+			MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
 	}
 	// ------------------------------------------------------------------
 	// 燈光轉向.
@@ -96,7 +94,7 @@ public class AIPlayer : MonoBehaviour
 			// 發射子彈.
 			CreateBullet();
 			// 計算冷卻.
-			fCoolDown = Time.time + Rule.EquipFireRate(GetComponent<G_Player>().iPlayer);
+			fCoolDown = Time.time + Rule.EquipFireRate(iPlayer);
 		}
 		
 	}
@@ -149,7 +147,7 @@ public class AIPlayer : MonoBehaviour
 		pObj.transform.parent = transform.parent;
 		pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
 		pObj.GetComponent<AIBullet>().Chace(ObjTarget);
-		pObj.GetComponent<AIBullet>().iDamage = Rule.BulletDamage(GetComponent<G_Player>().iPlayer);
+		pObj.GetComponent<AIBullet>().iDamage = Rule.BulletDamage(iPlayer);
 	}
 	// ------------------------------------------------------------------
 	// 被抓函式.
@@ -171,12 +169,13 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = false;
         // 重新加入可抓佇列中.
-        SysMain.pthis.CatchRole.Add(gameObject, GetComponent<G_Player>().iPlayer);
+        SysMain.pthis.CatchRole.Add(gameObject, iPlayer);
 		Destroy(gameObject.GetComponent<PlayerFollow>());
 		if (pAni)
 			pAni.Play("Run");
 	}
     // ------------------------------------------------------------------
+    // 移動函式.
 	public void MoveTo(int iRoad)
 	{
 		if (!MapCreater.pthis.GetRoadObj(iRoad))
@@ -194,7 +193,7 @@ public class AIPlayer : MonoBehaviour
 		// 把物件位置朝目標向量(玩家方向)移動.
 		transform.localPosition += vecDirection.normalized * fMyMoveSpeed * Time.deltaTime;
 		
-		if (pPlayer.iPlayer == 0)
+		if (iPlayer == 0)
 		{
 			// 檢查距離.
 			if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iRoad).transform.position) < 0.005f)

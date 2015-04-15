@@ -37,7 +37,9 @@ public class PlayerCreater : MonoBehaviour
         // 建立第一個玩家.
         pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
         pPrePlayer.name = string.Format("Role{0:000}", iCount);
-        pPrePlayer.GetComponent<G_Player>().iPlayer = iCount;
+        pPrePlayer.GetComponent<AIPlayer>().iPlayer = iCount;
+
+        // 加入玩家佇列.
         SysMain.pthis.Role.Add(pPrePlayer, iCount);
         SysMain.pthis.CatchRole.Add(pPrePlayer, iCount);
         iCount ++;

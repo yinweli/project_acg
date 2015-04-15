@@ -38,20 +38,6 @@ public class EnemyCreater : MonoBehaviour
         StartCoroutine(Creater());
     }
     // ------------------------------------------------------------------
-    // 關卡敵人過濾.
-    void GetStageEnemy()
-    {
-        StageEnemy.Clear();
-        // 從DBF表中過濾該出現的怪物加入.
-        //SysMain.pthis.iStage
-
-        // 目前暫時一種怪.
-        StageEnemy.Add(EnemyType.Enemy_001.ToString(), 0);
-        // 平均給予機率.        
-        foreach (KeyValuePair<string, int> itor in StageEnemy)
-            StageEnemy[itor.Key] = StageEnemy.Count * 10;
-    }
-    // ------------------------------------------------------------------
     // 敵人佇列產生函式.
     public void ListEnemyCreater(List<string> EnemyList)
     {
@@ -80,13 +66,13 @@ public class EnemyCreater : MonoBehaviour
 			if (iTempEnegry > 0 && iTempEnegry <= 1)
 			{
 				iTempEnegry -= 1;
-				EnemyList.Add(string.Format("Enemy_{0:000}", 1));
+				EnemyList.Add(string.Format("Enemy/{0:000}", 1));
 			}
 
 			if (iTempEnegry > 0 && iTempEnegry >= DBFData.Enegry)
 			{
 				iTempEnegry -= DBFData.Enegry;
-				EnemyList.Add(string.Format("Enemy_{0:000}", iEnemy));
+				EnemyList.Add(string.Format("Enemy/{0:000}", iEnemy));
 			}
 		}
     }
