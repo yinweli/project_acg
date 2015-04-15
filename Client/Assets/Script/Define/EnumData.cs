@@ -127,3 +127,12 @@ public enum ENUM_Role
 
     Role_Count,
 }
+
+// 地圖拾取列舉
+public enum ENUM_Pickup
+{
+	Member, // 成員
+	Battery, // 電池
+	LightAmmo, // 輕型彈藥
+	HeavyAmmo, // 重型彈藥
+}
