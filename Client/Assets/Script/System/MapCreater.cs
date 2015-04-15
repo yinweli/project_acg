@@ -267,9 +267,4 @@ public class MapCreater : MonoBehaviour
 	{
 		return GameData.pthis.RoadList.Count > iRoad ? GameData.pthis.RoadList[iRoad].Obj : null;
 	}
-	// 檢查是否為空
-	public bool IsEmpty()
-	{
-		return GameData.pthis.RoadList.Count <= 0 || GameData.pthis.ObjtList.Count <= 0;
-	}
 }

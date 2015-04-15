@@ -150,7 +150,6 @@ public class SaveMember
 	public int[] Behavior = new int[0]; // 行為列表
 }
 
-
 public class SavePlayer
 {
 	public int iStage = 0; // 關卡編號
@@ -170,9 +169,4 @@ public class SaveGame
 	public MapRoad[] RoadList = new MapRoad[0]; // 地圖道路列表
 	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
 	public int iRoad = 0; // 目前位置
-	
-	public bool IsEmpty()
-	{
-		return RoadList.Length <= 0 && ObjtList.Length <= 0;
-	}
 }
