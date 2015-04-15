@@ -31,7 +31,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        pLbDis.text = string.Format("{0}m",(GameData.pthis.RoadList.Count - CameraCtrl.pthis.iLeaderRoad) * 10);
+        pLbDis.text = string.Format("{0}m",(GameData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);
 
         if (!SysMain.pthis.bIsGaming)
             return;
@@ -133,11 +133,12 @@ public class P_UI : MonoBehaviour
 
         int iActive = (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));
 
+        if (iActive > 0)
+            iActive++;
+ 
         if (iActive > pSBattery.Length)
             iActive = pSBattery.Length;
-        else if (iActive == 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
-            iActive = 1;
-
+        
         for (int i = 0; i < iActive; i++)
         {
             if (iActive == 1)

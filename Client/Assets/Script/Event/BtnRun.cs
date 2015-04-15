@@ -25,8 +25,11 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator StaCost()
     {
-        if (SysMain.pthis.bCanRun)
+        if (SysMain.pthis.bCanRun && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
+        {
+            fCoolDown = Time.time + 1.0f; ;
             GameData.pthis.fRunDouble = 3.0f;
+        }
 
         while (bIsRun && SysMain.pthis.bCanRun)
         {            
