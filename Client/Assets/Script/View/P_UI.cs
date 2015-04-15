@@ -105,13 +105,13 @@ public class P_UI : MonoBehaviour
         }
 
         // 增加電量時要確認是否需要閃爍.
-        if (iValue > 0 && fBattery / fMaxBattery >= 0.005f)
+        if (iValue > 0 && fBattery > 30)
         {
             for (int i = 0; i < pListLight.Count; i++)
                 pListLight[i].pAni.Play("Wait");
         }
         // 電量低於5%，燈光開始閃爍.
-        else if (fBattery / fMaxBattery < 0.005f)
+        else if (fBattery / fMaxBattery < 30)
         {
             for (int i = 0; i < pListLight.Count; i++)
                 pListLight[i].pAni.Play("NoPower");
@@ -123,17 +123,14 @@ public class P_UI : MonoBehaviour
     {
         // 先關掉.
         for (int i = 0; i < pSBattery.Length; i++)
-        {
-            pSBattery[i].spriteName = "ui_com_004";
             pSBattery[i].gameObject.SetActive(false);
-        }
 
         if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] <= 0)
             return;
 
-        int iActive = (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5));
+        int iActive = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5);
 
-        if (iActive > 0)
+        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
             iActive++;
  
         if (iActive > pSBattery.Length)
@@ -143,6 +140,8 @@ public class P_UI : MonoBehaviour
         {
             if (iActive == 1)
                 pSBattery[i].spriteName = "ui_com_003";
+            else
+                pSBattery[i].spriteName = "ui_com_004";
 
             pSBattery[i].gameObject.SetActive(true);
         }
@@ -168,10 +167,7 @@ public class P_UI : MonoBehaviour
         pLbStamina.text = PlayerData.pthis.iStamina.ToString() + "/" + PlayerData.pthis.iStaminaLimit;
 
         for (int i = 0; i < pSStamina.Length; i++)
-        {
-            pSBattery[i].spriteName = "ui_com_005";
             pSStamina[i].gameObject.SetActive(false);
-        }
 
         int iActive = (PlayerData.pthis.iStamina / (PlayerData.pthis.iStaminaLimit / pSStamina.Length));
 
@@ -183,7 +179,9 @@ public class P_UI : MonoBehaviour
         for (int i = 0; i < iActive; i++)
         {
             if (iActive <= 2)
-                pSBattery[i].spriteName = "ui_com_003";
+                pSStamina[i].spriteName = "ui_com_003";
+            else
+                pSStamina[i].spriteName = "ui_com_005";
 
             pSStamina[i].gameObject.SetActive(true);
         }
