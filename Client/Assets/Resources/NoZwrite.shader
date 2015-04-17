@@ -1,7 +1,7 @@
 ﻿Shader "Custom/test" {
 	Properties
 	{
-		  [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+		  [PerRendererData] _MainTex ("Sprite Texture", 2D) = "" {}
 		  _Color ("Tint", Color) = (1,1,1,1)
 		  [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 	}
@@ -10,11 +10,11 @@
 	 {
 	  Tags
 	  { 
-		   "Queue"="Transparent" 
-		   "IgnoreProjector"="True" 
-		   "RenderType"="Transparent" 
-		   "PreviewType"="Plane"
-		   "CanUseSpriteAtlas"="True"
+	   "Queue"="Transparent" 
+	   "IgnoreProjector"="True" 
+	   "RenderType"="Transparent" 
+	   "PreviewType"="Plane"
+	   "CanUseSpriteAtlas"="True"
 	  }
 
 	  Cull Off

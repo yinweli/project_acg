@@ -8,6 +8,10 @@ public class P_UI : MonoBehaviour
 
     public int iBattery = 100;
 
+    public GameObject ObjBattery = null;
+    public GameObject ObjAmmoLight = null;
+    public GameObject ObjAmmoHeavy = null;
+
     public BtnRun pBtn = null;
     public UILabel pLbDayNum = null;
     public UILabel pLbDis = null;

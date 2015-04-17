@@ -24,6 +24,8 @@ public class EnemyCreater : MonoBehaviour
     public int iEnegry = 0;
     // 本關敵人與機率列表<敵人名稱,機率>.
     public Dictionary<string, int> StageEnemy = new Dictionary<string, int>();
+
+    int iCount = 0;
     void Awake()
     {
         pthis = this;
@@ -32,6 +34,7 @@ public class EnemyCreater : MonoBehaviour
     // 開始新的關卡.
     public void StartNew()
     {
+        iCount = 0;
         // 計算總波數能量：怪物能量 = 能量基礎值 + 關卡編號 / 每多少關增加難度 * 能量增加值。.
         iEnegry = GameDefine.iBaseEngry + (PlayerData.pthis.iStage / GameDefine.iStageCount * GameDefine.iWeightEngry);
 
@@ -91,24 +94,27 @@ public class EnemyCreater : MonoBehaviour
             
             for (int i = 0; i < ListEnemy.Count; i++)
             {
+                GameObject pObj = null;
                 switch (Random.Range(1, 4))
                 {
                     case 1: //上方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], 
+                        pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], 
                             CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), 
                             CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
                          break;
                     case 2: //左方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                         pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
                             CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
                         break;
                     case 3: //右方.
-                        UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                        pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
                             CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
                         break;
                 }
+                pObj.GetComponent<AIEnemy>().SetLayer(iCount);
+                iCount++;
                 yield return new WaitForSeconds(0.05f);
             }
         }        

@@ -48,6 +48,21 @@ public class AIEnemy : MonoBehaviour
         PosStart = transform.position;
 	}
     // ------------------------------------------------------------------
+    public void SetLayer(int iLayer)
+    {
+        UI2DSprite[] Enemy = GetComponentsInChildren<UI2DSprite>();
+
+        // 依照角色切換layer.
+        for (int i = 0; i < Enemy.Length; i++)
+        {
+            Enemy[i].depth = Enemy[i].depth + (iLayer * 20);
+
+            Vector3 vecPos = Enemy[i].gameObject.transform.localPosition;
+            vecPos.z = -0.00002f * (float)Enemy[i].depth;
+            Enemy[i].gameObject.transform.localPosition = vecPos;
+        }
+    }
+    // ------------------------------------------------------------------
     void OnDestroy()
     {
         if (SysMain.pthis.Enemy.ContainsKey(gameObject))
@@ -116,7 +131,6 @@ public class AIEnemy : MonoBehaviour
         FindTarget();        
 
         // 如果有目標且沒抓人時，追蹤目標
-        //if (!ObjTarget && !bHasTarget)
         Chace();
     }
     // ------------------------------------------------------------------
@@ -208,10 +222,15 @@ public class AIEnemy : MonoBehaviour
         vecDirection.z = 0;
 
         if (vecDirection.x < 0)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
+            FaceTo(-1);
         else
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+            FaceTo(1);
         // 把物件位置朝目標向量(玩家方向)移動.
         transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
+    }
+    // ------------------------------------------------------------------
+    public void FaceTo(int iFace)
+    {
+        transform.localScale = new Vector3(iFace, transform.localScale.y, transform.localScale.z);
     }
 }
