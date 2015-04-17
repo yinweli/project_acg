@@ -23,13 +23,13 @@ public class PlayerFollow : MonoBehaviour
         {
             Vector3 pPos = new Vector3(ObjTarget.transform.position.x - 0.2f, ObjTarget.transform.position.y, 0);
             transform.position = pPos;
-            GetComponent<AIPlayer>().FaceTo(180);
+            GetComponent<AIPlayer>().FaceTo(-1);
         }
         else if (vecDir.x < 0)
         {
             Vector3 pPos = new Vector3(ObjTarget.transform.position.x + 0.2f, ObjTarget.transform.position.y, 0);
             transform.position = pPos;
-            GetComponent<AIPlayer>().FaceTo(0);
+            GetComponent<AIPlayer>().FaceTo(1);
         }
     }
 }

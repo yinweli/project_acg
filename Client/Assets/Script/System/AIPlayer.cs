@@ -58,9 +58,9 @@ public class AIPlayer : MonoBehaviour
 	void ChackLight()
 	{
 		if (ObjTarget.transform.localPosition.x > 0)
-			FaceTo(0);
+			FaceTo(1);
 		else
-			FaceTo(180);
+			FaceTo(-1);
 	}
 	// ------------------------------------------------------------------
 	// 射擊函式.
@@ -85,9 +85,9 @@ public class AIPlayer : MonoBehaviour
 			if (!bBeCaught)
 			{
 				if (transform.position.x < ObjTarget.transform.position.x)
-					FaceTo(0);
+					FaceTo(1);
 				else
-					FaceTo(180);
+					FaceTo(-1);
 			}
 			
 			NGUITools.PlaySound(audioClip, 0.8f);
@@ -201,8 +201,9 @@ public class AIPlayer : MonoBehaviour
 		}
 	}
     // ------------------------------------------------------------------
-	public void FaceTo(int iRotation)
+	public void FaceTo(int iFace)
 	{
-		ObjHuman.transform.rotation = new Quaternion(0, iRotation, 0, 0);
+        //ObjHuman.transform.rotation = new Quaternion(0, iRotation, 0, 0);
+        ObjHuman.transform.localScale = new Vector3(iFace, 1, 1);
 	}
 }
