@@ -32,7 +32,7 @@ public class AIPlayer : MonoBehaviour
 	{
         // 未加入角色要被加上蜘蛛網.
         if (!bIsIn)
-            ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefeb/Item/G_Catch");
+            ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/Item/G_Catch");
 
         pWeapon = (WeaponType)pMember.iEquip;
         // 建立外觀.

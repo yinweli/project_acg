@@ -50,6 +50,8 @@ public class PlayerCreater : MonoBehaviour
         pObj.GetComponent<AIPlayer>().iPlayer = PlayerData.pthis.Members.Count + CatchList.Count;
         pObj.GetComponent<AIPlayer>().Init(false, temp);
 
+        pObj.transform.position = new Vector2(fPosX, fPosY);
+
         CatchList.Add(pObj, temp);        
     }
     // ------------------------------------------------------------------
