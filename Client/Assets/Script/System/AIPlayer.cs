@@ -23,14 +23,20 @@ public class AIPlayer : MonoBehaviour
 	public bool bBeCaught = false;
 	// 武器冷卻.
 	public float fCoolDown = 0;
-	
+
 	public AudioClip audioClip;
+
+    GameObject ObjCatch = null;
     // ------------------------------------------------------------------
-	void Start ()
+    public void Init(bool bIsIn, Member pMember)
 	{
-        pWeapon = (WeaponType)PlayerData.pthis.Members[iPlayer].iEquip;
+        // 未加入角色要被加上蜘蛛網.
+        if (!bIsIn)
+            ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefeb/Item/G_Catch");
+
+        pWeapon = (WeaponType)pMember.iEquip;
         // 建立外觀.
-        ObjHuman = UITool.pthis.CreateRole(gameObject, PlayerData.pthis.Members[iPlayer].iSex, PlayerData.pthis.Members[iPlayer].iLook);
+        ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iSex, pMember.iLook);
         // 設定武器.
         if (ObjHuman && ObjHuman.GetComponent<G_PLook>())
             ObjHuman.GetComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
@@ -43,6 +49,9 @@ public class AIPlayer : MonoBehaviour
 	{
 		if (!SysMain.pthis.bIsGaming)
 			return;
+
+        if (ObjCatch)
+            return;
 		
 		if (pWeapon == WeaponType.Weapon_001)
 			ChackLight();
