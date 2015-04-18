@@ -58,8 +58,7 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 2; // 物件遞減機率
 
-	public const int iMaxPickupRange = 5; // 最大拾取範圍
-	public const int iMinPickupRange = 1; // 最小拾取範圍
+	public const int iPickupRange = 5; // 拾取範圍
 	public const int iMaxPickupMember = 1; // 最大拾取成員次數
 	public const int iMaxPickupItems = 16; // 最大拾取物品次數
 	public const int iMinPickupItems = 8; // 最小拾取物品次數

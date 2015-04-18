@@ -29,6 +29,19 @@ public class UITool : MonoBehaviour {
 
         return pObj;
     }
+	// ------------------------------------------------------------------
+	public GameObject CreatePickup(GameObject Parent, ENUM_Pickup emType, float fPosX, float fPosY)
+	{
+		GameObject pObj = null;
+
+		if(emType != ENUM_Pickup.Member && emType != ENUM_Pickup.Currency)
+		{
+			pObj = NGUITools.AddChild(Parent, Resources.Load("Prefab/Item/G_" + emType) as GameObject);
+			pObj.transform.localPosition = new Vector3(fPosX, fPosY);
+		}//if
+
+		return pObj;
+	}
     // ------------------------------------------------------------------
     // 建立角色.
     public GameObject CreateRole(GameObject Parent, int iSex, int iLook)

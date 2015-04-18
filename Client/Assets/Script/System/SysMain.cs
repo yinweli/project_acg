@@ -55,12 +55,11 @@ public class SysMain : MonoBehaviour
             // 以下是測試資料, 以後要改
             Rule.MemberAdd(1);
 			Rule.MemberAdd(5);
+			Rule.MemberAdd(10);
 			GameData.pthis.iStyle = 1;
         }//if
         // 建立地圖.
         MapCreater.pthis.Create();
-        // 移動地圖.
-        MapMove.pthis.StartNew();
         // 開始行走
         CameraCtrl.pthis.LoginMove();
     }
@@ -100,8 +99,6 @@ public class SysMain : MonoBehaviour
         MapCreater.pthis.Clear();
         // 建立地圖.
         MapCreater.pthis.Create();
-        // 移動地圖.
-        MapMove.pthis.StartNew();
         // 清空物件.
         ClearObj();
         // UI初始化.
