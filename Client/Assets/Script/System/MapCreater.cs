@@ -10,6 +10,7 @@ public class MapCreater : MonoBehaviour
 	public static MapCreater pthis = null;
 
 	private Dictionary<Vector2, GameObject> ObjectList = new Dictionary<Vector2, GameObject>();
+	private List<GameObject> PickupList = new List<GameObject>();
 	private int iWidth = 0;
 	private int iHeight = 0;
 
@@ -135,6 +136,70 @@ public class MapCreater : MonoBehaviour
 			}//for
 		}//for
 	}
+	// 建立地圖拾取
+	public void CreatePickup()
+	{
+		GameData.pthis.PickupList.Clear();
+		
+		// 成員拾取
+		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
+		{
+			for(int iCount = 0; iCount < GameDefine.iMaxPickupMember; ++iCount)
+			{
+				Pickup Data = new Pickup();
+				
+				Data.Pos = Rule.NextPickup();
+				Data.iType = (int)ENUM_Pickup.Member;
+				Data.iCount = 1;
+				Data.iSex = Random.Range(0, GameDefine.iMaxSex);
+				Data.iLook = Random.Range(0, GameDefine.iMaxLook);
+				Data.bPickup = false;
+				
+				GameData.pthis.PickupList.Add(Data);
+			}//for
+		}//if
+		
+		// 物品拾取
+		for(int iCount = 0, iMax = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems); iCount < iMax; ++iCount)
+		{
+			int iValue = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue);
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = Random.Range((int)ENUM_Pickup.Currency, System.Enum.GetValues(typeof(ENUM_Pickup)).Length);
+			
+			switch((ENUM_Pickup)Data.iType)
+			{
+			case ENUM_Pickup.Currency: Data.iCount = iValue; break;
+			case ENUM_Pickup.Battery: Data.iCount = iValue / GameDefine.iPriceBattery; break;
+			case ENUM_Pickup.LightAmmo: Data.iCount = iValue / GameDefine.iPriceLightAmmo; break;
+			case ENUM_Pickup.HeavyAmmo: Data.iCount = iValue / GameDefine.iPriceHeavyAmmo; break;
+			default: Data.iCount = 0; break;
+			}//switch
+			
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
+		}//for
+
+		foreach(Pickup Itor in GameData.pthis.PickupList)
+		{
+			Vector2 Pos = Itor.Pos.ToVector2();
+			float fPosX = Pos.x + GameDefine.iBlockSize / 2;
+			float fPosY = Pos.y + GameDefine.iBlockSize / 2;
+			GameObject Obj = null;
+			
+			if((ENUM_Pickup)Itor.iType == ENUM_Pickup.Member)
+				Obj = null;//UITool.pthis.CreateRole(gameObject, Itor.iSex, Itor.iLook);
+			else
+				Obj = UITool.pthis.CreatePickup(gameObject, (ENUM_Pickup)Itor.iType, fPosX, fPosY);
+			
+			if(Obj != null)
+				PickupList.Add(Obj);
+		}//for
+	}
 	// 填滿地圖
 	private void Fill()
 	{
@@ -179,8 +244,10 @@ public class MapCreater : MonoBehaviour
 		CreateStart();
 		CreateEnd();
 		CreateObjt();
+		CreatePickup();
 		Fill();
 		Refresh(0);
+		transform.localPosition = new Vector3(-GetRoadObj(0).transform.localPosition.x, -GetRoadObj(0).transform.localPosition.y, 0);
 	}
 	// 清除地圖
 	public void Clear()
@@ -188,7 +255,11 @@ public class MapCreater : MonoBehaviour
 		foreach(KeyValuePair<Vector2, GameObject> Itor in ObjectList)
 			Destroy(Itor.Value);
 
+		foreach(GameObject Itor in PickupList)
+			Destroy(Itor);
+
 		ObjectList.Clear();
+		PickupList.Clear();
 		GameData.pthis.RoadList.Clear();
         GameData.pthis.ObjtList.Clear();
 	}
