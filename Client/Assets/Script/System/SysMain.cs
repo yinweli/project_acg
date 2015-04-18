@@ -54,7 +54,7 @@ public class SysMain : MonoBehaviour
 
             // 以下是測試資料, 以後要改
             Rule.MemberAdd(1);
-			Rule.MemberAdd(5);
+			Rule.MemberAdd(10);
 			GameData.pthis.iStyle = 1;
         }//if
         // 建立地圖.
@@ -171,8 +171,7 @@ public class SysMain : MonoBehaviour
     {
         bIsGaming = false;
         //Time.timeScale = 0;
-        GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
-        pObj.transform.localPosition = new Vector3(0, 0, -1000);
+        SysUI.pthis.CreatePanel("Prefab/P_Victory");        
     }
     // ------------------------------------------------------------------
     void ClearObj()
