@@ -45,12 +45,10 @@ public class PlayerCreater : MonoBehaviour
         temp.iSex = iSex;
         temp.iLook = iLook;
 
-        GameObject pObj = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
+        GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "G_Player", fPosX, fPosY);
         pObj.name = string.Format("Role{0:000}", PlayerData.pthis.Members.Count + CatchList.Count);
         pObj.GetComponent<AIPlayer>().iPlayer = PlayerData.pthis.Members.Count + CatchList.Count;
         pObj.GetComponent<AIPlayer>().Init(false, temp);
-
-        pObj.transform.position = new Vector2(fPosX, fPosY);
 
         CatchList.Add(pObj, temp);        
     }
