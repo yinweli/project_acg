@@ -22,6 +22,7 @@ public class Btn_GetResource : MonoBehaviour
             pSprite.depth = 10000;
             // 取得數量.
             pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
+            GameData.pthis.PickupList[iItemID].bPickup = true;
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
@@ -31,19 +32,13 @@ public class Btn_GetResource : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
-            Debug.Log("Look Enter");
             GetComponent<Animator>().Play("TalkShing");
-        }
     }
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
-            Debug.Log("Look Exit");
             GetComponent<Animator>().Play("Wait");
-        }
     }
     // ------------------------------------------------------------------
     IEnumerator FlyToPos()
