@@ -59,6 +59,7 @@ public class GameDefine
 	public const int iObjtDec = 2; // 物件遞減機率
 
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
+	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iMaxPickupItems = 12; // 最大拾取物品次數
 	public const int iMinPickupItems = 10; // 最小拾取物品次數
 	public const int iMaxPickupValue = 54; // 最大拾取物品價值
