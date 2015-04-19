@@ -99,6 +99,8 @@ public class SysMain : MonoBehaviour
         MapCreater.pthis.Clear();
         // 建立地圖.
         MapCreater.pthis.Create();
+        // 建立撿取物件.
+        MapCreater.pthis.CreatePickup();
         // 清空物件.
         ClearObj();
         // UI初始化.
