@@ -59,10 +59,10 @@ public class GameDefine
 	public const int iObjtDec = 2; // 物件遞減機率
 
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
-	public const int iMaxPickupItems = 16; // 最大拾取物品次數
-	public const int iMinPickupItems = 8; // 最小拾取物品次數
-	public const int iMaxPickupValue = 60; // 最大拾取物品價值
-	public const int iMinPickupValue = 30; // 最小拾取物品價值
+	public const int iMaxPickupItems = 12; // 最大拾取物品次數
+	public const int iMinPickupItems = 10; // 最小拾取物品次數
+	public const int iMaxPickupValue = 54; // 最大拾取物品價值
+	public const int iMinPickupValue = 48; // 最小拾取物品價值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
