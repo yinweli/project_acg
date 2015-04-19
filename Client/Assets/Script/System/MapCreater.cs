@@ -193,10 +193,12 @@ public class MapCreater : MonoBehaviour
             if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
                 PlayerCreater.pthis.AddList(fPosX, fPosY, itor.iSex, itor.iLook);
             else
-            {
+            {                
                 Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
                 if (Obj && Obj.GetComponent<Btn_GetResource>())
                     Obj.GetComponent<Btn_GetResource>().iItemID = i;
+                else if (Obj && Obj.GetComponent<Btn_GetCurrency>())
+                    Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
             }
 			
 			if(Obj != null)

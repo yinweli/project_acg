@@ -34,7 +34,7 @@ public class UITool : MonoBehaviour {
 	{
 		GameObject pObj = null;
 
-		if(emType != ENUM_Pickup.Member && emType != ENUM_Pickup.Currency)
+		if(emType != ENUM_Pickup.Member)
 		{
 			pObj = NGUITools.AddChild(Parent, Resources.Load("Prefab/Item/G_" + emType) as GameObject);
 			pObj.transform.localPosition = new Vector3(fPosX, fPosY);

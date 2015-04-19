@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Btn_GetResource : MonoBehaviour 
-{
-    public int iItemID = 0;
+public class Btn_GetCurrency : MonoBehaviour {
 
-    public ENUM_Resource enumType;
+    public int iItemID = 0;
 
     public Shader ClickShader;
 
@@ -25,7 +23,7 @@ public class Btn_GetResource : MonoBehaviour
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
-        }        
+        }
     }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
@@ -48,24 +46,17 @@ public class Btn_GetResource : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator FlyToPos()
     {
-        //轉加放大
+        //放大
         int iCount = 1;
         while (iCount <= 9)
         {
-            pSprite.transform.Rotate(0, 0, -10);
             pSprite.transform.localScale = new Vector3(pSprite.transform.localScale.x + (0.01f * iCount), pSprite.transform.localScale.y + (0.01f * iCount), 1);
             iCount++;
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.8f);
 
-        Vector3 VecPos = Vector3.zero;
-        if (enumType == ENUM_Resource.Battery)
-            VecPos = P_UI.pthis.ObjBattery.transform.position;
-        else if (enumType == ENUM_Resource.LightAmmo)
-            VecPos = P_UI.pthis.ObjAmmoLight.transform.position;
-        else if (enumType == ENUM_Resource.HeavyAmmo)
-            VecPos = P_UI.pthis.ObjAmmoHeavy.transform.position;
+        Vector3 VecPos = P_UI.pthis.ObjCurrency.transform.position;
 
         float fFrame = 1;
         while (Vector2.Distance(pSprite.transform.position, VecPos) > 0.03f)
@@ -75,18 +66,11 @@ public class Btn_GetResource : MonoBehaviour
             fFrame += 0.05f;
         }
 
-        if (enumType == ENUM_Resource.Battery)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += GameData.pthis.PickupList[iItemID].iCount;
-        else if (enumType == ENUM_Resource.LightAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += GameData.pthis.PickupList[iItemID].iCount;
-        else if (enumType == ENUM_Resource.HeavyAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo] += GameData.pthis.PickupList[iItemID].iCount;
-
-        P_UI.pthis.UpdateResource();
+        PlayerData.pthis.iCurrency += GameData.pthis.PickupList[iItemID].iCount;
+        P_UI.pthis.UpdateCurrency();
 
         Destroy(gameObject);
     }
-
     // ------------------------------------------------------------------
     void MoveTo(Vector3 vecDirection, float fSpeed)
     {

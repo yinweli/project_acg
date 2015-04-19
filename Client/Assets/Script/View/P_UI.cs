@@ -8,6 +8,7 @@ public class P_UI : MonoBehaviour
 
     public int iBattery = 100;
 
+    public GameObject ObjCurrency = null;
     public GameObject ObjBattery = null;
     public GameObject ObjAmmoLight = null;
     public GameObject ObjAmmoHeavy = null;
