@@ -99,6 +99,8 @@ public class SysMain : MonoBehaviour
         MapCreater.pthis.Clear();
         // 清空物件.
         ClearObj();
+        // 清空待救角色.
+        PlayerCreater.pthis.ClearList();
 
         // 建立地圖.
         MapCreater.pthis.Create();
