@@ -58,8 +58,7 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 2; // 物件遞減機率
 
-	public const int iPickupRange = 5; // 拾取範圍
-	public const int iMaxPickupMember = 1; // 最大拾取成員次數
+	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iMaxPickupItems = 16; // 最大拾取物品次數
 	public const int iMinPickupItems = 8; // 最小拾取物品次數
 	public const int iMaxPickupValue = 60; // 最大拾取物品價值
@@ -73,6 +72,10 @@ public class GameDefine
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
 
+	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
+	{
+		-3, -2, -1, 1, 2, 3, 
+	};
 	public static readonly List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
 	{
 		new MapCoor(1, 1), // 物件(1x1)

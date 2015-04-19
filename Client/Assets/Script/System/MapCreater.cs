@@ -144,19 +144,16 @@ public class MapCreater : MonoBehaviour
 		// 成員拾取
 		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
 		{
-			for(int iCount = 0; iCount < GameDefine.iMaxPickupMember; ++iCount)
-			{
-				Pickup Data = new Pickup();
-				
-				Data.Pos = Rule.NextPickup();
-				Data.iType = (int)ENUM_Pickup.Member;
-				Data.iCount = 1;
-				Data.iSex = Random.Range(0, GameDefine.iMaxSex);
-				Data.iLook = Random.Range(0, GameDefine.iMaxLook);
-				Data.bPickup = false;
-				
-				GameData.pthis.PickupList.Add(Data);
-			}//for
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Member;
+			Data.iCount = 1;
+			Data.iSex = Random.Range(0, GameDefine.iMaxSex);
+			Data.iLook = Random.Range(0, GameDefine.iMaxLook);
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
 		}//if
 		
 		// 物品拾取

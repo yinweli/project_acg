@@ -231,22 +231,20 @@ public class Rule
 			return new MapCoor();
 
 		MapCoor Road = GameData.pthis.RoadList[Random.Range(0, GameData.pthis.RoadList.Count)];
-		List<int> NewPosX = new List<int>();
-		List<int> NewPosY = new List<int>();
 
-		for(int iX = -GameDefine.iPickupRange; iX < GameDefine.iPickupRange; ++iX)
+		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
 		{
-			if(iX != 0)
-				NewPosX.Add(iX);
+			MapCoor Result = new MapCoor(Road.X + Tool.RandomPick(GameDefine.PickupRange), Road.Y + Tool.RandomPick(GameDefine.PickupRange));
+			bool bCheck = true;
+
+			foreach(MapCoor Itor in GameData.pthis.RoadList)
+				bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
+
+			if(bCheck)
+				return Result;
 		}//for
 
-		for(int iY = -GameDefine.iPickupRange; iY < GameDefine.iPickupRange; ++iY)
-		{
-			if(iY != 0)
-				NewPosY.Add(iY);
-		}//for
-
-		return new MapCoor(Road.X + Tool.RandomPick(NewPosX), Road.Y + Tool.RandomPick(NewPosY));
+		return new MapCoor();
 	}
 	// 執行獲得裝備
 	public static int GainEquip(int iPos)
