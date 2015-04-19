@@ -230,7 +230,7 @@ public class Rule
 		if(GameData.pthis.RoadList.Count <= GameDefine.iPickupBorder)
 			return new MapCoor();
 
-		MapCoor Road = GameData.pthis.RoadList[Random.Range(GameData.iPickupBorder, GameData.pthis.RoadList.Count - GameDefine.iPickupBorder)];
+		MapCoor Road = GameData.pthis.RoadList[Random.Range(GameDefine.iPickupBorder, GameData.pthis.RoadList.Count - GameDefine.iPickupBorder)];
 
 		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
 		{
