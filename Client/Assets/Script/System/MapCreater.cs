@@ -191,7 +191,7 @@ public class MapCreater : MonoBehaviour
 			GameObject Obj = null;
 
             if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
-                PlayerCreater.pthis.AddList(fPosX, fPosY, itor.iSex, itor.iLook);
+                PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iSex, itor.iLook);
             else
             {                
                 Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);

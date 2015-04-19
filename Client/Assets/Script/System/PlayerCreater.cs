@@ -38,7 +38,7 @@ public class PlayerCreater : MonoBehaviour
 
     }
     // ------------------------------------------------------------------
-    public void AddList(float fPosX, float fPosY, int iSex, int iLook)
+    public void AddList(int iItemID, float fPosX, float fPosY, int iSex, int iLook)
     {
         // 增加玩家資料.
         Member temp = new Member();
@@ -46,9 +46,10 @@ public class PlayerCreater : MonoBehaviour
         temp.iLook = iLook;
 
         GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "G_Player", fPosX, fPosY);
+        pObj.transform.localPosition = new Vector3(fPosX, fPosY, -0.1f * (PlayerData.pthis.Members.Count + CatchList.Count));
         pObj.name = string.Format("Role{0:000}", PlayerData.pthis.Members.Count + CatchList.Count);
         pObj.GetComponent<AIPlayer>().iPlayer = PlayerData.pthis.Members.Count + CatchList.Count;
-        pObj.GetComponent<AIPlayer>().Init(false, temp);
+        pObj.GetComponent<AIPlayer>().Init(false, iItemID, temp);
 
         CatchList.Add(pObj, temp);        
     }
@@ -58,8 +59,11 @@ public class PlayerCreater : MonoBehaviour
         pPrePlayer = pObj;
         iCount++;
 
+        PlayerData.pthis.Members.Add(CatchList[pObj]);
+        PlayerData.pthis.Save();
         SysMain.pthis.Role.Add(pObj, iCount);
-        SysMain.pthis.CatchRole.Add(pObj, iCount);
+        SysMain.pthis.CatchRole.Add(pObj, iCount);        
+
         CatchList.Remove(pObj);
     }
     // ------------------------------------------------------------------
@@ -74,7 +78,7 @@ public class PlayerCreater : MonoBehaviour
         pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
         pPrePlayer.name = string.Format("Role{0:000}", iCount);
         pPrePlayer.GetComponent<AIPlayer>().iPlayer = iCount;
-        pPrePlayer.GetComponent<AIPlayer>().Init(true, PlayerData.pthis.Members[iCount]);
+        pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, PlayerData.pthis.Members[iCount]);
 
         // 加入玩家佇列.
         SysMain.pthis.Role.Add(pPrePlayer, iCount);

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Btn_SaveRole : MonoBehaviour 
 {
+    public int iItemID = 0;
+
     public AIPlayer pPlayer;
     public Animator pAni;
     // ------------------------------------------------------------------
@@ -11,26 +13,26 @@ public class Btn_SaveRole : MonoBehaviour
         pPlayer = transform.parent.gameObject.GetComponent<AIPlayer>();
     }
     // ------------------------------------------------------------------
-    void OnClick()
+    void OnPress(bool bIsPress)
     {
-        PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
-        Destroy(this);        
+        if (bIsPress)
+        {
+            PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
+            GameData.pthis.PickupList[iItemID].bPickup = true;
+            Destroy(gameObject);
+        }
     }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
             pAni.Play("TalkShing");
-        }
     }
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
             pAni.Play("Wait");
-        }
     }
 	
 }
