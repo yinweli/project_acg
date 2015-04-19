@@ -40,7 +40,6 @@ public class GameDefine
 	
     public const int iWeightEngry = 3;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
-    public const int iStageCount = 5;   // 每多少關增加難度.
     public const int iMINWaitSec = 5;   // 怪物出怪最小間隔秒數.
     public const int iMAXWaitSec = 21;  // 怪物出怪最大間隔秒數.
 
@@ -64,6 +63,7 @@ public class GameDefine
 	public const int iMinPickupItems = 10; // 最小拾取物品次數
 	public const int iMaxPickupValue = 54; // 最大拾取物品價值
 	public const int iMinPickupValue = 48; // 最小拾取物品價值
+	public const int iAddPickupValue = 5; // 增加拾取物品價值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱

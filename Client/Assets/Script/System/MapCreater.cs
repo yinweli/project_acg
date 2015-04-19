@@ -159,7 +159,7 @@ public class MapCreater : MonoBehaviour
 		// 物品拾取
 		for(int iCount = 0, iMax = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems); iCount < iMax; ++iCount)
 		{
-			int iValue = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue);
+			int iValue = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + PlayerData.pthis.iStage / GameDefine.iStageLevel * GameDefine.iAddPickupValue;
 			Pickup Data = new Pickup();
 			
 			Data.Pos = Rule.NextPickup();
