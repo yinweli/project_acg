@@ -184,17 +184,23 @@ public class MapCreater : MonoBehaviour
 			GameData.pthis.PickupList.Add(Data);
 		}//for
 
-		foreach(Pickup Itor in GameData.pthis.PickupList)
+		for(int i = 0; i < GameData.pthis.PickupList.Count; i++ )
 		{
-			Vector2 Pos = Itor.Pos.ToVector2();
-			float fPosX = Pos.x + GameDefine.iBlockSize / 2;
-			float fPosY = Pos.y + GameDefine.iBlockSize / 2;
+            Pickup itor = GameData.pthis.PickupList[i];
+
+            Vector2 Pos = itor.Pos.ToVector2();
+			float fPosX = Pos.x + GameDefine.iBlockSize / 2 -GetRoadObj(0).transform.localPosition.x;
+			float fPosY = Pos.y + GameDefine.iBlockSize / 2 -GetRoadObj(0).transform.localPosition.y;
 			GameObject Obj = null;
-			
-			if((ENUM_Pickup)Itor.iType == ENUM_Pickup.Member)
-				PlayerCreater.pthis.AddList(fPosX, fPosY, Itor.iSex, Itor.iLook);
-			else
-				Obj = UITool.pthis.CreatePickup(gameObject, (ENUM_Pickup)Itor.iType, fPosX, fPosY);
+
+            if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
+                PlayerCreater.pthis.AddList(fPosX, fPosY, itor.iSex, itor.iLook);
+            else
+            {
+                Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
+                if (Obj && Obj.GetComponent<Btn_GetResource>())
+                    Obj.GetComponent<Btn_GetResource>().iItemID = i;
+            }
 			
 			if(Obj != null)
 				PickupList.Add(Obj);
@@ -243,8 +249,7 @@ public class MapCreater : MonoBehaviour
 		CreateRoad();
 		CreateStart();
 		CreateEnd();
-		CreateObjt();
-		CreatePickup();
+		CreateObjt();		
 		Fill();
 		Refresh(0);
 		transform.localPosition = new Vector3(-GetRoadObj(0).transform.localPosition.x, -GetRoadObj(0).transform.localPosition.y, 0);

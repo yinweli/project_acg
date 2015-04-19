@@ -97,10 +97,13 @@ public class SysMain : MonoBehaviour
     {
         // 清空地圖.
         MapCreater.pthis.Clear();
-        // 建立地圖.
-        MapCreater.pthis.Create();
         // 清空物件.
         ClearObj();
+
+        // 建立地圖.
+        MapCreater.pthis.Create();
+        // 建立撿取物件.
+        MapCreater.pthis.CreatePickup();
         // UI初始化.
         P_UI.pthis.StartNew();
         // 新遊戲 - 淡出淡入天數後開始遊戲.
