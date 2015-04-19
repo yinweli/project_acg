@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Btn_GetResource : MonoBehaviour 
 {
+    public int iItemID = 0;
+
     public ENUM_Resource enumType;
 
     public Shader ClickShader;
 
     public UI2DSprite pSprite;
+    public UILabel pLbCount;
 
     void OnClick()
     {
@@ -15,6 +18,9 @@ public class Btn_GetResource : MonoBehaviour
         // 變更為不受光.
         pSprite.shader = ClickShader;
         pSprite.depth = 10000;
+        // 取得數量.
+        pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
+        GetComponent<Animator>().Play("GetItem");
         // 飛行至定位.
         StartCoroutine(FlyToPos());
     }
@@ -25,7 +31,7 @@ public class Btn_GetResource : MonoBehaviour
         int iCount = 1;
         while (iCount <= 9)
         {
-            transform.Rotate(0,0,-10);
+            pSprite.transform.Rotate(0, 0, -10);
             pSprite.transform.localScale = new Vector3(pSprite.transform.localScale.x + (0.01f * iCount), pSprite.transform.localScale.y + (0.01f * iCount), 1);
             iCount++;
             yield return new WaitForEndOfFrame();
@@ -41,19 +47,19 @@ public class Btn_GetResource : MonoBehaviour
             VecPos = P_UI.pthis.ObjAmmoHeavy.transform.position;
 
         float fFrame = 1;
-        while (Vector2.Distance(transform.position, VecPos) > 0.01f)
+        while (Vector2.Distance(pSprite.transform.position, VecPos) > 0.03f)
         {
             yield return new WaitForEndOfFrame();
-            MoveTo(VecPos - transform.position, 0.8f * fFrame);
+            MoveTo(VecPos - pSprite.transform.position, 0.8f * fFrame);
             fFrame += 0.05f;
         }
 
         if (enumType == ENUM_Resource.Battery)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += 10;
+            PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += GameData.pthis.PickupList[iItemID].iCount;
         else if (enumType == ENUM_Resource.LightAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += 10;
+            PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += GameData.pthis.PickupList[iItemID].iCount;
         else if (enumType == ENUM_Resource.HeavyAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo] += 10;
+            PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo] += GameData.pthis.PickupList[iItemID].iCount;
 
         Destroy(gameObject);
     }
@@ -64,6 +70,6 @@ public class Btn_GetResource : MonoBehaviour
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
         // 把物件位置朝目標向量(玩家方向)移動.
-        transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
+        pSprite.transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
 }
