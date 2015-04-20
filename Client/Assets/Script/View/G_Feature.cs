@@ -29,7 +29,7 @@ public class G_Feature : MonoBehaviour
             ObjGrid.GetComponent<UIGrid>().Reposition();
 
             iFeature[i] = Rule.GainFeature(i);
-            iEquip[i] = Rule.GainFeature(i);
+            iEquip[i] = Rule.GainEquip(i);
         }
 
         PlayerData.pthis.Save();
