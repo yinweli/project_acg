@@ -154,8 +154,7 @@ public class Rule
 	// 建立成員
 	public static void MemberAdd(int iEquip)
 	{
-        MemberAdd(0, 0, iEquip);
-		//MemberAdd(Random.Range(0, GameDefine.iMaxSex), Random.Range(0, GameDefine.iMaxLook), iEquip);
+		MemberAdd(Random.Range(0, GameDefine.iMaxSex), Random.Range(0, GameDefine.iMaxLook), iEquip);
 	}
 	// 建立成員
 	public static void MemberAdd()
