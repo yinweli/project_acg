@@ -9,7 +9,7 @@ public class BtnStartNew : MonoBehaviour
 	void OnClick()
     {
         PlayerData.pthis.iStage++;
-		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+
         SysMain.pthis.NewGame();
         Destroy(pPanel);
     }
