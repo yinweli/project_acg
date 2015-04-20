@@ -30,19 +30,13 @@ public class Btn_GetCurrency : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
-            Debug.Log("Look Enter");
             GetComponent<Animator>().Play("TalkShing");
-        }
     }
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Look")
-        {
-            Debug.Log("Look Exit");
             GetComponent<Animator>().Play("Wait");
-        }
     }
     // ------------------------------------------------------------------
     IEnumerator FlyToPos()

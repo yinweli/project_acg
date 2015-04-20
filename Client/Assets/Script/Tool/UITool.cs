@@ -52,8 +52,6 @@ public class UITool : MonoBehaviour {
         else            // 男生
             Name = string.Format("Boy_{0:000}", iLook);
 
-        Debug.Log(Name);
-
         GameObject pObj = NGUITools.AddChild(Parent, Resources.Load("Prefab/Chr/" + Name) as GameObject);
 
         return pObj;
