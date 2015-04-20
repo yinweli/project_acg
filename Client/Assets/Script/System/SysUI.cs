@@ -20,6 +20,11 @@ public class SysUI : MonoBehaviour
         return NGUITools.AddChild(gameObject, Resources.Load(Path) as GameObject);
     }
     // ------------------------------------------------------------------
+    public GameObject CreateUI(GameObject Parent, string Path)
+    {
+        return NGUITools.AddChild(Parent, Resources.Load(Path) as GameObject);
+    }
+    // ------------------------------------------------------------------
     public void ShowDay()
     {
         GameObject pObj = CreatePanel("Prefab/P_Day");

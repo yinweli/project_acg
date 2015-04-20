@@ -4,7 +4,7 @@ using System.Collections;
 public class G_PLook : MonoBehaviour 
 {
     public UI2DSprite[] Role;
-    public void SetLook(AIPlayer pAI, int iLayer, WeaponType pWeapon)
+    public void SetLook(AIPlayer pAI, int iLayer, ENUM_Weapon pWeapon)
     {
         GameObject ObjRHand = null;
         Role = GetComponentsInChildren<UI2DSprite>();
@@ -17,7 +17,7 @@ public class G_PLook : MonoBehaviour
         pAI.pAni = GetComponent<Animator>();
 
         // 實例化武器.
-        if (pWeapon != WeaponType.Weapon_null)
+        if (pWeapon != ENUM_Weapon.Weapon_null)
         {
             GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pAI.pWeapon);
             UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
@@ -32,7 +32,7 @@ public class G_PLook : MonoBehaviour
             }
 
             // 拿手電筒需替玩家加上光源.
-            if (pWeapon == WeaponType.Weapon_001)
+            if (pWeapon == ENUM_Weapon.Weapon_001)
             {
                 GameObject pObj = UITool.pthis.CreateUI(pAI.gameObject, "Prefab/G_Light");
                 pObj.GetComponent<G_Light>().SetLightFollow(ObjWeapon);
@@ -52,6 +52,31 @@ public class G_PLook : MonoBehaviour
             Role[i].gameObject.transform.localPosition = vecPos;
         }
 
-        //Destroy(this);
+        Destroy(this);
+    }
+
+    public GameObject SetShader(Shader pShader, ENUM_Weapon pWeapon)
+    {
+        GameObject ObjRHand = null;
+        Role = GetComponentsInChildren<UI2DSprite>();
+
+        for (int i = 0; i < Role.Length; i++)
+        {
+            Role[i].shader = pShader;
+            // 取得右手.
+            if (Role[i].gameObject.name == "S_Hand_R")
+                ObjRHand = Role[i].gameObject.transform.parent.gameObject;
+        }
+
+        if (pWeapon != ENUM_Weapon.Weapon_null)
+        {
+            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pWeapon);
+            UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
+
+            for (int i = 0; i < p2DS.Length; i++)
+                p2DS[i].shader = pShader;
+        }       
+
+        return ObjRHand;
     }
 }

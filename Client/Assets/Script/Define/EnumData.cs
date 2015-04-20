@@ -1,12 +1,12 @@
-﻿public enum EnemyType
+﻿public enum ENUM_Language
 {
-    Enemy_001,
-    Enemy_002,
+    enUS,
+    zhTW,
 
-    EnemyCount,
+    LanguageCount,
 }
 
-public enum WeaponType
+public enum ENUM_Weapon
 {
     Weapon_null,
     Weapon_001, // 手電筒.
@@ -101,31 +101,6 @@ public enum ENUM_Resource
 	HeavyAmmo, // 重型彈藥
 
     Resource_Count,
-}
-
-// 角色外觀列舉.
-public enum ENUM_Role
-{
-    HairA,
-    HairB,    
-    Adorn,    
-    BrowR,
-    BrowL,    
-    EyeR,
-    EyeL,
-    EyeBgR,
-    EyeBgL,    
-    Mouth,
-    Face_Bg,
-    Face_BR,
-    Face_BL,    
-    Body,
-    HandR,
-    HandL,    
-    FootR,
-    FootL,
-
-    Role_Count,
 }
 
 // 地圖拾取列舉

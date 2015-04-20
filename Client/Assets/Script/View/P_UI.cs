@@ -62,7 +62,7 @@ public class P_UI : MonoBehaviour
             pBtn.StartNew();
     }
     // ------------------------------------------------------------------
-    public bool UseBullet(WeaponType pType)
+    public bool UseBullet(ENUM_Weapon pType)
     {
         DBFEquip DataEquip = GameDBF.This.GetEquip((int)pType) as DBFEquip;
 

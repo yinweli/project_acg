@@ -11,7 +11,7 @@ public class AIPlayer : MonoBehaviour
 	// 武器動畫.
 	public Animator pWAni = null;
 	// 手上武器type.
-	public WeaponType pWeapon = WeaponType.Weapon_null;
+	public ENUM_Weapon pWeapon = ENUM_Weapon.Weapon_null;
 	
 	// 角色.
 	public GameObject ObjHuman = null;
@@ -38,14 +38,14 @@ public class AIPlayer : MonoBehaviour
             ObjCatch.GetComponent<Btn_SaveRole>().iItemID = iItemID;
         }
 
-        pWeapon = (WeaponType)pMember.iEquip;
+        pWeapon = (ENUM_Weapon)pMember.iEquip;
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iSex, pMember.iLook);
         // 設定武器.
         if (ObjHuman && ObjHuman.GetComponent<G_PLook>())
             ObjHuman.GetComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
         // 設定武器音效
-        if (pWeapon != WeaponType.Weapon_null && pWeapon != WeaponType.Weapon_001)
+        if (pWeapon != ENUM_Weapon.Weapon_null && pWeapon != ENUM_Weapon.Weapon_001)
             audioClip = Resources.Load("Sound/FX/" + pWeapon) as AudioClip;
 	}
 	// ------------------------------------------------------------------
@@ -57,7 +57,7 @@ public class AIPlayer : MonoBehaviour
         if (ObjCatch)
             return;
 		
-		if (pWeapon == WeaponType.Weapon_001)
+		if (pWeapon == ENUM_Weapon.Weapon_001)
 			ChackLight();
 		else
 			Attack();
@@ -79,7 +79,7 @@ public class AIPlayer : MonoBehaviour
 	// 射擊函式.
 	void Attack()
 	{
-		if (pWeapon == WeaponType.Weapon_null || pWeapon == WeaponType.Weapon_001)
+		if (pWeapon == ENUM_Weapon.Weapon_null || pWeapon == ENUM_Weapon.Weapon_001)
 			return;
 		
 		// 確認目標.
@@ -170,7 +170,7 @@ public class AIPlayer : MonoBehaviour
         // 從可抓佇列中移除.
         SysMain.pthis.CatchRole.Remove(gameObject);
 		// 拿手電筒的不需要改目標.
-		if(pWeapon != WeaponType.Weapon_001)
+		if(pWeapon != ENUM_Weapon.Weapon_001)
 			ObjTarget = ObjMonster;
 		gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
 		if (pAni)

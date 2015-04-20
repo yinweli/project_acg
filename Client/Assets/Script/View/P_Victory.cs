@@ -24,5 +24,8 @@ public class P_Victory : MonoBehaviour
     {
         ObjPage[iPage].SetActive(false);
         ObjPage[iPage + 1].SetActive(true);
+
+        if (ObjPage[iPage + 1] && ObjPage[iPage + 1].GetComponent<G_Feature>())
+            ObjPage[iPage + 1].GetComponent<G_Feature>().OpenPage();
     }
 }
