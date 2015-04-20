@@ -103,6 +103,8 @@ public class SysMain : MonoBehaviour
         // 清空待救角色.
         PlayerCreater.pthis.ClearList();
 
+		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+
         // 建立地圖.
         MapCreater.pthis.Create();
         // 建立撿取物件.
