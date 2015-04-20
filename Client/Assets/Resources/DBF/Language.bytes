@@ -16,10 +16,10 @@
 {"GUID":"2006", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
 {"GUID":"2007", "enUS":"Flu", "zhTW":"\u611f\u5192"}
 {"GUID":"2008", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
-{"GUID":"2009", "enUS":"Clumsy soldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
-{"GUID":"2010", "enUS":"Careless soldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
-{"GUID":"2011", "enUS":"Elite soldiers", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
-{"GUID":"2012", "enUS":"Talented fighters", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
+{"GUID":"2009", "enUS":"Clumsy\nsoldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
+{"GUID":"2010", "enUS":"Careless\nsoldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
+{"GUID":"2011", "enUS":"Elite\nsoldiers", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
+{"GUID":"2012", "enUS":"Talented\nfighters", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
 {"GUID":"2013", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
 {"GUID":"3001", "enUS":"+10 stamina limit", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965010\u9ede"}
 {"GUID":"3002", "enUS":"+20 stamina limit", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965020\u9ede"}
