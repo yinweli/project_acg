@@ -42,8 +42,8 @@ public class P_UI : MonoBehaviour
             return;
 
         // 電源冷卻計算.
-        if (fCoolDown <= Time.time && AddBattery(-1))
-            fCoolDown = Time.time + 1.0f;
+        if (fCoolDown <= Time.time && AddBattery(GameDefine.iBatteryTimeCost))
+            fCoolDown = Time.time + GameDefine.fBatteryTime;
     }
     // ------------------------------------------------------------------
     public void StartNew()
