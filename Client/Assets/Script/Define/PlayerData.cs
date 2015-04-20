@@ -11,13 +11,14 @@ public class PlayerData : MonoBehaviour
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
+	public int iStamina = 0; // 耐力
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
 	public List<int> Resource = new List<int>(); // 資源列表
 	public List<Member> Members = new List<Member>(); // 成員列表
 
 	/* Not Save */
-	public int iStamina = 0; // 耐力
+
 	public int iStaminaLimit = 0; // 耐力上限
 	public int iStaminaRecovery = 0; // 耐力回復
 
@@ -33,6 +34,7 @@ public class PlayerData : MonoBehaviour
 		Data.iStage = iStage;
 		Data.iStyle = iStyle;
 		Data.iCurrency = iCurrency;
+		Data.iStamina = iStamina;
 		Data.iEnemyKill = iEnemyKill;
 		Data.iPlayTime = iPlayTime;
 		Data.Resource = Resource.ToArray();
@@ -70,6 +72,7 @@ public class PlayerData : MonoBehaviour
 		iStage = Data.iStage;
 		iStyle = Data.iStyle;
 		iCurrency = Data.iCurrency;
+		iStamina = Data.iStamina;
 		iEnemyKill = Data.iEnemyKill;
 		iPlayTime = Data.iPlayTime;
 		Resource = new List<int>(Data.Resource);

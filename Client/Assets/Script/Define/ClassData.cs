@@ -147,6 +147,7 @@ public class SavePlayer
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
+	public int iStamina = 0; // 耐力
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
 	public int[] Resource = new int[0]; // 資源列表
