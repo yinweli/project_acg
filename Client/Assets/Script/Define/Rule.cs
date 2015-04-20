@@ -240,6 +240,9 @@ public class Rule
 			foreach(MapCoor Itor in GameData.pthis.RoadList)
 				bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
 
+			foreach(Pickup Itor in GameData.pthis.PickupList)
+				bCheck &= (Result.X == Itor.Pos.X && Result.Y == Itor.Pos.Y) == false;
+
 			if(bCheck)
 				return Result;
 		}//for
