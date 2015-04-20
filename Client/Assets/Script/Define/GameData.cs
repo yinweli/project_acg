@@ -18,7 +18,6 @@ public class GameData : MonoBehaviour
 	public List<Pickup> PickupList = new List<Pickup>(); // 地圖拾取列表
 
 	/* Not Save */
-	public int iStyle = 1; // 風格編號
 	public float fRunDouble = 1.0f; // 跑步速度倍率.
     
     void Awake()

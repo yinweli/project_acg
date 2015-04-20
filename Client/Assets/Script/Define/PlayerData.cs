@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
 
 	/* Save */
 	public int iStage = 0; // 關卡編號
+	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
@@ -30,6 +31,7 @@ public class PlayerData : MonoBehaviour
 		SavePlayer Data = new SavePlayer();
 		
 		Data.iStage = iStage;
+		Data.iStyle = iStyle;
 		Data.iCurrency = iCurrency;
 		Data.iEnemyKill = iEnemyKill;
 		Data.iPlayTime = iPlayTime;
@@ -66,6 +68,7 @@ public class PlayerData : MonoBehaviour
 			return false;
 		
 		iStage = Data.iStage;
+		iStyle = Data.iStyle;
 		iCurrency = Data.iCurrency;
 		iEnemyKill = Data.iEnemyKill;
 		iPlayTime = Data.iPlayTime;

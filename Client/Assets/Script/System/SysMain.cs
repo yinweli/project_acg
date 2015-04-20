@@ -41,6 +41,7 @@ public class SysMain : MonoBehaviour
         if (bResult == false)
         {
             PlayerData.pthis.iStage = 1;
+			PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
             PlayerData.pthis.iCurrency = 0;
             PlayerData.pthis.iEnemyKill = 0;
             PlayerData.pthis.iPlayTime = 0;
@@ -56,8 +57,8 @@ public class SysMain : MonoBehaviour
             Rule.MemberAdd(1);
 			Rule.MemberAdd(5);
 			Rule.MemberAdd(10);
-			GameData.pthis.iStyle = 1;
         }//if
+
         // 建立地圖.
         MapCreater.pthis.Create();
         // 開始行走

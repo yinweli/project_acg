@@ -289,7 +289,7 @@ public class MapCreater : MonoBehaviour
 					float fPosX = Pos.x + GameDefine.iBlockSize / 2;
 					float fPosY = Pos.y + GameDefine.iBlockSize / 2;
 
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ENUM_Map.MapRoad.ToString(), GameData.pthis.iStyle, fPosX, fPosY));
+					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ENUM_Map.MapRoad.ToString(), PlayerData.pthis.iStyle, fPosX, fPosY));
 				}//if
 			}
 			else
@@ -313,7 +313,7 @@ public class MapCreater : MonoBehaviour
 					float fPosX = Pos.x + (Itor.Width * GameDefine.iBlockSize) / 2;
 					float fPosY = Pos.y + (Itor.Height * GameDefine.iBlockSize) / 2;
 
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Type).ToString(), GameData.pthis.iStyle, fPosX, fPosY));
+					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Type).ToString(), PlayerData.pthis.iStyle, fPosX, fPosY));
 				}//if
 			}
 			else
