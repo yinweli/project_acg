@@ -25,10 +25,7 @@ public class G_Feature : MonoBehaviour
             // 建立群組.
             ObjGroup[i] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
             ObjGroup[i].name = string.Format("Role{0:000}", i);
-            // 建立外觀.
-            GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], PlayerData.pthis.Members[i].iSex, PlayerData.pthis.Members[i].iLook);
-            ObjHand[i] = ObjHuman.GetComponent<G_PLook>().SetShader(pShader, (ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
-
+            
             ObjGrid.GetComponent<UIGrid>().Reposition();
 
             iFeature[i] = Rule.GainFeature(i);
@@ -42,10 +39,14 @@ public class G_Feature : MonoBehaviour
 
     IEnumerator StartGain()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         for (int i = 0; i < PlayerData.pthis.Members.Count; i++)
         {
+            // 建立外觀.
+            GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], PlayerData.pthis.Members[i].iSex, PlayerData.pthis.Members[i].iLook);
+            ObjHand[i] = ObjHuman.GetComponent<G_PLook>().SetShader(pShader, (ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
+
             float fWaitSec = 0.5f;
             Debug.Log(ObjGroup[i].name + " Feature: " + iFeature[i] + " Equip: " + (ENUM_Weapon)iEquip[i]);
             if (iFeature[i] != 0)

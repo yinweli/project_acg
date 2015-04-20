@@ -13,6 +13,9 @@ public class G_ListRole : MonoBehaviour
 
     public void ShowEquip(GameObject pHand, int iEquip, Shader pShader)
     {
+        GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Weapon");
+        pObj.transform.localPosition = new Vector3(0, -73, 0);
+
         GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + (ENUM_Weapon)iEquip);
         UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
 
