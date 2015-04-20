@@ -62,11 +62,12 @@ public class GameDefine
 
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
+	public const int iPickupMember = 25; // 救援成員出現機率
 	public const int iMaxPickupItems = 12; // 最大拾取物品次數
 	public const int iMinPickupItems = 10; // 最小拾取物品次數
 	public const int iMaxPickupValue = 54; // 最大拾取物品價值
-	public const int iMinPickupValue = 48; // 最小拾取物品價值
-	public const int iAddPickupValue = 5; // 增加拾取物品價值
+	public const int iMinPickupValue = 42; // 最小拾取物品價值
+	public const int iAddPickupValue = 6; // 增加拾取物品價值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
