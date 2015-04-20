@@ -6,7 +6,7 @@ public class GameDefine
 {
     public const int iSaveSec = 2; // 存檔秒數.
 
-	public const int iInitBattery = 300; // 初始電池值
+	public const int iInitBattery = 350; // 初始電池值
 	public const int iInitLightAmmo = 200; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 150; // 初始重型彈藥值
 
@@ -21,8 +21,8 @@ public class GameDefine
     public const int iHeavyAmmoCount = 100; // 重型彈藥購買一單位數量.
 	public const int iHeavyAmmoCost = iPriceHeavyAmmo * iHeavyAmmoCount; // 重型彈藥價格.
 
-    public const int iBatteryTimeCost = 1; // 電池每跳每次扣除額.
-    public const float fBatteryTime = 1.0f; // 電池每跳時間.
+    public const int iBatteryTimeCost = -1; // 電池每跳每次扣除額.
+    public const float fBatteryTime = 0.5f; // 電池每跳時間.
 
     public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
