@@ -8,7 +8,7 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     public void StartNew()
     {
-        fCoolDown = Time.time + 1.0f;
+		fCoolDown = Time.time + GameDefine.iStaminaTime;
         StartCoroutine(StaRecovery());
     }
     // ------------------------------------------------------------------
@@ -46,7 +46,7 @@ public class BtnRun : MonoBehaviour
     {
         if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
-            fCoolDown = Time.time + 1.0f;
+			NextTime();
             GameData.pthis.fRunDouble = 3.0f;
             yield return new WaitForSeconds(0.9f);
         }
@@ -59,7 +59,7 @@ public class BtnRun : MonoBehaviour
             {
 				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
                     GameData.pthis.fRunDouble = 3.0f;
-                fCoolDown = Time.time + 1.0f;
+				NextTime();
                 yield return new WaitForSeconds(0.9f);
             }
         }
@@ -73,7 +73,7 @@ public class BtnRun : MonoBehaviour
             GameData.pthis.fRunDouble = 1.0f;
 
         bIsRun = false;
-        fCoolDown = Time.time + 1.0f;
+		NextTime();
     }
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
@@ -87,16 +87,24 @@ public class BtnRun : MonoBehaviour
         {
             if (bIsRun && SysMain.pthis.bCanRun)
                 yield return new WaitForEndOfFrame();
+			else if (PlayerData.pthis.iStamina >= PlayerData.pthis.iStaminaLimit)
+				yield return new WaitForEndOfFrame();
             else if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
             else
             {
+				NextTime();
+
                 SysMain.pthis.AddStamina(PlayerData.pthis.iStaminaRecovery);
-				fCoolDown = Time.time + GameDefine.iStaminaTime;
 
                 if (SysMain.pthis.bCanRun && PlayerData.pthis.iStamina >= 20)
                     GetComponent<UIButton>().isEnabled = true;
             }
-        }        
+        }
     }
+	// ------------------------------------------------------------------
+	void NextTime()
+	{
+		fCoolDown = Time.time + GameDefine.iStaminaTime;
+	}
 }
