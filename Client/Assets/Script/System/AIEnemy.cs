@@ -116,12 +116,8 @@ public class AIEnemy : MonoBehaviour
             
             if (EnemyCreater.pthis.CheckPos(gameObject))
             {
-                Destroy(ObjTarget);
-                if (ObjTarget)
-                {
-                    GameData.pthis.iDead++;
-                    Destroy(ObjTarget);
-                }  
+                if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                    ObjTarget.GetComponent<AIPlayer>().BeKill();
                 Destroy(gameObject);
             }
             return;
@@ -203,8 +199,17 @@ public class AIEnemy : MonoBehaviour
         if (!ObjTarget)
             return;
 
+        // 如果目標是鏡頭就給他慢速追個角色
+        if (ObjTarget == CameraCtrl.pthis.gameObject)
+        {
+            KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.Role);
+            if (pTemp.Key != null)
+                MoveTo(pTemp.Key.transform.position - transform.position, fMoveSpeed * 0.35f);
+            return;
+        }
+
         // 檢查距離是否可抓抓.
-        if (ObjTarget != CameraCtrl.pthis.gameObject && Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.18f)
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.175f)
         {
             bHasTarget = true;
             iThreat += 5;

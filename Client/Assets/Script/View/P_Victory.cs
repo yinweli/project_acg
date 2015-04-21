@@ -15,7 +15,7 @@ public class P_Victory : MonoBehaviour
         // 殺怪數.
         pLb[2].text = GameData.pthis.iKill.ToString();
         // 殘餘人數.
-        pLb[3].text = SysMain.pthis.Role.Count.ToString();
+        pLb[3].text = PlayerData.pthis.Members.Count.ToString();
         // 死亡人數.
         pLb[4].text = GameData.pthis.iDead.ToString();
     }

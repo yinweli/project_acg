@@ -20,6 +20,7 @@ public class Lb_Feature : MonoBehaviour
             pLb.text = pDBFLanguage.zhTW;
         }
 
-        pSBg.width = pLb.width + 10;
+        pSBg.width = pLb.width + 12;
+        pSBg.height = pLb.height + 5;
     }
 }

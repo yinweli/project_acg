@@ -44,6 +44,9 @@ public class CameraCtrl : MonoBehaviour
     {
         if (!bTestMove && !SysMain.pthis.bIsGaming)
             return;
+
+        if (!MapCreater.pthis.GetRoadObj(iNextRoad))
+            return;
         // 檢查距離.
         if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.018f)
             iNextRoad++;

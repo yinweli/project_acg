@@ -185,6 +185,16 @@ public class AIPlayer : MonoBehaviour
 			pAni.Play("Run");
 	}
     // ------------------------------------------------------------------
+    // 被殺函式.
+    public void BeKill()
+    {
+        SysMain.pthis.DeadRole.Add(iPlayer);
+        SysMain.pthis.Role.Remove(gameObject);
+        GameData.pthis.iDead++;
+
+        Destroy(gameObject);
+    }
+    // ------------------------------------------------------------------
     // 移動函式.
 	public void MoveTo(int iRoad)
 	{

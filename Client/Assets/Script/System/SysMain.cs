@@ -16,8 +16,11 @@ public class SysMain : MonoBehaviour
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 可抓人物佇列.
     public Dictionary<GameObject, int> CatchRole = new Dictionary<GameObject, int>();
+    // 死亡人物佇列.
+    public List<int> DeadRole = new List<int>();
     // 敵人佇列.
     public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
+
 
     bool bResult = true;
 
@@ -74,10 +77,8 @@ public class SysMain : MonoBehaviour
         }
 
         // 沒有玩家資料就算失敗了.
-        if (bIsGaming && PlayerData.pthis.Members.Count <= 0)
-        {
-
-        }
+        if (PlayerData.pthis.Members.Count <= DeadRole.Count)
+            Failed();
 	}
     // ------------------------------------------------------------------
     // 準備開始遊戲.
@@ -183,9 +184,27 @@ public class SysMain : MonoBehaviour
     public void Victory()
     {
         bIsGaming = false;
-        //Time.timeScale = 0;
+
+        foreach (int itor in DeadRole)
+        {
+            Debug.Log("Delete Role: " + itor);
+            PlayerData.pthis.Members.RemoveAt(itor);
+        }
+
+        PlayerData.pthis.Save();
+
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
+    }
+    // ------------------------------------------------------------------
+    public void Failed()
+    {
+        bIsGaming = false;
+
+        GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Failed");
+        pObj.transform.localPosition = new Vector3(0, 0, -1000);
+
+        ClearObj();
     }
     // ------------------------------------------------------------------
     void ClearObj()
@@ -195,6 +214,8 @@ public class SysMain : MonoBehaviour
             Destroy(itor.Key);
         // 清空人物佇列.
         Role.Clear();
+        CatchRole.Clear();
+        DeadRole.Clear();
 
         // 刪除 敵人.
         foreach (KeyValuePair<GameObject, int> itor in Enemy)
