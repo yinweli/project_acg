@@ -7,7 +7,6 @@ public class CameraCtrl : MonoBehaviour
 
     public int iNextRoad = 1;
     public int iLeaderRoad = 1;
-    public bool bCanMove = true;
 
     public bool bTestMove = false;
     // ------------------------------------------------------------------
@@ -29,21 +28,23 @@ public class CameraCtrl : MonoBehaviour
             if (bTestMove)
                 StartCoroutine(ReStart());
             else
-            {
                 SysMain.pthis.Victory();
-            }
+
             return;
         }
 
         // 檢查隊伍是否為停滯狀態.
-        if (!bCanMove)
-            return;
-
-        // 檢查距離.
-        if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.005f)
-            iNextRoad++;
+        if (!CheckCanMove())
+            return;        
 
         MoveTo(iNextRoad);
+    }
+    // ------------------------------------------------------------------
+    void FixedUpdate()
+    {
+        // 檢查距離.
+        if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.018f)
+            iNextRoad++;
     }
     // ------------------------------------------------------------------
     public void StartNew()
@@ -84,9 +85,21 @@ public class CameraCtrl : MonoBehaviour
         MapCreater.pthis.Refresh(iNextRoad);
     }
     // ------------------------------------------------------------------
+    public bool CheckCanMove()
+    {
+        if (bTestMove)
+            return true;
+
+        if (SysMain.pthis.CatchRole.Count <= 0)
+            return false;
+
+        return true;
+    }
+    // ------------------------------------------------------------------
     IEnumerator ReStart()
     {
         yield return new WaitForSeconds(2);
         ResetPos();
     }
+    // ------------------------------------------------------------------
 }

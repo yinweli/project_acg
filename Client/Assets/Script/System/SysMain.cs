@@ -72,6 +72,12 @@ public class SysMain : MonoBehaviour
             GameData.pthis.iStageTime += GameDefine.iSaveSec;
             fSaveTime = Time.time + GameDefine.iSaveSec;
         }
+
+        // 沒有玩家資料就算失敗了.
+        if (bIsGaming && PlayerData.pthis.Members.Count <= 0)
+        {
+
+        }
 	}
     // ------------------------------------------------------------------
     // 準備開始遊戲.
@@ -163,10 +169,12 @@ public class SysMain : MonoBehaviour
         
         Rule.StaminaAdd(iValue);
 
-        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > 20)
+        // 冷卻後須等待耐力回復至10%才能移動.
+        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > PlayerData.pthis.iStaminaLimit / 10)
+        {
             bCanRun = true;
-        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > 10)
             GameData.pthis.fRunDouble = 1.0f;
+        }
 
         P_UI.pthis.UpdateStamina();
         return true;

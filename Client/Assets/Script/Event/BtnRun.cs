@@ -12,9 +12,17 @@ public class BtnRun : MonoBehaviour
         StartCoroutine(StaRecovery());
     }
     // ------------------------------------------------------------------
+    void Update()
+    {
+        if(GetComponent<UIButton>().isEnabled && !CheckCanMove())
+            GetComponent<UIButton>().isEnabled = false;
+        else if (!GetComponent<UIButton>().isEnabled && CheckCanMove())
+            GetComponent<UIButton>().isEnabled = true;
+    }
+    // ------------------------------------------------------------------
 	void OnPress(bool bDown)
     {
-        if (bDown)
+        if (bDown && CheckCanMove())
         {
             bIsRun = true;
             StartCoroutine(StaCost());
@@ -23,15 +31,27 @@ public class BtnRun : MonoBehaviour
             bIsRun = false;
     }
     // ------------------------------------------------------------------
+    public bool CheckCanMove()
+    {
+        if (!SysMain.pthis.bCanRun)
+            return false;
+
+        if (SysMain.pthis.CatchRole.Count <= 0)
+            return false;
+
+        return true;
+    }
+    // ------------------------------------------------------------------
     IEnumerator StaCost()
     {
-        if (SysMain.pthis.bCanRun && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
+        if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
-            fCoolDown = Time.time + 1.0f; ;
+            fCoolDown = Time.time + 1.0f;
             GameData.pthis.fRunDouble = 3.0f;
+            yield return new WaitForSeconds(0.9f);
         }
 
-        while (bIsRun && SysMain.pthis.bCanRun)
+        while (bIsRun && CheckCanMove())
         {            
             if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
@@ -40,10 +60,11 @@ public class BtnRun : MonoBehaviour
 				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
                     GameData.pthis.fRunDouble = 3.0f;
                 fCoolDown = Time.time + 1.0f;
+                yield return new WaitForSeconds(0.9f);
             }
         }
 
-        if (!SysMain.pthis.bCanRun && PlayerData.pthis.iStamina < 10)
+        if (!CheckCanMove() && PlayerData.pthis.iStamina < 10)
         {
             GetComponent<UIButton>().isEnabled = false;
             GameData.pthis.fRunDouble = 0;
@@ -57,7 +78,7 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
     {
-        if (!SysMain.pthis.bCanRun && PlayerData.pthis.iStamina < 10)
+        if (!CheckCanMove() && PlayerData.pthis.iStamina < 10)
             GameData.pthis.fRunDouble = 0;
         else
             GameData.pthis.fRunDouble = 1.0f;

@@ -51,20 +51,17 @@ public class AIPlayer : MonoBehaviour
 	// ------------------------------------------------------------------
 	void Update () 
 	{
-		if (!SysMain.pthis.bIsGaming)
-			return;
-
-        if (ObjCatch)
+        if (!SysMain.pthis.bIsGaming || ObjCatch)
             return;
-		
+
 		if (pWeapon == ENUM_Weapon.Weapon_001)
 			ChackLight();
 		else
 			Attack();
-		
-		// 移動.
-		if (!bBeCaught)
-			MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
+
+        // 移動.
+        if (!bBeCaught)
+            MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
 	}
 	// ------------------------------------------------------------------
 	// 燈光轉向.
