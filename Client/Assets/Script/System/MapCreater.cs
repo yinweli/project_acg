@@ -142,7 +142,7 @@ public class MapCreater : MonoBehaviour
 		GameData.pthis.PickupList.Clear();
 		
 		// 成員拾取
-		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember && Random.Range(0, 100) <= GameDefine.iPickupMember)
+		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
 		{
 			if(Random.Range(0, 100) <= (GameDefine.iMaxMember - PlayerData.pthis.Members.Count) * GameDefine.iPickupMember)
 			{
