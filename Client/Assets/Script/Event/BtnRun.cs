@@ -92,7 +92,7 @@ public class BtnRun : MonoBehaviour
             else
             {
                 SysMain.pthis.AddStamina(PlayerData.pthis.iStaminaRecovery);
-                fCoolDown = Time.time + 1.0f;
+				fCoolDown = Time.time + GameDefine.iStaminaTime;
 
                 if (SysMain.pthis.bCanRun && PlayerData.pthis.iStamina >= 20)
                     GetComponent<UIButton>().isEnabled = true;

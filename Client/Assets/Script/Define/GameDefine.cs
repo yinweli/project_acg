@@ -37,8 +37,9 @@ public class GameDefine
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
 	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
-	public const int iBaseStaminaRecovery = 1; // 基礎耐力回復值
+	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
+	public const int iStaminaTime = 5; // 耐力回復時間
 	
     public const int iWeightEngry = 3;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.

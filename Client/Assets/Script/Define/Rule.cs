@@ -99,7 +99,7 @@ public class Rule
 	// 重置耐力回復值
 	public static void StaminaRecovery()
 	{
-		PlayerData.pthis.iStaminaRecovery = Value(0, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.Passive_StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
+		PlayerData.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.Passive_StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
