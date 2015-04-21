@@ -6,7 +6,7 @@ public class GameDefine
 {
     public const int iSaveSec = 2; // 存檔秒數.
 
-	public const int iInitBattery = 400; // 初始電池值
+	public const int iInitBattery = 350; // 初始電池值
 	public const int iInitLightAmmo = 200; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 150; // 初始重型彈藥值
 
