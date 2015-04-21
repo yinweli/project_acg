@@ -39,7 +39,6 @@ public class GameDefine
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 1; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
-	public const int iGainDouble = 10; // 獲得機率倍率
 	
     public const int iWeightEngry = 3;  // 怪物出怪能量關卡加權.
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
@@ -62,7 +61,7 @@ public class GameDefine
 
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
-	public const int iPickupMember = 25; // 救援成員出現機率
+	public const int iPickupMember = 33; // 救援成員出現機率
 	public const int iMaxPickupItems = 12; // 最大拾取物品次數
 	public const int iMinPickupItems = 10; // 最小拾取物品次數
 	public const int iMaxPickupValue = 54; // 最大拾取物品價值

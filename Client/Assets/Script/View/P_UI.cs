@@ -171,7 +171,7 @@ public class P_UI : MonoBehaviour
         for (int i = 0; i < pSStamina.Length; i++)
             pSStamina[i].gameObject.SetActive(false);
 
-        int iActive = (PlayerData.pthis.iStamina / (PlayerData.pthis.iStaminaLimit / pSStamina.Length));
+		int iActive = PlayerData.pthis.iStaminaLimit > 0 ? (int)(PlayerData.pthis.iStamina / ((float)PlayerData.pthis.iStaminaLimit / pSStamina.Length)) : 0;
 
         if (iActive > pSStamina.Length)
             iActive = pSStamina.Length;

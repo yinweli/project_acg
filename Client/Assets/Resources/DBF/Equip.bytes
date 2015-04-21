@@ -1,7 +1,7 @@
-{"GUID":"1", "StrID":"1001", "Mode":"1", "StageID":"1", "Gain":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
-{"GUID":"5", "StrID":"1005", "Mode":"2", "StageID":"1", "Gain":"7", "Damage":"3", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"6", "StrID":"1006", "Mode":"2", "StageID":"4", "Gain":"6", "Damage":"3", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"7", "StrID":"1007", "Mode":"2", "StageID":"7", "Gain":"5", "Damage":"6", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
-{"GUID":"8", "StrID":"1008", "Mode":"2", "StageID":"10", "Gain":"4", "Damage":"2", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
-{"GUID":"9", "StrID":"1009", "Mode":"2", "StageID":"13", "Gain":"3", "Damage":"4", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
-{"GUID":"10", "StrID":"1010", "Mode":"2", "StageID":"16", "Gain":"2", "Damage":"2", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}
+{"GUID":"1", "StrID":"1001", "Mode":"1", "StageID":"1", "Gain":"2", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
+{"GUID":"5", "StrID":"1005", "Mode":"2", "StageID":"1", "Gain":"15", "Damage":"3", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"6", "StrID":"1006", "Mode":"2", "StageID":"3", "Gain":"13", "Damage":"3", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"7", "StrID":"1007", "Mode":"2", "StageID":"5", "Gain":"11", "Damage":"6", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
+{"GUID":"8", "StrID":"1008", "Mode":"2", "StageID":"7", "Gain":"9", "Damage":"2", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
+{"GUID":"9", "StrID":"1009", "Mode":"2", "StageID":"9", "Gain":"7", "Damage":"4", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
+{"GUID":"10", "StrID":"1010", "Mode":"2", "StageID":"11", "Gain":"5", "Damage":"2", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}

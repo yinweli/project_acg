@@ -273,6 +273,7 @@ public class Rule
 		if(bLight)
 		{
 			// 建立獲得裝備骰子
+			int iProb = 100;
 			CDice<int> Dice = new CDice<int>();
 			DBFItor Itor = GameDBF.This.GetEquip();
 			
@@ -281,12 +282,16 @@ public class Rule
 				DBFEquip Data = Itor.Data() as DBFEquip;
 				
 				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+				{
+					iProb -= Data.Gain;
 					Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+				}//if
 				
 				Itor.Next();
 			}//while
-			
-			Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+
+			if(iProb > 0)
+				Dice.Set(0, iProb); // 加入失敗項
 			
 			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
 		}
@@ -311,6 +316,7 @@ public class Rule
 		}//for
 		
 		// 建立獲得特性骰子
+		int iProb = 100;
 		CDice<int> Dice = new CDice<int>();
 		DBFItor Itor = GameDBF.This.GetFeature();
 		
@@ -319,12 +325,16 @@ public class Rule
 			DBFFeature Data = Itor.Data() as DBFFeature;
 			
 			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
+			{
+				iProb -= Data.Gain;
 				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+			}//if
 			
 			Itor.Next();
 		}//while
-		
-		Dice.Set(0, Dice.Max() * GameDefine.iGainDouble); // 加入失敗項
+
+		if(iProb > 0)
+			Dice.Set(0, iProb); // 加入失敗項
 		
 		int iFeature = Dice.Roll();
 		
