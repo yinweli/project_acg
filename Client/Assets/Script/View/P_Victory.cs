@@ -12,10 +12,8 @@ public class P_Victory : MonoBehaviour
         pLb[0].text = PlayerData.pthis.iStage.ToString();
         // 關卡時間.
         pLb[1].text = string.Format("{0:00}:{1:00}:{2:00}",GameData.pthis.iStageTime / 3600 ,(GameData.pthis.iStageTime / 60) % 60, GameData.pthis.iStageTime % 60);
-        PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         // 殺怪數.
         pLb[2].text = GameData.pthis.iKill.ToString();
-        PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
         // 殘餘人數.
         pLb[3].text = PlayerData.pthis.Members.Count.ToString();
         // 死亡人數.

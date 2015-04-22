@@ -17,7 +17,11 @@ public class P_Failed : MonoBehaviour
         pLb[2].text = PlayerData.pthis.iEnemyKill.ToString();
 
         // 重設存檔與遊戲檔案.
+        PlayerData.pthis.ClearData();
         PlayerData.pthis.Save();
+
+        GameData.pthis.ClearData();
+        GameData.pthis.Save();
     }
 
     IEnumerator OpenPage()
