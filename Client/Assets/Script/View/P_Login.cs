@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class P_Login : MonoBehaviour {
-
-    void Start()
-    {
-        GetComponent<Animator>().Play("Wait");
-    }
+public class P_Login : MonoBehaviour 
+{
 	// Update is called once per frame
     void Update()
     {
