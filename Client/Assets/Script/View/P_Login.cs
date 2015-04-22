@@ -3,6 +3,10 @@ using System.Collections;
 
 public class P_Login : MonoBehaviour {
 
+    void Start()
+    {
+        GetComponent<Animator>().Play("Wait");
+    }
 	// Update is called once per frame
     void Update()
     {
