@@ -1,23 +1,6 @@
 fileFormatVersion: 2
 guid: c4691a685a0406b478669a4dc82e6a9a
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: S_001_Road
-    21300002: S_001_0
-    21300004: S_001_1
-    21300006: S_001_2
-    21300008: S_001_3
-    21300010: S_001_Base
-    21300012: S_001_Start
-    21300014: S_001_4
-    21300016: S_001_5
-    21300018: S_001_6
-    21300020: S_001_7
-    21300022: S_001_8
-    21300024: S_001_9
-    21300026: S_001_10
-    21300028: S_001_11
-    21300030: S_001_End
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -216,6 +199,26 @@ TextureImporter:
         y: 0
         width: 192
         height: 128
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: S_001_ExitBg
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 102
+        width: 64
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: S_001_Exit
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 76
+        width: 64
+        height: 26
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
