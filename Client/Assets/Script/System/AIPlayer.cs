@@ -73,7 +73,8 @@ public class AIPlayer : MonoBehaviour
 			return;
 		
 		// 確認目標.
-		GetTarget();
+        if (!bBeCaught)
+    		GetTarget();
 		
 		// 射擊.
 		if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
@@ -111,10 +112,10 @@ public class AIPlayer : MonoBehaviour
 				ObjTarget = itor.Key;
 				return;
 			}
-			
+		
 			AIEnemy pTargetAI = ObjTarget.GetComponent<AIEnemy>();
 			AIEnemy pObjAi = itor.Key.GetComponent<AIEnemy>();
-			
+
 			// 比較威脅值.
 			if (pTargetAI.iThreat < pObjAi.iThreat)
 			{
