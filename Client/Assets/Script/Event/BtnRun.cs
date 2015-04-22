@@ -8,7 +8,7 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     public void StartNew()
     {
-		fCoolDown = Time.time + GameDefine.iStaminaTime;
+		fCoolDown = Time.time + GameDefine.iStaminaRecoveryTime;
         StartCoroutine(StaRecovery());
     }
     // ------------------------------------------------------------------
@@ -46,7 +46,7 @@ public class BtnRun : MonoBehaviour
     {
         if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
-			NextTime();
+			ConsumeTime();
             GameData.pthis.fRunDouble = 3.0f;
             yield return new WaitForSeconds(0.9f);
         }
@@ -59,7 +59,7 @@ public class BtnRun : MonoBehaviour
             {
 				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
                     GameData.pthis.fRunDouble = 3.0f;
-				NextTime();
+				ConsumeTime();
                 yield return new WaitForSeconds(0.9f);
             }
         }
@@ -73,7 +73,7 @@ public class BtnRun : MonoBehaviour
             GameData.pthis.fRunDouble = 1.0f;
 
         bIsRun = false;
-		NextTime();
+		RecoveryTime();
     }
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
@@ -93,7 +93,7 @@ public class BtnRun : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             else
             {
-				NextTime();
+				RecoveryTime();
 
                 SysMain.pthis.AddStamina(PlayerData.pthis.iStaminaRecovery);
 
@@ -103,8 +103,13 @@ public class BtnRun : MonoBehaviour
         }
     }
 	// ------------------------------------------------------------------
-	void NextTime()
+	void RecoveryTime()
 	{
-		fCoolDown = Time.time + GameDefine.iStaminaTime;
+		fCoolDown = Time.time + GameDefine.iStaminaRecoveryTime;
+	}
+	// ------------------------------------------------------------------
+	void ConsumeTime()
+	{
+		fCoolDown = Time.time + GameDefine.iStaminaConsumeTime;
 	}
 }

@@ -39,7 +39,8 @@ public class GameDefine
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
-	public const int iStaminaTime = 5; // 耐力回復時間
+	public const int iStaminaRecoveryTime = 5; // 耐力回復時間
+	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
     public const int iMINWaitSec = 5;   // 怪物出怪最小間隔秒數.
