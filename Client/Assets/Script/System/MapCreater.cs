@@ -28,7 +28,7 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖道路
 	private void CreateRoad()
 	{
-		int iRoadSize = GameDefine.iRoadSizeBase + PlayerData.pthis.iStage / GameDefine.iStageLevel * GameDefine.iRoadSizeAdd; // 取得地圖道路長度
+		int iRoadSize = GameDefine.iRoadSizeBase + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeRoad); // 取得地圖道路長度
 		RandDir Dir = new RandDir();
 		
 		while(iRoadSize > 0)
@@ -158,25 +158,69 @@ public class MapCreater : MonoBehaviour
 				GameData.pthis.PickupList.Add(Data);
 			}//if
 		}//if
-		
-		// 物品拾取
-		for(int iCount = 0, iMax = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems); iCount < iMax; ++iCount)
+
+		// 總物品拾取次數
+		int iPickupTotal = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems);
+		int iPickupLightAmmo = (int)(iPickupTotal * GameDefine.fPickupPartLightAmmo);
+		int iPickupHeavyAmmo = (int)(iPickupTotal * GameDefine.fPickupPartHeavyAmmo);
+		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
+		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
+		// 額外拾取價值
+		int iExteraValue = (int)(PlayerData.pthis.iStage * GameDefine.fUpgradePickup);
+
+		// 輕型彈藥拾取
+		for(int iCount = 0; iCount < iPickupLightAmmo; ++iCount)
 		{
-			int iValue = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + PlayerData.pthis.iStage / GameDefine.iStageLevel * GameDefine.iAddPickupValue;
 			Pickup Data = new Pickup();
 			
 			Data.Pos = Rule.NextPickup();
-			Data.iType = Random.Range((int)ENUM_Pickup.Currency, System.Enum.GetValues(typeof(ENUM_Pickup)).Length);
+			Data.iType = (int)ENUM_Pickup.LightAmmo;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
 			
-			switch((ENUM_Pickup)Data.iType)
-			{
-			case ENUM_Pickup.Currency: Data.iCount = iValue; break;
-			case ENUM_Pickup.Battery: Data.iCount = iValue / GameDefine.iPriceBattery; break;
-			case ENUM_Pickup.LightAmmo: Data.iCount = iValue / GameDefine.iPriceLightAmmo; break;
-			case ENUM_Pickup.HeavyAmmo: Data.iCount = iValue / GameDefine.iPriceHeavyAmmo; break;
-			default: Data.iCount = 0; break;
-			}//switch
+			GameData.pthis.PickupList.Add(Data);
+		}//for
+
+		// 重型彈藥拾取
+		for(int iCount = 0; iCount < iPickupHeavyAmmo; ++iCount)
+		{
+			Pickup Data = new Pickup();
 			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
+		}//for
+
+		// 電池拾取
+		for(int iCount = 0; iCount < iPickupBattery; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Battery;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
+		}//for
+
+		// 通貨拾取
+		for(int iCount = 0; iCount < iPickupCurrency; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Currency;
+			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
 			Data.iSex = 0;
 			Data.iLook = 0;
 			Data.bPickup = false;
@@ -189,8 +233,8 @@ public class MapCreater : MonoBehaviour
             Pickup itor = GameData.pthis.PickupList[i];
 
             Vector2 Pos = itor.Pos.ToVector2();
-			float fPosX = Pos.x + GameDefine.iBlockSize / 2 -GetRoadObj(0).transform.localPosition.x;
-			float fPosY = Pos.y + GameDefine.iBlockSize / 2 -GetRoadObj(0).transform.localPosition.y;
+			float fPosX = Pos.x + GameDefine.iBlockSize / 2 - GetRoadObj(0).transform.localPosition.x;
+			float fPosY = Pos.y + GameDefine.iBlockSize / 2 - GetRoadObj(0).transform.localPosition.y;
 			GameObject Obj = null;
 
             if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)

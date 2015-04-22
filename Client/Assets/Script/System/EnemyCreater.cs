@@ -35,8 +35,8 @@ public class EnemyCreater : MonoBehaviour
     public void StartNew()
     {
         iCount = 0;
-        // 計算總波數能量：怪物能量 = 能量基礎值 + 關卡編號 / 每多少關增加難度 * 能量增加值。.
-		iEnegry = GameDefine.iBaseEngry + (PlayerData.pthis.iStage / GameDefine.iStageLevel * GameDefine.iWeightEngry);
+        // 計算總波數能量：怪物能量 = 能量基礎值 + 關卡編號 * 能量增加值。.
+		iEnegry = GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry);
 
         StartCoroutine(Creater());
     }
