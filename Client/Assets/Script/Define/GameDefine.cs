@@ -6,9 +6,9 @@ public class GameDefine
 {
     public const int iSaveSec = 2; // 存檔秒數.
 
-	public const int iInitBattery = 350; // 初始電池值
-	public const int iInitLightAmmo = 200; // 初始輕型彈藥值
-	public const int iInitHeavyAmmo = 150; // 初始重型彈藥值
+	public const int iInitBattery = 300; // 初始電池值
+	public const int iInitLightAmmo = 150; // 初始輕型彈藥值
+	public const int iInitHeavyAmmo = 100; // 初始重型彈藥值
 
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 2; // 輕型彈藥價格
@@ -16,9 +16,9 @@ public class GameDefine
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
 	public const int iBatteryCost = iPriceBattery * iBatteryCount; // 電池值價格.
-	public const int iLightAmmoCount = 100; // 輕型彈藥購買一單位數量.
+	public const int iLightAmmoCount = 30; // 輕型彈藥購買一單位數量.
 	public const int iLightAmmoCost = iPriceLightAmmo * iLightAmmoCount; // 輕型彈藥價格.
-    public const int iHeavyAmmoCount = 100; // 重型彈藥購買一單位數量.
+    public const int iHeavyAmmoCount = 30; // 重型彈藥購買一單位數量.
 	public const int iHeavyAmmoCost = iPriceHeavyAmmo * iHeavyAmmoCount; // 重型彈藥價格.
 
     public const int iBatteryTimeCost = -1; // 電池每跳每次扣除額.
@@ -70,7 +70,7 @@ public class GameDefine
 	public const float fPickupPartBattery = 0.3f; // 拾取物品(電池)比例
 
 	public const float fUpgradeRoad = 0.4f; // 地圖道路升級值
-	public const float fUpgradeEnegry = 0.5f; // 怪物能量升級值
+	public const float fUpgradeEnegry = 0.4f; // 怪物能量升級值
 	public const float fUpgradePickup = 0.4f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱

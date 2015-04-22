@@ -185,12 +185,15 @@ public class SysMain : MonoBehaviour
     {
         bIsGaming = false;
 
-        foreach (int itor in DeadRole)
-        {
-            Debug.Log("Delete Role: " + itor);
-            PlayerData.pthis.Members.RemoveAt(itor);
-        }
+		List<Member> NewMember = new List<Member>();
 
+		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		{
+			if(DeadRole.Contains(iPos) == false)
+				NewMember.Add(PlayerData.pthis.Members[iPos]);
+		}//for
+
+		PlayerData.pthis.Members = NewMember;
         PlayerData.pthis.Save();
 
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
