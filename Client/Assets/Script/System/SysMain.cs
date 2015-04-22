@@ -106,6 +106,7 @@ public class SysMain : MonoBehaviour
     public void NewGame()
     {
         // 清空地圖.
+		GameData.pthis.ClearData();
         MapCreater.pthis.Clear();
         // 清空物件.
         ClearObj();
@@ -123,10 +124,8 @@ public class SysMain : MonoBehaviour
         P_UI.pthis.StartNew();
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         if (!bResult)
-        {
             SysUI.pthis.ShowDay();
-            GameData.pthis.ClearData();
-        }        
+
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
         // 到數開始.

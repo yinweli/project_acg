@@ -69,5 +69,10 @@ public class GameData : MonoBehaviour
         iKill = 0;
         iAlive = 0;
         iDead = 0;
+		RoadList.Clear();
+		ObjtList.Clear();
+		PickupList.Clear();
+
+		PlayerPrefs.DeleteKey(GameDefine.szSaveGame);
     }
 }

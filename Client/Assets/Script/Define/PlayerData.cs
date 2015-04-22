@@ -18,7 +18,6 @@ public class PlayerData : MonoBehaviour
 	public List<Member> Members = new List<Member>(); // 成員列表
 
 	/* Not Save */
-
 	public int iStaminaLimit = 0; // 耐力上限
 	public int iStaminaRecovery = 0; // 耐力回復
 
@@ -92,5 +91,19 @@ public class PlayerData : MonoBehaviour
 		}//for
 		
 		return true;
+	}
+	// 清除資料
+	public void ClearData()
+	{
+		iStage = 0;
+		iStyle = 0;
+		iCurrency = 0;
+		iStamina = 0;
+		iEnemyKill = 0;
+		iPlayTime = 0;
+		Resource.Clear();
+		Members.Clear();
+
+		PlayerPrefs.DeleteKey(GameDefine.szSavePlayer);
 	}
 }
