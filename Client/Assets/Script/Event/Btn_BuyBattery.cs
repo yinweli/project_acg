@@ -8,8 +8,8 @@ public class Btn_BuyBattery : MonoBehaviour
 
     void Start()
     {
-        LbMoney.text = GameDefine.iHeavyAmmoCost.ToString();
-        LbCount.text = GameDefine.iHeavyAmmoCount + "Sec";
+        LbMoney.text = GameDefine.iBatteryCost.ToString();
+        LbCount.text = GameDefine.iBatteryCount + "Sec";
     }
 
     void Update()
