@@ -62,17 +62,19 @@ public class GameDefine
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPickupMember = 25; // 救援成員出現機率
-	public const int iMaxPickupItems = 12; // 最大拾取物品次數
-	public const int iMinPickupItems = 10; // 最小拾取物品次數
-	public const int iMaxPickupValue = 40; // 最大拾取物品價值
-	public const int iMinPickupValue = 30; // 最小拾取物品價值
+	public const int iMaxPickupItems = 18; // 最大拾取物品次數
+	public const int iMinPickupItems = 15; // 最小拾取物品次數
+	public const int iMaxPickupValue = 28; // 最大拾取物品價值
+	public const int iMinPickupValue = 20; // 最小拾取物品價值
 	public const float fPickupPartLightAmmo = 0.1f; // 拾取物品(輕型彈藥)比例
 	public const float fPickupPartHeavyAmmo = 0.1f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.3f; // 拾取物品(電池)比例
 
+	public const int iEquipExtra = 20; // 額外裝備機率值
+
 	public const float fUpgradeRoad = 0.4f; // 地圖道路升級值
-	public const float fUpgradeEnegry = 0.4f; // 怪物能量升級值
-	public const float fUpgradePickup = 0.4f; // 拾取物品價值升級值
+	public const float fUpgradeEnegry = 0.5f; // 怪物能量升級值
+	public const float fUpgradePickup = 0.5f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱

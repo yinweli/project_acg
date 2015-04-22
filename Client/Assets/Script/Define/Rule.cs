@@ -257,14 +257,21 @@ public class Rule
 		if(PlayerData.pthis.Members[iPos].iEquip > 0)
 			return 0;
 		
-		// 檢查隊伍裡是否沒有光源裝備
+		// 檢查隊伍裡是否沒有光源裝備, 設定裝備額外機率值
 		bool bLight = false;
+		int iEquipExtra = 0;
 		
 		foreach(Member ItorMember in PlayerData.pthis.Members)
 		{
 			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+
+			if(Data == null)
+			{
+				iEquipExtra += GameDefine.iEquipExtra;
+				continue;
+			}//if
 			
-			if(Data != null && Data.Mode == (int)ENUM_ModeEquip.Light)
+			if(Data.Mode == (int)ENUM_ModeEquip.Light)
 				bLight = true;
 		}//for
 		
@@ -273,7 +280,8 @@ public class Rule
 		if(bLight)
 		{
 			// 建立獲得裝備骰子
-			int iProb = 100;
+			int iEquipProb = 0;
+			int iEmptyProb = 100;
 			CDice<int> Dice = new CDice<int>();
 			DBFItor Itor = GameDBF.This.GetEquip();
 			
@@ -283,15 +291,16 @@ public class Rule
 				
 				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
 				{
-					iProb -= Data.Gain;
-					Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
+					iEquipProb = Data.Gain + iEquipExtra;
+					iEmptyProb -= iEquipProb;
+					Dice.Set(System.Convert.ToInt32(Data.GUID), iEquipProb);
 				}//if
 				
 				Itor.Next();
 			}//while
 
-			if(iProb > 0)
-				Dice.Set(0, iProb); // 加入失敗項
+			if(iEmptyProb > 0)
+				Dice.Set(0, iEmptyProb); // 加入失敗項
 			
 			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
 		}
@@ -316,7 +325,7 @@ public class Rule
 		}//for
 		
 		// 建立獲得特性骰子
-		int iProb = 100;
+		int iEmptyProb = 100;
 		CDice<int> Dice = new CDice<int>();
 		DBFItor Itor = GameDBF.This.GetFeature();
 		
@@ -326,15 +335,15 @@ public class Rule
 			
 			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
 			{
-				iProb -= Data.Gain;
+				iEmptyProb -= Data.Gain;
 				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);
 			}//if
 			
 			Itor.Next();
 		}//while
 
-		if(iProb > 0)
-			Dice.Set(0, iProb); // 加入失敗項
+		if(iEmptyProb > 0)
+			Dice.Set(0, iEmptyProb); // 加入失敗項
 		
 		int iFeature = Dice.Roll();
 		
