@@ -26,7 +26,9 @@ public class AIPlayer : MonoBehaviour
 
 	public AudioClip audioClip;
 
-    GameObject ObjCatch = null;
+    public Vector3 VecDeadPos = Vector3.zero;
+
+    GameObject ObjCatch = null;    
     // ------------------------------------------------------------------
     public void Init(bool bIsIn,int iItemID, Member pMember)
 	{
@@ -54,23 +56,14 @@ public class AIPlayer : MonoBehaviour
         if (!SysMain.pthis.bIsGaming || ObjCatch)
             return;
 
-		if (pWeapon == ENUM_Weapon.Weapon_001)
-			ChackLight();
-		else
-			Attack();
+        if (pWeapon == ENUM_Weapon.Weapon_001)
+            FaceTo(1, ObjTarget);
+        else
+            Attack();
 
         // 移動.
         if (!bBeCaught)
             MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
-	}
-	// ------------------------------------------------------------------
-	// 燈光轉向.
-	void ChackLight()
-	{
-		if (ObjTarget.transform.localPosition.x > 0)
-			FaceTo(1);
-		else
-			FaceTo(-1);
 	}
 	// ------------------------------------------------------------------
 	// 射擊函式.
@@ -86,27 +79,21 @@ public class AIPlayer : MonoBehaviour
 		if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
 		{
 			// 播放射擊.
-			if (!bBeCaught && pAni)
-				pAni.Play("Shot");
+            if (!bBeCaught && pAni)
+            {
+                pAni.Play("Shot");
+                // 轉面向.
+                FaceTo(1, ObjTarget);
+            }
 			if (pWAni)
-				pWAni.Play("Fire");
-			
-			// 轉面向.
-			if (!bBeCaught)
-			{
-				if (transform.position.x < ObjTarget.transform.position.x)
-					FaceTo(1);
-				else
-					FaceTo(-1);
-			}
+				pWAni.Play("Fire");					
 			
 			NGUITools.PlaySound(audioClip, 0.8f);
 			// 發射子彈.
 			CreateBullet();
 			// 計算冷卻.
 			fCoolDown = Time.time + Rule.EquipFireRate(iPlayer);
-		}
-		
+		}		
 	}
 	// ------------------------------------------------------------------
 	// 取得目標.
@@ -114,10 +101,7 @@ public class AIPlayer : MonoBehaviour
 	{
 		// 沒有可作為目標的怪物.
 		if (SysMain.pthis.Enemy.Count == 0)
-		{            
 			ObjTarget = null;
-			// 播放角色走路.
-		}
 		
 		foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
 		{
@@ -143,10 +127,7 @@ public class AIPlayer : MonoBehaviour
 			
 			// 比較距離.
 			if(fDisTarget > fDisObj)
-			{
 				ObjTarget = itor.Key;
-				return;
-			}
 		}        
 	}
 	// ------------------------------------------------------------------
@@ -183,6 +164,8 @@ public class AIPlayer : MonoBehaviour
 		Destroy(gameObject.GetComponent<PlayerFollow>());
 		if (pAni)
 			pAni.Play("Run");
+
+        StartCoroutine(ResetDeadPos());
 	}
     // ------------------------------------------------------------------
     // 被殺函式.
@@ -221,9 +204,55 @@ public class AIPlayer : MonoBehaviour
 		}
 	}
     // ------------------------------------------------------------------
-	public void FaceTo(int iFace)
+    public Vector3 GetDeadPos()
+    {
+        // 如果已有預定死亡位置.
+        if (VecDeadPos == Vector3.zero)
+            switch (Random.Range(1, 4))
+            {
+                case 1: //上方.
+                    VecDeadPos.x = transform.localPosition.x + Random.Range(-500.0f, 500.0f);
+                    VecDeadPos.y = transform.localPosition.y + Random.Range(380.0f, 450.0f);
+                    break;
+                case 2: //左方.
+                    VecDeadPos.x = transform.localPosition.x + Random.Range(-470.0f, -520.0f);
+                    VecDeadPos.y = transform.localPosition.y + +Random.Range(-300.0f, 400.0f);
+                    break;
+                case 3: //右方.
+                    VecDeadPos.x = transform.localPosition.x + Random.Range(470.0f, 520.0f);
+                    VecDeadPos.y = transform.localPosition.y + +Random.Range(-300.0f, 400.0f);
+                    break;
+            }
+        
+        return VecDeadPos;
+    }
+    // ------------------------------------------------------------------
+	public void FaceTo(int iFaceTo, GameObject FaceObj)
 	{
-        //ObjHuman.transform.rotation = new Quaternion(0, iRotation, 0, 0);
-        ObjHuman.transform.localScale = new Vector3(iFace, 1, 1);
+        if (transform.position.x < ObjTarget.transform.position.x)
+            ObjHuman.transform.localScale = new Vector3(1 * iFaceTo, 1, 1);
+        else
+            ObjHuman.transform.localScale = new Vector3(-1 * iFaceTo, 1, 1);
 	}
+    // ------------------------------------------------------------------
+    IEnumerator ResetDeadPos()
+    {
+        bool bCanReset = true;
+        float fReset = Time.time + 3;
+
+        while (bCanReset)
+        {
+            yield return new WaitForEndOfFrame();
+            // 等待期間被抓.
+            if (bBeCaught)
+                bCanReset = false;
+
+            // 檢查是否可重置.
+            if (fReset <= Time.time)
+            {
+                bCanReset = false;
+                VecDeadPos = Vector3.zero;
+            }
+        }        
+    }        
 }

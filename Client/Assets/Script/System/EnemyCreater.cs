@@ -122,7 +122,7 @@ public class EnemyCreater : MonoBehaviour
     // ------------------------------------------------------------------
     public bool CheckPos(GameObject pObj)
     {
-        if (Vector2.Distance(CameraCtrl.transform.position, pObj.transform.position) > 2.8f)
+        if (Vector2.Distance(CameraCtrl.transform.position, pObj.transform.position) > 2.5f)
             return true;
         else
             return false;

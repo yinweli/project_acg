@@ -107,7 +107,7 @@ public class AIEnemy : MonoBehaviour
             // 取向量.
             if (vecRunDir == Vector3.zero)
             {
-                vecRunDir = PosStart - transform.position;
+                vecRunDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
 				if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
                     ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
             }
@@ -178,10 +178,10 @@ public class AIEnemy : MonoBehaviour
         if (bHasTarget)
             return;
 
-        // 如果可抓佇列無人就走向CamCtrl.
+        // 如果可抓追著離自己最近的角色跑.
         if(SysMain.pthis.CatchRole.Count <= 0)
         {
-            ObjTarget = CameraCtrl.pthis.gameObject;
+            ObjTarget = null;
             return;
         }
 
@@ -195,16 +195,20 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void Chace()
     {
-        // 沒有目標就放棄追蹤.
-        if (!ObjTarget)
+        if(SysMain.pthis.Role.Count == 0)
             return;
 
-        // 如果目標是鏡頭就給他慢速追個角色
-        if (ObjTarget == CameraCtrl.pthis.gameObject)
+        // 沒有目標就給他慢速追個角色.
+        if (!ObjTarget)
         {
-            KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.Role);
-            if (pTemp.Key != null)
-                MoveTo(pTemp.Key.transform.position - transform.position, fMoveSpeed * 0.35f);
+            GameObject pTempObj = null;
+            foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Role)
+            {
+                if(!pTempObj || Vector2.Distance(transform.position, itor.Key.transform.position) < Vector2.Distance(transform.position, pTempObj.transform.position))
+                    pTempObj = itor.Key;
+            }
+            if (pTempObj != null)
+                MoveTo(pTempObj.transform.position - transform.position, fMoveSpeed * 0.38f);
             return;
         }
 
@@ -215,6 +219,8 @@ public class AIEnemy : MonoBehaviour
             iThreat += 5;
             if (ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
+
+            return;
         }
 
         // 取向量.

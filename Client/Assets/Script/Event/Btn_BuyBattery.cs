@@ -3,6 +3,15 @@ using System.Collections;
 
 public class Btn_BuyBattery : MonoBehaviour 
 {
+    public UILabel LbMoney;
+    public UILabel LbCount;
+
+    void Start()
+    {
+        LbMoney.text = GameDefine.iHeavyAmmoCost.ToString();
+        LbCount.text = GameDefine.iHeavyAmmoCount + "Sec";
+    }
+
     void Update()
     {
         if (PlayerData.pthis.iCurrency < GameDefine.iBatteryCost)
