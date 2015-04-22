@@ -41,6 +41,10 @@ public class SysMain : MonoBehaviour
         // 測試用
         bResult = false;
 
+        // 確認是否為新遊戲.
+        if (bResult == false)
+            NewRoleData();
+
         // 建立地圖.
         MapCreater.pthis.Create();
         // 開始行走
@@ -83,27 +87,6 @@ public class SysMain : MonoBehaviour
     // 開始遊戲.
     public void NewGame()
     {
-        // 確認是否為新遊戲.
-        if (bResult == false)
-        {
-            PlayerData.pthis.iStage = 1;
-            PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
-            PlayerData.pthis.iCurrency = 0;
-            PlayerData.pthis.iEnemyKill = 0;
-            PlayerData.pthis.iPlayTime = 0;
-            PlayerData.pthis.Resource = new List<int>();
-            PlayerData.pthis.Members = new List<Member>();
-
-            // 給與初始資源
-            Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
-            Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iInitLightAmmo);
-            Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
-
-            // 以下是測試資料, 以後要改
-            Rule.MemberAdd(1);
-            Rule.MemberAdd(5);
-        }//if
-
         // 清空地圖.
 		GameData.pthis.ClearData();
         MapCreater.pthis.Clear();
@@ -127,8 +110,30 @@ public class SysMain : MonoBehaviour
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
+
         // 到數開始.
         StartCoroutine(CountStart());
+    }
+    // ------------------------------------------------------------------
+    // 新遊戲資料.
+    void NewRoleData()
+    {
+        PlayerData.pthis.iStage = 1;
+        PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+        PlayerData.pthis.iCurrency = 0;
+        PlayerData.pthis.iEnemyKill = 0;
+        PlayerData.pthis.iPlayTime = 0;
+        PlayerData.pthis.Resource = new List<int>();
+        PlayerData.pthis.Members = new List<Member>();
+
+        // 給與初始資源
+        Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
+        Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iInitLightAmmo);
+        Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
+
+        // 以下是測試資料, 以後要改
+        Rule.MemberAdd(1);
+        Rule.MemberAdd(5);
     }
     // ------------------------------------------------------------------
     IEnumerator CountStart()
@@ -218,6 +223,9 @@ public class SysMain : MonoBehaviour
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
 
         ClearObj();
+
+        // 設為新遊戲.
+        NewRoleData();
     }
     // ------------------------------------------------------------------
     void ClearObj()
