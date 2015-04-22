@@ -84,6 +84,7 @@ public class SysMain : MonoBehaviour
     // 準備開始遊戲.
     public void ReadyStart()
     {
+        bCanRun = true;
         PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
 		Rule.StaminaReset();
 		Rule.StaminaRecovery();
