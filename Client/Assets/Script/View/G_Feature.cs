@@ -4,6 +4,7 @@ using System.Collections;
 public class G_Feature : MonoBehaviour 
 {
     public GameObject ObjGrid = null;
+	public UIButton BtnNext = null;
     public Shader pShader = null;
 
     public int[] iFeature = null;
@@ -11,6 +12,11 @@ public class G_Feature : MonoBehaviour
 
     GameObject[] ObjGroup = null;
     GameObject[] ObjHand = null;
+
+	void Start()
+	{
+		BtnNext.isEnabled = false;
+	}
 
 	public void OpenPage()
     {
@@ -64,5 +70,7 @@ public class G_Feature : MonoBehaviour
 
             yield return new WaitForSeconds(fWaitSec);
         }
+
+		BtnNext.isEnabled = true;
     }
 }

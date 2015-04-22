@@ -11,7 +11,7 @@ public class GameDefine
 	public const int iInitHeavyAmmo = 100; // 初始重型彈藥值
 
 	public const int iPriceBattery = 1; // 電池價格
-	public const int iPriceLightAmmo = 2; // 輕型彈藥價格
+	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
@@ -73,7 +73,7 @@ public class GameDefine
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
 	public const float fUpgradeRoad = 0.4f; // 地圖道路升級值
-	public const float fUpgradeEnegry = 0.5f; // 怪物能量升級值
+	public const float fUpgradeEnegry = 0.7f; // 怪物能量升級值
 	public const float fUpgradePickup = 0.5f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
