@@ -34,6 +34,11 @@ public class P_UI : MonoBehaviour
         GetComponent<UIPanel>().alpha = 0;
     }
     // ------------------------------------------------------------------
+    public void SetAlpha(float fValue)
+    {
+        GetComponent<UIPanel>().alpha = fValue;
+    }
+    // ------------------------------------------------------------------
     void Update()
     {
         pLbDis.text = string.Format("{0}m",(GameData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);

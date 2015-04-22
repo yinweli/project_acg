@@ -10,11 +10,6 @@ public class SysUI : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
-    void Start()
-    {
-        CreatePanel("Prefab/P_Login");
-    }
-    // ------------------------------------------------------------------
     public GameObject CreatePanel(string Path)
     {
         return NGUITools.AddChild(gameObject, Resources.Load(Path) as GameObject);

@@ -33,6 +33,8 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
+        // 建立遊戲開頭畫面.
+        SysUI.pthis.CreatePanel("Prefab/P_Login");
         // 讀取遊戲
         bResult &= PlayerData.pthis.Load();
         bResult &= GameData.pthis.Load();
