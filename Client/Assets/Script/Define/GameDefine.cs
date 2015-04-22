@@ -63,7 +63,7 @@ public class GameDefine
 	public const int iPickupMember = 25; // 救援成員出現機率
 	public const int iMaxPickupItems = 12; // 最大拾取物品次數
 	public const int iMinPickupItems = 10; // 最小拾取物品次數
-	public const int iMaxPickupValue = 42; // 最大拾取物品價值
+	public const int iMaxPickupValue = 40; // 最大拾取物品價值
 	public const int iMinPickupValue = 30; // 最小拾取物品價值
 	public const float fPickupPartLightAmmo = 0.1f; // 拾取物品(輕型彈藥)比例
 	public const float fPickupPartHeavyAmmo = 0.1f; // 拾取物品(重型彈藥)比例
