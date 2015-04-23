@@ -21,18 +21,18 @@
 {"GUID":"2011", "enUS":"Elite\nsoldiers", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
 {"GUID":"2012", "enUS":"Talented\nfighters", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
 {"GUID":"2013", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
-{"GUID":"3001", "enUS":"+10 stamina limit", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965010\u9ede"}
-{"GUID":"3002", "enUS":"+20 stamina limit", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965020\u9ede"}
-{"GUID":"3003", "enUS":"-15 stamina limit", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u965015\u9ede"}
-{"GUID":"3004", "enUS":"-25 stamina limit", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u965025\u9ede"}
-{"GUID":"3005", "enUS":"+1 stamina recovery", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa91\u9ede"}
-{"GUID":"3006", "enUS":"+2 stamina recovery", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa92\u9ede"}
-{"GUID":"3007", "enUS":"-1 stamina recovery", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa91\u9ede"}
-{"GUID":"3008", "enUS":"-2 stamina recovery", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa92\u9ede"}
-{"GUID":"3009", "enUS":"+20G(40% chance, 10 sec cooldown)", "zhTW":"40%\u7684\u6a5f\u7387\u7372\u5f9720G\uff0c10\u79d2\u51b7\u537b"}
-{"GUID":"3010", "enUS":"+40G(40% chance, 10 sec cooldown)", "zhTW":"40%\u7684\u6a5f\u7387\u7372\u5f9740G\uff0c10\u79d2\u51b7\u537b"}
-{"GUID":"3011", "enUS":"-20% critical strike", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738720%"}
-{"GUID":"3012", "enUS":"-10% critical strike", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738710%"}
-{"GUID":"3013", "enUS":"+10% critical strike", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738710%"}
-{"GUID":"3014", "enUS":"+20% critical strike", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738720%"}
-{"GUID":"3015", "enUS":"+1 damage", "zhTW":"\u589e\u52a01\u9ede\u50b7\u5bb3"}
+{"GUID":"3001", "enUS":"[ffed00]stamina limit[-][546ef2]+10[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965010\u9ede"}
+{"GUID":"3002", "enUS":"[ffed00]stamina limit[-][546ef2]+20[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u965020\u9ede"}
+{"GUID":"3003", "enUS":"[ffed00]stamina limit[-][e92121]-15[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u965015\u9ede"}
+{"GUID":"3004", "enUS":"[ffed00]stamina limit[-][e92121]-25[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u965025\u9ede"}
+{"GUID":"3005", "enUS":"[ffed00]stamina recovery[-][546ef2]+1[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa91\u9ede"}
+{"GUID":"3006", "enUS":"[ffed00]stamina recovery[-][546ef2]+2[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa92\u9ede"}
+{"GUID":"3007", "enUS":"[ffed00]stamina recovery[-][e92121]-1[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa91\u9ede"}
+{"GUID":"3008", "enUS":"[ffed00]stamina recovery[-][e92121]-2[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa92\u9ede"}
+{"GUID":"3009", "enUS":"", "zhTW":""}
+{"GUID":"3010", "enUS":"", "zhTW":""}
+{"GUID":"3011", "enUS":"[ffed00]critical strike[-][e92121]-20%[-]", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738720%"}
+{"GUID":"3012", "enUS":"[ffed00]critical strike[-][e92121]-10%[-]", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738710%"}
+{"GUID":"3013", "enUS":"[ffed00]critical strike[-][546ef2]+10%[-]", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738710%"}
+{"GUID":"3014", "enUS":"[ffed00]critical strike[-][546ef2]+20%[-]", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738720%"}
+{"GUID":"3015", "enUS":"[ffed00]damage[-][546ef2]+1[-]", "zhTW":"\u589e\u52a01\u9ede\u50b7\u5bb3"}

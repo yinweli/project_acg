@@ -291,7 +291,11 @@ public class Rule
 				
 				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
 				{
-					iEquipProb = Data.Gain + iEquipExtra;
+					if(Data.Mode == (int)ENUM_ModeEquip.Light)
+						iEquipProb = Data.Gain;
+					else
+						iEquipProb = Data.Gain + iEquipExtra;
+
 					iEmptyProb -= iEquipProb;
 					Dice.Set(System.Convert.ToInt32(Data.GUID), iEquipProb);
 				}//if

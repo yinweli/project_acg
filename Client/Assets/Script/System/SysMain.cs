@@ -38,6 +38,9 @@ public class SysMain : MonoBehaviour
         bResult &= PlayerData.pthis.Load();
         bResult &= GameData.pthis.Load();
 
+		// 測試
+		bResult = false;
+
         // 確認是否為新遊戲.
         if (bResult == false)
             NewRoleData();
