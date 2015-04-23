@@ -55,6 +55,9 @@ public class SysMain : MonoBehaviour
         {
             GameData.pthis.iStageTime += GameDefine.iSaveSec;
             fSaveTime = Time.time + GameDefine.iSaveSec;
+
+            PlayerData.pthis.Save();
+            GameData.pthis.Save();
         }
 
         // 沒有玩家資料就算失敗了.
