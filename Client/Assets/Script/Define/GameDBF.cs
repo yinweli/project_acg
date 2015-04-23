@@ -37,9 +37,19 @@ public class GameDBF : MonoBehaviour
 	{
 		return m_DBF.Get(GameDefine.szDBFFeature);
 	}
-	public DBF GetLanguage(Argu GUID)
+	public string GetLanguage(Argu GUID)
 	{
-		return m_DBF.Get(GameDefine.szDBFLanguage, GUID);
+		DBFLanguage Data = m_DBF.Get(GameDefine.szDBFLanguage, GUID) as DBFLanguage;
+
+		if(Data == null)
+			return "";
+
+		switch(GameData.pthis.Language)
+		{
+		case ENUM_Language.zhTW: return Data.zhTW;
+		case ENUM_Language.enUS: return Data.enUS;
+		default: return "";
+		}//switch
 	}
 	public DBFItor GetLanguage()
 	{
