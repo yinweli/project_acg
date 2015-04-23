@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -164,4 +165,36 @@ public class SaveGame
 	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
 	public Pickup[] PickupList = new Pickup[0]; // 地圖拾取列表
 	public int iRoad = 0; // 目前位置
+}
+
+public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
+{
+	public int iStage = 0; // 關卡編號
+	public int iEnemyKill = 0; // 殺怪數量
+	public int iPlayTime = 0; // 遊戲時間
+	public string szTime = ""; // 紀錄時間
+
+	public string RecordString()
+	{
+		return string.Format("{0:00000}_{1:00000}_{2:00000}_{3}", iStage, iEnemyKill, iPlayTime, szTime);
+	}
+	public override int GetHashCode()
+	{
+		return RecordString().GetHashCode();
+	}
+	public override bool Equals(object obj)
+	{
+		return Equals(obj as SaveRecord);
+	}
+	public bool Equals(SaveRecord obj)
+	{
+		return obj != null && RecordString() == obj.RecordString();
+	}
+	public int CompareTo(SaveRecord obj)
+	{
+		if(obj == null)
+			return 1;
+		else
+			return RecordString().CompareTo(obj.RecordString());
+	}
 }

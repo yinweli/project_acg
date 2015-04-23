@@ -63,6 +63,7 @@ public class GameData : MonoBehaviour
 		
 		return true;
 	}
+	// 清除資料
     public void ClearData()
     {
         iStageTime = 0;
