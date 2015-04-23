@@ -103,7 +103,5 @@ public class PlayerData : MonoBehaviour
 		iPlayTime = 0;
 		Resource.Clear();
 		Members.Clear();
-
-		PlayerPrefs.DeleteKey(GameDefine.szSavePlayer);
 	}
 }

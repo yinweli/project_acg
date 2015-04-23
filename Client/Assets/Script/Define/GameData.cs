@@ -73,7 +73,5 @@ public class GameData : MonoBehaviour
 		RoadList.Clear();
 		ObjtList.Clear();
 		PickupList.Clear();
-
-		PlayerPrefs.DeleteKey(GameDefine.szSaveGame);
     }
 }
