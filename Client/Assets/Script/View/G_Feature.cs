@@ -6,6 +6,7 @@ public class G_Feature : MonoBehaviour
     public GameObject ObjGrid = null;
 	public UIButton BtnNext = null;
     public Shader pShader = null;
+    public G_Info pInfo = null;
 
     public int[] iFeature = null;
     public int[] iEquip = null;
@@ -31,6 +32,8 @@ public class G_Feature : MonoBehaviour
             // 建立群組.
             ObjGroup[i] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
             ObjGroup[i].name = string.Format("Role{0:000}", i);
+            ObjGroup[i].GetComponent<G_ListRole>().pInfo = pInfo;
+            ObjGroup[i].GetComponent<G_ListRole>().iPlayerID = i;
             
             ObjGrid.GetComponent<UIGrid>().Reposition();
 

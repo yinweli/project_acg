@@ -3,7 +3,19 @@ using System.Collections;
 
 public class G_ListRole : MonoBehaviour 
 {
-    public GameObject ObjRHand = null;
+    public int iPlayerID = 0;
+    public G_Info pInfo = null;
+
+    void OnPress(bool bIsDown)
+    {
+        if (bIsDown && pInfo)
+        {
+            pInfo.gameObject.SetActive(true);
+            pInfo.SetInfo(iPlayerID);            
+        }
+        else if(!bIsDown && pInfo)
+            pInfo.gameObject.SetActive(false);
+    }
 
     public void ShowFeature(int iFeature)
     {
@@ -16,7 +28,7 @@ public class G_ListRole : MonoBehaviour
         GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Weapon");
         pObj.transform.localPosition = new Vector3(0, -73, 0);
 
-        GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + (ENUM_Weapon)iEquip);
+        GameObject ObjWeapon = UITool.pthis.CreateUI(pHand, "Prefab/" + (ENUM_Weapon)iEquip);
         UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
 
         for (int i = 0; i < p2DS.Length; i++)
