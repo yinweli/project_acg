@@ -12,4 +12,5 @@ public class DBFFeature : DBF
 	public float Chances = 0; // 機率
 	public float Cooldown = 0; // 冷卻時間
 	public string Value = ""; // 效果值
+	public int Description = 0; // 描述字串編號
 }
