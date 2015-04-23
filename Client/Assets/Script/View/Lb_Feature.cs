@@ -10,16 +10,8 @@ public class Lb_Feature : MonoBehaviour
     {
         // 顯示取得的特性.
         DBFFeature pDBFFeature = GameDBF.This.GetFeature(iFeature) as DBFFeature;
-        DBFLanguage pDBFLanguage = GameDBF.This.GetLanguage(pDBFFeature.StrID) as DBFLanguage;
 
-        if (GameData.pthis.Language == ENUM_Language.enUS)
-            pLb.text = pDBFLanguage.enUS;
-        else if (GameData.pthis.Language == ENUM_Language.zhTW)
-        {
-            Debug.Log(gameObject.name + " Get Feature zhTW: " + pDBFLanguage.zhTW);
-            pLb.text = pDBFLanguage.zhTW;
-        }
-
+		pLb.text = GameDBF.This.GetLanguage(pDBFFeature.StrID);
         pSBg.width = pLb.width + 12;
         pSBg.height = pLb.height + 5;
     }
