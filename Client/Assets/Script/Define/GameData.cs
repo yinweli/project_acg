@@ -13,6 +13,7 @@ public class GameData : MonoBehaviour
     public int iKill = 0; // 殺怪數.
     public int iAlive = 0; // 存活數.
     public int iDead = 0; // 死亡數.
+	public int iRoad = 0; // 目前位置
 
 	public List<MapCoor> RoadList = new List<MapCoor>(); // 地圖道路列表
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
@@ -37,7 +38,7 @@ public class GameData : MonoBehaviour
 		Data.RoadList = RoadList.ToArray();
 		Data.ObjtList = ObjtList.ToArray();
 		Data.PickupList = PickupList.ToArray();
-		Data.iRoad = CameraCtrl.pthis.iNextRoad - 1;
+		Data.iRoad = iRoad;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Data));
 	}
@@ -56,10 +57,10 @@ public class GameData : MonoBehaviour
 		iKill = Data.iKill;
 		iAlive = Data.iAlive;
 		iDead = Data.iDead;
+		iRoad = Data.iRoad;
 		RoadList = new List<MapCoor>(Data.RoadList);
 		ObjtList = new List<MapObjt>(Data.ObjtList);
 		PickupList = new List<Pickup>(Data.PickupList);
-		CameraCtrl.pthis.iNextRoad = Data.iRoad;
 		
 		return true;
 	}
@@ -70,6 +71,7 @@ public class GameData : MonoBehaviour
         iKill = 0;
         iAlive = 0;
         iDead = 0;
+		iRoad = 0;
 		RoadList.Clear();
 		ObjtList.Clear();
 		PickupList.Clear();

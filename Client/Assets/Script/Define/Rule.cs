@@ -138,7 +138,7 @@ public class Rule
 		if(PlayerData.pthis.Resource.Count <= iIndex)
 			return false;
 
-		return PlayerData.pthis.Resource[iIndex] >= iValue;
+		return PlayerData.pthis.Resource[iIndex] > iValue;
 	}
 	// 建立成員
 	public static void MemberAdd(int iSex, int iLook, int iEquip)

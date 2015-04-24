@@ -93,37 +93,62 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] + iValue < 0)
-        {
-            // 沒電時關掉燈光.
-            for (int i = 0; i < pListLight.Count; i++)
-                pListLight[i].gameObject.SetActive(false);
-            return false;
-        }
+		// 檢查隊伍裡是否沒有光源裝備
+		bool bExist = false;
+		
+		foreach(Member ItorMember in PlayerData.pthis.Members)
+		{
+			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+			
+			if(Data == null)
+				continue;
+			
+			if(Data.Mode == (int)ENUM_ModeEquip.Light)
+				bExist = true;
+		}//for
 
-        Rule.ResourceAdd(ENUM_Resource.Battery, iValue);
-        UpdateBattery();
-        UpdateResource();
+		if(bExist == false)
+			return false;
 
-        if (iValue > 0)
-        {
-            for (int i = 0; i < pListLight.Count; i++)
-                pListLight[i].gameObject.SetActive(true);
-        }
+		int iBatteryTemp = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery];
 
-        // 增加電量時要確認是否需要閃爍.
-        if (iValue > 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 30)
-        {
-            for (int i = 0; i < pListLight.Count; i++)
-                pListLight[i].pAni.Play("Wait");
-        }
-        // 電量低於30，燈光開始閃爍.
-        else if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] < 30)
-        {
-            for (int i = 0; i < pListLight.Count; i++)
-                pListLight[i].pAni.Play("NoPower");
-        }
-        return true;
+		Rule.ResourceAdd(ENUM_Resource.Battery, iValue);
+		UpdateBattery();
+		UpdateResource();
+
+		bool bIsLight = Rule.ResourceChk(ENUM_Resource.Battery, 0);
+
+		if(iBatteryTemp == PlayerData.pthis.Resource[(int)ENUM_Resource.Battery])
+			return bIsLight;
+
+		if(bIsLight)
+		{
+			// 打開燈光
+			for(int i = 0; i < pListLight.Count; i++)
+				pListLight[i].gameObject.SetActive(true);
+
+			// 判斷燈光是否需要閃爍
+			if(Rule.ResourceChk(ENUM_Resource.Battery, 30))
+			{
+				for(int i = 0; i < pListLight.Count; i++)
+					pListLight[i].pAni.Play("Wait");
+			}
+			else
+			{
+				for(int i = 0; i < pListLight.Count; i++)
+					pListLight[i].pAni.Play("NoPower");
+			}//if
+
+			return true;
+		}
+		else
+		{
+			// 關閉燈光
+			for (int i = 0; i < pListLight.Count; i++)
+				pListLight[i].gameObject.SetActive(false);
+
+			return false;
+		}//if
     }
     // ------------------------------------------------------------------
     public void UpdateBattery()
