@@ -3,6 +3,11 @@ using System.Collections;
 
 public class P_Login : MonoBehaviour 
 {
+    void Start()
+    {
+        // 選音樂.
+        AudioCtrl.pthis.PlayMusic("Start");
+    }
 	// Update is called once per frame
     void Update()
     {

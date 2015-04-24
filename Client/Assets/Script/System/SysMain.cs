@@ -91,6 +91,9 @@ public class SysMain : MonoBehaviour
     // 建立舊關卡.
     public void OldStage()
     {
+        // 選音樂.
+        AudioCtrl.pthis.RedomMusic();
+
         Debug.Log("Old Game");
 
         bCanRun = true;
@@ -120,6 +123,8 @@ public class SysMain : MonoBehaviour
     // 建立新關卡.
     public void NewStage()
     {
+        // 選音樂.
+        AudioCtrl.pthis.RedomMusic();
         Debug.Log("New Game");
         // 清空遊戲資料.
         GameData.pthis.ClearData();
