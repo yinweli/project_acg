@@ -61,7 +61,7 @@ public class G_Info : MonoBehaviour
 			{
 				int iEquip = pDBFEquip.Damage;
 				int iAddon = PlayerData.pthis.Members[iID].iAddDamage;
-				string szTemp = string.Format("[ffed00]{0}[-]", iEquip + iAddon);
+				string szTemp = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon));
 				
 				if(iAddon != 0)
 				{
@@ -81,7 +81,7 @@ public class G_Info : MonoBehaviour
 			{
 				int iEquip = (int)(pDBFEquip.CriticalStrike * 100);
 				int iAddon = (int)(PlayerData.pthis.Members[iID].fCriticalStrike * 100);
-				string szTemp = string.Format("[ffed00]{0}[-]", iEquip + iAddon);
+				string szTemp = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon));
 
 				if(iAddon != 0)
 				{
