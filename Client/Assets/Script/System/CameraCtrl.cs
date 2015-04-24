@@ -51,7 +51,8 @@ public class CameraCtrl : MonoBehaviour
         // 檢查距離.
         if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.018f)
         {
-
+            if (!bTestMove)
+                GameData.pthis.iRoad = iNextRoad;
             iNextRoad++;
         }
     }
@@ -60,10 +61,11 @@ public class CameraCtrl : MonoBehaviour
     {
         bTestMove = false;
 
-        if()
-        ResetPos();
         // 有舊位子就先移動到舊位子上去.
-        
+        if (GameData.pthis.iRoad != 0)
+            SetPos(GameData.pthis.iRoad);
+        else
+            ResetPos();
     }
     // ------------------------------------------------------------------
     public void LoginMove()
@@ -78,6 +80,14 @@ public class CameraCtrl : MonoBehaviour
         MapCreater.pthis.Refresh(iNextRoad);
         transform.localPosition = Vector3.zero;
         Camera.main.gameObject.transform.localPosition = Vector3.zero;
+    }
+    // ------------------------------------------------------------------
+    void SetPos(int iRoad)
+    {
+        Debug.Log("SetPos: " + iRoad);
+        iNextRoad = iRoad + 1;
+        transform.localPosition = MapCreater.pthis.GetRoadObj(iRoad).transform.position;
+        Camera.main.gameObject.transform.localPosition = -1 * MapCreater.pthis.GetRoadObj(iRoad).transform.position;
     }
     // ------------------------------------------------------------------
     void MoveTo(int iRoad)

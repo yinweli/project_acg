@@ -67,13 +67,34 @@ public class PlayerCreater : MonoBehaviour
         CatchList.Remove(pObj);
     }
     // ------------------------------------------------------------------
+    public void CreateByRoad(int iRoad)
+    {
+        iCount = 0;
+
+        if (PlayerData.pthis.Members.Count <= 0)
+            return;
+
+        for (int i = 0; i < PlayerData.pthis.Members.Count; i++)
+        {
+            // 建立第一個玩家.
+            pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
+            pPrePlayer.name = string.Format("Role{0:000}", iCount);
+            pPrePlayer.GetComponent<AIPlayer>().iPlayer = iCount;
+            pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, PlayerData.pthis.Members[iCount]);
+            pPrePlayer.transform.position = MapCreater.pthis.GetRoadObj(iRoad - i).transform.position;
+            
+            // 加入玩家佇列.
+            SysMain.pthis.Role.Add(pPrePlayer, iCount);
+            SysMain.pthis.CatchRole.Add(pPrePlayer, iCount);
+            iCount++;
+        }            
+    }
+    // ------------------------------------------------------------------
     void Create()
     {
         if (PlayerData.pthis.Members.Count <= 0)
-        {
-            Debug.Log("No Player Data!!");
             return;
-        }
+
         // 建立第一個玩家.
         pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
         pPrePlayer.name = string.Format("Role{0:000}", iCount);

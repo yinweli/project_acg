@@ -37,13 +37,18 @@ public class G_Feature : MonoBehaviour
             
             ObjGrid.GetComponent<UIGrid>().Reposition();
 
-            iFeature[i] = Rule.GainFeature(i);
-            iEquip[i] = Rule.GainEquip(i);
+            if (!GameData.pthis.bVictory)
+            {
+                Debug.Log("Redom Feature & Equip");
+                iFeature[i] = Rule.GainFeature(i);
+                iEquip[i] = Rule.GainEquip(i);
+                GameData.pthis.bVictory = true;
+            }
         }
 
 		Rule.AddDamageReset();
 		Rule.CriticalStrikeReset();
-        PlayerData.pthis.Save();
+        SysMain.pthis.SaveGame();
 
         StartCoroutine(StartGain());
     }

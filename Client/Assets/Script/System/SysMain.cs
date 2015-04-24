@@ -100,10 +100,10 @@ public class SysMain : MonoBehaviour
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
 
-        // 建立地圖物件.
-        MapCreater.pthis.ShowMap(0);
         // 建立撿取物件.
         MapCreater.pthis.CreatePickup();
+        // 建立地圖物件.
+        MapCreater.pthis.ShowMap(GameData.pthis.iRoad);       
 
         // UI初始化.
         P_UI.pthis.StartNew();
@@ -193,7 +193,10 @@ public class SysMain : MonoBehaviour
         bIsGaming = true;
         P_UI.pthis.StartRecoverSta();
         // 創建人物.
-        PlayerCreater.pthis.StartNew();
+        if (bShowCount)
+            PlayerCreater.pthis.CreateByRoad(GameData.pthis.iRoad);
+        else
+            PlayerCreater.pthis.StartNew();
         // 開始出怪.
         EnemyCreater.pthis.StartNew();
     }
