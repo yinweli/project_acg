@@ -39,6 +39,6 @@ public class AIBullet : MonoBehaviour
 
         Vector3 diff = pOgj.transform.position - transform.position;
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+        transform.localRotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 }

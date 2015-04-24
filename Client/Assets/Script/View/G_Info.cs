@@ -22,6 +22,7 @@ public class G_Info : MonoBehaviour
         if ((ENUM_Weapon)PlayerData.pthis.Members[iID].iEquip != ENUM_Weapon.Weapon_null)
         {
             ObjWeapon = UITool.pthis.CreateUI(S_Weapon, "Prefab/" + (ENUM_Weapon)PlayerData.pthis.Members[iID].iEquip);
+            ObjWeapon.transform.localPosition = new Vector3(-20,0,0);
             UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
 
             for (int i = 0; i < p2DS.Length; i++)
