@@ -13,6 +13,8 @@ public class G_FeatureInfo : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+        else
+            gameObject.SetActive(true);
 
         DBFFeature pDBFFeature = GameDBF.This.GetFeature(PlayerData.pthis.Members[iID].Feature[iIndex]) as DBFFeature;
 

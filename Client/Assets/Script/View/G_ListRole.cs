@@ -13,8 +13,11 @@ public class G_ListRole : MonoBehaviour
             pInfo.gameObject.SetActive(true);
             pInfo.SetInfo(iPlayerID);            
         }
-        else if(!bIsDown && pInfo)
+        else if (!bIsDown && pInfo)
+        {
+            pInfo.Reset();
             pInfo.gameObject.SetActive(false);
+        }
     }
 
     public void ShowFeature(int iFeature)
