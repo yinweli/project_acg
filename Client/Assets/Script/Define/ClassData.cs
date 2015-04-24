@@ -165,6 +165,7 @@ public class SaveGame
 	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
 	public Pickup[] PickupList = new Pickup[0]; // 地圖拾取列表
 	public int iRoad = 0; // 目前位置
+	public bool bVictory = false; // 勝利旗標
 }
 
 public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>

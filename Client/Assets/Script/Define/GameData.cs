@@ -14,6 +14,7 @@ public class GameData : MonoBehaviour
     public int iAlive = 0; // 存活數.
     public int iDead = 0; // 死亡數.
 	public int iRoad = 0; // 目前位置
+	public bool bVictory = false; // 勝利旗標
 
 	public List<MapCoor> RoadList = new List<MapCoor>(); // 地圖道路列表
 	public List<MapObjt> ObjtList = new List<MapObjt>(); // 地圖物件列表
@@ -39,6 +40,7 @@ public class GameData : MonoBehaviour
 		Data.ObjtList = ObjtList.ToArray();
 		Data.PickupList = PickupList.ToArray();
 		Data.iRoad = iRoad;
+		Data.bVictory = bVictory;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Data));
 	}
@@ -58,6 +60,7 @@ public class GameData : MonoBehaviour
 		iAlive = Data.iAlive;
 		iDead = Data.iDead;
 		iRoad = Data.iRoad;
+		bVictory = Data.bVictory;
 		RoadList = new List<MapCoor>(Data.RoadList);
 		ObjtList = new List<MapObjt>(Data.ObjtList);
 		PickupList = new List<Pickup>(Data.PickupList);
@@ -72,6 +75,7 @@ public class GameData : MonoBehaviour
         iAlive = 0;
         iDead = 0;
 		iRoad = 0;
+		bVictory = false;
 		RoadList.Clear();
 		ObjtList.Clear();
 		PickupList.Clear();
