@@ -41,6 +41,8 @@ public class G_Feature : MonoBehaviour
             iEquip[i] = Rule.GainEquip(i);
         }
 
+		Rule.AddDamageReset();
+		Rule.CriticalStrikeReset();
         PlayerData.pthis.Save();
 
         StartCoroutine(StartGain());

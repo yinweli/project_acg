@@ -57,12 +57,42 @@ public class G_Info : MonoBehaviour
         {
             DBFEquip pDBFEquip = GameDBF.This.GetEquip(PlayerData.pthis.Members[iID].iEquip) as DBFEquip;
 
-            // 攻擊力.
-            Lb_Value[0].text = string.Format("{0}({1})",pDBFEquip.Damage, PlayerData.pthis.Members[iID].iAddDamage);
-            // 射擊速度.
-            Lb_Value[1].text = string.Format("1/{0}Sec", pDBFEquip.FireRate);
-            // 爆擊.
-            Lb_Value[2].text = string.Format("{0}({1})", pDBFEquip.CriticalStrike * 100, PlayerData.pthis.Members[iID].fCriticalStrike * 100);
+			// 攻擊力
+			{
+				int iEquip = pDBFEquip.Damage;
+				int iAddon = PlayerData.pthis.Members[iID].iAddDamage;
+				string szTemp = string.Format("[ffed00]{0}[-]", iEquip + iAddon);
+				
+				if(iAddon != 0)
+				{
+					if(iAddon > 0)
+						szTemp += string.Format("({0}[546ef2]+{1}[-])", iEquip, iAddon);
+					else
+						szTemp += string.Format("({0}[e92121]{1}[-])", iEquip, iAddon);
+				}//if
+
+				Lb_Value[0].text = szTemp;
+			}
+
+            // 射擊速度
+			Lb_Value[1].text = string.Format("[ffed00]{0:0.0}[-] per sec", 1 / pDBFEquip.FireRate);
+
+            // 爆擊
+			{
+				int iEquip = (int)(pDBFEquip.CriticalStrike * 100);
+				int iAddon = (int)(PlayerData.pthis.Members[iID].fCriticalStrike * 100);
+				string szTemp = string.Format("[ffed00]{0}[-]", iEquip + iAddon);
+
+				if(iAddon != 0)
+				{
+					if(iAddon > 0)
+						szTemp += string.Format("({0}[546ef2]+{1}[-])", iEquip, iAddon);
+					else
+						szTemp += string.Format("({0}[e92121]{1}[-])", iEquip, iAddon);
+				}//if
+
+				Lb_Value[2].text = szTemp + "%";
+			}
         }        
     }
 
