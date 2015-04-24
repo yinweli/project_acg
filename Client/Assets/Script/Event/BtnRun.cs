@@ -8,7 +8,7 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     public void StartNew()
     {
-		fCoolDown = Time.time + GameDefine.iStaminaRecoveryTime;
+		RecoveryTime();
         StartCoroutine(StaRecovery());
     }
     // ------------------------------------------------------------------
@@ -95,7 +95,7 @@ public class BtnRun : MonoBehaviour
             {
 				RecoveryTime();
 
-                SysMain.pthis.AddStamina(PlayerData.pthis.iStaminaRecovery);
+                SysMain.pthis.AddStamina(1);
 
                 if (SysMain.pthis.bCanRun && PlayerData.pthis.iStamina >= 20)
                     GetComponent<UIButton>().isEnabled = true;
@@ -105,7 +105,10 @@ public class BtnRun : MonoBehaviour
 	// ------------------------------------------------------------------
 	void RecoveryTime()
 	{
-		fCoolDown = Time.time + GameDefine.iStaminaRecoveryTime;
+		if(PlayerData.pthis.iStaminaRecovery > 0)
+			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime / PlayerData.pthis.iStaminaRecovery;
+		else
+			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime;
 	}
 	// ------------------------------------------------------------------
 	void ConsumeTime()
