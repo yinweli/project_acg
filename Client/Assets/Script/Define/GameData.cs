@@ -37,7 +37,7 @@ public class GameData : MonoBehaviour
 		Data.RoadList = RoadList.ToArray();
 		Data.ObjtList = ObjtList.ToArray();
 		Data.PickupList = PickupList.ToArray();
-		Data.iRoad = CameraCtrl.pthis.iNextRoad;
+		Data.iRoad = CameraCtrl.pthis.iNextRoad - 1;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Data));
 	}
