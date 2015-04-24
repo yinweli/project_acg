@@ -59,10 +59,10 @@ public class PlayerCreater : MonoBehaviour
         pPrePlayer = pObj;
         iCount++;
 
-        PlayerData.pthis.Members.Add(CatchList[pObj]);
-        PlayerData.pthis.Save();
+        PlayerData.pthis.Members.Add(CatchList[pObj]);        
         SysMain.pthis.Role.Add(pObj, iCount);
-        SysMain.pthis.CatchRole.Add(pObj, iCount);        
+        SysMain.pthis.CatchRole.Add(pObj, iCount);
+        SysMain.pthis.SaveGame();
 
         CatchList.Remove(pObj);
     }

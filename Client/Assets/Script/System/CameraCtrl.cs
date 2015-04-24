@@ -47,17 +47,23 @@ public class CameraCtrl : MonoBehaviour
 
         if (!MapCreater.pthis.GetRoadObj(iNextRoad))
             return;
+
         // 檢查距離.
         if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.018f)
+        {
+
             iNextRoad++;
+        }
     }
     // ------------------------------------------------------------------
     public void StartNew()
     {
         bTestMove = false;
+
+        if()
         ResetPos();
         // 有舊位子就先移動到舊位子上去.
-
+        
     }
     // ------------------------------------------------------------------
     public void LoginMove()

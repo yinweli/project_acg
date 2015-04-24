@@ -10,7 +10,7 @@ public class BtnStartNew : MonoBehaviour
     {
         PlayerData.pthis.iStage++;
 
-        SysMain.pthis.NewGame();
+        SysMain.pthis.NewStage();
         Destroy(pPanel);
     }
 }

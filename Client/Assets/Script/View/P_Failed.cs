@@ -18,10 +18,9 @@ public class P_Failed : MonoBehaviour
 
         // 重設存檔與遊戲檔案.
         PlayerData.pthis.ClearData();
-        PlayerData.pthis.Save();
-
         GameData.pthis.ClearData();
-        GameData.pthis.Save();
+
+        SysMain.pthis.SaveGame();
     }
 
     IEnumerator OpenPage()

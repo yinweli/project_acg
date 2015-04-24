@@ -19,7 +19,7 @@ public class P_Victory : MonoBehaviour
         // 死亡人數.
         pLb[4].text = GameData.pthis.iDead.ToString();
 
-        PlayerData.pthis.Save();
+        SysMain.pthis.SaveGame();
     }
 
     public void ChangePage(int iPage)

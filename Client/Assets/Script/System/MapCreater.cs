@@ -285,6 +285,7 @@ public class MapCreater : MonoBehaviour
 			}//for
 		}//for
 	}
+    // ------------------------------------------------------------------
 	// 建立地圖
 	public void Create()
 	{
@@ -296,10 +297,15 @@ public class MapCreater : MonoBehaviour
 		CreateStart();
 		CreateEnd();
 		CreateObjt();		
-		Fill();
-		Refresh(0);
-		transform.localPosition = new Vector3(-GetRoadObj(0).transform.localPosition.x, -GetRoadObj(0).transform.localPosition.y, 0);
+		Fill();		
 	}
+    // ------------------------------------------------------------------
+    public void ShowMap(int iRoad)
+    {
+        Refresh(iRoad);
+        transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
+    }
+    // ------------------------------------------------------------------
 	// 清除地圖
 	public void Clear()
 	{

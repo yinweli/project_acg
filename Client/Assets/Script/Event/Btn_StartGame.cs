@@ -14,6 +14,5 @@ public class Btn_StartGame : MonoBehaviour
     {
         GetComponent<UIButton>().isEnabled = false;
         pAni.Play("FadOut");
-        SysMain.pthis.ReadyStart();
     }
 }

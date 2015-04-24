@@ -8,7 +8,7 @@ public class P_Login : MonoBehaviour
     {
         if (GetComponent<UIPanel>().alpha < 0.002)
         {
-            SysMain.pthis.NewGame();
+            SysMain.pthis.CheckStart();
             Destroy(gameObject);
         }
     }

@@ -21,7 +21,7 @@ public class SysMain : MonoBehaviour
     // 敵人佇列.
     public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
 
-    bool bResult = true;
+    bool bIsOld = true;
 
     public float fSaveTime = 0;
     // ------------------------------------------------------------------
@@ -35,18 +35,14 @@ public class SysMain : MonoBehaviour
         // 建立遊戲開頭畫面.
         SysUI.pthis.CreatePanel("Prefab/P_Login");
         // 讀取遊戲
-        bResult &= PlayerData.pthis.Load();
-        bResult &= GameData.pthis.Load();
+        bIsOld &= PlayerData.pthis.Load();
+        bIsOld &= GameData.pthis.Load();
 
-		// 測試
-		bResult = false;
+        if (!bIsOld)
+            CreateNew();         
 
-        // 確認是否為新遊戲.
-        if (bResult == false)
-            NewRoleData();
-
-        // 建立地圖.
-        MapCreater.pthis.Create();
+        // 建立地圖物件.
+        MapCreater.pthis.ShowMap(0);
         // 開始行走
         CameraCtrl.pthis.LoginMove();
     }
@@ -59,25 +55,13 @@ public class SysMain : MonoBehaviour
             GameData.pthis.iStageTime += GameDefine.iSaveSec;
             fSaveTime = Time.time + GameDefine.iSaveSec;
 
-            PlayerData.pthis.Save();
-            GameData.pthis.Save();
+            SaveGame();
         }
 
         // 沒有玩家資料就算失敗了.
         if (bIsGaming && PlayerData.pthis.Members.Count <= DeadRole.Count)
             Failed();
 	}
-    // ------------------------------------------------------------------
-    // 準備開始遊戲.
-    public void ReadyStart()
-    {
-        bCanRun = true;
-        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
-		Rule.StaminaReset();
-		Rule.StaminaRecovery();
-		Rule.CriticalStrikeReset();
-		Rule.AddDamageReset();
-    }
 	// ------------------------------------------------------------------
 	// 儲存遊戲.
 	public void SaveGame()
@@ -87,35 +71,92 @@ public class SysMain : MonoBehaviour
 		PlayerPrefs.Save();
 	}
     // ------------------------------------------------------------------
-    // 開始遊戲.
-    public void NewGame()
+    // 確認存檔內容開始遊戲.
+    public void CheckStart()
     {
-        // 清空地圖.
-		GameData.pthis.ClearData();
-        MapCreater.pthis.Clear();
-        // 清空物件.
-        ClearObj();
-        // 清空待救角色.
-        PlayerCreater.pthis.ClearList();
-
-		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
-
-        // 建立地圖.
+        if (bIsOld)
+            OldStage();
+        else
+            NewStage();            
+    }
+    // ------------------------------------------------------------------
+    // 進入全新遊戲.
+    public void CreateNew()
+    {
+        NewRoleData();
+        // 建立新地圖資料.
         MapCreater.pthis.Create();
+    }
+    // ------------------------------------------------------------------
+    // 建立舊關卡.
+    public void OldStage()
+    {
+        Debug.Log("Old Game");
+
+        bCanRun = true;
+        // 重新計算數值.
+        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
+        Rule.StaminaRecovery();
+        Rule.CriticalStrikeReset();
+        Rule.AddDamageReset();
+
+        // 建立地圖物件.
+        MapCreater.pthis.ShowMap(0);
         // 建立撿取物件.
         MapCreater.pthis.CreatePickup();
-		ReadyStart();
+
         // UI初始化.
         P_UI.pthis.StartNew();
-        // 新遊戲 - 淡出淡入天數後開始遊戲.
-        if (!bResult)
-            SysUI.pthis.ShowDay();
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
 
         // 到數開始.
-        StartCoroutine(CountStart());
+        StartCoroutine(CountStart(true));
+
+        bIsOld = false;
+    }
+    // ------------------------------------------------------------------
+    // 建立新關卡.
+    public void NewStage()
+    {
+        Debug.Log("New Game");
+        // 清空遊戲資料.
+        GameData.pthis.ClearData();
+        // 清空物件.
+        ClearObj();
+        // 清空待救角色.
+        PlayerCreater.pthis.ClearList();
+
+        // 重置跑步旗標.
+        bCanRun = true;
+        // 重新計算數值.
+        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
+        Rule.StaminaReset();
+        Rule.StaminaRecovery();
+        Rule.CriticalStrikeReset();
+        Rule.AddDamageReset();
+
+        // 選擇關卡風格編號.
+        PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+        // 建立新地圖資料.
+        MapCreater.pthis.Create();
+        // 建立地圖物件.
+        MapCreater.pthis.ShowMap(0);
+        // 建立撿取物件.
+        MapCreater.pthis.CreatePickup();        
+
+        // UI初始化.
+        P_UI.pthis.StartNew();
+
+        // 鏡頭位置調整.
+        CameraCtrl.pthis.StartNew();
+
+        // 新遊戲 - 淡出淡入天數後開始遊戲.
+        SysUI.pthis.ShowDay();
+
+        // 到數開始.
+        StartCoroutine(CountStart(false));
     }
     // ------------------------------------------------------------------
     // 新遊戲資料.
@@ -139,11 +180,13 @@ public class SysMain : MonoBehaviour
         Rule.MemberAdd(5);
     }
     // ------------------------------------------------------------------
-    IEnumerator CountStart()
+    IEnumerator CountStart(bool bShowCount)
     {
         int iCount = 3;
         while (iCount > 0)
         {
+            if (bShowCount)
+            { }
             yield return new WaitForSeconds(1);
             iCount--;
         }
@@ -206,7 +249,7 @@ public class SysMain : MonoBehaviour
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
 
 		PlayerData.pthis.Members = NewMember;
-        PlayerData.pthis.Save();
+        SaveGame();
 
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
@@ -219,8 +262,7 @@ public class SysMain : MonoBehaviour
         PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
 
-        // 比較紀錄.
-        
+        // 比較紀錄.        
 
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Failed");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
