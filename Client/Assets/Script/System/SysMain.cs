@@ -37,6 +37,7 @@ public class SysMain : MonoBehaviour
         // 讀取遊戲
         bIsOld &= PlayerData.pthis.Load();
         bIsOld &= GameData.pthis.Load();
+        RecordData.pthis.Load();
 
         if (!bIsOld)
             CreateNew();
