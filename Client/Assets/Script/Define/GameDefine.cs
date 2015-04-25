@@ -33,6 +33,7 @@ public class GameDefine
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
+	public const int iMinStamina = 10; // 耐力下限值
 	public const int iMaxStaminaRecovery = 10; // 最大耐力回復值
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
 	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
@@ -64,17 +65,17 @@ public class GameDefine
 	public const int iPickupMember = 25; // 救援成員出現機率
 	public const int iMaxPickupItems = 24; // 最大拾取物品次數
 	public const int iMinPickupItems = 20; // 最小拾取物品次數
-	public const int iMaxPickupValue = 30; // 最大拾取物品價值
-	public const int iMinPickupValue = 26; // 最小拾取物品價值
-	public const float fPickupPartLightAmmo = 0.2f; // 拾取物品(輕型彈藥)比例
-	public const float fPickupPartHeavyAmmo = 0.2f; // 拾取物品(重型彈藥)比例
+	public const int iMaxPickupValue = 22; // 最大拾取物品價值
+	public const int iMinPickupValue = 16; // 最小拾取物品價值
+	public const float fPickupPartLightAmmo = 0.15f; // 拾取物品(輕型彈藥)比例
+	public const float fPickupPartHeavyAmmo = 0.15f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
 
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 0.8f; // 怪物能量升級值
-	public const float fUpgradePickup = 1.5f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 1.0f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱

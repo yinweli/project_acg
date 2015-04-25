@@ -94,7 +94,7 @@ public class Rule
 	// 重置耐力上限值
 	public static int StaminaLimit()
 	{
-		return Value(0, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.Passive_StaminaLimit) + GameDefine.iBaseStaminaLimit);
+		return Value(GameDefine.iMinStamina, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.Passive_StaminaLimit) + GameDefine.iBaseStaminaLimit);
 	}
 	// 重置耐力回復值
 	public static void StaminaRecovery()
