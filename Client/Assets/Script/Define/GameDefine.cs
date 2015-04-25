@@ -65,9 +65,9 @@ public class GameDefine
 	public const int iMinPickupItems = 18; // 最小拾取物品次數
 	public const int iMaxPickupValue = 28; // 最大拾取物品價值
 	public const int iMinPickupValue = 20; // 最小拾取物品價值
-	public const float fPickupPartLightAmmo = 0.15f; // 拾取物品(輕型彈藥)比例
-	public const float fPickupPartHeavyAmmo = 0.15f; // 拾取物品(重型彈藥)比例
-	public const float fPickupPartBattery = 0.3f; // 拾取物品(電池)比例
+	public const float fPickupPartLightAmmo = 0.2f; // 拾取物品(輕型彈藥)比例
+	public const float fPickupPartHeavyAmmo = 0.2f; // 拾取物品(重型彈藥)比例
+	public const float fPickupPartBattery = 0.1f; // 拾取物品(電池)比例
 
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
