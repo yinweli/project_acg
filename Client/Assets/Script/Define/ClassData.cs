@@ -155,6 +155,16 @@ public class SavePlayer
 	public SaveMember[] Data = new SaveMember[0]; // 成員列表
 }
 
+public class SaveEnemy
+{
+	public int iMonster = 0; // 怪物編號
+	public int iHP = 0; // HP
+	public float fMoveSpeed = 0.0f; // 移動速度
+	public int iThreat = 0; // 威脅
+	public float fPosX = 0.0f; // 座標X
+	public float fPosY = 0.0f; // 座標Y
+}
+
 public class SaveGame
 {
 	public int iStageTime = 0; // 關卡時間.
