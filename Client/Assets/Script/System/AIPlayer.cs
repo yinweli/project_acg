@@ -101,10 +101,10 @@ public class AIPlayer : MonoBehaviour
 	void GetTarget()
 	{
 		// 沒有可作為目標的怪物.
-		if (SysMain.pthis.Enemy.Count == 0)
+		if (SysMain.pthis.AtkEnemy.Count == 0)
 			ObjTarget = null;
 		
-		foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
+		foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.AtkEnemy)
 		{
 			// 確認現在是否有目標.
 			if(ObjTarget == null)

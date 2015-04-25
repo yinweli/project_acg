@@ -19,7 +19,9 @@ public class SysMain : MonoBehaviour
     // 死亡人物佇列.
     public List<int> DeadRole = new List<int>();
     // 敵人佇列.
-    public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
+    public List<GameObject> Enemy = new List<GameObject>();
+    // 可打敵人佇列.
+    public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();    
 
     bool bIsOld = true;
 
@@ -126,8 +128,6 @@ public class SysMain : MonoBehaviour
         GameData.pthis.ClearData();
         // 清空物件.
         ClearObj();
-        // 清空待救角色.
-        PlayerCreater.pthis.ClearList();
 
         // 重置跑步旗標.
         bCanRun = true;
@@ -283,15 +283,20 @@ public class SysMain : MonoBehaviour
         // 刪除人物.
         foreach (KeyValuePair<GameObject, int> itor in Role)
             Destroy(itor.Key);
+        foreach (KeyValuePair<GameObject, int> itor in CatchRole)
+            Destroy(itor.Key);
         // 清空人物佇列.
         Role.Clear();
         CatchRole.Clear();
         DeadRole.Clear();
+        // 刪除待救人物.
+        PlayerCreater.pthis.ClearList();
 
         // 刪除 敵人.
-        foreach (KeyValuePair<GameObject, int> itor in Enemy)
-            Destroy(itor.Key);
+        foreach (GameObject itor in Enemy)
+            Destroy(itor);
         // 清空 敵人佇列.
         Enemy.Clear();
+        AtkEnemy.Clear();
     }
 }

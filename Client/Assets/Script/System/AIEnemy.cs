@@ -32,6 +32,8 @@ public class AIEnemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        SysMain.pthis.Enemy.Add(gameObject);
+
 		DBFMonster DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
 
 		if(DBFData == null)
@@ -65,8 +67,8 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnDestroy()
     {
-        if (SysMain.pthis.Enemy.ContainsKey(gameObject))
-            SysMain.pthis.Enemy.Remove(gameObject);
+        if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+            SysMain.pthis.AtkEnemy.Remove(gameObject);
     }
     // ------------------------------------------------------------------
     void Update()
@@ -134,8 +136,8 @@ public class AIEnemy : MonoBehaviour
     {
         if (iHP > 0 && other.gameObject.tag == "Light")
         {
-            if (!SysMain.pthis.Enemy.ContainsKey(gameObject))
-                SysMain.pthis.Enemy.Add(gameObject, iThreat);
+            if (!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+                SysMain.pthis.AtkEnemy.Add(gameObject, iThreat);
         }
     }
     // ------------------------------------------------------------------
@@ -143,8 +145,8 @@ public class AIEnemy : MonoBehaviour
     {
         if (iHP > 0 && other.gameObject.tag == "Light")
         {
-            if (SysMain.pthis.Enemy.ContainsKey(gameObject))
-                SysMain.pthis.Enemy.Remove(gameObject);
+            if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+                SysMain.pthis.AtkEnemy.Remove(gameObject);
         }
     }
     // ------------------------------------------------------------------
@@ -165,8 +167,8 @@ public class AIEnemy : MonoBehaviour
             NGUITools.PlaySound(ClipDead, 0.8f);
             GameData.pthis.iKill++;
             // 從可攻擊陣列移除.
-            if (SysMain.pthis.Enemy.ContainsKey(gameObject))
-                SysMain.pthis.Enemy.Remove(gameObject);       
+            if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+                SysMain.pthis.AtkEnemy.Remove(gameObject);       
         }
         else
             NGUITools.PlaySound(ClipHurt, 0.8f);
