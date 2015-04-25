@@ -43,7 +43,7 @@ public class GameDefine
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
-	public const int iWaitSec = 12; // 怪物出怪間隔秒數.
+	public const int iWaitSec = 8; // 怪物出怪間隔秒數.
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iBlockUpdate = 25; // 格子更新距離
