@@ -5,7 +5,8 @@ public class Btn_ClearData : MonoBehaviour {
 
 	void OnClick()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerData.pthis.Clear();
+        GameData.pthis.Clear();
         SysMain.pthis.NewRoleData();
     }
 }

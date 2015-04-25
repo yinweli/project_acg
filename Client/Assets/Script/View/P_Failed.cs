@@ -3,7 +3,8 @@ using System.Collections;
 
 public class P_Failed : MonoBehaviour 
 {
-    public UISprite pTitleBg;
+    public UISprite pTitleBg = null;
+    public GameObject ObjRecord = null;
     public UILabel[] pLb = new UILabel[3];
 
     void Start()
@@ -16,9 +17,12 @@ public class P_Failed : MonoBehaviour
         // 殺怪數.
         pLb[2].text = PlayerData.pthis.iEnemyKill.ToString();
 
+        // 比較紀錄.
+        ObjRecord.SetActive(RecordData.pthis.RecordNow());
+
         // 重設存檔與遊戲檔案.
-        PlayerData.pthis.ClearData();
-        GameData.pthis.ClearData();
+        PlayerData.pthis.Clear();
+        GameData.pthis.Clear();
 
 		PlayerPrefs.DeleteAll();
 		// 設為新遊戲.

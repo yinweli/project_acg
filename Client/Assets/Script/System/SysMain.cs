@@ -125,7 +125,7 @@ public class SysMain : MonoBehaviour
         AudioCtrl.pthis.RedomMusic();
         Debug.Log("New Game");
         // 清空遊戲資料.
-        GameData.pthis.ClearData();
+        GameData.pthis.Clear();
         // 清空物件.
         ClearObj();
 
@@ -271,8 +271,6 @@ public class SysMain : MonoBehaviour
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
 
         EnemyCreater.pthis.StopCreate();
-
-        // 比較紀錄.        
 
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Failed");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
