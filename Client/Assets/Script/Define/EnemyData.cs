@@ -49,4 +49,10 @@ public class EnemyData : MonoBehaviour
 
 		return EnemyList != null;
 	}
+	// 清除存檔
+	public void Clear()
+	{
+		EnemyList = new List<SaveEnemy>();
+		PlayerPrefs.DeleteKey(GameDefine.szSaveEnemy);
+	}
 }

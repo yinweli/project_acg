@@ -80,4 +80,10 @@ public class GameData : MonoBehaviour
 		ObjtList.Clear();
 		PickupList.Clear();
     }
+	// 清除存檔
+	public void Clear()
+	{
+		ClearData();
+		PlayerPrefs.DeleteKey(GameDefine.szSaveGame);
+	}
 }

@@ -104,4 +104,10 @@ public class PlayerData : MonoBehaviour
 		Resource.Clear();
 		Members.Clear();
 	}
+	// 清除存檔
+	public void Clear()
+	{
+		ClearData();
+		PlayerPrefs.DeleteKey(GameDefine.szSavePlayer);
+	}
 }
