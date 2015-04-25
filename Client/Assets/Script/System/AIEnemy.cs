@@ -6,8 +6,6 @@ public class AIEnemy : MonoBehaviour
 {
 	// 怪物編號
 	public int iMonster = 1;
-	// 怪物模式
-	public ENUM_ModeMonster emMode = ENUM_ModeMonster.Null;
 	// HP
 	public int iHP = 0;
 	// 移動速度
@@ -42,7 +40,6 @@ public class AIEnemy : MonoBehaviour
 			return;
 		}//if
 
-		emMode = (ENUM_ModeMonster)DBFData.Mode;
         iHP = DBFData.HP;
 		fMoveSpeed = DBFData.MoveSpeed;
 		iThreat = DBFData.Threat;

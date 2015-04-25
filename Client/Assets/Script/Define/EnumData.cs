@@ -77,13 +77,6 @@ public enum ENUM_ModeFeature
 	Passive_AddDamage, // 被動增加增傷
 }
 
-// 怪物模式列舉
-public enum ENUM_ModeMonster
-{
-	Null = 0, 
-	Normal, // 正常
-}
-
 // 射程列舉
 public enum ENUM_Range
 {
