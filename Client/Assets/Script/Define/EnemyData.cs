@@ -16,7 +16,7 @@ public class EnemyData : MonoBehaviour
 	// 存檔.
 	public void Save()
 	{
-		List<SaveEnemy> Data = new List<SaveEnemy>();
+		int iCount = 0;
 
 		foreach(GameObject Itor in SysMain.pthis.Enemy)
 		{
@@ -26,31 +26,40 @@ public class EnemyData : MonoBehaviour
 
                 if (Enemy && Enemy.iHP > 0)
                 {
-                    SaveEnemy Temp = new SaveEnemy();
+                    SaveEnemy Data = new SaveEnemy();
 
-                    Temp.iMonster = Enemy.iMonster;
-                    Temp.iHP = Enemy.iHP;
-                    Temp.fMoveSpeed = Enemy.fMoveSpeed;
-                    Temp.iThreat = Enemy.iThreat;
-                    Temp.fPosX = Itor.transform.localPosition.x;
-                    Temp.fPosY = Itor.transform.localPosition.y;
+					Data.iMonster = Enemy.iMonster;
+					Data.iHP = Enemy.iHP;
+					Data.fMoveSpeed = Enemy.fMoveSpeed;
+					Data.iThreat = Enemy.iThreat;
+					Data.fPosX = Itor.transform.localPosition.x;
+					Data.fPosY = Itor.transform.localPosition.y;
 
-                    Data.Add(Temp);
+					PlayerPrefs.SetString(GameDefine.szSaveEnemy + iCount, Json.ToString(Data));
+					++iCount;
                 }//if
             }//if
 		}//for
-		
-		PlayerPrefs.SetString(GameDefine.szSaveEnemy, Json.ToString(Data));
+
+		PlayerPrefs.SetInt(GameDefine.szSaveEnemyCount, iCount);
 	}
 	// 讀檔.
 	public bool Load()
 	{
-		if(PlayerPrefs.HasKey(GameDefine.szSaveEnemy) == false)
-			return false;
-		
-		EnemyList = Json.ToObject<List<SaveEnemy>>(PlayerPrefs.GetString(GameDefine.szSaveEnemy));
+		EnemyList.Clear();
 
-		return EnemyList != null;
+		if(PlayerPrefs.HasKey(GameDefine.szSaveEnemyCount) == false)
+			return false;
+
+		for(int iPos = 0, iMax = PlayerPrefs.GetInt(GameDefine.szSaveEnemyCount); iPos < iMax; ++iPos)
+		{
+			string szSave = GameDefine.szSaveEnemy + iPos;
+			
+			if(PlayerPrefs.HasKey(szSave))
+				EnemyList.Add(Json.ToObject<SaveEnemy>(PlayerPrefs.GetString(szSave)));
+		}//for
+
+		return true;
 	}
 	// 清除存檔
 	public void Clear()

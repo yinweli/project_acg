@@ -79,7 +79,8 @@ public class GameDefine
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
-	public const string szSaveEnemy = "save_enemy"; // 怪物資料存檔名稱
+	public const string szSaveEnemyCount = "save_enemy_count"; // 怪物資料數量存檔名稱
+	public const string szSaveEnemy = "save_enemy_"; // 怪物資料存檔名稱
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
 
