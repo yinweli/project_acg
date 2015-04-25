@@ -94,7 +94,7 @@ public class EnemyCreater : MonoBehaviour
             ListEnemyCreater(ListEnemy);
 
             // 計算等待間隔.
-            yield return new WaitForSeconds(Random.Range(GameDefine.iMINWaitSec, GameDefine.iMAXWaitSec));
+			yield return new WaitForSeconds(GameDefine.iWaitSec);
             
             for (int i = 0; i < ListEnemy.Count; i++)
             {
