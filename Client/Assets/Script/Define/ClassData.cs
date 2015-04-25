@@ -149,8 +149,9 @@ public class SavePlayer
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
 	public int iStamina = 0; // 耐力
-	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
+	public int iEnemyKill = 0; // 殺怪數量
+	public int iPlayerLost = 0; // 死人數量
 	public int[] Resource = new int[0]; // 資源列表
 	public SaveMember[] Data = new SaveMember[0]; // 成員列表
 }
@@ -181,13 +182,14 @@ public class SaveGame
 public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
 {
 	public int iStage = 0; // 關卡編號
-	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
+	public int iEnemyKill = 0; // 殺怪數量
+	public int iPlayerLost = 0; // 死人數量
 	public string szTime = ""; // 紀錄時間
 
 	public string RecordString()
 	{
-		return string.Format("{0:00000}_{1:00000}_{2:00000}_{3}", iStage, iEnemyKill, iPlayTime, szTime);
+		return string.Format("{0:00000}_{1:00000}_{2:00000}_{3:00000}_{4}", iStage, 1.0f / iPlayTime, iEnemyKill, iPlayerLost, szTime);
 	}
 	public override int GetHashCode()
 	{

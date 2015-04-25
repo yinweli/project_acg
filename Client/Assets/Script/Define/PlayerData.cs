@@ -12,8 +12,9 @@ public class PlayerData : MonoBehaviour
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
 	public int iStamina = 0; // 耐力
-	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayTime = 0; // 遊戲時間
+	public int iEnemyKill = 0; // 殺怪數量
+	public int iPlayerLost = 0; // 死人數量
 	public List<int> Resource = new List<int>(); // 資源列表
 	public List<Member> Members = new List<Member>(); // 成員列表
 
@@ -34,8 +35,9 @@ public class PlayerData : MonoBehaviour
 		Data.iStyle = iStyle;
 		Data.iCurrency = iCurrency;
 		Data.iStamina = iStamina;
-		Data.iEnemyKill = iEnemyKill;
 		Data.iPlayTime = iPlayTime;
+		Data.iEnemyKill = iEnemyKill;
+		Data.iPlayerLost = iPlayerLost;
 		Data.Resource = Resource.ToArray();
 		
 		List<SaveMember> MemberList = new List<SaveMember>();
@@ -72,8 +74,9 @@ public class PlayerData : MonoBehaviour
 		iStyle = Data.iStyle;
 		iCurrency = Data.iCurrency;
 		iStamina = Data.iStamina;
-		iEnemyKill = Data.iEnemyKill;
 		iPlayTime = Data.iPlayTime;
+		iEnemyKill = Data.iEnemyKill;
+		iPlayerLost = Data.iPlayerLost;
 		Resource = new List<int>(Data.Resource);
 		Members = new List<Member>();
 		
@@ -99,8 +102,9 @@ public class PlayerData : MonoBehaviour
 		iStyle = 0;
 		iCurrency = 0;
 		iStamina = 0;
-		iEnemyKill = 0;
 		iPlayTime = 0;
+		iEnemyKill = 0;
+		iPlayerLost = 0;
 		Resource.Clear();
 		Members.Clear();
 	}

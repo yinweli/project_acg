@@ -43,7 +43,8 @@ public class GameDefine
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
-	public const int iWaitSec = 8; // 怪物出怪間隔秒數.
+	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
+	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iBlockUpdate = 25; // 格子更新距離
@@ -61,19 +62,19 @@ public class GameDefine
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPickupMember = 25; // 救援成員出現機率
-	public const int iMaxPickupItems = 22; // 最大拾取物品次數
-	public const int iMinPickupItems = 18; // 最小拾取物品次數
-	public const int iMaxPickupValue = 28; // 最大拾取物品價值
-	public const int iMinPickupValue = 20; // 最小拾取物品價值
+	public const int iMaxPickupItems = 24; // 最大拾取物品次數
+	public const int iMinPickupItems = 20; // 最小拾取物品次數
+	public const int iMaxPickupValue = 30; // 最大拾取物品價值
+	public const int iMinPickupValue = 26; // 最小拾取物品價值
 	public const float fPickupPartLightAmmo = 0.2f; // 拾取物品(輕型彈藥)比例
 	public const float fPickupPartHeavyAmmo = 0.2f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
 
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
-	public const float fUpgradeRoad = 1.0f; // 地圖道路升級值
+	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 0.8f; // 怪物能量升級值
-	public const float fUpgradePickup = 0.8f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 1.5f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
