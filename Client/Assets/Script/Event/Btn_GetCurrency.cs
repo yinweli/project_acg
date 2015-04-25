@@ -15,6 +15,7 @@ public class Btn_GetCurrency : MonoBehaviour {
         if (bIsPress)
         {
             GetComponent<BoxCollider2D>().enabled = false;
+            NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
             // 變更為不受光.
             pSprite.shader = ClickShader;
             pSprite.depth = 10000;
