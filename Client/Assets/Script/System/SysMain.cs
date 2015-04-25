@@ -37,6 +37,7 @@ public class SysMain : MonoBehaviour
         // 讀取遊戲
         bIsOld &= PlayerData.pthis.Load();
         bIsOld &= GameData.pthis.Load();
+        bIsOld &= EnemyData.pthis.Load();
         RecordData.pthis.Load();
 
         if (!bIsOld)
@@ -67,6 +68,7 @@ public class SysMain : MonoBehaviour
 	{
 		PlayerData.pthis.Save();
 		GameData.pthis.Save();
+        EnemyData.pthis.Save();
 		PlayerPrefs.Save();
 	}
     // ------------------------------------------------------------------
@@ -112,6 +114,11 @@ public class SysMain : MonoBehaviour
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
+        // 復原舊怪物.
+        EnemyCreater.pthis.CreateOldEnemy();
+
+        // 新遊戲 - 淡出淡入天數後開始遊戲.
+        SysUI.pthis.ShowDay();
 
         // 到數開始.
         StartCoroutine(CountStart(true));

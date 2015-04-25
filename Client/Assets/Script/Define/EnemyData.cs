@@ -20,21 +20,24 @@ public class EnemyData : MonoBehaviour
 
 		foreach(GameObject Itor in SysMain.pthis.Enemy)
 		{
-			AIEnemy Enemy = Itor.GetComponent<AIEnemy>();
+            if (Itor)
+            {
+                AIEnemy Enemy = Itor.GetComponent<AIEnemy>();
 
-			if(Enemy && Enemy.iHP > 0)
-			{
-				SaveEnemy Temp = new SaveEnemy();
+                if (Enemy && Enemy.iHP > 0)
+                {
+                    SaveEnemy Temp = new SaveEnemy();
 
-				Temp.iMonster = Enemy.iMonster;
-				Temp.iHP = Enemy.iHP;
-				Temp.fMoveSpeed = Enemy.fMoveSpeed;
-				Temp.iThreat = Enemy.iThreat;
-				Temp.fPosX = Itor.transform.localPosition.x;
-				Temp.fPosY = Itor.transform.localPosition.y;
+                    Temp.iMonster = Enemy.iMonster;
+                    Temp.iHP = Enemy.iHP;
+                    Temp.fMoveSpeed = Enemy.fMoveSpeed;
+                    Temp.iThreat = Enemy.iThreat;
+                    Temp.fPosX = Itor.transform.localPosition.x;
+                    Temp.fPosY = Itor.transform.localPosition.y;
 
-				Data.Add(Temp);
-			}//if
+                    Data.Add(Temp);
+                }//if
+            }//if
 		}//for
 		
 		PlayerPrefs.SetString(GameDefine.szSaveEnemy, Json.ToString(Data));

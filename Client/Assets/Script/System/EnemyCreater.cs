@@ -84,6 +84,26 @@ public class EnemyCreater : MonoBehaviour
 		}
     }
     // ------------------------------------------------------------------
+    // 復原怪物.
+    public void CreateOldEnemy()
+    {
+        Debug.Log("Old Enemy: " + EnemyData.pthis.EnemyList.Count);
+        foreach (SaveEnemy itor in EnemyData.pthis.EnemyList)
+        {
+            GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", itor.iMonster), itor.fPosX, itor.fPosY);
+            
+            if (pEnemy && pEnemy.GetComponent<AIEnemy>())
+            {
+                pEnemy.GetComponent<AIEnemy>().SetLayer(iCount);
+
+                pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;
+                pEnemy.GetComponent<AIEnemy>().iThreat = itor.iThreat;
+                pEnemy.GetComponent<AIEnemy>().fMoveSpeed = itor.fMoveSpeed;                
+            }
+            iCount++;
+        }        
+    }
+    // ------------------------------------------------------------------
     // 偕同程序
     IEnumerator Creater()
     {
@@ -109,12 +129,12 @@ public class EnemyCreater : MonoBehaviour
                     case 2: //左方.
                          pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
-                            CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
+                            CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                     case 3: //右方.
                         pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
                             CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
-                            CameraCtrl.transform.localPosition.y + +Random.Range(-300.0f, 400.0f));
+                            CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
                 pObj.GetComponent<AIEnemy>().SetLayer(iCount);

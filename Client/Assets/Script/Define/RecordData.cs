@@ -63,15 +63,8 @@ public class RecordData : MonoBehaviour
         RecordData.pthis.Recordlist.Sort();
 
         int iRecCount = RecordData.pthis.Recordlist.Count;
-        Debug.Log("Record Count: " + iRecCount);
-        
         if (iRecCount > 0 && RecordData.pthis.Recordlist[iRecCount - 1].szTime == ptemp.szTime)
-        {
-            
-            Debug.Log("Record Last: " + RecordData.pthis.Recordlist[iRecCount - 1].szTime + " Day: " + RecordData.pthis.Recordlist[iRecCount - 1].iStage);
-            Debug.Log("Record First: " + RecordData.pthis.Recordlist[0].szTime + " Day: " + RecordData.pthis.Recordlist[0].iStage);
             return true;
-        }
 
         return false;
     }
