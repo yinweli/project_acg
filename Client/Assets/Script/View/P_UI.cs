@@ -57,6 +57,7 @@ public class P_UI : MonoBehaviour
         pLbDayNum.text = PlayerData.pthis.iStage.ToString();
 
         GetComponent<UIPanel>().alpha = 1;
+		AddBattery(0);
         UpdateResource();
         UpdateCurrency();
         UpdateStamina();
@@ -116,12 +117,7 @@ public class P_UI : MonoBehaviour
 		UpdateBattery();
 		UpdateResource();
 
-		bool bIsLight = Rule.ResourceChk(ENUM_Resource.Battery, 0);
-
-		if(iBatteryTemp == PlayerData.pthis.Resource[(int)ENUM_Resource.Battery])
-			return bIsLight;
-
-		if(bIsLight)
+		if(Rule.ResourceChk(ENUM_Resource.Battery, 0))
 		{
 			// 打開燈光
 			for(int i = 0; i < pListLight.Count; i++)

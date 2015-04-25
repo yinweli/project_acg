@@ -382,6 +382,9 @@ public class MapCreater : MonoBehaviour
 	// 取得道路物件
     public GameObject GetRoadObj(int iRoad)
 	{
+		if(iRoad < 0)
+			iRoad = 0;
+
 		if(GameData.pthis.RoadList.Count <= iRoad)
 			return null;
 

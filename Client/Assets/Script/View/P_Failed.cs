@@ -20,7 +20,9 @@ public class P_Failed : MonoBehaviour
         PlayerData.pthis.ClearData();
         GameData.pthis.ClearData();
 
-        SysMain.pthis.SaveGame();
+		PlayerPrefs.DeleteAll();
+		// 設為新遊戲.
+		SysMain.pthis.NewRoleData();
     }
 
     IEnumerator OpenPage()

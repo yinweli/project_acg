@@ -165,7 +165,7 @@ public class SysMain : MonoBehaviour
     }
     // ------------------------------------------------------------------
     // 新遊戲資料.
-    void NewRoleData()
+    public void NewRoleData()
     {
         PlayerData.pthis.iStage = 1;
         PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
@@ -276,9 +276,6 @@ public class SysMain : MonoBehaviour
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
 
         ClearObj();
-
-        // 設為新遊戲.
-        NewRoleData();
     }
     // ------------------------------------------------------------------
     void ClearObj()
