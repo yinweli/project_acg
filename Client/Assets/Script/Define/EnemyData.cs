@@ -32,8 +32,8 @@ public class EnemyData : MonoBehaviour
 					Data.iHP = Enemy.iHP;
 					Data.fMoveSpeed = Enemy.fMoveSpeed;
 					Data.iThreat = Enemy.iThreat;
-					Data.fPosX = Itor.transform.localPosition.x;
-					Data.fPosY = Itor.transform.localPosition.y;
+                    Data.fPosX = Itor.transform.localPosition.x - CameraCtrl.pthis.gameObject.transform.localPosition.x;
+                    Data.fPosY = Itor.transform.localPosition.y - CameraCtrl.pthis.gameObject.transform.localPosition.y;
 
 					PlayerPrefs.SetString(GameDefine.szSaveEnemy + iCount, Json.ToString(Data));
 					++iCount;

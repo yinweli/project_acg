@@ -90,7 +90,7 @@ public class EnemyCreater : MonoBehaviour
         Debug.Log("Old Enemy: " + EnemyData.pthis.EnemyList.Count);
         foreach (SaveEnemy itor in EnemyData.pthis.EnemyList)
         {
-            GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", itor.iMonster), itor.fPosX, itor.fPosY);
+            GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", itor.iMonster), itor.fPosX + CameraCtrl.transform.localPosition.x, itor.fPosY + CameraCtrl.transform.localPosition.y);
             
             if (pEnemy && pEnemy.GetComponent<AIEnemy>())
             {

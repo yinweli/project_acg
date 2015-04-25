@@ -114,8 +114,6 @@ public class SysMain : MonoBehaviour
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
-        // 復原舊怪物.
-        EnemyCreater.pthis.CreateOldEnemy();
 
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
@@ -209,6 +207,8 @@ public class SysMain : MonoBehaviour
         else
             PlayerCreater.pthis.StartNew();
         // 開始出怪.
+        if (bShowCount)  // 復原舊怪物.            
+            EnemyCreater.pthis.CreateOldEnemy();
         EnemyCreater.pthis.StartNew();
     }
     // ------------------------------------------------------------------
