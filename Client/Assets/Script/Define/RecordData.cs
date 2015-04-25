@@ -54,6 +54,7 @@ public class RecordData : MonoBehaviour
         ptemp.iStage = PlayerData.pthis.iStage;
         ptemp.iPlayTime = PlayerData.pthis.iPlayTime;
         ptemp.iEnemyKill = PlayerData.pthis.iEnemyKill;
+        ptemp.iPlayerLost = PlayerData.pthis.iPlayerLost;
         ptemp.szTime = System.DateTime.Now.ToString();
         RecordData.pthis.Recordlist.Add(ptemp);
 

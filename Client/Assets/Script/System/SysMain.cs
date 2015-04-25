@@ -253,6 +253,7 @@ public class SysMain : MonoBehaviour
 
         PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
+        PlayerData.pthis.iPlayerLost += GameData.pthis.iDead;
 
 		PlayerData.pthis.Members = NewMember;
         SaveGame();
@@ -269,6 +270,7 @@ public class SysMain : MonoBehaviour
 
         PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
+        PlayerData.pthis.iPlayerLost += GameData.pthis.iDead;
 
         EnemyCreater.pthis.StopCreate();
 
