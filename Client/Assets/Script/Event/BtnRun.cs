@@ -14,6 +14,9 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
+		if (!SysMain.pthis.bIsGaming)
+			return;
+
         if(GetComponent<UIButton>().isEnabled && !CheckCanMove())
             GetComponent<UIButton>().isEnabled = false;
         else if (!GetComponent<UIButton>().isEnabled && CheckCanMove())
@@ -78,11 +81,6 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
     {
-        if (!CheckCanMove() && PlayerData.pthis.iStamina < 10)
-            GameData.pthis.fRunDouble = 0;
-        else
-            GameData.pthis.fRunDouble = 1.0f;
-
         while (SysMain.pthis.bIsGaming)
         {
             if (bIsRun && SysMain.pthis.bCanRun)
