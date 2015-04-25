@@ -24,7 +24,6 @@ public class P_Failed : MonoBehaviour
         PlayerData.pthis.Clear();
         GameData.pthis.Clear();
 
-		PlayerPrefs.DeleteAll();
 		// 設為新遊戲.
 		SysMain.pthis.NewRoleData();
     }
