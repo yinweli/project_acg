@@ -77,7 +77,7 @@ public class P_UI : MonoBehaviour
 
         ENUM_Resource emResource = (ENUM_Resource)DataEquip.Resource;
 
-        if (Rule.ResourceChk(emResource, 1) == false)
+        if (Rule.ResourceChk(emResource, 0) == false)
             return false;
 
         Rule.ResourceAdd(emResource, -1);
