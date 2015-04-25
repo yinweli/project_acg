@@ -32,21 +32,15 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
-		PlayerPrefs.DeleteAll();
-
-        // 建立遊戲開頭畫面.
-        SysUI.pthis.CreatePanel("Prefab/P_Login");
         // 讀取遊戲
         bIsOld &= PlayerData.pthis.Load();
         bIsOld &= GameData.pthis.Load();
 
         if (!bIsOld)
-            CreateNew();         
+            CreateNew();
 
-        // 建立地圖物件.
-        MapCreater.pthis.ShowMap(0);
-        // 開始行走
-        CameraCtrl.pthis.LoginMove();
+        // 建立遊戲開頭畫面.
+        SysUI.pthis.CreatePanel("Prefab/P_Login");        
     }
     // ------------------------------------------------------------------
 	void Update () 
@@ -261,6 +255,8 @@ public class SysMain : MonoBehaviour
 		PlayerData.pthis.Members = NewMember;
         SaveGame();
 
+        EnemyCreater.pthis.StopCreate();
+
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
     }
@@ -271,6 +267,8 @@ public class SysMain : MonoBehaviour
 
         PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
+
+        EnemyCreater.pthis.StopCreate();
 
         // 比較紀錄.        
 

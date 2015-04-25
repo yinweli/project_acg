@@ -94,21 +94,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-		// 檢查隊伍裡是否沒有光源裝備
-		bool bExist = false;
-		
-		foreach(Member ItorMember in PlayerData.pthis.Members)
-		{
-			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
-			
-			if(Data == null)
-				continue;
-			
-			if(Data.Mode == (int)ENUM_ModeEquip.Light)
-				bExist = true;
-		}//for
-
-		if(bExist == false)
+        if (iValue <=0 && pListLight.Count <= 0)
 			return false;
 
 		int iBatteryTemp = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery];

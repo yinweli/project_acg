@@ -22,8 +22,6 @@ public class EnemyCreater : MonoBehaviour
     public GameObject CameraCtrl;
     // 波數能量.
     public int iEnegry = 0;
-    // 本關敵人與機率列表<敵人名稱,機率>.
-    public Dictionary<string, int> StageEnemy = new Dictionary<string, int>();
 
     int iCount = 0;
     void Awake()
@@ -39,6 +37,12 @@ public class EnemyCreater : MonoBehaviour
 		iEnegry = GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry);
 
         StartCoroutine(Creater());
+    }
+    // ------------------------------------------------------------------
+    // 開始新的關卡.
+    public void StopCreate()
+    {
+        StopAllCoroutines();
     }
     // ------------------------------------------------------------------
     // 敵人佇列產生函式.
