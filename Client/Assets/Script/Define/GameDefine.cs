@@ -67,13 +67,13 @@ public class GameDefine
 	public const int iMinPickupValue = 20; // 最小拾取物品價值
 	public const float fPickupPartLightAmmo = 0.2f; // 拾取物品(輕型彈藥)比例
 	public const float fPickupPartHeavyAmmo = 0.2f; // 拾取物品(重型彈藥)比例
-	public const float fPickupPartBattery = 0.1f; // 拾取物品(電池)比例
+	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
 
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
 	public const float fUpgradeRoad = 1.0f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 0.8f; // 怪物能量升級值
-	public const float fUpgradePickup = 0.5f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 0.8f; // 拾取物品價值升級值
 
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
