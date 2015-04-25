@@ -25,10 +25,10 @@
 {"GUID":"3002", "enUS":"[ffed00]sta limit[-][546ef2]+4[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u96504\u9ede"}
 {"GUID":"3003", "enUS":"[ffed00]sta limit[-][e92121]-2[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u96502\u9ede"}
 {"GUID":"3004", "enUS":"[ffed00]sta limit[-][e92121]-4[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u96504\u9ede"}
-{"GUID":"3005", "enUS":"[ffed00]sta reply[-][546ef2]+1[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa91\u9ede"}
-{"GUID":"3006", "enUS":"[ffed00]sta reply[-][546ef2]+2[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa92\u9ede"}
-{"GUID":"3007", "enUS":"[ffed00]sta reply[-][e92121]-1[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa91\u9ede"}
-{"GUID":"3008", "enUS":"[ffed00]sta reply[-][e92121]-2[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa92\u9ede"}
+{"GUID":"3005", "enUS":"[ffed00]sta regain[-][546ef2]+1[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa91\u9ede"}
+{"GUID":"3006", "enUS":"[ffed00]sta regain[-][546ef2]+2[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa92\u9ede"}
+{"GUID":"3007", "enUS":"[ffed00]sta regain[-][e92121]-1[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa91\u9ede"}
+{"GUID":"3008", "enUS":"[ffed00]sta regain[-][e92121]-2[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa92\u9ede"}
 {"GUID":"3009", "enUS":"", "zhTW":""}
 {"GUID":"3010", "enUS":"", "zhTW":""}
 {"GUID":"3011", "enUS":"[ffed00]critical[-][e92121]-20%[-]", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738720%"}

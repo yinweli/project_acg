@@ -39,12 +39,13 @@ public class G_Feature : MonoBehaviour
 
             if (!GameData.pthis.bVictory)
             {
-                Debug.Log("Redom Feature & Equip");
+                Debug.Log("Redom Feature & Equip : " + i);
                 iFeature[i] = Rule.GainFeature(i);
                 iEquip[i] = Rule.GainEquip(i);
-                GameData.pthis.bVictory = true;
             }
         }
+
+		GameData.pthis.bVictory = true;
 
 		Rule.AddDamageReset();
 		Rule.CriticalStrikeReset();
