@@ -47,4 +47,25 @@ public class RecordData : MonoBehaviour
 	{
 		Recordlist.Clear();
 	}
+    // 更新紀錄.
+    public bool RecordNow()
+    {
+        SaveRecord ptemp = new SaveRecord();
+        ptemp.iStage = PlayerData.pthis.iStage;
+        ptemp.iPlayTime = PlayerData.pthis.iPlayTime;
+        ptemp.iEnemyKill = PlayerData.pthis.iEnemyKill;
+        ptemp.szTime = System.DateTime.Now.ToString();
+        RecordData.pthis.Recordlist.Add(ptemp);
+
+        RecordData.pthis.Recordlist.Sort();
+
+        int iRecCount = RecordData.pthis.Recordlist.Count;
+
+        if (iRecCount == 1)
+            return true;
+        if (iRecCount > 1 && RecordData.pthis.Recordlist[iRecCount - 1].szTime == ptemp.szTime)
+            return true;
+
+        return false;
+    }
 }
