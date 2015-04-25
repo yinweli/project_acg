@@ -100,11 +100,11 @@ public class SysMain : MonoBehaviour
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
-
-        // 建立撿取物件.
-        MapCreater.pthis.CreatePickup();
-        // 建立地圖物件.
-        MapCreater.pthis.ShowMap(GameData.pthis.iRoad);       
+		
+		// 建立地圖物件.
+		MapCreater.pthis.ShowMap(GameData.pthis.iRoad);
+		// 建立撿取物件.
+		MapCreater.pthis.ShowPickup(GameData.pthis.iRoad);
 
         // UI初始化.
         P_UI.pthis.StartNew();
@@ -139,13 +139,15 @@ public class SysMain : MonoBehaviour
         Rule.AddDamageReset();
 
         // 選擇關卡風格編號.
-        PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
         // 建立新地圖資料.
         MapCreater.pthis.Create();
         // 建立地圖物件.
         MapCreater.pthis.ShowMap(0);
-        // 建立撿取物件.
-        MapCreater.pthis.CreatePickup();        
+		// 建立撿取物件.
+		MapCreater.pthis.CreatePickup();
+		// 建立撿取物件.
+		MapCreater.pthis.ShowPickup(0);
 
         // UI初始化.
         P_UI.pthis.StartNew();

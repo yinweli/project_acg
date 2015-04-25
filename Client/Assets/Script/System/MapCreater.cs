@@ -227,30 +227,6 @@ public class MapCreater : MonoBehaviour
 			
 			GameData.pthis.PickupList.Add(Data);
 		}//for
-
-		for(int i = 0; i < GameData.pthis.PickupList.Count; i++ )
-		{
-            Pickup itor = GameData.pthis.PickupList[i];
-
-            Vector2 Pos = itor.Pos.ToVector2();
-			float fPosX = Pos.x + GameDefine.iBlockSize / 2 - GetRoadObj(0).transform.localPosition.x;
-			float fPosY = Pos.y + GameDefine.iBlockSize / 2 - GetRoadObj(0).transform.localPosition.y;
-			GameObject Obj = null;
-
-            if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
-                PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iSex, itor.iLook);
-            else
-            {                
-                Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
-                if (Obj && Obj.GetComponent<Btn_GetResource>())
-                    Obj.GetComponent<Btn_GetResource>().iItemID = i;
-                else if (Obj && Obj.GetComponent<Btn_GetCurrency>())
-                    Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
-            }
-			
-			if(Obj != null)
-				PickupList.Add(Obj);
-		}//for
 	}
 	// 填滿地圖
 	private void Fill()
@@ -305,6 +281,36 @@ public class MapCreater : MonoBehaviour
         Refresh(iRoad);
         transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
     }
+	public void ShowPickup(int iRoad)
+	{
+		for(int i = 0; i < GameData.pthis.PickupList.Count; i++ )
+		{
+			Pickup itor = GameData.pthis.PickupList[i];
+
+			if(itor.bPickup == false)
+			{
+				Vector2 Pos = itor.Pos.ToVector2();
+				float fPosX = Pos.x + GameDefine.iBlockSize / 2 - GetRoadObj(iRoad).transform.localPosition.x;
+				float fPosY = Pos.y + GameDefine.iBlockSize / 2 - GetRoadObj(iRoad).transform.localPosition.y;
+				GameObject Obj = null;
+				
+				if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
+					PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iSex, itor.iLook);
+				else
+				{                
+					Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
+					
+					if (Obj && Obj.GetComponent<Btn_GetResource>())
+						Obj.GetComponent<Btn_GetResource>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetCurrency>())
+						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
+				}
+				
+				if(Obj != null)
+					PickupList.Add(Obj);
+			}//if
+		}//for
+	}
     // ------------------------------------------------------------------
 	// 清除地圖
 	public void Clear()
