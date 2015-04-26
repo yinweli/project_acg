@@ -34,11 +34,15 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     public void ReadyStart()
     {
+        // 讀取遊戲
+        bIsOld &= PlayerData.pthis.Load();
+        bIsOld &= GameData.pthis.Load();
+        bIsOld &= EnemyData.pthis.Load();
+        bIsOld &= MapData.pthis.Load();
+        RecordData.pthis.Load();
+
         if (!bIsOld)
             CreateNew();
-
-        // 建立遊戲開頭畫面.
-        SysUI.pthis.CreatePanel("Prefab/P_Login");        
     }
     // ------------------------------------------------------------------
 	void Update () 
