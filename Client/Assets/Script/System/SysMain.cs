@@ -85,7 +85,9 @@ public class SysMain : MonoBehaviour
         if (bIsOld)
             OldStage();
         else
-            NewStage();            
+            NewStage();
+
+		ResourceStat.pthis.Reset();
     }
     // ------------------------------------------------------------------
     // 進入全新遊戲.
@@ -270,11 +272,11 @@ public class SysMain : MonoBehaviour
 				NewMember.Add(PlayerData.pthis.Members[iPos]);
 		}//for
 
+		PlayerData.pthis.Members = NewMember;
         PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
         PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
         PlayerData.pthis.iPlayerLost += GameData.pthis.iDead;
 
-		PlayerData.pthis.Members = NewMember;
         SaveGame();
 
         EnemyCreater.pthis.StopCreate();

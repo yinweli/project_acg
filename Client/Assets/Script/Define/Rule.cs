@@ -126,6 +126,7 @@ public class Rule
 		}//switch
 
 		PlayerData.pthis.Resource[(int)emResource] = iResult;
+		ResourceStat.pthis.Record(emResource, iValue);
 	}
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)

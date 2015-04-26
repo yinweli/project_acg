@@ -31,7 +31,8 @@ public class Btn_BuyLAmmo : MonoBehaviour
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         PlayerData.pthis.iCurrency -= GameDefine.iLightAmmoCost;
-        PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += GameDefine.iLightAmmoCount;
+        //PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += GameDefine.iLightAmmoCount;
+		Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iLightAmmoCount);
         P_UI.pthis.UpdateCurrency();
         P_UI.pthis.UpdateResource();
         PlayerData.pthis.Save();

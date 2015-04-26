@@ -31,7 +31,8 @@ public class Btn_BuyBattery : MonoBehaviour
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         PlayerData.pthis.iCurrency -= GameDefine.iBatteryCost;
-        PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += GameDefine.iBatteryCount;
+        //PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += GameDefine.iBatteryCount;
+		Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iBatteryCount);
         P_UI.pthis.UpdateCurrency();
         P_UI.pthis.UpdateResource();
         P_UI.pthis.UpdateBattery();
