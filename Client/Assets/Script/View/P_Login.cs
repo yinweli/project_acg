@@ -23,4 +23,10 @@ public class P_Login : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void OnGUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
 }
