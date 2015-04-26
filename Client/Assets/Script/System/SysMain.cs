@@ -110,6 +110,7 @@ public class SysMain : MonoBehaviour
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
+		GameData.pthis.fRunDouble = 1.0f;
 		
 		// 建立地圖物件.
 		MapCreater.pthis.ShowMap(GameData.pthis.iRoad);
@@ -150,6 +151,7 @@ public class SysMain : MonoBehaviour
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
+		GameData.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.
 		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
