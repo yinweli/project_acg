@@ -7,12 +7,12 @@ public class Btn_StartGame : MonoBehaviour
 
     void Start()
     {
-        GetComponent<UIButton>().isEnabled = true;
+        gameObject.collider2D.enabled = true;
     }    
 
 	void OnClick()
     {
-        GetComponent<UIButton>().isEnabled = false;
+        gameObject.collider2D.enabled = false;
         pAni.Play("FadOut");
     }
 }

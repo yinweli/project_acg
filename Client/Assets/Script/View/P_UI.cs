@@ -97,8 +97,6 @@ public class P_UI : MonoBehaviour
         if (iValue <=0 && pListLight.Count <= 0)
 			return false;
 
-		int iBatteryTemp = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery];
-
 		Rule.ResourceAdd(ENUM_Resource.Battery, iValue);
 		UpdateBattery();
 		UpdateResource();

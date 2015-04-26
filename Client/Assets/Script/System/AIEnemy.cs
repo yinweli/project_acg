@@ -54,7 +54,7 @@ public class AIEnemy : MonoBehaviour
         // 依照角色切換layer.
         for (int i = 0; i < Enemy.Length; i++)
         {
-            Enemy[i].depth = Enemy[i].depth + (iLayer * 20);
+            Enemy[i].depth = Enemy[i].depth + (iLayer * 30);
 
             Vector3 vecPos = Enemy[i].gameObject.transform.localPosition;
             vecPos.z = -0.00002f * (float)Enemy[i].depth;
