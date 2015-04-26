@@ -13,6 +13,20 @@ public class AudioCtrl : MonoBehaviour {
         pthis = this;
         DontDestroyOnLoad(gameObject);
     }
+	void Start()
+	{
+		if(PlayerPrefs.HasKey(GameDefine.szSaveMusic))
+			pMusic.mute = PlayerPrefs.GetInt(GameDefine.szSaveMusic) > 0;
+
+		if(PlayerPrefs.HasKey(GameDefine.szSaveSound))
+			pSound.mute = PlayerPrefs.GetInt(GameDefine.szSaveSound) > 0;
+	}
+	void OnApplicationQuit()
+	{
+		PlayerPrefs.SetInt(GameDefine.szSaveMusic, pMusic.mute ? 1 : 0);
+		PlayerPrefs.SetInt(GameDefine.szSaveSound, pSound.mute ? 1 : 0);
+		PlayerPrefs.Save();
+	}
 
     public void PlayMusic(string Name)
     {
