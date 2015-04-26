@@ -6,16 +6,16 @@ public class P_Day : MonoBehaviour
     public Animator pAni;
     public UILabel LbDay;
 
-    void Update()
-    {
-        if (GetComponent<UIPanel>().alpha < 0.002)
-            Destroy(gameObject);
-    }
-
     public void SetDay()
     {
         GoogleAnalytics.pthis.LogScreen("Day " + PlayerData.pthis.iStage);
-        pAni.Play("FadIn");
-        LbDay.text = "Day " + PlayerData.pthis.iStage;
+        StartCoroutine(WaitFad());
+        LbDay.text = "Day [e92121]" + PlayerData.pthis.iStage;
+    }
+
+    IEnumerator WaitFad()
+    {
+        yield return new WaitForSeconds(2.5f);
+        pAni.Play("FadOut");
     }
 }

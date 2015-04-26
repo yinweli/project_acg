@@ -14,5 +14,12 @@ public class Btn_StartGame : MonoBehaviour
     {
         gameObject.collider2D.enabled = false;
         pAni.Play("FadOut");
+        StartCoroutine(DelayStart());
+    }
+
+    IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(0.7f);
+        SysMain.pthis.CheckStart();
     }
 }

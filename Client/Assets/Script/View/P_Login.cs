@@ -14,15 +14,6 @@ public class P_Login : MonoBehaviour
         // 開始行走
         CameraCtrl.pthis.LoginMove();
     }
-	// Update is called once per frame
-    void Update()
-    {
-        if (GetComponent<UIPanel>().alpha < 0.002)
-        {
-            SysMain.pthis.CheckStart();
-            Destroy(gameObject);
-        }
-    }
 
     void OnGUI()
     {

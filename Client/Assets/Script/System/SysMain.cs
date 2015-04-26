@@ -32,15 +32,8 @@ public class SysMain : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
-    void Start()
+    public void ReadyStart()
     {
-        // 讀取遊戲
-        bIsOld &= PlayerData.pthis.Load();
-        bIsOld &= GameData.pthis.Load();
-        bIsOld &= EnemyData.pthis.Load();
-        bIsOld &= MapData.pthis.Load();
-        RecordData.pthis.Load();
-
         if (!bIsOld)
             CreateNew();
 
