@@ -19,7 +19,15 @@ public class P_Victory : MonoBehaviour
         // 死亡人數.
         pLb[4].text = GameData.pthis.iDead.ToString();
 
+        AudioCtrl.pthis.pMusic.volume = 0.5f;
+        NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);
+
         //GoogleAnalyticsV3.instance.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, " Kill:" + GameData.pthis.iKill + " Live:" + PlayerData.pthis.Members.Count + " Dead:" + GameData.pthis.iDead, GameData.pthis.iStageTime);
+    }
+
+    public void OnDestory()
+    {
+        AudioCtrl.pthis.pMusic.volume = 1f;
     }
 
     public void ChangePage(int iPage)
