@@ -1,7 +1,7 @@
-{"GUID":"1", "StrID":"2001", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"1", "Chances":"0", "Cooldown":"0", "Value":"5", "Description":"3001"}
-{"GUID":"2", "StrID":"2002", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"1", "Chances":"0", "Cooldown":"0", "Value":"10", "Description":"3002"}
-{"GUID":"3", "StrID":"2003", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"2", "Chances":"0", "Cooldown":"0", "Value":"-5", "Description":"3003"}
-{"GUID":"4", "StrID":"2004", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"2", "Chances":"0", "Cooldown":"0", "Value":"-10", "Description":"3004"}
+{"GUID":"1", "StrID":"2001", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"1", "Chances":"0", "Cooldown":"0", "Value":"4", "Description":"3001"}
+{"GUID":"2", "StrID":"2002", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"1", "Chances":"0", "Cooldown":"0", "Value":"8", "Description":"3002"}
+{"GUID":"3", "StrID":"2003", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"2", "Chances":"0", "Cooldown":"0", "Value":"-4", "Description":"3003"}
+{"GUID":"4", "StrID":"2004", "Mode":"5", "StageID":"1", "Gain":"3", "Group":"2", "Chances":"0", "Cooldown":"0", "Value":"-8", "Description":"3004"}
 {"GUID":"5", "StrID":"2005", "Mode":"6", "StageID":"1", "Gain":"3", "Group":"3", "Chances":"0", "Cooldown":"0", "Value":"2", "Description":"3005"}
 {"GUID":"6", "StrID":"2006", "Mode":"6", "StageID":"1", "Gain":"3", "Group":"3", "Chances":"0", "Cooldown":"0", "Value":"3", "Description":"3006"}
 {"GUID":"7", "StrID":"2007", "Mode":"6", "StageID":"1", "Gain":"3", "Group":"3", "Chances":"0", "Cooldown":"0", "Value":"-2", "Description":"3007"}
