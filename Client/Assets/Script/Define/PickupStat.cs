@@ -66,23 +66,43 @@ public class PickupStat : MonoBehaviour
 		else
 			Used[(int)emPickup] += Mathf.Abs(iValue);
 	}
-	public int ValueGap()
+	public Tuple<int, int> ValueGap()
 	{
-		int iResult = 0;
+		int iResultGain = 0;
+		int iResultTotal = 0;
 
 		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
 		{
 			switch((ENUM_Pickup)Itor)
 			{
-			case ENUM_Pickup.Member: break;
-			case ENUM_Pickup.Currency: iResult += Gain[Itor] - Used[Itor]; break;
-			case ENUM_Pickup.Battery: iResult += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceBattery; break;
-			case ENUM_Pickup.LightAmmo: iResult += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceLightAmmo; break;
-			case ENUM_Pickup.HeavyAmmo: iResult += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceHeavyAmmo; break;
-			default: break;
+			case ENUM_Pickup.Member:
+				break;
+
+			case ENUM_Pickup.Currency:
+				iResultGain += Gain[Itor] - Used[Itor];
+				iResultTotal += Total[Itor] - Used[Itor];
+				break;
+
+			case ENUM_Pickup.Battery:
+				iResultGain += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceBattery;
+				iResultTotal += (Total[Itor] - Used[Itor]) * GameDefine.iPriceBattery;
+				break;
+
+			case ENUM_Pickup.LightAmmo:
+				iResultGain += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceLightAmmo;
+				iResultTotal += (Total[Itor] - Used[Itor]) * GameDefine.iPriceLightAmmo;
+				break;
+
+			case ENUM_Pickup.HeavyAmmo:
+				iResultGain += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceHeavyAmmo;
+				iResultTotal += (Total[Itor] - Used[Itor]) * GameDefine.iPriceHeavyAmmo;
+				break;
+
+			default:
+				break;
 			}//switch
 		}//for
 
-		return iResult;
+		return new Tuple<int, int>(iResultGain, iResultTotal);
 	}
 }

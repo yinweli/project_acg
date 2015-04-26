@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,7 +30,8 @@ public class P_Victory : MonoBehaviour
 		}//for
 
 		{
-			string szTemp = "ValueGap:" + PickupStat.pthis.ValueGap();
+			Tuple<int, int> Result = PickupStat.pthis.ValueGap();
+			string szTemp = string.Format("ValueGap:G:{0},T{1}", Result.Item1, Result.Item2);
 
 			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
 			Debug.Log(szTemp);
