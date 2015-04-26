@@ -22,9 +22,13 @@ public class P_Victory : MonoBehaviour
 			if(Itor == (int)ENUM_Resource.Resource_Count)
 				continue;
 
-			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, string.Format("{0}_Init:{1}", (ENUM_Resource)Itor, ResourceStat.pthis.Init[Itor]), ResourceStat.pthis.Init[Itor]);
-			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, string.Format("{0}_Gain:{1}", (ENUM_Resource)Itor, ResourceStat.pthis.Gain[Itor]), ResourceStat.pthis.Gain[Itor]);
-			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, string.Format("{0}_Used:{1}", (ENUM_Resource)Itor, ResourceStat.pthis.Used[Itor]), ResourceStat.pthis.Used[Itor]);
+			string szTemp = string.Format("{0}(I:{1},G:{2},U:{3})", 
+			                              (ENUM_Resource)Itor, 
+			                              ResourceStat.pthis.Init[Itor], 
+			                              ResourceStat.pthis.Gain[Itor], 
+			                              ResourceStat.pthis.Used[Itor]);
+
+			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
 		}//for
 
 		ResourceStat.pthis.Report();
