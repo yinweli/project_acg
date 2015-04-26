@@ -9,7 +9,10 @@ public class P_Victory : MonoBehaviour
     void Start()
     {
         GoogleAnalytics.pthis.LogScreen("Victory");
-        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Time: " + GameData.pthis.iStageTime + " Kill:" + GameData.pthis.iKill + " Live:" + PlayerData.pthis.Members.Count + " Dead:" + GameData.pthis.iDead, GameData.pthis.iStageTime);
+        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Time:" + GameData.pthis.iStageTime, GameData.pthis.iStageTime);
+        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Kill:" + GameData.pthis.iKill, GameData.pthis.iKill);
+        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Live:" + PlayerData.pthis.Members.Count, PlayerData.pthis.Members.Count);
+        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Dead:" + GameData.pthis.iDead, GameData.pthis.iDead);
 
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
