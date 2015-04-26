@@ -17,6 +17,9 @@ public class P_Failed : MonoBehaviour
         // 殺怪數.
         pLb[2].text = PlayerData.pthis.iEnemyKill.ToString();
 
+        AudioCtrl.pthis.pMusic.volume = 0.5f;
+        NGUITools.PlaySound(Resources.Load("Sound/FX/Fail") as AudioClip);
+
         // 比較紀錄.
         ObjRecord.SetActive(RecordData.pthis.RecordNow());
 
@@ -26,6 +29,11 @@ public class P_Failed : MonoBehaviour
 
 		// 設為新遊戲.
 		SysMain.pthis.NewRoleData();
+    }
+
+    public void OnDestory()
+    {
+        AudioCtrl.pthis.pMusic.volume = 1f;
     }
 
     IEnumerator OpenPage()
