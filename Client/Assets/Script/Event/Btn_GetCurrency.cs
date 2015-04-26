@@ -62,7 +62,7 @@ public class Btn_GetCurrency : MonoBehaviour {
             fFrame += 0.05f;
         }
 
-        PlayerData.pthis.iCurrency += GameData.pthis.PickupList[iItemID].iCount;
+		Rule.CurrencyAdd(GameData.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateCurrency();
 
         Destroy(gameObject);

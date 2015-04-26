@@ -72,14 +72,6 @@ public class Btn_GetResource : MonoBehaviour
         }
 
 		Rule.ResourceAdd(enumType, GameData.pthis.PickupList[iItemID].iCount);
-		/*
-        if (enumType == ENUM_Resource.Battery)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] += GameData.pthis.PickupList[iItemID].iCount;
-        else if (enumType == ENUM_Resource.LightAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo] += GameData.pthis.PickupList[iItemID].iCount;
-        else if (enumType == ENUM_Resource.HeavyAmmo)
-            PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo] += GameData.pthis.PickupList[iItemID].iCount;
-		*/
         P_UI.pthis.UpdateResource();
 
         Destroy(gameObject);

@@ -80,6 +80,7 @@ public class Rule
 	public static void CurrencyAdd(int iValue)
 	{
 		PlayerData.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, PlayerData.pthis.iCurrency + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.Currency, iValue);
 	}
 	// 重置耐力值
 	public static void StaminaReset()
@@ -119,14 +120,25 @@ public class Rule
 
 		switch(emResource)
 		{
-		case ENUM_Resource.Battery: iResult = Value(0, System.Int32.MaxValue, iResult + iValue); break;
-		case ENUM_Resource.LightAmmo: iResult = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue); break;
-		case ENUM_Resource.HeavyAmmo: iResult = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue); break;
+		case ENUM_Resource.Battery:
+			iResult = Value(0, System.Int32.MaxValue, iResult + iValue);
+			PickupStat.pthis.Record(ENUM_Pickup.Battery, iValue);
+			break;
+
+		case ENUM_Resource.LightAmmo:
+			iResult = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue);
+			PickupStat.pthis.Record(ENUM_Pickup.LightAmmo, iValue);
+			break;
+
+		case ENUM_Resource.HeavyAmmo:
+			iResult = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue);
+			PickupStat.pthis.Record(ENUM_Pickup.HeavyAmmo, iValue);
+			break;
+
 		default: break;
 		}//switch
 
 		PlayerData.pthis.Resource[(int)emResource] = iResult;
-		ResourceStat.pthis.Record(emResource, iValue);
 	}
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)

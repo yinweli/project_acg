@@ -15,41 +15,25 @@ public class P_Victory : MonoBehaviour
         GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Live:" + PlayerData.pthis.Members.Count, PlayerData.pthis.Members.Count);
         GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Dead:" + GameData.pthis.iDead, GameData.pthis.iDead);
 
-		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Resource)))
+		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
 		{
-			if(Itor == (int)ENUM_Resource.Null)
-				continue;
-
-			if(Itor == (int)ENUM_Resource.Resource_Count)
-				continue;
-
-			string szTemp = string.Format("{0}(I:{1},G:{2},U:{3})", 
-			                              (ENUM_Resource)Itor, 
-			                              ResourceStat.pthis.Init[Itor], 
-			                              ResourceStat.pthis.Gain[Itor], 
-			                              ResourceStat.pthis.Used[Itor]);
+			string szTemp = string.Format("{0}(I:{1},G:{2},U:{3},T:{4})", 
+			                              (ENUM_Pickup)Itor, 
+			                              PickupStat.pthis.Init[Itor], 
+			                              PickupStat.pthis.Gain[Itor], 
+			                              PickupStat.pthis.Used[Itor], 
+			                              PickupStat.pthis.Total[Itor]);
 
 			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
 			Debug.Log(szTemp);
 		}//for
 
-		Dictionary<int, int> PickupTotal = new Dictionary<int, int>();
-
-		foreach(Pickup Itor in GameData.pthis.PickupList)
 		{
-			if(PickupTotal.ContainsKey(Itor.iType))
-				PickupTotal[Itor.iType] += Itor.iCount;
-			else
-				PickupTotal[Itor.iType] = Itor.iCount;
-		}//for
-
-		foreach(KeyValuePair<int, int> Itor in PickupTotal)
-		{
-			string szTemp = string.Format("Pickup_{0}:{1}", (ENUM_Pickup)Itor.Key, Itor.Value);
+			string szTemp = "ValueGap:" + PickupStat.pthis.ValueGap();
 
 			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
 			Debug.Log(szTemp);
-		}//for
+		}
 
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
