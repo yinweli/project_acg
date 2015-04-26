@@ -9,7 +9,7 @@ public class Btn_BuyBattery : MonoBehaviour
     void Start()
     {
         LbMoney.text = GameDefine.iBatteryCost.ToString();
-        LbCount.text = GameDefine.iBatteryCount + "Sec";
+		LbCount.text = (int)(GameDefine.iBatteryCount * GameDefine.fBatteryTime) + "Sec";
     }
 
     void Update()
