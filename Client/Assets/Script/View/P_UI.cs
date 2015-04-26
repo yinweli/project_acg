@@ -41,7 +41,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        pLbDis.text = string.Format("{0}m",(GameData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);
+        pLbDis.text = string.Format("{0}m",(MapData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);
 
         if (!SysMain.pthis.bIsGaming)
             return;

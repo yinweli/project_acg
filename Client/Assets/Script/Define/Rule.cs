@@ -226,17 +226,17 @@ public class Rule
 	// 取得隨機地圖拾取位置
 	public static MapCoor NextPickup()
 	{
-		if(GameData.pthis.RoadList.Count <= GameDefine.iPickupBorder)
+		if(MapData.pthis.RoadList.Count <= GameDefine.iPickupBorder)
 			return new MapCoor();
 
-		MapCoor Road = GameData.pthis.RoadList[Random.Range(GameDefine.iPickupBorder, GameData.pthis.RoadList.Count - GameDefine.iPickupBorder)];
+		MapCoor Road = MapData.pthis.RoadList[Random.Range(GameDefine.iPickupBorder, MapData.pthis.RoadList.Count - GameDefine.iPickupBorder)];
 
 		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
 		{
 			MapCoor Result = new MapCoor(Road.X + Tool.RandomPick(GameDefine.PickupRange), Road.Y + Tool.RandomPick(GameDefine.PickupRange));
 			bool bCheck = true;
 
-			foreach(MapCoor Itor in GameData.pthis.RoadList)
+			foreach(MapCoor Itor in MapData.pthis.RoadList)
 				bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
 
 			foreach(Pickup Itor in GameData.pthis.PickupList)

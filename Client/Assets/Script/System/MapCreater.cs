@@ -33,12 +33,12 @@ public class MapCreater : MonoBehaviour
 		
 		while(iRoadSize > 0)
 		{
-			foreach(MapCoor Itor in Rule.NextPath(Dir.Get(), GameData.pthis.RoadList.Count > 0 ? GameData.pthis.RoadList[GameData.pthis.RoadList.Count - 1] : null))
+			foreach(MapCoor Itor in Rule.NextPath(Dir.Get(), MapData.pthis.RoadList.Count > 0 ? MapData.pthis.RoadList[MapData.pthis.RoadList.Count - 1] : null))
 			{
 				if(iRoadSize > 0)
 				{
 					UpdateSize(Itor);
-					GameData.pthis.RoadList.Add(Itor);
+					MapData.pthis.RoadList.Add(Itor);
 					--iRoadSize; // 減少還需要產生的地圖道路長度
 				}//if
 			}//for
@@ -47,9 +47,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖起點
 	private void CreateStart()
 	{
-		if(GameData.pthis.RoadList.Count > 0)
+		if(MapData.pthis.RoadList.Count > 0)
 		{
-			MapCoor Road = GameData.pthis.RoadList[0];
+			MapCoor Road = MapData.pthis.RoadList[0];
 
 			if(Road.Y > 0)
 			{
@@ -60,7 +60,7 @@ public class MapCreater : MonoBehaviour
 				Data.Width = GameDefine.ObjtStart.X;
 				Data.Height = GameDefine.ObjtStart.Y;
 
-				GameData.pthis.ObjtList.Add(Data);
+				MapData.pthis.ObjtList.Add(Data);
 				UpdateSize(Data.Pos);
 			}//if
 		}//if
@@ -68,9 +68,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖終點
 	private void CreateEnd()
 	{
-		if(GameData.pthis.RoadList.Count > 0)
+		if(MapData.pthis.RoadList.Count > 0)
 		{
-			MapCoor Road = GameData.pthis.RoadList[GameData.pthis.RoadList.Count - 1];
+			MapCoor Road = MapData.pthis.RoadList[MapData.pthis.RoadList.Count - 1];
 			MapObjt Data = new MapObjt();
 			
 			Data.Pos = new MapCoor(Road.X - 1, Road.Y + 1);
@@ -78,14 +78,14 @@ public class MapCreater : MonoBehaviour
 			Data.Width = GameDefine.ObjtEnd.X;
 			Data.Height = GameDefine.ObjtEnd.Y;
 			
-			GameData.pthis.ObjtList.Add(Data);
+			MapData.pthis.ObjtList.Add(Data);
 			UpdateSize(Data.Pos);
 		}//if
 	}
 	// 建立地圖物件
 	private void CreateObjt()
 	{
-		foreach(MapCoor Itor in GameData.pthis.RoadList)
+		foreach(MapCoor Itor in MapData.pthis.RoadList)
 		{
 			foreach(ENUM_Dir ItorDir in System.Enum.GetValues(typeof(ENUM_Dir)))
 			{
@@ -110,13 +110,13 @@ public class MapCreater : MonoBehaviour
 
 							bool bCheck = true;
 							
-							foreach(MapCoor ItorRoad in GameData.pthis.RoadList)
+							foreach(MapCoor ItorRoad in MapData.pthis.RoadList)
 							{
 								if(Data.Cover(ItorRoad))
 									bCheck &= false;
 							}//for
 							
-							foreach(MapObjt ItorObjt in GameData.pthis.ObjtList)
+							foreach(MapObjt ItorObjt in MapData.pthis.ObjtList)
 							{
 								if(Data.Cover(ItorObjt))
 									bCheck &= false;
@@ -124,7 +124,7 @@ public class MapCreater : MonoBehaviour
 							
 							if(bCheck)
 							{
-								GameData.pthis.ObjtList.Add(Data);
+								MapData.pthis.ObjtList.Add(Data);
 								UpdateSize(Data.Pos);
 							}//if
 						}//if
@@ -244,20 +244,20 @@ public class MapCreater : MonoBehaviour
 				
 				bool bCheck = true;
 				
-				foreach(MapCoor ItorRoad in GameData.pthis.RoadList)
+				foreach(MapCoor ItorRoad in MapData.pthis.RoadList)
 				{
 					if(Data.Cover(ItorRoad))
 						bCheck &= false;
 				}//for
 				
-				foreach(MapObjt ItorObjt in GameData.pthis.ObjtList)
+				foreach(MapObjt ItorObjt in MapData.pthis.ObjtList)
 				{
 					if(Data.Cover(ItorObjt))
 						bCheck &= false;
 				}//for
 				
 				if(bCheck)
-					GameData.pthis.ObjtList.Add(Data);
+					MapData.pthis.ObjtList.Add(Data);
 			}//for
 		}//for
 	}
@@ -323,16 +323,16 @@ public class MapCreater : MonoBehaviour
 
 		ObjectList.Clear();
 		PickupList.Clear();
-		GameData.pthis.RoadList.Clear();
-        GameData.pthis.ObjtList.Clear();
+		MapData.pthis.RoadList.Clear();
+        MapData.pthis.ObjtList.Clear();
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
-		MapCoor RoadPos = GameData.pthis.RoadList.Count > iRoad ? GameData.pthis.RoadList[iRoad] : new MapCoor();
+		MapCoor RoadPos = MapData.pthis.RoadList.Count > iRoad ? MapData.pthis.RoadList[iRoad] : new MapCoor();
 		MapCoor ChkPos = new MapCoor(RoadPos.X - GameDefine.iBlockUpdate / 2, RoadPos.Y - GameDefine.iBlockUpdate / 2);
 
-		foreach(MapCoor Itor in GameData.pthis.RoadList)
+		foreach(MapCoor Itor in MapData.pthis.RoadList)
 		{
 			Vector2 Pos = Itor.ToVector2();
 			MapObjt Temp = new MapObjt();
@@ -361,7 +361,7 @@ public class MapCreater : MonoBehaviour
 			}//if
 		}//for
 		
-		foreach(MapObjt Itor in GameData.pthis.ObjtList)
+		foreach(MapObjt Itor in MapData.pthis.ObjtList)
 		{
 			Vector2 Pos = Itor.Pos.ToVector2();
 
@@ -391,10 +391,10 @@ public class MapCreater : MonoBehaviour
 		if(iRoad < 0)
 			iRoad = 0;
 
-		if(GameData.pthis.RoadList.Count <= iRoad)
+		if(MapData.pthis.RoadList.Count <= iRoad)
 			return null;
 
-		Vector2 Pos = GameData.pthis.RoadList[iRoad].ToVector2();
+		Vector2 Pos = MapData.pthis.RoadList[iRoad].ToVector2();
 
 		if(ObjectList.ContainsKey(Pos) == false)
 			return null;

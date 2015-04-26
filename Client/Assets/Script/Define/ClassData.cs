@@ -172,11 +172,15 @@ public class SaveGame
 	public int iKill = 0; // 殺怪數.
 	public int iAlive = 0; // 存活數.
 	public int iDead = 0; // 死亡數.
-	public MapCoor[] RoadList = new MapCoor[0]; // 地圖道路列表
-	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
 	public Pickup[] PickupList = new Pickup[0]; // 地圖拾取列表
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
+}
+
+public class SaveMap
+{
+	public MapCoor[] RoadList = new MapCoor[0]; // 地圖道路列表
+	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
 }
 
 public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
