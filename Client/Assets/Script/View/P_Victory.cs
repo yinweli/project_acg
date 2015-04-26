@@ -19,6 +19,7 @@ public class P_Victory : MonoBehaviour
         // 死亡人數.
         pLb[4].text = GameData.pthis.iDead.ToString();
 
+        //GoogleAnalyticsV3.instance.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, " Kill:" + GameData.pthis.iKill + " Live:" + PlayerData.pthis.Members.Count + " Dead:" + GameData.pthis.iDead, GameData.pthis.iStageTime);
     }
 
     public void ChangePage(int iPage)

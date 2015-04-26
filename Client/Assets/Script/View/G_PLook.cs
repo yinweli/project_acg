@@ -24,7 +24,7 @@ public class G_PLook : MonoBehaviour
             // 修改武器layer
             for (int i = 0; i < p2DS.Length; i++)
             {
-                p2DS[i].depth = p2DS[i].depth + (iLayer * 20);
+                p2DS[i].depth = p2DS[i].depth + (iLayer * 30);
 
                 Vector3 vecPos = p2DS[i].gameObject.transform.localPosition;
                 vecPos.z = -0.00002f * (float)p2DS[i].depth;
@@ -45,7 +45,7 @@ public class G_PLook : MonoBehaviour
         // 依照角色切換layer.
         for (int i = 0; i < Role.Length; i++)
         {
-            Role[i].depth = Role[i].depth + (iLayer * 20);
+            Role[i].depth = Role[i].depth + (iLayer * 30);
 
             Vector3 vecPos = Role[i].gameObject.transform.localPosition;
             vecPos.z = -0.00002f * (float)Role[i].depth;

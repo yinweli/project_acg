@@ -38,6 +38,7 @@ public class SysMain : MonoBehaviour
         bIsOld &= PlayerData.pthis.Load();
         bIsOld &= GameData.pthis.Load();
         bIsOld &= EnemyData.pthis.Load();
+        bIsOld &= MapData.pthis.Load();
         RecordData.pthis.Load();
 
         if (!bIsOld)
@@ -62,14 +63,20 @@ public class SysMain : MonoBehaviour
         if (bIsGaming && PlayerData.pthis.Members.Count <= DeadRole.Count)
             Failed();
 	}
+    // ------------------------------------------------------------------
+    void OnApplicationQuit()
+    {
+        Debug.Log("Save");
+        
+        PlayerPrefs.Save();
+    }
 	// ------------------------------------------------------------------
 	// 儲存遊戲.
 	public void SaveGame()
 	{
-		PlayerData.pthis.Save();
-		GameData.pthis.Save();
+        PlayerData.pthis.Save();
+        GameData.pthis.Save();
         EnemyData.pthis.Save();
-		PlayerPrefs.Save();
 	}
     // ------------------------------------------------------------------
     // 確認存檔內容開始遊戲.
@@ -154,6 +161,8 @@ public class SysMain : MonoBehaviour
 		MapCreater.pthis.CreatePickup();
 		// 建立撿取物件.
 		MapCreater.pthis.ShowPickup(0);
+
+        MapData.pthis.Save();
 
         // UI初始化.
         P_UI.pthis.StartNew();
