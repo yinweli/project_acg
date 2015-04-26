@@ -27,6 +27,7 @@ public class Btn_BuyBattery : MonoBehaviour
             GetComponent<Animator>().Play("CantBuy");
             return;
         }
+        GoogleAnalytics.pthis.LogEvent("Buy", "Battery", "Day" + PlayerData.pthis.iStage, GameDefine.iBatteryCost);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         PlayerData.pthis.iCurrency -= GameDefine.iBatteryCost;

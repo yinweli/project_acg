@@ -9,6 +9,9 @@ public class P_Failed : MonoBehaviour
 
     void Start()
     {
+        GoogleAnalytics.pthis.LogScreen("Failed");
+        GoogleAnalytics.pthis.LogEvent("Failed", "Day" + PlayerData.pthis.iStage, "Time:" + PlayerData.pthis.iPlayTime, PlayerData.pthis.iPlayTime);
+
         StartCoroutine(OpenPage());
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
@@ -28,7 +31,7 @@ public class P_Failed : MonoBehaviour
         GameData.pthis.Clear();
 
 		// 設為新遊戲.
-		SysMain.pthis.NewRoleData();
+		SysMain.pthis.NewRoleData();        
     }
 
     public void OnDestory()

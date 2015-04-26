@@ -8,6 +8,9 @@ public class P_Victory : MonoBehaviour
 	
     void Start()
     {
+        GoogleAnalytics.pthis.LogScreen("Victory");
+        GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Time: " + GameData.pthis.iStageTime + " Kill:" + GameData.pthis.iKill + " Live:" + PlayerData.pthis.Members.Count + " Dead:" + GameData.pthis.iDead, GameData.pthis.iStageTime);
+
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
         // 關卡時間.
@@ -21,8 +24,6 @@ public class P_Victory : MonoBehaviour
 
         AudioCtrl.pthis.pMusic.volume = 0.5f;
         NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);
-
-        //GoogleAnalyticsV3.instance.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, " Kill:" + GameData.pthis.iKill + " Live:" + PlayerData.pthis.Members.Count + " Dead:" + GameData.pthis.iDead, GameData.pthis.iStageTime);
     }
 
     public void OnDestory()
