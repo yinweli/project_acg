@@ -45,21 +45,4 @@ public class ResourceStat : MonoBehaviour
 		else
 			Used[(int)emResource] += Mathf.Abs(iValue);
 	}
-	public void Report()
-	{
-		string szReport = "";
-
-		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Resource)))
-		{
-			if(Itor == (int)ENUM_Resource.Null)
-				continue;
-			
-			if(Itor == (int)ENUM_Resource.Resource_Count)
-				continue;
-
-			szReport += string.Format("resource[{0}] : start({1}), gain({2}), used({3})\n", (ENUM_Resource)Itor, Init[Itor], Gain[Itor], Used[Itor]);
-		}//for
-
-		Debug.Log(szReport);
-	}
 }

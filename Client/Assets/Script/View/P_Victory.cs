@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class P_Victory : MonoBehaviour 
 {
@@ -29,9 +30,26 @@ public class P_Victory : MonoBehaviour
 			                              ResourceStat.pthis.Used[Itor]);
 
 			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
+			Debug.Log(szTemp);
 		}//for
 
-		ResourceStat.pthis.Report();
+		Dictionary<int, int> PickupTotal = new Dictionary<int, int>();
+
+		foreach(Pickup Itor in GameData.pthis.PickupList)
+		{
+			if(PickupTotal.ContainsKey(Itor.iType))
+				PickupTotal[Itor.iType] += Itor.iCount;
+			else
+				PickupTotal[Itor.iType] = Itor.iCount;
+		}//for
+
+		foreach(KeyValuePair<int, int> Itor in PickupTotal)
+		{
+			string szTemp = string.Format("Pickup_{0}:{1}", (ENUM_Pickup)Itor.Key, Itor.Value);
+
+			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
+			Debug.Log(szTemp);
+		}//for
 
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
