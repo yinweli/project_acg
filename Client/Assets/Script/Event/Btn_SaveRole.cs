@@ -17,6 +17,7 @@ public class Btn_SaveRole : MonoBehaviour
     {
         if (bIsPress)
         {
+            NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
             PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
             GameData.pthis.PickupList[iItemID].bPickup = true;
             Destroy(gameObject);
