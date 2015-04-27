@@ -63,8 +63,6 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     void OnApplicationQuit()
     {
-        Debug.Log("Save");
-        
         PlayerPrefs.Save();
     }
 	// ------------------------------------------------------------------
