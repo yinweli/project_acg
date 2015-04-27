@@ -39,22 +39,21 @@ public class P_UI : MonoBehaviour
         GetComponent<UIPanel>().alpha = fValue;
     }
     // ------------------------------------------------------------------
-    void OnGUI()
-    {
-        if (SysMain.pthis.bIsGaming && Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Escape))
-        {
-            Time.timeScale = 0;
-            GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Pause");
-            pObj.transform.localPosition = new Vector3(0, 0, -1000);
-        }
-    }
-    // ------------------------------------------------------------------
     void Update()
     {
         pLbDis.text = string.Format("{0}m",(MapData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);
 
         if (!SysMain.pthis.bIsGaming)
             return;
+
+        if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Pause");
+            pObj.transform.localPosition = new Vector3(0, 0, -1000);
+        }
+        else if (Time.timeScale == 0 && Input.GetKeyDown(KeyCode.Escape))
+            Time.timeScale = 1;
 
         // 電源冷卻計算.
         if (fCoolDown <= Time.time && AddBattery(GameDefine.iBatteryTimeCost))

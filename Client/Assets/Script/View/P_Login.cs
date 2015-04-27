@@ -15,7 +15,7 @@ public class P_Login : MonoBehaviour
         CameraCtrl.pthis.LoginMove();
     }
 
-    void OnGUI()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();

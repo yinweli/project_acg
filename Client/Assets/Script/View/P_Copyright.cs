@@ -7,11 +7,10 @@ public class P_Copyright : MonoBehaviour
     {
         SysMain.pthis.ReadyStart();
     }
-    public void DelSelf()
+    public void DelCopyright()
     {
         // 建立遊戲開頭畫面.
         SysUI.pthis.CreatePanel("Prefab/P_Login");
-
         Destroy(gameObject);
     }
 }
