@@ -63,8 +63,8 @@ public class GameDefine
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPickupMember = 25; // 救援成員出現機率
-	public const int iMaxPickupItems = 24; // 最大拾取物品次數
-	public const int iMinPickupItems = 20; // 最小拾取物品次數
+	public const int iMaxPickupItems = 26; // 最大拾取物品次數
+	public const int iMinPickupItems = 22; // 最小拾取物品次數
 	public const int iMaxPickupValue = 24; // 最大拾取物品價值
 	public const int iMinPickupValue = 20; // 最小拾取物品價值
 	public const float fPickupPartLightAmmo = 0.15f; // 拾取物品(輕型彈藥)比例
@@ -75,7 +75,7 @@ public class GameDefine
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 0.8f; // 怪物能量升級值
-	public const float fUpgradePickup = 0.6f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 0.8f; // 拾取物品價值升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔

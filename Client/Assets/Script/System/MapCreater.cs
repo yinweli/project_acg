@@ -140,11 +140,25 @@ public class MapCreater : MonoBehaviour
 	public void CreatePickup()
 	{
 		GameData.pthis.PickupList.Clear();
+
+		// 檢查隊伍裡是否沒有光源裝備
+		bool bLight = false;
+		
+		foreach(Member ItorMember in PlayerData.pthis.Members)
+		{
+			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+			
+			if(Data == null)
+				continue;
+			
+			if(Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
 		
 		// 成員拾取
 		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
 		{
-			if(Random.Range(0, 100) <= (GameDefine.iMaxMember - PlayerData.pthis.Members.Count) * GameDefine.iPickupMember)
+			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - PlayerData.pthis.Members.Count) * GameDefine.iPickupMember)
 			{
 				Pickup Data = new Pickup();
 				
