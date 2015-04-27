@@ -2,11 +2,13 @@
 using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class PickupStat : MonoBehaviour
 {
 	static public PickupStat pthis = null;
 
+	public bool bReport = false;
 	public List<int> Init = new List<int>(); // 初始資源
 	public List<int> Gain = new List<int>(); // 獲得資源
 	public List<int> Used = new List<int>(); // 使用資源
@@ -104,5 +106,21 @@ public class PickupStat : MonoBehaviour
 		}//for
 
 		return new Tuple<int, int>(iResultGain, iResultTotal);
+	}
+	public void Report()
+	{
+		if(bReport == false)
+			return;
+
+		string szReport = string.Format("Day{0} [{1}]\n", PlayerData.pthis.iStage, System.DateTime.Now);
+
+		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
+			szReport += string.Format("{0,-10}(I:{1,4}, G:{2,4}, U:{3,4}, T:{4,4})\n", (ENUM_Pickup)Itor, Init[Itor], Gain[Itor], Used[Itor], Total[Itor]);
+
+		Tuple<int, int> Gap = ValueGap();
+
+		szReport += string.Format("ValueGap = G:{0,4}, T{1,4}\n", Gap.Item1, Gap.Item2);
+
+		File.AppendAllText(GameDefine.szPickupStat, szReport);
 	}
 }

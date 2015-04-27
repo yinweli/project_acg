@@ -10,6 +10,8 @@ public class P_Victory : MonoBehaviour
 	
     void Start()
     {
+		Tuple<int, int> ValueGap = PickupStat.pthis.ValueGap();
+
         GoogleAnalytics.pthis.LogScreen("Victory");
         GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Time:" + GameData.pthis.iStageTime, GameData.pthis.iStageTime);
         GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Kill:" + GameData.pthis.iKill, GameData.pthis.iKill);
@@ -17,25 +19,11 @@ public class P_Victory : MonoBehaviour
         GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "Dead:" + GameData.pthis.iDead, GameData.pthis.iDead);
 
 		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
-		{
-			string szTemp = string.Format("{0}(I:{1},G:{2},U:{3},T:{4})", 
-			                              (ENUM_Pickup)Itor, 
-			                              PickupStat.pthis.Init[Itor], 
-			                              PickupStat.pthis.Gain[Itor], 
-			                              PickupStat.pthis.Used[Itor], 
-			                              PickupStat.pthis.Total[Itor]);
+			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, string.Format("{0}(I:{1},G:{2},U:{3},T:{4})", (ENUM_Pickup)Itor, PickupStat.pthis.Init[Itor], PickupStat.pthis.Gain[Itor], PickupStat.pthis.Used[Itor], PickupStat.pthis.Total[Itor]), 0);
 
-			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
-			Debug.Log(szTemp);
-		}//for
+		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, string.Format("ValueGap:G:{0},T{1}", ValueGap.Item1, ValueGap.Item2), 0);
 
-		{
-			Tuple<int, int> Result = PickupStat.pthis.ValueGap();
-			string szTemp = string.Format("ValueGap:G:{0},T{1}", Result.Item1, Result.Item2);
-
-			GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, szTemp, 0);
-			Debug.Log(szTemp);
-		}
+		PickupStat.pthis.Report();
 
         // 天數.
         pLb[0].text = PlayerData.pthis.iStage.ToString();
