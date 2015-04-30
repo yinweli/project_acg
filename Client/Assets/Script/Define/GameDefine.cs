@@ -29,7 +29,7 @@ public class GameDefine
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
 	public const int iMaxMember = 5; // 最大成員數
 	public const int iMaxSex = 2; // 最大性別數
-	public const int iMaxLook = 8; // 最大外觀數
+	public const int iMaxLook = 10; // 最大外觀數
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
