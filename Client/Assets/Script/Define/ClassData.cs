@@ -127,6 +127,7 @@ public class Member
 	/* [Save] */ public int iSex = 0; // 性別編號
 	/* [Save] */ public int iLook = 0; // 外觀編號
 	/* [Save] */ public int iEquip = 0; // 裝備編號
+	/* [Save] */ public int iLiveStage = 0; // 生存關卡數
 	/* [Save] */ public List<int> Feature = new List<int>(); // 特性列表
 	/* [Save] */ public List<int> Behavior = new List<int>(); // 行為列表
 	/* [    ] */ public int iInvincibleTime = 0; // 無敵時間
@@ -139,6 +140,7 @@ public class SaveMember
 	public int iSex = 0; // 性別編號
 	public int iLook = 0; // 外觀編號
 	public int iEquip = 0; // 裝備編號
+	public int iLiveStage = 0; // 生存關卡數
 	public int[] Feature = new int[0]; // 特性列表
 	public int[] Behavior = new int[0]; // 行為列表
 }

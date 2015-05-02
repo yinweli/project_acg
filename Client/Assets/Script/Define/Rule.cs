@@ -385,6 +385,8 @@ public class Rule
 					iResult = (DataMember.iAddDamage + DataEquip.Damage);
 				else
 					iResult = (int)((DataMember.iAddDamage + DataEquip.Damage) * GameDefine.fCriticalStrik);
+
+				iResult += DataMember.iLiveStage * GameDefine.iDamageUpgrade;
 			}//if
 		}//if
 

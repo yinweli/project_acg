@@ -42,6 +42,8 @@ public class GameDefine
 	public const int iStaminaConsume = 5; // 耐力消耗值
 	public const int iStaminaRecoveryTime = 5; // 耐力回復時間
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
+	public const int iDamageUpgrade = 1; // 升級傷害值
+	public const int iDamageClick = 1; // 點擊傷害值
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
