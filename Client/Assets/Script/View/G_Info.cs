@@ -61,17 +61,20 @@ public class G_Info : MonoBehaviour
 			{
 				int iEquip = pDBFEquip.Damage;
 				int iAddon = PlayerData.pthis.Members[iID].iAddDamage;
-				string szTemp = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon));
+				int iUpgrade = PlayerData.pthis.Members[iID].iLiveStage * GameDefine.iDamageUpgrade;
+				string szResult = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon));
+				string szExtra = "";
 				
 				if(iAddon != 0)
-				{
-					if(iAddon > 0)
-						szTemp += string.Format("({0}[546ef2]+{1}[-])", iEquip, iAddon);
-					else
-						szTemp += string.Format("({0}[e92121]{1}[-])", iEquip, iAddon);
-				}//if
+					szExtra += iAddon > 0 ? string.Format("[546ef2]+{0}[-]", iAddon) : string.Format("[e92121]{0}[-]", iAddon);
 
-				Lb_Value[0].text = szTemp;
+				if(iUpgrade != 0)
+					szExtra += iUpgrade > 0 ? string.Format("[00ff00]+{0}[-]", iUpgrade) : string.Format("[e92121]{0}[-]", iUpgrade);
+
+				if(szExtra.Length > 0)
+					szResult += string.Format("({0}{1})", iEquip, szExtra);
+
+				Lb_Value[0].text = szResult;
 			}
 
             // 射擊速度
