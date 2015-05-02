@@ -147,6 +147,12 @@ public class AIEnemy : MonoBehaviour
         }
     }
     // ------------------------------------------------------------------
+    void OnClick()
+    {
+        if (iHP > 0)
+            AddHP(-GameDefine.iDamageClick);
+    }
+    // ------------------------------------------------------------------
     public void AddHP(int iValue)
     {
         if (iHP <= 0 && iValue < 0)
