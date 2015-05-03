@@ -62,7 +62,7 @@ public class G_Info : MonoBehaviour
 				int iEquip = pDBFEquip.Damage;
 				int iAddon = PlayerData.pthis.Members[iID].iAddDamage;
 				int iUpgrade = PlayerData.pthis.Members[iID].iLiveStage * GameDefine.iDamageUpgrade;
-				string szResult = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon));
+				string szResult = string.Format("[ffed00]{0}[-]", Mathf.Max(0, iEquip + iAddon + iUpgrade));
 				string szExtra = "";
 				
 				if(iAddon != 0)
