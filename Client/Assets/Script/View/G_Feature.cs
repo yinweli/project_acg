@@ -39,6 +39,8 @@ public class G_Feature : MonoBehaviour
 
             if (!GameData.pthis.bVictory)
             {
+                // 升級.
+                PlayerData.pthis.Members[i].iLiveStage++;
                 Debug.Log("Redom Feature & Equip : " + i);
                 iFeature[i] = Rule.GainFeature(i);
                 iEquip[i] = Rule.GainEquip(i);
@@ -64,22 +66,27 @@ public class G_Feature : MonoBehaviour
             GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], PlayerData.pthis.Members[i].iSex, PlayerData.pthis.Members[i].iLook);
             ObjHand[i] = ObjHuman.GetComponent<G_PLook>().SetShader(pShader, (ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
 
-            float fWaitSec = 0.5f;
             Debug.Log(ObjGroup[i].name + " Feature: " + iFeature[i] + " Equip: " + (ENUM_Weapon)iEquip[i]);
+            // 顯示升級.
+            ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(PlayerData.pthis.Members[i].iLiveStage);
+            yield return new WaitForSeconds(0.5f);
+            ObjGroup[i].GetComponent<G_ListRole>().ChangeLevel(PlayerData.pthis.Members[i].iLiveStage + 1);
+
+            // 給予角色取得的天賦.
             if (iFeature[i] != 0)
             {
+                yield return new WaitForSeconds(0.5f);
                 ObjGroup[i].GetComponent<G_ListRole>().ShowFeature(iFeature[i]);
-                fWaitSec += 0.5f;
             }
 
+            // 給予角色取得的武器.
             if (iEquip[i] != 0)
-            {
-                // 給予角色取得的武器.
+            {                
+                yield return new WaitForSeconds(0.5f);
                 ObjGroup[i].GetComponent<G_ListRole>().ShowEquip(ObjHand[i], iEquip[i], pShader);
-                fWaitSec += 0.5f;
             }
 
-            yield return new WaitForSeconds(fWaitSec);
+            yield return new WaitForSeconds(0.5f);
         }
 
 		BtnNext.isEnabled = true;

@@ -4,7 +4,15 @@ using System.Collections;
 public class G_ListRole : MonoBehaviour 
 {
     public int iPlayerID = 0;
+    public UILabel pLbLv = null;
     public G_Info pInfo = null;
+
+    void Start()
+    {
+        pLbLv.gameObject.SetActive(false);
+        if (GetComponent<Animation>())
+            GetComponent<Animation>().Stop();
+    }
 
     void OnPress(bool bIsDown)
     {
@@ -18,6 +26,19 @@ public class G_ListRole : MonoBehaviour
             pInfo.Reset();
             pInfo.gameObject.SetActive(false);
         }
+    }
+
+    public void ShowLevelUp(int iLv)
+    {
+        pLbLv.gameObject.SetActive(true);
+        if (GetComponent<Animation>())
+            GetComponent<Animation>().Play();
+        ChangeLevel(iLv);
+    }
+
+    public void ChangeLevel(int iLv)
+    {
+        pLbLv.text = "Lv " + iLv;
     }
 
     public void ShowFeature(int iFeature)
