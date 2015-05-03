@@ -95,12 +95,12 @@ public class Rule
 	// 重置耐力上限值
 	public static int StaminaLimit()
 	{
-		return Value(GameDefine.iMinStamina, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.Passive_StaminaLimit) + GameDefine.iBaseStaminaLimit);
+		return Value(GameDefine.iMinStamina, GameDefine.iMaxStamina, FeatureI(ENUM_ModeFeature.StaminaLimit) + GameDefine.iBaseStaminaLimit);
 	}
 	// 重置耐力回復值
 	public static void StaminaRecovery()
 	{
-		PlayerData.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.Passive_StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
+		PlayerData.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
@@ -183,7 +183,7 @@ public class Rule
 	public static void CriticalStrikeReset(int iPos)
 	{
 		if(PlayerData.pthis.Members.Count > iPos)
-			PlayerData.pthis.Members[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.Passive_CriticalStrike, iPos);
+			PlayerData.pthis.Members[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.CriticalStrike, iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset()
@@ -195,7 +195,7 @@ public class Rule
 	public static void AddDamageReset(int iPos)
 	{
 		if(PlayerData.pthis.Members.Count > iPos)
-			PlayerData.pthis.Members[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.Passive_AddDamage, iPos);
+			PlayerData.pthis.Members[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.AddDamage, iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset()
@@ -302,7 +302,7 @@ public class Rule
 			{
 				DBFEquip Data = Itor.Data() as DBFEquip;
 				
-				if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+				if(Data != null)
 				{
 					if(Data.Mode == (int)ENUM_ModeEquip.Light)
 						iEquipProb = Data.Gain;
@@ -350,7 +350,7 @@ public class Rule
 		{
 			DBFFeature Data = Itor.Data() as DBFFeature;
 			
-			if(Data != null && Data.StageID <= PlayerData.pthis.iStage && Group.Contains(Data.Group) == false)
+			if(Data != null && Group.Contains(Data.Group) == false)
 			{
 				iEmptyProb -= Data.Gain;
 				Dice.Set(System.Convert.ToInt32(Data.GUID), Data.Gain);

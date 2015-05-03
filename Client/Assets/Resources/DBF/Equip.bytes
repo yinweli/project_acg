@@ -1,7 +1,7 @@
-{"GUID":"1", "StrID":"1001", "Mode":"1", "StageID":"1", "Gain":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
-{"GUID":"5", "StrID":"1005", "Mode":"2", "StageID":"1", "Gain":"12", "Damage":"30", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"6", "StrID":"1006", "Mode":"2", "StageID":"2", "Gain":"10", "Damage":"30", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
-{"GUID":"7", "StrID":"1007", "Mode":"2", "StageID":"3", "Gain":"8", "Damage":"60", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
-{"GUID":"8", "StrID":"1008", "Mode":"2", "StageID":"2", "Gain":"10", "Damage":"20", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
-{"GUID":"9", "StrID":"1009", "Mode":"2", "StageID":"3", "Gain":"8", "Damage":"40", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
-{"GUID":"10", "StrID":"1010", "Mode":"2", "StageID":"3", "Gain":"6", "Damage":"20", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}
+{"GUID":"1", "StrID":"1001", "Mode":"1", "Gain":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
+{"GUID":"5", "StrID":"1005", "Mode":"2", "Gain":"12", "Damage":"30", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"6", "StrID":"1006", "Mode":"2", "Gain":"10", "Damage":"30", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
+{"GUID":"7", "StrID":"1007", "Mode":"2", "Gain":"8", "Damage":"60", "CriticalStrike":"0.8", "FireRate":"2.5", "Range":"2", "Resource":"2"}
+{"GUID":"8", "StrID":"1008", "Mode":"2", "Gain":"10", "Damage":"20", "CriticalStrike":"0.25", "FireRate":"0.5", "Range":"2", "Resource":"3"}
+{"GUID":"9", "StrID":"1009", "Mode":"2", "Gain":"8", "Damage":"40", "CriticalStrike":"0.5", "FireRate":"1", "Range":"2", "Resource":"3"}
+{"GUID":"10", "StrID":"1010", "Mode":"2", "Gain":"6", "Damage":"20", "CriticalStrike":"0", "FireRate":"0.25", "Range":"2", "Resource":"3"}

@@ -67,14 +67,10 @@ public enum ENUM_ModeEquip
 public enum ENUM_ModeFeature
 {
 	Null = 0, 
-	Random_Currency, // 隨機增加通貨
-	Random_Battery, // 隨機增加電池
-	Random_LightAmmo, // 隨機增加輕型彈藥
-	Random_HeavyAmmo, // 隨機增加重型彈藥
-	Passive_StaminaLimit, // 被動增加耐力上限
-	Passive_StaminaRecovery, // 被動增加耐力回復
-	Passive_CriticalStrike, // 被動增加致命
-	Passive_AddDamage, // 被動增加增傷
+	StaminaLimit, // 被動增加耐力上限
+	StaminaRecovery, // 被動增加耐力回復
+	CriticalStrike, // 被動增加致命
+	AddDamage, // 被動增加增傷
 }
 
 // 射程列舉
