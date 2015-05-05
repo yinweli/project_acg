@@ -148,6 +148,8 @@ public class SysMain : MonoBehaviour
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
+		Rule.BombReset();
+		Rule.ShieldReset();
 		GameData.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.

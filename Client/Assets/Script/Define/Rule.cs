@@ -15,6 +15,34 @@ public class Rule
 	{
 		return Mathf.Max(fMin, Mathf.Min(fMax, fValue));
 	}
+	// 取得是否有特性
+	public static bool IsFeature(ENUM_ModeFeature emMode)
+	{
+		bool bResult = false;
+		
+		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+			bResult |= IsFeature(emMode, iPos);
+		
+		return bResult;
+	}
+	// 取得是否有特性
+	public static bool IsFeature(ENUM_ModeFeature emMode, int iPos)
+	{
+		bool bResult = false;
+		
+		if(PlayerData.pthis.Members.Count > iPos)
+		{
+			foreach(int Itor in PlayerData.pthis.Members[iPos].Feature)
+			{
+				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+				
+				if(Data != null && Data.Mode == (int)emMode)
+					bResult = true;
+			}//for
+		}//if
+		
+		return bResult;
+	}
 	// 取得特性效果值
 	public static int FeatureI(ENUM_ModeFeature emMode)
 	{
@@ -106,6 +134,12 @@ public class Rule
 	public static void BombReset()
 	{
 		PlayerData.pthis.iBomb = Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb));
+	}
+	// 重置護盾次數
+	public static void ShieldReset()
+	{
+		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+			PlayerData.pthis.Members[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)

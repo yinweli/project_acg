@@ -37,6 +37,7 @@ public class GameDefine
 	public const int iMaxStaminaRecovery = 10; // 最大耐力回復值
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
 	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
+	public const int iMaxShield = 100; // 最大護盾值
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
@@ -44,6 +45,8 @@ public class GameDefine
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
 	public const int iDamageUpgrade = 1; // 升級傷害值
 	public const int iDamageClick = 3; // 點擊傷害值
+	public const int iDamageBomb = 200; // 絕招傷害值
+	public const int iDamageShield = 200; // 護盾傷害值
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
