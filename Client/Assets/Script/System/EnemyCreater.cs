@@ -34,7 +34,7 @@ public class EnemyCreater : MonoBehaviour
     {
         iCount = 0;
         // 計算總波數能量：怪物能量 = (能量基礎值 + 關卡編號 * 能量增加值) * 額外能量加成
-		iEnegry = (GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * Rule.FeatureF(ENUM_ModeFeature.AddEnegry);
+		iEnegry = (int)((GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * Rule.FeatureF(ENUM_ModeFeature.AddEnegry));
 
         StartCoroutine(Creater());
     }
