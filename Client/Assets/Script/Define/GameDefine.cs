@@ -98,7 +98,7 @@ public class GameDefine
 
 	public static readonly List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
-		0, 1, 2, 
+		/*0, 1, */2, 
 	};
 	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{
