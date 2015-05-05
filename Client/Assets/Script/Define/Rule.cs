@@ -133,7 +133,15 @@ public class Rule
 	// 重置絕招次數
 	public static void BombReset()
 	{
-		PlayerData.pthis.iBomb = Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb));
+		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+			PlayerData.pthis.iBomb = Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb, iPos));
+
+		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, PlayerData.pthis.iBomb);
+	}
+	// 增加絕招次數
+	public static void BombaAdd(int iValue)
+	{
+		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, PlayerData.pthis.iBomb + iValue);
 	}
 	// 重置護盾次數
 	public static void ShieldReset()

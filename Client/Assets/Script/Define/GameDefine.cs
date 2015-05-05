@@ -38,6 +38,7 @@ public class GameDefine
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
 	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
 	public const int iMaxFeature = 6; // 最大特性數量
+	public const int iMaxBomb = 10; // 最大絕招數量
 	public const int iMaxShield = 100; // 最大護盾值
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
@@ -55,7 +56,6 @@ public class GameDefine
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iBlockUpdate = 25; // 格子更新距離
-	public const int iStageLevel = 5; // 關卡升階值
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iMapWidth = 41; // 地圖寬度
 	public const int iMapBorderX = 12; // 地圖X軸邊框長度
