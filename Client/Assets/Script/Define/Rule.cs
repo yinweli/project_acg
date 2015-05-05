@@ -368,6 +368,9 @@ public class Rule
 	{
 		if(PlayerData.pthis.Members.Count <= iPos)
 			return 0;
+
+		if(PlayerData.pthis.Members[iPos].Feature.Count >= GameDefine.iMaxFeature)
+			return 0;
 		
 		// 建立特性群組列表
 		HashSet<int> Group = new HashSet<int>();

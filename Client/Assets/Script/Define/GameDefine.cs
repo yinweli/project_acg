@@ -37,6 +37,7 @@ public class GameDefine
 	public const int iMaxStaminaRecovery = 10; // 最大耐力回復值
 	public const int iMaxLightAmmo = 9999; // 最大輕型彈藥值
 	public const int iMaxHeavyAmmo = 9999; // 最大重型彈藥值
+	public const int iMaxFeature = 6; // 最大特性數量
 	public const int iMaxShield = 100; // 最大護盾值
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
