@@ -104,4 +104,5 @@ public enum ENUM_Pickup
 	Battery, // 電池
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
+	Bomb, // 絕招
 }

@@ -241,6 +241,21 @@ public class MapCreater : MonoBehaviour
 			
 			GameData.pthis.PickupList.Add(Data);
 		}//for
+
+		// 絕招拾取
+		if(Random.Range(0, 100) <= GameDefine.iPickupProbBomb)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Bomb;
+			Data.iCount = 1;
+			Data.iSex = 0;
+			Data.iLook = 0;
+			Data.bPickup = false;
+			
+			GameData.pthis.PickupList.Add(Data);
+		}//if
 	}
 	// 填滿地圖
 	private void Fill()
