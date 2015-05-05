@@ -67,10 +67,14 @@ public enum ENUM_ModeEquip
 public enum ENUM_ModeFeature
 {
 	Null = 0, 
-	StaminaLimit, // 被動增加耐力上限
-	StaminaRecovery, // 被動增加耐力回復
-	CriticalStrike, // 被動增加致命
-	AddDamage, // 被動增加增傷
+	StaminaLimit, // 增加耐力上限
+	StaminaRecovery, // 增加耐力回復
+	CriticalStrike, // 增加致命
+	AddDamage, // 增加增傷
+	AddLeastBomb, // 增加最少絕招次數
+	AddShield, // 增加護盾次數
+	AddEnegry, // 增加怪物能量
+	Frozen, // 冰凍
 }
 
 // 射程列舉

@@ -12,6 +12,7 @@ public class PlayerData : MonoBehaviour
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
 	public int iStamina = 0; // 耐力
+	public int iBomb = 0; // 絕招次數
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
@@ -35,6 +36,7 @@ public class PlayerData : MonoBehaviour
 		Data.iStyle = iStyle;
 		Data.iCurrency = iCurrency;
 		Data.iStamina = iStamina;
+		Data.iBomb = iBomb;
 		Data.iPlayTime = iPlayTime;
 		Data.iEnemyKill = iEnemyKill;
 		Data.iPlayerLost = iPlayerLost;
@@ -75,6 +77,7 @@ public class PlayerData : MonoBehaviour
 		iStyle = Data.iStyle;
 		iCurrency = Data.iCurrency;
 		iStamina = Data.iStamina;
+		iBomb = Data.iBomb;
 		iPlayTime = Data.iPlayTime;
 		iEnemyKill = Data.iEnemyKill;
 		iPlayerLost = Data.iPlayerLost;
@@ -104,6 +107,7 @@ public class PlayerData : MonoBehaviour
 		iStyle = 0;
 		iCurrency = 0;
 		iStamina = 0;
+		iBomb = 0;
 		iPlayTime = 0;
 		iEnemyKill = 0;
 		iPlayerLost = 0;

@@ -27,7 +27,7 @@ public class GameDefine
     public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
-	public const int iMaxMember = 5; // 最大成員數
+	public const int iMaxMember = 6; // 最大成員數
 	public const int iMaxSex = 2; // 最大性別數
 	public const int iMaxLook = 10; // 最大外觀數
 	public const int iMaxCurrency = 9999; // 最大通貨值
@@ -98,7 +98,7 @@ public class GameDefine
 
 	public static readonly List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
-		0, 1, 
+		0, 1, 2, 
 	};
 	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{

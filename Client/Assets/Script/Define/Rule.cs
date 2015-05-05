@@ -102,6 +102,11 @@ public class Rule
 	{
 		PlayerData.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
 	}
+	// 重置絕招次數
+	public static void BombReset()
+	{
+		PlayerData.pthis.iBomb = Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb));
+	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
 	{
@@ -425,5 +430,32 @@ public class Rule
 		}//while
 
 		return Result;
+	}
+	// 取得成員威脅值
+	public static int MemberThreat(int iPos)
+	{
+		int iResult = 0;
+
+		if(PlayerData.pthis.Members.Count > iPos)
+		{
+			Member DataMember = PlayerData.pthis.Members[iPos];
+
+			iResult += DataMember.iLiveStage;
+
+			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+
+			if(DataEquip != null)
+				iResult += DataEquip.Threat;
+
+			foreach(int Itor in DataMember.Feature)
+			{
+				DBFFeature DataFeature = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+
+				if(DataFeature != null)
+					iResult += DataFeature.Threat;
+			}//for
+		}//if
+
+		return Mathf.Max(0, iResult);
 	}
 }
