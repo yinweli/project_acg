@@ -21,7 +21,6 @@ public class Btn_GetCurrency : MonoBehaviour {
             pSprite.depth = 10000;
             // 取得數量.
             pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
-            GameData.pthis.PickupList[iItemID].bPickup = true;
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
@@ -62,6 +61,7 @@ public class Btn_GetCurrency : MonoBehaviour {
             fFrame += 0.05f;
         }
 
+        GameData.pthis.PickupList[iItemID].bPickup = true;
 		Rule.CurrencyAdd(GameData.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateCurrency();
 

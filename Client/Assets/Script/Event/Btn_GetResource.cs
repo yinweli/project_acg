@@ -23,7 +23,6 @@ public class Btn_GetResource : MonoBehaviour
             pSprite.depth = 10000;
             // 取得數量.
             pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
-            GameData.pthis.PickupList[iItemID].bPickup = true;
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
@@ -70,7 +69,7 @@ public class Btn_GetResource : MonoBehaviour
             MoveTo(VecPos - pSprite.transform.position, 0.8f * fFrame);
             fFrame += 0.05f;
         }
-
+        GameData.pthis.PickupList[iItemID].bPickup = true;
 		Rule.ResourceAdd(enumType, GameData.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateResource();
 
