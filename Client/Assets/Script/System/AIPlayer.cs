@@ -147,7 +147,7 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = true;
         // 從可抓佇列中移除.
-        SysMain.pthis.CatchRole.Remove(gameObject);
+        ToolKit.CatchRole.Remove(gameObject);
 		// 拿手電筒的不需要改目標.
 		if(pWeapon != ENUM_Weapon.Weapon_001)
 			ObjTarget = ObjMonster;
@@ -161,12 +161,12 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = false;
         // 重新加入可抓佇列中.
-        SysMain.pthis.CatchRole.Add(gameObject, iPlayer);
+        ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
 		Destroy(gameObject.GetComponent<PlayerFollow>());
-		if (pAni)
-			pAni.Play("Run");
 
         StartCoroutine(ResetDeadPos());
+        if (pAni)
+            pAni.Play("Run");
 	}
     // ------------------------------------------------------------------
     // 被殺函式.

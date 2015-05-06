@@ -14,7 +14,7 @@ public class Btn_Bomb : MonoBehaviour
 
     void OnClick()
     {
-        if (fCoolDown > Time.time)
+        if (fCoolDown > Time.time || PlayerData.pthis.iBomb <= 0)
             return;
 
         GetComponent<UIButton>().isEnabled = false;

@@ -61,7 +61,7 @@ public class PlayerCreater : MonoBehaviour
 
         PlayerData.pthis.Members.Add(CatchList[pObj]);        
         SysMain.pthis.Role.Add(pObj, iCount);
-        SysMain.pthis.CatchRole.Add(pObj, iCount);
+        ToolKit.CatchRole.Add(pObj, Rule.MemberThreat(iCount));
         SysMain.pthis.SaveGame();
 
         CatchList.Remove(pObj);
@@ -85,7 +85,7 @@ public class PlayerCreater : MonoBehaviour
             
             // 加入玩家佇列.
             SysMain.pthis.Role.Add(pPrePlayer, iCount);
-            SysMain.pthis.CatchRole.Add(pPrePlayer, iCount);
+            ToolKit.CatchRole.Add(pPrePlayer, Rule.MemberThreat(iCount));
             iCount++;
         }            
     }
@@ -103,7 +103,7 @@ public class PlayerCreater : MonoBehaviour
 
         // 加入玩家佇列.
         SysMain.pthis.Role.Add(pPrePlayer, iCount);
-        SysMain.pthis.CatchRole.Add(pPrePlayer, iCount);
+        ToolKit.CatchRole.Add(pPrePlayer, Rule.MemberThreat(iCount));
         iCount ++;
     }
     // ------------------------------------------------------------------

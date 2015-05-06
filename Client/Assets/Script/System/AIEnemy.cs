@@ -6,8 +6,6 @@ public class AIEnemy : MonoBehaviour
 {
 	// 怪物編號
 	public int iMonster = 1;
-	// 模式
-	public ENUM_ModeMonster emMode = ENUM_ModeMonster.Null;
 	// HP
 	public int iHP = 0;
 	// 移動速度
@@ -42,7 +40,6 @@ public class AIEnemy : MonoBehaviour
 			return;
 		}//if
 
-		emMode = (ENUM_ModeMonster)DBFData.Mode;
         iHP = DBFData.HP;
 		fMoveSpeed = DBFData.MoveSpeed;
 		iThreat = DBFData.Threat;
@@ -187,18 +184,15 @@ public class AIEnemy : MonoBehaviour
             return;
 
         // 如果可抓追著離自己最近的角色跑.
-        if(SysMain.pthis.CatchRole.Count <= 0)
+        if(ToolKit.CatchRole.Count <= 0)
         {
             ObjTarget = null;
             return;
         }
 
         // 沒有目標或目標已不存在可抓佇列就給新目標.
-        if (!ObjTarget || !SysMain.pthis.CatchRole.ContainsKey(ObjTarget))
-        {
-            KeyValuePair<GameObject, int> pTemp = LibCSNStandard.Tool.RandomPick(SysMain.pthis.CatchRole);
-            ObjTarget = pTemp.Key;
-        }       
+        if (!ObjTarget || !ToolKit.CatchRole.ContainsKey(ObjTarget))
+            ObjTarget = ToolKit.GetEnemyTarget();
     }
     // ------------------------------------------------------------------
     void Chace()
@@ -216,7 +210,7 @@ public class AIEnemy : MonoBehaviour
                     pTempObj = itor.Key;
             }
             if (pTempObj != null)
-                MoveTo(pTempObj.transform.position - transform.position, fMoveSpeed * 0.38f);
+                MoveTo(pTempObj.transform.position - transform.position, fMoveSpeed * 0.4f);
             return;
         }
 
@@ -237,15 +231,11 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void MoveTo(Vector3 vecDirection, float fSpeed)
     {        
-        // 把z歸零, 因為沒有要動z值.
-        vecDirection.z = 0;
-
         if (vecDirection.x < 0)
             FaceTo(-1);
         else
             FaceTo(1);
-        // 把物件位置朝目標向量(玩家方向)移動.
-        transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
+        ToolKit.MoveTo(gameObject, vecDirection, fSpeed);
     }
     // ------------------------------------------------------------------
     public void FaceTo(int iFace)

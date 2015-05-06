@@ -111,7 +111,7 @@ public class CameraCtrl : MonoBehaviour
         if (bTestMove)
             return true;
 
-        if (SysMain.pthis.CatchRole.Count <= 0)
+        if (ToolKit.CatchRole.Count <= 0)
             return false;
 
         return true;

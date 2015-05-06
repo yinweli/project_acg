@@ -39,7 +39,7 @@ public class BtnRun : MonoBehaviour
         if (!SysMain.pthis.bCanRun)
             return false;
 
-        if (SysMain.pthis.CatchRole.Count <= 0)
+        if (ToolKit.CatchRole.Count <= 0)
             return false;
 
         return true;
