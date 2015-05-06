@@ -9,6 +9,7 @@ public class GameDefine
 	public const int iInitBattery = 300; // 初始電池值
 	public const int iInitLightAmmo = 150; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 100; // 初始重型彈藥值
+	public const int iInitBomo = 3; // 初始炸彈數量
 
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
