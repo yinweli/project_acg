@@ -57,7 +57,7 @@ public class Btn_GetCurrency : MonoBehaviour {
         while (Vector2.Distance(pSprite.transform.position, VecPos) > 0.03f)
         {
             yield return new WaitForEndOfFrame();
-            MoveTo(VecPos - pSprite.transform.position, 0.8f * fFrame);
+            ToolKit.MoveTo(gameObject, VecPos - pSprite.transform.position, 0.82f * fFrame);
             fFrame += 0.05f;
         }
 
@@ -67,12 +67,5 @@ public class Btn_GetCurrency : MonoBehaviour {
 
         Destroy(gameObject);
     }
-    // ------------------------------------------------------------------
-    void MoveTo(Vector3 vecDirection, float fSpeed)
-    {
-        // 把z歸零, 因為沒有要動z值.
-        vecDirection.z = 0;
-        // 把物件位置朝目標向量(玩家方向)移動.
-        pSprite.transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
-    }
+    
 }
