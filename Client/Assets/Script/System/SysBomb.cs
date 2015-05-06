@@ -14,7 +14,8 @@ public class SysBomb : MonoBehaviour
     public void StartBomb()
     {
         // 播放動畫.
-        BombDamage();
+        if (pAni)
+            pAni.Play("Bomb");
     }
 
     public void BombDamage()
