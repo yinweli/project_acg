@@ -333,6 +333,8 @@ public class MapCreater : MonoBehaviour
 						Obj.GetComponent<Btn_GetResource>().iItemID = i;
 					else if (Obj && Obj.GetComponent<Btn_GetCurrency>())
 						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetBomb>())
+						Obj.GetComponent<Btn_GetBomb>().iItemID = i;
 				}
 				
 				if(Obj != null)
