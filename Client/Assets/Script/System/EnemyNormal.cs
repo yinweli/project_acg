@@ -114,9 +114,9 @@ public class EnemyNormal : MonoBehaviour {
             if (GetDistance(gameObject, ObjTarget) < 0.175f)
             {
                 pAI.bHasTarget = true;
-                GetDir();
                 if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
                     ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
+                GetDir();
                 return;
             }
             // 調整面向.
