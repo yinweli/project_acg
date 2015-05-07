@@ -119,6 +119,8 @@ public class EnemyNormal : MonoBehaviour {
                     ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
                 return;
             }
+            // 調整面向.
+            pAI.FaceTo(vecRunDir);
             // 追追追.
             ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.DBFData.MoveSpeed);
         }
@@ -132,7 +134,11 @@ public class EnemyNormal : MonoBehaviour {
                     pTempObj = itor.Key;
             }
             if (pTempObj != null)
+            {
+                // 調整面向.
+                pAI.FaceTo(vecRunDir);
                 ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.DBFData.MoveSpeed * 0.4f);
+            }
             return;
         }        
     }
@@ -140,7 +146,6 @@ public class EnemyNormal : MonoBehaviour {
     // 取得距離.
     float GetDistance(GameObject ObjMe, GameObject ObjYou)
     {
-        Debug.Log("Me: " + ObjMe + " You: " + ObjYou);
         return Vector2.Distance(ObjMe.transform.position, ObjYou.transform.position);
     }
     // ------------------------------------------------------------------
