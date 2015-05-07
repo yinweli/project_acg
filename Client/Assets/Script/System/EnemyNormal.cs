@@ -53,7 +53,8 @@ public class EnemyNormal : MonoBehaviour {
         // 播放逃跑動作.
         pAI.AniPlay("Escape");
 
-        GetDir();
+        if (vecRunDir == Vector3.zero)
+            GetDir();
         // 調整面向.
         pAI.FaceTo(vecRunDir);
 
