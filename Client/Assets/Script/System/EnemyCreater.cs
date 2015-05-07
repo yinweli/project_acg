@@ -96,9 +96,7 @@ public class EnemyCreater : MonoBehaviour
             {
                 pEnemy.GetComponent<AIEnemy>().SetLayer(iCount);
 
-                pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;
-                pEnemy.GetComponent<AIEnemy>().iThreat = itor.iThreat;
-                pEnemy.GetComponent<AIEnemy>().fMoveSpeed = itor.fMoveSpeed;                
+                pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;      
             }
             iCount++;
         }        

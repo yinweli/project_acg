@@ -8,10 +8,9 @@ public class AIEnemy : MonoBehaviour
 	public int iMonster = 1;
 	// HP
 	public int iHP = 0;
-	// 移動速度
-	public float fMoveSpeed = 0.0f;
-	// 威脅
-	public int iThreat = 0;
+    // 怪物資料.
+    public DBFMonster DBFData;
+
     // 目標
     public GameObject ObjTarget = null;
     // 是否已抓了人.
@@ -41,9 +40,6 @@ public class AIEnemy : MonoBehaviour
 		}//if
 
         iHP = DBFData.HP;
-		fMoveSpeed = DBFData.MoveSpeed;
-		iThreat = DBFData.Threat;
-
         PosStart = transform.position;
 	}
     // ------------------------------------------------------------------
@@ -79,7 +75,6 @@ public class AIEnemy : MonoBehaviour
             // 如果有抓目標就丟下目標.
             if (bHasTarget)
             {
-                iThreat = 0;
                 bHasTarget = false;
                 if (ObjTarget.GetComponent<AIPlayer>())
                     ObjTarget.GetComponent<AIPlayer>().BeFree();                
@@ -89,9 +84,9 @@ public class AIEnemy : MonoBehaviour
                 pAni.Play("Escape");
             // 取向量.
             if (vecRunDir == Vector3.zero)
-                vecRunDir = PosStart - transform.position;                
+                vecRunDir = PosStart - transform.position;
 
-            MoveTo(vecRunDir, fMoveSpeed * 4);
+            MoveTo(vecRunDir, DBFData.MoveSpeed * 4);
             if (EnemyCreater.pthis.CheckPos(gameObject))
                 Destroy(gameObject);
             return;
@@ -111,7 +106,7 @@ public class AIEnemy : MonoBehaviour
                     ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
             }
 
-            MoveTo(vecRunDir, fMoveSpeed * 0.5f);
+            MoveTo(vecRunDir, DBFData.MoveSpeed * 0.5f);
             
             if (EnemyCreater.pthis.CheckPos(gameObject))
             {
@@ -134,7 +129,7 @@ public class AIEnemy : MonoBehaviour
         if (iHP > 0 && other.gameObject.tag == "Light")
         {
             if (!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
-                SysMain.pthis.AtkEnemy.Add(gameObject, iThreat);
+                SysMain.pthis.AtkEnemy.Add(gameObject, GetTheat());
         }
     }
     // ------------------------------------------------------------------
@@ -210,7 +205,7 @@ public class AIEnemy : MonoBehaviour
                     pTempObj = itor.Key;
             }
             if (pTempObj != null)
-                MoveTo(pTempObj.transform.position - transform.position, fMoveSpeed * 0.4f);
+                MoveTo(pTempObj.transform.position - transform.position, DBFData.MoveSpeed * 0.4f);
             return;
         }
 
@@ -218,7 +213,6 @@ public class AIEnemy : MonoBehaviour
         if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.175f)
         {
             bHasTarget = true;
-            iThreat += 5;
             if (ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
 
@@ -226,7 +220,15 @@ public class AIEnemy : MonoBehaviour
         }
 
         // 取向量.
-        MoveTo(ObjTarget.transform.position - transform.position, fMoveSpeed);
+        MoveTo(ObjTarget.transform.position - transform.position, DBFData.MoveSpeed);
+    }
+    // ------------------------------------------------------------------
+    public int GetTheat()
+    {
+        if (bHasTarget)
+            return DBFData.Threat + 5;
+        else
+            return DBFData.Threat;
     }
     // ------------------------------------------------------------------
     void MoveTo(Vector3 vecDirection, float fSpeed)

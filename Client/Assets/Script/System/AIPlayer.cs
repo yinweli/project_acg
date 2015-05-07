@@ -117,7 +117,7 @@ public class AIPlayer : MonoBehaviour
 			AIEnemy pObjAi = itor.Key.GetComponent<AIEnemy>();
 
 			// 比較威脅值.
-			if (pTargetAI.iThreat < pObjAi.iThreat)
+            if (pTargetAI.GetTheat() < pObjAi.GetTheat())
 			{
 				ObjTarget = itor.Key;
 				return;
