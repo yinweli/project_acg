@@ -18,7 +18,7 @@ public class Btn_GetCurrency : MonoBehaviour {
             NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
             // 變更為不受光.
             pSprite.shader = ClickShader;
-            pSprite.depth = 10000;
+            pSprite.depth = 5998;
             // 取得數量.
             pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
             GetComponent<Animator>().Play("GetItem");
