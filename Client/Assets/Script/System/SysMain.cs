@@ -14,8 +14,6 @@ public class SysMain : MonoBehaviour
 
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
-    // 可抓人物佇列.
-    public Dictionary<GameObject, int> CatchRole = new Dictionary<GameObject, int>();
     // 死亡人物佇列.
     public List<int> DeadRole = new List<int>();
     // 敵人佇列.
@@ -306,11 +304,9 @@ public class SysMain : MonoBehaviour
         // 刪除人物.
         foreach (KeyValuePair<GameObject, int> itor in Role)
             Destroy(itor.Key);
-        foreach (KeyValuePair<GameObject, int> itor in CatchRole)
-            Destroy(itor.Key);
         // 清空人物佇列.
         Role.Clear();
-        CatchRole.Clear();
+        ToolKit.ClearCatchRole();
         DeadRole.Clear();
         // 刪除待救人物.
         PlayerCreater.pthis.ClearList();
