@@ -10,12 +10,12 @@ public class EnemyNormal : MonoBehaviour {
     public GameObject ObjTarget = null;
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
-
+    // ------------------------------------------------------------------
 	void Start() 
     {
         pAI = GetComponent<AIEnemy>();
 	}
-	
+    // ------------------------------------------------------------------
 	// Update is called once per frame
 	void Update() 
     {
@@ -92,12 +92,12 @@ public class EnemyNormal : MonoBehaviour {
 
         // 沒有目標或目標已不存在可抓佇列就給新目標.
         if (!ObjTarget || !ToolKit.CatchRole.ContainsKey(ObjTarget))
-        {
             ObjTarget = ToolKit.GetEnemyTarget();
-            return true;
-        }
 
-        return false;
+        if (ObjTarget == null)
+            return false;
+        else
+            return true;
     }
     // ------------------------------------------------------------------
     // 追人.
@@ -107,8 +107,23 @@ public class EnemyNormal : MonoBehaviour {
         if (SysMain.pthis.Role.Count == 0 || pAI.bHasTarget)
             return;
 
+        // 有目標追目標.
+        if (FindTarget())
+        {
+            // 檢查距離是否可抓抓.
+            if (GetDistance(gameObject, ObjTarget) < 0.175f)
+            {
+                pAI.bHasTarget = true;
+                GetDir();
+                if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                    ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
+                return;
+            }
+            // 追追追.
+            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.DBFData.MoveSpeed);
+        }
         // 沒有目標可抓就慢速追個角色.
-        if (!FindTarget() && SysMain.pthis.Role.Count > 0)
+        else if (SysMain.pthis.Role.Count > 0)
         {
             GameObject pTempObj = null;
             foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Role)
@@ -119,24 +134,13 @@ public class EnemyNormal : MonoBehaviour {
             if (pTempObj != null)
                 ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.DBFData.MoveSpeed * 0.4f);
             return;
-        }
-
-        // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 0.175f)
-        {
-            pAI.bHasTarget = true;
-            GetDir();
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
-            return;
-        }
-        // 追追追.
-        ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.DBFData.MoveSpeed);
+        }        
     }
     // ------------------------------------------------------------------
     // 取得距離.
     float GetDistance(GameObject ObjMe, GameObject ObjYou)
     {
+        Debug.Log("Me: " + ObjMe + " You: " + ObjYou);
         return Vector2.Distance(ObjMe.transform.position, ObjYou.transform.position);
     }
     // ------------------------------------------------------------------
