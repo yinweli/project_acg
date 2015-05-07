@@ -11,8 +11,6 @@ public class AIEnemy : MonoBehaviour
     // 怪物資料.
     public DBFMonster DBFData;
 
-    // 目標
-    public GameObject ObjTarget = null;
     // 是否已抓了人.
     public bool bHasTarget = false;
 
@@ -22,16 +20,16 @@ public class AIEnemy : MonoBehaviour
     public AudioClip ClipDead;
 
     // 記住起點.
-    Vector3 PosStart = new Vector3();
+    public Vector3 PosStart = new Vector3();
 
-    Vector3 vecRunDir = Vector3.zero;
+    public Vector3 vecRunDir = Vector3.zero;
     
 	// Use this for initialization
 	void Start () 
     {
         SysMain.pthis.Enemy.Add(gameObject);
 
-		DBFMonster DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
+		DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
 
 		if(DBFData == null)
 		{
@@ -41,77 +39,14 @@ public class AIEnemy : MonoBehaviour
 
         iHP = DBFData.HP;
         PosStart = transform.position;
+
+        gameObject.AddComponent<EnemyNormal>();
 	}
-    // ------------------------------------------------------------------
-    public void SetLayer(int iLayer)
-    {
-        ToolKit.SetLayer(iLayer, GetComponentsInChildren<UI2DSprite>());
-    }
     // ------------------------------------------------------------------
     void OnDestroy()
     {
         if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
             SysMain.pthis.AtkEnemy.Remove(gameObject);
-    }
-    // ------------------------------------------------------------------
-    void Update()
-    {
-        if (!SysMain.pthis.bIsGaming)
-            return;
-
-        // 沒血逃跑.
-        if (iHP <= 0)
-        {
-            // 如果有抓目標就丟下目標.
-            if (bHasTarget)
-            {
-                bHasTarget = false;
-                if (ObjTarget.GetComponent<AIPlayer>())
-                    ObjTarget.GetComponent<AIPlayer>().BeFree();                
-            }
-            // 播放逃跑動作.
-            if (pAni)
-                pAni.Play("Escape");
-            // 取向量.
-            if (vecRunDir == Vector3.zero)
-                vecRunDir = PosStart - transform.position;
-
-            MoveTo(vecRunDir, DBFData.MoveSpeed * 4);
-            if (EnemyCreater.pthis.CheckPos(gameObject))
-                Destroy(gameObject);
-            return;
-        }
-
-        // 已有抓人逃跑模式.
-        if (bHasTarget)
-        {
-            // 播放逃跑動作.
-            if (pAni)
-                pAni.Play("Catch");
-            // 取向量.
-            if (vecRunDir == Vector3.zero)
-            {
-                vecRunDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
-				if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
-                    ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
-            }
-
-            MoveTo(vecRunDir, DBFData.MoveSpeed * 0.5f);
-            
-            if (EnemyCreater.pthis.CheckPos(gameObject))
-            {
-                if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                    ObjTarget.GetComponent<AIPlayer>().BeKill();
-                Destroy(gameObject);
-            }
-            return;
-        }
-
-        // 確認目標.
-        FindTarget();        
-
-        // 如果有目標且沒抓人時，追蹤目標
-        Chace();
     }
     // ------------------------------------------------------------------
     void OnTriggerStay2D(Collider2D other)
@@ -162,57 +97,6 @@ public class AIEnemy : MonoBehaviour
             NGUITools.PlaySound(ClipHurt, 0.8f);
     }
     // ------------------------------------------------------------------
-    void FindTarget()
-    {
-        // 如果已經抓了人就不用再找目標了.
-        if (bHasTarget)
-            return;
-
-        // 如果可抓追著離自己最近的角色跑.
-        if(ToolKit.CatchRole.Count <= 0)
-        {
-            ObjTarget = null;
-            return;
-        }
-
-        // 沒有目標或目標已不存在可抓佇列就給新目標.
-        if (!ObjTarget || !ToolKit.CatchRole.ContainsKey(ObjTarget))
-            ObjTarget = ToolKit.GetEnemyTarget();
-    }
-    // ------------------------------------------------------------------
-    void Chace()
-    {
-        if(SysMain.pthis.Role.Count == 0)
-            return;
-
-        // 沒有目標就給他慢速追個角色.
-        if (!ObjTarget)
-        {
-            GameObject pTempObj = null;
-            foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Role)
-            {
-                if(!pTempObj || Vector2.Distance(transform.position, itor.Key.transform.position) < Vector2.Distance(transform.position, pTempObj.transform.position))
-                    pTempObj = itor.Key;
-            }
-            if (pTempObj != null)
-                MoveTo(pTempObj.transform.position - transform.position, DBFData.MoveSpeed * 0.4f);
-            return;
-        }
-
-        // 檢查距離是否可抓抓.
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.175f)
-        {
-            bHasTarget = true;
-            if (ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
-
-            return;
-        }
-
-        // 取向量.
-        MoveTo(ObjTarget.transform.position - transform.position, DBFData.MoveSpeed);
-    }
-    // ------------------------------------------------------------------
     public int GetTheat()
     {
         if (bHasTarget)
@@ -221,17 +105,17 @@ public class AIEnemy : MonoBehaviour
             return DBFData.Threat;
     }
     // ------------------------------------------------------------------
-    void MoveTo(Vector3 vecDirection, float fSpeed)
-    {        
-        if (vecDirection.x < 0)
-            FaceTo(-1);
+    public void FaceTo(Vector3 vecDir)
+    {
+        if (vecDir.x < 0)
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         else
-            FaceTo(1);
-        ToolKit.MoveTo(gameObject, vecDirection, fSpeed);
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);        
     }
     // ------------------------------------------------------------------
-    public void FaceTo(int iFace)
+    public void AniPlay(string Name)
     {
-        transform.localScale = new Vector3(iFace, transform.localScale.y, transform.localScale.z);
+        if (pAni)
+            pAni.Play(Name);
     }
 }

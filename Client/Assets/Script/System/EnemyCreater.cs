@@ -94,8 +94,7 @@ public class EnemyCreater : MonoBehaviour
             
             if (pEnemy && pEnemy.GetComponent<AIEnemy>())
             {
-                pEnemy.GetComponent<AIEnemy>().SetLayer(iCount);
-
+                ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<UI2DSprite>());
                 pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;      
             }
             iCount++;
@@ -135,7 +134,7 @@ public class EnemyCreater : MonoBehaviour
                             CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
-                pObj.GetComponent<AIEnemy>().SetLayer(iCount);
+                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
                 iCount++;
                 yield return new WaitForSeconds(0.05f);
             }
