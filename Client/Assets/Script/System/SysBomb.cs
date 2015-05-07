@@ -4,7 +4,6 @@ using System.Collections;
 public class SysBomb : MonoBehaviour 
 {
     static public SysBomb pthis = null;
-    public Animator pAni;
 
     void Awake()
     {
@@ -13,11 +12,7 @@ public class SysBomb : MonoBehaviour
 
     public void StartBomb()
     {
-        // 播放動畫.
-        if (pAni)
-            pAni.Play("Bomb");
-
-        BombDamage();
+        SysUI.pthis.CreateUI(gameObject, "Prefab/G_bomb");
     }
 
     public void BombDamage()

@@ -23,7 +23,7 @@ public class Btn_Bomb : MonoBehaviour
         SysBomb.pthis.StartBomb();
 
         // 計算冷卻.
-        fCoolDown = Time.time + 5;
+        fCoolDown = Time.time + 3;
 
         StartCoroutine(CoolDown());
     }
