@@ -45,17 +45,7 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     public void SetLayer(int iLayer)
     {
-        UI2DSprite[] Enemy = GetComponentsInChildren<UI2DSprite>();
-
-        // 依照角色切換layer.
-        for (int i = 0; i < Enemy.Length; i++)
-        {
-            Enemy[i].depth = Enemy[i].depth + (iLayer * 30);
-
-            Vector3 vecPos = Enemy[i].gameObject.transform.localPosition;
-            vecPos.z = -0.00002f * (float)Enemy[i].depth;
-            Enemy[i].gameObject.transform.localPosition = vecPos;
-        }
+        ToolKit.SetLayer(iLayer, GetComponentsInChildren<UI2DSprite>());
     }
     // ------------------------------------------------------------------
     void OnDestroy()

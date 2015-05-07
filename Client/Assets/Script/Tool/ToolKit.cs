@@ -37,6 +37,19 @@ public class ToolKit : MonoBehaviour
         CatchRole.Clear();
     }
     // ------------------------------------------------------------------
+    static public void SetLayer(int iLayer, UI2DSprite[] pSprite)
+    {
+        // 切換layer.
+        for (int i = 0; i < pSprite.Length; i++)
+        {
+            pSprite[i].depth = pSprite[i].depth + (iLayer * 30);
+
+            Vector3 vecPos = pSprite[i].gameObject.transform.localPosition;
+            vecPos.z = -0.00002f * (float)pSprite[i].depth;
+            pSprite[i].gameObject.transform.localPosition = vecPos;
+        }
+    }
+    // ------------------------------------------------------------------
     static public void MoveTo(GameObject pObj, Vector3 vecDirection, float fSpeed)
     {
         // 把z歸零, 因為沒有要動z值.

@@ -32,12 +32,6 @@ public class PlayerCreater : MonoBehaviour
         CatchList.Clear();
     }
     // ------------------------------------------------------------------
-    // 接關時建角色用.
-    void CreateAll()
-    {
-
-    }
-    // ------------------------------------------------------------------
     public void AddList(int iItemID, float fPosX, float fPosY, int iSex, int iLook)
     {
         // 增加玩家資料.
