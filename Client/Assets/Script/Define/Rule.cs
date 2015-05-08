@@ -420,9 +420,10 @@ public class Rule
 		return iFeature;
 	}
 	// 取得子彈傷害值
-	public static int BulletDamage(int iPos)
+	public static Tuple<int, bool> BulletDamage(int iPos)
 	{
-		int iResult = 0;
+		int iDamage = 0;
+		bool bCriticalStrike = false;
 
 		if(PlayerData.pthis.Members.Count > iPos)
 		{
@@ -432,15 +433,21 @@ public class Rule
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
 				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) > (DataMember.fCriticalStrike + DataEquip.CriticalStrike))
-					iResult = (DataMember.iAddDamage + DataEquip.Damage);
+				{
+					iDamage = (DataMember.iAddDamage + DataEquip.Damage);
+					bCriticalStrike = false;
+				}
 				else
-					iResult = (int)((DataMember.iAddDamage + DataEquip.Damage) * GameDefine.fCriticalStrik);
+				{
+					iDamage = (int)((DataMember.iAddDamage + DataEquip.Damage) * GameDefine.fCriticalStrik);
+					bCriticalStrike = true;
+				}//if
 
-				iResult += DataMember.iLiveStage * GameDefine.iDamageUpgrade;
+				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade;
 			}//if
 		}//if
 
-		return iResult;
+		return new Tuple<int, bool>(iDamage, bCriticalStrike);
 	}
 	// 取得裝備攻擊間隔時間
 	public static float EquipFireRate(int iPos)
