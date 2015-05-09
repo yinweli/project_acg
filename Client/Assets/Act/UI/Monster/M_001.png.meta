@@ -1,44 +1,6 @@
 fileFormatVersion: 2
 guid: 3944e0b17f3afb44dbdfde1667545a58
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: M_000_eye
-    21300002: M_000_brow1
-    21300004: M_000_eye2
-    21300006: M_001_b03
-    21300008: M_001_b02
-    21300010: M_000_eye1
-    21300012: M_000_brow2
-    21300014: M_000_brow3
-    21300016: ui_hp_bg
-    21300018: ui_hp_hp
-    21300020: M_001_b01
-    21300022: M_001_b05
-    21300024: M_001_b06
-    21300026: M_002_b05
-    21300028: M_001_b00
-    21300030: M_000_light
-    21300032: M_Adorn_A_000
-    21300034: M_002_b03
-    21300036: M_Adorn_B_000
-    21300038: M_002_b02
-    21300040: M_002_b01
-    21300042: M_002_b00
-    21300044: M_001_b07
-    21300046: M_001_b08
-    21300048: M_003_b00
-    21300050: M_003_b01
-    21300052: M_003_b02
-    21300054: M_003_b04
-    21300056: M_003_b05
-    21300058: M_003_b06
-    21300060: M_003_b07
-    21300062: M_003_b08
-    21300064: M_003_b09
-    21300066: M_003_b10
-    21300068: M_003_b11
-    21300070: M_003_b12
-    21300072: M_003_b13
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -447,6 +409,126 @@ TextureImporter:
         y: 371
         width: 42
         height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_004_b01
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 175
+        width: 77
+        height: 77
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_004_b02
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 182
+        width: 13
+        height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_004_b03
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 211
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_004_b04
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 235
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_004_b05
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 174
+        width: 45
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b01
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 217
+        width: 54
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b02
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 175
+        width: 100
+        height: 81
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b05
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 259
+        width: 22
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b04
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 259
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b03
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 173
+        width: 74
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b06
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 268
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_005_b07
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 270
+        width: 38
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
