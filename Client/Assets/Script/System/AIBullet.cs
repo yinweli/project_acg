@@ -28,7 +28,7 @@ public class AIBullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             if (other.gameObject.GetComponent<AIEnemy>())
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-iDamage);
+                other.gameObject.GetComponent<AIEnemy>().AddHP(-iDamage, bCriticalStrik);
             Destroy(gameObject);
         }
     }

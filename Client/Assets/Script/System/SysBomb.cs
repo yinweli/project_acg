@@ -21,7 +21,7 @@ public class SysBomb : MonoBehaviour
         foreach (GameObject ObjEnemy in SysMain.pthis.Enemy)
         {
             if (ObjEnemy && ObjEnemy.GetComponent<AIEnemy>())
-                ObjEnemy.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb);
+                ObjEnemy.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
         }
         SysMain.pthis.SaveGame();
     }

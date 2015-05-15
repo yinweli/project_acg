@@ -70,10 +70,10 @@ public class AIEnemy : MonoBehaviour
     void OnClick()
     {
         if (iHP > 0)
-            AddHP(-GameDefine.iDamageClick);
+            AddHP(-GameDefine.iDamageClick, false);
     }
     // ------------------------------------------------------------------
-    public void AddHP(int iValue)
+    public void AddHP(int iValue, bool IsCrit)
     {
         if (iHP <= 0 && iValue < 0)
             return;
@@ -83,6 +83,9 @@ public class AIEnemy : MonoBehaviour
 		// 播放受擊特效.
 		if(iValue < 0)
 			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
+
+        if (IsCrit)
+            UITool.pthis.CreateUI(gameObject, "Prefab/G_Crit");
 
         // 沒血逃跑.
         if (iHP <= 0)
