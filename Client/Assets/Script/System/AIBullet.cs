@@ -9,6 +9,8 @@ public class AIBullet : MonoBehaviour
     public int iDamage = 1;
     // 移動速度
     public float fSpeed = 1.0f;
+    // 狀態.
+    public ENUM_ModeFeature pType = ENUM_ModeFeature.Null;
     // ------------------------------------------------------------------
     void Update()
     {
@@ -29,6 +31,9 @@ public class AIBullet : MonoBehaviour
         {
             if (other.gameObject.GetComponent<AIEnemy>())
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-iDamage, bCriticalStrik);
+
+            if (pType == ENUM_ModeFeature.Frozen && !other.gameObject.GetComponent<Freeze>())
+                other.gameObject.AddComponent<Freeze>().FreezeNow();
             Destroy(gameObject);
         }
     }

@@ -58,7 +58,7 @@ public class EnemyNormal : MonoBehaviour {
         // 調整面向.
         pAI.FaceTo(vecRunDir);
 
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.DBFData.MoveSpeed * 4);
+        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 4);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -73,7 +73,7 @@ public class EnemyNormal : MonoBehaviour {
         // 調整面向.
         pAI.FaceTo(vecRunDir);
 
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.DBFData.MoveSpeed * 0.55f);
+        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 0.55f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
@@ -111,7 +111,7 @@ public class EnemyNormal : MonoBehaviour {
             // 調整面向.
             pAI.FaceTo(ObjTarget.transform.position - transform.position);
             // 追追追.
-            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.DBFData.MoveSpeed);
+            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.GetSpeed());
         }
         // 沒有目標可抓就慢速追個角色.
         else if (SysMain.pthis.Role.Count > 0)
@@ -126,7 +126,7 @@ public class EnemyNormal : MonoBehaviour {
             {
                 // 調整面向.
                 pAI.FaceTo(pTempObj.transform.position - transform.position);
-                ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.DBFData.MoveSpeed * 0.4f);
+                ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.GetSpeed() * 0.4f);
             }
             return;
         }        

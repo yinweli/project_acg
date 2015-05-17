@@ -37,6 +37,12 @@ public class ToolKit : MonoBehaviour
         CatchRole.Clear();
     }
     // ------------------------------------------------------------------
+    static public void SetShader(Shader pShader, UI2DSprite[] pSprite)
+    {
+        for (int i = 0; i < pSprite.Length; i++)
+            pSprite[i].shader = pShader;
+    }
+    // ------------------------------------------------------------------
     static public void SetLayer(int iLayer, UI2DSprite[] pSprite)
     {
         // 切換layer.

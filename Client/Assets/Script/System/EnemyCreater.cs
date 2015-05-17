@@ -18,6 +18,7 @@ using System.Collections.Generic;
 public class EnemyCreater : MonoBehaviour
 {
     public static EnemyCreater pthis = null;
+    public Shader pShader;
 
     public GameObject CameraCtrl;
     // 波數能量.
@@ -134,6 +135,7 @@ public class EnemyCreater : MonoBehaviour
                             CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
+                ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
                 ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
                 iCount++;
                 yield return new WaitForSeconds(0.05f);

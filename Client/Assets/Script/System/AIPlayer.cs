@@ -144,6 +144,9 @@ public class AIPlayer : MonoBehaviour
 		pObj.GetComponent<AIBullet>().Chace(ObjTarget);
 		pObj.GetComponent<AIBullet>().iDamage = Damage.Item1;
 		pObj.GetComponent<AIBullet>().bCriticalStrik = Damage.Item2;
+
+        if (Rule.IsFeature(ENUM_ModeFeature.Frozen, iPlayer))
+            pObj.GetComponent<AIBullet>().pType = ENUM_ModeFeature.Frozen;
 	}
 	// ------------------------------------------------------------------
 	// 被抓函式.

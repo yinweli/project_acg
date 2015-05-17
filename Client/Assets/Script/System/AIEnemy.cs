@@ -108,6 +108,14 @@ public class AIEnemy : MonoBehaviour
             return DBFData.Threat;
     }
     // ------------------------------------------------------------------
+    public float GetSpeed()
+    {
+        if (GetComponent<Freeze>())
+            return DBFData.MoveSpeed * 0.5f;
+        else
+            return DBFData.MoveSpeed;
+    }
+    // ------------------------------------------------------------------
     public void FaceTo(Vector3 vecDir)
     {
         if (vecDir.x < 0)
