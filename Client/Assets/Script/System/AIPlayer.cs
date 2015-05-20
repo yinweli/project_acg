@@ -20,6 +20,8 @@ public class AIPlayer : MonoBehaviour
 	public GameObject ObjTarget = null;
 	// 武器物件.
 	public GameObject pSWeapon = null;
+    // 盾盾.
+    public GameObject ObjShield = null;
 	// 是否被抓住.
 	public bool bBeCaught = false;
 	// 武器冷卻.
@@ -40,6 +42,10 @@ public class AIPlayer : MonoBehaviour
             ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
             ObjCatch.GetComponent<Btn_SaveRole>().iItemID = iItemID;
         }
+
+        // 有盾套盾.
+        if (PlayerData.pthis.Members[iPlayer].iShield > 0)
+            ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
 
         pWeapon = (ENUM_Weapon)pMember.iEquip;
         // 建立外觀.
@@ -161,6 +167,12 @@ public class AIPlayer : MonoBehaviour
 		gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
 		if (pAni)
 			pAni.Play("Break");
+
+        if (ObjShield && ObjShield.GetComponent<Shield>() && ObjShield.GetComponent<Shield>().iCount > 0)
+        {
+            ObjMonster.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageShield, false);
+            ObjShield.GetComponent<Shield>().CostShield();
+        }
 	}
 	// ------------------------------------------------------------------
 	// 自由函式.
