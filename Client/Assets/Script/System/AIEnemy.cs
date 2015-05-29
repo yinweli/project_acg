@@ -40,7 +40,10 @@ public class AIEnemy : MonoBehaviour
         iHP = DBFData.HP;
         PosStart = transform.position;
 
-        gameObject.AddComponent<EnemyNormal>();
+        if(DBFData.Mode == (int)ENUM_ModeMonster.ActiveDark)
+            gameObject.AddComponent<EnemyLightStop>();
+        else
+            gameObject.AddComponent<EnemyNormal>();
 	}
     // ------------------------------------------------------------------
     void OnDestroy()
