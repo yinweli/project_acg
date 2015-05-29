@@ -83,6 +83,7 @@ public enum ENUM_ModeMonster
 	Null = 0, 
 	Normal, // 正常
 	ActiveDark, // 黑暗啟動
+    Tied, // 綁人. 
 }
 
 // 射程列舉

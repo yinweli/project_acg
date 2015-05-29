@@ -45,7 +45,7 @@ public class AIPlayer : MonoBehaviour
 
         Debug.Log("PlayerID" + iPlayer);
         // 有盾套盾.
-        if (PlayerData.pthis.Members.Count < iPlayer && PlayerData.pthis.Members[iPlayer].iShield > 0)
+        if (iPlayer < PlayerData.pthis.Members.Count && PlayerData.pthis.Members[iPlayer].iShield > 0)
             ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
 
         pWeapon = (ENUM_Weapon)pMember.iEquip;
@@ -155,6 +155,20 @@ public class AIPlayer : MonoBehaviour
         if (Rule.IsFeature(ENUM_ModeFeature.Frozen, iPlayer))
             pObj.GetComponent<AIBullet>().pType = ENUM_ModeFeature.Frozen;
 	}
+    // ------------------------------------------------------------------
+    // 被抓函式.
+    public void BeTied()
+    {
+        bBeCaught = true;
+        // 從可抓佇列中移除.
+        ToolKit.CatchRole.Remove(gameObject);
+
+        if (pAni)
+            pAni.Play("Run");
+
+        ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/Item/G_Tied");
+        ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
+    }
 	// ------------------------------------------------------------------
 	// 被抓函式.
 	public void BeCaught(GameObject ObjMonster)

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Btn_SaveRole : MonoBehaviour 
+public class Btn_SaveTied : MonoBehaviour 
 {
-    public int iItemID = 0;
-
     public AIPlayer pPlayer;
     public Animator pAni;
     // ------------------------------------------------------------------
@@ -13,14 +11,17 @@ public class Btn_SaveRole : MonoBehaviour
         pPlayer = transform.parent.gameObject.GetComponent<AIPlayer>();
     }
     // ------------------------------------------------------------------
+    void Update()
+    {
+        if (EnemyCreater.pthis.CheckPos(pPlayer.gameObject))
+            pPlayer.BeKill();
+    }
+    // ------------------------------------------------------------------
     void OnPress(bool bIsPress)
     {
         if (bIsPress)
         {
-            NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
-            PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
-            if (GameData.pthis.PickupList[iItemID] != null)
-                GameData.pthis.PickupList[iItemID].bPickup = true;
+            NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);            
             Destroy(gameObject);
         }
     }
@@ -36,5 +37,4 @@ public class Btn_SaveRole : MonoBehaviour
         if (other.gameObject.tag == "Look")
             pAni.Play("Wait");
     }
-	
 }

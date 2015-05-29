@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyNormal : MonoBehaviour 
+public class EnemyTied : MonoBehaviour 
 {
     AIEnemy pAI = null;
 
@@ -11,13 +11,13 @@ public class EnemyNormal : MonoBehaviour
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
     // ------------------------------------------------------------------
-	void Start() 
+    void Start()
     {
         pAI = GetComponent<AIEnemy>();
-	}
+    }
     // ------------------------------------------------------------------
-	// Update is called once per frame
-	void Update() 
+    // Update is called once per frame
+    void Update()
     {
         if (!SysMain.pthis.bIsGaming)
             return;
@@ -38,7 +38,7 @@ public class EnemyNormal : MonoBehaviour
 
         // 如果有目標且沒抓人時，追蹤目標
         Chace();
-	}
+    }
     // ------------------------------------------------------------------
     // 逃跑.
     void Run()
@@ -129,7 +129,7 @@ public class EnemyNormal : MonoBehaviour
                 ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.GetSpeed() * 0.4f);
             }
             return;
-        }        
+        }
     }
     // ------------------------------------------------------------------
     // 抓人.
@@ -138,11 +138,10 @@ public class EnemyNormal : MonoBehaviour
         // 檢查距離是否可抓抓.
         if (GetDistance(gameObject, ObjTarget) < 0.175f)
         {
-            pAI.bHasTarget = true;
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
-            GetDir();
+                ObjTarget.GetComponent<AIPlayer>().BeTied();
         }
+        Destroy(gameObject);
     }
     // ------------------------------------------------------------------
     // 取得距離.
