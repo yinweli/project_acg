@@ -42,7 +42,7 @@ public class AIEnemy : MonoBehaviour
 
         Debug.Log((ENUM_ModeMonster)DBFData.Mode);
 
-        if(DBFData.Mode == (int)ENUM_ModeMonster.ActiveDark)
+        if (ENUM_ModeMonster.ActiveDark == (ENUM_ModeMonster)DBFData.Mode)
             gameObject.AddComponent<EnemyLightStop>();
         else
             gameObject.AddComponent<EnemyNormal>();
