@@ -3,12 +3,15 @@ using System.Collections;
 
 public class Shield : MonoBehaviour 
 {
+    public AIPlayer pAI = null;
     public int iCount = 0;
 
     void Start()
     {
-        if (transform.parent.gameObject.GetComponent<AIPlayer>())
-            iCount = PlayerData.pthis.Members[GetComponent<AIPlayer>().iPlayer].iShield;
+        pAI = transform.parent.gameObject.GetComponent<AIPlayer>();
+
+        if (pAI)
+            iCount = PlayerData.pthis.Members[pAI.iPlayer].iShield;
         else
             Destroy(gameObject);
     }

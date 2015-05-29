@@ -40,6 +40,8 @@ public class AIEnemy : MonoBehaviour
         iHP = DBFData.HP;
         PosStart = transform.position;
 
+        Debug.Log((ENUM_ModeMonster)DBFData.Mode);
+
         if(DBFData.Mode == (int)ENUM_ModeMonster.ActiveDark)
             gameObject.AddComponent<EnemyLightStop>();
         else
