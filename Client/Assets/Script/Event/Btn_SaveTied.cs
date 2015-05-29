@@ -13,7 +13,7 @@ public class Btn_SaveTied : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        if (EnemyCreater.pthis.CheckPos(pPlayer.gameObject))
+		if (pPlayer != null && EnemyCreater.pthis.CheckPos(pPlayer.gameObject))
             pPlayer.BeKill();
     }
     // ------------------------------------------------------------------

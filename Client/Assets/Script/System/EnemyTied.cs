@@ -79,6 +79,7 @@ public class EnemyTied : MonoBehaviour
         {
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeKill();
+
             Destroy(gameObject);
         }
     }
@@ -140,8 +141,9 @@ public class EnemyTied : MonoBehaviour
         {
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeTied();
+
+			Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
     // ------------------------------------------------------------------
     // 取得距離.
