@@ -29,6 +29,15 @@ public class EnemyLightStop : MonoBehaviour
             return;
         }
 
+        // 如果有目標且沒抓人時，追蹤目標
+        if (!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+        {
+            pAI.pAni.speed = 0;
+            return;
+        }
+        else
+            pAI.pAni.speed = 1;
+
         // 已有抓人逃跑模式.
         if (pAI.bHasTarget)
         {
@@ -36,14 +45,7 @@ public class EnemyLightStop : MonoBehaviour
             return;
         }
 
-        // 如果有目標且沒抓人時，追蹤目標
-        if(!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
-        {
-            Chace();
-            pAI.pAni.speed = 0;
-        }
-        else
-            pAI.pAni.speed = 1;
+        Chace(); 
     }
     // ------------------------------------------------------------------
     // 逃跑.
