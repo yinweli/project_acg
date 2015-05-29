@@ -41,7 +41,6 @@ public class G_Feature : MonoBehaviour
             {
                 // 升級.
                 PlayerData.pthis.Members[i].iLiveStage++;
-                Debug.Log("Redom Feature & Equip : " + i);
                 iFeature[i] = Rule.GainFeature(i);
                 iEquip[i] = Rule.GainEquip(i);
             }
@@ -66,7 +65,6 @@ public class G_Feature : MonoBehaviour
             GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], PlayerData.pthis.Members[i].iSex, PlayerData.pthis.Members[i].iLook);
             ObjHand[i] = ObjHuman.GetComponent<G_PLook>().SetShader(pShader, (ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
 
-            Debug.Log(ObjGroup[i].name + " Feature: " + iFeature[i] + " Equip: " + (ENUM_Weapon)iEquip[i]);
             // 顯示升級.
             ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(PlayerData.pthis.Members[i].iLiveStage);
             yield return new WaitForSeconds(0.5f);

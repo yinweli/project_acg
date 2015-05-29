@@ -43,7 +43,6 @@ public class AIPlayer : MonoBehaviour
             ObjCatch.GetComponent<Btn_SaveRole>().iItemID = iItemID;
         }
 
-        Debug.Log("PlayerID" + iPlayer);
         // 有盾套盾.
         if (iPlayer < PlayerData.pthis.Members.Count && PlayerData.pthis.Members[iPlayer].iShield > 0)
             ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
