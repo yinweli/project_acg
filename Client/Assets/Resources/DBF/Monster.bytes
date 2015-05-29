@@ -13,3 +13,10 @@
 {"GUID":"23", "Mode":"1", "Threat":"2", "StageID":"11", "Enegry":"4", "HP":"100", "MoveSpeed":"0.6"}
 {"GUID":"24", "Mode":"1", "Threat":"2", "StageID":"15", "Enegry":"5", "HP":"120", "MoveSpeed":"0.6"}
 {"GUID":"25", "Mode":"1", "Threat":"2", "StageID":"19", "Enegry":"6", "HP":"140", "MoveSpeed":"0.6"}
+{"GUID":"31", "Mode":"2", "Threat":"1", "StageID":"22", "Enegry":"4", "HP":"100", "MoveSpeed":"0.4"}
+{"GUID":"32", "Mode":"2", "Threat":"1", "StageID":"25", "Enegry":"6", "HP":"160", "MoveSpeed":"0.4"}
+{"GUID":"41", "Mode":"1", "Threat":"4", "StageID":"99", "Enegry":"6", "HP":"150", "MoveSpeed":"0.3"}
+{"GUID":"42", "Mode":"1", "Threat":"4", "StageID":"99", "Enegry":"6", "HP":"150", "MoveSpeed":"0.3"}
+{"GUID":"43", "Mode":"1", "Threat":"4", "StageID":"99", "Enegry":"6", "HP":"150", "MoveSpeed":"0.3"}
+{"GUID":"44", "Mode":"1", "Threat":"4", "StageID":"99", "Enegry":"6", "HP":"150", "MoveSpeed":"0.3"}
+{"GUID":"45", "Mode":"1", "Threat":"4", "StageID":"99", "Enegry":"6", "HP":"150", "MoveSpeed":"0.3"}

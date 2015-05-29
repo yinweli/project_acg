@@ -7,7 +7,7 @@ public class GameDefine
     public const int iSaveSec = 2; // 存檔秒數.
 
 	public const int iInitBattery = 300; // 初始電池值
-	public const int iInitLightAmmo = 150; // 初始輕型彈藥值
+	public const int iInitLightAmmo = 120; // 初始輕型彈藥值
 	public const int iInitHeavyAmmo = 100; // 初始重型彈藥值
 	public const int iInitBomo = 3; // 初始炸彈數量
 
@@ -82,8 +82,8 @@ public class GameDefine
 	public const int iEquipExtra = 20; // 額外裝備機率值
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
-	public const float fUpgradeEnegry = 0.8f; // 怪物能量升級值
-	public const float fUpgradePickup = 0.8f; // 拾取物品價值升級值
+	public const float fUpgradeEnegry = 1.65f; // 怪物能量升級值
+	public const float fUpgradePickup = 1.25f; // 拾取物品價值升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔

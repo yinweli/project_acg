@@ -8,7 +8,7 @@ public class PickupStat : MonoBehaviour
 {
 	static public PickupStat pthis = null;
 
-	public bool bReport = false;
+	public bool bReport = true;
 	public List<int> Init = new List<int>(); // 初始資源
 	public List<int> Gain = new List<int>(); // 獲得資源
 	public List<int> Used = new List<int>(); // 使用資源
@@ -41,6 +41,7 @@ public class PickupStat : MonoBehaviour
 			case ENUM_Pickup.Battery: iValue = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery]; break;
 			case ENUM_Pickup.LightAmmo: iValue = PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo]; break;
 			case ENUM_Pickup.HeavyAmmo: iValue = PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo]; break;
+			case ENUM_Pickup.Bomb: iValue = PlayerData.pthis.iBomb; break;
 			default: break;
 			}//switch
 
@@ -98,6 +99,9 @@ public class PickupStat : MonoBehaviour
 			case ENUM_Pickup.HeavyAmmo:
 				iResultGain += (Gain[Itor] - Used[Itor]) * GameDefine.iPriceHeavyAmmo;
 				iResultTotal += (Total[Itor] - Used[Itor]) * GameDefine.iPriceHeavyAmmo;
+				break;
+
+			case ENUM_Pickup.Bomb:
 				break;
 
 			default:

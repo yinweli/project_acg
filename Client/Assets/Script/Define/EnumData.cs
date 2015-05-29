@@ -82,7 +82,6 @@ public enum ENUM_ModeMonster
 {
 	Null = 0, 
 	Normal, // 正常
-	ActiveLight, // 光照啟動
 	ActiveDark, // 黑暗啟動
 }
 

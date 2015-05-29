@@ -9,30 +9,48 @@
 {"GUID":"1009", "enUS":"Assault Rifle", "zhTW":"\u7a81\u64ca\u6b65\u69cd"}
 {"GUID":"1010", "enUS":"Light machine gun", "zhTW":"\u8f15\u6a5f\u69cd"}
 {"GUID":"2001", "enUS":"Chef", "zhTW":"\u5eda\u5e2b"}
-{"GUID":"2002", "enUS":"Doctor", "zhTW":"\u91ab\u751f"}
+{"GUID":"2002", "enUS":"Doctors", "zhTW":"\u91ab\u751f"}
 {"GUID":"2003", "enUS":"Obesity", "zhTW":"\u80a5\u80d6"}
 {"GUID":"2004", "enUS":"Disability", "zhTW":"\u6b98\u75be"}
 {"GUID":"2005", "enUS":"Health", "zhTW":"\u5065\u5eb7"}
 {"GUID":"2006", "enUS":"Strong", "zhTW":"\u5f37\u58ef"}
 {"GUID":"2007", "enUS":"Flu", "zhTW":"\u611f\u5192"}
 {"GUID":"2008", "enUS":"Injured", "zhTW":"\u53d7\u50b7"}
-{"GUID":"2009", "enUS":"Clumsy\nsoldier", "zhTW":"\u7b28\u62d9\u7684\u6230\u58eb"}
-{"GUID":"2010", "enUS":"Careless\nsoldier", "zhTW":"\u7c97\u5fc3\u7684\u6230\u58eb"}
-{"GUID":"2011", "enUS":"Elite\nsoldiers", "zhTW":"\u7cbe\u82f1\u7684\u6230\u58eb"}
-{"GUID":"2012", "enUS":"Talented\nfighters", "zhTW":"\u5929\u624d\u7684\u6230\u58eb"}
-{"GUID":"2013", "enUS":"Berserker", "zhTW":"\u72c2\u6230\u58eb"}
-{"GUID":"3001", "enUS":"[ffed00]sta limit[-][546ef2]+4[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u96504\u9ede"}
-{"GUID":"3002", "enUS":"[ffed00]sta limit[-][546ef2]+8[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u4e0a\u96508\u9ede"}
-{"GUID":"3003", "enUS":"[ffed00]sta limit[-][e92121]-4[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u96504\u9ede"}
-{"GUID":"3004", "enUS":"[ffed00]sta limit[-][e92121]-8[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u4e0a\u96508\u9ede"}
-{"GUID":"3005", "enUS":"[ffed00]sta regain[-][546ef2]+2[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa92\u9ede"}
-{"GUID":"3006", "enUS":"[ffed00]sta regain[-][546ef2]+3[-]", "zhTW":"\u589e\u52a0\u8010\u529b\u56de\u5fa93\u9ede"}
-{"GUID":"3007", "enUS":"[ffed00]sta regain[-][e92121]-2[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa92\u9ede"}
-{"GUID":"3008", "enUS":"[ffed00]sta regain[-][e92121]-3[-]", "zhTW":"\u6e1b\u5c11\u8010\u529b\u56de\u5fa93\u9ede"}
-{"GUID":"3009", "enUS":"", "zhTW":""}
-{"GUID":"3010", "enUS":"", "zhTW":""}
-{"GUID":"3011", "enUS":"[ffed00]critical[-][e92121]-20%[-]", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738720%"}
-{"GUID":"3012", "enUS":"[ffed00]critical[-][e92121]-10%[-]", "zhTW":"\u6e1b\u5c11\u81f4\u547d\u6a5f\u738710%"}
-{"GUID":"3013", "enUS":"[ffed00]critical[-][546ef2]+10%[-]", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738710%"}
-{"GUID":"3014", "enUS":"[ffed00]critical[-][546ef2]+20%[-]", "zhTW":"\u589e\u52a0\u81f4\u547d\u6a5f\u738720%"}
-{"GUID":"3015", "enUS":"[ffed00]damage[-][546ef2]+1[-]", "zhTW":"\u589e\u52a01\u9ede\u50b7\u5bb3"}
+{"GUID":"2009", "enUS":"Clumsy", "zhTW":"\u7b28\u62d9"}
+{"GUID":"2010", "enUS":"Careless", "zhTW":"\u7c97\u5fc3"}
+{"GUID":"2011", "enUS":"Elite", "zhTW":"\u7cbe\u82f1"}
+{"GUID":"2012", "enUS":"Genius", "zhTW":"\u5929\u624d"}
+{"GUID":"2013", "enUS":"Modified", "zhTW":"\u6539\u88dd"}
+{"GUID":"2014", "enUS":"Corrupted", "zhTW":"\u640d\u58de"}
+{"GUID":"2015", "enUS":"Signaller", "zhTW":"\u901a\u8a0a\u5175"}
+{"GUID":"2016", "enUS":"General", "zhTW":"\u5c07\u8ecd"}
+{"GUID":"2017", "enUS":"Shield", "zhTW":"\u8b77\u76fe"}
+{"GUID":"2018", "enUS":"Dual shield", "zhTW":"\u96d9\u91cd\u8b77\u76fe"}
+{"GUID":"2019", "enUS":"Nightmare", "zhTW":"\u5669\u5922"}
+{"GUID":"2020", "enUS":"Curse", "zhTW":"\u8a5b\u5492"}
+{"GUID":"2021", "enUS":"Frozen", "zhTW":"\u51b0\u51cd"}
+{"GUID":"2022", "enUS":"Low profile", "zhTW":"\u4f4e\u8abf"}
+{"GUID":"2023", "enUS":"Prominently", "zhTW":"\u9192\u76ee"}
+{"GUID":"3001", "enUS":"[ffed00]sta limit[-][546ef2]+4[-]", "zhTW":""}
+{"GUID":"3002", "enUS":"[ffed00]sta limit[-][546ef2]+8[-]", "zhTW":""}
+{"GUID":"3003", "enUS":"[ffed00]sta limit[-][e92121]-4[-]", "zhTW":""}
+{"GUID":"3004", "enUS":"[ffed00]sta limit[-][e92121]-8[-]", "zhTW":""}
+{"GUID":"3005", "enUS":"[ffed00]sta regain[-][546ef2]+2[-]", "zhTW":""}
+{"GUID":"3006", "enUS":"[ffed00]sta regain[-][546ef2]+3[-]", "zhTW":""}
+{"GUID":"3007", "enUS":"[ffed00]sta regain[-][e92121]-2[-]", "zhTW":""}
+{"GUID":"3008", "enUS":"[ffed00]sta regain[-][e92121]-3[-]", "zhTW":""}
+{"GUID":"3009", "enUS":"[ffed00]critical[-][e92121]-20%[-]", "zhTW":""}
+{"GUID":"3010", "enUS":"[ffed00]critical[-][e92121]-10%[-]", "zhTW":""}
+{"GUID":"3011", "enUS":"[ffed00]critical[-][546ef2]+10%[-]", "zhTW":""}
+{"GUID":"3012", "enUS":"[ffed00]critical[-][546ef2]+20%[-]", "zhTW":""}
+{"GUID":"3013", "enUS":"[ffed00]damage[-][546ef2]+10[-]", "zhTW":""}
+{"GUID":"3014", "enUS":"[ffed00]damage[-][e92121]-10[-]", "zhTW":""}
+{"GUID":"3015", "enUS":"[ffed00]bomb[-][546ef2]+1[-]", "zhTW":""}
+{"GUID":"3016", "enUS":"[ffed00]bomb[-][546ef2]+2[-]", "zhTW":""}
+{"GUID":"3017", "enUS":"[ffed00]shield[-][546ef2]+1[-]", "zhTW":""}
+{"GUID":"3018", "enUS":"[ffed00]shield[-][546ef2]+2[-]", "zhTW":""}
+{"GUID":"3019", "enUS":"[e92121]more monster[-]", "zhTW":""}
+{"GUID":"3020", "enUS":"[e92121]much more monster[-]", "zhTW":""}
+{"GUID":"3021", "enUS":"[ffed00]frozen bullet[-]", "zhTW":""}
+{"GUID":"3022", "enUS":"[ffed00]catch chance[-][546ef2]-10[-]", "zhTW":""}
+{"GUID":"3023", "enUS":"[ffed00]catch chance[-][e92121]+20[-]", "zhTW":""}
