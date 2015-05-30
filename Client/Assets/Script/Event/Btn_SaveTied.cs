@@ -21,7 +21,8 @@ public class Btn_SaveTied : MonoBehaviour
     {
         if (bIsPress)
         {
-            NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);            
+            NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
+            pPlayer.BeFree();
             Destroy(gameObject);
         }
     }

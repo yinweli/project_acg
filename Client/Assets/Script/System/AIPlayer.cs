@@ -165,7 +165,7 @@ public class AIPlayer : MonoBehaviour
         if (pAni)
             pAni.Play("Run");
 
-        ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/Item/G_Tied");
+        ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/G_Tied");
         ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
     }
 	// ------------------------------------------------------------------
