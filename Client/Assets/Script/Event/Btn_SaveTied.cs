@@ -22,7 +22,8 @@ public class Btn_SaveTied : MonoBehaviour
         if (bIsPress)
         {
             NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
-            pPlayer.BeFree();
+            // 減少被抓機率.
+            ToolKit.CatchRole[pPlayer.gameObject] += 20;
             Destroy(gameObject);
         }
     }

@@ -159,8 +159,8 @@ public class AIPlayer : MonoBehaviour
     public void BeTied()
     {
         bBeCaught = true;
-        // 從可抓佇列中移除.
-        ToolKit.CatchRole.Remove(gameObject);
+        // 減少被抓機率.
+        ToolKit.CatchRole[gameObject] -= 20;
 
         if (pAni)
             pAni.Play("Run");
@@ -205,6 +205,8 @@ public class AIPlayer : MonoBehaviour
     // 被殺函式.
     public void BeKill()
     {
+        if (ToolKit.CatchRole.ContainsKey(gameObject))
+            ToolKit.CatchRole.Remove(gameObject);
         SysMain.pthis.DeadRole.Add(iPlayer);
         SysMain.pthis.Role.Remove(gameObject);
         GameData.pthis.iDead++;
