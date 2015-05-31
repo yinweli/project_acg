@@ -83,7 +83,7 @@ public class GameDefine
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.65f; // 怪物能量升級值
-	public const float fUpgradePickup = 1.45f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 1.65f; // 拾取物品價值升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔
@@ -104,7 +104,7 @@ public class GameDefine
 
 	public static readonly List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
-		/*0, 1, */2, 
+		/*0, 1, */2, 3, 
 	};
 	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{
