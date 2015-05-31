@@ -16,8 +16,8 @@
 {"GUID":"16", "StrID":"2016", "Mode":"5", "Threat":"16", "Gain":"1", "Group":"6", "Value":"2", "Description":"3016"}
 {"GUID":"17", "StrID":"2017", "Mode":"6", "Threat":"4", "Gain":"2", "Group":"7", "Value":"3", "Description":"3017"}
 {"GUID":"18", "StrID":"2018", "Mode":"6", "Threat":"8", "Gain":"1", "Group":"7", "Value":"5", "Description":"3018"}
-{"GUID":"19", "StrID":"2019", "Mode":"7", "Threat":"2", "Gain":"3", "Group":"8", "Value":"1.2", "Description":"3019"}
-{"GUID":"20", "StrID":"2020", "Mode":"7", "Threat":"2", "Gain":"3", "Group":"8", "Value":"1.3", "Description":"3020"}
+{"GUID":"19", "StrID":"2019", "Mode":"7", "Threat":"2", "Gain":"3", "Group":"8", "Value":"1.1", "Description":"3019"}
+{"GUID":"20", "StrID":"2020", "Mode":"7", "Threat":"2", "Gain":"3", "Group":"8", "Value":"1.2", "Description":"3020"}
 {"GUID":"21", "StrID":"2021", "Mode":"8", "Threat":"10", "Gain":"2", "Group":"9", "Value":"0", "Description":"3021"}
 {"GUID":"22", "StrID":"2022", "Mode":"0", "Threat":"-10", "Gain":"3", "Group":"10", "Value":"0", "Description":"3022"}
 {"GUID":"23", "StrID":"2023", "Mode":"0", "Threat":"20", "Gain":"3", "Group":"10", "Value":"0", "Description":"3023"}

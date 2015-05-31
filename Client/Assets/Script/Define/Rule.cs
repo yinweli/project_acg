@@ -133,7 +133,7 @@ public class Rule
 	// 重置絕招次數
 	public static void BombReset()
 	{
-		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb));
+		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
 	}
 	// 增加絕招次數
 	public static void BombaAdd(int iValue)

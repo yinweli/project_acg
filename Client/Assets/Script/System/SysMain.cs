@@ -193,7 +193,7 @@ public class SysMain : MonoBehaviour
         Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
         Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iInitLightAmmo);
         Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
-		Rule.BombaAdd(GameDefine.iInitBomo);
+		Rule.BombaAdd(GameDefine.iInitBomb);
 
         // 給與初始隊員
         Rule.MemberAdd(1);
