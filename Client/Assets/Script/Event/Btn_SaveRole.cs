@@ -11,6 +11,7 @@ public class Btn_SaveRole : MonoBehaviour
     void Start()
     {
         pPlayer = transform.parent.gameObject.GetComponent<AIPlayer>();
+        pAni.Play("TalkShing");
     }
     // ------------------------------------------------------------------
     void OnPress(bool bIsPress)
@@ -24,17 +25,4 @@ public class Btn_SaveRole : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // ------------------------------------------------------------------
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Look")
-            pAni.Play("TalkShing");
-    }
-    // ------------------------------------------------------------------
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Look")
-            pAni.Play("Wait");
-    }
-	
 }

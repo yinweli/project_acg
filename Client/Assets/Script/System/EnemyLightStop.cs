@@ -10,6 +10,8 @@ public class EnemyLightStop : MonoBehaviour
     public GameObject ObjTarget = null;
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
+
+    bool bStop = false;
     // ------------------------------------------------------------------
     void Start()
     {
@@ -28,8 +30,8 @@ public class EnemyLightStop : MonoBehaviour
             Run();
             return;
         }
-        
-        if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+
+        if (bStop)
         {
             pAI.pAni.speed = 0;
             return;
@@ -151,6 +153,18 @@ public class EnemyLightStop : MonoBehaviour
                 ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
             GetDir();
         }
+    }
+    // ------------------------------------------------------------------
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (pAI.iHP > 0 && other.gameObject.tag == "Look")
+            bStop = true;
+    }
+    // ------------------------------------------------------------------
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (pAI.iHP > 0 && other.gameObject.tag == "Look")
+            bStop = false;
     }
     // ------------------------------------------------------------------
     // 取得距離.

@@ -194,7 +194,10 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = false;
         // 重新加入可抓佇列中.
-        ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
+        if (ObjCatch)
+            ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer) - 20);
+        else
+            ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
 		Destroy(gameObject.GetComponent<PlayerFollow>());
 
         StartCoroutine(ResetDeadPos());
