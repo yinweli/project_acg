@@ -47,8 +47,8 @@
 {"GUID":"3014", "enUS":"[ffed00]damage[-][e92121]-10[-]", "zhTW":""}
 {"GUID":"3015", "enUS":"[ffed00]bomb[-][546ef2]+1[-]", "zhTW":""}
 {"GUID":"3016", "enUS":"[ffed00]bomb[-][546ef2]+2[-]", "zhTW":""}
-{"GUID":"3017", "enUS":"[ffed00]shield[-][546ef2]+3[-]", "zhTW":""}
-{"GUID":"3018", "enUS":"[ffed00]shield[-][546ef2]+5[-]", "zhTW":""}
+{"GUID":"3017", "enUS":"[ffed00]shield[-][546ef2]+2[-]", "zhTW":""}
+{"GUID":"3018", "enUS":"[ffed00]shield[-][546ef2]+4[-]", "zhTW":""}
 {"GUID":"3019", "enUS":"[ffed00]monster[-][e92121]+10%[-]", "zhTW":""}
 {"GUID":"3020", "enUS":"[ffed00]monster[-][e92121]+20%[-]", "zhTW":""}
 {"GUID":"3021", "enUS":"[ffed00]frozen bullet[-]", "zhTW":""}
