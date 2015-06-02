@@ -95,8 +95,6 @@ public class GameDefine
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
 
-	public const string szPickupStat = "pickupstat.log"; // 拾取紀錄檔案名稱
-
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
@@ -104,7 +102,7 @@ public class GameDefine
 
 	public static readonly List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
-		/*0, 1, */2, 3, 
+		0, 1, 2, 3, 
 	};
 	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{

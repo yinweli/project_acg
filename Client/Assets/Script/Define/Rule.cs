@@ -139,6 +139,7 @@ public class Rule
 	public static void BombaAdd(int iValue)
 	{
 		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, PlayerData.pthis.iBomb + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.Bomb, iValue);
 	}
 	// 重置護盾次數
 	public static void ShieldReset()

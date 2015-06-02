@@ -84,7 +84,6 @@ public class CameraCtrl : MonoBehaviour
     // ------------------------------------------------------------------
     void SetPos(int iRoad)
     {
-        Debug.Log("SetPos: " + iRoad);
         iNextRoad = iRoad + 1;
         transform.localPosition = MapCreater.pthis.GetRoadObj(iRoad).transform.position;
         Camera.main.gameObject.transform.localPosition = -1 * MapCreater.pthis.GetRoadObj(iRoad).transform.position;

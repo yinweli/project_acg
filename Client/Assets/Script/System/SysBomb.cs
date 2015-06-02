@@ -17,7 +17,8 @@ public class SysBomb : MonoBehaviour
 
     public void BombDamage()
     {
-        PlayerData.pthis.iBomb--;
+		Rule.BombaAdd(-1);
+
         foreach (GameObject ObjEnemy in SysMain.pthis.Enemy)
         {
             if (ObjEnemy && ObjEnemy.GetComponent<AIEnemy>())
