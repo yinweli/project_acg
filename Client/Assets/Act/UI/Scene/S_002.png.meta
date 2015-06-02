@@ -1,6 +1,25 @@
 fileFormatVersion: 2
 guid: ee5742494b3387140b5187be0aff07b1
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: S_002_Road
+    21300002: S_002_0
+    21300004: S_002_1
+    21300006: S_002_2
+    21300008: S_002_3
+    21300010: S_002_Base
+    21300012: S_002_Start
+    21300014: S_002_4
+    21300016: S_002_5
+    21300018: S_002_6
+    21300020: S_002_7
+    21300022: S_002_8
+    21300024: S_002_9
+    21300026: S_002_10
+    21300028: S_002_11
+    21300030: S_002_End
+    21300032: S_002_ExitBg
+    21300034: S_002_Exit
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
