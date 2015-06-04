@@ -452,5 +452,85 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_003
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 229
+        width: 61
+        height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Hair_A_004
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 228
+        width: 71
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Hair_A_005
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 228
+        width: 72
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_004
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 270
+        width: 40
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_005
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 268
+        width: 50
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_006
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 246
+        width: 49
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_007
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 229
+        width: 30
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_008
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 268
+        width: 49
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
