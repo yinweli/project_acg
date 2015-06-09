@@ -508,4 +508,9 @@ public class Rule
 
 		return Mathf.Max(0, iResult);
 	}
+	// 取得廣告影片贈送金額
+	public static int AdsMoney()
+	{
+		return GameDefine.iAdsMoney * PlayerData.pthis.iStage;
+	}
 }
