@@ -532,5 +532,45 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_49
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 324
+        width: 44
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_000_50
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 353
+        width: 53
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LED_001
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 324
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LED_000
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 351
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
