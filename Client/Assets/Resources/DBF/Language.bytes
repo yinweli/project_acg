@@ -29,8 +29,8 @@
 {"GUID":"2019", "enUS":"Nightmare", "zhTW":"\u5669\u5922"}
 {"GUID":"2020", "enUS":"Curse", "zhTW":"\u8a5b\u5492"}
 {"GUID":"2021", "enUS":"Frozen", "zhTW":"\u51b0\u51cd"}
-{"GUID":"2022", "enUS":"Low profile", "zhTW":"\u4f4e\u8abf"}
-{"GUID":"2023", "enUS":"Prominently", "zhTW":"\u9192\u76ee"}
+{"GUID":"2022", "enUS":"Low-key", "zhTW":"\u4f4e\u8abf"}
+{"GUID":"2023", "enUS":"High-profile", "zhTW":"\u9192\u76ee"}
 {"GUID":"3001", "enUS":"[ffed00]sta limit[-][546ef2]+4[-]", "zhTW":""}
 {"GUID":"3002", "enUS":"[ffed00]sta limit[-][546ef2]+8[-]", "zhTW":""}
 {"GUID":"3003", "enUS":"[ffed00]sta limit[-][e92121]-4[-]", "zhTW":""}
