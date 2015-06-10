@@ -2,7 +2,6 @@
 using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Advertisements;
 
 public class SysMain : MonoBehaviour 
 {
@@ -29,7 +28,6 @@ public class SysMain : MonoBehaviour
     void Awake()
     {
         pthis = this;
-        Advertisement.Initialize("43864");
     }
     // ------------------------------------------------------------------
     public void ReadyStart()
