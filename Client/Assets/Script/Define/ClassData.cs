@@ -175,6 +175,7 @@ public class SaveEnemy
 public class SaveGame
 {
 	public int iStageTime = 0; // 關卡時間.
+	public int iAds = 0; // 觀看廣告次數
 	public int iKill = 0; // 殺怪數.
 	public int iAlive = 0; // 存活數.
 	public int iDead = 0; // 死亡數.
