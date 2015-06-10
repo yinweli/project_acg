@@ -10,7 +10,6 @@ public class GameData : MonoBehaviour
     public ENUM_Language Language = ENUM_Language.enUS; // 現在使用的語系.
 	/* Save */
     public int iStageTime = 0; // 關卡時間.
-	public int iAdsCount = 0; // 可用廣告次數
 	public int iAdsWatch = 0; // 觀看廣告次數
     public int iKill = 0; // 殺怪數.
     public int iAlive = 0; // 存活數.
@@ -33,7 +32,6 @@ public class GameData : MonoBehaviour
 		SaveGame Data = new SaveGame();
 
 		Data.iStageTime = iStageTime;
-		Data.iAdsCount = iAdsCount;
 		Data.iAdsWatch = iAdsWatch;
 		Data.iKill = iKill;
 		Data.iAlive = iAlive;
@@ -56,7 +54,6 @@ public class GameData : MonoBehaviour
 			return false;
 
 		iStageTime = Data.iStageTime;
-		iAdsCount = Data.iAdsCount;
 		iAdsWatch = Data.iAdsWatch;
 		iKill = Data.iKill;
 		iAlive = Data.iAlive;
@@ -71,7 +68,6 @@ public class GameData : MonoBehaviour
     public void ClearData()
     {
         iStageTime = 0;
-		iAdsCount = 0;
 		iAdsWatch = 0;
         iKill = 0;
         iAlive = 0;
