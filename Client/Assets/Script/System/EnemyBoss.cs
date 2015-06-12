@@ -2,21 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyLightStop : MonoBehaviour 
+public class EnemyBoss : MonoBehaviour 
 {
     AIEnemy pAI = null;
 
-    // 目標.
     public GameObject ObjTarget = null;
+    // 目標.
+    public EnemyCurry[] pCarry = new EnemyCurry[3];
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
-
-    bool bStop = false;
     // ------------------------------------------------------------------
     void Start()
     {
         pAI = GetComponent<AIEnemy>();
-    } 
+    }
     // ------------------------------------------------------------------
     // Update is called once per frame
     void Update()
@@ -31,38 +30,59 @@ public class EnemyLightStop : MonoBehaviour
             return;
         }
 
-        if (bStop)
-        {
-            pAI.pAni.speed = 0;
-            return;
-        }
-        else
-            pAI.pAni.speed = 1;
-
         // 已有抓人逃跑模式.
-        if (pAI.bHasTarget)
-        {
+        if (CheckGet())
             Take();
-            return;
+        else  // 如果有目標且沒抓人時，追蹤目標
+            Chace();
+    }
+    // ------------------------------------------------------------------
+    // 取得是否該逃跑.
+    bool CheckGet()
+    {
+        // 如果已經沒人可抓.
+        if (ToolKit.CatchRole.Count == 0)
+        {
+            pAI.bHasTarget = true;
+            return true;
         }
 
-        // 如果有目標且沒抓人時，追蹤目標
-        Chace(); 
+        // 抓人旗標關閉.
+        if (!pAI.bHasTarget)
+        {
+            // 檢查是否抓滿三人.
+            for (int i = 0; i < pCarry.Length; i++)
+                if (!pCarry[i])
+                    return false;
+
+            pAI.bHasTarget = true;
+            return true;
+        }
+        // 抓人旗標開啟.
+        else
+        {
+            // 檢查手上是否還有人.
+            for (int i = 0; i < pCarry.Length; i++)
+                if (pCarry[i])
+                    return true;
+
+            pAI.bHasTarget = false;
+            return false;
+        }
     }
     // ------------------------------------------------------------------
     // 逃跑.
     void Run()
     {
         // 如果有抓目標就丟下目標.
-        if (pAI.bHasTarget)
-        {
-            pAI.bHasTarget = false;
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeFree();
-        }
+        for (int i = 0; i < pCarry.Length; i++)
+            if (pCarry[i])
+                pCarry[i].ReleaseWarriors();
+
         // 播放逃跑動作.
         pAI.AniPlay("Escape");
 
+        pAI.bHasTarget = false;
         if (vecRunDir == Vector3.zero)
             GetDir();
         // 調整面向.
@@ -87,8 +107,9 @@ public class EnemyLightStop : MonoBehaviour
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeKill();
+            for (int i = 0; i < pCarry.Length; i++)
+                if (pCarry[i])
+                    pCarry[i].KillJames();
             Destroy(gameObject);
         }
     }
@@ -148,23 +169,21 @@ public class EnemyLightStop : MonoBehaviour
         // 檢查距離是否可抓抓.
         if (GetDistance(gameObject, ObjTarget) < 0.175f)
         {
-            pAI.bHasTarget = true;
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, 1);
-            GetDir();
+            for (int i = 0; i < pCarry.Length; i++)
+            {
+                if (!pCarry[i])
+                {
+                    pCarry[i] = gameObject.AddComponent<EnemyCurry>();
+                    pCarry[i].ObjTarget = ObjTarget;
+
+                    if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                        ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, i);
+                    if (CheckGet())
+                        GetDir();
+					return;
+                }                                
+            }
         }
-    }
-    // ------------------------------------------------------------------
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (pAI.iHP > 0 && other.gameObject.tag == "Look")
-            bStop = true;
-    }
-    // ------------------------------------------------------------------
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (pAI.iHP > 0 && other.gameObject.tag == "Look")
-            bStop = false;
     }
     // ------------------------------------------------------------------
     // 取得距離.

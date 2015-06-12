@@ -34,10 +34,17 @@ public class EnemyCreater : MonoBehaviour
     public void StartNew()
     {
         iCount = 0;
-        // 計算總波數能量：怪物能量 = (能量基礎值 + 關卡編號 * 能量增加值) * 額外能量加成
-		iEnegry = (int)((GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * (1.0f + Rule.FeatureF(ENUM_ModeFeature.AddEnegry)));
 
-        StartCoroutine(Creater());
+        // 每10關為魔王關
+        //if (PlayerData.pthis.iStage % 10 == 0)
+            StartCoroutine(BossCreater());
+        /*else
+        {
+            // 計算總波數能量：怪物能量 = (能量基礎值 + 關卡編號 * 能量增加值) * 額外能量加成
+            iEnegry = (int)((GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * (1.0f + Rule.FeatureF(ENUM_ModeFeature.AddEnegry)));
+
+            StartCoroutine(Creater());
+        }*/
     }
     // ------------------------------------------------------------------
     // 開始新的關卡.
@@ -95,10 +102,41 @@ public class EnemyCreater : MonoBehaviour
             if (pEnemy && pEnemy.GetComponent<AIEnemy>())
             {
                 ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<UI2DSprite>());
+                pEnemy.GetComponent<AIEnemy>().iMonster = itor.iMonster;
                 pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;      
             }
             iCount++;
         }        
+    }
+    // ------------------------------------------------------------------
+    IEnumerator BossCreater()
+    {
+        yield return new WaitForSeconds(Random.Range(GameDefine.iMinWaitSec, GameDefine.iMaxWaitSec));
+        while (SysMain.pthis.bIsGaming)
+        {
+            // 魔王還在不出怪.
+            if (SysMain.pthis.AtkEnemy.Count > 0)
+                yield return new WaitForSeconds(0.1f);
+            else
+            {
+                // 等待2.0秒後出新魔王.
+                yield return new WaitForSeconds(2.0f);
+
+                int iIndex = 1000 + (PlayerData.pthis.iStage / 10 % 8 + 1);
+                Debug.Log("Boss: " + iIndex);
+                GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "Enemy/" + iIndex,
+                    CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f),
+                    CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
+
+                pObj.GetComponent<AIEnemy>().iMonster = iIndex;
+
+                ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
+                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
+
+                iCount++;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
     }
     // ------------------------------------------------------------------
     // 偕同程序
@@ -134,6 +172,7 @@ public class EnemyCreater : MonoBehaviour
                             CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
+                pObj.GetComponent<AIEnemy>().iMonster = System.Convert.ToInt32(ListEnemy[i]);
                 ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
                 ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
                 iCount++;

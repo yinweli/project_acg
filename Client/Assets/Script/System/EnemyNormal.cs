@@ -140,7 +140,7 @@ public class EnemyNormal : MonoBehaviour
         {
             pAI.bHasTarget = true;
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject);
+                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, 1);
             GetDir();
         }
     }

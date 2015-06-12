@@ -170,7 +170,7 @@ public class AIPlayer : MonoBehaviour
     }
 	// ------------------------------------------------------------------
 	// 被抓函式.
-	public void BeCaught(GameObject ObjMonster)
+	public void BeCaught(GameObject ObjMonster, int iPos)
 	{
 		bBeCaught = true;
         // 從可抓佇列中移除.
@@ -178,7 +178,12 @@ public class AIPlayer : MonoBehaviour
 		// 拿手電筒的不需要改目標.
 		if(pWeapon != ENUM_Weapon.Weapon_001)
 			ObjTarget = ObjMonster;
-		gameObject.AddComponent<PlayerFollow>().ObjTarget = ObjMonster;
+
+        // 跟隨抓人者.
+        PlayerFollow pFollow = gameObject.AddComponent<PlayerFollow>();
+        pFollow.ObjTarget = ObjMonster;
+        pFollow.iPos = iPos;
+
 		if (pAni)
 			pAni.Play("Break");
 
