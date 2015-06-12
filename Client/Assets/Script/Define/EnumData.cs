@@ -84,6 +84,7 @@ public enum ENUM_ModeMonster
 	Normal, // 正常
 	ActiveDark, // 黑暗啟動
     Tied, // 綁人. 
+	Boss, // 魔王
 }
 
 // 射程列舉
