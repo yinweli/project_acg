@@ -59,6 +59,5 @@ public class Btn_OpenAds : MonoBehaviour
             // 存檔.
             SysMain.pthis.SaveGame();
         }
-        Debug.Log("Now Look: " + PlayerData.pthis.iAdsWatch);
     }    
 }
