@@ -10,7 +10,6 @@ public class Btn_SaveRole : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
-        pPlayer = transform.parent.gameObject.GetComponent<AIPlayer>();
         pAni.Play("TalkShing");
     }
     // ------------------------------------------------------------------

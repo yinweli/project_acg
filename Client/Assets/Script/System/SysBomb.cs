@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SysBomb : MonoBehaviour 
 {
@@ -19,10 +20,10 @@ public class SysBomb : MonoBehaviour
     {
 		Rule.BombaAdd(-1);
 
-        foreach (GameObject ObjEnemy in SysMain.pthis.Enemy)
+        foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
-            if (ObjEnemy && ObjEnemy.GetComponent<AIEnemy>())
-                ObjEnemy.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
+            if (itor.Key && itor.Key.GetComponent<AIEnemy>())
+                itor.Key.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
         }
         SysMain.pthis.SaveGame();
     }

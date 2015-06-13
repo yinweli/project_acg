@@ -177,7 +177,10 @@ public class EnemyBoss : MonoBehaviour
                     pCarry[i].ObjTarget = ObjTarget;
 
                     if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                    {
                         ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, i);
+                        ObjTarget.GetComponent<PlayerFollow>().vecDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
+                    }
                     if (CheckGet())
                         GetDir();
 					return;
@@ -196,11 +199,7 @@ public class EnemyBoss : MonoBehaviour
     void GetDir()
     {
         if (pAI.bHasTarget)
-        {
             vecRunDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
-            if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
-                ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
-        }
         else
             vecRunDir = pAI.PosStart - transform.position;
     }

@@ -27,9 +27,9 @@ public class AIEnemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        SysMain.pthis.Enemy.Add(gameObject);
-
 		DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
+
+        SysMain.pthis.Enemy.Add(gameObject, DBFData.Threat);
 
 		if(DBFData == null)
 		{
@@ -52,6 +52,8 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnDestroy()
     {
+        if (SysMain.pthis.Enemy.ContainsKey(gameObject))
+            SysMain.pthis.Enemy.Remove(gameObject);
         if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
             SysMain.pthis.AtkEnemy.Remove(gameObject);
     }

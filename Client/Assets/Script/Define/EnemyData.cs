@@ -18,11 +18,11 @@ public class EnemyData : MonoBehaviour
 	{
 		int iCount = 0;
 
-		foreach(GameObject Itor in SysMain.pthis.Enemy)
+		foreach(KeyValuePair<GameObject,int> Itor in SysMain.pthis.Enemy)
 		{
-            if (Itor)
+            if (Itor.Key)
             {
-                AIEnemy Enemy = Itor.GetComponent<AIEnemy>();
+                AIEnemy Enemy = Itor.Key.GetComponent<AIEnemy>();
 
                 if (Enemy && Enemy.iHP > 0)
                 {
@@ -30,8 +30,8 @@ public class EnemyData : MonoBehaviour
 
 					Data.iMonster = Enemy.iMonster;
 					Data.iHP = Enemy.iHP;
-                    Data.fPosX = Itor.transform.localPosition.x - CameraCtrl.pthis.gameObject.transform.localPosition.x;
-                    Data.fPosY = Itor.transform.localPosition.y - CameraCtrl.pthis.gameObject.transform.localPosition.y;
+                    Data.fPosX = Itor.Key.transform.localPosition.x - CameraCtrl.pthis.gameObject.transform.localPosition.x;
+                    Data.fPosY = Itor.Key.transform.localPosition.y - CameraCtrl.pthis.gameObject.transform.localPosition.y;
 
 					PlayerPrefs.SetString(GameDefine.szSaveEnemy + iCount, Json.ToString(Data));
 					++iCount;

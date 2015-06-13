@@ -17,7 +17,7 @@ public class SysMain : MonoBehaviour
     // 死亡人物佇列.
     public List<int> DeadRole = new List<int>();
     // 敵人佇列.
-    public List<GameObject> Enemy = new List<GameObject>();
+    public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
     // 可打敵人佇列.
     public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();    
 
@@ -312,8 +312,8 @@ public class SysMain : MonoBehaviour
         PlayerCreater.pthis.ClearList();
 
         // 刪除 敵人.
-        foreach (GameObject itor in Enemy)
-            Destroy(itor);
+        foreach (KeyValuePair<GameObject,int> itor in Enemy)
+            Destroy(itor.Key);
         // 清空 敵人佇列.
         Enemy.Clear();
         AtkEnemy.Clear();

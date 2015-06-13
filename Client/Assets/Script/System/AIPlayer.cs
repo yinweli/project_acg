@@ -41,6 +41,7 @@ public class AIPlayer : MonoBehaviour
             ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/Item/G_Catch");
             ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
             ObjCatch.GetComponent<Btn_SaveRole>().iItemID = iItemID;
+            ObjCatch.GetComponent<Btn_SaveRole>().pPlayer = this;
         }
 
         // 有盾套盾.

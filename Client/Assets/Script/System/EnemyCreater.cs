@@ -36,15 +36,15 @@ public class EnemyCreater : MonoBehaviour
         iCount = 0;
 
         // 每10關為魔王關
-        //if (PlayerData.pthis.iStage % 10 == 0)
+        if (PlayerData.pthis.iStage % 10 == 0)
             StartCoroutine(BossCreater());
-        /*else
+        else
         {
             // 計算總波數能量：怪物能量 = (能量基礎值 + 關卡編號 * 能量增加值) * 額外能量加成
             iEnegry = (int)((GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * (1.0f + Rule.FeatureF(ENUM_ModeFeature.AddEnegry)));
 
             StartCoroutine(Creater());
-        }*/
+        }
     }
     // ------------------------------------------------------------------
     // 開始新的關卡.
@@ -115,7 +115,7 @@ public class EnemyCreater : MonoBehaviour
         while (SysMain.pthis.bIsGaming)
         {
             // 魔王還在不出怪.
-            if (SysMain.pthis.AtkEnemy.Count > 0)
+            if (SysMain.pthis.Enemy.Count > 0)
                 yield return new WaitForSeconds(0.1f);
             else
             {
@@ -123,7 +123,6 @@ public class EnemyCreater : MonoBehaviour
                 yield return new WaitForSeconds(2.0f);
 
                 int iIndex = 1000 + (PlayerData.pthis.iStage / 10 % 8 + 1);
-                Debug.Log("Boss: " + iIndex);
                 GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "Enemy/" + iIndex,
                     CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f),
                     CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
@@ -134,7 +133,7 @@ public class EnemyCreater : MonoBehaviour
                 ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
 
                 iCount++;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(5.0f);
             }
         }
     }
