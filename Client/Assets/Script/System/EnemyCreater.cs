@@ -36,7 +36,8 @@ public class EnemyCreater : MonoBehaviour
         iCount = 0;
 
         // 每10關為魔王關
-        if (PlayerData.pthis.iStage % 10 == 0)
+        Debug.Log("Now type: " + (float)PlayerData.pthis.iStage % 10);
+        if ((float)PlayerData.pthis.iStage % 10 == 0)
             StartCoroutine(BossCreater());
         else
         {
@@ -54,7 +55,7 @@ public class EnemyCreater : MonoBehaviour
     }
     // ------------------------------------------------------------------
     // 敵人佇列產生函式.
-    public void ListEnemyCreater(List<string> EnemyList)
+    public void ListEnemyCreater(List<int> EnemyList)
     {
         // 先清理List.
         EnemyList.Clear();
@@ -81,13 +82,13 @@ public class EnemyCreater : MonoBehaviour
 			if (iTempEnegry > 0 && iTempEnegry <= 1)
 			{
 				iTempEnegry -= 1;
-				EnemyList.Add(string.Format("Enemy/{0:000}", 1));
+				EnemyList.Add(1);
 			}
 
 			if (iTempEnegry > 0 && iTempEnegry >= DBFData.Enegry)
 			{
 				iTempEnegry -= DBFData.Enegry;
-				EnemyList.Add(string.Format("Enemy/{0:000}", iEnemy));
+				EnemyList.Add(iEnemy);
 			}
 		}
     }
@@ -144,7 +145,7 @@ public class EnemyCreater : MonoBehaviour
         while (SysMain.pthis.bIsGaming)
         {
             // 計算要出的敵人佇列.
-            List<string> ListEnemy = new List<string>();
+            List<int> ListEnemy = new List<int>();
             ListEnemyCreater(ListEnemy);
 
             // 計算等待間隔.
@@ -153,25 +154,26 @@ public class EnemyCreater : MonoBehaviour
             for (int i = 0; i < ListEnemy.Count; i++)
             {
                 GameObject pObj = null;
+                string pName = string.Format("Enemy/{0:000}", ListEnemy[i]);
                 switch (Random.Range(1, 4))
                 {
                     case 1: //上方.
-                        pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i], 
+                        pObj = UITool.pthis.CreateUIByPos(gameObject, pName, 
                             CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), 
                             CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
                          break;
                     case 2: //左方.
-                         pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                         pObj = UITool.pthis.CreateUIByPos(gameObject, pName,
                             CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
                             CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                     case 3: //右方.
-                        pObj = UITool.pthis.CreateUIByPos(gameObject, ListEnemy[i],
+                        pObj = UITool.pthis.CreateUIByPos(gameObject, pName,
                             CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
                             CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
-                pObj.GetComponent<AIEnemy>().iMonster = System.Convert.ToInt32(ListEnemy[i]);
+                pObj.GetComponent<AIEnemy>().iMonster = ListEnemy[i];
                 ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
                 ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
                 iCount++;
