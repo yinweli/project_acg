@@ -16,6 +16,7 @@ public class PlayerData : MonoBehaviour
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
+	public int iAdsWatch = 0; // 觀看廣告次數
 	public List<int> Resource = new List<int>(); // 資源列表
 	public List<Member> Members = new List<Member>(); // 成員列表
 
@@ -40,6 +41,7 @@ public class PlayerData : MonoBehaviour
 		Data.iPlayTime = iPlayTime;
 		Data.iEnemyKill = iEnemyKill;
 		Data.iPlayerLost = iPlayerLost;
+		Data.iAdsWatch = iAdsWatch;
 		Data.Resource = Resource.ToArray();
 		
 		List<SaveMember> MemberList = new List<SaveMember>();
@@ -82,6 +84,7 @@ public class PlayerData : MonoBehaviour
 		iPlayTime = Data.iPlayTime;
 		iEnemyKill = Data.iEnemyKill;
 		iPlayerLost = Data.iPlayerLost;
+		iAdsWatch = Data.iAdsWatch;
 		Resource = new List<int>(Data.Resource);
 		Members = new List<Member>();
 		
@@ -113,6 +116,7 @@ public class PlayerData : MonoBehaviour
 		iPlayTime = 0;
 		iEnemyKill = 0;
 		iPlayerLost = 0;
+		iAdsWatch = 0;
 		Resource.Clear();
 		Members.Clear();
 	}

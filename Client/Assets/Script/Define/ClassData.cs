@@ -158,6 +158,7 @@ public class SavePlayer
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
+	public int iAdsWatch = 0; // 觀看廣告次數
 	public int[] Resource = new int[0]; // 資源列表
 	public SaveMember[] Data = new SaveMember[0]; // 成員列表
 }
@@ -175,7 +176,6 @@ public class SaveEnemy
 public class SaveGame
 {
 	public int iStageTime = 0; // 關卡時間.
-	public int iAdsWatch = 0; // 觀看廣告次數
 	public int iKill = 0; // 殺怪數.
 	public int iAlive = 0; // 存活數.
 	public int iDead = 0; // 死亡數.

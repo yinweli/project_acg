@@ -511,6 +511,6 @@ public class Rule
 	// 取得廣告影片贈送金額
 	public static int AdsMoney()
 	{
-		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyStage * GameData.pthis.iAdsWatch;
+		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyStage * PlayerData.pthis.iAdsWatch;
 	}
 }
