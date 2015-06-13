@@ -86,7 +86,7 @@ public class GameDefine
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
 	public const float fUpgradePickup = 2.0f; // 拾取物品價值升級值
-	public const float fUpgradeBossHP = 0.01f; // 魔王血量升級值
+	public const float fUpgradeBossHP = 0.02f; // 魔王血量升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔
