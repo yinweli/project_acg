@@ -513,4 +513,9 @@ public class Rule
 	{
 		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyStage * PlayerData.pthis.iAdsWatch;
 	}
+	// 取得魔王血量加成
+	public static int BossHP(int iHP)
+	{
+		return (int)(iHP * GameDefine.fUpgradeBossHP * PlayerData.pthis.iStage);
+	}
 }

@@ -45,7 +45,10 @@ public class AIEnemy : MonoBehaviour
         else if (ENUM_ModeMonster.Tied == (ENUM_ModeMonster)DBFData.Mode)
             gameObject.AddComponent<EnemyTied>();
         else if (ENUM_ModeMonster.Boss == (ENUM_ModeMonster)DBFData.Mode)
+		{
+			iHP += Rule.BossHP(iHP);
             gameObject.AddComponent<EnemyBoss>();
+		}
         else
             gameObject.AddComponent<EnemyNormal>();
 	}
