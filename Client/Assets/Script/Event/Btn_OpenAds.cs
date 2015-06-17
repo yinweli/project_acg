@@ -58,6 +58,7 @@ public class Btn_OpenAds : MonoBehaviour
             // 存檔.
             SysMain.pthis.SaveGame();
 			P_UI.pthis.UpdateCurrency();
+			pLb.text = "x" + Rule.AdsMoney();
         }
     }    
 }
