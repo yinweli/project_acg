@@ -49,15 +49,15 @@ public class Btn_OpenAds : MonoBehaviour
         // 增加獎勵.
         if (PlayerData.pthis.iStage - PlayerData.pthis.iAdsWatch > 0)
         {
-            // 已觀看次數增加.
-            PlayerData.pthis.iAdsWatch++;
             // 播給錢聲音.
             NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
             // 給錢.
             Rule.CurrencyAdd(Rule.AdsMoney());
-            P_UI.pthis.UpdateCurrency();
+			// 已觀看次數增加.
+			PlayerData.pthis.iAdsWatch++;
             // 存檔.
             SysMain.pthis.SaveGame();
+			P_UI.pthis.UpdateCurrency();
         }
     }    
 }

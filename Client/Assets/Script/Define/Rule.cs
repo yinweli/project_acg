@@ -511,7 +511,7 @@ public class Rule
 	// 取得廣告影片贈送金額
 	public static int AdsMoney()
 	{
-		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyStage * PlayerData.pthis.iAdsWatch;
+		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyAdd * PlayerData.pthis.iAdsWatch;
 	}
 	// 取得魔王血量加成
 	public static int BossHP(int iHP)
