@@ -48,7 +48,7 @@ public class GameDefine
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
 	public const int iDamageUpgrade = 1; // 升級傷害值
 	public const int iDamageClick = 3; // 點擊傷害值
-	public const int iDamageBomb = 200; // 絕招傷害值
+	public const int iDamageBomb = 300; // 絕招傷害值
 	public const int iDamageShield = 200; // 護盾傷害值
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
@@ -76,7 +76,7 @@ public class GameDefine
 	public const int iMinPickupItems = 20; // 最小拾取物品次數
 	public const int iMaxPickupValue = 24; // 最大拾取物品價值
 	public const int iMinPickupValue = 20; // 最小拾取物品價值
-	public const int iPickupProbBomb = 10; // 拾取物品(絕招)出現機率
+	public const int iPickupProbBomb = 15; // 拾取物品(絕招)出現機率
 	public const float fPickupPartLightAmmo = 0.15f; // 拾取物品(輕型彈藥)比例
 	public const float fPickupPartHeavyAmmo = 0.15f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
@@ -85,8 +85,8 @@ public class GameDefine
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
-	public const float fUpgradePickup = 2.0f; // 拾取物品價值升級值
-	public const float fUpgradeBossHP = 0.02f; // 魔王血量升級值
+	public const float fUpgradePickup = 1.25f; // 拾取物品價值升級值
+	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔
