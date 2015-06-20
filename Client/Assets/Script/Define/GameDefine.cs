@@ -14,6 +14,8 @@ public class GameDefine
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
+	public const int iPriceDmgLv = 120; // 傷害等級價格
+	public const int iPriceBomb = 300; // 絕招價格
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
 	public const int iBatteryCost = iPriceBattery * iBatteryCount; // 電池值價格.
@@ -50,8 +52,7 @@ public class GameDefine
 	public const int iDamageClick = 3; // 點擊傷害值
 	public const int iDamageBomb = 300; // 絕招傷害值
 	public const int iDamageShield = 200; // 護盾傷害值
-	public const int iDamageLvCost = 300; // 傷害等級價格
-	
+
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
 	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
@@ -87,6 +88,7 @@ public class GameDefine
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
 	public const float fUpgradePickup = 1.3f; // 拾取物品價值升級值
+	public const float fUpgradeDmgLv = 0.05f; // 傷害等級升級值
 	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔

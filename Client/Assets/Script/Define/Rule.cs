@@ -508,6 +508,11 @@ public class Rule
 
 		return Mathf.Max(0, iResult);
 	}
+	// 取得傷害等級價格
+	public static int DmgLvMoney()
+	{
+		return GameDefine.iPriceDmgLv + GameDefine.iPriceDmgLv * GameDefine.fUpgradeDmgLv * PlayerData.pthis.iDamageLv;
+	}
 	// 取得廣告影片贈送金額
 	public static int AdsMoney()
 	{
