@@ -23,6 +23,8 @@ public class GameDefine
 	public const int iLightAmmoCost = iPriceLightAmmo * iLightAmmoCount; // 輕型彈藥價格.
     public const int iHeavyAmmoCount = 30; // 重型彈藥購買一單位數量.
 	public const int iHeavyAmmoCost = iPriceHeavyAmmo * iHeavyAmmoCount; // 重型彈藥價格.
+	public const int iDmgLvCount = 1; // 傷害等級購買一單位數量.
+	public const int iBombCount = 1; // 絕招購買一單位數量.
 
     public const int iBatteryTimeCost = -1; // 電池每跳每次扣除額.
     public const float fBatteryTime = 0.5f; // 電池每跳時間.
