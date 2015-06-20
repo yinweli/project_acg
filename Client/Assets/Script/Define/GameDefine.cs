@@ -14,7 +14,7 @@ public class GameDefine
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
-	public const int iPriceDmgLv = 120; // 傷害等級價格
+	public const int iPriceDmgLv = 240; // 傷害等級價格
 	public const int iPriceBomb = 300; // 絕招價格
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
