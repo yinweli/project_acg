@@ -490,7 +490,7 @@ public class Rule
 		{
 			Member DataMember = PlayerData.pthis.Members[iPos];
 
-			iResult += DataMember.iLiveStage;
+			iResult += DataMember.iLiveStage + 1;
 
 			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 

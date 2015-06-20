@@ -51,12 +51,13 @@ public class PlayerCreater : MonoBehaviour
     public void SaveRole(GameObject pObj)
     {
         pPrePlayer = pObj;
-        iCount++;
 
-        PlayerData.pthis.Members.Add(CatchList[pObj]);        
+		PlayerData.pthis.Members.Add(CatchList[pObj]);        
         SysMain.pthis.Role.Add(pObj, iCount);
         ToolKit.CatchRole.Add(pObj, Rule.MemberThreat(iCount));
         SysMain.pthis.SaveGame();
+
+		iCount++;
 
         CatchList.Remove(pObj);
     }
