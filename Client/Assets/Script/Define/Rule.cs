@@ -441,7 +441,7 @@ public class Rule
 					bCriticalStrike = true;
 				}//if
 
-				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade;
+				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade + PlayerData.pthis.iDamageLv;
 			}//if
 		}//if
 

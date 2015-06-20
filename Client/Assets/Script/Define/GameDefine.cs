@@ -50,6 +50,7 @@ public class GameDefine
 	public const int iDamageClick = 3; // 點擊傷害值
 	public const int iDamageBomb = 300; // 絕招傷害值
 	public const int iDamageShield = 200; // 護盾傷害值
+	public const int iDamageLvCost = 300; // 傷害等級價格
 	
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.

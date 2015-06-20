@@ -155,6 +155,7 @@ public class SavePlayer
 	public int iCurrency = 0; // 通貨
 	public int iStamina = 0; // 耐力
 	public int iBomb = 0; // 絕招次數
+	public int iDamageLv = 0; // 傷害等級
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
