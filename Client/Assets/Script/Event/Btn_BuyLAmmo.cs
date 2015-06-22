@@ -15,6 +15,8 @@ public class Btn_BuyLAmmo : MonoBehaviour
     {
         if (PlayerData.pthis.iCurrency < GameDefine.iLightAmmoCost)
             GetComponent<UIButtonScale>().enabled = false;
+        else
+            GetComponent<UIButtonScale>().enabled = true;
     }
 
     void OnClick()

@@ -16,6 +16,8 @@ public class Btn_BuyBomb : MonoBehaviour
     {
         if (PlayerData.pthis.iCurrency < GameDefine.iPriceBomb)
             GetComponent<UIButtonScale>().enabled = false;
+        else
+            GetComponent<UIButtonScale>().enabled = true;
     }
     // ------------------------------------------------------------------
     void OnClick()

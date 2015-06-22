@@ -16,6 +16,8 @@ public class Btn_BuyDmg : MonoBehaviour
     {
         if (PlayerData.pthis.iCurrency < Rule.DmgLvMoney())
             GetComponent<UIButtonScale>().enabled = false;
+        else
+            GetComponent<UIButtonScale>().enabled = true;
     }
     // ------------------------------------------------------------------
     void OnClick()

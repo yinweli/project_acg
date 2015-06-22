@@ -16,6 +16,8 @@ public class Btn_BuyBattery : MonoBehaviour
     {
         if (PlayerData.pthis.iCurrency < GameDefine.iBatteryCost)
             GetComponent<UIButtonScale>().enabled = false;
+        else
+            GetComponent<UIButtonScale>().enabled = true;
     }
 
     void OnClick()
