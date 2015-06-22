@@ -14,7 +14,7 @@ public class GameDefine
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
-	public const int iPriceDmgLv = 240; // 傷害等級價格
+	public const int iPriceDmgLv = 180; // 傷害等級價格
 	public const int iPriceBomb = 300; // 絕招價格
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
@@ -71,8 +71,8 @@ public class GameDefine
 	public const int iObjtProb = 50; // 物件出現機率
 	public const int iObjtDec = 2; // 物件遞減機率
 
-	public const int iAdsMoneyBase = 100; // 廣告影片贈送金錢基礎值
-	public const int iAdsMoneyAdd = 12; // 廣告影片贈送金錢增加值
+	public const int iAdsMoneyBase = 200; // 廣告影片贈送金錢基礎值
+	public const int iAdsMoneyAdd = 16; // 廣告影片贈送金錢增加值
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPickupMember = 25; // 救援成員出現機率
