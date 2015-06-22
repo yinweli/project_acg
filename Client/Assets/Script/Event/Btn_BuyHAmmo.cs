@@ -16,6 +16,8 @@ public class Btn_BuyHAmmo : MonoBehaviour
     {
         if (PlayerData.pthis.iCurrency < GameDefine.iHeavyAmmoCost)
             GetComponent<UIButtonScale>().enabled = false;
+        else
+            GetComponent<UIButtonScale>().enabled = true;
     }
 
     void OnClick()
