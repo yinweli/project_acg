@@ -17,8 +17,6 @@ public class ToolKit : MonoBehaviour
         foreach (KeyValuePair<GameObject, int> itor in CatchRole)
             iTotal += itor.Value;
 
-        Debug.Log("Catch Role Count: " + CatchRole.Count + " Total: " + iTotal);
-
         int iPick = Random.Range(0, iTotal);
 
         foreach (KeyValuePair<GameObject, int> itor in CatchRole)
