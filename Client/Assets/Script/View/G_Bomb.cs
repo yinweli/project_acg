@@ -8,4 +8,9 @@ public class G_Bomb : MonoBehaviour
         SysBomb.pthis.BombDamage();
         Destroy(gameObject);
     }
+
+    public void BombSound()
+    {
+        NGUITools.PlaySound(Resources.Load("Sound/FX/Bomb") as AudioClip);
+    }
 }

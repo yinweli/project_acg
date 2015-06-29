@@ -3,12 +3,22 @@ using System.Collections;
 
 public class Btn_Bomb : MonoBehaviour 
 {
-    public UILabel pLbCount;
+    public UILabel pLbCount;    
     // 冷卻.
     public float fCoolDown = 0;
 
+    UIButton pBtn;
+
+    void Start()
+    {
+        pBtn = GetComponent<UIButton>();
+    }
+
     void Update()
     {
+        if (PlayerData.pthis.iBomb <= 0 && pBtn.isEnabled)
+            pBtn.isEnabled = false;
+
         pLbCount.text = PlayerData.pthis.iBomb.ToString();
     }
 
@@ -17,7 +27,7 @@ public class Btn_Bomb : MonoBehaviour
         if (fCoolDown > Time.time || PlayerData.pthis.iBomb <= 0)
             return;
 
-        GetComponent<UIButton>().isEnabled = false;
+        pBtn.isEnabled = false;
 
         // 播放大絕.
         SysBomb.pthis.StartBomb();
@@ -35,6 +45,6 @@ public class Btn_Bomb : MonoBehaviour
         while (fCoolDown > Time.time)
             yield return new WaitForEndOfFrame();
 
-        GetComponent<UIButton>().isEnabled = true;       
+        pBtn.isEnabled = true;       
     }
 }
