@@ -136,7 +136,7 @@ public class Rule
 		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
 	}
 	// 增加絕招次數
-	public static void BombaAdd(int iValue)
+	public static void BombAdd(int iValue)
 	{
 		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, PlayerData.pthis.iBomb + iValue);
 		PickupStat.pthis.Record(ENUM_Pickup.Bomb, iValue);

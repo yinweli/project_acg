@@ -42,6 +42,7 @@ public class Btn_OpenAds : MonoBehaviour
     public void ShowAd()
     {
         UnityAdsHelper.ShowAd(zoneID, RewardUser);
+		GoogleAnalytics.pthis.LogEvent("Count", "WatchAD", "", 0);
     }
 
     private void RewardUser()

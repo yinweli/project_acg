@@ -60,8 +60,11 @@ public class Btn_GetBomb : MonoBehaviour {
             ToolKit.MoveTo(gameObject, VecPos - pSprite.transform.position, 0.8f * fFrame);
             fFrame += 0.05f;
         }
+
+		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Bomb", "", 0);
+
         GameData.pthis.PickupList[iItemID].bPickup = true;
-        Rule.BombaAdd(GameData.pthis.PickupList[iItemID].iCount);
+		Rule.BombAdd(GameData.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateCurrency();
 
         Destroy(gameObject);

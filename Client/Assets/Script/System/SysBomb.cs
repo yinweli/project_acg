@@ -18,7 +18,7 @@ public class SysBomb : MonoBehaviour
 
     public void BombDamage()
     {
-		Rule.BombaAdd(-1);
+		Rule.BombAdd(-1);
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {

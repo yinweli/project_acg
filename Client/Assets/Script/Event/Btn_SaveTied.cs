@@ -25,6 +25,8 @@ public class Btn_SaveTied : MonoBehaviour
             // 減少被抓機率.
             if (ToolKit.CatchRole.ContainsKey(pPlayer.gameObject))
                 ToolKit.CatchRole[pPlayer.gameObject] += 20;
+
+			GoogleAnalytics.pthis.LogEvent("Count", "Untied Member", "", 0);
             pPlayer.bBeCaught = false;
             Destroy(gameObject);
         }

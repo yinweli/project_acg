@@ -55,12 +55,22 @@ public class Btn_GetResource : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
 
         Vector3 VecPos = Vector3.zero;
+
         if (enumType == ENUM_Resource.Battery)
+		{
             VecPos = P_UI.pthis.ObjBattery.transform.position;
+			GoogleAnalytics.pthis.LogEvent("Count", "Pickup Battery", "", 0);
+		}
         else if (enumType == ENUM_Resource.LightAmmo)
+		{
             VecPos = P_UI.pthis.ObjAmmoLight.transform.position;
+			GoogleAnalytics.pthis.LogEvent("Count", "Pickup LightAmmo", "", 0);
+		}
         else if (enumType == ENUM_Resource.HeavyAmmo)
+		{
             VecPos = P_UI.pthis.ObjAmmoHeavy.transform.position;
+			GoogleAnalytics.pthis.LogEvent("Count", "Pickup HeavyAmmo", "", 0);
+		}//if
 
         float fFrame = 1;
         while (Vector2.Distance(pSprite.transform.position, VecPos) > 0.03f)

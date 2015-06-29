@@ -30,11 +30,11 @@ public class Btn_BuyBomb : MonoBehaviour
             return;
         }
 
-        GoogleAnalytics.pthis.LogEvent("Buy", "Bomb", "Day" + PlayerData.pthis.iStage, GameDefine.iPriceBomb);
+		GoogleAnalytics.pthis.LogEvent("Count", "Buy Bomb", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         PlayerData.pthis.iCurrency -= GameDefine.iPriceBomb;
-        Rule.BombaAdd(GameDefine.iBombCount);
+		Rule.BombAdd(GameDefine.iBombCount);
         P_UI.pthis.UpdateCurrency();
         PlayerData.pthis.Save();
     }

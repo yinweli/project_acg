@@ -25,6 +25,8 @@ public class Btn_Bomb : MonoBehaviour
         // 計算冷卻.
         fCoolDown = Time.time + 3;
 
+		GoogleAnalytics.pthis.LogEvent("Count", "Use Bomb", "", 0);
+
         StartCoroutine(CoolDown());
     }
 
