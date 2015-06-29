@@ -8,7 +8,7 @@ public class P_Day : MonoBehaviour
 
     public void SetDay()
     {
-		GoogleAnalytics.pthis.LogEvent("Count", "Play Day" + PlayerData.pthis.iStage, "", 1);
+		GoogleAnalytics.pthis.LogEvent("Play", "Day" + PlayerData.pthis.iStage, "", 1);
         StartCoroutine(WaitFad());
         LbDay.text = "Day [e92121]" + PlayerData.pthis.iStage;
     }

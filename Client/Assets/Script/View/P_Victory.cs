@@ -11,7 +11,7 @@ public class P_Victory : MonoBehaviour
     void Start()
     {
 		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + PlayerData.pthis.iStage, "", GameData.pthis.iStageTime);
-		GoogleAnalytics.pthis.LogEvent("Count", "Victory Day" + PlayerData.pthis.iStage, "", 1);
+		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "", 1);
 
 		PickupStat.pthis.Report();
 
