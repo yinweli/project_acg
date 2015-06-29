@@ -9,10 +9,7 @@ public class P_Failed : MonoBehaviour
 
     void Start()
     {
-        GoogleAnalytics.pthis.LogScreen("Failed");
-        GoogleAnalytics.pthis.LogEvent("Failed", "Day" + PlayerData.pthis.iStage, "Time:" + PlayerData.pthis.iPlayTime, PlayerData.pthis.iPlayTime);
-        GoogleAnalytics.pthis.LogEvent("Failed", "Day" + PlayerData.pthis.iStage, "Kill:" + PlayerData.pthis.iEnemyKill, PlayerData.pthis.iEnemyKill);
-        GoogleAnalytics.pthis.LogEvent("Failed", "Day" + PlayerData.pthis.iStage, "Loss:" + PlayerData.pthis.iPlayerLost, PlayerData.pthis.iPlayerLost);
+		GoogleAnalytics.pthis.LogEvent("Count", "Failed Day" + PlayerData.pthis.iStage, "", 1);
 
         StartCoroutine(OpenPage());
         // 天數.

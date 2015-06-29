@@ -5,7 +5,6 @@ public class P_Login : MonoBehaviour
 {
     void Start()
     {
-        GoogleAnalytics.pthis.LogScreen("Login");
         // 選音樂.
         AudioCtrl.pthis.PlayMusic("Start");
 
