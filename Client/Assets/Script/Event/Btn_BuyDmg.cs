@@ -9,7 +9,7 @@ public class Btn_BuyDmg : MonoBehaviour
     void Start()
     {
         LbMoney.text = Rule.DmgLvMoney().ToString();
-        LbCount.text = "All +" + GameDefine.iDmgLvCount + "dmg";
+        LbCount.text = "All+" + GameDefine.iDmgLvCount + "dmg";
     }
     // ------------------------------------------------------------------
     void Update()
