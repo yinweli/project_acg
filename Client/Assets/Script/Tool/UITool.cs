@@ -26,6 +26,7 @@ public class UITool : MonoBehaviour {
     {
         GameObject pObj = NGUITools.AddChild(Parent, Resources.Load(string.Format("Prefab/Scene{0:00}/", iStyle) + Name) as GameObject);
         pObj.transform.localPosition = new Vector3(fPosX, fPosY);
+        pObj.transform.localScale = new Vector3(100, 100, 1);
 
         return pObj;
     }

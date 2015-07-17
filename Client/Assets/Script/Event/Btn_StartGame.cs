@@ -7,12 +7,12 @@ public class Btn_StartGame : MonoBehaviour
 
     void Start()
     {
-        gameObject.collider2D.enabled = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
     }    
 
 	void OnClick()
     {
-        gameObject.collider2D.enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
         pAni.Play("FadOut");
         StartCoroutine(DelayStart());
     }

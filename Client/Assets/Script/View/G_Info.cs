@@ -34,7 +34,7 @@ public class G_Info : MonoBehaviour
             DBFEquip pDBFEquip = GameDBF.This.GetEquip(PlayerData.pthis.Members[iID].iEquip) as DBFEquip;
 
             ObjBullet = UITool.pthis.CreateUI(S_Bullet, "Prefab/Item/G_" + (ENUM_Resource)pDBFEquip.Resource);
-            ObjBullet.collider2D.enabled = false;
+            ObjBullet.GetComponent<Collider2D>().enabled = false;
             p2DS = ObjBullet.GetComponentsInChildren<UI2DSprite>();
 
             for (int i = 0; i < p2DS.Length; i++)
