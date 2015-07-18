@@ -3,8 +3,6 @@ using System.Collections;
 
 public class G_Info : MonoBehaviour 
 {
-    public Shader pShader = null;
-
     public GameObject S_Weapon = null;
     public GameObject S_Bullet = null;
 
@@ -23,25 +21,19 @@ public class G_Info : MonoBehaviour
         {
             ObjWeapon = UITool.pthis.CreateUI(S_Weapon, "Prefab/" + (ENUM_Weapon)PlayerData.pthis.Members[iID].iEquip);
             ObjWeapon.transform.localPosition = new Vector3(-20,0,0);
-            UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
+            SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
-            for (int i = 0; i < p2DS.Length; i++)
-            {
-                p2DS[i].shader = pShader;
-                p2DS[i].depth = p2DS[i].depth + 20;
-            }
+            foreach (SpriteRenderer pRender in p2DS)
+                ToolKit.ChangeTo2DSprite(pRender);
 
             DBFEquip pDBFEquip = GameDBF.This.GetEquip(PlayerData.pthis.Members[iID].iEquip) as DBFEquip;
 
             ObjBullet = UITool.pthis.CreateUI(S_Bullet, "Prefab/Item/G_" + (ENUM_Resource)pDBFEquip.Resource);
             ObjBullet.GetComponent<Collider2D>().enabled = false;
-            p2DS = ObjBullet.GetComponentsInChildren<UI2DSprite>();
+            p2DS = ObjBullet.GetComponentsInChildren<SpriteRenderer>();
 
-            for (int i = 0; i < p2DS.Length; i++)
-            {
-                p2DS[i].shader = pShader;
-                p2DS[i].depth = p2DS[i].depth + 20;
-            }
+            foreach (SpriteRenderer pRender in p2DS)
+                ToolKit.ChangeTo2DSprite(pRender);
         }        
 
         if ((ENUM_Weapon)PlayerData.pthis.Members[iID].iEquip == ENUM_Weapon.Weapon_001 || (ENUM_Weapon)PlayerData.pthis.Members[iID].iEquip == ENUM_Weapon.Weapon_null)

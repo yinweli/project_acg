@@ -52,4 +52,18 @@ public class ToolKit : MonoBehaviour
         pObj.transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
     // ------------------------------------------------------------------
+    static public UI2DSprite ChangeTo2DSprite(SpriteRenderer pRender)
+    {
+        pRender.gameObject.transform.localScale = Vector3.one;
+        UI2DSprite pSprite = pRender.gameObject.AddComponent<UI2DSprite>();
+        pSprite.sprite2D = pRender.sprite;
+        pSprite.depth = pRender.sortingOrder;
+        pSprite.color = pRender.color;
+        pSprite.MakePixelPerfect();
+
+        Destroy(pRender);
+
+        return pSprite;
+    }
+    // ------------------------------------------------------------------
 }

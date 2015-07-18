@@ -7,9 +7,7 @@ public class Btn_GetResource : MonoBehaviour
 
     public ENUM_Resource enumType;
 
-    public Shader ClickShader;
-
-    public UI2DSprite pSprite;
+    public SpriteRenderer pSprite;
     public UILabel pLbCount;
     // ------------------------------------------------------------------
     void OnPress(bool bIsPress)
@@ -19,8 +17,8 @@ public class Btn_GetResource : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             NGUITools.PlaySound(Resources.Load("Sound/FX/GetItem") as AudioClip);
             // 變更為不受光.
-            pSprite.shader = ClickShader;
-            pSprite.depth = 5998;
+            pSprite.material = Resources.Load("Sprite") as Material;
+            pSprite.sortingLayerName = "Top";
             // 取得數量.
             pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
             GetComponent<Animator>().Play("GetItem");

@@ -6,7 +6,7 @@ public class G_Feature : MonoBehaviour
     public GameObject ObjGrid = null;
 	public UIButton BtnNext = null;
     public G_Info pInfo = null;
-
+    
     public int[] iFeature = null;
     public int[] iEquip = null;
 
@@ -58,13 +58,11 @@ public class G_Feature : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        Material pMaterial = Resources.Load("Diffuse") as Material;
-
         for (int i = 0; i < PlayerData.pthis.Members.Count; i++)
         {
             // 建立外觀.
             GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], PlayerData.pthis.Members[i].iSex, PlayerData.pthis.Members[i].iLook);
-            ObjHand[i] = ObjHuman.GetComponent<G_PLook>().SetShader(pMaterial, (ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
+            ObjHand[i] = ObjHuman.GetComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)PlayerData.pthis.Members[i].iEquip);
 
             // 顯示升級.
             ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(PlayerData.pthis.Members[i].iLiveStage);
@@ -82,7 +80,7 @@ public class G_Feature : MonoBehaviour
             if (iEquip[i] != 0)
             {                
                 yield return new WaitForSeconds(0.5f);
-                ObjGroup[i].GetComponent<G_ListRole>().ShowEquip(ObjHand[i], iEquip[i], pMaterial);
+                ObjGroup[i].GetComponent<G_ListRole>().ShowEquip(ObjHand[i], iEquip[i]);
             }
 
             yield return new WaitForSeconds(0.5f);

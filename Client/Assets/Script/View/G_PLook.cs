@@ -39,17 +39,24 @@ public class G_PLook : MonoBehaviour
         Destroy(this);
     }
 
-    public GameObject SetShader(Material pMaterial, ENUM_Weapon pWeapon)
+    public GameObject ChangeTo2DSprite(ENUM_Weapon pWeapon)
     {
         GameObject ObjRHand = null;
         SpriteRenderer[] Role = GetComponentsInChildren<SpriteRenderer>();
 
-        for (int i = 0; i < Role.Length; i++)
+        foreach (SpriteRenderer pRender in Role)
         {
-            Role[i].material = pMaterial;
+            UI2DSprite pSprite = ToolKit.ChangeTo2DSprite(pRender);
+
             // 取得右手.
-            if (Role[i].gameObject.name == "S_Hand_R")
-                ObjRHand = Role[i].gameObject.transform.parent.gameObject;
+            if (pSprite.gameObject.name == "S_Hand_R")
+                ObjRHand = pSprite.gameObject.transform.parent.gameObject;
+
+            if (pSprite.gameObject.name == "Eye_bg_L" || pSprite.gameObject.name == "Eye_bg_R")
+            {
+                pSprite.width = 12;
+                pSprite.height = 12;
+            }            
         }
 
         if (pWeapon != ENUM_Weapon.Weapon_null)
@@ -57,8 +64,8 @@ public class G_PLook : MonoBehaviour
             GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pWeapon);
             SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
-            for (int i = 0; i < p2DS.Length; i++)
-                p2DS[i].material = pMaterial;
+            foreach (SpriteRenderer pRender in p2DS)
+                ToolKit.ChangeTo2DSprite(pRender);
         }
 
         return ObjRHand;
