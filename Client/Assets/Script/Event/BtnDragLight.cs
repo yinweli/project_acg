@@ -3,8 +3,28 @@ using System.Collections;
 
 public class BtnDragLight : MonoBehaviour
 {
+    public UILabel pLbDrag;
+    public UILabel pLb;
     public GameObject ObjRange;
     public GameObject ObjRange_2;
+
+    void Start()
+    {
+        if (PlayerData.pthis.iStage != 1)
+        {
+            Destroy(pLbDrag);
+            Destroy(pLb);
+        }
+    }
+
+    void OnClick()
+    {
+        if (pLbDrag)
+            Destroy(pLbDrag.gameObject);
+
+        if (pLb)
+            Destroy(pLb.gameObject);
+    }
 
     void OnDrag(Vector2 delta)
     {
