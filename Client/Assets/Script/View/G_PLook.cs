@@ -6,7 +6,7 @@ public class G_PLook : MonoBehaviour
     public void SetLook(AIPlayer pAI, int iLayer, ENUM_Weapon pWeapon)
     {
         GameObject ObjRHand = null;
-        UI2DSprite[] Role = GetComponentsInChildren<UI2DSprite>();
+        SpriteRenderer[] Role = GetComponentsInChildren<SpriteRenderer>();
 
         // 取得右手.
         for (int i = 0; i < Role.Length; i++)
@@ -21,7 +21,7 @@ public class G_PLook : MonoBehaviour
             GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pAI.pWeapon);
 
             // 修改武器layer.
-            ToolKit.SetLayer(iLayer, ObjWeapon.GetComponentsInChildren<UI2DSprite>());
+            ToolKit.SetLayer(iLayer, ObjWeapon.GetComponentsInChildren<SpriteRenderer>());
 
             // 拿手電筒需替玩家加上光源.
             if (pWeapon == ENUM_Weapon.Weapon_001)
@@ -39,14 +39,14 @@ public class G_PLook : MonoBehaviour
         Destroy(this);
     }
 
-    public GameObject SetShader(Shader pShader, ENUM_Weapon pWeapon)
+    public GameObject SetShader(Material pMaterial, ENUM_Weapon pWeapon)
     {
         GameObject ObjRHand = null;
-        UI2DSprite[] Role = GetComponentsInChildren<UI2DSprite>();
+        SpriteRenderer[] Role = GetComponentsInChildren<SpriteRenderer>();
 
         for (int i = 0; i < Role.Length; i++)
         {
-            Role[i].shader = pShader;
+            Role[i].material = pMaterial;
             // 取得右手.
             if (Role[i].gameObject.name == "S_Hand_R")
                 ObjRHand = Role[i].gameObject.transform.parent.gameObject;
@@ -55,11 +55,11 @@ public class G_PLook : MonoBehaviour
         if (pWeapon != ENUM_Weapon.Weapon_null)
         {
             GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pWeapon);
-            UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
+            SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
             for (int i = 0; i < p2DS.Length; i++)
-                p2DS[i].shader = pShader;
-        }       
+                p2DS[i].material = pMaterial;
+        }
 
         return ObjRHand;
     }

@@ -47,15 +47,15 @@ public class G_ListRole : MonoBehaviour
         pObj.GetComponent<Lb_Feature>().SetFeature(iFeature);        
     }
 
-    public void ShowEquip(GameObject pHand, int iEquip, Shader pShader)
+    public void ShowEquip(GameObject pHand, int iEquip, Material pMaterial)
     {
         GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Weapon");
         pObj.transform.localPosition = new Vector3(0, -73, 0);
 
         GameObject ObjWeapon = UITool.pthis.CreateUI(pHand, "Prefab/" + (ENUM_Weapon)iEquip);
-        UI2DSprite[] p2DS = ObjWeapon.GetComponentsInChildren<UI2DSprite>();
+        SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
         for (int i = 0; i < p2DS.Length; i++)
-            p2DS[i].shader = pShader;
+            p2DS[i].material = pMaterial;
     }
 }

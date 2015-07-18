@@ -102,7 +102,7 @@ public class EnemyCreater : MonoBehaviour
             
             if (pEnemy && pEnemy.GetComponent<AIEnemy>())
             {
-                ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<UI2DSprite>());
+                ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<SpriteRenderer>());
                 pEnemy.GetComponent<AIEnemy>().iMonster = itor.iMonster;
                 pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;      
             }
@@ -130,8 +130,7 @@ public class EnemyCreater : MonoBehaviour
 
                 pObj.GetComponent<AIEnemy>().iMonster = iIndex;
 
-                ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
-                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
+                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<SpriteRenderer>());
 
                 iCount++;
                 yield return new WaitForSeconds(5.0f);
@@ -174,8 +173,7 @@ public class EnemyCreater : MonoBehaviour
                         break;
                 }
                 pObj.GetComponent<AIEnemy>().iMonster = ListEnemy[i];
-                ToolKit.SetShader(pShader, pObj.GetComponentsInChildren<UI2DSprite>());
-                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<UI2DSprite>());
+                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<SpriteRenderer>());
                 iCount++;
                 yield return new WaitForSeconds(0.05f);
             }

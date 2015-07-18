@@ -37,23 +37,11 @@ public class ToolKit : MonoBehaviour
         CatchRole.Clear();
     }
     // ------------------------------------------------------------------
-    static public void SetShader(Shader pShader, UI2DSprite[] pSprite)
-    {
-        for (int i = 0; i < pSprite.Length; i++)
-            pSprite[i].shader = pShader;
-    }
-    // ------------------------------------------------------------------
-    static public void SetLayer(int iLayer, UI2DSprite[] pSprite)
+    static public void SetLayer(int iLayer, SpriteRenderer[] pSprite)
     {
         // 切換layer.
         for (int i = 0; i < pSprite.Length; i++)
-        {
-            pSprite[i].depth = pSprite[i].depth + (iLayer * 30);
-
-            Vector3 vecPos = pSprite[i].gameObject.transform.localPosition;
-            vecPos.z = -0.00002f * (float)pSprite[i].depth;
-            pSprite[i].gameObject.transform.localPosition = vecPos;
-        }
+            pSprite[i].sortingOrder = pSprite[i].sortingOrder + (iLayer * 30);
     }
     // ------------------------------------------------------------------
     static public void MoveTo(GameObject pObj, Vector3 vecDirection, float fSpeed)
