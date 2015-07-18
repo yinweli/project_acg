@@ -44,7 +44,8 @@ public class G_ListRole : MonoBehaviour
     public void ShowFeature(int iFeature)
     {
         GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Feature");
-        pObj.GetComponent<Lb_Feature>().SetFeature(iFeature);        
+        pObj.GetComponent<Lb_Feature>().SetFeature(iFeature);
+        pObj.transform.localPosition = new Vector3(0, 30, 0);
     }
 
     public void ShowEquip(GameObject pHand, int iEquip)
