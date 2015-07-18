@@ -31,18 +31,18 @@
 {"GUID":"2021", "enUS":"Frozen", "zhTW":"\u51b0\u51cd"}
 {"GUID":"2022", "enUS":"Low-key", "zhTW":"\u4f4e\u8abf"}
 {"GUID":"2023", "enUS":"High-profile", "zhTW":"\u9192\u76ee"}
-{"GUID":"3001", "enUS":"[ffed00]sta limit[-][546ef2]+4[-]", "zhTW":""}
-{"GUID":"3002", "enUS":"[ffed00]sta limit[-][546ef2]+8[-]", "zhTW":""}
-{"GUID":"3003", "enUS":"[ffed00]sta limit[-][e92121]-4[-]", "zhTW":""}
-{"GUID":"3004", "enUS":"[ffed00]sta limit[-][e92121]-8[-]", "zhTW":""}
+{"GUID":"3001", "enUS":"[ffed00]sta ca[-][546ef2]p+4[-]", "zhTW":""}
+{"GUID":"3002", "enUS":"[ffed00]sta ca[-][546ef2]p+8[-]", "zhTW":""}
+{"GUID":"3003", "enUS":"[ffed00]sta ca[-][e92121]p-4[-]", "zhTW":""}
+{"GUID":"3004", "enUS":"[ffed00]sta ca[-][e92121]p-8[-]", "zhTW":""}
 {"GUID":"3005", "enUS":"[ffed00]sta regain[-][546ef2]+2[-]", "zhTW":""}
 {"GUID":"3006", "enUS":"[ffed00]sta regain[-][546ef2]+3[-]", "zhTW":""}
 {"GUID":"3007", "enUS":"[ffed00]sta regain[-][e92121]-2[-]", "zhTW":""}
 {"GUID":"3008", "enUS":"[ffed00]sta regain[-][e92121]-3[-]", "zhTW":""}
-{"GUID":"3009", "enUS":"[ffed00]critical[-][e92121]-20%[-]", "zhTW":""}
-{"GUID":"3010", "enUS":"[ffed00]critical[-][e92121]-10%[-]", "zhTW":""}
-{"GUID":"3011", "enUS":"[ffed00]critical[-][546ef2]+10%[-]", "zhTW":""}
-{"GUID":"3012", "enUS":"[ffed00]critical[-][546ef2]+20%[-]", "zhTW":""}
+{"GUID":"3009", "enUS":"[ffed00]crit[-][e92121]-20%[-]", "zhTW":""}
+{"GUID":"3010", "enUS":"[ffed00]crit[-][e92121]-10%[-]", "zhTW":""}
+{"GUID":"3011", "enUS":"[ffed00]crit[-][546ef2]+10%[-]", "zhTW":""}
+{"GUID":"3012", "enUS":"[ffed00]crit[-][546ef2]+20%[-]", "zhTW":""}
 {"GUID":"3013", "enUS":"[ffed00]damage[-][546ef2]+10[-]", "zhTW":""}
 {"GUID":"3014", "enUS":"[ffed00]damage[-][e92121]-10[-]", "zhTW":""}
 {"GUID":"3015", "enUS":"[ffed00]bomb[-][546ef2]+1[-]", "zhTW":""}
