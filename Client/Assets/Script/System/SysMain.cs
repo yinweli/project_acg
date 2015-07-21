@@ -24,6 +24,8 @@ public class SysMain : MonoBehaviour
     bool bIsOld = true;
 
     public float fSaveTime = 0;
+
+    bool bIsTalk = false;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -329,26 +331,12 @@ public class SysMain : MonoBehaviour
         foreach(KeyValuePair<GameObject, int> itor in Role)
         {
             int iRandom = Random.Range(0, 100);
-            if(iRandom < 50)
-            {
-                GameObject pObj = UITool.pthis.CreateUI(itor.Key, "Prefab/G_Talk") as GameObject;
-                if(iCount == 0)
-                    pObj.GetComponent<G_Talk>().Talk(false, pTalk, iCount);
-                else
-                    pObj.GetComponent<G_Talk>().Talk(true, pTalk, iCount);
-            }            
+            if (iCount == 0 && itor.Key.GetComponent<AIPlayer>())
+                itor.Key.GetComponent<AIPlayer>().RoleTalk(false, pTalk, iCount);
+            else if(iRandom < 45)
+                itor.Key.GetComponent<AIPlayer>().RoleTalk(true, pTalk, iCount);
+         
             iCount++;
         }
-    }
-    // ------------------------------------------------------------------
-    public void RoleTalk(GameObject pGObj, string pTalk)
-    {
-        int iRandom = Random.Range(0, 100);
-        if (iRandom < 50)
-        {
-            GameObject pObj = UITool.pthis.CreateUI(pGObj, "Prefab/G_Talk") as GameObject;
-            pObj.GetComponent<G_Talk>().Talk(true, pTalk, 0);
-        }
-        
     }
 }

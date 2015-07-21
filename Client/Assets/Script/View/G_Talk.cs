@@ -6,7 +6,7 @@ public class G_Talk : MonoBehaviour
     public UILabel pLb = null;
     public UISprite pSBg = null;
 
-    int iMaxRan = 5;
+    int iMaxRan = 6;
     // ------------------------------------------------------------------
     public void Talk(bool bNeedRan, string pTalk, int iSort)
     {
@@ -16,8 +16,8 @@ public class G_Talk : MonoBehaviour
     IEnumerator WaitTalk(bool bNeedRan, string pTalk, int iSort)
     {
         float fSec = 0.1f;
-        if (bNeedRan)
-            fSec = Random.Range(2.8f, 6.5f);
+        if (iSort != 0)
+            fSec = Random.Range(2.8f, 7.2f);
         
         yield return new WaitForSeconds(fSec);
 
@@ -40,7 +40,11 @@ public class G_Talk : MonoBehaviour
             pTalk = GetStrRun(iRandom);
         // 被抓住.
         else if (pTalk == "Help")
+        {
+            pLb.color = Color.red;
+            pLb.fontSize = 30;
             pTalk = GetStrHelp(iRandom);
+        }
 
         pLb.text = pTalk;
 
@@ -50,10 +54,15 @@ public class G_Talk : MonoBehaviour
         GetComponent<Animator>().Play("TalkFadIn");
 
         if (iRandom == iMaxRan)
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3.5f);
         else
-            yield return new WaitForSeconds(3);
-        
+            yield return new WaitForSeconds(2.8f);
+
+        EndTalk();
+    }
+    // ------------------------------------------------------------------
+    public void EndTalk()
+    {
         GetComponent<Animator>().Play("TalkFadOut");
     }
     // ------------------------------------------------------------------
@@ -65,7 +74,7 @@ public class G_Talk : MonoBehaviour
     string GetStrBattery(int iRan)
     {
         if (iRan == 0)
-            return "No!!!";
+            return "Find battery!";
         else if (iRan == 1)
             return "Gosh!";
         else if (iRan == 2)
@@ -74,6 +83,8 @@ public class G_Talk : MonoBehaviour
             return "Darkness Coming.";
         else if (iRan == 4)
             return "What happened?";
+        else if (iRan == 5)
+            return "I love Darkness.";
         else
             return "Flashlight running out of power.";
     }
@@ -83,13 +94,15 @@ public class G_Talk : MonoBehaviour
         if (iRan == 0)
             return "Run!!!";
         else if (iRan == 1)
-            return "Energetic!";
+            return "Full energy!";
         else if (iRan == 2)
             return "Too slow?";
         else if (iRan == 3)
             return "Can we Speed up?";
         else if (iRan == 4)
             return "I fell asleep.";
+        else if (iRan == 5)
+            return "GO!GO!GO!";
         else
             return "Time to full speed ahead.";
     }
@@ -101,11 +114,13 @@ public class G_Talk : MonoBehaviour
         else if (iRan == 1)
             return "Shot it!!!";
         else if (iRan == 2)
-            return "Kill Monster!!";
+            return "Kill Monsters!!";
         else if (iRan == 3)
             return "Please Don't!";
         else if (iRan == 4)
             return "He loves me!";
+        else if (iRan == 5)
+            return "Hands off!!";
         else
             return "Help me!";
     }

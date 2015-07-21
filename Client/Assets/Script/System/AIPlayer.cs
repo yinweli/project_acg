@@ -31,7 +31,8 @@ public class AIPlayer : MonoBehaviour
 
     public Vector3 VecDeadPos = Vector3.zero;
 
-    GameObject ObjCatch = null;    
+    GameObject ObjCatch = null;
+    GameObject ObjTalk = null;
     // ------------------------------------------------------------------
     public void Init(bool bIsIn,int iItemID, Member pMember)
 	{
@@ -175,7 +176,7 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = true;
 
-        SysMain.pthis.AllRoleTalk("Help");
+        RoleTalk(true, "Help", 0);
 
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
@@ -283,6 +284,15 @@ public class AIPlayer : MonoBehaviour
             ObjHuman.transform.localScale = new Vector3(-1 * iFaceTo, 1, 1);
 	}
     // ------------------------------------------------------------------
+    public void RoleTalk(bool bNeedRan, string pTalk, int iSort)
+    {
+        if (ObjTalk && ObjTalk.GetComponent<G_Talk>())
+            ObjTalk.GetComponent<G_Talk>().EndTalk();
+
+        ObjTalk = UITool.pthis.CreateUI(gameObject, "Prefab/G_Talk") as GameObject;
+        ObjTalk.GetComponent<G_Talk>().Talk(bNeedRan, pTalk, iSort);
+    }
+    // ------------------------------------------------------------------
     IEnumerator ResetDeadPos()
     {
         bool bCanReset = true;
@@ -302,5 +312,6 @@ public class AIPlayer : MonoBehaviour
                 VecDeadPos = Vector3.zero;
             }
         }        
-    }        
+    }
+    // ------------------------------------------------------------------
 }
