@@ -17,12 +17,12 @@ public class BtnDragLight : MonoBehaviour
         }
     }
 
-    void OnClick()
+    void OnPress(bool bIsDown)
     {
-        if (pLbDrag)
+        if (bIsDown && pLbDrag)
             Destroy(pLbDrag.gameObject);
 
-        if (pLb)
+        if (bIsDown && pLb)
             Destroy(pLb.gameObject);
     }
 

@@ -82,7 +82,6 @@ public class G_Feature : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 ObjGroup[i].GetComponent<G_ListRole>().ShowEquip(ObjHand[i], iEquip[i]);
             }
-
             yield return new WaitForSeconds(0.5f);
         }
 

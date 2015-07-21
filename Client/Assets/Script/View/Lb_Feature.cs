@@ -13,6 +13,6 @@ public class Lb_Feature : MonoBehaviour
 
 		pLb.text = GameDBF.This.GetLanguage(pDBFFeature.StrID);
         pSBg.width = pLb.width + 12;
-        pSBg.height = pLb.height + 5;
+        pSBg.height = pLb.height + 5;        
     }
 }
