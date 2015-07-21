@@ -174,6 +174,9 @@ public class AIPlayer : MonoBehaviour
 	public void BeCaught(GameObject ObjMonster, int iPos)
 	{
 		bBeCaught = true;
+
+        SysMain.pthis.AllRoleTalk("Help");
+
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
 		// 拿手電筒的不需要改目標.

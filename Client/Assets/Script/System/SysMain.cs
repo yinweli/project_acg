@@ -247,6 +247,9 @@ public class SysMain : MonoBehaviour
         
         Rule.StaminaAdd(iValue);
 
+        if (iValue > 0 && PlayerData.pthis.iStamina == PlayerData.pthis.iStaminaLimit)
+            AllRoleTalk("Run");
+
         // 冷卻後須等待耐力回復至10%才能移動.
         if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > PlayerData.pthis.iStaminaLimit / 10)
         {
@@ -317,5 +320,35 @@ public class SysMain : MonoBehaviour
         // 清空 敵人佇列.
         Enemy.Clear();
         AtkEnemy.Clear();
+    }
+    // ------------------------------------------------------------------
+    public void AllRoleTalk(string pTalk)
+    {
+        int iCount = 0;
+
+        foreach(KeyValuePair<GameObject, int> itor in Role)
+        {
+            int iRandom = Random.Range(0, 100);
+            if(iRandom < 50)
+            {
+                GameObject pObj = UITool.pthis.CreateUI(itor.Key, "Prefab/G_Talk") as GameObject;
+                if(iCount == 0)
+                    pObj.GetComponent<G_Talk>().Talk(false, pTalk, iCount);
+                else
+                    pObj.GetComponent<G_Talk>().Talk(true, pTalk, iCount);
+            }            
+            iCount++;
+        }
+    }
+    // ------------------------------------------------------------------
+    public void RoleTalk(GameObject pGObj, string pTalk)
+    {
+        int iRandom = Random.Range(0, 100);
+        if (iRandom < 50)
+        {
+            GameObject pObj = UITool.pthis.CreateUI(pGObj, "Prefab/G_Talk") as GameObject;
+            pObj.GetComponent<G_Talk>().Talk(true, pTalk, 0);
+        }
+        
     }
 }

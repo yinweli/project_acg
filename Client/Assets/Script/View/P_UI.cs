@@ -15,12 +15,11 @@ public class P_UI : MonoBehaviour
     public GameObject ObjBomb = null;
 
     public BtnRun pBtn = null;
+    public G_Stamina pSta = null;
     public UILabel pLbDayNum = null;
     public UILabel pLbDis = null;
     public UILabel pLbCurrency = null;
-    public UILabel pLbStamina = null;
     public UISprite[] pSBattery = new UISprite[5];
-    public UISprite[] pSStamina = new UISprite[10];
     public UILabel[] pLbBullet = new UILabel[(int)ENUM_Resource.Resource_Count-1];
     public List<G_Light> pListLight = new List<G_Light>();
 
@@ -125,6 +124,8 @@ public class P_UI : MonoBehaviour
 			}
 			else
 			{
+                if (iValue < 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] == 30)
+                    SysMain.pthis.AllRoleTalk("Battery");
 				for(int i = 0; i < pListLight.Count; i++)
 					pListLight[i].pAni.Play("NoPower");
 			}//if
@@ -186,27 +187,8 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateStamina()
     {
-        pLbStamina.text = PlayerData.pthis.iStamina.ToString() + "/" + PlayerData.pthis.iStaminaLimit;
-
-        for (int i = 0; i < pSStamina.Length; i++)
-            pSStamina[i].gameObject.SetActive(false);
-
-		int iActive = PlayerData.pthis.iStaminaLimit > 0 ? (int)(PlayerData.pthis.iStamina / ((float)PlayerData.pthis.iStaminaLimit / pSStamina.Length)) : 0;
-
-        if (iActive > pSStamina.Length)
-            iActive = pSStamina.Length;
-        else if (iActive == 0 && PlayerData.pthis.iStamina > 0)
-            iActive = 1;
-
-        for (int i = 0; i < iActive; i++)
-        {
-            if (iActive <= 2)
-                pSStamina[i].spriteName = "ui_com_003";
-            else
-                pSStamina[i].spriteName = "ui_com_005";
-
-            pSStamina[i].gameObject.SetActive(true);
-        }
+        if (pSta)
+            pSta.UpdateStamina();
     }
     // ------------------------------------------------------------------
 }

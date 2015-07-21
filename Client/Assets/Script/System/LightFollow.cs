@@ -16,5 +16,6 @@ public class LightFollow : MonoBehaviour
 
         Vector3 pPos = new Vector3(ObjTarget.transform.position.x, ObjTarget.transform.position.y, zPos);
         transform.position = pPos;
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + 15, transform.localPosition.z);
 	}
 }
