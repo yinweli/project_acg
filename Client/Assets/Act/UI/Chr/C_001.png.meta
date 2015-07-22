@@ -1,6 +1,56 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: C_eye_000
+    21300002: C_brow_001
+    21300004: C_foot_000
+    21300006: C_brow_500
+    21300008: C_brow_000
+    21300010: C_body_000
+    21300012: C_mouth_000
+    21300014: C_mouth_500
+    21300016: C_Hair_A_000
+    21300018: C_Hair_B_000
+    21300020: C_Hair_B_001
+    21300022: C_Adorn_A_000
+    21300024: W_000
+    21300026: W_001
+    21300028: E_001
+    21300030: E_100
+    21300032: C_hand_000
+    21300034: C_eyeline_000
+    21300036: C_face_000
+    21300038: C_Adorn_B_000
+    21300040: C_hr_000
+    21300042: W_002
+    21300044: W_100
+    21300046: C_Hair_A_001
+    21300048: C_Hair_A_002
+    21300050: C_Hair_B_002
+    21300052: C_Hair_A_003
+    21300054: C_Adorn_B_001
+    21300056: C_Adorn_B_002
+    21300058: T_001
+    21300060: T_002
+    21300062: T_003
+    21300064: T_004
+    21300066: T_005
+    21300068: T_Cobweb
+    21300070: W_003
+    21300072: W_004
+    21300074: W_005
+    21300076: W_006
+    21300078: E_002
+    21300080: T_006
+    21300082: C_Adorn_B_003
+    21300084: C_Hair_A_004
+    21300086: C_Hair_A_005
+    21300088: C_Adorn_B_004
+    21300090: C_Adorn_B_005
+    21300092: C_Adorn_B_006
+    21300094: C_Adorn_B_007
+    21300096: C_Adorn_B_008
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,6 +69,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -29,6 +82,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -534,3 +588,5 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
