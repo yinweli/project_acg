@@ -165,8 +165,7 @@ public class MapCreater : MonoBehaviour
 				Data.Pos = Rule.NextPickup();
 				Data.iType = (int)ENUM_Pickup.Member;
 				Data.iCount = 1;
-				Data.iSex = Random.Range(0, GameDefine.iMaxSex);
-				Data.iLook = Random.Range(0, GameDefine.iMaxLook);
+				Data.iLooks = Tool.RandomPick(GameDefine.MemberLooks);
 				Data.bPickup = false;
 				
 				GameData.pthis.PickupList.Add(Data);
@@ -190,8 +189,7 @@ public class MapCreater : MonoBehaviour
 			Data.Pos = Rule.NextPickup();
 			Data.iType = (int)ENUM_Pickup.LightAmmo;
 			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
-			Data.iSex = 0;
-			Data.iLook = 0;
+			Data.iLooks = 0;
 			Data.bPickup = false;
 			
 			GameData.pthis.PickupList.Add(Data);
@@ -205,8 +203,7 @@ public class MapCreater : MonoBehaviour
 			Data.Pos = Rule.NextPickup();
 			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
 			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
-			Data.iSex = 0;
-			Data.iLook = 0;
+			Data.iLooks = 0;
 			Data.bPickup = false;
 			
 			GameData.pthis.PickupList.Add(Data);
@@ -220,8 +217,7 @@ public class MapCreater : MonoBehaviour
 			Data.Pos = Rule.NextPickup();
 			Data.iType = (int)ENUM_Pickup.Battery;
 			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
-			Data.iSex = 0;
-			Data.iLook = 0;
+			Data.iLooks = 0;
 			Data.bPickup = false;
 			
 			GameData.pthis.PickupList.Add(Data);
@@ -235,8 +231,7 @@ public class MapCreater : MonoBehaviour
 			Data.Pos = Rule.NextPickup();
 			Data.iType = (int)ENUM_Pickup.Currency;
 			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
-			Data.iSex = 0;
-			Data.iLook = 0;
+			Data.iLooks = 0;
 			Data.bPickup = false;
 			
 			GameData.pthis.PickupList.Add(Data);
@@ -250,8 +245,7 @@ public class MapCreater : MonoBehaviour
 			Data.Pos = Rule.NextPickup();
 			Data.iType = (int)ENUM_Pickup.Bomb;
 			Data.iCount = 1;
-			Data.iSex = 0;
-			Data.iLook = 0;
+			Data.iLooks = 0;
 			Data.bPickup = false;
 			
 			GameData.pthis.PickupList.Add(Data);
@@ -324,7 +318,7 @@ public class MapCreater : MonoBehaviour
 				GameObject Obj = null;
 				
 				if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
-					PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iSex, itor.iLook);
+					PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iLooks);
 				else
 				{                
 					Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);

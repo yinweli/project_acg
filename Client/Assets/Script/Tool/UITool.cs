@@ -45,16 +45,8 @@ public class UITool : MonoBehaviour {
 	}
     // ------------------------------------------------------------------
     // 建立角色.
-    public GameObject CreateRole(GameObject Parent, int iSex, int iLook)
+    public GameObject CreateRole(GameObject Parent, int iLooks)
     {
-        string Name;
-        if (iSex == 0)  // 女生.
-            Name = string.Format("Girl_{0:000}", iLook);
-        else            // 男生
-            Name = string.Format("Boy_{0:000}", iLook);
-
-        GameObject pObj = NGUITools.AddChild(Parent, Resources.Load("Prefab/Chr/" + Name) as GameObject);
-
-        return pObj;
+		return NGUITools.AddChild(Parent, Resources.Load("Prefab/Chr/" + string.Format("Chr_{0:000}", iLooks)) as GameObject);
     }
 }

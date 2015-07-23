@@ -32,12 +32,12 @@ public class PlayerCreater : MonoBehaviour
         CatchList.Clear();
     }
     // ------------------------------------------------------------------
-    public void AddList(int iItemID, float fPosX, float fPosY, int iSex, int iLook)
+    public void AddList(int iItemID, float fPosX, float fPosY, int iLooks)
     {
         // 增加玩家資料.
         Member temp = new Member();
-        temp.iSex = iSex;
-        temp.iLook = iLook;
+
+        temp.iLooks = iLooks;
 
         GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "G_Player", fPosX, fPosY);
         pObj.transform.localPosition = new Vector3(fPosX, fPosY, -0.1f * (PlayerData.pthis.Members.Count + CatchList.Count));

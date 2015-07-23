@@ -14,7 +14,7 @@ public class RecordData : MonoBehaviour
 
 	void Awake()
 	{
-		pthis = this;        
+		pthis = this;
 	}
 	// 存檔.
 	public void Save()

@@ -117,15 +117,13 @@ public class Pickup
 	/* [Save] */ public MapCoor Pos = new MapCoor(); // 地圖座標
 	/* [Save] */ public int iType = 0; // 拾取列舉
 	/* [Save] */ public int iCount = 0; // 數量
-	/* [Save] */ public int iSex = 0; // 性別編號
-	/* [Save] */ public int iLook = 0; // 外觀編號
+	/* [Save] */ public int iLooks = 0; // 外觀編號
 	/* [Save] */ public bool bPickup = false; // 拾取旗標
 }
 
 public class Member
 {
-	/* [Save] */ public int iSex = 0; // 性別編號
-	/* [Save] */ public int iLook = 0; // 外觀編號
+	/* [Save] */ public int iLooks = 0; // 外觀編號
 	/* [Save] */ public int iEquip = 0; // 裝備編號
 	/* [Save] */ public int iLiveStage = 0; // 生存關卡數
 	/* [Save] */ public int iShield = 0; // 護盾次數
@@ -134,13 +132,11 @@ public class Member
 	/* [    ] */ public int iInvincibleTime = 0; // 無敵時間
 	/* [    ] */ public float fCriticalStrike = 0.0f; // 致命
 	/* [    ] */ public int iAddDamage = 0; // 增傷
-
 }
 
 public class SaveMember
 {
-	public int iSex = 0; // 性別編號
-	public int iLook = 0; // 外觀編號
+	public int iLooks = 0; // 外觀編號
 	public int iEquip = 0; // 裝備編號
 	public int iLiveStage = 0; // 生存關卡數
 	public int iShield = 0; // 護盾次數
@@ -222,4 +218,9 @@ public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
 		else
 			return RecordString().CompareTo(obj.RecordString());
 	}
+}
+
+public class SaveAtlas
+{
+	public string[] Data = new string[0]; // 圖鑑列表
 }

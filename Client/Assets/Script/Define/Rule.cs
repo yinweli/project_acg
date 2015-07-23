@@ -199,12 +199,11 @@ public class Rule
 		return PlayerData.pthis.Resource[iIndex] > iValue;
 	}
 	// 建立成員
-	public static void MemberAdd(int iSex, int iLook, int iEquip)
+	public static void MemberAdd(int iLooks, int iEquip)
 	{
 		Member MemberTemp = new Member();
 		
-		MemberTemp.iSex = iSex;
-		MemberTemp.iLook = iLook;
+		MemberTemp.iLooks = iLooks;
 		MemberTemp.iEquip = iEquip;
 
 		PlayerData.pthis.Members.Add(MemberTemp);
@@ -212,7 +211,7 @@ public class Rule
 	// 建立成員
 	public static void MemberAdd(int iEquip)
 	{
-		MemberAdd(Random.Range(0, GameDefine.iMaxSex), Random.Range(0, GameDefine.iMaxLook), iEquip);
+		MemberAdd(Tool.RandomPick(GameDefine.MemberLooks), iEquip);
 	}
 	// 建立成員
 	public static void MemberAdd()

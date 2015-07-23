@@ -51,7 +51,7 @@ public class AIPlayer : MonoBehaviour
 
         pWeapon = (ENUM_Weapon)pMember.iEquip;
         // 建立外觀.
-        ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iSex, pMember.iLook);
+        ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iLooks);
         // 設定武器.
         if (ObjHuman && ObjHuman.GetComponent<G_PLook>())
             ObjHuman.GetComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);

@@ -52,8 +52,7 @@ public class PlayerData : MonoBehaviour
 		{
 			SaveMember Temp = new SaveMember();
 			
-			Temp.iSex = Itor.iSex;
-			Temp.iLook = Itor.iLook;
+			Temp.iLooks = Itor.iLooks;
 			Temp.iEquip = Itor.iEquip;
 			Temp.iLiveStage = Itor.iLiveStage;
 			Temp.iShield = Itor.iShield;
@@ -95,8 +94,7 @@ public class PlayerData : MonoBehaviour
 		{
 			Member MemberTemp = new Member();
 			
-			MemberTemp.iSex = Itor.iSex;
-			MemberTemp.iLook = Itor.iLook;
+			MemberTemp.iLooks = Itor.iLooks;
 			MemberTemp.iEquip = Itor.iEquip;
 			MemberTemp.iLiveStage = Itor.iLiveStage;
 			MemberTemp.iShield = Itor.iShield;

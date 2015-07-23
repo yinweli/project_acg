@@ -33,8 +33,6 @@ public class GameDefine
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
 	public const int iMaxMember = 6; // 最大成員數
-	public const int iMaxSex = 2; // 最大性別數
-	public const int iMaxLook = 15; // 最大外觀數
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
@@ -102,21 +100,26 @@ public class GameDefine
 	public const string szSaveEnemy = "save_enemy_"; // 怪物資料存檔名稱
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
+	public const string szSaveAtlas = "save_atlas_"; // 圖鑑列表存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
 
-	public static readonly List<int> StageStyle = new List<int>() // 關卡風格列表
+	public static List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
         0, 1, 2, 3, 
 	};
-	public static readonly List<int> PickupRange = new List<int>() // 拾取範圍列表
+	public static List<int> MemberLooks = new List<int>() // 成員外觀列表
+	{
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+	};
+	public static List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{
 		-3, -2, -1, 1, 2, 3, 
 	};
-	public static readonly List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
+	public static List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
 	{
 		new MapCoor(1, 1), // 物件(1x1)
 		new MapCoor(1, 1), // 物件(1x1)
@@ -131,7 +134,7 @@ public class GameDefine
 		new MapCoor(2, 2), // 物件(2x2)
 		new MapCoor(2, 2), // 物件(2x2)
 	};
-	public static readonly MapCoor ObjtStart = new MapCoor(1, 1); // 起點物件尺寸
-	public static readonly MapCoor ObjtEnd = new MapCoor(3, 2); // 終點物件尺寸
-	public static readonly MapCoor ObjtBase = new MapCoor(1, 1); // 底圖物件尺寸
+	public static MapCoor ObjtStart = new MapCoor(1, 1); // 起點物件尺寸
+	public static MapCoor ObjtEnd = new MapCoor(3, 2); // 終點物件尺寸
+	public static MapCoor ObjtBase = new MapCoor(1, 1); // 底圖物件尺寸
 }
