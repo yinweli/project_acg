@@ -106,6 +106,7 @@ public class GameDefine
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
+	public const string szDBFAtlas = "Atlas"; // 圖鑑dbf名稱
 
 	public static List<int> StageStyle = new List<int>() // 關卡風格列表
 	{

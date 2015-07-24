@@ -15,6 +15,7 @@ public class GameDBF : MonoBehaviour
         Add<DBFFeature>(GameDefine.szDBFFeature);
         Add<DBFLanguage>(GameDefine.szDBFLanguage);
         Add<DBFMonster>(GameDefine.szDBFMonster);
+		Add<DBFAtlas>(GameDefine.szDBFAtlas);
 	}
 
     public void Add<T>(string szDBFName) where T : DBF
@@ -62,5 +63,13 @@ public class GameDBF : MonoBehaviour
 	public DBFItor GetMonster()
 	{
 		return m_DBF.Get(GameDefine.szDBFMonster);
+	}
+	public DBF GetAtlas(Argu GUID)
+	{
+		return m_DBF.Get(GameDefine.szDBFAtlas, GUID);
+	}
+	public DBFItor GetAtlas()
+	{
+		return m_DBF.Get(GameDefine.szDBFAtlas);
 	}
 }
