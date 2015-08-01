@@ -3,12 +3,12 @@ using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AtlasData : MonoBehaviour 
+public class DataAtlas : MonoBehaviour 
 {
-	static public AtlasData pthis = null;
+	static public DataAtlas pthis = null;
 	
 	/* Save */
-	public Dictionary<int, BitArray> Atlas = new Dictionary<int, BitArray>(); // 圖鑑列表
+	public Dictionary<int, BitArray> Data = new Dictionary<int, BitArray>(); // 圖鑑列表
 	
 	void Awake()
 	{
@@ -28,7 +28,7 @@ public class AtlasData : MonoBehaviour
 		BitArray Temp = new BitArray(szData.Length);
 
 		for(int iCount = 0; iCount < szData.Length; ++iCount)
-			Temp[iCount] = szData[iCount] == '0' ? false : true;
+			Temp[iCount] = szData[iCount] != '0';
 
 		return Temp;
 	}
@@ -37,14 +37,14 @@ public class AtlasData : MonoBehaviour
 	{
 		List<string> AtlasTemp = new List<string>();
 
-		foreach(KeyValuePair<int, BitArray> Itor in Atlas)
+		foreach(KeyValuePair<int, BitArray> Itor in Data)
 			AtlasTemp.Add(Itor.Key + "_" + BitArrayToString(Itor.Value));
 
-		SaveAtlas Data = new SaveAtlas();
+		SaveAtlas Temp = new SaveAtlas();
 
-		Data.Data = AtlasTemp.ToArray();
+		Temp.Data = AtlasTemp.ToArray();
 		
-		PlayerPrefs.SetString(GameDefine.szSaveAtlas, Json.ToString(Data));
+		PlayerPrefs.SetString(GameDefine.szSaveAtlas, Json.ToString(Temp));
 	}
 	// 讀檔.
 	public bool Load()
@@ -52,24 +52,24 @@ public class AtlasData : MonoBehaviour
 		if(PlayerPrefs.HasKey(GameDefine.szSaveAtlas) == false)
 			return false;
 		
-		SaveAtlas Data = Json.ToObject<SaveAtlas>(PlayerPrefs.GetString(GameDefine.szSaveAtlas));
+		SaveAtlas Temp = Json.ToObject<SaveAtlas>(PlayerPrefs.GetString(GameDefine.szSaveAtlas));
 		
-		if(Data == null)
+		if(Temp == null)
 			return false;
 
-		foreach(string Itor in Data.Data)
+		foreach(string Itor in Temp.Data)
 		{
 			string[] szTemp = Itor.Split(new char[] {'_'});
 
 			if(szTemp.Length >= 2)
-				Atlas.Add(System.Convert.ToInt32(szTemp[0]), StringToBitArray(szTemp[1]));
+				Data.Add(System.Convert.ToInt32(szTemp[0]), StringToBitArray(szTemp[1]));
 		}//for
 		
 		return true;
 	}
 	// 清除資料
-	public void ClearData()
+	public void Clear()
 	{
-		Atlas.Clear();
+		Data.Clear();
 	}
 }

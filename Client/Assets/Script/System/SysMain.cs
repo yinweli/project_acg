@@ -35,11 +35,11 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
     {
         // 讀取遊戲
-        bIsOld &= PlayerData.pthis.Load();
-        bIsOld &= GameData.pthis.Load();
-        bIsOld &= EnemyData.pthis.Load();
-        bIsOld &= MapData.pthis.Load();
-        RecordData.pthis.Load();
+        bIsOld &= DataPlayer.pthis.Load();
+        bIsOld &= DataGame.pthis.Load();
+        bIsOld &= DataEnemy.pthis.Load();
+        bIsOld &= DataMap.pthis.Load();
+        DataRecord.pthis.Load();
 
         if (!bIsOld)
             CreateNew();
@@ -50,14 +50,14 @@ public class SysMain : MonoBehaviour
         // 記錄遊戲時間.
         if (bIsGaming && fSaveTime <= Time.time)
         {
-            GameData.pthis.iStageTime += GameDefine.iSaveSec;
+            DataGame.pthis.iStageTime += GameDefine.iSaveSec;
             fSaveTime = Time.time + GameDefine.iSaveSec;
 
             SaveGame();
         }
 
         // 沒有玩家資料就算失敗了.
-        if (bIsGaming && PlayerData.pthis.Members.Count <= DeadRole.Count)
+        if (bIsGaming && DataPlayer.pthis.Members.Count <= DeadRole.Count)
             Failed();
 	}
     // ------------------------------------------------------------------
@@ -69,9 +69,9 @@ public class SysMain : MonoBehaviour
 	// 儲存遊戲.
 	public void SaveGame()
 	{
-        PlayerData.pthis.Save();
-        GameData.pthis.Save();
-        EnemyData.pthis.Save();
+        DataPlayer.pthis.Save();
+        DataGame.pthis.Save();
+        DataEnemy.pthis.Save();
 	}
     // ------------------------------------------------------------------
     // 確認存檔內容開始遊戲.
@@ -101,16 +101,16 @@ public class SysMain : MonoBehaviour
 
         bCanRun = true;
         // 重新計算數值.
-        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
+        DataPlayer.pthis.iStaminaLimit = Rule.StaminaLimit();
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
-		GameData.pthis.fRunDouble = 1.0f;
+		DataGame.pthis.fRunDouble = 1.0f;
 		
 		// 建立地圖物件.
-		MapCreater.pthis.ShowMap(GameData.pthis.iRoad);
+		MapCreater.pthis.ShowMap(DataGame.pthis.iRoad);
 		// 建立撿取物件.
-		MapCreater.pthis.ShowPickup(GameData.pthis.iRoad);
+		MapCreater.pthis.ShowPickup(DataGame.pthis.iRoad);
 
         // UI初始化.
         P_UI.pthis.StartNew();
@@ -136,24 +136,24 @@ public class SysMain : MonoBehaviour
         AudioCtrl.pthis.RedomMusic();
         Debug.Log("New Game");
         // 清空遊戲資料.
-        GameData.pthis.Clear();
+        DataGame.pthis.Clear();
         // 清空物件.
         ClearObj();
 
         // 重置跑步旗標.
         bCanRun = true;
         // 重新計算數值.
-        PlayerData.pthis.iStaminaLimit = Rule.StaminaLimit();
+        DataPlayer.pthis.iStaminaLimit = Rule.StaminaLimit();
         Rule.StaminaReset();
         Rule.StaminaRecovery();
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
 		Rule.BombReset();
 		Rule.ShieldReset();
-		GameData.pthis.fRunDouble = 1.0f;
+		DataGame.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.
-		PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
         // 建立新地圖資料.
         MapCreater.pthis.Create();
         // 建立地圖物件.
@@ -163,7 +163,7 @@ public class SysMain : MonoBehaviour
 		// 建立撿取物件.
 		MapCreater.pthis.ShowPickup(0);
 
-        MapData.pthis.Save();
+        DataMap.pthis.Save();
 
         // UI初始化.
         P_UI.pthis.StartNew();
@@ -183,13 +183,13 @@ public class SysMain : MonoBehaviour
     // 新遊戲資料.
     public void NewRoleData()
     {
-        PlayerData.pthis.iStage = 1;
-        PlayerData.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
-        PlayerData.pthis.iCurrency = 0;
-        PlayerData.pthis.iEnemyKill = 0;
-        PlayerData.pthis.iPlayTime = 0;
-        PlayerData.pthis.Resource = new List<int>();
-        PlayerData.pthis.Members = new List<Member>();
+        DataPlayer.pthis.iStage = 1;
+        DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+        DataPlayer.pthis.iCurrency = 0;
+        DataPlayer.pthis.iEnemyKill = 0;
+        DataPlayer.pthis.iPlayTime = 0;
+        DataPlayer.pthis.Resource = new List<int>();
+        DataPlayer.pthis.Members = new List<Member>();
 
         // 給與初始資源
         Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
@@ -216,7 +216,7 @@ public class SysMain : MonoBehaviour
         P_UI.pthis.StartRecoverSta();
         // 創建人物.
         if (bShowCount)
-            PlayerCreater.pthis.CreateByRoad(GameData.pthis.iRoad);
+            PlayerCreater.pthis.CreateByRoad(DataGame.pthis.iRoad);
         else
             PlayerCreater.pthis.StartNew();
         // 開始出怪.
@@ -228,7 +228,7 @@ public class SysMain : MonoBehaviour
     // 取得真實跑速
     public float GetMoveSpeed()
     {
-        return GameDefine.fBaseSpeed * GameData.pthis.fRunDouble;
+        return GameDefine.fBaseSpeed * DataGame.pthis.fRunDouble;
     }
     // ------------------------------------------------------------------
     // 增加耐力.
@@ -238,10 +238,10 @@ public class SysMain : MonoBehaviour
             return false;
 
         // 當扣除後低於0進入冷卻狀態.
-        if (bCanRun && PlayerData.pthis.iStamina + iValue <= 0)
+        if (bCanRun && DataPlayer.pthis.iStamina + iValue <= 0)
         {
-            PlayerData.pthis.iStamina = 0;
-            GameData.pthis.fRunDouble = 0;
+            DataPlayer.pthis.iStamina = 0;
+            DataGame.pthis.fRunDouble = 0;
             bCanRun = false;
             P_UI.pthis.UpdateStamina();
             return true;
@@ -249,14 +249,14 @@ public class SysMain : MonoBehaviour
         
         Rule.StaminaAdd(iValue);
 
-        if (iValue > 0 && PlayerData.pthis.iStamina == PlayerData.pthis.iStaminaLimit)
+        if (iValue > 0 && DataPlayer.pthis.iStamina == DataPlayer.pthis.iStaminaLimit)
             AllRoleTalk("Run");
 
         // 冷卻後須等待耐力回復至10%才能移動.
-        if (iValue > 0 && !bCanRun && PlayerData.pthis.iStamina + iValue > PlayerData.pthis.iStaminaLimit / 10)
+        if (iValue > 0 && !bCanRun && DataPlayer.pthis.iStamina + iValue > DataPlayer.pthis.iStaminaLimit / 10)
         {
             bCanRun = true;
-            GameData.pthis.fRunDouble = 1.0f;
+            DataGame.pthis.fRunDouble = 1.0f;
         }
 
         P_UI.pthis.UpdateStamina();
@@ -269,16 +269,16 @@ public class SysMain : MonoBehaviour
 
 		List<Member> NewMember = new List<Member>();
 
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 		{
 			if(DeadRole.Contains(iPos) == false)
-				NewMember.Add(PlayerData.pthis.Members[iPos]);
+				NewMember.Add(DataPlayer.pthis.Members[iPos]);
 		}//for
 
-		PlayerData.pthis.Members = NewMember;
-        PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
-        PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
-        PlayerData.pthis.iPlayerLost += GameData.pthis.iDead;
+		DataPlayer.pthis.Members = NewMember;
+        DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
+        DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
+        DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
 
         SaveGame();
 
@@ -292,9 +292,9 @@ public class SysMain : MonoBehaviour
     {
         bIsGaming = false;
 
-        PlayerData.pthis.iPlayTime += GameData.pthis.iStageTime;
-        PlayerData.pthis.iEnemyKill += GameData.pthis.iKill;
-        PlayerData.pthis.iPlayerLost += GameData.pthis.iDead;
+        DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
+        DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
+        DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
 
         EnemyCreater.pthis.StopCreate();
 

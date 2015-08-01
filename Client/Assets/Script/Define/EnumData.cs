@@ -115,4 +115,25 @@ public enum ENUM_Pickup
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
 	Bomb, // 絕招
+	Collection, // 收集物品
+}
+
+// 獎勵列舉
+public enum ENUM_Reward
+{
+	Null = 0, 
+	Upgrade, // 裝備升級
+	Looks, // 角色外觀
+}
+
+// 條件列舉
+public enum ENUM_Condition
+{
+	Null = 0, 
+	Collection, // 收集物品
+	Single_Stage, // 單輪通過關卡數量
+	Single_SaveMember, // 單輪救援成員人數
+	Single_LostMember, // 單輪失去成員人數
+	Total_CurrencyPickup, // 累積拾取金幣數量
+	Total_MonsterKill, // 累積擊敗怪物數量
 }

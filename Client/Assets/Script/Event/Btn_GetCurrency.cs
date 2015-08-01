@@ -20,7 +20,7 @@ public class Btn_GetCurrency : MonoBehaviour {
             pSprite.material = Resources.Load("Sprite") as Material;
             pSprite.sortingLayerName = "Top";
             // 取得數量.
-            pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
+            pLbCount.text = "+" + DataGame.pthis.PickupList[iItemID].iCount;
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
@@ -63,8 +63,8 @@ public class Btn_GetCurrency : MonoBehaviour {
 
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Currency", "", 0);
 
-        GameData.pthis.PickupList[iItemID].bPickup = true;
-		Rule.CurrencyAdd(GameData.pthis.PickupList[iItemID].iCount);
+        DataGame.pthis.PickupList[iItemID].bPickup = true;
+		Rule.CurrencyAdd(DataGame.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateCurrency();
 
         Destroy(gameObject);

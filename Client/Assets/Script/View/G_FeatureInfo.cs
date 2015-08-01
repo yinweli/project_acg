@@ -8,7 +8,7 @@ public class G_FeatureInfo : MonoBehaviour
 
     public void SetInfo(int iIndex, int iID)
     {
-        if (iIndex >= PlayerData.pthis.Members[iID].Feature.Count)
+        if (iIndex >= DataPlayer.pthis.Members[iID].Feature.Count)
         {
             gameObject.SetActive(false);
             return;
@@ -16,10 +16,10 @@ public class G_FeatureInfo : MonoBehaviour
         else
             gameObject.SetActive(true);
 
-        DBFFeature pDBFFeature = GameDBF.This.GetFeature(PlayerData.pthis.Members[iID].Feature[iIndex]) as DBFFeature;
+        DBFFeature pDBFFeature = GameDBF.pthis.GetFeature(DataPlayer.pthis.Members[iID].Feature[iIndex]) as DBFFeature;
 
-        S_Icon.spriteName = string.Format("ui_feature_{0:000}", PlayerData.pthis.Members[iID].Feature[iIndex]);
-        Lb_Src.text = GameDBF.This.GetLanguage(pDBFFeature.StrID) + "\n" + GameDBF.This.GetLanguage(pDBFFeature.Description);
+        S_Icon.spriteName = string.Format("ui_feature_{0:000}", DataPlayer.pthis.Members[iID].Feature[iIndex]);
+        Lb_Src.text = GameDBF.pthis.GetLanguage(pDBFFeature.StrID) + "\n" + GameDBF.pthis.GetLanguage(pDBFFeature.Description);
 
     }
 }

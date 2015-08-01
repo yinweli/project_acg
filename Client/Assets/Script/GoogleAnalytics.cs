@@ -37,7 +37,7 @@ public class GoogleAnalytics : MonoBehaviour {
         
 		title = WWW.EscapeURL(title);
 
-        string url = "http://www.google-analytics.com/collect?v=1&ul=" + GameData.pthis.Language + "&t=appview&sr=" + screenRes +
+        string url = "http://www.google-analytics.com/collect?v=1&ul=" + DataGame.pthis.Language + "&t=appview&sr=" + screenRes +
             "&an=" + WWW.EscapeURL(appName) + "&a=448166238&tid=" + propertyID + "&aid=" + bundleID + "&cid=" + WWW.EscapeURL(clientID) + "&_u=.sB&av=" + Version + "&_v=ma1b3&cd=" + title + "&qt=2500&z=185";
 		WWW request = new WWW(url);
         if (request.error != null)

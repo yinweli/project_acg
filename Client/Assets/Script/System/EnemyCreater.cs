@@ -36,13 +36,13 @@ public class EnemyCreater : MonoBehaviour
         iCount = 0;
 
         // 每10關為魔王關
-        Debug.Log("Now type: " + (float)PlayerData.pthis.iStage % 10);
-        if ((float)PlayerData.pthis.iStage % 10 == 0)
+        Debug.Log("Now type: " + (float)DataPlayer.pthis.iStage % 10);
+        if ((float)DataPlayer.pthis.iStage % 10 == 0)
             StartCoroutine(BossCreater());
         else
         {
             // 計算總波數能量：怪物能量 = (能量基礎值 + 關卡編號 * 能量增加值) * 額外能量加成
-            iEnegry = (int)((GameDefine.iBaseEngry + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeEnegry)) * (1.0f + Rule.FeatureF(ENUM_ModeFeature.AddEnegry)));
+            iEnegry = (int)((GameDefine.iBaseEngry + (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradeEnegry)) * (1.0f + Rule.FeatureF(ENUM_ModeFeature.AddEnegry)));
 
             StartCoroutine(Creater());
         }
@@ -71,7 +71,7 @@ public class EnemyCreater : MonoBehaviour
 		while (iTempEnegry > 0)
 		{
 			int iEnemy = LibCSNStandard.Tool.RandomPick(pEnemy);
-			DBFMonster DBFData = GameDBF.This.GetMonster(iEnemy) as DBFMonster;
+			DBFMonster DBFData = GameDBF.pthis.GetMonster(iEnemy) as DBFMonster;
 			
 			if (DBFData == null)
 			{
@@ -96,7 +96,7 @@ public class EnemyCreater : MonoBehaviour
     // 復原怪物.
     public void CreateOldEnemy()
     {
-        foreach (SaveEnemy itor in EnemyData.pthis.EnemyList)
+        foreach (SaveEnemy itor in DataEnemy.pthis.Data)
         {
             GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", itor.iMonster), itor.fPosX + CameraCtrl.transform.localPosition.x, itor.fPosY + CameraCtrl.transform.localPosition.y);
             
@@ -123,7 +123,7 @@ public class EnemyCreater : MonoBehaviour
                 // 等待2.0秒後出新魔王.
                 yield return new WaitForSeconds(2.0f);
 
-                int iIndex = 1000 + (PlayerData.pthis.iStage / 10 % 8 + 1);
+                int iIndex = 1000 + (DataPlayer.pthis.iStage / 10 % 8 + 1);
                 GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "Enemy/" + iIndex,
                     CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f),
                     CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));

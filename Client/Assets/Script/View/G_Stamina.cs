@@ -13,16 +13,16 @@ public class G_Stamina : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateStamina()
     {
-        pLbStamina.text = PlayerData.pthis.iStamina.ToString() + "/" + PlayerData.pthis.iStaminaLimit;
+        pLbStamina.text = DataPlayer.pthis.iStamina.ToString() + "/" + DataPlayer.pthis.iStaminaLimit;
 
         for (int i = 0; i < pSStamina.Length; i++)
             pSStamina[i].gameObject.SetActive(false);
 
-        int iActive = PlayerData.pthis.iStaminaLimit > 0 ? (int)(PlayerData.pthis.iStamina / ((float)PlayerData.pthis.iStaminaLimit / pSStamina.Length)) : 0;
+        int iActive = DataPlayer.pthis.iStaminaLimit > 0 ? (int)(DataPlayer.pthis.iStamina / ((float)DataPlayer.pthis.iStaminaLimit / pSStamina.Length)) : 0;
 
         if (iActive > pSStamina.Length)
             iActive = pSStamina.Length;
-        else if (iActive == 0 && PlayerData.pthis.iStamina > 0)
+        else if (iActive == 0 && DataPlayer.pthis.iStamina > 0)
             iActive = 1;
 
         for (int i = 0; i < iActive; i++)

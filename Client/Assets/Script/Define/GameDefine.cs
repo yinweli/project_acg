@@ -100,13 +100,16 @@ public class GameDefine
 	public const string szSaveEnemy = "save_enemy_"; // 怪物資料存檔名稱
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
-	public const string szSaveAtlas = "save_atlas_"; // 圖鑑列表存檔名稱
+	public const string szSaveAtlas = "save_atlas"; // 圖鑑列表存檔名稱
+	public const string szSaveCollection = "save_collection"; // 收集物品存檔名稱
+	public const string szSaveAchievement = "save_achievement"; // 成就存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
 	public const string szDBFAtlas = "Atlas"; // 圖鑑dbf名稱
+	public const string szDBFCollection = "Collection"; // 收集物品dbf名稱
 
 	public static List<int> StageStyle = new List<int>() // 關卡風格列表
 	{

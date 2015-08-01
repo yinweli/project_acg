@@ -20,7 +20,7 @@ public class Btn_GetResource : MonoBehaviour
             pSprite.material = Resources.Load("Sprite") as Material;
             pSprite.sortingLayerName = "Top";
             // 取得數量.
-            pLbCount.text = "+" + GameData.pthis.PickupList[iItemID].iCount;
+            pLbCount.text = "+" + DataGame.pthis.PickupList[iItemID].iCount;
             GetComponent<Animator>().Play("GetItem");
             // 飛行至定位.
             StartCoroutine(FlyToPos());
@@ -77,8 +77,8 @@ public class Btn_GetResource : MonoBehaviour
             ToolKit.MoveTo(gameObject, VecPos - pSprite.transform.position, 0.8f * fFrame);
             fFrame += 0.05f;
         }
-        GameData.pthis.PickupList[iItemID].bPickup = true;
-		Rule.ResourceAdd(enumType, GameData.pthis.PickupList[iItemID].iCount);
+        DataGame.pthis.PickupList[iItemID].bPickup = true;
+		Rule.ResourceAdd(enumType, DataGame.pthis.PickupList[iItemID].iCount);
         P_UI.pthis.UpdateResource();
 
         Destroy(gameObject);

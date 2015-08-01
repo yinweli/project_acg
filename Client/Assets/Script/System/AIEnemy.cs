@@ -27,7 +27,7 @@ public class AIEnemy : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		DBFData = GameDBF.This.GetMonster(iMonster) as DBFMonster;
+		DBFData = GameDBF.pthis.GetMonster(iMonster) as DBFMonster;
 
         SysMain.pthis.Enemy.Add(gameObject, DBFData.Threat);
 
@@ -103,7 +103,7 @@ public class AIEnemy : MonoBehaviour
         if (iHP <= 0)
         {
             NGUITools.PlaySound(ClipDead, 0.8f);
-            GameData.pthis.iKill++;
+            DataGame.pthis.iKill++;
             // 從可攻擊陣列移除.
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Remove(gameObject);       

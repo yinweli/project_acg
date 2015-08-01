@@ -3,9 +3,9 @@ using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameData : MonoBehaviour 
+public class DataGame : MonoBehaviour 
 {
-    static public GameData pthis = null;
+    static public DataGame pthis = null;
 
     public ENUM_Language Language = ENUM_Language.enUS; // 現在使用的語系.
 	/* Save */
@@ -15,7 +15,6 @@ public class GameData : MonoBehaviour
     public int iDead = 0; // 死亡數.
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
-
 	public List<Pickup> PickupList = new List<Pickup>(); // 地圖拾取列表
 
 	/* Not Save */
@@ -28,17 +27,17 @@ public class GameData : MonoBehaviour
 	// 存檔.
 	public void Save()
 	{
-		SaveGame Data = new SaveGame();
+		SaveGame Temp = new SaveGame();
 
-		Data.iStageTime = iStageTime;
-		Data.iKill = iKill;
-		Data.iAlive = iAlive;
-		Data.iDead = iDead;
-		Data.PickupList = PickupList.ToArray();
-		Data.iRoad = iRoad;
-		Data.bVictory = bVictory;
+		Temp.iStageTime = iStageTime;
+		Temp.iKill = iKill;
+		Temp.iAlive = iAlive;
+		Temp.iDead = iDead;
+		Temp.PickupList = PickupList.ToArray();
+		Temp.iRoad = iRoad;
+		Temp.bVictory = bVictory;
 		
-		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Data));
+		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Temp));
 	}
     // 讀檔.
 	public bool Load()
@@ -46,23 +45,23 @@ public class GameData : MonoBehaviour
 		if(PlayerPrefs.HasKey(GameDefine.szSaveGame) == false)
 			return false;
 		
-		SaveGame Data = Json.ToObject<SaveGame>(PlayerPrefs.GetString(GameDefine.szSaveGame));
+		SaveGame Temp = Json.ToObject<SaveGame>(PlayerPrefs.GetString(GameDefine.szSaveGame));
 		
-		if(Data == null)
+		if(Temp == null)
 			return false;
 
-		iStageTime = Data.iStageTime;
-		iKill = Data.iKill;
-		iAlive = Data.iAlive;
-		iDead = Data.iDead;
-		iRoad = Data.iRoad;
-		bVictory = Data.bVictory;
-		PickupList = new List<Pickup>(Data.PickupList);
+		iStageTime = Temp.iStageTime;
+		iKill = Temp.iKill;
+		iAlive = Temp.iAlive;
+		iDead = Temp.iDead;
+		iRoad = Temp.iRoad;
+		bVictory = Temp.bVictory;
+		PickupList = new List<Pickup>(Temp.PickupList);
 		
 		return true;
 	}
 	// 清除資料
-    public void ClearData()
+    public void Clear()
     {
         iStageTime = 0;
         iKill = 0;
@@ -73,9 +72,9 @@ public class GameData : MonoBehaviour
 		PickupList.Clear();
     }
 	// 清除存檔
-	public void Clear()
+	public void ClearSave()
 	{
-		ClearData();
+		Clear();
 		PlayerPrefs.DeleteKey(GameDefine.szSaveGame);
 	}
 }

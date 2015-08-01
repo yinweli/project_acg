@@ -46,7 +46,7 @@ public class AIPlayer : MonoBehaviour
         }
 
         // 有盾套盾.
-        if (iPlayer < PlayerData.pthis.Members.Count && PlayerData.pthis.Members[iPlayer].iShield > 0)
+        if (iPlayer < DataPlayer.pthis.Members.Count && DataPlayer.pthis.Members[iPlayer].iShield > 0)
             ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
 
         pWeapon = (ENUM_Weapon)pMember.iEquip;
@@ -222,7 +222,7 @@ public class AIPlayer : MonoBehaviour
             ToolKit.CatchRole.Remove(gameObject);
         SysMain.pthis.DeadRole.Add(iPlayer);
         SysMain.pthis.Role.Remove(gameObject);
-        GameData.pthis.iDead++;
+        DataGame.pthis.iDead++;
 
         Destroy(gameObject);
     }

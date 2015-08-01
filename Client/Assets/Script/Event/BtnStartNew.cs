@@ -8,7 +8,7 @@ public class BtnStartNew : MonoBehaviour
 
 	void OnClick()
     {
-        PlayerData.pthis.iStage++;
+        DataPlayer.pthis.iStage++;
 
         SysMain.pthis.NewStage();
         Destroy(pPanel);

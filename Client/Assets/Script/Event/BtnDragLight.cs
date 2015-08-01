@@ -10,7 +10,7 @@ public class BtnDragLight : MonoBehaviour
 
     void Start()
     {
-        if (PlayerData.pthis.iStage != 1)
+        if (DataPlayer.pthis.iStage != 1)
         {
             Destroy(pLbDrag);
             Destroy(pLb);

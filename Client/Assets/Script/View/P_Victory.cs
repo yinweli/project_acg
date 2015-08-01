@@ -10,21 +10,21 @@ public class P_Victory : MonoBehaviour
 	
     void Start()
     {
-		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + PlayerData.pthis.iStage, "", GameData.pthis.iStageTime);
-		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + PlayerData.pthis.iStage, "", 1);
+		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
+		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
 
 		PickupStat.pthis.Report();
 
         // 天數.
-        pLb[0].text = PlayerData.pthis.iStage.ToString();
+        pLb[0].text = DataPlayer.pthis.iStage.ToString();
         // 關卡時間.
-        pLb[1].text = string.Format("{0:00}:{1:00}:{2:00}",GameData.pthis.iStageTime / 3600 ,(GameData.pthis.iStageTime / 60) % 60, GameData.pthis.iStageTime % 60);
+        pLb[1].text = string.Format("{0:00}:{1:00}:{2:00}",DataGame.pthis.iStageTime / 3600 ,(DataGame.pthis.iStageTime / 60) % 60, DataGame.pthis.iStageTime % 60);
         // 殺怪數.
-        pLb[2].text = GameData.pthis.iKill.ToString();
+        pLb[2].text = DataGame.pthis.iKill.ToString();
         // 殘餘人數.
-        pLb[3].text = PlayerData.pthis.Members.Count.ToString();
+        pLb[3].text = DataPlayer.pthis.Members.Count.ToString();
         // 死亡人數.
-        pLb[4].text = GameData.pthis.iDead.ToString();
+        pLb[4].text = DataGame.pthis.iDead.ToString();
 
         AudioCtrl.pthis.pMusic.volume = 0.5f;
         NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);

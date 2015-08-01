@@ -32,16 +32,16 @@ public class PickupStat : MonoBehaviour
 
 			switch((ENUM_Pickup)Itor)
 			{
-			case ENUM_Pickup.Member: Temp.iInitial = PlayerData.pthis.Members.Count; break;
-			case ENUM_Pickup.Currency: Temp.iInitial = PlayerData.pthis.iCurrency; break;
-			case ENUM_Pickup.Battery: Temp.iInitial = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery]; break;
-			case ENUM_Pickup.LightAmmo: Temp.iInitial = PlayerData.pthis.Resource[(int)ENUM_Resource.LightAmmo]; break;
-			case ENUM_Pickup.HeavyAmmo: Temp.iInitial = PlayerData.pthis.Resource[(int)ENUM_Resource.HeavyAmmo]; break;
-			case ENUM_Pickup.Bomb: Temp.iInitial = PlayerData.pthis.iBomb; break;
+			case ENUM_Pickup.Member: Temp.iInitial = DataPlayer.pthis.Members.Count; break;
+			case ENUM_Pickup.Currency: Temp.iInitial = DataPlayer.pthis.iCurrency; break;
+			case ENUM_Pickup.Battery: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery]; break;
+			case ENUM_Pickup.LightAmmo: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.LightAmmo]; break;
+			case ENUM_Pickup.HeavyAmmo: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.HeavyAmmo]; break;
+			case ENUM_Pickup.Bomb: Temp.iInitial = DataPlayer.pthis.iBomb; break;
 			default: break;
 			}//switch
 
-			foreach(Pickup ItorPickup in GameData.pthis.PickupList)
+			foreach(Pickup ItorPickup in DataGame.pthis.PickupList)
 			{
 				if(Itor == ItorPickup.iType)
 					Temp.iAvailable += ItorPickup.iCount;
@@ -67,7 +67,7 @@ public class PickupStat : MonoBehaviour
 	}
 	public void Report()
 	{
-		string szReport = string.Format("Day{0} [{1}]\n", PlayerData.pthis.iStage, System.DateTime.Now);
+		string szReport = string.Format("Day{0} [{1}]\n", DataPlayer.pthis.iStage, System.DateTime.Now);
 
 		szReport += string.Format("Name, Initial, Available, Obtain, Used\n");
 

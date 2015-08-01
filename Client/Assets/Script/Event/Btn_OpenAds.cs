@@ -19,7 +19,7 @@ public class Btn_OpenAds : MonoBehaviour
 
     void Update()
     {
-        if (PlayerData.pthis.iAdsWatch >= PlayerData.pthis.iStage)
+        if (DataPlayer.pthis.iAdsWatch >= DataPlayer.pthis.iStage)
         {
             GetComponent<UIButton>().isEnabled = false;
             pLb.color = Color.gray;
@@ -48,14 +48,14 @@ public class Btn_OpenAds : MonoBehaviour
     private void RewardUser()
     {
         // 增加獎勵.
-        if (PlayerData.pthis.iStage - PlayerData.pthis.iAdsWatch > 0)
+        if (DataPlayer.pthis.iStage - DataPlayer.pthis.iAdsWatch > 0)
         {
             // 播給錢聲音.
             NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
             // 給錢.
             Rule.CurrencyAdd(Rule.AdsMoney());
 			// 已觀看次數增加.
-			PlayerData.pthis.iAdsWatch++;
+			DataPlayer.pthis.iAdsWatch++;
             // 存檔.
             SysMain.pthis.SaveGame();
 			P_UI.pthis.UpdateCurrency();

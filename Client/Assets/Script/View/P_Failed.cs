@@ -9,25 +9,25 @@ public class P_Failed : MonoBehaviour
 
     void Start()
     {
-		GoogleAnalytics.pthis.LogEvent("Failed", "Day" + PlayerData.pthis.iStage, "", 1);
+		GoogleAnalytics.pthis.LogEvent("Failed", "Day" + DataPlayer.pthis.iStage, "", 1);
 
         StartCoroutine(OpenPage());
         // 天數.
-        pLb[0].text = PlayerData.pthis.iStage.ToString();
+        pLb[0].text = DataPlayer.pthis.iStage.ToString();
         // 關卡時間.
-        pLb[1].text = string.Format("{0:00}:{1:00}:{2:00}", PlayerData.pthis.iPlayTime / 3600, (PlayerData.pthis.iPlayTime / 60) % 60, PlayerData.pthis.iPlayTime % 60);
+        pLb[1].text = string.Format("{0:00}:{1:00}:{2:00}", DataPlayer.pthis.iPlayTime / 3600, (DataPlayer.pthis.iPlayTime / 60) % 60, DataPlayer.pthis.iPlayTime % 60);
         // 殺怪數.
-        pLb[2].text = PlayerData.pthis.iEnemyKill.ToString();
+        pLb[2].text = DataPlayer.pthis.iEnemyKill.ToString();
 
         AudioCtrl.pthis.pMusic.volume = 0.5f;
         NGUITools.PlaySound(Resources.Load("Sound/FX/Fail") as AudioClip);
 
         // 比較紀錄.
-        ObjRecord.SetActive(RecordData.pthis.RecordNow());
+        ObjRecord.SetActive(DataRecord.pthis.RecordNow());
 
         // 重設存檔與遊戲檔案.
-        PlayerData.pthis.Clear();
-        GameData.pthis.Clear();
+        DataPlayer.pthis.Clear();
+        DataGame.pthis.Clear();
 
 		// 設為新遊戲.
 		SysMain.pthis.NewRoleData();        

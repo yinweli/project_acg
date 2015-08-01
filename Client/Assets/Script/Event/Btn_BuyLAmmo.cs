@@ -13,7 +13,7 @@ public class Btn_BuyLAmmo : MonoBehaviour
 
     void Update()
     {
-        if (PlayerData.pthis.iCurrency < GameDefine.iLightAmmoCost)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iLightAmmoCost)
             GetComponent<UIButtonScale>().enabled = false;
         else
             GetComponent<UIButtonScale>().enabled = true;
@@ -22,7 +22,7 @@ public class Btn_BuyLAmmo : MonoBehaviour
     void OnClick()
     {
         // 檢查金錢是否足夠.
-        if (PlayerData.pthis.iCurrency < GameDefine.iLightAmmoCost)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iLightAmmoCost)
         {
             // 錢不夠要表演叭叭.
             GetComponent<Animator>().Play("CantBuy");
@@ -32,11 +32,11 @@ public class Btn_BuyLAmmo : MonoBehaviour
 		GoogleAnalytics.pthis.LogEvent("Count", "Buy LightAmmo", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
-        PlayerData.pthis.iCurrency -= GameDefine.iLightAmmoCost;
+        DataPlayer.pthis.iCurrency -= GameDefine.iLightAmmoCost;
 		Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iLightAmmoCount);
         P_UI.pthis.UpdateCurrency();
         P_UI.pthis.UpdateResource();
-        PlayerData.pthis.Save();
+        DataPlayer.pthis.Save();
     }
 
     public void PlaySound()

@@ -14,7 +14,7 @@ public class Btn_BuyDmg : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        if (PlayerData.pthis.iCurrency < Rule.DmgLvMoney())
+        if (DataPlayer.pthis.iCurrency < Rule.DmgLvMoney())
             GetComponent<UIButtonScale>().enabled = false;
         else
             GetComponent<UIButtonScale>().enabled = true;
@@ -23,7 +23,7 @@ public class Btn_BuyDmg : MonoBehaviour
     void OnClick()
     {
         // 檢查金錢是否足夠.
-        if (PlayerData.pthis.iCurrency < Rule.DmgLvMoney())
+        if (DataPlayer.pthis.iCurrency < Rule.DmgLvMoney())
         {
             // 錢不夠要表演叭叭.
             GetComponent<Animator>().Play("CantBuy");
@@ -33,10 +33,10 @@ public class Btn_BuyDmg : MonoBehaviour
 		GoogleAnalytics.pthis.LogEvent("Count", "Buy AddDmg", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
-        PlayerData.pthis.iCurrency -= Rule.DmgLvMoney();
-        PlayerData.pthis.iDamageLv++;
+        DataPlayer.pthis.iCurrency -= Rule.DmgLvMoney();
+        DataPlayer.pthis.iDamageLv++;
         P_UI.pthis.UpdateCurrency();
-        PlayerData.pthis.Save();
+        DataPlayer.pthis.Save();
         // 更新價格.
         LbMoney.text = Rule.DmgLvMoney().ToString();
     }

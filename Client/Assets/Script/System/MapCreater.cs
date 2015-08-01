@@ -28,17 +28,17 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖道路
 	private void CreateRoad()
 	{
-		int iRoadSize = GameDefine.iRoadSizeBase + (int)(PlayerData.pthis.iStage * GameDefine.fUpgradeRoad); // 取得地圖道路長度
+		int iRoadSize = GameDefine.iRoadSizeBase + (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradeRoad); // 取得地圖道路長度
 		RandDir Dir = new RandDir();
 		
 		while(iRoadSize > 0)
 		{
-			foreach(MapCoor Itor in Rule.NextPath(Dir.Get(), MapData.pthis.RoadList.Count > 0 ? MapData.pthis.RoadList[MapData.pthis.RoadList.Count - 1] : null))
+			foreach(MapCoor Itor in Rule.NextPath(Dir.Get(), DataMap.pthis.DataRoad.Count > 0 ? DataMap.pthis.DataRoad[DataMap.pthis.DataRoad.Count - 1] : null))
 			{
 				if(iRoadSize > 0)
 				{
 					UpdateSize(Itor);
-					MapData.pthis.RoadList.Add(Itor);
+					DataMap.pthis.DataRoad.Add(Itor);
 					--iRoadSize; // 減少還需要產生的地圖道路長度
 				}//if
 			}//for
@@ -47,9 +47,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖起點
 	private void CreateStart()
 	{
-		if(MapData.pthis.RoadList.Count > 0)
+		if(DataMap.pthis.DataRoad.Count > 0)
 		{
-			MapCoor Road = MapData.pthis.RoadList[0];
+			MapCoor Road = DataMap.pthis.DataRoad[0];
 
 			if(Road.Y > 0)
 			{
@@ -60,7 +60,7 @@ public class MapCreater : MonoBehaviour
 				Data.Width = GameDefine.ObjtStart.X;
 				Data.Height = GameDefine.ObjtStart.Y;
 
-				MapData.pthis.ObjtList.Add(Data);
+				DataMap.pthis.DataObjt.Add(Data);
 				UpdateSize(Data.Pos);
 			}//if
 		}//if
@@ -68,9 +68,9 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖終點
 	private void CreateEnd()
 	{
-		if(MapData.pthis.RoadList.Count > 0)
+		if(DataMap.pthis.DataRoad.Count > 0)
 		{
-			MapCoor Road = MapData.pthis.RoadList[MapData.pthis.RoadList.Count - 1];
+			MapCoor Road = DataMap.pthis.DataRoad[DataMap.pthis.DataRoad.Count - 1];
 			MapObjt Data = new MapObjt();
 			
 			Data.Pos = new MapCoor(Road.X - 1, Road.Y + 1);
@@ -78,14 +78,14 @@ public class MapCreater : MonoBehaviour
 			Data.Width = GameDefine.ObjtEnd.X;
 			Data.Height = GameDefine.ObjtEnd.Y;
 			
-			MapData.pthis.ObjtList.Add(Data);
+			DataMap.pthis.DataObjt.Add(Data);
 			UpdateSize(Data.Pos);
 		}//if
 	}
 	// 建立地圖物件
 	private void CreateObjt()
 	{
-		foreach(MapCoor Itor in MapData.pthis.RoadList)
+		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 		{
 			foreach(ENUM_Dir ItorDir in System.Enum.GetValues(typeof(ENUM_Dir)))
 			{
@@ -110,13 +110,13 @@ public class MapCreater : MonoBehaviour
 
 							bool bCheck = true;
 							
-							foreach(MapCoor ItorRoad in MapData.pthis.RoadList)
+							foreach(MapCoor ItorRoad in DataMap.pthis.DataRoad)
 							{
 								if(Data.Cover(ItorRoad))
 									bCheck &= false;
 							}//for
 							
-							foreach(MapObjt ItorObjt in MapData.pthis.ObjtList)
+							foreach(MapObjt ItorObjt in DataMap.pthis.DataObjt)
 							{
 								if(Data.Cover(ItorObjt))
 									bCheck &= false;
@@ -124,7 +124,7 @@ public class MapCreater : MonoBehaviour
 							
 							if(bCheck)
 							{
-								MapData.pthis.ObjtList.Add(Data);
+								DataMap.pthis.DataObjt.Add(Data);
 								UpdateSize(Data.Pos);
 							}//if
 						}//if
@@ -139,14 +139,14 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖拾取
 	public void CreatePickup()
 	{
-		GameData.pthis.PickupList.Clear();
+		DataGame.pthis.PickupList.Clear();
 
 		// 檢查隊伍裡是否沒有光源裝備
 		bool bLight = false;
 		
-		foreach(Member ItorMember in PlayerData.pthis.Members)
+		foreach(Member ItorMember in DataPlayer.pthis.Members)
 		{
-			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
 			
 			if(Data == null)
 				continue;
@@ -156,9 +156,9 @@ public class MapCreater : MonoBehaviour
 		}//for
 		
 		// 成員拾取
-		if(PlayerData.pthis.Members.Count < GameDefine.iMaxMember)
+		if(DataPlayer.pthis.Members.Count < GameDefine.iMaxMember)
 		{
-			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - PlayerData.pthis.Members.Count) * GameDefine.iPickupMember)
+			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - DataPlayer.pthis.Members.Count) * GameDefine.iPickupMember)
 			{
 				Pickup Data = new Pickup();
 				
@@ -168,7 +168,7 @@ public class MapCreater : MonoBehaviour
 				Data.iLooks = Tool.RandomPick(GameDefine.MemberLooks);
 				Data.bPickup = false;
 				
-				GameData.pthis.PickupList.Add(Data);
+				DataGame.pthis.PickupList.Add(Data);
 			}//if
 		}//if
 
@@ -179,7 +179,7 @@ public class MapCreater : MonoBehaviour
 		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
 		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
 		// 額外拾取價值
-		int iExteraValue = (int)(PlayerData.pthis.iStage * GameDefine.fUpgradePickup);
+		int iExteraValue = (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradePickup);
 
 		// 輕型彈藥拾取
 		for(int iCount = 0; iCount < iPickupLightAmmo; ++iCount)
@@ -192,7 +192,7 @@ public class MapCreater : MonoBehaviour
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
-			GameData.pthis.PickupList.Add(Data);
+			DataGame.pthis.PickupList.Add(Data);
 		}//for
 
 		// 重型彈藥拾取
@@ -206,7 +206,7 @@ public class MapCreater : MonoBehaviour
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
-			GameData.pthis.PickupList.Add(Data);
+			DataGame.pthis.PickupList.Add(Data);
 		}//for
 
 		// 電池拾取
@@ -220,7 +220,7 @@ public class MapCreater : MonoBehaviour
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
-			GameData.pthis.PickupList.Add(Data);
+			DataGame.pthis.PickupList.Add(Data);
 		}//for
 
 		// 通貨拾取
@@ -234,7 +234,7 @@ public class MapCreater : MonoBehaviour
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
-			GameData.pthis.PickupList.Add(Data);
+			DataGame.pthis.PickupList.Add(Data);
 		}//for
 
 		// 絕招拾取
@@ -248,8 +248,29 @@ public class MapCreater : MonoBehaviour
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
-			GameData.pthis.PickupList.Add(Data);
+			DataGame.pthis.PickupList.Add(Data);
 		}//if
+
+		// 收集物品拾取
+		DBFItor Itor = GameDBF.pthis.GetCollection();
+
+		while(Itor.IsEnd() == false)
+		{
+			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
+			
+			if(DataPlayer.pthis.iStage == DBFTemp.Stage && DataCollection.pthis.Data.Contains((Argu)DBFTemp.GUID) == false)
+			{
+				Pickup Data = new Pickup();
+				
+				Data.Pos = Rule.NextPickup();
+				Data.iType = (int)ENUM_Pickup.Collection;
+				Data.iCount = 1;
+				Data.iLooks = DBFTemp.Icon;
+				Data.bPickup = false;
+				
+				DataGame.pthis.PickupList.Add(Data);
+			}//if
+		}//while
 	}
 	// 填滿地圖
 	private void Fill()
@@ -267,20 +288,20 @@ public class MapCreater : MonoBehaviour
 				
 				bool bCheck = true;
 				
-				foreach(MapCoor ItorRoad in MapData.pthis.RoadList)
+				foreach(MapCoor ItorRoad in DataMap.pthis.DataRoad)
 				{
 					if(Data.Cover(ItorRoad))
 						bCheck &= false;
 				}//for
 				
-				foreach(MapObjt ItorObjt in MapData.pthis.ObjtList)
+				foreach(MapObjt ItorObjt in DataMap.pthis.DataObjt)
 				{
 					if(Data.Cover(ItorObjt))
 						bCheck &= false;
 				}//for
 				
 				if(bCheck)
-					MapData.pthis.ObjtList.Add(Data);
+					DataMap.pthis.DataObjt.Add(Data);
 			}//for
 		}//for
 	}
@@ -306,9 +327,9 @@ public class MapCreater : MonoBehaviour
     }
 	public void ShowPickup(int iRoad)
 	{
-		for(int i = 0; i < GameData.pthis.PickupList.Count; i++ )
+		for(int i = 0; i < DataGame.pthis.PickupList.Count; i++ )
 		{
-			Pickup itor = GameData.pthis.PickupList[i];
+			Pickup itor = DataGame.pthis.PickupList[i];
 
 			if(itor.bPickup == false)
 			{
@@ -348,16 +369,16 @@ public class MapCreater : MonoBehaviour
 
 		ObjectList.Clear();
 		PickupList.Clear();
-		MapData.pthis.RoadList.Clear();
-        MapData.pthis.ObjtList.Clear();
+		DataMap.pthis.DataRoad.Clear();
+        DataMap.pthis.DataObjt.Clear();
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
-		MapCoor RoadPos = MapData.pthis.RoadList.Count > iRoad ? MapData.pthis.RoadList[iRoad] : new MapCoor();
+		MapCoor RoadPos = DataMap.pthis.DataRoad.Count > iRoad ? DataMap.pthis.DataRoad[iRoad] : new MapCoor();
 		MapCoor ChkPos = new MapCoor(RoadPos.X - GameDefine.iBlockUpdate / 2, RoadPos.Y - GameDefine.iBlockUpdate / 2);
 
-		foreach(MapCoor Itor in MapData.pthis.RoadList)
+		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 		{
 			Vector2 Pos = Itor.ToVector2();
 			MapObjt Temp = new MapObjt();
@@ -373,7 +394,7 @@ public class MapCreater : MonoBehaviour
 					float fPosX = Pos.x + GameDefine.iBlockSize / 2;
 					float fPosY = Pos.y + GameDefine.iBlockSize / 2;
 
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ENUM_Map.MapRoad.ToString(), PlayerData.pthis.iStyle, fPosX, fPosY));
+					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ENUM_Map.MapRoad.ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
 				}//if
 			}
 			else
@@ -386,7 +407,7 @@ public class MapCreater : MonoBehaviour
 			}//if
 		}//for
 		
-		foreach(MapObjt Itor in MapData.pthis.ObjtList)
+		foreach(MapObjt Itor in DataMap.pthis.DataObjt)
 		{
 			Vector2 Pos = Itor.Pos.ToVector2();
 
@@ -397,7 +418,7 @@ public class MapCreater : MonoBehaviour
 					float fPosX = Pos.x + (Itor.Width * GameDefine.iBlockSize) / 2;
 					float fPosY = Pos.y + (Itor.Height * GameDefine.iBlockSize) / 2;
 
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Type).ToString(), PlayerData.pthis.iStyle, fPosX, fPosY));
+					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
 				}//if
 			}
 			else
@@ -416,10 +437,10 @@ public class MapCreater : MonoBehaviour
 		if(iRoad < 0)
 			iRoad = 0;
 
-		if(MapData.pthis.RoadList.Count <= iRoad)
+		if(DataMap.pthis.DataRoad.Count <= iRoad)
 			return null;
 
-		Vector2 Pos = MapData.pthis.RoadList[iRoad].ToVector2();
+		Vector2 Pos = DataMap.pthis.DataRoad[iRoad].ToVector2();
 
 		if(ObjectList.ContainsKey(Pos) == false)
 			return null;

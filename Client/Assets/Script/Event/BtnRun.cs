@@ -50,7 +50,7 @@ public class BtnRun : MonoBehaviour
         if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
 			ConsumeTime();
-            GameData.pthis.fRunDouble = 3.0f;
+            DataGame.pthis.fRunDouble = 3.0f;
             yield return new WaitForSeconds(0.9f);
         }
 
@@ -61,19 +61,19 @@ public class BtnRun : MonoBehaviour
             else
             {
 				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
-                    GameData.pthis.fRunDouble = 3.0f;
+                    DataGame.pthis.fRunDouble = 3.0f;
 				ConsumeTime();
                 yield return new WaitForSeconds(0.9f);
             }
         }
 
-        if (!CheckCanMove() && PlayerData.pthis.iStamina < 10)
+        if (!CheckCanMove() && DataPlayer.pthis.iStamina < 10)
         {
             GetComponent<UIButton>().isEnabled = false;
-            GameData.pthis.fRunDouble = 0;
+            DataGame.pthis.fRunDouble = 0;
         }
         else
-            GameData.pthis.fRunDouble = 1.0f;
+            DataGame.pthis.fRunDouble = 1.0f;
 
         bIsRun = false;
 		RecoveryTime();
@@ -85,7 +85,7 @@ public class BtnRun : MonoBehaviour
         {
             if (bIsRun && SysMain.pthis.bCanRun)
                 yield return new WaitForEndOfFrame();
-			else if (PlayerData.pthis.iStamina >= PlayerData.pthis.iStaminaLimit)
+			else if (DataPlayer.pthis.iStamina >= DataPlayer.pthis.iStaminaLimit)
 				yield return new WaitForEndOfFrame();
             else if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
@@ -95,7 +95,7 @@ public class BtnRun : MonoBehaviour
 
                 SysMain.pthis.AddStamina(1);
 
-                if (SysMain.pthis.bCanRun && PlayerData.pthis.iStamina >= 20)
+                if (SysMain.pthis.bCanRun && DataPlayer.pthis.iStamina >= 20)
                     GetComponent<UIButton>().isEnabled = true;
             }
         }
@@ -103,8 +103,8 @@ public class BtnRun : MonoBehaviour
 	// ------------------------------------------------------------------
 	void RecoveryTime()
 	{
-		if(PlayerData.pthis.iStaminaRecovery > 0)
-			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime / PlayerData.pthis.iStaminaRecovery;
+		if(DataPlayer.pthis.iStaminaRecovery > 0)
+			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime / DataPlayer.pthis.iStaminaRecovery;
 		else
 			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime;
 	}

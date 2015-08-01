@@ -14,7 +14,7 @@ public class Btn_BuyBomb : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        if (PlayerData.pthis.iCurrency < GameDefine.iPriceBomb)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceBomb)
             GetComponent<UIButtonScale>().enabled = false;
         else
             GetComponent<UIButtonScale>().enabled = true;
@@ -23,7 +23,7 @@ public class Btn_BuyBomb : MonoBehaviour
     void OnClick()
     {
         // 檢查金錢是否足夠.
-        if (PlayerData.pthis.iCurrency < GameDefine.iPriceBomb)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceBomb)
         {
             // 錢不夠要表演叭叭.
             GetComponent<Animator>().Play("CantBuy");
@@ -33,10 +33,10 @@ public class Btn_BuyBomb : MonoBehaviour
 		GoogleAnalytics.pthis.LogEvent("Count", "Buy Bomb", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
-        PlayerData.pthis.iCurrency -= GameDefine.iPriceBomb;
+        DataPlayer.pthis.iCurrency -= GameDefine.iPriceBomb;
 		Rule.BombAdd(GameDefine.iBombCount);
         P_UI.pthis.UpdateCurrency();
-        PlayerData.pthis.Save();
+        DataPlayer.pthis.Save();
     }
     // ------------------------------------------------------------------
     public void PlaySound()

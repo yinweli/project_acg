@@ -6,16 +6,17 @@ public class GameDBF : MonoBehaviour
 {
 	private DBFData m_DBF = new DBFData();
 
-	public static GameDBF This = null;
+	public static GameDBF pthis = null;
 
 	void Awake()
 	{
-		This = this;
+		pthis = this;
         Add<DBFEquip>(GameDefine.szDBFEquip);
         Add<DBFFeature>(GameDefine.szDBFFeature);
         Add<DBFLanguage>(GameDefine.szDBFLanguage);
         Add<DBFMonster>(GameDefine.szDBFMonster);
 		Add<DBFAtlas>(GameDefine.szDBFAtlas);
+		Add<DBFCollection>(GameDefine.szDBFCollection);
 	}
 
     public void Add<T>(string szDBFName) where T : DBF
@@ -45,7 +46,7 @@ public class GameDBF : MonoBehaviour
 		if(Data == null)
 			return "";
 
-		switch(GameData.pthis.Language)
+		switch(DataGame.pthis.Language)
 		{
 		case ENUM_Language.zhTW: return Data.zhTW;
 		case ENUM_Language.enUS: return Data.enUS;
@@ -71,5 +72,13 @@ public class GameDBF : MonoBehaviour
 	public DBFItor GetAtlas()
 	{
 		return m_DBF.Get(GameDefine.szDBFAtlas);
+	}
+	public DBF GetCollection(Argu GUID)
+	{
+		return m_DBF.Get(GameDefine.szDBFCollection, GUID);
+	}
+	public DBFItor GetCollection()
+	{
+		return m_DBF.Get(GameDefine.szDBFCollection);
 	}
 }

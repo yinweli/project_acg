@@ -20,7 +20,7 @@ public class Rule
 	{
 		bool bResult = false;
 		
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 			bResult |= IsFeature(emMode, iPos);
 		
 		return bResult;
@@ -30,11 +30,11 @@ public class Rule
 	{
 		bool bResult = false;
 		
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			foreach(int Itor in PlayerData.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
 			{
-				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
 				if(Data != null && Data.Mode == (int)emMode)
 					bResult = true;
@@ -48,7 +48,7 @@ public class Rule
 	{
 		int iResult = 0;
 
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 			iResult += FeatureI(emMode, iPos);
 		
 		return iResult;
@@ -58,11 +58,11 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			foreach(int Itor in PlayerData.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
 			{
-				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
 				if(Data != null && Data.Mode == (int)emMode)
 					iResult += System.Convert.ToInt32(Data.Value);
@@ -76,7 +76,7 @@ public class Rule
 	{
 		float fResult = 0.0f;
 		
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 			fResult += FeatureF(emMode, iPos);
 		
 		return fResult;
@@ -86,11 +86,11 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			foreach(int Itor in PlayerData.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
 			{
-				DBFFeature Data = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
 				if(Data != null && Data.Mode == (int)emMode)
 					fResult += System.Convert.ToSingle(Data.Value);
@@ -102,23 +102,23 @@ public class Rule
 	// 重置通貨值
 	public static void CurrencyReset()
 	{
-		PlayerData.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, 0);
+		DataPlayer.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, 0);
 	}
 	// 增加通貨值
 	public static void CurrencyAdd(int iValue)
 	{
-		PlayerData.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, PlayerData.pthis.iCurrency + iValue);
+		DataPlayer.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, DataPlayer.pthis.iCurrency + iValue);
 		PickupStat.pthis.Record(ENUM_Pickup.Currency, iValue);
 	}
 	// 重置耐力值
 	public static void StaminaReset()
 	{
-		PlayerData.pthis.iStamina = Value(0, GameDefine.iMaxStamina, PlayerData.pthis.iStaminaLimit);
+		DataPlayer.pthis.iStamina = Value(0, GameDefine.iMaxStamina, DataPlayer.pthis.iStaminaLimit);
 	}
 	// 增加耐力值
 	public static void StaminaAdd(int iValue)
 	{
-		PlayerData.pthis.iStamina = Value(0, PlayerData.pthis.iStaminaLimit, PlayerData.pthis.iStamina + iValue);
+		DataPlayer.pthis.iStamina = Value(0, DataPlayer.pthis.iStaminaLimit, DataPlayer.pthis.iStamina + iValue);
 	}
 	// 重置耐力上限值
 	public static int StaminaLimit()
@@ -128,40 +128,40 @@ public class Rule
 	// 重置耐力回復值
 	public static void StaminaRecovery()
 	{
-		PlayerData.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
+		DataPlayer.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
 	}
 	// 重置絕招次數
 	public static void BombReset()
 	{
-		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(PlayerData.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
+		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(DataPlayer.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
 	}
 	// 增加絕招次數
 	public static void BombAdd(int iValue)
 	{
-		PlayerData.pthis.iBomb = Value(0, GameDefine.iMaxBomb, PlayerData.pthis.iBomb + iValue);
+		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, DataPlayer.pthis.iBomb + iValue);
 		PickupStat.pthis.Record(ENUM_Pickup.Bomb, iValue);
 	}
 	// 重置護盾次數
 	public static void ShieldReset()
 	{
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
-			PlayerData.pthis.Members[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+			DataPlayer.pthis.Members[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
 	{
-		while(PlayerData.pthis.Resource.Count <= (int)emResource)
-			PlayerData.pthis.Resource.Add(0);
+		while(DataPlayer.pthis.Resource.Count <= (int)emResource)
+			DataPlayer.pthis.Resource.Add(0);
 
-		PlayerData.pthis.Resource[(int)emResource] = 0;
+		DataPlayer.pthis.Resource[(int)emResource] = 0;
 	}
 	// 增加資源
 	public static void ResourceAdd(ENUM_Resource emResource, int iValue)
 	{
-		while(PlayerData.pthis.Resource.Count <= (int)emResource)
-			PlayerData.pthis.Resource.Add(0);
+		while(DataPlayer.pthis.Resource.Count <= (int)emResource)
+			DataPlayer.pthis.Resource.Add(0);
 
-		int iResult = PlayerData.pthis.Resource[(int)emResource];
+		int iResult = DataPlayer.pthis.Resource[(int)emResource];
 
 		switch(emResource)
 		{
@@ -183,7 +183,7 @@ public class Rule
 		default: break;
 		}//switch
 
-		PlayerData.pthis.Resource[(int)emResource] = iResult;
+		DataPlayer.pthis.Resource[(int)emResource] = iResult;
 	}
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)
@@ -193,10 +193,10 @@ public class Rule
 
 		int iIndex = (int)emResource;
 
-		if(PlayerData.pthis.Resource.Count <= iIndex)
+		if(DataPlayer.pthis.Resource.Count <= iIndex)
 			return false;
 
-		return PlayerData.pthis.Resource[iIndex] > iValue;
+		return DataPlayer.pthis.Resource[iIndex] > iValue;
 	}
 	// 建立成員
 	public static void MemberAdd(int iLooks, int iEquip)
@@ -206,7 +206,7 @@ public class Rule
 		MemberTemp.iLooks = iLooks;
 		MemberTemp.iEquip = iEquip;
 
-		PlayerData.pthis.Members.Add(MemberTemp);
+		DataPlayer.pthis.Members.Add(MemberTemp);
 	}
 	// 建立成員
 	public static void MemberAdd(int iEquip)
@@ -221,30 +221,30 @@ public class Rule
 	// 刪除成員
 	public void MemberDel(int iPos)
 	{
-		PlayerData.pthis.Members.RemoveAt(iPos);
+		DataPlayer.pthis.Members.RemoveAt(iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset(int iPos)
 	{
-		if(PlayerData.pthis.Members.Count > iPos)
-			PlayerData.pthis.Members[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.CriticalStrike, iPos);
+		if(DataPlayer.pthis.Members.Count > iPos)
+			DataPlayer.pthis.Members[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.CriticalStrike, iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset()
 	{
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 			CriticalStrikeReset(iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset(int iPos)
 	{
-		if(PlayerData.pthis.Members.Count > iPos)
-			PlayerData.pthis.Members[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.AddDamage, iPos);
+		if(DataPlayer.pthis.Members.Count > iPos)
+			DataPlayer.pthis.Members[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.AddDamage, iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset()
 	{
-		for(int iPos = 0; iPos < PlayerData.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
 			AddDamageReset(iPos);
 	}
 	// 依方向取得座標列表
@@ -283,20 +283,20 @@ public class Rule
 	// 取得隨機地圖拾取位置
 	public static MapCoor NextPickup()
 	{
-		if(MapData.pthis.RoadList.Count <= GameDefine.iPickupBorder)
+		if(DataMap.pthis.DataRoad.Count <= GameDefine.iPickupBorder)
 			return new MapCoor();
 
-		MapCoor Road = MapData.pthis.RoadList[Random.Range(GameDefine.iPickupBorder, MapData.pthis.RoadList.Count - GameDefine.iPickupBorder)];
+		MapCoor Road = DataMap.pthis.DataRoad[Random.Range(GameDefine.iPickupBorder, DataMap.pthis.DataRoad.Count - GameDefine.iPickupBorder)];
 
 		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
 		{
 			MapCoor Result = new MapCoor(Road.X + Tool.RandomPick(GameDefine.PickupRange), Road.Y + Tool.RandomPick(GameDefine.PickupRange));
 			bool bCheck = true;
 
-			foreach(MapCoor Itor in MapData.pthis.RoadList)
+			foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 				bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
 
-			foreach(Pickup Itor in GameData.pthis.PickupList)
+			foreach(Pickup Itor in DataGame.pthis.PickupList)
 				bCheck &= (Result.X == Itor.Pos.X && Result.Y == Itor.Pos.Y) == false;
 
 			if(bCheck)
@@ -308,19 +308,19 @@ public class Rule
 	// 執行獲得裝備
 	public static int GainEquip(int iPos)
 	{
-		if(PlayerData.pthis.Members.Count <= iPos)
+		if(DataPlayer.pthis.Members.Count <= iPos)
 			return 0;
 		
-		if(PlayerData.pthis.Members[iPos].iEquip > 0)
+		if(DataPlayer.pthis.Members[iPos].iEquip > 0)
 			return 0;
 		
 		// 檢查隊伍裡是否沒有光源裝備, 設定裝備額外機率值
 		bool bLight = false;
 		int iEquipExtra = 0;
 		
-		foreach(Member ItorMember in PlayerData.pthis.Members)
+		foreach(Member ItorMember in DataPlayer.pthis.Members)
 		{
-			DBFEquip Data = GameDBF.This.GetEquip(ItorMember.iEquip) as DBFEquip;
+			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
 
 			if(Data == null)
 			{
@@ -340,7 +340,7 @@ public class Rule
 			int iEquipProb = 0;
 			int iEmptyProb = 100;
 			CDice<int> Dice = new CDice<int>();
-			DBFItor Itor = GameDBF.This.GetEquip();
+			DBFItor Itor = GameDBF.pthis.GetEquip();
 			
 			while(Itor.IsEnd() == false)
 			{
@@ -363,26 +363,26 @@ public class Rule
 			if(iEmptyProb > 0)
 				Dice.Set(0, iEmptyProb); // 加入失敗項
 			
-			return PlayerData.pthis.Members[iPos].iEquip = Dice.Roll();
+			return DataPlayer.pthis.Members[iPos].iEquip = Dice.Roll();
 		}
 		else
-			return PlayerData.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
+			return DataPlayer.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
 	}
 	// 執行獲得特性
 	public static int GainFeature(int iPos)
 	{
-		if(PlayerData.pthis.Members.Count <= iPos)
+		if(DataPlayer.pthis.Members.Count <= iPos)
 			return 0;
 
-		if(PlayerData.pthis.Members[iPos].Feature.Count >= GameDefine.iMaxFeature)
+		if(DataPlayer.pthis.Members[iPos].Feature.Count >= GameDefine.iMaxFeature)
 			return 0;
 		
 		// 建立特性群組列表
 		HashSet<int> Group = new HashSet<int>();
 		
-		foreach(int ItorFeature in PlayerData.pthis.Members[iPos].Feature)
+		foreach(int ItorFeature in DataPlayer.pthis.Members[iPos].Feature)
 		{
-			DBFFeature Data = GameDBF.This.GetFeature(ItorFeature) as DBFFeature;
+			DBFFeature Data = GameDBF.pthis.GetFeature(ItorFeature) as DBFFeature;
 			
 			if(Data != null)
 				Group.Add(Data.Group);
@@ -391,7 +391,7 @@ public class Rule
 		// 建立獲得特性骰子
 		int iEmptyProb = 100;
 		CDice<int> Dice = new CDice<int>();
-		DBFItor Itor = GameDBF.This.GetFeature();
+		DBFItor Itor = GameDBF.pthis.GetFeature();
 		
 		while(Itor.IsEnd() == false)
 		{
@@ -412,7 +412,7 @@ public class Rule
 		int iFeature = Dice.Roll();
 		
 		if(iFeature > 0)
-			PlayerData.pthis.Members[iPos].Feature.Add(iFeature);
+			DataPlayer.pthis.Members[iPos].Feature.Add(iFeature);
 		
 		return iFeature;
 	}
@@ -422,10 +422,10 @@ public class Rule
 		int iDamage = 0;
 		bool bCriticalStrike = false;
 
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			Member DataMember = PlayerData.pthis.Members[iPos];
-			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+			Member DataMember = DataPlayer.pthis.Members[iPos];
+			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
@@ -440,7 +440,7 @@ public class Rule
 					bCriticalStrike = true;
 				}//if
 
-				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade + PlayerData.pthis.iDamageLv;
+				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade + DataPlayer.pthis.iDamageLv;
 			}//if
 		}//if
 
@@ -451,10 +451,10 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			Member DataMember = PlayerData.pthis.Members[iPos];
-			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+			Member DataMember = DataPlayer.pthis.Members[iPos];
+			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 			
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 				fResult = DataEquip.FireRate;
@@ -466,13 +466,13 @@ public class Rule
 	public static List<int> MonsterList()
 	{
 		List<int> Result = new List<int>();
-		DBFItor Itor = GameDBF.This.GetMonster();
+		DBFItor Itor = GameDBF.pthis.GetMonster();
 
 		while(Itor.IsEnd() == false)
 		{
 			DBFMonster Data = Itor.Data() as DBFMonster;
 
-			if(Data != null && Data.StageID <= PlayerData.pthis.iStage)
+			if(Data != null && Data.StageID <= DataPlayer.pthis.iStage)
 				Result.Add(System.Convert.ToInt32(Data.GUID));
 
 			Itor.Next();
@@ -485,20 +485,20 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(PlayerData.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.Members.Count > iPos)
 		{
-			Member DataMember = PlayerData.pthis.Members[iPos];
+			Member DataMember = DataPlayer.pthis.Members[iPos];
 
 			iResult += DataMember.iLiveStage + 1;
 
-			DBFEquip DataEquip = GameDBF.This.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
+			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 
 			if(DataEquip != null)
 				iResult += DataEquip.Threat;
 
 			foreach(int Itor in DataMember.Feature)
 			{
-				DBFFeature DataFeature = GameDBF.This.GetFeature(new Argu(Itor)) as DBFFeature;
+				DBFFeature DataFeature = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 
 				if(DataFeature != null)
 					iResult += DataFeature.Threat;
@@ -510,16 +510,16 @@ public class Rule
 	// 取得傷害等級價格
 	public static int DmgLvMoney()
 	{
-		return (int)(GameDefine.iPriceDmgLv + GameDefine.iPriceDmgLv * GameDefine.fUpgradeDmgLv * PlayerData.pthis.iDamageLv);
+		return (int)(GameDefine.iPriceDmgLv + GameDefine.iPriceDmgLv * GameDefine.fUpgradeDmgLv * DataPlayer.pthis.iDamageLv);
 	}
 	// 取得廣告影片贈送金額
 	public static int AdsMoney()
 	{
-		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyAdd * PlayerData.pthis.iAdsWatch;
+		return GameDefine.iAdsMoneyBase + GameDefine.iAdsMoneyAdd * DataPlayer.pthis.iAdsWatch;
 	}
 	// 取得魔王血量加成
 	public static int BossHP(int iHP)
 	{
-		return (int)(iHP * GameDefine.fUpgradeBossHP * PlayerData.pthis.iStage);
+		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
 }

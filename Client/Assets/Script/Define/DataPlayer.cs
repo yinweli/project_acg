@@ -3,9 +3,9 @@ using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerData : MonoBehaviour 
+public class DataPlayer : MonoBehaviour 
 {
-    static public PlayerData pthis = null;
+    static public DataPlayer pthis = null;
 
 	/* Save */
 	public int iStage = 0; // 關卡編號
@@ -32,39 +32,39 @@ public class PlayerData : MonoBehaviour
 	// 存檔.
 	public void Save()
 	{
-		SavePlayer Data = new SavePlayer();
+		SavePlayer Temp = new SavePlayer();
 		
-		Data.iStage = iStage;
-		Data.iStyle = iStyle;
-		Data.iCurrency = iCurrency;
-		Data.iStamina = iStamina;
-		Data.iBomb = iBomb;
-		Data.iDamageLv = iDamageLv;
-		Data.iPlayTime = iPlayTime;
-		Data.iEnemyKill = iEnemyKill;
-		Data.iPlayerLost = iPlayerLost;
-		Data.iAdsWatch = iAdsWatch;
-		Data.Resource = Resource.ToArray();
+		Temp.iStage = iStage;
+		Temp.iStyle = iStyle;
+		Temp.iCurrency = iCurrency;
+		Temp.iStamina = iStamina;
+		Temp.iBomb = iBomb;
+		Temp.iDamageLv = iDamageLv;
+		Temp.iPlayTime = iPlayTime;
+		Temp.iEnemyKill = iEnemyKill;
+		Temp.iPlayerLost = iPlayerLost;
+		Temp.iAdsWatch = iAdsWatch;
+		Temp.Resource = Resource.ToArray();
 		
 		List<SaveMember> MemberList = new List<SaveMember>();
 		
 		foreach(Member Itor in Members)
 		{
-			SaveMember Temp = new SaveMember();
+			SaveMember MemberTemp = new SaveMember();
 			
-			Temp.iLooks = Itor.iLooks;
-			Temp.iEquip = Itor.iEquip;
-			Temp.iLiveStage = Itor.iLiveStage;
-			Temp.iShield = Itor.iShield;
-			Temp.Feature = Itor.Feature.ToArray();
-			Temp.Behavior = Itor.Behavior.ToArray();
+			MemberTemp.iLooks = Itor.iLooks;
+			MemberTemp.iEquip = Itor.iEquip;
+			MemberTemp.iLiveStage = Itor.iLiveStage;
+			MemberTemp.iShield = Itor.iShield;
+			MemberTemp.Feature = Itor.Feature.ToArray();
+			MemberTemp.Behavior = Itor.Behavior.ToArray();
 			
-			MemberList.Add(Temp);
+			MemberList.Add(MemberTemp);
 		}//for
 		
-		Data.Data = MemberList.ToArray();
+		Temp.Data = MemberList.ToArray();
 		
-		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Data));
+		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Temp));
 	}
     // 讀檔.
 	public bool Load()
@@ -72,25 +72,25 @@ public class PlayerData : MonoBehaviour
 		if(PlayerPrefs.HasKey(GameDefine.szSavePlayer) == false)
 			return false;
 		
-		SavePlayer Data = Json.ToObject<SavePlayer>(PlayerPrefs.GetString(GameDefine.szSavePlayer));
+		SavePlayer Temp = Json.ToObject<SavePlayer>(PlayerPrefs.GetString(GameDefine.szSavePlayer));
 		
-		if(Data == null)
+		if(Temp == null)
 			return false;
 		
-		iStage = Data.iStage;
-		iStyle = Data.iStyle;
-		iCurrency = Data.iCurrency;
-		iStamina = Data.iStamina;
-		iBomb = Data.iBomb;
-		iDamageLv = Data.iDamageLv;
-		iPlayTime = Data.iPlayTime;
-		iEnemyKill = Data.iEnemyKill;
-		iPlayerLost = Data.iPlayerLost;
-		iAdsWatch = Data.iAdsWatch;
-		Resource = new List<int>(Data.Resource);
+		iStage = Temp.iStage;
+		iStyle = Temp.iStyle;
+		iCurrency = Temp.iCurrency;
+		iStamina = Temp.iStamina;
+		iBomb = Temp.iBomb;
+		iDamageLv = Temp.iDamageLv;
+		iPlayTime = Temp.iPlayTime;
+		iEnemyKill = Temp.iEnemyKill;
+		iPlayerLost = Temp.iPlayerLost;
+		iAdsWatch = Temp.iAdsWatch;
+		Resource = new List<int>(Temp.Resource);
 		Members = new List<Member>();
 		
-		foreach(SaveMember Itor in Data.Data)
+		foreach(SaveMember Itor in Temp.Data)
 		{
 			Member MemberTemp = new Member();
 			
@@ -107,7 +107,7 @@ public class PlayerData : MonoBehaviour
 		return true;
 	}
 	// 清除資料
-	public void ClearData()
+	public void Clear()
 	{
 		iStage = 0;
 		iStyle = 0;
@@ -123,9 +123,9 @@ public class PlayerData : MonoBehaviour
 		Members.Clear();
 	}
 	// 清除存檔
-	public void Clear()
+	public void ClearSave()
 	{
-		ClearData();
+		Clear();
 		PlayerPrefs.DeleteKey(GameDefine.szSavePlayer);
 	}
 }

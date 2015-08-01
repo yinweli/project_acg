@@ -183,8 +183,8 @@ public class SaveGame
 
 public class SaveMap
 {
-	public MapCoor[] RoadList = new MapCoor[0]; // 地圖道路列表
-	public MapObjt[] ObjtList = new MapObjt[0]; // 地圖物件列表
+	public MapCoor[] DataRoad = new MapCoor[0]; // 地圖道路列表
+	public MapObjt[] DataObjt = new MapObjt[0]; // 地圖物件列表
 }
 
 public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
@@ -223,4 +223,18 @@ public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
 public class SaveAtlas
 {
 	public string[] Data = new string[0]; // 圖鑑列表
+}
+
+public class SaveCollection
+{
+	public int[] Data = new int[0]; // 收集物品列表
+}
+
+public class SaveAchievement
+{
+	public int iSingle_Stage = 0; // 單輪通過關卡數量
+	public int iSingle_SaveMember = 0; // 單輪救援成員人數
+	public int iSingle_LostMember = 0; // 單輪失去成員人數
+	public int iTotal_CurrencyPickup = 0; // 累積拾取金幣數量
+	public int iTotal_MonsterKill = 0; // 累積擊敗怪物數量
 }

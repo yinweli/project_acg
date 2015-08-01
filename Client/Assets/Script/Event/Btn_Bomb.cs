@@ -16,15 +16,15 @@ public class Btn_Bomb : MonoBehaviour
 
     void Update()
     {
-        if (PlayerData.pthis.iBomb <= 0 && pBtn.isEnabled)
+        if (DataPlayer.pthis.iBomb <= 0 && pBtn.isEnabled)
             pBtn.isEnabled = false;
 
-        pLbCount.text = PlayerData.pthis.iBomb.ToString();
+        pLbCount.text = DataPlayer.pthis.iBomb.ToString();
     }
 
     void OnClick()
     {
-        if (fCoolDown > Time.time || PlayerData.pthis.iBomb <= 0)
+        if (fCoolDown > Time.time || DataPlayer.pthis.iBomb <= 0)
             return;
 
         pBtn.isEnabled = false;

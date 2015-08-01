@@ -41,7 +41,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     void Update()
     {
-        pLbDis.text = string.Format("{0}m",(MapData.pthis.RoadList.Count - CameraCtrl.pthis.iNextRoad) * 10);
+        pLbDis.text = string.Format("{0}m",(DataMap.pthis.DataRoad.Count - CameraCtrl.pthis.iNextRoad) * 10);
 
         if (!SysMain.pthis.bIsGaming)
             return;
@@ -63,7 +63,7 @@ public class P_UI : MonoBehaviour
     public void StartNew()
     {
         // 設定關卡Title.
-        pLbDayNum.text = PlayerData.pthis.iStage.ToString();
+        pLbDayNum.text = DataPlayer.pthis.iStage.ToString();
 
         GetComponent<UIPanel>().alpha = 1;
 		AddBattery(0);
@@ -79,7 +79,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool UseBullet(ENUM_Weapon pType)
     {
-        DBFEquip DataEquip = GameDBF.This.GetEquip((int)pType) as DBFEquip;
+        DBFEquip DataEquip = GameDBF.pthis.GetEquip((int)pType) as DBFEquip;
 
         if (DataEquip == null)
             return false;
@@ -96,9 +96,9 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateResource()
     {
-        for (int i = 1; i < PlayerData.pthis.Resource.Count; i++)
+        for (int i = 1; i < DataPlayer.pthis.Resource.Count; i++)
 			if (pLbBullet[i-1])
-                pLbBullet[i-1].text = PlayerData.pthis.Resource[i].ToString();
+                pLbBullet[i-1].text = DataPlayer.pthis.Resource[i].ToString();
     }
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
@@ -124,7 +124,7 @@ public class P_UI : MonoBehaviour
 			}
 			else
 			{
-                if (iValue < 0 && PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] == 30)
+                if (iValue < 0 && DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] == 30)
                     SysMain.pthis.AllRoleTalk("Battery");
 				for(int i = 0; i < pListLight.Count; i++)
 					pListLight[i].pAni.Play("NoPower");
@@ -148,12 +148,12 @@ public class P_UI : MonoBehaviour
         for (int i = 0; i < pSBattery.Length; i++)
             pSBattery[i].gameObject.SetActive(false);
 
-        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] <= 0)
+        if (DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] <= 0)
             return;
 
-        int iActive = PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5);
+        int iActive = DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5);
 
-        if (PlayerData.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
+        if (DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
             iActive++;
  
         if (iActive > pSBattery.Length)
@@ -172,7 +172,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddCurrency(int iValue)
     {
-        if(iValue < 0 && PlayerData.pthis.iCurrency + iValue < 0)
+        if(iValue < 0 && DataPlayer.pthis.iCurrency + iValue < 0)
             return false;
 
         Rule.CurrencyAdd(iValue);
@@ -182,7 +182,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public void UpdateCurrency()
     {
-        pLbCurrency.text = PlayerData.pthis.iCurrency.ToString();
+        pLbCurrency.text = DataPlayer.pthis.iCurrency.ToString();
     }
     // ------------------------------------------------------------------
     public void UpdateStamina()

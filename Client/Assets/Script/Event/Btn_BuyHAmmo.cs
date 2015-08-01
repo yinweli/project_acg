@@ -14,7 +14,7 @@ public class Btn_BuyHAmmo : MonoBehaviour
 
     void Update()
     {
-        if (PlayerData.pthis.iCurrency < GameDefine.iHeavyAmmoCost)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iHeavyAmmoCost)
             GetComponent<UIButtonScale>().enabled = false;
         else
             GetComponent<UIButtonScale>().enabled = true;
@@ -23,7 +23,7 @@ public class Btn_BuyHAmmo : MonoBehaviour
     void OnClick()
     {
         // 檢查金錢是否足夠.
-        if (PlayerData.pthis.iCurrency < GameDefine.iHeavyAmmoCost)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iHeavyAmmoCost)
         {
             // 錢不夠要表演叭叭.
             GetComponent<Animator>().Play("CantBuy");
@@ -33,11 +33,11 @@ public class Btn_BuyHAmmo : MonoBehaviour
 		GoogleAnalytics.pthis.LogEvent("Count", "Buy HeavyAmmo", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
-        PlayerData.pthis.iCurrency -= GameDefine.iHeavyAmmoCost;
+        DataPlayer.pthis.iCurrency -= GameDefine.iHeavyAmmoCost;
 		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iHeavyAmmoCount);
         P_UI.pthis.UpdateCurrency();
         P_UI.pthis.UpdateResource();
-        PlayerData.pthis.Save();
+        DataPlayer.pthis.Save();
     }
 
     public void PlaySound()

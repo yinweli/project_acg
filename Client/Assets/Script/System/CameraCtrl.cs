@@ -52,7 +52,7 @@ public class CameraCtrl : MonoBehaviour
         if (Vector2.Distance(transform.position, MapCreater.pthis.GetRoadObj(iNextRoad).transform.position) < 0.018f)
         {
             if (!bTestMove)
-                GameData.pthis.iRoad = iNextRoad;
+                DataGame.pthis.iRoad = iNextRoad;
             iNextRoad++;
         }
     }
@@ -62,8 +62,8 @@ public class CameraCtrl : MonoBehaviour
         bTestMove = false;
 
         // 有舊位子就先移動到舊位子上去.
-        if (GameData.pthis.iRoad != 0)
-            SetPos(GameData.pthis.iRoad);
+        if (DataGame.pthis.iRoad != 0)
+            SetPos(DataGame.pthis.iRoad);
         else
             ResetPos();
     }
