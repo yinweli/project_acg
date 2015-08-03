@@ -7,10 +7,11 @@ public class AIPlayer : MonoBehaviour
 {
     // 角色編號.
     public int iPlayer;
+    // 角色隊伍站位.
+    public int iTeamPos = 0;
 	// 角色動畫.
+    public G_ChrAction pAction = null;
 	public Animator pAni = null;
-	// 武器動畫.
-	public Animator pWAni = null;
 	// 手上武器type.
 	public ENUM_Weapon pWeapon = ENUM_Weapon.Weapon_null;
 	
@@ -24,6 +25,8 @@ public class AIPlayer : MonoBehaviour
     public GameObject ObjShield = null;
 	// 是否被抓住.
 	public bool bBeCaught = false;
+    // 是否被綁住.
+    public bool bBeTied = false;
 	// 武器冷卻.
 	public float fCoolDown = 0;
 
@@ -52,9 +55,11 @@ public class AIPlayer : MonoBehaviour
         pWeapon = (ENUM_Weapon)pMember.iEquip;
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iLooks);
+        // 建立動作播放器
+        pAction = ObjHuman.AddComponent<G_ChrAction>();
         // 設定武器.
-        if (ObjHuman && ObjHuman.GetComponent<G_PLook>())
-            ObjHuman.GetComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
+        if (ObjHuman)
+            ObjHuman.AddComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
         // 設定武器音效
         if (pWeapon != ENUM_Weapon.Weapon_null && pWeapon != ENUM_Weapon.Weapon_001)
             audioClip = Resources.Load("Sound/FX/" + pWeapon) as AudioClip;
@@ -66,7 +71,7 @@ public class AIPlayer : MonoBehaviour
             return;
 
         if (pWeapon == ENUM_Weapon.Weapon_001)
-            FaceTo(1, ObjTarget);
+            pAction.FaceTo(1, ObjTarget);
         else
             Attack();
 
@@ -89,15 +94,9 @@ public class AIPlayer : MonoBehaviour
 		if (ObjTarget && fCoolDown <= Time.time && P_UI.pthis.UseBullet(pWeapon))
 		{
 			// 播放射擊.
-            if (!bBeCaught && pAni)
-            {
-                pAni.Play("Shot");
-                // 轉面向.
-                FaceTo(1, ObjTarget);
-            }
-			if (pWAni)
-				pWAni.Play("Fire");					
-			
+            if (!bBeCaught)
+                pAction.PlayAtk(ObjTarget);
+		
 			NGUITools.PlaySound(audioClip, 0.8f);
 			// 發射子彈.
 			CreateBullet();
@@ -164,8 +163,7 @@ public class AIPlayer : MonoBehaviour
         // 減少被抓機率.
         ToolKit.CatchRole[gameObject] -= 20;
 
-        if (pAni)
-            pAni.Play("Run");
+        pAction.PlayRun();
 
         ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/G_Tied");
         ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
@@ -189,8 +187,7 @@ public class AIPlayer : MonoBehaviour
         pFollow.ObjTarget = ObjMonster;
         pFollow.iPos = iPos;
 
-		if (pAni)
-			pAni.Play("Break");
+        pAction.PlayBreak();
 
         if (ObjShield && ObjShield.GetComponent<Shield>() && ObjShield.GetComponent<Shield>().iCount > 0)
         {
@@ -211,8 +208,7 @@ public class AIPlayer : MonoBehaviour
 		Destroy(gameObject.GetComponent<PlayerFollow>());
 
         StartCoroutine(ResetDeadPos());
-        if (pAni)
-            pAni.Play("Run");
+        pAction.PlayRun();
 	}
     // ------------------------------------------------------------------
     // 被殺函式.

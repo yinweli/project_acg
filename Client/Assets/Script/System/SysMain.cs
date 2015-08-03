@@ -24,8 +24,6 @@ public class SysMain : MonoBehaviour
     bool bIsOld = true;
 
     public float fSaveTime = 0;
-
-    bool bIsTalk = false;
     // ------------------------------------------------------------------
     void Awake()
     {

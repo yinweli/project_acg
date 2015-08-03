@@ -13,8 +13,6 @@ public class G_PLook : MonoBehaviour
             if (Role[i].gameObject.name == "S_Hand_R")
                 ObjRHand = Role[i].gameObject.transform.parent.gameObject;
 
-        pAI.pAni = GetComponent<Animator>();
-
         // 實例化武器.
         if (pWeapon != ENUM_Weapon.Weapon_null)
         {
@@ -31,7 +29,7 @@ public class G_PLook : MonoBehaviour
                 pAI.ObjTarget = pObj.GetComponent<G_Light>().pDrag.gameObject;
             }
             else
-                pAI.pWAni = ObjWeapon.GetComponent<Animator>();
+                pAI.pAction.pWAni = ObjWeapon.GetComponent<Animator>();
         }
 
         // 依照角色切換layer.
