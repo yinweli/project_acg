@@ -258,18 +258,20 @@ public class MapCreater : MonoBehaviour
 		{
 			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
 			
-			if(DataPlayer.pthis.iStage == DBFTemp.Stage && DataCollection.pthis.Data.Contains((Argu)DBFTemp.GUID) == false)
+			if(DataPlayer.pthis.iStage == DBFTemp.Stage && Rule.GetCollection((Argu)DBFTemp.GUID) == false)
 			{
 				Pickup Data = new Pickup();
 				
 				Data.Pos = Rule.NextPickup();
 				Data.iType = (int)ENUM_Pickup.Collection;
 				Data.iCount = 1;
-				Data.iLooks = DBFTemp.Icon;
+				Data.iLooks = System.Convert.ToInt32(DBFTemp.GUID);
 				Data.bPickup = false;
 				
 				DataGame.pthis.PickupList.Add(Data);
 			}//if
+
+			Itor.Next();
 		}//while
 	}
 	// 填滿地圖
@@ -309,6 +311,8 @@ public class MapCreater : MonoBehaviour
 	// 建立地圖
 	public void Create()
 	{
+		Debug.Log("Create Map");
+
 		iWidth = GameDefine.iMapWidth;
 		iHeight = 0;
 
@@ -350,6 +354,8 @@ public class MapCreater : MonoBehaviour
 						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
 					else if (Obj && Obj.GetComponent<Btn_GetBomb>())
 						Obj.GetComponent<Btn_GetBomb>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetCollection>())
+						Obj.GetComponent<Btn_GetCollection>().iItemID = i;
 				}
 				
 				if(Obj != null)

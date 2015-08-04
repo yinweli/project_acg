@@ -91,6 +91,8 @@ public class GameDefine
 	public const float fUpgradeDmgLv = 0.05f; // 傷害等級升級值
 	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
+	public const int iMaxAtlasCondition = 5; // 最大圖鑑條件數量
+
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱

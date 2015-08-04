@@ -522,4 +522,95 @@ public class Rule
 	{
 		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
+	// 取得圖鑑是否完成
+	public static bool GetAtlas(int iGUID)
+	{
+		if(GameDBF.pthis.GetAtlas(iGUID) == null)
+			return false;
+
+		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
+			return false;
+
+		bool bResult = true;
+
+		foreach(bool Itor in DataAtlas.pthis.Data[iGUID])
+			bResult &= Itor;
+
+		if(bResult)
+			Debug.Log("Complete : " + iGUID);
+
+		return bResult;
+	}
+	// 取得圖鑑條件是否完成
+	public static bool GetAtlas(int iGUID, int iCondition)
+	{
+		if(GameDBF.pthis.GetAtlas(iGUID) == null)
+			return false;
+
+		if(iCondition >= GameDefine.iMaxAtlasCondition)
+			return false;
+
+		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
+			return false;
+
+		return DataAtlas.pthis.Data[iGUID].Get(iCondition);
+	}
+	// 設定圖鑑條件
+	public static void SetAtlas(int iGUID, int iCondition, bool bValue)
+	{
+		if(GameDBF.pthis.GetAtlas(iGUID) == null)
+			return;
+		
+		if(iCondition >= GameDefine.iMaxAtlasCondition)
+			return;
+
+		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
+			DataAtlas.pthis.Data.Add(iGUID, new BitArray(GameDefine.iMaxAtlasCondition, false));
+
+		DataAtlas.pthis.Data[iGUID].Set(iCondition, bValue);
+	}
+	// 取得收集物品是否拿過
+	public static bool GetCollection(int iGUID)
+	{
+		return DataCollection.pthis.Data.Contains(iGUID);
+	}
+	// 拾取收集物品, 並傳回完成的圖鑑編號列表
+	public static List<int> SetCollection(int iGUID)
+	{
+		List<int> Result = new List<int>();
+		DBFItor Itor = GameDBF.pthis.GetAtlas();
+
+		DataCollection.pthis.Data.Add(iGUID);
+
+		while(Itor.IsEnd() == false)
+		{
+			DBFAtlas DBFTemp = (DBFAtlas)Itor.Data();
+			int iAtlasGUID = System.Convert.ToInt32(DBFTemp.GUID);
+
+			if(GetAtlas(iAtlasGUID))
+				continue;
+
+			if((ENUM_Condition)DBFTemp.Cond1 == ENUM_Condition.Collection && DBFTemp.CondV1 == iGUID)
+				SetAtlas(iAtlasGUID, 0, true);
+
+			if((ENUM_Condition)DBFTemp.Cond2 == ENUM_Condition.Collection && DBFTemp.CondV2 == iGUID)
+				SetAtlas(iAtlasGUID, 1, true);
+
+			if((ENUM_Condition)DBFTemp.Cond3 == ENUM_Condition.Collection && DBFTemp.CondV3 == iGUID)
+				SetAtlas(iAtlasGUID, 2, true);
+
+			if((ENUM_Condition)DBFTemp.Cond4 == ENUM_Condition.Collection && DBFTemp.CondV4 == iGUID)
+				SetAtlas(iAtlasGUID, 3, true);
+
+			if((ENUM_Condition)DBFTemp.Cond5 == ENUM_Condition.Collection && DBFTemp.CondV5 == iGUID)
+				SetAtlas(iAtlasGUID, 4, true);
+
+			if(GetAtlas(iAtlasGUID))
+				Result.Add(iAtlasGUID);
+
+			Itor.Next();
+		}//while
+
+		return Result;
+	}
 }
