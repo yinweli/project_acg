@@ -5,8 +5,8 @@ public class Btn_ClearData : MonoBehaviour {
 
 	void OnClick()
     {
-        DataPlayer.pthis.Clear();
-        DataGame.pthis.Clear();
+        DataPlayer.pthis.ClearSave();
+        DataGame.pthis.ClearSave();
         SysMain.pthis.NewRoleData();
     }
 }
