@@ -35,9 +35,10 @@ public class EnemyCreater : MonoBehaviour
     {
         iCount = 0;
 
-        // 每10關為魔王關
-        Debug.Log("Now type: " + (float)DataPlayer.pthis.iStage % 10);
-        if ((float)DataPlayer.pthis.iStage % 10 == 0)
+        // 每5關為魔王關
+		Debug.Log("Now type: " + (float)DataPlayer.pthis.iStage % GameDefine.iBossStage);
+
+		if ((float)DataPlayer.pthis.iStage % GameDefine.iBossStage == 0)
             StartCoroutine(BossCreater());
         else
         {
@@ -123,7 +124,7 @@ public class EnemyCreater : MonoBehaviour
                 // 等待2.0秒後出新魔王.
                 yield return new WaitForSeconds(2.0f);
 
-                int iIndex = 1000 + (DataPlayer.pthis.iStage / 10 % 8 + 1);
+				int iIndex = 1000 + (DataPlayer.pthis.iStage / GameDefine.iBossStage % 8 + 1);
                 GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "Enemy/" + iIndex,
                     CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f),
                     CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));

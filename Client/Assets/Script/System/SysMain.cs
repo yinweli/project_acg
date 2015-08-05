@@ -200,7 +200,7 @@ public class SysMain : MonoBehaviour
 
         // 給與初始隊員
         Rule.MemberAdd(1);
-        Rule.MemberAdd(5);
+        Rule.MemberAdd(3);
     }
     // ------------------------------------------------------------------
     IEnumerator CountStart(bool bShowCount)

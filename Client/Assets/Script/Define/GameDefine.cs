@@ -56,6 +56,7 @@ public class GameDefine
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
 	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
+	public const int iBossStage = 5; // 每幾關為魔王關
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iBlockUpdate = 25; // 格子更新距離
