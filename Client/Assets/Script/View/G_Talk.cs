@@ -31,7 +31,6 @@ public class G_Talk : MonoBehaviour
         if (bNeedRan)
             iRandom = Random.Range(0, 5);
 
-        Debug.Log("Talk Ran: " + iRandom);
         // 沒電.
         if (pTalk == "Battery")
             pTalk = GetStrBattery(iRandom);

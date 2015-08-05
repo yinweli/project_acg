@@ -17,9 +17,9 @@ public class G_Info : MonoBehaviour
         for (int i = 0; i < pFInfo.Length; i++)
             pFInfo[i].SetInfo(i, iID);
 
-        if ((ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip != ENUM_Weapon.Weapon_null)
+        if ((ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip != ENUM_Weapon.Null)
         {
-            ObjWeapon = UITool.pthis.CreateUI(S_Weapon, "Prefab/" + (ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip);
+            ObjWeapon = UITool.pthis.CreateUI(S_Weapon, "Prefab/Weapon/" + (ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip);
             ObjWeapon.transform.localPosition = new Vector3(-20,0,0);
             SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
@@ -36,7 +36,7 @@ public class G_Info : MonoBehaviour
                 ToolKit.ChangeTo2DSprite(pRender);
         }        
 
-        if ((ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip == ENUM_Weapon.Weapon_001 || (ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip == ENUM_Weapon.Weapon_null)
+        if ((ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip == ENUM_Weapon.Light || (ENUM_Weapon)DataPlayer.pthis.Members[iID].iEquip == ENUM_Weapon.Null)
         {
             // 攻擊力.
             Lb_Value[0].text = "--";

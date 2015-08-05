@@ -13,7 +13,7 @@ public class AIPlayer : MonoBehaviour
     public G_ChrAction pAction = null;
 	public Animator pAni = null;
 	// 手上武器type.
-	public ENUM_Weapon pWeapon = ENUM_Weapon.Weapon_null;
+	public ENUM_Weapon pWeapon = ENUM_Weapon.Null;
 	
 	// 角色.
 	public GameObject ObjHuman = null;
@@ -61,7 +61,7 @@ public class AIPlayer : MonoBehaviour
         if (ObjHuman)
             ObjHuman.AddComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
         // 設定武器音效
-        if (pWeapon != ENUM_Weapon.Weapon_null && pWeapon != ENUM_Weapon.Weapon_001)
+        if (pWeapon != ENUM_Weapon.Null && pWeapon != ENUM_Weapon.Light)
             audioClip = Resources.Load("Sound/FX/" + pWeapon) as AudioClip;
 	}
 	// ------------------------------------------------------------------
@@ -70,7 +70,7 @@ public class AIPlayer : MonoBehaviour
         if (!SysMain.pthis.bIsGaming || ObjCatch)
             return;
 
-        if (pWeapon == ENUM_Weapon.Weapon_001)
+        if (pWeapon == ENUM_Weapon.Light)
             pAction.FaceTo(1, ObjTarget);
         else
             Attack();
@@ -83,7 +83,7 @@ public class AIPlayer : MonoBehaviour
 	// 射擊函式.
 	void Attack()
 	{
-		if (pWeapon == ENUM_Weapon.Weapon_null || pWeapon == ENUM_Weapon.Weapon_001)
+		if (pWeapon == ENUM_Weapon.Null || pWeapon == ENUM_Weapon.Light)
 			return;
 		
 		// 確認目標.
@@ -143,7 +143,13 @@ public class AIPlayer : MonoBehaviour
 	// 建立子彈函式.
 	public void CreateBullet()
 	{
-		GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/S_Bullet") as GameObject);
+        GameObject pObj = null;
+
+        if(Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) != null)
+            pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
+        else
+            pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/S_Bullet") as GameObject);
+		
 		Tuple<int, bool> Damage = Rule.BulletDamage(iPlayer);
 
 		pObj.transform.parent = transform.parent;
@@ -152,8 +158,8 @@ public class AIPlayer : MonoBehaviour
 		pObj.GetComponent<AIBullet>().iDamage = Damage.Item1;
 		pObj.GetComponent<AIBullet>().bCriticalStrik = Damage.Item2;
 
-        if (Rule.IsFeature(ENUM_ModeFeature.Frozen, iPlayer))
-            pObj.GetComponent<AIBullet>().pType = ENUM_ModeFeature.Frozen;
+        //if (Rule.IsFeature(ENUM_ModeFeature.Frozen, iPlayer))
+            //pObj.GetComponent<AIBullet>().pType = ENUM_ModeFeature.Frozen;
 	}
     // ------------------------------------------------------------------
     // 被抓函式.
@@ -179,7 +185,7 @@ public class AIPlayer : MonoBehaviour
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
 		// 拿手電筒的不需要改目標.
-		if(pWeapon != ENUM_Weapon.Weapon_001)
+		if(pWeapon != ENUM_Weapon.Light)
 			ObjTarget = ObjMonster;
 
         // 跟隨抓人者.

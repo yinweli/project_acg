@@ -21,6 +21,9 @@ public class SysMain : MonoBehaviour
     // 可打敵人佇列.
     public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();    
 
+    // 暫時替代武器等級
+    public int[] iWLevel = new int[(int)ENUM_Weapon.Count];
+
     bool bIsOld = true;
 
     public float fSaveTime = 0;

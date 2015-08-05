@@ -8,19 +8,17 @@
 
 public enum ENUM_Weapon
 {
-    Weapon_null,
-    Weapon_001, // 手電筒.
-    Weapon_002, // 小刀
-    Weapon_003, // 武士刀.
-    Weapon_004, // 電鋸.
-    Weapon_005, // 手槍.
-    Weapon_006, // 左輪手槍.
-    Weapon_007, // 沙漠之鷹.
-    Weapon_008, // 衝鋒槍.
-    Weapon_009, // 突擊步槍.
-    Weapon_010, // 輕機槍.
+    Null,
+    Light, // 手電筒.
+    Knife, // 小刀
+    Pistol, // 手槍.
+    Revolver, // 左輪手槍.
+    Eagle, // 沙漠之鷹.
+    SUB, // 衝鋒槍.
+    Rifle, // 突擊步槍.
+    LMG, // 輕機槍.
 
-    WeaponCount,
+    Count,
 }
 
 // 方向列舉

@@ -62,7 +62,7 @@ public class G_Feature : MonoBehaviour
         {
             // 建立外觀.
             GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], DataPlayer.pthis.Members[i].iLooks);
-            ObjHand[i] = ObjHuman.GetComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.Members[i].iEquip);
+            ObjHand[i] = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.Members[i].iEquip);
 
             // 顯示升級.
             ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(DataPlayer.pthis.Members[i].iLiveStage);

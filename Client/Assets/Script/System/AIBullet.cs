@@ -9,13 +9,16 @@ public class AIBullet : MonoBehaviour
     public int iDamage = 1;
     // 移動速度
     public float fSpeed = 1.0f;
-    // 狀態.
-    public ENUM_ModeFeature pType = ENUM_ModeFeature.Null;
+    // 特性等級
+    public int iLevel = 0;
     // ------------------------------------------------------------------
     void Update()
     {
         if (!SysMain.pthis.bIsGaming)
+        {
+            Destroy(gameObject);
             return;
+        }
 
         // 把物件朝目標(玩家方向)移動.
         transform.Translate(0, fSpeed * Time.deltaTime, 0);
@@ -23,19 +26,6 @@ public class AIBullet : MonoBehaviour
         // 跑出畫面外就刪掉
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
-    }
-    // ------------------------------------------------------------------
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            if (other.gameObject.GetComponent<AIEnemy>())
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-iDamage, bCriticalStrik);
-
-            if (pType == ENUM_ModeFeature.Frozen && !other.gameObject.GetComponent<Freeze>())
-                other.gameObject.AddComponent<Freeze>().FreezeNow();
-            Destroy(gameObject);
-        }
     }
     // ------------------------------------------------------------------
     public void Chace(GameObject pOgj)

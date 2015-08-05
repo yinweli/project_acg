@@ -14,15 +14,15 @@ public class G_PLook : MonoBehaviour
                 ObjRHand = Role[i].gameObject.transform.parent.gameObject;
 
         // 實例化武器.
-        if (pWeapon != ENUM_Weapon.Weapon_null)
+        if (pWeapon != ENUM_Weapon.Null)
         {
-            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pAI.pWeapon);
+            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/Weapon/" + pAI.pWeapon);
 
             // 修改武器layer.
             ToolKit.SetLayer(iLayer, ObjWeapon.GetComponentsInChildren<SpriteRenderer>());
 
             // 拿手電筒需替玩家加上光源.
-            if (pWeapon == ENUM_Weapon.Weapon_001)
+            if (pWeapon == ENUM_Weapon.Light)
             {
                 GameObject pObj = UITool.pthis.CreateUI(pAI.gameObject, "Prefab/G_Light");
                 pObj.GetComponent<G_Light>().SetLightFollow(ObjWeapon);
@@ -57,9 +57,9 @@ public class G_PLook : MonoBehaviour
             }            
         }
 
-        if (pWeapon != ENUM_Weapon.Weapon_null)
+        if (pWeapon != ENUM_Weapon.Null)
         {
-            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/" + pWeapon);
+            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/Weapon/" + pWeapon);
             SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
             foreach (SpriteRenderer pRender in p2DS)
