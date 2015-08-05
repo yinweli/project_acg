@@ -613,34 +613,34 @@ public class Rule
 
 		return Result;
 	}
-	// 取得升級子彈:冰凍的緩速值
-	public static float UpgradeFrozen()
+	// 取得升級手槍:冰凍的緩速值
+	public static float UpgradeWeaponPistol()
 	{
-		return Mathf.Max(100.0f - (20.0f + SysMain.pthis.iWLevel[ENUM_Weapon.Pistol] - 1) * 4.0f, 0.0f);
+		return Mathf.Max(100.0f - (20.0f + SysMain.pthis.iWLevel[(int)ENUM_Weapon.Pistol] - 1) * 4.0f, 0.0f);
 	}
-	// 取得升級子彈:連鎖的連鎖次數
-	public static int UpgradeChain()
+	// 取得升級左輪手槍:連鎖的連鎖次數
+	public static int UpgradeWeaponRevolver()
 	{
-		return SysMain.pthis.iWLevel[ENUM_Weapon.Revolver];
+		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.Revolver];
 	}
-	// 取得升級子彈:爆頭的致命傷害倍數
-	public static float UpgradeHeadshot()
+	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
+	public static float UpgradeWeaponEagle()
 	{
-		return Mathf.Max(280.0f + (SysMain.pthis.iWLevel[ENUM_Weapon.Eagle] - 1) * 10.0f, 0.0f);
+		return Mathf.Max(280.0f + (SysMain.pthis.iWLevel[(int)ENUM_Weapon.Eagle] - 1) * 10.0f, 0.0f);
 	}
-	// 取得升級子彈:榴彈的爆炸傷害值
-	public static int UpgradeGrenade()
+	// 取得升級衝鋒槍:榴彈的爆炸傷害值
+	public static int UpgradeWeaponSUB()
 	{
-		return SysMain.pthis.iWLevel[ENUM_Weapon.SUB] * 6;
+		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.SUB] * 6;
 	}
-	// 取得升級子彈:穿透的穿透次數
-	public static int UpgradePierce()
+	// 取得升級突擊步槍:穿透的穿透次數
+	public static int UpgradeWeaponRifle()
 	{
-		return SysMain.pthis.iWLevel[ENUM_Weapon.Rifle];
+		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.Rifle];
 	}
-	// 取得升級子彈:電漿的增傷值
-	public static int UpgradePlasma()
+	// 取得升級輕機槍:電漿的增傷值
+	public static int UpgradeWeaponLMG()
 	{
-		return SysMain.pthis.iWLevel[ENUM_Weapon.LMG];
+		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.LMG];
 	}
 }
