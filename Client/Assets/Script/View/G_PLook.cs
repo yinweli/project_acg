@@ -16,7 +16,7 @@ public class G_PLook : MonoBehaviour
         // 實例化武器.
         if (pWeapon != ENUM_Weapon.Null)
         {
-            GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/Weapon/" + pAI.pWeapon);
+			GameObject ObjWeapon = UITool.pthis.CreateUI(ObjRHand, "Prefab/Weapon/" + pWeapon);
 
             // 修改武器layer.
             ToolKit.SetLayer(iLayer, ObjWeapon.GetComponentsInChildren<SpriteRenderer>());

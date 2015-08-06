@@ -11,6 +11,8 @@ public class UITool : MonoBehaviour {
     // ------------------------------------------------------------------
     public GameObject CreateUI(GameObject Parent, string Path)
     {
+		if(Resources.Load(Path) == null)
+			Debug.Log(Path + " is NULL");
 		return NGUITools.AddChild(Parent, Resources.Load(Path) as GameObject);
     }
     // ------------------------------------------------------------------

@@ -123,7 +123,7 @@ public class AIEnemy : MonoBehaviour
     public float GetSpeed()
     {
         if (GetComponent<Freeze>())
-            return DBFData.MoveSpeed * 0.5f;
+            return DBFData.MoveSpeed * Rule.UpgradeWeaponPistol();
         else
             return DBFData.MoveSpeed;
     }

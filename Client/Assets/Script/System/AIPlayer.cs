@@ -145,10 +145,9 @@ public class AIPlayer : MonoBehaviour
 	{
         GameObject pObj = null;
 
-        if(Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) != null)
-            pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
-        else
-            pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/S_Bullet") as GameObject);
+        Debug.Log("Weapon " + pWeapon + "(" + (int)pWeapon + ")" + " Level: " + SysMain.pthis.iWLevel[(int)pWeapon]);
+
+        pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
 		
 		Tuple<int, bool> Damage = Rule.BulletDamage(iPlayer);
 
@@ -157,9 +156,6 @@ public class AIPlayer : MonoBehaviour
 		pObj.GetComponent<AIBullet>().Chace(ObjTarget);
 		pObj.GetComponent<AIBullet>().iDamage = Damage.Item1;
 		pObj.GetComponent<AIBullet>().bCriticalStrik = Damage.Item2;
-
-        //if (Rule.IsFeature(ENUM_ModeFeature.Frozen, iPlayer))
-            //pObj.GetComponent<AIBullet>().pType = ENUM_ModeFeature.Frozen;
 	}
     // ------------------------------------------------------------------
     // 被抓函式.

@@ -9,8 +9,6 @@ public class AIBullet : MonoBehaviour
     public int iDamage = 1;
     // 移動速度
     public float fSpeed = 1.0f;
-    // 特性等級
-    public int iLevel = 0;
     // ------------------------------------------------------------------
     void Update()
     {
@@ -23,7 +21,7 @@ public class AIBullet : MonoBehaviour
         // 把物件朝目標(玩家方向)移動.
         transform.Translate(0, fSpeed * Time.deltaTime, 0);
 
-        // 跑出畫面外就刪掉
+        // 跑出畫面外就刪掉 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
     }
