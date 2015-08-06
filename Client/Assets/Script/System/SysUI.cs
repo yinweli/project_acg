@@ -24,7 +24,6 @@ public class SysUI : MonoBehaviour
     {
         GameObject pObj = CreatePanel("Prefab/P_Day");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
-        pObj.GetComponent<P_Day>().SetDay();
     }
     // ------------------------------------------------------------------
 }

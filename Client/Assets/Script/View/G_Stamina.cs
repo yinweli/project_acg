@@ -30,7 +30,7 @@ public class G_Stamina : MonoBehaviour
             if (iActive <= 1)
                 pSStamina[i].spriteName = "ui_com_003";
             else if (iActive <= 5)
-                 pSStamina[i].spriteName = "ui_com_004";
+                 pSStamina[i].spriteName = "ui_com_017";
             else
                 pSStamina[i].spriteName = "ui_com_005";
 
