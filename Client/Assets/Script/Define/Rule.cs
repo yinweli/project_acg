@@ -417,7 +417,7 @@ public class Rule
 		return iFeature;
 	}
 	// 取得子彈傷害值
-	public static Tuple<int, bool> BulletDamage(int iPos)
+	public static Tuple<int, bool> BulletDamage(int iPos, bool bEnable)
 	{
 		int iDamage = 0;
 		bool bCriticalStrike = false;
@@ -429,15 +429,22 @@ public class Rule
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
-				if(Random.Range(0.0f, GameDefine.fCriticalStrikProb) > (DataMember.fCriticalStrike + DataEquip.CriticalStrike))
+				if(bEnable && Random.Range(0.0f, GameDefine.fCriticalStrikProb) <= (DataMember.fCriticalStrike + DataEquip.CriticalStrike))
 				{
-					iDamage = (DataMember.iAddDamage + DataEquip.Damage);
-					bCriticalStrike = false;
+					float fCriticalStrik = 0.0f;
+					
+					if(System.Convert.ToInt32(DataEquip.GUID) == (int)ENUM_Weapon.Eagle && SysMain.pthis.iWLevel[(int)ENUM_Weapon.Eagle] > 0)
+						fCriticalStrik = UpgradeWeaponEagle();
+					else
+						fCriticalStrik = GameDefine.fCriticalStrik;
+					
+					iDamage = (int)((DataMember.iAddDamage + DataEquip.Damage) * fCriticalStrik);
+					bCriticalStrike = true;
 				}
 				else
 				{
-					iDamage = (int)((DataMember.iAddDamage + DataEquip.Damage) * GameDefine.fCriticalStrik);
-					bCriticalStrike = true;
+					iDamage = (DataMember.iAddDamage + DataEquip.Damage);
+					bCriticalStrike = false;
 				}//if
 
 				iDamage += DataMember.iLiveStage * GameDefine.iDamageUpgrade + DataPlayer.pthis.iDamageLv;
@@ -522,96 +529,73 @@ public class Rule
 	{
 		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
-	// 取得圖鑑是否完成
-	public static bool GetAtlas(int iGUID)
+	// 取得成就是否完成
+	public static bool AchievementComplete(int iGUID, int iLevel)
 	{
-		if(GameDBF.pthis.GetAtlas(iGUID) == null)
+		if(iLevel < GameDefine.iMinAchievementLv || iLevel > GameDefine.iMaxAchievementLv)
 			return false;
 
-		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
+		if(GameDBF.pthis.GetAchievement(iGUID, iLevel) == null)
 			return false;
 
-		bool bResult = true;
-
-		foreach(bool Itor in DataAtlas.pthis.Data[iGUID])
-			bResult &= Itor;
-
-		if(bResult)
-			Debug.Log("Complete : " + iGUID);
-
-		return bResult;
+		return DataAchievement.pthis.IsComplete(iGUID, iLevel);
 	}
-	// 取得圖鑑條件是否完成
-	public static bool GetAtlas(int iGUID, int iCondition)
+	// 檢查成就程序
+	public static List<string> AchievementCheck()
 	{
-		if(GameDBF.pthis.GetAtlas(iGUID) == null)
-			return false;
-
-		if(iCondition >= GameDefine.iMaxAtlasCondition)
-			return false;
-
-		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
-			return false;
-
-		return DataAtlas.pthis.Data[iGUID].Get(iCondition);
-	}
-	// 設定圖鑑條件
-	public static void SetAtlas(int iGUID, int iCondition, bool bValue)
-	{
-		if(GameDBF.pthis.GetAtlas(iGUID) == null)
-			return;
-		
-		if(iCondition >= GameDefine.iMaxAtlasCondition)
-			return;
-
-		if(DataAtlas.pthis.Data.ContainsKey(iGUID) == false)
-			DataAtlas.pthis.Data.Add(iGUID, new BitArray(GameDefine.iMaxAtlasCondition, false));
-
-		DataAtlas.pthis.Data[iGUID].Set(iCondition, bValue);
-	}
-	// 取得收集物品是否拿過
-	public static bool GetCollection(int iGUID)
-	{
-		return DataCollection.pthis.Data.Contains(iGUID);
-	}
-	// 拾取收集物品, 並傳回完成的圖鑑編號列表
-	public static List<int> SetCollection(int iGUID)
-	{
-		List<int> Result = new List<int>();
-		DBFItor Itor = GameDBF.pthis.GetAtlas();
-
-		DataCollection.pthis.Data.Add(iGUID);
+		List<string> Result = new List<string>();
+		DBFItor Itor = GameDBF.pthis.GetAchievement();
 
 		while(Itor.IsEnd() == false)
 		{
-			DBFAtlas DBFTemp = (DBFAtlas)Itor.Data();
-			int iAtlasGUID = System.Convert.ToInt32(DBFTemp.GUID);
+			Tuple<int, int> GUID = DBFAchievement.GetGUID(Itor.Data().GUID);
 
-			if(GetAtlas(iAtlasGUID))
+			if(GUID == null)
+			{
+				Itor.Next();
 				continue;
+			}//if
 
-			if((ENUM_Condition)DBFTemp.Cond1 == ENUM_Condition.Collection && DBFTemp.CondV1 == iGUID)
-				SetAtlas(iAtlasGUID, 0, true);
+			int iGUID = GUID.Item1;
+			int iLevel = GUID.Item2;
 
-			if((ENUM_Condition)DBFTemp.Cond2 == ENUM_Condition.Collection && DBFTemp.CondV2 == iGUID)
-				SetAtlas(iAtlasGUID, 1, true);
+			if(iLevel <= 0)
+			{
+				Itor.Next();
+				continue;
+			}//if
 
-			if((ENUM_Condition)DBFTemp.Cond3 == ENUM_Condition.Collection && DBFTemp.CondV3 == iGUID)
-				SetAtlas(iAtlasGUID, 2, true);
+			if(iLevel > 1 && DataAchievement.pthis.IsComplete(iGUID, iLevel - 1) == false)
+			{
+				Itor.Next();
+				continue;
+			}//if
 
-			if((ENUM_Condition)DBFTemp.Cond4 == ENUM_Condition.Collection && DBFTemp.CondV4 == iGUID)
-				SetAtlas(iAtlasGUID, 3, true);
+			DBFAchievement DBFTemp = (DBFAchievement)Itor.Data();
 
-			if((ENUM_Condition)DBFTemp.Cond5 == ENUM_Condition.Collection && DBFTemp.CondV5 == iGUID)
-				SetAtlas(iAtlasGUID, 4, true);
+			if(DBFTemp.CondValue > DataAchievement.pthis.Get((ENUM_Condition)DBFTemp.Cond))
+			{
+				Itor.Next();
+				continue;
+			}//if
 
-			if(GetAtlas(iAtlasGUID))
-				Result.Add(iAtlasGUID);
+			DataAchievement.pthis.Data[DBFTemp.GUID] = true;
+			Result.Add(DBFTemp.GUID);
 
 			Itor.Next();
 		}//while
 
 		return Result;
+	}
+	// 設定成就內容
+	public static void AchievementSet(ENUM_Condition emCondition, int iValue)
+	{
+		DataAchievement.pthis.Set(emCondition, iValue);
+	}
+	// 增加成就內容
+	public static void AchievementAdd(ENUM_Condition emCondition, int iValue)
+	{
+		DataAchievement.pthis.Add(emCondition, iValue);
 	}
 	// 取得升級手槍:冰凍的緩速值
 	public static float UpgradeWeaponPistol()

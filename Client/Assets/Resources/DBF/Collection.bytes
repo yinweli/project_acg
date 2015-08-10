@@ -1,5 +1,1 @@
-{"GUID":"1", "Stage":"1"}
-{"GUID":"2", "Stage":"1"}
-{"GUID":"3", "Stage":"1"}
-{"GUID":"4", "Stage":"1"}
-{"GUID":"5", "Stage":"1"}
+{"GUID":"1", "Name":"test", "Items1":"1", "Items2":"2", "Items3":"3", "Items4":"4", "Items5":"5", "Reward":"0", "RewardValue":"0"}

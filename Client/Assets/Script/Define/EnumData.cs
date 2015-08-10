@@ -113,25 +113,35 @@ public enum ENUM_Pickup
 	LightAmmo, // 輕型彈藥
 	HeavyAmmo, // 重型彈藥
 	Bomb, // 絕招
-	Collection, // 收集物品
+	Crystal, // 水晶
 }
 
 // 獎勵列舉
 public enum ENUM_Reward
 {
 	Null = 0, 
-	Upgrade, // 裝備升級
 	Looks, // 角色外觀
+	Upgrade, // 裝備升級
+	Currency, // 初始金錢
+	Battery, // 初始電池
+	LightAmmo, // 初始輕型彈藥
+	HeavyAmmo, // 初始重型彈藥
+	Bomb, // 初始絕招
 }
 
 // 條件列舉
 public enum ENUM_Condition
 {
 	Null = 0, 
-	Collection, // 收集物品
 	Single_Stage, // 單輪通過關卡數量
-	Single_SaveMember, // 單輪救援成員人數
-	Single_LostMember, // 單輪失去成員人數
-	Total_CurrencyPickup, // 累積拾取金幣數量
-	Total_MonsterKill, // 累積擊敗怪物數量
+	Single_MemberSave, // 單輪救援隊員數量
+	Single_MemberFire, // 單輪解雇隊員數量
+	Total_Stage, // 累積通過關卡數量
+	Total_Crystal, // 累積拾取水晶數量
+	Total_Currency, // 累積拾取金幣數量
+	Total_Battery, // 累積拾取電池數量
+	Total_LightAmmo, // 累積拾取輕型彈藥數量
+	Total_HeavyAmmo, // 累積拾取重型彈藥數量
+	Total_Bomb, // 累積拾取絕招數量
+	Total_Kill, // 累積擊敗怪物數量
 }

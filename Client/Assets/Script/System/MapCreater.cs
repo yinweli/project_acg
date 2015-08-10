@@ -250,7 +250,7 @@ public class MapCreater : MonoBehaviour
 			
 			DataGame.pthis.PickupList.Add(Data);
 		}//if
-
+		/*
 		// 收集物品拾取
 		DBFItor Itor = GameDBF.pthis.GetCollection();
 
@@ -272,7 +272,7 @@ public class MapCreater : MonoBehaviour
 			}//if
 
 			Itor.Next();
-		}//while
+		}//while*/
 	}
 	// 填滿地圖
 	private void Fill()

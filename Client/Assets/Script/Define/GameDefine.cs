@@ -43,6 +43,11 @@ public class GameDefine
 	public const int iMaxFeature = 6; // 最大特性數量
 	public const int iMaxBomb = 10; // 最大絕招數量
 	public const int iMaxShield = 100; // 最大護盾值
+	public const int iMaxAchievementLv = 6; // 最大成就等級
+	public const int iMinAchievementLv = 1; // 最小成就等級
+	public const int iMaxCollectionLv = 6; // 最大收集等級
+	public const int iMinCollectionLv = 1; // 最小收集等級
+	public const int iMaxCollectionCount = 5; // 最大收集物品數量
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
@@ -92,8 +97,6 @@ public class GameDefine
 	public const float fUpgradeDmgLv = 0.05f; // 傷害等級升級值
 	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
-	public const int iMaxAtlasCondition = 5; // 最大圖鑑條件數量
-
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
@@ -103,15 +106,15 @@ public class GameDefine
 	public const string szSaveEnemy = "save_enemy_"; // 怪物資料存檔名稱
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
-	public const string szSaveAtlas = "save_atlas"; // 圖鑑列表存檔名稱
-	public const string szSaveCollection = "save_collection"; // 收集物品存檔名稱
 	public const string szSaveAchievement = "save_achievement"; // 成就存檔名稱
+	public const string szSaveAchievementProgress = "save_achievementprogress"; // 成就進度存檔名稱
+	public const string szSaveCollection = "save_collection"; // 收集物品存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
-	public const string szDBFAtlas = "Atlas"; // 圖鑑dbf名稱
+	public const string szDBFAchievement = "Achievement"; // 成就dbf名稱
 	public const string szDBFCollection = "Collection"; // 收集物品dbf名稱
 
 	public static List<int> StageStyle = new List<int>() // 關卡風格列表

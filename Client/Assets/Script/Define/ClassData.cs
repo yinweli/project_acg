@@ -220,21 +220,27 @@ public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
 	}
 }
 
-public class SaveAtlas
+public class SaveAchievement
 {
-	public string[] Data = new string[0]; // 圖鑑列表
+	public string[] Data = new string[0]; // 成就列表
+}
+
+public class SaveAchievementProgress
+{
+	public int iSingle_Stage = 0; // 單輪通過關卡數量
+	public int iSingle_MemberSave = 0; // 單輪救援隊員數量
+	public int iSingle_MemberFire = 0; // 單輪解雇隊員數量
+	public int iTotal_Stage = 0; // 累積通過關卡數量
+	public int iTotal_Crystal = 0; // 累積拾取水晶數量
+	public int iTotal_Currency = 0; // 累積拾取金幣數量
+	public int iTotal_Battery = 0; // 累積拾取電池數量
+	public int iTotal_LightAmmo = 0; // 累積拾取輕型彈藥數量
+	public int iTotal_HeavyAmmo = 0; // 累積拾取重型彈藥數量
+	public int iTotal_Bomb = 0; // 累積拾取絕招數量
+	public int iTotal_Kill = 0; // 累積擊敗怪物數量
 }
 
 public class SaveCollection
 {
-	public int[] Data = new int[0]; // 收集物品列表
-}
-
-public class SaveAchievement
-{
-	public int iSingle_Stage = 0; // 單輪通過關卡數量
-	public int iSingle_SaveMember = 0; // 單輪救援成員人數
-	public int iSingle_LostMember = 0; // 單輪失去成員人數
-	public int iTotal_CurrencyPickup = 0; // 累積拾取金幣數量
-	public int iTotal_MonsterKill = 0; // 累積擊敗怪物數量
+	public string[] Data = new string[0]; // 收集物品列表
 }

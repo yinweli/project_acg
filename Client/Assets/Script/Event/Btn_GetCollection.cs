@@ -39,7 +39,7 @@ public class Btn_GetCollection : MonoBehaviour
 	}
 	// ------------------------------------------------------------------
 	IEnumerator FlyToPos()
-	{
+	{/*
 		//轉加放大
 		int iCount = 1;
 		while (iCount <= 9)
@@ -58,7 +58,8 @@ public class Btn_GetCollection : MonoBehaviour
 		List<int> Complete = Rule.SetCollection(DataGame.pthis.PickupList[iItemID].iLooks);
 
 		// 完成圖鑑提示!
-
+*/
+		yield return new WaitForEndOfFrame();
 		Destroy(gameObject);
 	}
 }
