@@ -2,10 +2,9 @@
 using LibCSNStandard;
 using System.Collections;
 
-public class Bullet_Pierce : MonoBehaviour
+public class Bullet_Rifle : MonoBehaviour
 {
     public AIBullet pAI = null;
-
     
     int iCount = 1;
     // ------------------------------------------------------------------

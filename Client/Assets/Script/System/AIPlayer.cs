@@ -148,15 +148,11 @@ public class AIPlayer : MonoBehaviour
         Debug.Log("Weapon " + pWeapon + "(" + (int)pWeapon + ")" + " Level: " + SysMain.pthis.iWLevel[(int)pWeapon]);
 
         pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
-		
-		
 
 		pObj.transform.parent = transform.parent;
 		pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
-		pObj.GetComponent<AIBullet>().Chace(ObjTarget);
-        /*
-		pObj.GetComponent<AIBullet>().iDamage = Damage.Item1;
-		pObj.GetComponent<AIBullet>().bCriticalStrik = Damage.Item2;*/
+        pObj.GetComponent<AIBullet>().Chace(ObjTarget);
+        pObj.GetComponent<AIBullet>().iPlayer = iPlayer;
 	}
     // ------------------------------------------------------------------
     // 被抓函式.

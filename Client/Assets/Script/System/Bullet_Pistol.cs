@@ -2,7 +2,7 @@
 using LibCSNStandard;
 using System.Collections;
 
-public class Bullet_Freeze : MonoBehaviour
+public class Bullet_Pistol : MonoBehaviour
 {
     public AIBullet pAI = null;
     // ------------------------------------------------------------------
