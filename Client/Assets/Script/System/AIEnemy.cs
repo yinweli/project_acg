@@ -112,6 +112,11 @@ public class AIEnemy : MonoBehaviour
             NGUITools.PlaySound(ClipHurt, 0.8f);
     }
     // ------------------------------------------------------------------
+    public void HitSfx(string sSfxName)
+    {
+        UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/" + sSfxName);
+    }
+    // ------------------------------------------------------------------
     public int GetTheat()
     {
         if (bHasTarget)

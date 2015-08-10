@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System.Collections;
 
 public class Bullet_Pierce : MonoBehaviour
 {
     public AIBullet pAI = null;
 
+    
     int iCount = 1;
     // ------------------------------------------------------------------
     void Start()
@@ -16,11 +18,15 @@ public class Bullet_Pierce : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            Tuple<int, bool> Damage;
+
             if (iCount < Rule.UpgradeWeaponRifle())
-                pAI.bCriticalStrik = false;
+                Damage = Rule.BulletDamage(pAI.iPlayer, false);
+            else
+                Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
             if (other.gameObject.GetComponent<AIEnemy>())
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-pAI.iDamage, pAI.bCriticalStrik);
+                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
 
             if (SysMain.pthis.iWLevel[(int)ENUM_Weapon.Rifle] > 0)
                 iCount--;           

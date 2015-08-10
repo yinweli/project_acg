@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System.Collections;
 
 public class Bullet_Freeze : MonoBehaviour
@@ -9,8 +10,10 @@ public class Bullet_Freeze : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
+
             if (other.gameObject.GetComponent<AIEnemy>())
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-pAI.iDamage, pAI.bCriticalStrik);
+                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
 
             if(SysMain.pthis.iWLevel[(int)ENUM_Weapon.Pistol] > 0)
                 other.gameObject.AddComponent<Freeze>().FreezeNow();

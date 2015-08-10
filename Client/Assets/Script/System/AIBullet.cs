@@ -3,10 +3,7 @@ using System.Collections;
 
 public class AIBullet : MonoBehaviour 
 {
-	// 是否暴擊
-	public bool bCriticalStrik = false;
-    // 傷害.
-    public int iDamage = 1;
+    public int iPlayer = 0;
     // 移動速度
     public float fSpeed = 1.0f;
     // ------------------------------------------------------------------
