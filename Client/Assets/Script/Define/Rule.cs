@@ -99,6 +99,12 @@ public class Rule
 		
 		return fResult;
 	}
+	// 增加水晶值
+	public static void CrystalAdd(int iValue)
+	{
+		DataReward.pthis.iCrystal = Value(0, GameDefine.iMaxCrystal, DataReward.pthis.iCrystal + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.Crystal, iValue);
+	}
 	// 重置通貨值
 	public static void CurrencyReset()
 	{
@@ -733,5 +739,16 @@ public class Rule
 	public static int UpgradeWeaponLMG()
 	{
 		return GetWeaponLevel(ENUM_Weapon.LMG);
+	}
+	// 取得是否要出現水晶
+	public static bool AppearCrystal()
+	{
+		if(DataPlayer.pthis.iStage % GameDefine.iBossStage == 0)
+			return true;
+
+		if(DataPlayer.pthis.iStage >= GameDefine.iCrystalStage && Random.Range(0, 100) <= GameDefine.iCrystalRatio)
+			return true;
+
+		return false;
 	}
 }

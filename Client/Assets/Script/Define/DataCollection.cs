@@ -34,6 +34,8 @@ public class DataCollection : MonoBehaviour
 			
 			Itor.Next();
 		}//while
+
+		Debug.Log("Collection list have " + Collection.Count + " items");
 	}
 	// 存檔.
 	public void Save()

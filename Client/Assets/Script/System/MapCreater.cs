@@ -250,29 +250,20 @@ public class MapCreater : MonoBehaviour
 			
 			DataGame.pthis.PickupList.Add(Data);
 		}//if
-		/*
-		// 收集物品拾取
-		DBFItor Itor = GameDBF.pthis.GetCollection();
 
-		while(Itor.IsEnd() == false)
+		// 水晶拾取
+		if(Rule.AppearCrystal())
 		{
-			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
+			Pickup Data = new Pickup();
 			
-			if(DataPlayer.pthis.iStage == DBFTemp.Stage && Rule.GetCollection((Argu)DBFTemp.GUID) == false)
-			{
-				Pickup Data = new Pickup();
-				
-				Data.Pos = Rule.NextPickup();
-				Data.iType = (int)ENUM_Pickup.Collection;
-				Data.iCount = 1;
-				Data.iLooks = System.Convert.ToInt32(DBFTemp.GUID);
-				Data.bPickup = false;
-				
-				DataGame.pthis.PickupList.Add(Data);
-			}//if
-
-			Itor.Next();
-		}//while*/
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Crystal;
+			Data.iCount = GameDefine.iCrystalCount;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//if
 	}
 	// 填滿地圖
 	private void Fill()
@@ -354,8 +345,8 @@ public class MapCreater : MonoBehaviour
 						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
 					else if (Obj && Obj.GetComponent<Btn_GetBomb>())
 						Obj.GetComponent<Btn_GetBomb>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetCollection>())
-						Obj.GetComponent<Btn_GetCollection>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetCrystal>())
+						Obj.GetComponent<Btn_GetCrystal>().iItemID = i;
 				}
 				
 				if(Obj != null)

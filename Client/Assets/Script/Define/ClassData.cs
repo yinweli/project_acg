@@ -270,4 +270,5 @@ public class SaveReward
 	public int iInitLightAmmo = 0; // 初始輕型彈藥
 	public int iInitHeavyAmmo = 0; // 初始重型彈藥
 	public int iInitBomb = 0; // 初始絕招
+	public int iCrystal = 0; // 水晶
 }

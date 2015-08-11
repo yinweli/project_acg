@@ -28,6 +28,7 @@ public class GameDefine
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
 	public const int iMaxMember = 6; // 最大成員數
+	public const int iMaxCrystal = 99999; // 最大水晶值
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
 	public const int iMaxStamina = 9999; // 最大耐力值
@@ -57,6 +58,9 @@ public class GameDefine
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
 	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
 	public const int iBossStage = 5; // 每幾關為魔王關
+	public const int iCrystalStage = 6; // 水晶最小出現關卡
+	public const int iCrystalRatio = 20; // 水晶出現機率
+	public const int iCrystalCount = 8; // 水晶出現數量
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iBlockUpdate = 25; // 格子更新距離

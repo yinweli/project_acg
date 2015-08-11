@@ -16,6 +16,8 @@ public class DataReward : MonoBehaviour
 	public int iInitLightAmmo = 0; // 初始輕型彈藥
 	public int iInitHeavyAmmo = 0; // 初始重型彈藥
 	public int iInitBomb = 0; // 初始絕招
+
+	public int iCrystal = 0; // 水晶, 用來購買水晶商人的貨品
 	
 	void Awake()
 	{
@@ -38,6 +40,7 @@ public class DataReward : MonoBehaviour
 		Temp.iInitLightAmmo = iInitLightAmmo;
 		Temp.iInitHeavyAmmo = iInitHeavyAmmo;
 		Temp.iInitBomb = iInitBomb;
+		Temp.iCrystal = iCrystal;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveReward, Json.ToString(Temp));
 	}
@@ -66,6 +69,7 @@ public class DataReward : MonoBehaviour
 			iInitLightAmmo = Temp.iInitLightAmmo;
 			iInitHeavyAmmo = Temp.iInitHeavyAmmo;
 			iInitBomb = Temp.iInitBomb;
+			iCrystal = Temp.iCrystal;
 		}
 		else
 		{
@@ -76,6 +80,7 @@ public class DataReward : MonoBehaviour
 			iInitLightAmmo = GameInit.iInitLightAmmo;
 			iInitHeavyAmmo = GameInit.iInitHeavyAmmo;
 			iInitBomb = GameInit.iInitBomb;
+			iCrystal = 0;
 		}//if
 		
 		return true;

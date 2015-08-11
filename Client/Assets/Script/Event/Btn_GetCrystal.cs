@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Btn_GetCollection : MonoBehaviour 
+public class Btn_GetCrystal : MonoBehaviour 
 {
 	public int iItemID = 0;
 	
@@ -39,9 +39,10 @@ public class Btn_GetCollection : MonoBehaviour
 	}
 	// ------------------------------------------------------------------
 	IEnumerator FlyToPos()
-	{/*
+	{
 		//轉加放大
 		int iCount = 1;
+
 		while (iCount <= 9)
 		{
 			pSprite.transform.localScale = new Vector3(pSprite.transform.localScale.x + (0.01f * iCount), pSprite.transform.localScale.y + (0.01f * iCount), 1);
@@ -51,15 +52,10 @@ public class Btn_GetCollection : MonoBehaviour
 
 		yield return new WaitForSeconds(0.8f);
 
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Collection", "", 0);
-
+		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Crystal", "", 0);
 		DataGame.pthis.PickupList[iItemID].bPickup = true;
+		Rule.CrystalAdd(DataGame.pthis.PickupList[iItemID].iCount);
 
-		List<int> Complete = Rule.SetCollection(DataGame.pthis.PickupList[iItemID].iLooks);
-
-		// 完成圖鑑提示!
-*/
-		yield return new WaitForEndOfFrame();
 		Destroy(gameObject);
 	}
 }
