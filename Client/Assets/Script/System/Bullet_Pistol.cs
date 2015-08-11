@@ -15,7 +15,7 @@ public class Bullet_Pistol : MonoBehaviour
             if (other.gameObject.GetComponent<AIEnemy>())
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
 
-            if(SysMain.pthis.iWLevel[(int)ENUM_Weapon.Pistol] > 0)
+            if(Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)
                 other.gameObject.AddComponent<Freeze>().FreezeNow();
 
             Destroy(gameObject);

@@ -87,7 +87,7 @@ public class P_UI : MonoBehaviour
         ENUM_Resource emResource = (ENUM_Resource)DataEquip.Resource;
 
         // 輕機槍升級後不再消耗子彈，改為消耗電力.
-        if (pType == ENUM_Weapon.LMG && SysMain.pthis.iWLevel[(int)ENUM_Weapon.LMG] > 0)
+        if (pType == ENUM_Weapon.LMG && Rule.GetWeaponLevel(ENUM_Weapon.LMG) > 0)
             emResource = ENUM_Resource.Battery;
 
         if (Rule.ResourceChk(emResource, 0) == false)

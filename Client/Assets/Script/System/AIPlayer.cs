@@ -145,7 +145,7 @@ public class AIPlayer : MonoBehaviour
 	{
         GameObject pObj = null;
 
-        Debug.Log("Weapon " + pWeapon + "(" + (int)pWeapon + ")" + " Level: " + SysMain.pthis.iWLevel[(int)pWeapon]);
+        Debug.Log("Weapon " + pWeapon + "(" + (int)pWeapon + ")" + " Level: " + Rule.GetWeaponLevel(pWeapon));
 
         pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
 

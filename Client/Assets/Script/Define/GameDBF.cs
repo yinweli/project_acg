@@ -17,6 +17,7 @@ public class GameDBF : MonoBehaviour
         Add<DBFMonster>(GameDefine.szDBFMonster);
 		Add<DBFAchievement>(GameDefine.szDBFAchievement);
 		Add<DBFCollection>(GameDefine.szDBFCollection);
+		Add<DBFReward>(GameDefine.szDBFReward);
 	}
 
     public void Add<T>(string szDBFName) where T : DBF
@@ -65,20 +66,32 @@ public class GameDBF : MonoBehaviour
 	{
 		return m_DBF.Get(GameDefine.szDBFMonster);
 	}
-	public DBF GetAchievement(int iGUID, int iLevel)
+	public DBF GetAchievement(Argu GUID)
 	{
-		return m_DBF.Get(GameDefine.szDBFAchievement, DBFAchievement.GetGUID(iGUID, iLevel));
+		return m_DBF.Get(GameDefine.szDBFAchievement, GUID);
+	}
+	public DBF GetAchievement(ENUM_Achievement emAchievement)
+	{
+		return m_DBF.Get(GameDefine.szDBFAchievement, (int)emAchievement);
 	}
 	public DBFItor GetAchievement()
 	{
 		return m_DBF.Get(GameDefine.szDBFAchievement);
 	}
-	public DBF GetCollection(int iGUID, int iLevel)
+	public DBF GetCollection(Argu GUID)
 	{
-		return m_DBF.Get(GameDefine.szDBFCollection, DBFCollection.GetGUID(iGUID, iLevel));
+		return m_DBF.Get(GameDefine.szDBFCollection, GUID);
 	}
 	public DBFItor GetCollection()
 	{
 		return m_DBF.Get(GameDefine.szDBFCollection);
+	}
+	public DBF GetReward(Argu GUID)
+	{
+		return m_DBF.Get(GameDefine.szDBFReward, GUID);
+	}
+	public DBFItor GetReward()
+	{
+		return m_DBF.Get(GameDefine.szDBFReward);
 	}
 }

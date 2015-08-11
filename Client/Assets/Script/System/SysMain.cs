@@ -21,9 +21,6 @@ public class SysMain : MonoBehaviour
     // 可打敵人佇列.
     public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();    
 
-    // 暫時替代武器等級
-    public int[] iWLevel = new int[(int)ENUM_Weapon.Count];
-
     bool bIsOld = true;
 
     public float fSaveTime = 0;
@@ -193,10 +190,11 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.Members = new List<Member>();
 
         // 給與初始資源
-        Rule.ResourceAdd(ENUM_Resource.Battery, GameDefine.iInitBattery);
-        Rule.ResourceAdd(ENUM_Resource.LightAmmo, GameDefine.iInitLightAmmo);
-        Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iInitHeavyAmmo);
-		Rule.BombAdd(GameDefine.iInitBomb);
+		Rule.CurrencyAdd(DataReward.pthis.iInitCurrency);
+		Rule.ResourceAdd(ENUM_Resource.Battery, DataReward.pthis.iInitBattery);
+		Rule.ResourceAdd(ENUM_Resource.LightAmmo, DataReward.pthis.iInitLightAmmo);
+		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, DataReward.pthis.iInitHeavyAmmo);
+		Rule.BombAdd(DataReward.pthis.iInitBomb);
 
         // 給與初始隊員
         Rule.MemberAdd(1);

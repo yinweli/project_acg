@@ -27,7 +27,7 @@ public class Bullet_Rifle : MonoBehaviour
             if (other.gameObject.GetComponent<AIEnemy>())
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
 
-            if (SysMain.pthis.iWLevel[(int)ENUM_Weapon.Rifle] > 0)
+            if (Rule.GetWeaponLevel(ENUM_Weapon.Rifle) > 0)
                 iCount--;           
 
             if (iCount <= 0)

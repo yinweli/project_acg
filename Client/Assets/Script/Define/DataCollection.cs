@@ -9,41 +9,38 @@ public class DataCollection : MonoBehaviour
 	static public DataCollection pthis = null;
 	
 	/* Save */
-	public Dictionary<string, BitArray> Data = new Dictionary<string, BitArray>(); // 收集列表
+	public HashSet<int> Data = new HashSet<int>(); // 收集列表
+
+	/* Not Save */
+	public HashSet<int> Collection = new HashSet<int>(); // 收集物品列表, 用來比對物品是否可以收集
 	
 	void Awake()
 	{
 		pthis = this;
 	}
-	private string BitArrayToString(BitArray Data)
+	void Start()
 	{
-		string szTemp = "";
+		DBFItor Itor = GameDBF.pthis.GetCollection();
 		
-		foreach(bool Itor in Data)
-			szTemp += Itor ? '1' : '0';
-		
-		return szTemp;
-	}
-	private BitArray StringToBitArray(string szData)
-	{
-		BitArray Temp = new BitArray(szData.Length);
-		
-		for(int iCount = 0; iCount < szData.Length; ++iCount)
-			Temp[iCount] = szData[iCount] != '0';
-		
-		return Temp;
+		while(Itor.IsEnd() == false)
+		{
+			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
+			
+			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
+			{
+				foreach(int ItorItems in DBFTemp.Items(iLevel))
+					Collection.Add(ItorItems);
+			}//for
+			
+			Itor.Next();
+		}//while
 	}
 	// 存檔.
 	public void Save()
 	{
-		List<string> DataTemp = new List<string>();
-		
-		foreach(KeyValuePair<string, BitArray> Itor in Data)
-			DataTemp.Add(Itor.Key + "_" + BitArrayToString(Itor.Value));
-		
 		SaveCollection Temp = new SaveCollection();
 		
-		Temp.Data = DataTemp.ToArray();
+		Temp.Data = Data.ToList().ToArray();
 		
 		PlayerPrefs.SetString(GameDefine.szSaveCollection, Json.ToString(Temp));
 	}
@@ -58,22 +55,38 @@ public class DataCollection : MonoBehaviour
 		if(Temp == null)
 			return false;
 		
-		foreach(string Itor in Temp.Data)
-		{
-			string[] szTemp = Itor.Split(new char[] {'_'});
-			
-			if(szTemp.Length >= 2)
-				Data.Add(szTemp[0], StringToBitArray(szTemp[1]));
-		}//for
+		foreach(int Itor in Temp.Data)
+			Data.Add(Itor);
 
 		return true;
 	}
-	// 取得收集是否完成
-	public bool IsComplete(int iGUID, int iLevel)
+	// 檢查列表內物品是否都收集了
+	public bool IsComplete(List<int> Items)
 	{
-		string szGUID = DBFCollection.GetGUID(iGUID, iLevel);
+		bool bResult = true;
 
-		return Data.ContainsKey(szGUID) ? Data[szGUID].Cast<bool>().Contains(false) == false : false;
+		foreach(int Itor in Items)
+			bResult &= Data.Contains(Itor);
+
+		return bResult;
+	}
+	// 取得比對後已收集的物品列表
+	public List<int> GetComplete(List<int> Items)
+	{
+		List<int> Result = new List<int>();
+
+		foreach(int Itor in Items)
+		{
+			if(Data.Contains(Itor))
+				Result.Add(Itor);
+		}//for
+
+		return Result;
+	}
+	// 檢查物品是否存在收集列表中
+	public bool IsCollection(int iItems)
+	{
+		return Collection.Contains(iItems);
 	}
 	// 清除資料
 	public void Clear()

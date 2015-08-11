@@ -134,6 +134,37 @@ public class Member
 	/* [    ] */ public int iAddDamage = 0; // 增傷
 }
 
+public class AchievementInfo
+{
+	public int iLevel = 0; // 成就等級
+	public int iValue = 0; // 目前值
+
+	public AchievementInfo()
+	{
+
+	}
+	public AchievementInfo(int level, int value)
+	{
+		iLevel = level;
+		iValue = value;
+	}
+	public bool Empty()
+	{
+		return iLevel <= 0;
+	}
+}
+
+public class CollectionInfo
+{
+	public int iLevel = 0; // 收集等級
+	public List<int> Items = new List<int>(); // 已收集物品列表
+
+	public bool Empty()
+	{
+		return iLevel <= 0;
+	}
+}
+
 public class SaveMember
 {
 	public int iLooks = 0; // 外觀編號
@@ -225,22 +256,18 @@ public class SaveAchievement
 	public string[] Data = new string[0]; // 成就列表
 }
 
-public class SaveAchievementProgress
-{
-	public int iSingle_Stage = 0; // 單輪通過關卡數量
-	public int iSingle_MemberSave = 0; // 單輪救援隊員數量
-	public int iSingle_MemberFire = 0; // 單輪解雇隊員數量
-	public int iTotal_Stage = 0; // 累積通過關卡數量
-	public int iTotal_Crystal = 0; // 累積拾取水晶數量
-	public int iTotal_Currency = 0; // 累積拾取金幣數量
-	public int iTotal_Battery = 0; // 累積拾取電池數量
-	public int iTotal_LightAmmo = 0; // 累積拾取輕型彈藥數量
-	public int iTotal_HeavyAmmo = 0; // 累積拾取重型彈藥數量
-	public int iTotal_Bomb = 0; // 累積拾取絕招數量
-	public int iTotal_Kill = 0; // 累積擊敗怪物數量
-}
-
 public class SaveCollection
 {
-	public string[] Data = new string[0]; // 收集物品列表
+	public int[] Data = new int[0]; // 收集列表
+}
+
+public class SaveReward
+{
+	public int[] MemberLooks = new int[0]; // 角色外觀列表
+	public string[] WeaponLevel = new string[0]; // 武器等級列表
+	public int iInitCurrency = 0; // 初始金錢
+	public int iInitBattery = 0; // 初始電池
+	public int iInitLightAmmo = 0; // 初始輕型彈藥
+	public int iInitHeavyAmmo = 0; // 初始重型彈藥
+	public int iInitBomb = 0; // 初始絕招
 }

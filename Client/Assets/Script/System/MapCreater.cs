@@ -165,7 +165,7 @@ public class MapCreater : MonoBehaviour
 				Data.Pos = Rule.NextPickup();
 				Data.iType = (int)ENUM_Pickup.Member;
 				Data.iCount = 1;
-				Data.iLooks = Tool.RandomPick(GameDefine.MemberLooks);
+				Data.iLooks = Rule.RandomMemberLooks();
 				Data.bPickup = false;
 				
 				DataGame.pthis.PickupList.Add(Data);

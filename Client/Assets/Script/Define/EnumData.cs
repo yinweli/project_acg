@@ -129,8 +129,8 @@ public enum ENUM_Reward
 	Bomb, // 初始絕招
 }
 
-// 條件列舉
-public enum ENUM_Condition
+// 成就列舉
+public enum ENUM_Achievement
 {
 	Null = 0, 
 	Single_Stage, // 單輪通過關卡數量

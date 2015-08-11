@@ -13,7 +13,7 @@ public class Bullet_LMG : MonoBehaviour
             Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
             if (other.gameObject.GetComponent<AIEnemy>())
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1 - SysMain.pthis.iWLevel[(int)ENUM_Weapon.LMG], Damage.Item2);
+                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1 - Rule.GetWeaponLevel(ENUM_Weapon.LMG), Damage.Item2);
 
             Destroy(gameObject);
         }

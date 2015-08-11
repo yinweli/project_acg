@@ -1,1 +1,1 @@
-{"GUID":"1", "Name":"test", "Items1":"1", "Items2":"2", "Items3":"3", "Items4":"4", "Items5":"5", "Reward":"0", "RewardValue":"0"}
+{"GUID":"1", "Name":"test", "Lv1Items":"1,1,1,1,1", "Lv2Items":"1,1,1,1,1", "Lv3Items":"1,1,1,1,1", "Lv4Items":"1,1,1,1,1", "Lv5Items":"1,1,1,1,1", "Lv6Items":"1,1,1,1,1", "Lv1Reward":"1", "Lv2Reward":"1", "Lv3Reward":"1", "Lv4Reward":"1", "Lv5Reward":"1", "Lv6Reward":"1"}

@@ -198,6 +198,11 @@ public class Rule
 
 		return DataPlayer.pthis.Resource[iIndex] > iValue;
 	}
+	// 取得隨機成員外型
+	public static int RandomMemberLooks()
+	{
+		return Tool.RandomPick(DataReward.pthis.MemberLooks);
+	}
 	// 建立成員
 	public static void MemberAdd(int iLooks, int iEquip)
 	{
@@ -211,7 +216,7 @@ public class Rule
 	// 建立成員
 	public static void MemberAdd(int iEquip)
 	{
-		MemberAdd(Tool.RandomPick(GameDefine.MemberLooks), iEquip);
+		MemberAdd(RandomMemberLooks(), iEquip);
 	}
 	// 建立成員
 	public static void MemberAdd()
@@ -433,7 +438,7 @@ public class Rule
 				{
 					float fCriticalStrik = 0.0f;
 					
-					if(System.Convert.ToInt32(DataEquip.GUID) == (int)ENUM_Weapon.Eagle && SysMain.pthis.iWLevel[(int)ENUM_Weapon.Eagle] > 0)
+					if(System.Convert.ToInt32(DataEquip.GUID) == (int)ENUM_Weapon.Eagle && GetWeaponLevel(ENUM_Weapon.Eagle) > 0)
 						fCriticalStrik = UpgradeWeaponEagle();
 					else
 						fCriticalStrik = GameDefine.fCriticalStrik;
@@ -529,102 +534,204 @@ public class Rule
 	{
 		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
-	// 取得成就是否完成
-	public static bool AchievementComplete(int iGUID, int iLevel)
+	// 增加成就內容, 傳回完成成就等級列表
+	public static List<int> AchievementAdd(ENUM_Achievement emAchievement, int iValue)
 	{
-		if(iLevel < GameDefine.iMinAchievementLv || iLevel > GameDefine.iMaxAchievementLv)
-			return false;
+		List<int> Result = new List<int>();
+		DBFAchievement DBFTemp = (DBFAchievement)GameDBF.pthis.GetAchievement(emAchievement);
 
-		if(GameDBF.pthis.GetAchievement(iGUID, iLevel) == null)
-			return false;
+		if(DBFTemp == null)
+			return Result;
 
-		return DataAchievement.pthis.IsComplete(iGUID, iLevel);
+		int iAchievement = (int)emAchievement;
+		int iOldValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
+		int iNewValue = iOldValue + iValue;
+
+		iNewValue = iNewValue > DBFTemp.Lv6Value ? DBFTemp.Lv6Value : iNewValue;
+		DataAchievement.pthis.Data[iAchievement] = iNewValue;
+		
+		if(DBFTemp.Lv1Value >= iOldValue && DBFTemp.Lv1Value <= iNewValue)
+			Result.Add(1);
+		
+		if(DBFTemp.Lv2Value >= iOldValue && DBFTemp.Lv2Value <= iNewValue)
+			Result.Add(2);
+		
+		if(DBFTemp.Lv3Value >= iOldValue && DBFTemp.Lv3Value <= iNewValue)
+			Result.Add(3);
+		
+		if(DBFTemp.Lv4Value >= iOldValue && DBFTemp.Lv4Value <= iNewValue)
+			Result.Add(4);
+		
+		if(DBFTemp.Lv5Value >= iOldValue && DBFTemp.Lv5Value <= iNewValue)
+			Result.Add(5);
+		
+		if(DBFTemp.Lv6Value >= iOldValue && DBFTemp.Lv6Value <= iNewValue)
+			Result.Add(6);
+
+		DataAchievement.pthis.Data[iAchievement] = iNewValue;
+
+		return Result;
 	}
-	// 檢查成就程序
-	public static List<string> AchievementCheck()
+	// 取得進行中成就資訊
+	public static AchievementInfo AchievementRunning(ENUM_Achievement emAchievement)
 	{
-		List<string> Result = new List<string>();
-		DBFItor Itor = GameDBF.pthis.GetAchievement();
+		DBFAchievement DBFTemp = (DBFAchievement)GameDBF.pthis.GetAchievement(emAchievement);
+		
+		if(DBFTemp == null)
+			return new AchievementInfo();
+				
+		int iAchievement = (int)emAchievement;
+		int iValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
+
+		if(DBFTemp.Lv1Value > iValue)
+			return new AchievementInfo(1, iValue);
+		
+		if(DBFTemp.Lv2Value > iValue)
+			return new AchievementInfo(2, iValue);
+		
+		if(DBFTemp.Lv3Value > iValue)
+			return new AchievementInfo(3, iValue);
+		
+		if(DBFTemp.Lv4Value > iValue)
+			return new AchievementInfo(4, iValue);
+		
+		if(DBFTemp.Lv5Value > iValue)
+			return new AchievementInfo(5, iValue);
+
+		return new AchievementInfo(6, iValue);
+	}
+	// 拾取收集物品, 傳回完成收集編號, 等級列表
+	public static List<Tuple<int, int>> CollectionAdd(int iItems)
+	{
+		List<Tuple<int, int>> Result = new List<Tuple<int, int>>();
+
+		if(DataCollection.pthis.IsCollection(iItems) == false)
+			return Result;
+
+		if(DataCollection.pthis.Data.Contains(iItems))
+			return Result;
+
+		DataCollection.pthis.Data.Add(iItems);
+
+		DBFItor Itor = GameDBF.pthis.GetCollection();
 
 		while(Itor.IsEnd() == false)
 		{
-			Tuple<int, int> GUID = DBFAchievement.GetGUID(Itor.Data().GUID);
+			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
 
-			if(GUID == null)
+			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
 			{
-				Itor.Next();
-				continue;
-			}//if
+				List<int> Items = DBFTemp.Items(iLevel);
 
-			int iGUID = GUID.Item1;
-			int iLevel = GUID.Item2;
+				if(Items.Contains(iItems) == false)
+					continue;
 
-			if(iLevel <= 0)
-			{
-				Itor.Next();
-				continue;
-			}//if
+				if(DataCollection.pthis.IsComplete(Items) == false)
+					continue;
 
-			if(iLevel > 1 && DataAchievement.pthis.IsComplete(iGUID, iLevel - 1) == false)
-			{
-				Itor.Next();
-				continue;
-			}//if
-
-			DBFAchievement DBFTemp = (DBFAchievement)Itor.Data();
-
-			if(DBFTemp.CondValue > DataAchievement.pthis.Get((ENUM_Condition)DBFTemp.Cond))
-			{
-				Itor.Next();
-				continue;
-			}//if
-
-			DataAchievement.pthis.Data[DBFTemp.GUID] = true;
-			Result.Add(DBFTemp.GUID);
+				Result.Add(new Tuple<int, int>(System.Convert.ToInt32(DBFTemp.GUID), iLevel));
+			}//for
 
 			Itor.Next();
 		}//while
 
 		return Result;
 	}
-	// 設定成就內容
-	public static void AchievementSet(ENUM_Condition emCondition, int iValue)
+	// 取得進行中收集資訊
+	public static CollectionInfo CollectionRunning(int iGUID)
 	{
-		DataAchievement.pthis.Set(emCondition, iValue);
+		DBFCollection DBFTemp = (DBFCollection)GameDBF.pthis.GetCollection(iGUID);
+		
+		if(DBFTemp == null)
+			return new CollectionInfo();
+
+		for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
+		{
+			List<int> Items = DBFTemp.Items(iLevel);
+
+			if(DataCollection.pthis.IsComplete(Items))
+				continue;
+
+			CollectionInfo Result = new CollectionInfo();
+
+			Result.iLevel = iLevel;
+			Result.Items = DataCollection.pthis.GetComplete(Items);
+			
+			return Result;
+		}//for
+
+		return new CollectionInfo();
 	}
-	// 增加成就內容
-	public static void AchievementAdd(ENUM_Condition emCondition, int iValue)
+	// 給予獎勵
+	public static void GetReward(int iReward)
 	{
-		DataAchievement.pthis.Add(emCondition, iValue);
+		DBFReward DBFTemp = (DBFReward)GameDBF.pthis.GetReward(iReward);
+
+		if(DBFTemp == null)
+			return;
+
+		ENUM_Reward emReward = (ENUM_Reward)DBFTemp.Reward;
+
+		if(emReward == ENUM_Reward.Looks)
+			DataReward.pthis.MemberLooks.Add(DBFTemp.Value);
+		
+		if(emReward == ENUM_Reward.Upgrade)
+		{
+			int iTemp = DataReward.pthis.WeaponLevel.ContainsKey(DBFTemp.Value) ? DataReward.pthis.WeaponLevel[DBFTemp.Value] : 0;
+			
+			DataReward.pthis.WeaponLevel[DBFTemp.Value] = iTemp + 1;
+		}//if
+		
+		if(emReward == ENUM_Reward.Currency)
+			DataReward.pthis.iInitCurrency += DBFTemp.Value;
+		
+		if(emReward == ENUM_Reward.Battery)
+			DataReward.pthis.iInitBattery += DBFTemp.Value;
+		
+		if(emReward == ENUM_Reward.LightAmmo)
+			DataReward.pthis.iInitLightAmmo += DBFTemp.Value;
+		
+		if(emReward == ENUM_Reward.HeavyAmmo)
+			DataReward.pthis.iInitHeavyAmmo += DBFTemp.Value;
+		
+		if(emReward == ENUM_Reward.Bomb)
+			DataReward.pthis.iInitBomb += DBFTemp.Value;
+	}
+	// 取得武器等級
+	public static int GetWeaponLevel(ENUM_Weapon emWeapon)
+	{
+		int iWeapon = (int)emWeapon;
+
+		return DataReward.pthis.WeaponLevel.ContainsKey(iWeapon) ? DataReward.pthis.WeaponLevel[iWeapon] : 0;
 	}
 	// 取得升級手槍:冰凍的緩速值
 	public static float UpgradeWeaponPistol()
 	{
-		return Mathf.Max(100.0f - (20.0f + SysMain.pthis.iWLevel[(int)ENUM_Weapon.Pistol] - 1) * 4.0f, 0.0f);
+		return Mathf.Max(100.0f - (20.0f + GetWeaponLevel(ENUM_Weapon.Pistol) - 1) * 4.0f, 0.0f);
 	}
 	// 取得升級左輪手槍:連鎖的連鎖次數
 	public static int UpgradeWeaponRevolver()
 	{
-		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.Revolver];
+		return GetWeaponLevel(ENUM_Weapon.Revolver);
 	}
 	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
 	public static float UpgradeWeaponEagle()
 	{
-		return Mathf.Max(280.0f + (SysMain.pthis.iWLevel[(int)ENUM_Weapon.Eagle] - 1) * 10.0f, 0.0f);
+		return Mathf.Max(280.0f + (GetWeaponLevel(ENUM_Weapon.Eagle) - 1) * 10.0f, 0.0f);
 	}
 	// 取得升級衝鋒槍:榴彈的爆炸傷害值
 	public static int UpgradeWeaponSUB()
 	{
-		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.SUB] * 6;
+		return GetWeaponLevel(ENUM_Weapon.SUB) * 6;
 	}
 	// 取得升級突擊步槍:穿透的穿透次數
 	public static int UpgradeWeaponRifle()
 	{
-		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.Rifle];
+		return GetWeaponLevel(ENUM_Weapon.Rifle);
 	}
 	// 取得升級輕機槍:電漿的增傷值
 	public static int UpgradeWeaponLMG()
 	{
-		return SysMain.pthis.iWLevel[(int)ENUM_Weapon.LMG];
+		return GetWeaponLevel(ENUM_Weapon.LMG);
 	}
 }

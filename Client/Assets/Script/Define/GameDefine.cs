@@ -6,11 +6,6 @@ public class GameDefine
 {
     public const int iSaveSec = 2; // 存檔秒數.
 
-	public const int iInitBattery = 300; // 初始電池值
-	public const int iInitLightAmmo = 120; // 初始輕型彈藥值
-	public const int iInitHeavyAmmo = 100; // 初始重型彈藥值
-	public const int iInitBomb = 3; // 初始炸彈數量
-
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
@@ -107,23 +102,20 @@ public class GameDefine
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
 	public const string szSaveAchievement = "save_achievement"; // 成就存檔名稱
-	public const string szSaveAchievementProgress = "save_achievementprogress"; // 成就進度存檔名稱
 	public const string szSaveCollection = "save_collection"; // 收集物品存檔名稱
+	public const string szSaveReward = "save_reward"; // 獎勵存檔名稱
 
 	public const string szDBFEquip = "Equip"; // 裝備dbf名稱
 	public const string szDBFFeature = "Feature"; // 特性dbf名稱
 	public const string szDBFLanguage = "Language"; // 語言dbf名稱
 	public const string szDBFMonster = "Monster"; // 怪物dbf名稱
 	public const string szDBFAchievement = "Achievement"; // 成就dbf名稱
-	public const string szDBFCollection = "Collection"; // 收集物品dbf名稱
+	public const string szDBFCollection = "Collection"; // 收集dbf名稱
+	public const string szDBFReward = "Reward"; // 獎勵dbf名稱
 
 	public static List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
         0, 1, 2, 3, 
-	};
-	public static List<int> MemberLooks = new List<int>() // 成員外觀列表
-	{
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
 	};
 	public static List<int> PickupRange = new List<int>() // 拾取範圍列表
 	{

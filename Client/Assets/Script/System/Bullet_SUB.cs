@@ -14,7 +14,7 @@ public class Bullet_SUB : MonoBehaviour
         {
             Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, false);
 
-            if (SysMain.pthis.iWLevel[(int)ENUM_Weapon.SUB] > 0)
+            if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
                 GroundHurt(other.gameObject, Damage.Item1);
             else if(other.gameObject.GetComponent<AIEnemy>())
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);

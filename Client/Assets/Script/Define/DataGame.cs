@@ -8,6 +8,7 @@ public class DataGame : MonoBehaviour
     static public DataGame pthis = null;
 
     public ENUM_Language Language = ENUM_Language.enUS; // 現在使用的語系.
+
 	/* Save */
     public int iStageTime = 0; // 關卡時間.
     public int iKill = 0; // 殺怪數.

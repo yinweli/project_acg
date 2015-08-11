@@ -7,6 +7,7 @@ public class DataEnemy : MonoBehaviour
 {
 	static public DataEnemy pthis = null;
 
+	/* Save */
 	public List<SaveEnemy> Data = new List<SaveEnemy>();
 
 	void Awake()
