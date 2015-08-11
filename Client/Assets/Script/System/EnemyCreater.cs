@@ -36,9 +36,9 @@ public class EnemyCreater : MonoBehaviour
         iCount = 0;
 
         // 每5關為魔王關
-		Debug.Log("Now type: " + (float)DataPlayer.pthis.iStage % GameDefine.iBossStage);
+		Debug.Log(Rule.AppearBossStage() ? "Boss Stage" : "Normal Stage");
 
-		if ((float)DataPlayer.pthis.iStage % GameDefine.iBossStage == 0)
+		if(Rule.AppearBossStage())
             StartCoroutine(BossCreater());
         else
         {

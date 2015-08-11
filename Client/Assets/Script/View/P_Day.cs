@@ -11,7 +11,7 @@ public class P_Day : MonoBehaviour
         GoogleAnalytics.pthis.LogEvent("Play", "Day" + DataPlayer.pthis.iStage, "", 1);
         LbDay.text = "Day [e92121]" + DataPlayer.pthis.iStage;
 
-        if (DataPlayer.pthis.iStage % GameDefine.iBossStage == 0)
+        if(Rule.AppearBossStage())
             pAni.Play("ShowDayBoss");
     }
 }

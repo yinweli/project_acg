@@ -740,10 +740,15 @@ public class Rule
 	{
 		return GetWeaponLevel(ENUM_Weapon.LMG);
 	}
+	// 取得是否要出現模王關
+	public static bool AppearBossStage()
+	{
+		return DataPlayer.pthis.iStage % GameDefine.iBossStage == 0;
+	}
 	// 取得是否要出現水晶
 	public static bool AppearCrystal()
 	{
-		if(DataPlayer.pthis.iStage % GameDefine.iBossStage == 0)
+		if(AppearBossStage())
 			return true;
 
 		if(DataPlayer.pthis.iStage >= GameDefine.iCrystalStage && Random.Range(0, 100) <= GameDefine.iCrystalRatio)
