@@ -209,28 +209,91 @@ public class Rule
 	{
 		return Tool.RandomPick(DataReward.pthis.MemberLooks);
 	}
-	// 建立成員
-	public static void MemberAdd(int iLooks, int iEquip)
+	// 隊伍成員取得隨機裝備編號
+	public static int RandomEquipParty(bool bMustLight, int iEquipExtra)
 	{
-		Member MemberTemp = new Member();
-		
-		MemberTemp.iLooks = iLooks;
-		MemberTemp.iEquip = iEquip;
+		if(bMustLight)
+			return 1; // 1號是手電筒
 
-		DataPlayer.pthis.MemberParty.Add(MemberTemp);
+		// 建立獲得裝備骰子
+		int iEquipProb = 0;
+		int iEmptyProb = 100;
+		CDice<int> Dice = new CDice<int>();
+		DBFItor Itor = GameDBF.pthis.GetEquip();
+		
+		while(Itor.IsEnd() == false)
+		{
+			DBFEquip Temp = Itor.Data() as DBFEquip;
+			
+			if(Temp != null)
+			{
+				if(Temp.Mode == (int)ENUM_ModeEquip.Light)
+					iEquipProb = Temp.Gain;
+				else
+					iEquipProb = Temp.Gain + iEquipExtra;
+				
+				iEmptyProb -= iEquipProb;
+				Dice.Set(System.Convert.ToInt32(Temp.GUID), iEquipProb);
+			}//if
+			
+			Itor.Next();
+		}//while
+		
+		if(iEmptyProb > 0)
+			Dice.Set(0, iEmptyProb); // 加入失敗項
+
+		return Dice.Roll();
 	}
-	// 建立成員
-	public static void MemberAdd(int iEquip)
+	// 新增隊伍成員
+	public static void MemberPartyAdd(int iLooks, int iEquip)
 	{
-		MemberAdd(RandomMemberLooks(), iEquip);
+		Member Temp = new Member();
+		
+		Temp.iLooks = iLooks;
+		Temp.iEquip = iEquip;
+
+		DataPlayer.pthis.MemberParty.Add(Temp);
 	}
-	// 建立成員
-	public static void MemberAdd()
+	// 新增隊伍成員
+	public static void MemberPartyAdd(int iEquip)
 	{
-		MemberAdd(0);
+		MemberPartyAdd(RandomMemberLooks(), iEquip);
 	}
-	// 刪除成員
-	public void MemberDel(int iPos)
+	// 新增隊伍成員
+	public static void MemberPartyAdd()
+	{
+		MemberPartyAdd(0);
+	}
+	// 刪除隊伍成員
+	public static void MemberPartyDel(int iPos)
+	{
+		DataPlayer.pthis.MemberParty.RemoveAt(iPos);
+	}
+	// 新增角色庫成員
+	public static void MemberDepotAdd(int iLooks, int iEquip)
+	{
+		if(DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepotCount)
+			return;
+
+		Member Temp = new Member();
+		
+		Temp.iLooks = iLooks;
+		Temp.iEquip = iEquip;
+		
+		DataPlayer.pthis.MemberDepot.Add(Temp);
+	}
+	// 新增角色庫成員
+	public static void MemberDepotAdd(int iLooks)
+	{
+		MemberDepotAdd(iLooks, RandomEquipParty(false, GameDefine.iEquipExtraDepot));
+	}
+	// 新增角色庫成員
+	public static void MemberDepotAdd()
+	{
+		MemberDepotAdd(RandomMemberLooks());
+	}
+	// 刪除角色庫成員
+	public static void MemberDepotDel(int iPos)
 	{
 		DataPlayer.pthis.MemberParty.RemoveAt(iPos);
 	}
@@ -316,75 +379,12 @@ public class Rule
 
 		return new MapCoor();
 	}
-	// 執行獲得裝備
-	public static int GainEquip(int iPos)
-	{
-		if(DataPlayer.pthis.MemberParty.Count <= iPos)
-			return 0;
-		
-		if(DataPlayer.pthis.MemberParty[iPos].iEquip > 0)
-			return 0;
-		
-		// 檢查隊伍裡是否沒有光源裝備, 設定裝備額外機率值
-		bool bLight = false;
-		int iEquipExtra = 0;
-		
-		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
-		{
-			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
-
-			if(Data == null)
-			{
-				iEquipExtra += GameDefine.iEquipExtra;
-				continue;
-			}//if
-			
-			if(Data.Mode == (int)ENUM_ModeEquip.Light)
-				bLight = true;
-		}//for
-		
-		// 有光源裝備的話, 就照一般規則獲得裝備
-		// 否則就一定拿到光源裝備
-		if(bLight)
-		{
-			// 建立獲得裝備骰子
-			int iEquipProb = 0;
-			int iEmptyProb = 100;
-			CDice<int> Dice = new CDice<int>();
-			DBFItor Itor = GameDBF.pthis.GetEquip();
-			
-			while(Itor.IsEnd() == false)
-			{
-				DBFEquip Data = Itor.Data() as DBFEquip;
-				
-				if(Data != null)
-				{
-					if(Data.Mode == (int)ENUM_ModeEquip.Light)
-						iEquipProb = Data.Gain;
-					else
-						iEquipProb = Data.Gain + iEquipExtra;
-
-					iEmptyProb -= iEquipProb;
-					Dice.Set(System.Convert.ToInt32(Data.GUID), iEquipProb);
-				}//if
-				
-				Itor.Next();
-			}//while
-
-			if(iEmptyProb > 0)
-				Dice.Set(0, iEmptyProb); // 加入失敗項
-			
-			return DataPlayer.pthis.MemberParty[iPos].iEquip = Dice.Roll();
-		}
-		else
-			return DataPlayer.pthis.MemberParty[iPos].iEquip = 1; // 1號是手電筒
-	}
 	// 執行獲得特性
 	public static int GainFeature(int iPos)
 	{
 		if(DataPlayer.pthis.MemberParty.Count <= iPos)
 			return 0;
-
+		
 		if(DataPlayer.pthis.MemberParty[iPos].Feature.Count >= GameDefine.iMaxFeature)
 			return 0;
 		
@@ -416,7 +416,7 @@ public class Rule
 			
 			Itor.Next();
 		}//while
-
+		
 		if(iEmptyProb > 0)
 			Dice.Set(0, iEmptyProb); // 加入失敗項
 		
@@ -426,6 +426,35 @@ public class Rule
 			DataPlayer.pthis.MemberParty[iPos].Feature.Add(iFeature);
 		
 		return iFeature;
+	}
+	// 隊伍成員執行獲得裝備
+	public static int GainEquip(int iPos)
+	{
+		if(DataPlayer.pthis.MemberParty.Count <= iPos)
+			return 0;
+		
+		if(DataPlayer.pthis.MemberParty[iPos].iEquip > 0)
+			return 0;
+		
+		// 檢查隊伍裡是否沒有光源裝備, 設定裝備額外機率值
+		bool bLight = false;
+		int iEquipExtra = 0;
+		
+		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
+		{
+			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
+
+			if(Data == null)
+			{
+				iEquipExtra += GameDefine.iEquipExtraParty;
+				continue;
+			}//if
+			
+			if(Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
+
+		return DataPlayer.pthis.MemberParty[iPos].iEquip = RandomEquipParty(bLight, iEquipExtra);
 	}
 	// 取得子彈傷害值
 	public static Tuple<int, bool> BulletDamage(int iPos, bool bEnable)
@@ -679,7 +708,10 @@ public class Rule
 		ENUM_Reward emReward = (ENUM_Reward)DBFTemp.Reward;
 
 		if(emReward == ENUM_Reward.Looks)
+		{
 			DataReward.pthis.MemberLooks.Add(DBFTemp.Value);
+			DataReward.pthis.MemberInits.Add(DBFTemp.Value);
+		}//if
 		
 		if(emReward == ENUM_Reward.Upgrade)
 		{

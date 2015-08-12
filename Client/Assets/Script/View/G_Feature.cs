@@ -41,7 +41,7 @@ public class G_Feature : MonoBehaviour
                 // 升級.
                 DataPlayer.pthis.MemberParty[i].iLiveStage++;
                 iFeature[i] = Rule.GainFeature(i);
-                iEquip[i] = Rule.GainEquip(i);
+				iEquip[i] = Rule.GainEquip(i);
             }
         }
 

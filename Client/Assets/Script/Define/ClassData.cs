@@ -188,7 +188,8 @@ public class SavePlayer
 	public int iPlayerLost = 0; // 死人數量
 	public int iAdsWatch = 0; // 觀看廣告次數
 	public int[] Resource = new int[0]; // 資源列表
-	public SaveMember[] Data = new SaveMember[0]; // 成員列表
+	public SaveMember[] Party = new SaveMember[0]; // 成員列表
+	public SaveMember[] Depot = new SaveMember[0]; // 成員列表
 }
 
 public class SaveEnemy
@@ -264,6 +265,7 @@ public class SaveCollection
 public class SaveReward
 {
 	public int[] MemberLooks = new int[0]; // 角色外觀列表
+	public int[] MemberInits = new int[0]; // 初始角色列表
 	public string[] WeaponLevel = new string[0]; // 武器等級列表
 	public int iInitCurrency = 0; // 初始金錢
 	public int iInitBattery = 0; // 初始電池

@@ -197,8 +197,12 @@ public class SysMain : MonoBehaviour
 		Rule.BombAdd(DataReward.pthis.iInitBomb);
 
         // 給與初始隊員
-        Rule.MemberAdd(1);
-        Rule.MemberAdd(3);
+		Rule.MemberPartyAdd(1);
+		Rule.MemberPartyAdd(3);
+
+		// 給予初始角色庫
+		foreach(int Itor in DataReward.pthis.MemberInits)
+			Rule.MemberDepotAdd(Itor);
     }
     // ------------------------------------------------------------------
     IEnumerator CountStart(bool bShowCount)

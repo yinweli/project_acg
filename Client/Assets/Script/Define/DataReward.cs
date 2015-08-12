@@ -10,6 +10,7 @@ public class DataReward : MonoBehaviour
 	
 	/* Save */
 	public HashSet<int> MemberLooks = new HashSet<int>(); // 角色外觀列表
+	public HashSet<int> MemberInits = new HashSet<int>(); // 初始角色列表
 	public Dictionary<int, int> WeaponLevel = new Dictionary<int, int>(); // 武器等級列表
 	public int iInitCurrency = 0; // 初始金錢
 	public int iInitBattery = 0; // 初始電池
@@ -34,6 +35,7 @@ public class DataReward : MonoBehaviour
 		SaveReward Temp = new SaveReward();
 		
 		Temp.MemberLooks = MemberLooks.ToList().ToArray();
+		Temp.MemberInits = MemberInits.ToList().ToArray();
 		Temp.WeaponLevel = WeaponLevelTemp.ToArray();
 		Temp.iInitCurrency = iInitCurrency;
 		Temp.iInitBattery = iInitBattery;
@@ -55,6 +57,7 @@ public class DataReward : MonoBehaviour
 		if(Temp != null)
 		{
 			MemberLooks = new HashSet<int>(Temp.MemberLooks);
+			MemberInits = new HashSet<int>(Temp.MemberInits);
 			
 			foreach(string Itor in Temp.WeaponLevel)
 			{
@@ -74,6 +77,7 @@ public class DataReward : MonoBehaviour
 		else
 		{
 			MemberLooks = new HashSet<int>(GameInit.InitMemberLooks);
+			MemberInits = new HashSet<int>();
 			WeaponLevel = new Dictionary<int, int>();
 			iInitCurrency = GameInit.iInitCurrency;
 			iInitBattery = GameInit.iInitBattery;
@@ -89,6 +93,7 @@ public class DataReward : MonoBehaviour
 	public void Clear()
 	{
 		MemberLooks.Clear();
+		MemberInits.Clear();
 		WeaponLevel.Clear();
 		iInitCurrency = 0;
      	iInitBattery = 0;

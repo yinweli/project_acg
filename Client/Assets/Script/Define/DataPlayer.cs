@@ -30,6 +30,46 @@ public class DataPlayer : MonoBehaviour
     {
         pthis = this;
     }
+	private SaveMember[] MemberSave(List<Member> Data)
+	{
+		List<SaveMember> Result = new List<SaveMember>();
+
+		foreach(Member Itor in Data)
+		{
+			SaveMember Temp = new SaveMember();
+
+			Temp.iLooks = Itor.iLooks;
+			Temp.iEquip = Itor.iEquip;
+			Temp.iLiveStage = Itor.iLiveStage;
+			Temp.iShield = Itor.iShield;
+			Temp.Feature = Itor.Feature.ToArray();
+			Temp.Behavior = Itor.Behavior.ToArray();
+
+			Result.Add(Temp);
+		}//for
+
+		return Result.ToArray();
+	}
+	private List<Member> MemberLoad(SaveMember[] Data)
+	{
+		List<Member> Result = new List<Member>();
+
+		foreach(SaveMember Itor in Data)
+		{
+			Member Temp = new Member();
+			
+			Temp.iLooks = Itor.iLooks;
+			Temp.iEquip = Itor.iEquip;
+			Temp.iLiveStage = Itor.iLiveStage;
+			Temp.iShield = Itor.iShield;
+			Temp.Feature = new List<int>(Itor.Feature);
+			Temp.Behavior = new List<int>(Itor.Behavior);
+			
+			Result.Add(Temp);
+		}//for
+
+		return Result;
+	}
 	// 存檔.
 	public void Save()
 	{
@@ -45,25 +85,9 @@ public class DataPlayer : MonoBehaviour
 		Temp.iEnemyKill = iEnemyKill;
 		Temp.iPlayerLost = iPlayerLost;
 		Temp.iAdsWatch = iAdsWatch;
-		Temp.Resource = Resource.ToArray();
-		
-		List<SaveMember> MemberList = new List<SaveMember>();
-		
-		foreach(Member Itor in MemberParty)
-		{
-			SaveMember MemberTemp = new SaveMember();
-			
-			MemberTemp.iLooks = Itor.iLooks;
-			MemberTemp.iEquip = Itor.iEquip;
-			MemberTemp.iLiveStage = Itor.iLiveStage;
-			MemberTemp.iShield = Itor.iShield;
-			MemberTemp.Feature = Itor.Feature.ToArray();
-			MemberTemp.Behavior = Itor.Behavior.ToArray();
-			
-			MemberList.Add(MemberTemp);
-		}//for
-		
-		Temp.Data = MemberList.ToArray();
+		Temp.Resource = Resource.ToArray();		
+		Temp.Party = MemberSave(MemberParty);
+		Temp.Depot = MemberSave(MemberDepot);
 		
 		PlayerPrefs.SetString(GameDefine.szSavePlayer, Json.ToString(Temp));
 	}
@@ -89,21 +113,8 @@ public class DataPlayer : MonoBehaviour
 		iPlayerLost = Temp.iPlayerLost;
 		iAdsWatch = Temp.iAdsWatch;
 		Resource = new List<int>(Temp.Resource);
-		MemberParty = new List<Member>();
-		
-		foreach(SaveMember Itor in Temp.Data)
-		{
-			Member MemberTemp = new Member();
-			
-			MemberTemp.iLooks = Itor.iLooks;
-			MemberTemp.iEquip = Itor.iEquip;
-			MemberTemp.iLiveStage = Itor.iLiveStage;
-			MemberTemp.iShield = Itor.iShield;
-			MemberTemp.Feature = new List<int>(Itor.Feature);
-			MemberTemp.Behavior = new List<int>(Itor.Behavior);
-			
-			MemberParty.Add(MemberTemp);
-		}//for
+		MemberParty = MemberLoad(Temp.Party);
+		MemberDepot = MemberLoad(Temp.Depot);
 		
 		return true;
 	}
@@ -122,6 +133,7 @@ public class DataPlayer : MonoBehaviour
 		iAdsWatch = 0;
 		Resource.Clear();
 		MemberParty.Clear();
+		MemberDepot.Clear();
 	}
 	// 清除存檔
 	public void ClearSave()

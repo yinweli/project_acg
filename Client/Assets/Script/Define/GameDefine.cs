@@ -44,6 +44,7 @@ public class GameDefine
 	public const int iMaxCollectionLv = 6; // 最大收集等級
 	public const int iMinCollectionLv = 1; // 最小收集等級
 	public const int iMaxCollectionCount = 5; // 最大收集物品數量
+	public const int iMaxMemberDepotCount = 20; // 最大角色庫數量
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
@@ -88,7 +89,8 @@ public class GameDefine
 	public const float fPickupPartHeavyAmmo = 0.15f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
 
-	public const int iEquipExtra = 20; // 額外裝備機率值
+	public const int iEquipExtraParty = 20; // 隊伍額外裝備機率值
+	public const int iEquipExtraDepot = 40; // 角色庫額外裝備機率值
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
