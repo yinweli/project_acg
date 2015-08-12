@@ -453,7 +453,7 @@ public class Rule
 				bLight = true;
 		}//for
 
-		return DataPlayer.pthis.MemberParty[iPos].iEquip = RandomEquipParty(bLight, iEquipExtra);
+		return DataPlayer.pthis.MemberParty[iPos].iEquip = RandomEquipParty(bLight == false, iEquipExtra);
 	}
 	// 取得子彈傷害值
 	public static Tuple<int, bool> BulletDamage(int iPos, bool bEnable)
