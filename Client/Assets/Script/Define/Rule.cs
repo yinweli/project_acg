@@ -585,29 +585,28 @@ public class Rule
 		int iAchievement = (int)emAchievement;
 		int iOldValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
 		int iNewValue = iOldValue + iValue;
+		int iMaxValue = DBFTemp.MaxValue();
 
-		iNewValue = iNewValue > DBFTemp.Lv6Value ? DBFTemp.Lv6Value : iNewValue;
+		iNewValue = iNewValue > iMaxValue ? iMaxValue : iNewValue;
 		DataAchievement.pthis.Data[iAchievement] = iNewValue;
 		
-		if(DBFTemp.Lv1Value >= iOldValue && DBFTemp.Lv1Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 1 && DBFTemp.Lv1Value >= iOldValue && DBFTemp.Lv1Value <= iNewValue)
 			Result.Add(1);
 		
-		if(DBFTemp.Lv2Value >= iOldValue && DBFTemp.Lv2Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 2 && DBFTemp.Lv2Value >= iOldValue && DBFTemp.Lv2Value <= iNewValue)
 			Result.Add(2);
 		
-		if(DBFTemp.Lv3Value >= iOldValue && DBFTemp.Lv3Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 3 && DBFTemp.Lv3Value >= iOldValue && DBFTemp.Lv3Value <= iNewValue)
 			Result.Add(3);
 		
-		if(DBFTemp.Lv4Value >= iOldValue && DBFTemp.Lv4Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 4 && DBFTemp.Lv4Value >= iOldValue && DBFTemp.Lv4Value <= iNewValue)
 			Result.Add(4);
 		
-		if(DBFTemp.Lv5Value >= iOldValue && DBFTemp.Lv5Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 5 && DBFTemp.Lv5Value >= iOldValue && DBFTemp.Lv5Value <= iNewValue)
 			Result.Add(5);
 		
-		if(DBFTemp.Lv6Value >= iOldValue && DBFTemp.Lv6Value <= iNewValue)
+		if(DBFTemp.MaxLevel >= 6 && DBFTemp.Lv6Value >= iOldValue && DBFTemp.Lv6Value <= iNewValue)
 			Result.Add(6);
-
-		DataAchievement.pthis.Data[iAchievement] = iNewValue;
 
 		return Result;
 	}
@@ -622,19 +621,19 @@ public class Rule
 		int iAchievement = (int)emAchievement;
 		int iValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
 
-		if(DBFTemp.Lv1Value > iValue)
+		if(DBFTemp.Lv1Value > iValue || DBFTemp.MaxLevel <= 1)
 			return new AchievementInfo(1, iValue);
 		
-		if(DBFTemp.Lv2Value > iValue)
+		if(DBFTemp.Lv2Value > iValue || DBFTemp.MaxLevel <= 2)
 			return new AchievementInfo(2, iValue);
 		
-		if(DBFTemp.Lv3Value > iValue)
+		if(DBFTemp.Lv3Value > iValue || DBFTemp.MaxLevel <= 3)
 			return new AchievementInfo(3, iValue);
 		
-		if(DBFTemp.Lv4Value > iValue)
+		if(DBFTemp.Lv4Value > iValue || DBFTemp.MaxLevel <= 4)
 			return new AchievementInfo(4, iValue);
 		
-		if(DBFTemp.Lv5Value > iValue)
+		if(DBFTemp.Lv5Value > iValue || DBFTemp.MaxLevel <= 5)
 			return new AchievementInfo(5, iValue);
 
 		return new AchievementInfo(6, iValue);
