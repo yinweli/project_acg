@@ -496,14 +496,19 @@ public class Rule
 	public static float EquipFireRate(int iPos)
 	{
 		float fResult = 0;
-		
+
 		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
 			Member DataMember = DataPlayer.pthis.MemberParty[iPos];
 			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 			
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
-				fResult = DataEquip.FireRate;
+			{
+				if(System.Convert.ToInt32(DataEquip.GUID) == (int)ENUM_Weapon.Knife && GetWeaponLevel(ENUM_Weapon.Knife) > 0)
+					fResult = UpgradeWeaponKnife(DataEquip.FireRate);
+				else
+					fResult = DataEquip.FireRate;
+			}//if
 		}//if
 		
 		return fResult;
@@ -740,6 +745,11 @@ public class Rule
 		int iWeapon = (int)emWeapon;
 
 		return DataReward.pthis.WeaponLevel.ContainsKey(iWeapon) ? DataReward.pthis.WeaponLevel[iWeapon] : 0;
+	}
+	// 取得升級小刀:加速的攻速值
+	public static float UpgradeWeaponKnife(float fFireRate)
+	{
+		return Mathf.Max(1.0f - GetWeaponLevel(ENUM_Weapon.Knife) * 0.15f, 0.0f) * fFireRate;
 	}
 	// 取得升級手槍:冰凍的緩速值
 	public static float UpgradeWeaponPistol()

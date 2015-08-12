@@ -203,7 +203,7 @@ public class SysMain : MonoBehaviour
 
         // 給與初始隊員
 		Rule.MemberPartyAdd(1);
-		Rule.MemberPartyAdd(3);
+		Rule.MemberPartyAdd(2);
 
 		// 給予初始角色庫
 		foreach(int Itor in DataReward.pthis.MemberInits)
