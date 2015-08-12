@@ -172,24 +172,23 @@ public class Rule
 		switch(emResource)
 		{
 		case ENUM_Resource.Battery:
-			iResult = Value(0, System.Int32.MaxValue, iResult + iValue);
+			DataPlayer.pthis.Resource[(int)emResource] = Value(0, System.Int32.MaxValue, iResult + iValue);
 			PickupStat.pthis.Record(ENUM_Pickup.Battery, iValue);
 			break;
 
 		case ENUM_Resource.LightAmmo:
-			iResult = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue);
+			DataPlayer.pthis.Resource[(int)emResource] = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue);;
 			PickupStat.pthis.Record(ENUM_Pickup.LightAmmo, iValue);
 			break;
 
 		case ENUM_Resource.HeavyAmmo:
-			iResult = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue);
+			DataPlayer.pthis.Resource[(int)emResource] = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue);
 			PickupStat.pthis.Record(ENUM_Pickup.HeavyAmmo, iValue);
 			break;
 
-		default: break;
+		default:
+			break;
 		}//switch
-
-		DataPlayer.pthis.Resource[(int)emResource] = iResult;
 	}
 	// 檢查是否資源足夠
 	public static bool ResourceChk(ENUM_Resource emResource, int iValue)

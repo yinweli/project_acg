@@ -31,13 +31,18 @@ public class SysMain : MonoBehaviour
     }
     // ------------------------------------------------------------------
     public void ReadyStart()
-    {
+	{
+		// 讀取資料
+		DataAchievement.pthis.Load();
+		DataCollection.pthis.Load();
+		DataReward.pthis.Load();
+		DataRecord.pthis.Load();
+
         // 讀取遊戲
         bIsOld &= DataPlayer.pthis.Load();
         bIsOld &= DataGame.pthis.Load();
         bIsOld &= DataEnemy.pthis.Load();
         bIsOld &= DataMap.pthis.Load();
-        DataRecord.pthis.Load();
 
         if (!bIsOld)
             CreateNew();
