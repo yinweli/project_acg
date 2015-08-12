@@ -58,7 +58,11 @@ public class GameDefine
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
 	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
+
+    // 魔王相關區域
 	public const int iBossStage = 5; // 每幾關為魔王關
+    public const int iJellyGrow = 100; // 軟泥損失多少血量會出新軟泥.
+
 	public const int iCrystalStage = 6; // 水晶最小出現關卡
 	public const int iCrystalRatio = 20; // 水晶出現機率
 	public const int iCrystalCount = 8; // 水晶出現數量

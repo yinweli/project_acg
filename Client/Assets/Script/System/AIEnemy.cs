@@ -37,7 +37,12 @@ public class AIEnemy : MonoBehaviour
 			return;
 		}//if
 
-        iHP = DBFData.HP;
+        if (iHP <= 0)
+        {
+            Debug.Log("Monster: " + iMonster + " HP: " + DBFData.HP);
+            iHP = DBFData.HP;
+        }
+
         PosStart = transform.position;
 
         if (ENUM_ModeMonster.ActiveDark == (ENUM_ModeMonster)DBFData.Mode)
@@ -47,6 +52,7 @@ public class AIEnemy : MonoBehaviour
         else if (ENUM_ModeMonster.Boss == (ENUM_ModeMonster)DBFData.Mode)
 		{
 			iHP += Rule.BossHP(iHP);
+            Debug.Log("Boss HP: " + iHP);
             gameObject.AddComponent<EnemyBoss>();
 		}
         else
@@ -98,6 +104,9 @@ public class AIEnemy : MonoBehaviour
 
         if (IsCrit)
             UITool.pthis.CreateUI(gameObject, "Prefab/G_Crit");
+
+        if (iValue < 0 && GetComponent<EnemyJelly>())
+            GetComponent<EnemyJelly>().CreateJelly(iValue);
 
         // 沒血逃跑.
         if (iHP <= 0)

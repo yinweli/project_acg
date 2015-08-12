@@ -16,7 +16,7 @@ public class EnemyCurry : MonoBehaviour
         // 播放抓人動作.
         pAI.AniPlay("Catch");
         EnemyCurry[] temp = GetComponents<EnemyCurry>();
-        iReleaseHp = pAI.iHP - (pAI.iHP / 5 * temp.Length);
+        iReleaseHp = pAI.iHP - (pAI.iHP / 10 * temp.Length);
     }
     // ------------------------------------------------------------------
     void Update()

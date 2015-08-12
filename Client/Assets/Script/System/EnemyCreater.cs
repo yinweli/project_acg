@@ -94,21 +94,27 @@ public class EnemyCreater : MonoBehaviour
 		}
     }
     // ------------------------------------------------------------------
+    // 產生一隻怪物.
+    public GameObject CreateOneEnemy(int iMonster, int iHP, float fPosX, float fPosY)
+    {
+        GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", iMonster), fPosX, fPosY);
+
+        if (pEnemy && pEnemy.GetComponent<AIEnemy>())
+        {
+            ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<SpriteRenderer>());
+            pEnemy.GetComponent<AIEnemy>().iMonster = iMonster;
+            pEnemy.GetComponent<AIEnemy>().iHP = iHP;
+        }
+        iCount++;
+
+        return pEnemy;
+    }
+    // ------------------------------------------------------------------
     // 復原怪物.
     public void CreateOldEnemy()
     {
         foreach (SaveEnemy itor in DataEnemy.pthis.Data)
-        {
-            GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", itor.iMonster), itor.fPosX + CameraCtrl.transform.localPosition.x, itor.fPosY + CameraCtrl.transform.localPosition.y);
-            
-            if (pEnemy && pEnemy.GetComponent<AIEnemy>())
-            {
-                ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<SpriteRenderer>());
-                pEnemy.GetComponent<AIEnemy>().iMonster = itor.iMonster;
-                pEnemy.GetComponent<AIEnemy>().iHP = itor.iHP;      
-            }
-            iCount++;
-        }        
+            CreateOneEnemy(itor.iMonster, itor.iHP, itor.fPosX + CameraCtrl.transform.localPosition.x, itor.fPosY + CameraCtrl.transform.localPosition.y);   
     }
     // ------------------------------------------------------------------
     IEnumerator BossCreater()
@@ -121,19 +127,12 @@ public class EnemyCreater : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             else
             {
-                // 等待2.0秒後出新魔王.
-                yield return new WaitForSeconds(2.0f);
+                // 等待1.8秒後出新魔王.
+                yield return new WaitForSeconds(1.8f);
 
-				int iIndex = 1000 + (DataPlayer.pthis.iStage / GameDefine.iBossStage % 8 + 1);
-                GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "Enemy/" + iIndex,
-                    CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f),
-                    CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
+				int iIndex = 1000 + (DataPlayer.pthis.iStage / GameDefine.iBossStage % 8);
 
-                pObj.GetComponent<AIEnemy>().iMonster = iIndex;
-
-                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<SpriteRenderer>());
-
-                iCount++;
+                CreateOneEnemy(iIndex, -1, CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));               
                 yield return new WaitForSeconds(5.0f);
             }
         }
@@ -149,32 +148,21 @@ public class EnemyCreater : MonoBehaviour
             ListEnemyCreater(ListEnemy);
 
             // 計算等待間隔.
-			yield return new WaitForSeconds(Random.Range(GameDefine.iMinWaitSec, GameDefine.iMaxWaitSec));
-            
+			yield return new WaitForSeconds(Random.Range(GameDefine.iMinWaitSec, GameDefine.iMaxWaitSec));            
             for (int i = 0; i < ListEnemy.Count; i++)
             {
-                GameObject pObj = null;
-                string pName = string.Format("Enemy/{0:000}", ListEnemy[i]);
                 switch (Random.Range(1, 4))
                 {
                     case 1: //上方.
-                        pObj = UITool.pthis.CreateUIByPos(gameObject, pName, 
-                            CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), 
-                            CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
-                         break;
+                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
+                        break;
                     case 2: //左方.
-                         pObj = UITool.pthis.CreateUIByPos(gameObject, pName,
-                            CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f),
-                            CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
+                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f), CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                     case 3: //右方.
-                        pObj = UITool.pthis.CreateUIByPos(gameObject, pName,
-                            CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f),
-                            CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
+                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f), CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
-                pObj.GetComponent<AIEnemy>().iMonster = ListEnemy[i];
-                ToolKit.SetLayer(iCount, pObj.GetComponentsInChildren<SpriteRenderer>());
                 iCount++;
                 yield return new WaitForSeconds(0.05f);
             }
