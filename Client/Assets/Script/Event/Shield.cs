@@ -11,7 +11,7 @@ public class Shield : MonoBehaviour
         pAI = transform.parent.gameObject.GetComponent<AIPlayer>();
 
         if (pAI)
-            iCount = DataPlayer.pthis.Members[pAI.iPlayer].iShield;
+			iCount = DataPlayer.pthis.MemberParty[pAI.iPlayer].iShield;
         else
             Destroy(gameObject);
     }

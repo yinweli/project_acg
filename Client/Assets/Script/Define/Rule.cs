@@ -20,7 +20,7 @@ public class Rule
 	{
 		bool bResult = false;
 		
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			bResult |= IsFeature(emMode, iPos);
 		
 		return bResult;
@@ -30,9 +30,9 @@ public class Rule
 	{
 		bool bResult = false;
 		
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.MemberParty[iPos].Feature)
 			{
 				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
@@ -48,7 +48,7 @@ public class Rule
 	{
 		int iResult = 0;
 
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			iResult += FeatureI(emMode, iPos);
 		
 		return iResult;
@@ -58,9 +58,9 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.MemberParty[iPos].Feature)
 			{
 				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
@@ -76,7 +76,7 @@ public class Rule
 	{
 		float fResult = 0.0f;
 		
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			fResult += FeatureF(emMode, iPos);
 		
 		return fResult;
@@ -86,9 +86,9 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			foreach(int Itor in DataPlayer.pthis.Members[iPos].Feature)
+			foreach(int Itor in DataPlayer.pthis.MemberParty[iPos].Feature)
 			{
 				DBFFeature Data = GameDBF.pthis.GetFeature(new Argu(Itor)) as DBFFeature;
 				
@@ -150,8 +150,8 @@ public class Rule
 	// 重置護盾次數
 	public static void ShieldReset()
 	{
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
-			DataPlayer.pthis.Members[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
+			DataPlayer.pthis.MemberParty[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
 	}
 	// 重置資源
 	public static void ResourceReset(ENUM_Resource emResource)
@@ -217,7 +217,7 @@ public class Rule
 		MemberTemp.iLooks = iLooks;
 		MemberTemp.iEquip = iEquip;
 
-		DataPlayer.pthis.Members.Add(MemberTemp);
+		DataPlayer.pthis.MemberParty.Add(MemberTemp);
 	}
 	// 建立成員
 	public static void MemberAdd(int iEquip)
@@ -232,30 +232,30 @@ public class Rule
 	// 刪除成員
 	public void MemberDel(int iPos)
 	{
-		DataPlayer.pthis.Members.RemoveAt(iPos);
+		DataPlayer.pthis.MemberParty.RemoveAt(iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset(int iPos)
 	{
-		if(DataPlayer.pthis.Members.Count > iPos)
-			DataPlayer.pthis.Members[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.CriticalStrike, iPos);
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
+			DataPlayer.pthis.MemberParty[iPos].fCriticalStrike = FeatureF(ENUM_ModeFeature.CriticalStrike, iPos);
 	}
 	// 重置成員致命值
 	public static void CriticalStrikeReset()
 	{
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			CriticalStrikeReset(iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset(int iPos)
 	{
-		if(DataPlayer.pthis.Members.Count > iPos)
-			DataPlayer.pthis.Members[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.AddDamage, iPos);
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
+			DataPlayer.pthis.MemberParty[iPos].iAddDamage = FeatureI(ENUM_ModeFeature.AddDamage, iPos);
 	}
 	// 重置成員增傷值
 	public static void AddDamageReset()
 	{
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			AddDamageReset(iPos);
 	}
 	// 依方向取得座標列表
@@ -319,17 +319,17 @@ public class Rule
 	// 執行獲得裝備
 	public static int GainEquip(int iPos)
 	{
-		if(DataPlayer.pthis.Members.Count <= iPos)
+		if(DataPlayer.pthis.MemberParty.Count <= iPos)
 			return 0;
 		
-		if(DataPlayer.pthis.Members[iPos].iEquip > 0)
+		if(DataPlayer.pthis.MemberParty[iPos].iEquip > 0)
 			return 0;
 		
 		// 檢查隊伍裡是否沒有光源裝備, 設定裝備額外機率值
 		bool bLight = false;
 		int iEquipExtra = 0;
 		
-		foreach(Member ItorMember in DataPlayer.pthis.Members)
+		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
 		{
 			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
 
@@ -374,24 +374,24 @@ public class Rule
 			if(iEmptyProb > 0)
 				Dice.Set(0, iEmptyProb); // 加入失敗項
 			
-			return DataPlayer.pthis.Members[iPos].iEquip = Dice.Roll();
+			return DataPlayer.pthis.MemberParty[iPos].iEquip = Dice.Roll();
 		}
 		else
-			return DataPlayer.pthis.Members[iPos].iEquip = 1; // 1號是手電筒
+			return DataPlayer.pthis.MemberParty[iPos].iEquip = 1; // 1號是手電筒
 	}
 	// 執行獲得特性
 	public static int GainFeature(int iPos)
 	{
-		if(DataPlayer.pthis.Members.Count <= iPos)
+		if(DataPlayer.pthis.MemberParty.Count <= iPos)
 			return 0;
 
-		if(DataPlayer.pthis.Members[iPos].Feature.Count >= GameDefine.iMaxFeature)
+		if(DataPlayer.pthis.MemberParty[iPos].Feature.Count >= GameDefine.iMaxFeature)
 			return 0;
 		
 		// 建立特性群組列表
 		HashSet<int> Group = new HashSet<int>();
 		
-		foreach(int ItorFeature in DataPlayer.pthis.Members[iPos].Feature)
+		foreach(int ItorFeature in DataPlayer.pthis.MemberParty[iPos].Feature)
 		{
 			DBFFeature Data = GameDBF.pthis.GetFeature(ItorFeature) as DBFFeature;
 			
@@ -423,7 +423,7 @@ public class Rule
 		int iFeature = Dice.Roll();
 		
 		if(iFeature > 0)
-			DataPlayer.pthis.Members[iPos].Feature.Add(iFeature);
+			DataPlayer.pthis.MemberParty[iPos].Feature.Add(iFeature);
 		
 		return iFeature;
 	}
@@ -433,9 +433,9 @@ public class Rule
 		int iDamage = 0;
 		bool bCriticalStrike = false;
 
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			Member DataMember = DataPlayer.pthis.Members[iPos];
+			Member DataMember = DataPlayer.pthis.MemberParty[iPos];
 			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
@@ -469,9 +469,9 @@ public class Rule
 	{
 		float fResult = 0;
 		
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			Member DataMember = DataPlayer.pthis.Members[iPos];
+			Member DataMember = DataPlayer.pthis.MemberParty[iPos];
 			DBFEquip DataEquip = GameDBF.pthis.GetEquip(new Argu(DataMember.iEquip)) as DBFEquip;
 			
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
@@ -503,9 +503,9 @@ public class Rule
 	{
 		int iResult = 0;
 
-		if(DataPlayer.pthis.Members.Count > iPos)
+		if(DataPlayer.pthis.MemberParty.Count > iPos)
 		{
-			Member DataMember = DataPlayer.pthis.Members[iPos];
+			Member DataMember = DataPlayer.pthis.MemberParty[iPos];
 
 			iResult += DataMember.iLiveStage + 1;
 

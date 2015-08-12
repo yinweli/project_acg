@@ -19,7 +19,8 @@ public class DataPlayer : MonoBehaviour
 	public int iPlayerLost = 0; // 死人數量
 	public int iAdsWatch = 0; // 觀看廣告次數
 	public List<int> Resource = new List<int>(); // 資源列表
-	public List<Member> Members = new List<Member>(); // 成員列表
+	public List<Member> MemberParty = new List<Member>(); // 成員列表
+	public List<Member> MemberDepot = new List<Member>(); // 角色庫列表
 
 	/* Not Save */
 	public int iStaminaLimit = 0; // 耐力上限
@@ -48,7 +49,7 @@ public class DataPlayer : MonoBehaviour
 		
 		List<SaveMember> MemberList = new List<SaveMember>();
 		
-		foreach(Member Itor in Members)
+		foreach(Member Itor in MemberParty)
 		{
 			SaveMember MemberTemp = new SaveMember();
 			
@@ -88,7 +89,7 @@ public class DataPlayer : MonoBehaviour
 		iPlayerLost = Temp.iPlayerLost;
 		iAdsWatch = Temp.iAdsWatch;
 		Resource = new List<int>(Temp.Resource);
-		Members = new List<Member>();
+		MemberParty = new List<Member>();
 		
 		foreach(SaveMember Itor in Temp.Data)
 		{
@@ -101,7 +102,7 @@ public class DataPlayer : MonoBehaviour
 			MemberTemp.Feature = new List<int>(Itor.Feature);
 			MemberTemp.Behavior = new List<int>(Itor.Behavior);
 			
-			Members.Add(MemberTemp);
+			MemberParty.Add(MemberTemp);
 		}//for
 		
 		return true;
@@ -120,7 +121,7 @@ public class DataPlayer : MonoBehaviour
 		iPlayerLost = 0;
 		iAdsWatch = 0;
 		Resource.Clear();
-		Members.Clear();
+		MemberParty.Clear();
 	}
 	// 清除存檔
 	public void ClearSave()

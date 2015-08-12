@@ -144,7 +144,7 @@ public class MapCreater : MonoBehaviour
 		// 檢查隊伍裡是否沒有光源裝備
 		bool bLight = false;
 		
-		foreach(Member ItorMember in DataPlayer.pthis.Members)
+		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
 		{
 			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
 			
@@ -156,9 +156,9 @@ public class MapCreater : MonoBehaviour
 		}//for
 		
 		// 成員拾取
-		if(DataPlayer.pthis.Members.Count < GameDefine.iMaxMember)
+		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMember)
 		{
-			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - DataPlayer.pthis.Members.Count) * GameDefine.iPickupMember)
+			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
 			{
 				Pickup Data = new Pickup();
 				

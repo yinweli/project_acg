@@ -40,9 +40,9 @@ public class PlayerCreater : MonoBehaviour
         temp.iLooks = iLooks;
 
         GameObject pObj = UITool.pthis.CreateUIByPos(gameObject, "G_Player", fPosX, fPosY);
-        pObj.transform.localPosition = new Vector3(fPosX, fPosY, -0.1f * (DataPlayer.pthis.Members.Count + CatchList.Count));
-        pObj.name = string.Format("Role{0:000}", DataPlayer.pthis.Members.Count + CatchList.Count);
-        pObj.GetComponent<AIPlayer>().iPlayer = DataPlayer.pthis.Members.Count + CatchList.Count;
+        pObj.transform.localPosition = new Vector3(fPosX, fPosY, -0.1f * (DataPlayer.pthis.MemberParty.Count + CatchList.Count));
+        pObj.name = string.Format("Role{0:000}", DataPlayer.pthis.MemberParty.Count + CatchList.Count);
+        pObj.GetComponent<AIPlayer>().iPlayer = DataPlayer.pthis.MemberParty.Count + CatchList.Count;
         pObj.GetComponent<AIPlayer>().Init(false, iItemID, temp);
 
         CatchList.Add(pObj, temp);        
@@ -52,7 +52,7 @@ public class PlayerCreater : MonoBehaviour
     {
         pPrePlayer = pObj;
 
-		DataPlayer.pthis.Members.Add(CatchList[pObj]);        
+		DataPlayer.pthis.MemberParty.Add(CatchList[pObj]);        
         SysMain.pthis.Role.Add(pObj, iCount);
         ToolKit.CatchRole.Add(pObj, Rule.MemberThreat(iCount));
         SysMain.pthis.SaveGame();
@@ -66,16 +66,16 @@ public class PlayerCreater : MonoBehaviour
     {
         iCount = 0;
 
-        if (DataPlayer.pthis.Members.Count <= 0)
+        if (DataPlayer.pthis.MemberParty.Count <= 0)
             return;
 
-        for (int i = 0; i < DataPlayer.pthis.Members.Count; i++)
+        for (int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
         {
             // 建立第一個玩家.
             pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
             pPrePlayer.name = string.Format("Role{0:000}", iCount);
             pPrePlayer.GetComponent<AIPlayer>().iPlayer = iCount;
-            pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, DataPlayer.pthis.Members[iCount]);
+            pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, DataPlayer.pthis.MemberParty[iCount]);
             pPrePlayer.transform.position = MapCreater.pthis.GetRoadObj(iRoad - i).transform.position;
             
             // 加入玩家佇列.
@@ -87,14 +87,14 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
     void Create()
     {
-        if (DataPlayer.pthis.Members.Count <= 0)
+        if (DataPlayer.pthis.MemberParty.Count <= 0)
             return;
 
         // 建立第一個玩家.
         pPrePlayer = UITool.pthis.CreateUI(gameObject, "Prefab/G_Player");
         pPrePlayer.name = string.Format("Role{0:000}", iCount);
         pPrePlayer.GetComponent<AIPlayer>().iPlayer = iCount;
-        pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, DataPlayer.pthis.Members[iCount]);
+        pPrePlayer.GetComponent<AIPlayer>().Init(true, 0, DataPlayer.pthis.MemberParty[iCount]);
 
         // 加入玩家佇列.
         SysMain.pthis.Role.Add(pPrePlayer, iCount);
@@ -104,7 +104,7 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator WaitCreate()
     {
-		while (iCount < DataPlayer.pthis.Members.Count)
+		while (iCount < DataPlayer.pthis.MemberParty.Count)
         {
             if (SysMain.pthis.bIsGaming)
             {

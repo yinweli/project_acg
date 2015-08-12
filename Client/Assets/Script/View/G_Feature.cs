@@ -20,13 +20,13 @@ public class G_Feature : MonoBehaviour
 
 	public void OpenPage()
     {
-        ObjGroup = new GameObject[DataPlayer.pthis.Members.Count];
-        ObjHand = new GameObject[DataPlayer.pthis.Members.Count];
-        iFeature = new int[DataPlayer.pthis.Members.Count];
-        iEquip = new int[DataPlayer.pthis.Members.Count];
+        ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count];
+        ObjHand = new GameObject[DataPlayer.pthis.MemberParty.Count];
+        iFeature = new int[DataPlayer.pthis.MemberParty.Count];
+        iEquip = new int[DataPlayer.pthis.MemberParty.Count];
 
         // 有幾個人建幾個人.
-        for(int i = 0; i < DataPlayer.pthis.Members.Count; i++)
+        for(int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
         {
             // 建立群組.
             ObjGroup[i] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
@@ -39,7 +39,7 @@ public class G_Feature : MonoBehaviour
             if (!DataGame.pthis.bVictory)
             {
                 // 升級.
-                DataPlayer.pthis.Members[i].iLiveStage++;
+                DataPlayer.pthis.MemberParty[i].iLiveStage++;
                 iFeature[i] = Rule.GainFeature(i);
                 iEquip[i] = Rule.GainEquip(i);
             }
@@ -58,16 +58,16 @@ public class G_Feature : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        for (int i = 0; i < DataPlayer.pthis.Members.Count; i++)
+        for (int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
         {
             // 建立外觀.
-            GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], DataPlayer.pthis.Members[i].iLooks);
-            ObjHand[i] = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.Members[i].iEquip);
+            GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], DataPlayer.pthis.MemberParty[i].iLooks);
+            ObjHand[i] = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[i].iEquip);
 
             // 顯示升級.
-            ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(DataPlayer.pthis.Members[i].iLiveStage);
+            ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(DataPlayer.pthis.MemberParty[i].iLiveStage);
             yield return new WaitForSeconds(0.5f);
-            ObjGroup[i].GetComponent<G_ListRole>().ChangeLevel(DataPlayer.pthis.Members[i].iLiveStage + 1);
+            ObjGroup[i].GetComponent<G_ListRole>().ChangeLevel(DataPlayer.pthis.MemberParty[i].iLiveStage + 1);
 
             // 給予角色取得的天賦.
             if (iFeature[i] != 0)

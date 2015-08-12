@@ -32,7 +32,7 @@ public class PickupStat : MonoBehaviour
 
 			switch((ENUM_Pickup)Itor)
 			{
-			case ENUM_Pickup.Member: Temp.iInitial = DataPlayer.pthis.Members.Count; break;
+			case ENUM_Pickup.Member: Temp.iInitial = DataPlayer.pthis.MemberParty.Count; break;
 			case ENUM_Pickup.Currency: Temp.iInitial = DataPlayer.pthis.iCurrency; break;
 			case ENUM_Pickup.Battery: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery]; break;
 			case ENUM_Pickup.LightAmmo: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.LightAmmo]; break;

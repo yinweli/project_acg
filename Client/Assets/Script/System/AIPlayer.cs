@@ -49,7 +49,7 @@ public class AIPlayer : MonoBehaviour
         }
 
         // 有盾套盾.
-        if (iPlayer < DataPlayer.pthis.Members.Count && DataPlayer.pthis.Members[iPlayer].iShield > 0)
+		if (iPlayer < DataPlayer.pthis.MemberParty.Count && DataPlayer.pthis.MemberParty[iPlayer].iShield > 0)
             ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
 
         pWeapon = (ENUM_Weapon)pMember.iEquip;

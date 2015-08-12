@@ -55,7 +55,7 @@ public class SysMain : MonoBehaviour
         }
 
         // 沒有玩家資料就算失敗了.
-        if (bIsGaming && DataPlayer.pthis.Members.Count <= DeadRole.Count)
+        if (bIsGaming && DataPlayer.pthis.MemberParty.Count <= DeadRole.Count)
             Failed();
 	}
     // ------------------------------------------------------------------
@@ -187,7 +187,7 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iEnemyKill = 0;
         DataPlayer.pthis.iPlayTime = 0;
         DataPlayer.pthis.Resource = new List<int>();
-        DataPlayer.pthis.Members = new List<Member>();
+        DataPlayer.pthis.MemberParty = new List<Member>();
 
         // 給與初始資源
 		Rule.CurrencyAdd(DataReward.pthis.iInitCurrency);
@@ -268,13 +268,13 @@ public class SysMain : MonoBehaviour
 
 		List<Member> NewMember = new List<Member>();
 
-		for(int iPos = 0; iPos < DataPlayer.pthis.Members.Count; ++iPos)
+		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 		{
 			if(DeadRole.Contains(iPos) == false)
-				NewMember.Add(DataPlayer.pthis.Members[iPos]);
+				NewMember.Add(DataPlayer.pthis.MemberParty[iPos]);
 		}//for
 
-		DataPlayer.pthis.Members = NewMember;
+		DataPlayer.pthis.MemberParty = NewMember;
         DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
         DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
         DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
