@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +9,8 @@ public class AIEnemy : MonoBehaviour
 	public int iMonster = 1;
 	// HP
 	public int iHP = 0;
+	// 下次灼燒時間
+	public float fBurnTime = 0.0f;
     // 怪物資料.
     public DBFMonster DBFData;
 
@@ -73,6 +76,16 @@ public class AIEnemy : MonoBehaviour
         {
             if (!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Add(gameObject, GetTheat());
+
+			if(Rule.GetWeaponLevel(ENUM_Weapon.Light) > 1 && Time.realtimeSinceStartup >= fBurnTime)
+			{
+				Tuple<int, float> Result = Rule.UpgradeWeaponLight();
+
+				fBurnTime = Result.Item2;
+				AddHP(-Result.Item1, false);
+
+				// 需要播放燃燒動畫
+			}//if
         }
     }
     // ------------------------------------------------------------------

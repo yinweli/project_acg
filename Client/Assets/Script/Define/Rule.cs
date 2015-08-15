@@ -745,6 +745,11 @@ public class Rule
 
 		return DataReward.pthis.WeaponLevel.ContainsKey(iWeapon) ? DataReward.pthis.WeaponLevel[iWeapon] : 0;
 	}
+	// 取得升級手電筒:灼燒傷害與下次時間
+	public static Tuple<int, float> UpgradeWeaponLight()
+	{
+		return new Tuple<int, float>(GetWeaponLevel(ENUM_Weapon.Light) * 6, Time.realtimeSinceStartup + 2.0f);
+	}
 	// 取得升級小刀:加速的攻速值
 	public static float UpgradeWeaponKnife(float fFireRate)
 	{
