@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
+timeCreated: 1439738021
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: C_eye_000
@@ -42,7 +44,7 @@ TextureImporter:
     21300074: W_005
     21300076: W_006
     21300078: E_002
-    21300080: T_006
+    21300080: E_101
     21300082: C_Adorn_B_003
     21300084: C_Hair_A_004
     21300086: C_Hair_A_005
@@ -51,6 +53,17 @@ TextureImporter:
     21300092: C_Adorn_B_006
     21300094: C_Adorn_B_007
     21300096: C_Adorn_B_008
+    21300098: E_102
+    21300100: E_103
+    21300102: E_104_1
+    21300104: E_104_2
+    21300106: T_010
+    21300108: T_011
+    21300110: T_012
+    21300112: T_013
+    21300114: T_014
+    21300116: T_015
+    21300118: T_016
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -496,13 +509,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_006
+    - name: E_101
       rect:
         serializedVersion: 2
         x: 110
-        y: 164
-        width: 46
-        height: 61
+        y: 198
+        width: 41
+        height: 18
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -583,6 +596,116 @@ TextureImporter:
         y: 268
         width: 49
         height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: E_102
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 186
+        width: 40
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: E_103
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 163
+        width: 38
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: E_104_1
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 187
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: E_104_2
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 187
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_010
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_011
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_012
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_013
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_014
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_015
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_016
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 109
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
