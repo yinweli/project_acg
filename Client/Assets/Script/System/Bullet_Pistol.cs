@@ -5,6 +5,13 @@ using System.Collections;
 public class Bullet_Pistol : MonoBehaviour
 {
     public AIBullet pAI = null;
+    public Sprite pSprite = null;
+    // ------------------------------------------------------------------
+    void Start()
+    {
+        if (Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)
+            pAI.pRander.sprite = pSprite;
+    }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {

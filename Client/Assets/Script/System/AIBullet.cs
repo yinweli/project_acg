@@ -6,6 +6,7 @@ public class AIBullet : MonoBehaviour
     public int iPlayer = 0;
     // 移動速度
     public float fSpeed = 1.0f;
+    public SpriteRenderer pRander = null;
     // ------------------------------------------------------------------
     void Update()
     {

@@ -5,12 +5,14 @@ using System.Collections;
 public class Bullet_Rifle : MonoBehaviour
 {
     public AIBullet pAI = null;
-    
+    public Sprite pSprite = null;
     int iCount = 1;
     // ------------------------------------------------------------------
     void Start()
     {
         iCount = Rule.UpgradeWeaponRifle();
+        if (Rule.GetWeaponLevel(ENUM_Weapon.Rifle) > 0)
+            pAI.pRander.sprite = pSprite;
     }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)

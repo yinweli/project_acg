@@ -163,7 +163,6 @@ public class EnemyCreater : MonoBehaviour
                         CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f), CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
                         break;
                 }
-                iCount++;
                 yield return new WaitForSeconds(0.05f);
             }
         }        

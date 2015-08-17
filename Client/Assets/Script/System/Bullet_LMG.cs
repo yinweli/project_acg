@@ -5,6 +5,11 @@ using System.Collections;
 public class Bullet_LMG : MonoBehaviour
 {
     public AIBullet pAI = null;
+    void Start()
+    {
+        if (Rule.GetWeaponLevel(ENUM_Weapon.LMG) > 0 && GetComponent<Animator>())
+            GetComponent<Animator>().Play("Plasma");
+    }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
