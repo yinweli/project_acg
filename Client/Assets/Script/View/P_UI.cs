@@ -96,6 +96,10 @@ public class P_UI : MonoBehaviour
 
 		switch(emResource)
 		{
+		case ENUM_Resource.Null:
+			bResult = true;
+			break;
+
 		case ENUM_Resource.Battery:
 			{
 				if(Rule.BatteryChk(1))

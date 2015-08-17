@@ -27,13 +27,20 @@ public class G_Info : MonoBehaviour
                 ToolKit.ChangeTo2DSprite(pRender);
 
             DBFEquip pDBFEquip = GameDBF.pthis.GetEquip(DataPlayer.pthis.MemberParty[iID].iEquip) as DBFEquip;
+			ENUM_Resource emResource = (ENUM_Resource)pDBFEquip.Resource;
 
-            ObjBullet = UITool.pthis.CreateUI(S_Bullet, "Prefab/Item/G_" + (ENUM_Resource)pDBFEquip.Resource);
-            ObjBullet.GetComponent<Collider2D>().enabled = false;
-            p2DS = ObjBullet.GetComponentsInChildren<SpriteRenderer>();
+			if(System.Convert.ToInt32(pDBFEquip.GUID) == (int)ENUM_Weapon.LMG && Rule.GetWeaponLevel(ENUM_Weapon.LMG) > 0)
+				emResource = ENUM_Resource.Battery;
 
-            foreach (SpriteRenderer pRender in p2DS)
-                ToolKit.ChangeTo2DSprite(pRender);
+			if(emResource != ENUM_Resource.Null)
+			{
+				ObjBullet = UITool.pthis.CreateUI(S_Bullet, "Prefab/Item/G_" + (ENUM_Resource)pDBFEquip.Resource);
+				ObjBullet.GetComponent<Collider2D>().enabled = false;
+				p2DS = ObjBullet.GetComponentsInChildren<SpriteRenderer>();
+				
+				foreach (SpriteRenderer pRender in p2DS)
+					ToolKit.ChangeTo2DSprite(pRender);
+			}//if
         }        
 
         if ((ENUM_Weapon)DataPlayer.pthis.MemberParty[iID].iEquip == ENUM_Weapon.Light || (ENUM_Weapon)DataPlayer.pthis.MemberParty[iID].iEquip == ENUM_Weapon.Null)
