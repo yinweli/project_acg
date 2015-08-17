@@ -338,11 +338,15 @@ public class MapCreater : MonoBehaviour
 				else
 				{                
 					Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
-					
-					if (Obj && Obj.GetComponent<Btn_GetResource>())
-						Obj.GetComponent<Btn_GetResource>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetCurrency>())
+
+					if (Obj && Obj.GetComponent<Btn_GetCurrency>())
 						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetBattery>())
+						Obj.GetComponent<Btn_GetBattery>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetLightAmmo>())
+						Obj.GetComponent<Btn_GetLightAmmo>().iItemID = i;
+					else if (Obj && Obj.GetComponent<Btn_GetHeavyAmmo>())
+						Obj.GetComponent<Btn_GetHeavyAmmo>().iItemID = i;
 					else if (Obj && Obj.GetComponent<Btn_GetBomb>())
 						Obj.GetComponent<Btn_GetBomb>().iItemID = i;
 					else if (Obj && Obj.GetComponent<Btn_GetCrystal>())

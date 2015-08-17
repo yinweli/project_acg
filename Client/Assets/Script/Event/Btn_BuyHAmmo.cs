@@ -34,7 +34,7 @@ public class Btn_BuyHAmmo : MonoBehaviour
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         DataPlayer.pthis.iCurrency -= GameDefine.iHeavyAmmoCost;
-		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, GameDefine.iHeavyAmmoCount);
+		Rule.HeavyAmmoAdd(GameDefine.iHeavyAmmoCount);
         P_UI.pthis.UpdateCurrency();
         P_UI.pthis.UpdateResource();
         DataPlayer.pthis.Save();

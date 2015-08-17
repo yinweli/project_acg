@@ -20,7 +20,9 @@ public class P_UI : MonoBehaviour
     public UILabel pLbDis = null;
     public UILabel pLbCurrency = null;
     public UISprite[] pSBattery = new UISprite[5];
-    public UILabel[] pLbBullet = new UILabel[(int)ENUM_Resource.Resource_Count-1];
+	public UILabel pLBBattery = null;
+	public UILabel pLBLightAmmo = null;
+	public UILabel pLBHeavyAmmo = null;
     public List<G_Light> pListLight = new List<G_Light>();
 
     float fCoolDown = 1;
@@ -90,46 +92,83 @@ public class P_UI : MonoBehaviour
         if (pType == ENUM_Weapon.LMG && Rule.GetWeaponLevel(ENUM_Weapon.LMG) > 0)
             emResource = ENUM_Resource.Battery;
 
-        if (Rule.ResourceChk(emResource, 0) == false)
-            return false;
+		bool bResult = false;
 
-        Rule.ResourceAdd(emResource, -1);
-        UpdateResource();
-        return true;
+		switch(emResource)
+		{
+		case ENUM_Resource.Battery:
+			{
+				if(Rule.BatteryChk(1))
+				{
+					Rule.BatteryAdd(-1);
+					bResult = true;
+				}//if
+			}
+			break;
+
+		case ENUM_Resource.LightAmmo:
+			{
+				if(Rule.LightAmmoChk(1))
+				{
+					Rule.LightAmmoAdd(-1);
+					bResult = true;
+				}//if
+			}
+			break;
+
+		case ENUM_Resource.HeavyAmmo:
+			{
+				if(Rule.HeavyAmmoChk(1))
+				{
+					Rule.HeavyAmmoAdd(-1);
+					bResult = true;
+				}//if
+			}
+			break;
+
+		default:
+			break;
+		}//switch
+
+		if(bResult)
+			UpdateResource();
+
+		return bResult;
     }
     // ------------------------------------------------------------------
     public void UpdateResource()
     {
-        for (int i = 1; i < DataPlayer.pthis.Resource.Count; i++)
-			if (pLbBullet[i-1])
-                pLbBullet[i-1].text = DataPlayer.pthis.Resource[i].ToString();
+		pLBBattery.text = DataPlayer.pthis.iBattery.ToString();
+		pLBLightAmmo.text = DataPlayer.pthis.iLightAmmo.ToString();
+		pLBHeavyAmmo.text = DataPlayer.pthis.iHeavyAmmo.ToString();
     }
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-        if (iValue <=0 && pListLight.Count <= 0)
+        if (iValue <= 0 && pListLight.Count <= 0)
 			return false;
 
-		Rule.ResourceAdd(ENUM_Resource.Battery, iValue);
+		Rule.BatteryAdd(iValue);
 		UpdateBattery();
 		UpdateResource();
 
-		if(Rule.ResourceChk(ENUM_Resource.Battery, 0))
+		if(Rule.BatteryChk(1))
 		{
 			// 打開燈光
 			for(int i = 0; i < pListLight.Count; i++)
 				pListLight[i].gameObject.SetActive(true);
 
 			// 判斷燈光是否需要閃爍
-			if(Rule.ResourceChk(ENUM_Resource.Battery, 30))
+			if(Rule.BatteryChk(30))
 			{
 				for(int i = 0; i < pListLight.Count; i++)
 					pListLight[i].pAni.Play("Wait");
 			}
 			else
 			{
-                if (iValue < 0 && DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] == 30)
+                if (iValue < 0 && DataPlayer.pthis.iBattery == 29)
                     SysMain.pthis.AllRoleTalk("Battery");
+
 				for(int i = 0; i < pListLight.Count; i++)
 					pListLight[i].pAni.Play("NoPower");
 			}//if
@@ -152,12 +191,12 @@ public class P_UI : MonoBehaviour
         for (int i = 0; i < pSBattery.Length; i++)
             pSBattery[i].gameObject.SetActive(false);
 
-        if (DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] <= 0)
+        if (DataPlayer.pthis.iBattery <= 0)
             return;
 
-        int iActive = DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] / (GameDefine.iMaxBattery / 5);
+		int iActive = DataPlayer.pthis.iBattery / (GameDefine.iMaxBattery / 5);
 
-        if (DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery] > 0)
+		if (DataPlayer.pthis.iBattery > 0)
             iActive++;
  
         if (iActive > pSBattery.Length)

@@ -189,16 +189,22 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iStage = 1;
         DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
         DataPlayer.pthis.iCurrency = 0;
+		DataPlayer.pthis.iBattery = 0;
+		DataPlayer.pthis.iLightAmmo = 0;
+		DataPlayer.pthis.iHeavyAmmo = 0;
+		DataPlayer.pthis.iBomb = 0;
+		DataPlayer.pthis.iStamina = 0;
+		DataPlayer.pthis.iDamageLv = 0;
         DataPlayer.pthis.iEnemyKill = 0;
         DataPlayer.pthis.iPlayTime = 0;
-        DataPlayer.pthis.Resource = new List<int>();
+		DataPlayer.pthis.iAdsWatch = 0;
         DataPlayer.pthis.MemberParty = new List<Member>();
 
         // 給與初始資源
 		Rule.CurrencyAdd(DataReward.pthis.iInitCurrency);
-		Rule.ResourceAdd(ENUM_Resource.Battery, DataReward.pthis.iInitBattery);
-		Rule.ResourceAdd(ENUM_Resource.LightAmmo, DataReward.pthis.iInitLightAmmo);
-		Rule.ResourceAdd(ENUM_Resource.HeavyAmmo, DataReward.pthis.iInitHeavyAmmo);
+		Rule.BatteryAdd(DataReward.pthis.iInitBattery);
+		Rule.LightAmmoAdd(DataReward.pthis.iInitLightAmmo);
+		Rule.HeavyAmmoAdd(DataReward.pthis.iInitHeavyAmmo);
 		Rule.BombAdd(DataReward.pthis.iInitBomb);
 
         // 給與初始隊員

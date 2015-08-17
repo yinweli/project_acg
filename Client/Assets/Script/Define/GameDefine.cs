@@ -112,6 +112,7 @@ public class GameDefine
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
 	public const string szSaveRecord = "save_reocrd_"; // 遊戲紀錄存檔名稱
 	public const string szSaveAchievement = "save_achievement"; // 成就存檔名稱
+	public const string szSaveAchievementCount = "save_achievement_count"; // 成就數量存檔名稱
 	public const string szSaveCollection = "save_collection"; // 收集物品存檔名稱
 	public const string szSaveReward = "save_reward"; // 獎勵存檔名稱
 

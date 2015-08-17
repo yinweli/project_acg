@@ -28,7 +28,7 @@ public class DataCollection : MonoBehaviour
 			
 			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
 			{
-				foreach(int ItorItems in DBFTemp.Items(iLevel))
+				foreach(int ItorItems in Rule.CollectionIndex(System.Convert.ToInt32(DBFTemp.GUID), iLevel))
 					Collection.Add(ItorItems);
 			}//for
 			

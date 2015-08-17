@@ -180,14 +180,16 @@ public class SavePlayer
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
-	public int iStamina = 0; // 耐力
+	public int iBattery = 0; // 電池
+	public int iLightAmmo = 0; // 輕型彈藥
+	public int iHeavyAmmo = 0; // 重型彈藥
 	public int iBomb = 0; // 絕招次數
+	public int iStamina = 0; // 耐力
 	public int iDamageLv = 0; // 傷害等級
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
 	public int iAdsWatch = 0; // 觀看廣告次數
-	public int[] Resource = new int[0]; // 資源列表
 	public SaveMember[] Party = new SaveMember[0]; // 成員列表
 	public SaveMember[] Depot = new SaveMember[0]; // 成員列表
 }
@@ -254,7 +256,8 @@ public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>
 
 public class SaveAchievement
 {
-	public string[] Data = new string[0]; // 成就列表
+	public int Key = 0; // 成就列舉
+	public int Value = 0; // 值
 }
 
 public class SaveCollection

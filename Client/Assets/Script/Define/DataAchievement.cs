@@ -17,36 +17,42 @@ public class DataAchievement : MonoBehaviour
 	// 存檔.
 	public void Save()
 	{
-		List<string> DataTemp = new List<string>();
-		
+		int iCount = 0;
+
 		foreach(KeyValuePair<int, int> Itor in Data)
-			DataTemp.Add(Itor.Key + "_" + Itor.Value);
-		
-		SaveAchievement Temp = new SaveAchievement();
-		
-		Temp.Data = DataTemp.ToArray();
-		
-		PlayerPrefs.SetString(GameDefine.szSaveAchievement, Json.ToString(Temp));
+		{
+			SaveAchievement Temp = new SaveAchievement();
+
+			Temp.Key = Itor.Key;
+			Temp.Value = Itor.Value;
+
+			PlayerPrefs.SetString(GameDefine.szSaveAchievement + iCount, Json.ToString(Temp));
+			++iCount;
+		}//for
+
+		PlayerPrefs.SetInt(GameDefine.szSaveAchievementCount, iCount);
 	}
 	// 讀檔.
 	public bool Load()
 	{
-		if(PlayerPrefs.HasKey(GameDefine.szSaveAchievement) == false)
+		if(PlayerPrefs.HasKey(GameDefine.szSaveAchievementCount) == false)
 			return false;
-		
-		SaveAchievement Temp = Json.ToObject<SaveAchievement>(PlayerPrefs.GetString(GameDefine.szSaveAchievement));
-		
-		if(Temp == null)
-			return false;
-		
-		foreach(string Itor in Temp.Data)
+
+		for(int iPos = 0, iMax = PlayerPrefs.GetInt(GameDefine.szSaveAchievementCount); iPos < iMax; ++iPos)
 		{
-			string[] szTemp = Itor.Split(new char[] {'_'});
+			string szSave = GameDefine.szSaveAchievement + iPos;
 			
-			if(szTemp.Length >= 2)
-				Data.Add(System.Convert.ToInt32(szTemp[0]), System.Convert.ToInt32(szTemp[1]));
+			if(PlayerPrefs.HasKey(szSave) == false)
+				continue;
+
+			SaveAchievement Temp = Json.ToObject<SaveAchievement>(PlayerPrefs.GetString(szSave));
+
+			if(Temp == null)
+				continue;
+
+			Data.Add(Temp.Key, Temp.Value);
 		}//for
-				
+		
 		return true;
 	}
 	// 清除單輪資料

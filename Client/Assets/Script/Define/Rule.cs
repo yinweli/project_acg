@@ -116,6 +116,65 @@ public class Rule
 		DataPlayer.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, DataPlayer.pthis.iCurrency + iValue);
 		PickupStat.pthis.Record(ENUM_Pickup.Currency, iValue);
 	}
+	// 重置電池
+	public static void BatteryReset()
+	{
+		DataPlayer.pthis.iBattery = 0;
+	}
+	// 增加電池
+	public static void BatteryAdd(int iValue)
+	{
+		DataPlayer.pthis.iBattery = Value(0, GameDefine.iMaxBattery, DataPlayer.pthis.iBattery + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.Battery, iValue);
+	}
+	// 檢查電池是否足夠
+	public static bool BatteryChk(int iValue)
+	{
+		return DataPlayer.pthis.iBattery >= iValue;
+	}
+	// 重置輕型彈藥
+	public static void LightAmmoReset()
+	{
+		DataPlayer.pthis.iLightAmmo = 0;
+	}
+	// 增加輕型彈藥
+	public static void LightAmmoAdd(int iValue)
+	{
+		DataPlayer.pthis.iLightAmmo = Value(0, GameDefine.iMaxLightAmmo, DataPlayer.pthis.iLightAmmo + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.LightAmmo, iValue);
+	}
+	// 檢查輕型彈藥是否足夠
+	public static bool LightAmmoChk(int iValue)
+	{
+		return DataPlayer.pthis.iLightAmmo >= iValue;
+	}
+	// 重置重型彈藥
+	public static void HeavyAmmoReset()
+	{
+		DataPlayer.pthis.iHeavyAmmo = 0;
+	}
+	// 增加重型彈藥
+	public static void HeavyAmmoAdd(int iValue)
+	{
+		DataPlayer.pthis.iHeavyAmmo = Value(0, GameDefine.iMaxHeavyAmmo, DataPlayer.pthis.iHeavyAmmo + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.HeavyAmmo, iValue);
+	}
+	// 檢查重型彈藥是否足夠
+	public static bool HeavyAmmoChk(int iValue)
+	{
+		return DataPlayer.pthis.iHeavyAmmo >= iValue;
+	}
+	// 重置絕招次數
+	public static void BombReset()
+	{
+		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(DataPlayer.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
+	}
+	// 增加絕招次數
+	public static void BombAdd(int iValue)
+	{
+		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, DataPlayer.pthis.iBomb + iValue);
+		PickupStat.pthis.Record(ENUM_Pickup.Bomb, iValue);
+	}
 	// 重置耐力值
 	public static void StaminaReset()
 	{
@@ -136,72 +195,11 @@ public class Rule
 	{
 		DataPlayer.pthis.iStaminaRecovery = Value(1, GameDefine.iMaxStaminaRecovery, FeatureI(ENUM_ModeFeature.StaminaRecovery) + GameDefine.iBaseStaminaRecovery);
 	}
-	// 重置絕招次數
-	public static void BombReset()
-	{
-		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, Mathf.Max(DataPlayer.pthis.iBomb, FeatureI(ENUM_ModeFeature.AddLeastBomb)));
-	}
-	// 增加絕招次數
-	public static void BombAdd(int iValue)
-	{
-		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, DataPlayer.pthis.iBomb + iValue);
-		PickupStat.pthis.Record(ENUM_Pickup.Bomb, iValue);
-	}
 	// 重置護盾次數
 	public static void ShieldReset()
 	{
 		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			DataPlayer.pthis.MemberParty[iPos].iShield = Value(0, GameDefine.iMaxShield, FeatureI(ENUM_ModeFeature.AddShield, iPos));
-	}
-	// 重置資源
-	public static void ResourceReset(ENUM_Resource emResource)
-	{
-		while(DataPlayer.pthis.Resource.Count <= (int)emResource)
-			DataPlayer.pthis.Resource.Add(0);
-
-		DataPlayer.pthis.Resource[(int)emResource] = 0;
-	}
-	// 增加資源
-	public static void ResourceAdd(ENUM_Resource emResource, int iValue)
-	{
-		while(DataPlayer.pthis.Resource.Count <= (int)emResource)
-			DataPlayer.pthis.Resource.Add(0);
-
-		int iResult = DataPlayer.pthis.Resource[(int)emResource];
-
-		switch(emResource)
-		{
-		case ENUM_Resource.Battery:
-			DataPlayer.pthis.Resource[(int)emResource] = Value(0, System.Int32.MaxValue, iResult + iValue);
-			PickupStat.pthis.Record(ENUM_Pickup.Battery, iValue);
-			break;
-
-		case ENUM_Resource.LightAmmo:
-			DataPlayer.pthis.Resource[(int)emResource] = Value(0, GameDefine.iMaxLightAmmo, iResult + iValue);;
-			PickupStat.pthis.Record(ENUM_Pickup.LightAmmo, iValue);
-			break;
-
-		case ENUM_Resource.HeavyAmmo:
-			DataPlayer.pthis.Resource[(int)emResource] = Value(0, GameDefine.iMaxHeavyAmmo, iResult + iValue);
-			PickupStat.pthis.Record(ENUM_Pickup.HeavyAmmo, iValue);
-			break;
-
-		default:
-			break;
-		}//switch
-	}
-	// 檢查是否資源足夠
-	public static bool ResourceChk(ENUM_Resource emResource, int iValue)
-	{
-		if(emResource == ENUM_Resource.Null)
-			return true;
-
-		int iIndex = (int)emResource;
-
-		if(DataPlayer.pthis.Resource.Count <= iIndex)
-			return false;
-
-		return DataPlayer.pthis.Resource[iIndex] > iValue;
 	}
 	// 取得隨機成員外型
 	public static int RandomMemberLooks()
@@ -638,6 +636,24 @@ public class Rule
 
 		return new AchievementInfo(6, iValue);
 	}
+	// 取得收集物品編號列表
+	public static List<int> CollectionIndex(int iGUID, int iLevel)
+	{
+		List<int> Result = new List<int>();
+
+		if(iGUID <= 0)
+			return Result;
+
+		if(iLevel <= 0)
+			return Result;
+
+		int iIndex = ((iGUID - 1) * GameDefine.iMaxCollectionLv * GameDefine.iMaxCollectionCount) + ((iLevel - 1) * GameDefine.iMaxCollectionCount) + 1;
+
+		for(int iCount = 0; iCount < GameDefine.iMaxCollectionCount; ++iCount)
+			Result.Add(iIndex + iCount);
+
+		return Result;
+	}
 	// 拾取收集物品, 傳回完成收集編號, 等級列表
 	public static List<Tuple<int, int>> CollectionAdd(int iItems)
 	{
@@ -659,7 +675,7 @@ public class Rule
 
 			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
 			{
-				List<int> Items = DBFTemp.Items(iLevel);
+				List<int> Items = CollectionIndex(System.Convert.ToInt32(DBFTemp.GUID), iLevel);
 
 				if(Items.Contains(iItems) == false)
 					continue;
@@ -685,7 +701,7 @@ public class Rule
 
 		for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
 		{
-			List<int> Items = DBFTemp.Items(iLevel);
+			List<int> Items = CollectionIndex(iGUID, iLevel);
 
 			if(DataCollection.pthis.IsComplete(Items))
 				continue;

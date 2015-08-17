@@ -11,14 +11,16 @@ public class DataPlayer : MonoBehaviour
 	public int iStage = 0; // 關卡編號
 	public int iStyle = 0; // 關卡風格編號
 	public int iCurrency = 0; // 通貨
-	public int iStamina = 0; // 耐力
+	public int iBattery = 0; // 電池
+	public int iLightAmmo = 0; // 輕型彈藥
+	public int iHeavyAmmo = 0; // 重型彈藥
 	public int iBomb = 0; // 絕招次數
+	public int iStamina = 0; // 耐力
 	public int iDamageLv = 0; // 傷害等級
 	public int iPlayTime = 0; // 遊戲時間
 	public int iEnemyKill = 0; // 殺怪數量
 	public int iPlayerLost = 0; // 死人數量
 	public int iAdsWatch = 0; // 觀看廣告次數
-	public List<int> Resource = new List<int>(); // 資源列表
 	public List<Member> MemberParty = new List<Member>(); // 成員列表
 	public List<Member> MemberDepot = new List<Member>(); // 角色庫列表
 
@@ -78,14 +80,16 @@ public class DataPlayer : MonoBehaviour
 		Temp.iStage = iStage;
 		Temp.iStyle = iStyle;
 		Temp.iCurrency = iCurrency;
-		Temp.iStamina = iStamina;
+		Temp.iBattery = iBattery;
+		Temp.iLightAmmo = iLightAmmo;
+		Temp.iHeavyAmmo = iHeavyAmmo;
 		Temp.iBomb = iBomb;
+		Temp.iStamina = iStamina;
 		Temp.iDamageLv = iDamageLv;
 		Temp.iPlayTime = iPlayTime;
 		Temp.iEnemyKill = iEnemyKill;
 		Temp.iPlayerLost = iPlayerLost;
 		Temp.iAdsWatch = iAdsWatch;
-		Temp.Resource = Resource.ToArray();		
 		Temp.Party = MemberSave(MemberParty);
 		Temp.Depot = MemberSave(MemberDepot);
 		
@@ -105,14 +109,16 @@ public class DataPlayer : MonoBehaviour
 		iStage = Temp.iStage;
 		iStyle = Temp.iStyle;
 		iCurrency = Temp.iCurrency;
-		iStamina = Temp.iStamina;
+		iBattery = Temp.iBattery;
+		iLightAmmo = Temp.iLightAmmo;
+		iHeavyAmmo = Temp.iHeavyAmmo;
 		iBomb = Temp.iBomb;
+		iStamina = Temp.iStamina;
 		iDamageLv = Temp.iDamageLv;
 		iPlayTime = Temp.iPlayTime;
 		iEnemyKill = Temp.iEnemyKill;
 		iPlayerLost = Temp.iPlayerLost;
 		iAdsWatch = Temp.iAdsWatch;
-		Resource = new List<int>(Temp.Resource);
 		MemberParty = MemberLoad(Temp.Party);
 		MemberDepot = MemberLoad(Temp.Depot);
 		
@@ -124,14 +130,16 @@ public class DataPlayer : MonoBehaviour
 		iStage = 0;
 		iStyle = 0;
 		iCurrency = 0;
-		iStamina = 0;
+		iBattery = 0;
+		iLightAmmo = 0;
+		iHeavyAmmo = 0;
 		iBomb = 0;
+		iStamina = 0;
 		iDamageLv = 0;
 		iPlayTime = 0;
 		iEnemyKill = 0;
 		iPlayerLost = 0;
 		iAdsWatch = 0;
-		Resource.Clear();
 		MemberParty.Clear();
 		MemberDepot.Clear();
 	}

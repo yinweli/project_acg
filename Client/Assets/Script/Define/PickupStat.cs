@@ -34,9 +34,9 @@ public class PickupStat : MonoBehaviour
 			{
 			case ENUM_Pickup.Member: Temp.iInitial = DataPlayer.pthis.MemberParty.Count; break;
 			case ENUM_Pickup.Currency: Temp.iInitial = DataPlayer.pthis.iCurrency; break;
-			case ENUM_Pickup.Battery: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.Battery]; break;
-			case ENUM_Pickup.LightAmmo: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.LightAmmo]; break;
-			case ENUM_Pickup.HeavyAmmo: Temp.iInitial = DataPlayer.pthis.Resource[(int)ENUM_Resource.HeavyAmmo]; break;
+			case ENUM_Pickup.Battery: Temp.iInitial = DataPlayer.pthis.iBattery; break;
+			case ENUM_Pickup.LightAmmo: Temp.iInitial = DataPlayer.pthis.iLightAmmo; break;
+			case ENUM_Pickup.HeavyAmmo: Temp.iInitial = DataPlayer.pthis.iHeavyAmmo; break;
 			case ENUM_Pickup.Bomb: Temp.iInitial = DataPlayer.pthis.iBomb; break;
 			default: break;
 			}//switch
