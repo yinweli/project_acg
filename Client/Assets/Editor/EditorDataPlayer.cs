@@ -8,6 +8,8 @@ public class EditorDataPlayer : Editor
 {
 	private bool ShowMemberParty = false;
 	private bool ShowMemberDepot = false;
+	private bool ShowFeatureParty = false;
+	private bool ShowFeatureDepot = false;
 	private int PosMemberParty = 0;
 	private int PosMemberDepot = 0;
 
@@ -104,7 +106,10 @@ public class EditorDataPlayer : Editor
 		Target.iAdsWatch = EditorGUILayout.IntField(Target.iAdsWatch, GUILayout.Width(200.0f));
 		GUILayout.EndHorizontal();
 
+		GUILayout.BeginHorizontal("box");
 		ShowMemberParty = EditorGUILayout.Toggle("Show Member Party", ShowMemberParty);
+		ShowFeatureParty = EditorGUILayout.Toggle("Show Feature Party", ShowFeatureParty);
+		GUILayout.EndHorizontal();
 		
 		if(ShowMemberParty)
 		{
@@ -112,6 +117,8 @@ public class EditorDataPlayer : Editor
 
 			if(PosMemberParty >= 0 && PosMemberParty < Target.MemberParty.Count)
 			{
+				Member Temp = Target.MemberParty[PosMemberParty];
+
 				GUILayout.BeginVertical("box");
 
 				GUILayout.BeginHorizontal("box");
@@ -125,21 +132,35 @@ public class EditorDataPlayer : Editor
 				GUILayout.Label("Features", GUILayout.Width(47.0f));
 				GUILayout.EndHorizontal();
 				GUILayout.BeginHorizontal("box");
-				Target.MemberParty[PosMemberParty].iLooks = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iLooks, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].iEquip = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iEquip, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].iLiveStage = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iLiveStage, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].iShield = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iShield, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].iInvincibleTime = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iInvincibleTime, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].fCriticalStrike = EditorGUILayout.FloatField(Target.MemberParty[PosMemberParty].fCriticalStrike, GUILayout.Width(47.0f));
-				Target.MemberParty[PosMemberParty].iAddDamage = EditorGUILayout.IntField(Target.MemberParty[PosMemberParty].iAddDamage, GUILayout.Width(47.0f));
-				GUILayout.Label(Target.MemberParty[PosMemberParty].Feature.Count.ToString(), GUILayout.Width(47.0f));
+				Temp.iLooks = EditorGUILayout.IntField(Temp.iLooks, GUILayout.Width(47.0f));
+				Temp.iEquip = EditorGUILayout.IntField(Temp.iEquip, GUILayout.Width(47.0f));
+				Temp.iLiveStage = EditorGUILayout.IntField(Temp.iLiveStage, GUILayout.Width(47.0f));
+				Temp.iShield = EditorGUILayout.IntField(Temp.iShield, GUILayout.Width(47.0f));
+				Temp.iInvincibleTime = EditorGUILayout.IntField(Temp.iInvincibleTime, GUILayout.Width(47.0f));
+				Temp.fCriticalStrike = EditorGUILayout.FloatField(Temp.fCriticalStrike, GUILayout.Width(47.0f));
+				Temp.iAddDamage = EditorGUILayout.IntField(Temp.iAddDamage, GUILayout.Width(47.0f));
+				GUILayout.Label(Temp.Feature.Count.ToString(), GUILayout.Width(47.0f));
 				GUILayout.EndHorizontal();
 
 				GUILayout.EndVertical();
+
+				if(ShowFeatureParty)
+				{
+					GUILayout.Label("Feature List");
+					GUILayout.BeginHorizontal("box");
+
+					foreach(int Itor in Temp.Feature)
+						GUILayout.Label(Itor.ToString(), GUILayout.Width(65.0f));
+
+					GUILayout.EndHorizontal();
+				}//if
 			}//if
 		}//if
 
+		GUILayout.BeginHorizontal("box");
 		ShowMemberDepot = EditorGUILayout.Toggle("Show Member Depot", ShowMemberDepot);
+		ShowFeatureDepot = EditorGUILayout.Toggle("Show Feature Depot", ShowFeatureDepot);
+		GUILayout.EndHorizontal();
 		
 		if(ShowMemberDepot)
 		{
@@ -147,6 +168,8 @@ public class EditorDataPlayer : Editor
 			
 			if(PosMemberDepot >= 0 && PosMemberDepot < Target.MemberDepot.Count)
 			{
+				Member Temp = Target.MemberDepot[PosMemberDepot];
+
 				GUILayout.BeginVertical("box");
 				
 				GUILayout.BeginHorizontal("box");
@@ -160,17 +183,28 @@ public class EditorDataPlayer : Editor
 				GUILayout.Label("Features", GUILayout.Width(47.0f));
 				GUILayout.EndHorizontal();
 				GUILayout.BeginHorizontal("box");
-				Target.MemberDepot[PosMemberDepot].iLooks = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iLooks, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].iEquip = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iEquip, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].iLiveStage = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iLiveStage, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].iShield = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iShield, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].iInvincibleTime = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iInvincibleTime, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].fCriticalStrike = EditorGUILayout.FloatField(Target.MemberDepot[PosMemberDepot].fCriticalStrike, GUILayout.Width(47.0f));
-				Target.MemberDepot[PosMemberDepot].iAddDamage = EditorGUILayout.IntField(Target.MemberDepot[PosMemberDepot].iAddDamage, GUILayout.Width(47.0f));
-				GUILayout.Label(Target.MemberDepot[PosMemberDepot].Feature.Count.ToString(), GUILayout.Width(47.0f));
+				Temp.iLooks = EditorGUILayout.IntField(Temp.iLooks, GUILayout.Width(47.0f));
+				Temp.iEquip = EditorGUILayout.IntField(Temp.iEquip, GUILayout.Width(47.0f));
+				Temp.iLiveStage = EditorGUILayout.IntField(Temp.iLiveStage, GUILayout.Width(47.0f));
+				Temp.iShield = EditorGUILayout.IntField(Temp.iShield, GUILayout.Width(47.0f));
+				Temp.iInvincibleTime = EditorGUILayout.IntField(Temp.iInvincibleTime, GUILayout.Width(47.0f));
+				Temp.fCriticalStrike = EditorGUILayout.FloatField(Temp.fCriticalStrike, GUILayout.Width(47.0f));
+				Temp.iAddDamage = EditorGUILayout.IntField(Temp.iAddDamage, GUILayout.Width(47.0f));
+				GUILayout.Label(Temp.Feature.Count.ToString(), GUILayout.Width(47.0f));
 				GUILayout.EndHorizontal();
 				
 				GUILayout.EndVertical();
+
+				if(ShowFeatureDepot)
+				{
+					GUILayout.Label("Feature List");
+					GUILayout.BeginHorizontal("box");
+					
+					foreach(int Itor in Temp.Feature)
+						GUILayout.Label(Itor.ToString(), GUILayout.Width(65.0f));
+					
+					GUILayout.EndHorizontal();
+				}//if
 			}//if
 		}//if
 	}
