@@ -54,13 +54,13 @@ public class EditorDataCollection : Editor
 		
 		// show content
 		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("ItemID", GUILayout.Width(300.0f));
+		GUILayout.Label("ItemID");
 		GUILayout.EndHorizontal();
 
 		foreach(int Itor in Target.Data)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(Itor.ToString(), GUILayout.Width(300.0f));
+			GUILayout.Label(Itor.ToString());
 			GUILayout.EndHorizontal();
 		}//for
 	}

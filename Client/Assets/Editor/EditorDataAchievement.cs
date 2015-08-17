@@ -60,15 +60,15 @@ public class EditorDataAchievement : Editor
 
 		// show content
 		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("Type", GUILayout.Width(150.0f));
-		GUILayout.Label("Value", GUILayout.Width(150.0f));
+		GUILayout.Label("Type", GUILayout.Width(200.0f));
+		GUILayout.Label("Value", GUILayout.Width(200.0f));
 		GUILayout.EndHorizontal();
 
 		foreach(KeyValuePair<int, int> Itor in Target.Data)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(((ENUM_Achievement)Itor.Key).ToString(), GUILayout.Width(150.0f));
-			GUILayout.Label(Itor.Value.ToString(), GUILayout.Width(150.0f));
+			GUILayout.Label(((ENUM_Achievement)Itor.Key).ToString(), GUILayout.Width(200.0f));
+			GUILayout.Label(Itor.Value.ToString(), GUILayout.Width(200.0f));
 			GUILayout.EndHorizontal();
 		}//for
 	}

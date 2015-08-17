@@ -269,7 +269,7 @@ public class Rule
 	// 新增角色庫成員
 	public static void MemberDepotAdd(int iLooks, int iEquip)
 	{
-		if(DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepotCount)
+		if(DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepot)
 			return;
 
 		Member Temp = new Member();

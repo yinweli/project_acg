@@ -27,7 +27,8 @@ public class GameDefine
     public const float fBaseSpeed = 64f; // 玩家移動速度.
 	public const float fCriticalStrikProb = 1.0f; // 致命計算機率
 	public const float fCriticalStrik = 1.5f; // 致命傷害倍數
-	public const int iMaxMember = 6; // 最大成員數
+	public const int iMaxMemberParty = 6; // 最大成員數
+	public const int iMaxMemberDepot = 20; // 最大角色庫數量
 	public const int iMaxCrystal = 99999; // 最大水晶值
 	public const int iMaxCurrency = 9999; // 最大通貨值
 	public const int iMaxBattery = 300; // 最大電池值
@@ -44,7 +45,6 @@ public class GameDefine
 	public const int iMaxCollectionLv = 6; // 最大收集等級
 	public const int iMinCollectionLv = 1; // 最小收集等級
 	public const int iMaxCollectionCount = 5; // 最大收集物品數量
-	public const int iMaxMemberDepotCount = 20; // 最大角色庫數量
 	public const int iBaseStaminaLimit = 30; // 基礎耐力上限值
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值

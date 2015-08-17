@@ -156,9 +156,9 @@ public class MapCreater : MonoBehaviour
 		}//for
 		
 		// 成員拾取
-		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMember)
+		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMemberParty)
 		{
-			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMember - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
+			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMemberParty - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
 			{
 				Pickup Data = new Pickup();
 				
