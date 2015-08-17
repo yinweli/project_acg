@@ -6,44 +6,8 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataEnemy))]
 public class EditorDataEnemy : Editor
 {
-	private List<SaveEnemy> Data = new List<SaveEnemy>();
-
 	private bool ShowData = false;
-	
-	void OnEnable()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-		
-		EditorApplication.update += new EditorApplication.CallbackFunction(Update);
-	}
-	void Update()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
 
-		Data.Clear();
-
-		foreach(KeyValuePair<GameObject,int> Itor in SysMain.pthis.Enemy)
-		{
-			if(Itor.Key)
-			{
-				AIEnemy EnemyTemp = Itor.Key.GetComponent<AIEnemy>();
-				
-				if (EnemyTemp && EnemyTemp.iHP > 0)
-				{
-					SaveEnemy Temp = new SaveEnemy();
-					
-					Temp.iMonster = EnemyTemp.iMonster;
-					Temp.iHP = EnemyTemp.iHP;
-					Temp.fPosX = Itor.Key.transform.localPosition.x - CameraCtrl.pthis.gameObject.transform.localPosition.x;
-					Temp.fPosY = Itor.Key.transform.localPosition.y - CameraCtrl.pthis.gameObject.transform.localPosition.y;
-					
-					Data.Add(Temp);
-				}//if
-			}//if
-		}//for
-	}
 	private DataEnemy Target
 	{
 		get
@@ -69,14 +33,24 @@ public class EditorDataEnemy : Editor
 		GUILayout.Label("PosY", GUILayout.Width(75.0f));
 		GUILayout.EndHorizontal();
 
-		for(int iPos = 0; iPos < Data.Count; ++iPos)
+		foreach(KeyValuePair<GameObject,int> Itor in SysMain.pthis.Enemy)
 		{
-			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(Data[iPos].iMonster.ToString(), GUILayout.Width(75.0f));
-			GUILayout.Label(Data[iPos].iHP.ToString(), GUILayout.Width(75.0f));
-			GUILayout.Label(Data[iPos].fPosX.ToString(), GUILayout.Width(75.0f));
-			GUILayout.Label(Data[iPos].fPosY.ToString(), GUILayout.Width(75.0f));
-			GUILayout.EndHorizontal();
+			if(Itor.Key)
+			{
+				AIEnemy EnemyTemp = Itor.Key.GetComponent<AIEnemy>();
+
+				if(EnemyTemp != null)
+				{
+					Vector3 Pos = Target.EnemyPos(Itor.Key.transform.localPosition);
+
+					GUILayout.BeginHorizontal("box");
+					GUILayout.Label(EnemyTemp.iMonster.ToString(), GUILayout.Width(75.0f));
+					GUILayout.Label(EnemyTemp.iHP.ToString(), GUILayout.Width(75.0f));
+					GUILayout.Label(Pos.x.ToString(), GUILayout.Width(75.0f));
+					GUILayout.Label(Pos.y.ToString(), GUILayout.Width(75.0f));
+					GUILayout.EndHorizontal();
+				}//if
+			}//if
 		}//for
 	}
 }

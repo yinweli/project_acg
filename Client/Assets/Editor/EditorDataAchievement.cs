@@ -6,36 +6,11 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataAchievement))]
 public class EditorDataAchievement : Editor
 {
-	private List<SaveAchievement> Data = new List<SaveAchievement>();
 	private SaveAchievement DataSet = new SaveAchievement();
 	private SaveAchievement DataDel = new SaveAchievement();
 
 	private bool ShowData = false;
 
-	void OnEnable()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-
-		EditorApplication.update += new EditorApplication.CallbackFunction(Update);
-	}
-	void Update()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-
-		Data.Clear();
-
-		foreach(KeyValuePair<int, int> Itor in Target.Data)
-		{
-			SaveAchievement Temp = new SaveAchievement();
-			
-			Temp.Key = Itor.Key;
-			Temp.Value = Itor.Value;
-			
-			Data.Add(Temp);
-		}//for
-	}
 	private DataAchievement Target
 	{
 		get
@@ -89,11 +64,11 @@ public class EditorDataAchievement : Editor
 		GUILayout.Label("Value", GUILayout.Width(150.0f));
 		GUILayout.EndHorizontal();
 
-		for(int iPos = 0; iPos < Data.Count; ++iPos)
+		foreach(KeyValuePair<int, int> Itor in Target.Data)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(((ENUM_Achievement)Data[iPos].Key).ToString(), GUILayout.Width(150.0f));
-			GUILayout.Label(Data[iPos].Value.ToString(), GUILayout.Width(150.0f));
+			GUILayout.Label(((ENUM_Achievement)Itor.Key).ToString(), GUILayout.Width(150.0f));
+			GUILayout.Label(Itor.Value.ToString(), GUILayout.Width(150.0f));
 			GUILayout.EndHorizontal();
 		}//for
 	}

@@ -28,11 +28,12 @@ public class DataEnemy : MonoBehaviour
                 if (EnemyTemp && EnemyTemp.iHP > 0)
                 {
                     SaveEnemy Temp = new SaveEnemy();
+					Vector3 Pos = EnemyPos(Itor.Key.transform.localPosition);
 
 					Temp.iMonster = EnemyTemp.iMonster;
 					Temp.iHP = EnemyTemp.iHP;
-                    Temp.fPosX = Itor.Key.transform.localPosition.x - CameraCtrl.pthis.gameObject.transform.localPosition.x;
-                    Temp.fPosY = Itor.Key.transform.localPosition.y - CameraCtrl.pthis.gameObject.transform.localPosition.y;
+					Temp.fPosX = Pos.x;
+					Temp.fPosY = Pos.y;
 
 					PlayerPrefs.SetString(GameDefine.szSaveEnemy + iCount, Json.ToString(Temp));
 					++iCount;
@@ -59,6 +60,11 @@ public class DataEnemy : MonoBehaviour
 		}//for
 
 		return true;
+	}
+	// 取得怪物位置
+	public Vector3 EnemyPos(Vector3 Pos)
+	{
+		return new Vector3(Pos.x - CameraCtrl.pthis.gameObject.transform.localPosition.x, Pos.y - CameraCtrl.pthis.gameObject.transform.localPosition.y);
 	}
 	// 清除資料
 	public void Clear()

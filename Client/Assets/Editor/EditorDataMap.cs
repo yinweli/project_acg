@@ -6,24 +6,6 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataMap))]
 public class EditorDataMap : Editor
 {
-	private int RoadCount = 0;
-	private int ObjtCount = 0;
-
-	void OnEnable()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-		
-		EditorApplication.update += new EditorApplication.CallbackFunction(Update);
-	}
-	void Update()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-
-		RoadCount = Target.DataRoad.Count;
-		ObjtCount = Target.DataObjt.Count;
-	}
 	private DataMap Target
 	{
 		get
@@ -39,11 +21,11 @@ public class EditorDataMap : Editor
 		// show content
 		GUILayout.BeginHorizontal("box");
 		GUILayout.Label("Road Count", GUILayout.Width(150.0f));
-		GUILayout.Label(RoadCount.ToString(), GUILayout.Width(150.0f));
+		GUILayout.Label(Target.DataRoad.Count.ToString(), GUILayout.Width(150.0f));
 		GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal("box");
 		GUILayout.Label("Objt Count", GUILayout.Width(150.0f));
-		GUILayout.Label(ObjtCount.ToString(), GUILayout.Width(150.0f));
+		GUILayout.Label(Target.DataObjt.Count.ToString(), GUILayout.Width(150.0f));
 		GUILayout.EndHorizontal();
 	}
 }

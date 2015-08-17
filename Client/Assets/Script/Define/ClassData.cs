@@ -128,7 +128,6 @@ public class Member
 	/* [Save] */ public int iLiveStage = 0; // 生存關卡數
 	/* [Save] */ public int iShield = 0; // 護盾次數
 	/* [Save] */ public List<int> Feature = new List<int>(); // 特性列表
-	/* [Save] */ public List<int> Behavior = new List<int>(); // 行為列表
 	/* [    ] */ public int iInvincibleTime = 0; // 無敵時間
 	/* [    ] */ public float fCriticalStrike = 0.0f; // 致命
 	/* [    ] */ public int iAddDamage = 0; // 增傷
@@ -172,7 +171,6 @@ public class SaveMember
 	public int iLiveStage = 0; // 生存關卡數
 	public int iShield = 0; // 護盾次數
 	public int[] Feature = new int[0]; // 特性列表
-	public int[] Behavior = new int[0]; // 行為列表
 }
 
 public class SavePlayer

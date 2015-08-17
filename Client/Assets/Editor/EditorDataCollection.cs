@@ -6,29 +6,11 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataCollection))]
 public class EditorDataCollection : Editor
 {
-	private List<int> Data = new List<int>();
 	private int DataSet = 0;
 	private int DataDel = 0;
 
 	private bool ShowData = false;
 	
-	void OnEnable()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-
-		EditorApplication.update += new EditorApplication.CallbackFunction(Update);
-	}
-	void Update()
-	{
-		if(EditorApplication.isPlaying == false)
-			return;
-
-		Data.Clear();
-		
-		foreach(int Itor in Target.Data)
-			Data.Add(Itor);
-	}
 	private DataCollection Target
 	{
 		get
@@ -75,10 +57,10 @@ public class EditorDataCollection : Editor
 		GUILayout.Label("ItemID", GUILayout.Width(300.0f));
 		GUILayout.EndHorizontal();
 
-		for(int iPos = 0; iPos < Data.Count; ++iPos)
+		foreach(int Itor in Target.Data)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(Data[iPos].ToString(), GUILayout.Width(300.0f));
+			GUILayout.Label(Itor.ToString(), GUILayout.Width(300.0f));
 			GUILayout.EndHorizontal();
 		}//for
 	}
