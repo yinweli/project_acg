@@ -72,12 +72,18 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnTriggerStay2D(Collider2D other)
     {
-        if (iHP > 0 && other.gameObject.tag == "Light")
-        {
-            if (!SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
-                SysMain.pthis.AtkEnemy.Add(gameObject, GetTheat());
+		if(iHP <= 0)
+			return;
 
-			if(Rule.GetWeaponLevel(ENUM_Weapon.Light) > 1 && Time.realtimeSinceStartup >= fBurnTime)
+		if(other.gameObject.tag == "FreshLight" || other.gameObject.tag == "Light")
+		{
+			if(SysMain.pthis.AtkEnemy.ContainsKey(gameObject) == false)
+				SysMain.pthis.AtkEnemy.Add(gameObject, GetTheat());
+		}//if
+
+		if(other.gameObject.tag == "FreshLight")
+        {
+			if(Rule.GetWeaponLevel(ENUM_Weapon.Light) > 0 && Time.realtimeSinceStartup >= fBurnTime)
 			{
 				Tuple<int, float> Result = Rule.UpgradeWeaponLight();
 

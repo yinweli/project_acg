@@ -124,7 +124,7 @@ public class Rule
 	// 增加電池
 	public static void BatteryAdd(int iValue)
 	{
-		DataPlayer.pthis.iBattery = Value(0, GameDefine.iMaxBattery, DataPlayer.pthis.iBattery + iValue);
+		DataPlayer.pthis.iBattery = Value(0, int.MaxValue, DataPlayer.pthis.iBattery + iValue);
 		PickupStat.pthis.Record(ENUM_Pickup.Battery, iValue);
 	}
 	// 檢查電池是否足夠
