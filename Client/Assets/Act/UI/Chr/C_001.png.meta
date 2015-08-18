@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1439738021
+timeCreated: 1439903699
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,6 +64,7 @@ TextureImporter:
     21300114: T_014
     21300116: T_015
     21300118: T_016
+    21300120: T_017
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -512,10 +513,10 @@ TextureImporter:
     - name: E_101
       rect:
         serializedVersion: 2
-        x: 110
-        y: 198
-        width: 41
-        height: 18
+        x: 109
+        y: 187
+        width: 18
+        height: 40
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -602,20 +603,20 @@ TextureImporter:
     - name: E_102
       rect:
         serializedVersion: 2
-        x: 110
-        y: 186
-        width: 40
-        height: 8
+        x: 235
+        y: 187
+        width: 7
+        height: 40
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: E_103
       rect:
         serializedVersion: 2
-        x: 109
-        y: 163
-        width: 38
-        height: 20
+        x: 131
+        y: 187
+        width: 20
+        height: 39
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -703,6 +704,16 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 348
+        y: 109
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: T_017
+      rect:
+        serializedVersion: 2
+        x: 398
         y: 109
         width: 48
         height: 48
