@@ -6,8 +6,7 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataCollection))]
 public class EditorDataCollection : Editor
 {
-	private int DataSet = 0;
-	private int DataDel = 0;
+	private int Collection = 0;
 
 	private bool ShowData = false;
 	
@@ -23,26 +22,17 @@ public class EditorDataCollection : Editor
 		if(EditorApplication.isPlaying == false)
 			return;
 
-		// show set area
+		// show edit area
 		{
 			GUILayout.BeginHorizontal("box");
 			
 			if(GUILayout.Button("Set", GUILayout.Width(60.0f)))
-				Target.Data.Add(DataSet);
-			
-			DataSet = EditorGUILayout.IntField(DataSet);
-			
-			GUILayout.EndHorizontal();
-		}
-		
-		// show del area
-		{
-			GUILayout.BeginHorizontal("box");
-			
+				Target.Data.Add(Collection);
+
 			if(GUILayout.Button("Del", GUILayout.Width(60.0f)))
-				Target.Data.Remove(DataDel);
+				Target.Data.Remove(Collection);
 			
-			DataDel = EditorGUILayout.IntField(DataDel);
+			Collection = EditorGUILayout.IntField(Collection, GUILayout.Width(150.0f));
 			
 			GUILayout.EndHorizontal();
 		}
@@ -53,14 +43,16 @@ public class EditorDataCollection : Editor
 			return;
 		
 		// show content
-		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("ItemID");
-		GUILayout.EndHorizontal();
+		{
+			GUILayout.BeginHorizontal("box");
+			GUILayout.Label("ItemID", GUILayout.Width(100.0f));
+			GUILayout.EndHorizontal();
+		}
 
 		foreach(int Itor in Target.Data)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(Itor.ToString());
+			GUILayout.Label(Itor.ToString(), GUILayout.Width(100.0f));
 			GUILayout.EndHorizontal();
 		}//for
 	}

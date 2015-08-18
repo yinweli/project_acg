@@ -26,12 +26,14 @@ public class EditorDataEnemy : Editor
 			return;
 
 		// show content
-		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("Monster", GUILayout.Width(100.0f));
-		GUILayout.Label("HP", GUILayout.Width(100.0f));
-		GUILayout.Label("PosX", GUILayout.Width(100.0f));
-		GUILayout.Label("PosY", GUILayout.Width(100.0f));
-		GUILayout.EndHorizontal();
+		{
+			GUILayout.BeginHorizontal("box");
+			GUILayout.Label("Monster", GUILayout.Width(100.0f));
+			GUILayout.Label("HP", GUILayout.Width(100.0f));
+			GUILayout.Label("PosX", GUILayout.Width(100.0f));
+			GUILayout.Label("PosY", GUILayout.Width(100.0f));
+			GUILayout.EndHorizontal();
+		}
 
 		foreach(KeyValuePair<GameObject,int> Itor in SysMain.pthis.Enemy)
 		{

@@ -19,13 +19,18 @@ public class EditorDataMap : Editor
 			return;
 
 		// show content
-		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("Road Count", GUILayout.Width(200.0f));
-		GUILayout.Label(Target.DataRoad.Count.ToString(), GUILayout.Width(200.0f));
-		GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal("box");
-		GUILayout.Label("Objt Count", GUILayout.Width(200.0f));
-		GUILayout.Label(Target.DataObjt.Count.ToString(), GUILayout.Width(200.0f));
-		GUILayout.EndHorizontal();
+		{
+			GUILayout.BeginHorizontal("box");
+			GUILayout.Label("Road Count", GUILayout.Width(100.0f));
+			GUILayout.Label(Target.DataRoad.Count.ToString(), GUILayout.Width(100.0f));
+			GUILayout.EndHorizontal();
+		}
+
+		{
+			GUILayout.BeginHorizontal("box");
+			GUILayout.Label("Objt Count", GUILayout.Width(100.0f));
+			GUILayout.Label(Target.DataObjt.Count.ToString(), GUILayout.Width(100.0f));
+			GUILayout.EndHorizontal();
+		}
 	}
 }
