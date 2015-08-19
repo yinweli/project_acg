@@ -26,6 +26,8 @@ public class AIEnemy : MonoBehaviour
     public Vector3 PosStart = new Vector3();
 
     public Vector3 vecRunDir = Vector3.zero;
+
+	GameObject Burn = null;
     
 	// Use this for initialization
 	void Start () 
@@ -41,10 +43,7 @@ public class AIEnemy : MonoBehaviour
 		}//if
 
         if (iHP <= 0)
-        {
-            Debug.Log("Monster: " + iMonster + " HP: " + DBFData.HP);
             iHP = DBFData.HP;
-        }
 
         PosStart = transform.position;
 
@@ -55,7 +54,6 @@ public class AIEnemy : MonoBehaviour
         else if (ENUM_ModeMonster.Boss == (ENUM_ModeMonster)DBFData.Mode)
 		{
 			iHP += Rule.BossHP(iHP);
-            Debug.Log("Boss HP: " + iHP);
             gameObject.AddComponent<EnemyBoss>();
 		}
         else
@@ -90,7 +88,9 @@ public class AIEnemy : MonoBehaviour
 				fBurnTime = Result.Item2;
 				AddHP(-Result.Item1, false);
 
-				// 需要播放燃燒動畫
+				// 播放燃燒動畫
+				if(Burn == null)
+					Burn = UITool.pthis.CreateUI(gameObject, "Prefab/G_Burn");
 			}//if
         }
     }
@@ -105,6 +105,15 @@ public class AIEnemy : MonoBehaviour
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Remove(gameObject);
         }
+
+		if(other.gameObject.tag == "FreshLight")
+		{
+			if(Burn != null)
+			{
+				Destroy(Burn);
+				Burn = null;
+			}//if
+		}
     }
     // ------------------------------------------------------------------
     void OnClick()
