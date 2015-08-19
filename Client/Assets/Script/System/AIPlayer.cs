@@ -143,11 +143,7 @@ public class AIPlayer : MonoBehaviour
 	// 建立子彈函式.
 	public void CreateBullet()
 	{
-        GameObject pObj = null;
-
-        Debug.Log("Weapon " + pWeapon + "(" + (int)pWeapon + ")" + " Level: " + Rule.GetWeaponLevel(pWeapon));
-
-        pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
+		GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
 
 		pObj.transform.parent = transform.parent;
 		pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
