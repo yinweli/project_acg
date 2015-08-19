@@ -20,8 +20,8 @@ public class EditorDataReward : Editor
 	}
 	public override void OnInspectorGUI()
 	{
-		//if(EditorApplication.isPlaying == false)
-		//	return;
+		if(EditorApplication.isPlaying == false)
+			return;
 
 		{
 			GUILayout.BeginVertical("box");
@@ -93,8 +93,8 @@ public class EditorDataReward : Editor
 				GUILayout.BeginHorizontal("box");
 				
 				if(GUILayout.Button("Set", GUILayout.Width(60.0f)))
-					Target.WeaponLevel.Add((int)WeaponType, WeaponLevel);
-				
+					Target.WeaponLevel[(int)WeaponType] = WeaponLevel;
+
 				if(GUILayout.Button("Del", GUILayout.Width(60.0f)))
 					Target.WeaponLevel.Remove((int)WeaponType);
 				

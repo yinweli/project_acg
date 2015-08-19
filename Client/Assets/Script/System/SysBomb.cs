@@ -13,7 +13,7 @@ public class SysBomb : MonoBehaviour
 
     public void StartBomb()
     {
-        SysUI.pthis.CreateUI(gameObject, "Prefab/G_bomb");
+        SysUI.pthis.CreateUI(gameObject, "Prefab/G_SuperBomb");
     }
 
     public void BombDamage()

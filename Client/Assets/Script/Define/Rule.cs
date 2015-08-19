@@ -774,7 +774,7 @@ public class Rule
 	// 取得升級手槍:冰凍的緩速值
 	public static float UpgradeWeaponPistol()
 	{
-		return Mathf.Max(100.0f - (20.0f + GetWeaponLevel(ENUM_Weapon.Pistol) - 1) * 4.0f, 0.0f);
+		return Mathf.Max(1.0f - (0.2f + GetWeaponLevel(ENUM_Weapon.Pistol) - 1) * 0.1f, 0.0f);
 	}
 	// 取得升級左輪手槍:連鎖的連鎖次數
 	public static int UpgradeWeaponRevolver()

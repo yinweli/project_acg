@@ -97,7 +97,10 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)
     {
-        if (iHP > 0 && other.gameObject.tag == "Light")
+		if(iHP <= 0)
+			return;
+
+		if(other.gameObject.tag == "FreshLight" || other.gameObject.tag == "Light")
         {
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Remove(gameObject);
@@ -121,10 +124,10 @@ public class AIEnemy : MonoBehaviour
 		if(iValue < 0)
 			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
 
-        if (IsCrit)
+        if(IsCrit)
             UITool.pthis.CreateUI(gameObject, "Prefab/G_Crit");
 
-        if (iValue < 0 && GetComponent<EnemyJelly>())
+        if(iValue < 0 && GetComponent<EnemyJelly>())
             GetComponent<EnemyJelly>().CreateJelly(iValue);
 
         // 沒血逃跑.
@@ -132,6 +135,7 @@ public class AIEnemy : MonoBehaviour
         {
             NGUITools.PlaySound(ClipDead, 0.8f);
             DataGame.pthis.iKill++;
+
             // 從可攻擊陣列移除.
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Remove(gameObject);       
