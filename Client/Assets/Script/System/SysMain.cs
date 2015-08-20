@@ -33,9 +33,6 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
 	{
 		// 讀取資料
-		DataAchievement.pthis.Load();
-		DataCollection.pthis.Load();
-		DataReward.pthis.Load();
 		DataRecord.pthis.Load();
 
         // 讀取遊戲
