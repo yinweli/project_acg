@@ -136,135 +136,6 @@ public class MapCreater : MonoBehaviour
 			}//for
 		}//for
 	}
-	// 建立地圖拾取
-	public void CreatePickup()
-	{
-		DataGame.pthis.PickupList.Clear();
-
-		// 檢查隊伍裡是否沒有光源裝備
-		bool bLight = false;
-		
-		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
-		{
-			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
-			
-			if(Data == null)
-				continue;
-			
-			if(Data.Mode == (int)ENUM_ModeEquip.Light)
-				bLight = true;
-		}//for
-		
-		// 成員拾取
-		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMemberParty)
-		{
-			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMemberParty - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
-			{
-				Pickup Data = new Pickup();
-				
-				Data.Pos = Rule.NextPickup();
-				Data.iType = (int)ENUM_Pickup.Member;
-				Data.iCount = 1;
-				Data.iLooks = Rule.RandomMemberLooks();
-				Data.bPickup = false;
-				
-				DataGame.pthis.PickupList.Add(Data);
-			}//if
-		}//if
-
-		// 總物品拾取次數
-		int iPickupTotal = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems);
-		int iPickupLightAmmo = (int)(iPickupTotal * GameDefine.fPickupPartLightAmmo);
-		int iPickupHeavyAmmo = (int)(iPickupTotal * GameDefine.fPickupPartHeavyAmmo);
-		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
-		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
-		// 額外拾取價值
-		int iExteraValue = (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradePickup);
-
-		// 輕型彈藥拾取
-		for(int iCount = 0; iCount < iPickupLightAmmo; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.LightAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-
-		// 重型彈藥拾取
-		for(int iCount = 0; iCount < iPickupHeavyAmmo; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-
-		// 電池拾取
-		for(int iCount = 0; iCount < iPickupBattery; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Battery;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-
-		// 通貨拾取
-		for(int iCount = 0; iCount < iPickupCurrency; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Currency;
-			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-
-		// 絕招拾取
-		if(Random.Range(0, 100) <= GameDefine.iPickupProbBomb)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Bomb;
-			Data.iCount = 1;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//if
-
-		// 水晶拾取
-		if(Rule.AppearCrystal())
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Crystal;
-			Data.iCount = GameDefine.iCrystalCount;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//if
-	}
 	// 填滿地圖
 	private void Fill()
 	{
@@ -313,6 +184,135 @@ public class MapCreater : MonoBehaviour
 		CreateEnd();
 		CreateObjt();		
 		Fill();		
+	}
+	// 建立地圖拾取
+	public void CreatePickup()
+	{
+		DataGame.pthis.PickupList.Clear();
+		
+		// 檢查隊伍裡是否沒有光源裝備
+		bool bLight = false;
+		
+		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
+		{
+			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
+			
+			if(Data == null)
+				continue;
+			
+			if(Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
+		
+		// 成員拾取
+		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMemberParty)
+		{
+			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMemberParty - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
+			{
+				Pickup Data = new Pickup();
+				
+				Data.Pos = Rule.NextPickup();
+				Data.iType = (int)ENUM_Pickup.Member;
+				Data.iCount = 1;
+				Data.iLooks = Rule.RandomMemberLooks();
+				Data.bPickup = false;
+				
+				DataGame.pthis.PickupList.Add(Data);
+			}//if
+		}//if
+		
+		// 總物品拾取次數
+		int iPickupTotal = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems);
+		int iPickupLightAmmo = (int)(iPickupTotal * GameDefine.fPickupPartLightAmmo);
+		int iPickupHeavyAmmo = (int)(iPickupTotal * GameDefine.fPickupPartHeavyAmmo);
+		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
+		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
+		// 額外拾取價值
+		int iExteraValue = (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradePickup);
+		
+		// 輕型彈藥拾取
+		for(int iCount = 0; iCount < iPickupLightAmmo; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.LightAmmo;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//for
+		
+		// 重型彈藥拾取
+		for(int iCount = 0; iCount < iPickupHeavyAmmo; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//for
+		
+		// 電池拾取
+		for(int iCount = 0; iCount < iPickupBattery; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Battery;
+			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//for
+		
+		// 通貨拾取
+		for(int iCount = 0; iCount < iPickupCurrency; ++iCount)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Currency;
+			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//for
+		
+		// 絕招拾取
+		if(Random.Range(0, 100) <= GameDefine.iPickupProbBomb)
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Bomb;
+			Data.iCount = 1;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//if
+		
+		// 水晶拾取
+		if(Rule.AppearCrystal())
+		{
+			Pickup Data = new Pickup();
+			
+			Data.Pos = Rule.NextPickup();
+			Data.iType = (int)ENUM_Pickup.Crystal;
+			Data.iCount = GameDefine.iCrystalCount;
+			Data.iLooks = 0;
+			Data.bPickup = false;
+			
+			DataGame.pthis.PickupList.Add(Data);
+		}//if
 	}
     // ------------------------------------------------------------------
     public void ShowMap(int iRoad)
