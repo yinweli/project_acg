@@ -29,11 +29,12 @@ public class Bullet_Revolver : MonoBehaviour
             else
                 Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
-            if (other.gameObject.GetComponent<AIEnemy>())
+            AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
+            if (pEnemy)
             {
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
+                pEnemy.AddHP(-Damage.Item1, Damage.Item2);
                 if (bIsCombo)
-                    UITool.pthis.CreateUI(other.gameObject, "Prefab/G_Combo");
+                    pEnemy.HitSfx("G_Combo");
             }
 
             if (Rule.GetWeaponLevel(ENUM_Weapon.Revolver) > 0)
