@@ -44,6 +44,7 @@ public class DataPlayer : MonoBehaviour
 			Temp.iEquip = Itor.iEquip;
 			Temp.iLiveStage = Itor.iLiveStage;
 			Temp.iShield = Itor.iShield;
+			Temp.Feature = Itor.Feature.ToArray();
 
 			Result.Add(Temp);
 		}//for
