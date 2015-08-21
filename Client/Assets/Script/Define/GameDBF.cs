@@ -15,9 +15,9 @@ public class GameDBF : MonoBehaviour
         Add<DBFFeature>(GameDefine.szDBFFeature);
         Add<DBFLanguage>(GameDefine.szDBFLanguage);
         Add<DBFMonster>(GameDefine.szDBFMonster);
-		Add<DBFAchievement>(GameDefine.szDBFAchievement);
-		Add<DBFCollection>(GameDefine.szDBFCollection);
-		Add<DBFReward>(GameDefine.szDBFReward);
+		//Add<DBFAchievement>(GameDefine.szDBFAchievement);
+		//Add<DBFCollection>(GameDefine.szDBFCollection);
+		//Add<DBFReward>(GameDefine.szDBFReward);
 	}
 
     public void Add<T>(string szDBFName) where T : DBF

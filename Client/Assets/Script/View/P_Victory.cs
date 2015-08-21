@@ -10,6 +10,8 @@ public class P_Victory : MonoBehaviour
 	
     void Start()
     {
+        SysUI.pthis.pVictory = this;
+
 		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
 		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
 
