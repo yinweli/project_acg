@@ -7,8 +7,8 @@ public class Bullet_Revolver : MonoBehaviour
 {
     public AIBullet pAI = null;
 
-    bool bIsCombo = false;
-    int iCount = 1;
+    public bool bIsCombo = false;
+    public int iCount = 1;
     // ------------------------------------------------------------------
     void Start()
     {
