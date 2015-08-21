@@ -40,16 +40,26 @@ public class EditorDataReward : Editor
 				
 				GUILayout.EndHorizontal();
 			}
-						
-			if(Target.MemberLooks.Count > 0)
+
 			{
-				GUILayout.BeginVertical("box");
-				
+				int iPos = 0;
+				string szTemp = "";
+
 				foreach(int Itor in Target.MemberLooks)
-					GUILayout.Label(Itor.ToString(), GUILayout.Width(100.0f));
-				
-				GUILayout.EndVertical();
-			}//if
+				{
+					szTemp += Itor + ", ";
+					++iPos;
+
+					if(iPos % 5 == 0)
+					{
+						GUILayout.Label(szTemp);
+						szTemp = "";
+					}//if
+				}//for
+
+				if(szTemp.Length > 0)
+					GUILayout.Label(szTemp);
+			}
 			
 			GUILayout.EndVertical();
 		}
@@ -71,17 +81,27 @@ public class EditorDataReward : Editor
 				
 				GUILayout.EndHorizontal();
 			}
-						
-			if(Target.MemberInits.Count > 0)
+
 			{
-				GUILayout.BeginVertical("box");
+				int iPos = 0;
+				string szTemp = "";
 				
 				foreach(int Itor in Target.MemberInits)
-					GUILayout.Label(Itor.ToString(), GUILayout.Width(100.0f));
-				
-				GUILayout.EndVertical();
-			}//if
-			
+				{
+					szTemp += Itor + ", ";
+					++iPos;
+					
+					if(iPos % 5 == 0)
+					{
+						GUILayout.Label(szTemp);
+						szTemp = "";
+					}//if
+				}//for
+
+				if(szTemp.Length > 0)
+					GUILayout.Label(szTemp);
+			}
+
 			GUILayout.EndVertical();
 		}
 

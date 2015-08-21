@@ -33,13 +33,16 @@ public class SysMain : MonoBehaviour
     public void ReadyStart()
 	{
 		// 讀取資料
+		DataAchievement.pthis.Load();
+		DataCollection.pthis.Load();
 		DataRecord.pthis.Load();
+		DataReward.pthis.Load();
 
         // 讀取遊戲
+		bIsOld &= DataEnemy.pthis.Load();
+		bIsOld &= DataGame.pthis.Load();
+		bIsOld &= DataMap.pthis.Load();
         bIsOld &= DataPlayer.pthis.Load();
-        bIsOld &= DataGame.pthis.Load();
-        bIsOld &= DataEnemy.pthis.Load();
-        bIsOld &= DataMap.pthis.Load();
 
         if (!bIsOld)
             CreateNew();
@@ -69,9 +72,14 @@ public class SysMain : MonoBehaviour
 	// 儲存遊戲.
 	public void SaveGame()
 	{
-        DataPlayer.pthis.Save();
-        DataGame.pthis.Save();
-        DataEnemy.pthis.Save();
+		DataAchievement.pthis.Save();
+		DataCollection.pthis.Save();
+		DataRecord.pthis.Save();
+		DataReward.pthis.Save();
+		DataEnemy.pthis.Save();
+		DataGame.pthis.Save();
+		DataMap.pthis.Save();
+		DataPlayer.pthis.Save();
 	}
     // ------------------------------------------------------------------
     // 確認存檔內容開始遊戲.
