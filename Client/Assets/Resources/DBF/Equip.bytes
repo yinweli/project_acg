@@ -1,5 +1,5 @@
 {"GUID":"1", "StrID":"1001", "Mode":"1", "Threat":"3", "Gain":"1", "Damage":"0", "CriticalStrike":"0", "FireRate":"0", "Range":"2", "Resource":"1"}
-{"GUID":"2", "StrID":"1002", "Mode":"2", "Threat":"4", "Gain":"6", "Damage":"15", "CriticalStrike":"0", "FireRate":"2", "Range":"2", "Resource":"0"}
+{"GUID":"2", "StrID":"1002", "Mode":"2", "Threat":"4", "Gain":"8", "Damage":"30", "CriticalStrike":"0", "FireRate":"2", "Range":"2", "Resource":"0"}
 {"GUID":"3", "StrID":"1003", "Mode":"2", "Threat":"6", "Gain":"12", "Damage":"30", "CriticalStrike":"0", "FireRate":"1", "Range":"2", "Resource":"2"}
 {"GUID":"4", "StrID":"1004", "Mode":"2", "Threat":"8", "Gain":"10", "Damage":"30", "CriticalStrike":"0.2", "FireRate":"1", "Range":"2", "Resource":"2"}
 {"GUID":"5", "StrID":"1005", "Mode":"2", "Threat":"10", "Gain":"8", "Damage":"60", "CriticalStrike":"0.75", "FireRate":"2.5", "Range":"2", "Resource":"2"}
