@@ -7,6 +7,7 @@ public class AIBullet : MonoBehaviour
     // 移動速度
     public float fSpeed = 1.0f;
     public SpriteRenderer pRander = null;
+    public bool bCanMove = true;
     // ------------------------------------------------------------------
     void Update()
     {
@@ -15,6 +16,9 @@ public class AIBullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        if (!bCanMove)
+            return;
 
         // 把物件朝目標(玩家方向)移動.
         transform.Translate(0, fSpeed * Time.deltaTime, 0);

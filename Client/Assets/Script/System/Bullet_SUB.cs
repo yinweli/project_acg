@@ -40,6 +40,9 @@ public class Bullet_SUB : MonoBehaviour
         if (!pObj || SysMain.pthis.AtkEnemy.Count <= 0)
             return;
 
+        pAI.bCanMove = false;
+        pAI.pRander.material = Resources.Load("Sprite") as Material;
+
         if (GetComponent<Animator>())
             GetComponent<Animator>().Play("Grenade");
 
