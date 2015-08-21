@@ -7,11 +7,15 @@ public class Bullet_Revolver : MonoBehaviour
 {
     public AIBullet pAI = null;
 
+    bool bIsCombo = false;
     int iCount = 1;
     // ------------------------------------------------------------------
     void Start()
     {
-        iCount = Rule.UpgradeWeaponRevolver();
+        iCount = Rule.UpgradeWeaponRevolver() + 1;
+
+        if (iCount > 1)
+            bIsCombo = true;
     }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
@@ -20,13 +24,17 @@ public class Bullet_Revolver : MonoBehaviour
         {
             Tuple<int, bool> Damage;
 
-            if (iCount < Rule.UpgradeWeaponRevolver())
+            if (iCount <= Rule.UpgradeWeaponRevolver())
                 Damage = Rule.BulletDamage(pAI.iPlayer, false);
             else
                 Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
             if (other.gameObject.GetComponent<AIEnemy>())
+            {
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
+                if (bIsCombo)
+                    UITool.pthis.CreateUI(other.gameObject, "Prefab/G_Combo");
+            }
 
             if (Rule.GetWeaponLevel(ENUM_Weapon.Revolver) > 0)
                 iCount--;
