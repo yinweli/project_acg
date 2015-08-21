@@ -84,15 +84,13 @@ public class EditorDataPlayerMember
 				}
 
 				{
-					GUILayout.BeginHorizontal("box");
-					
 					string szFeature = "";
 					
 					foreach(int Itor in Temp.Feature)
 						szFeature += Itor + ", ";
-					
-					GUILayout.Label(szFeature, GUILayout.Width(200.0f));
-					GUILayout.EndHorizontal();
+
+					if(szFeature.Length > 0)
+						GUILayout.Label(szFeature);
 				}
 
 				GUILayout.EndVertical();
