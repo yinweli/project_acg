@@ -12,7 +12,7 @@ public class Bullet_Revolver : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
-        iCount = Rule.UpgradeWeaponRevolver() + 1;
+        iCount = Rule.UpgradeWeaponRevolver();
 
         if (iCount > 1)
             bIsCombo = true;

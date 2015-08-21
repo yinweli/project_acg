@@ -134,7 +134,7 @@ public class AIEnemy : MonoBehaviour
 			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
 
         if(IsCrit)
-            UITool.pthis.CreateUI(gameObject, "Prefab/G_Crit");
+            UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/G_Crit");
 
         if(iValue < 0 && GetComponent<EnemyJelly>())
             GetComponent<EnemyJelly>().CreateJelly(iValue);
