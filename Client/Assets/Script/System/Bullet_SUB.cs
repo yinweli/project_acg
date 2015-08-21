@@ -42,6 +42,7 @@ public class Bullet_SUB : MonoBehaviour
 
         pAI.bCanMove = false;
         pAI.pRander.material = Resources.Load("Sprite") as Material;
+        gameObject.transform.localScale = new Vector3(GameDefine.fSUBArea / 0.1f, GameDefine.fSUBArea / 0.1f, 1);
 
         if (GetComponent<Animator>())
             GetComponent<Animator>().Play("Grenade");
@@ -51,7 +52,7 @@ public class Bullet_SUB : MonoBehaviour
             float fDisObj = Vector2.Distance(pObj.transform.position, itor.Key.transform.position);
 
             // 比較距離.
-            if (fDisObj < 0.5f && itor.Key && itor.Key.GetComponent<AIEnemy>() && itor.Key.GetComponent<AIEnemy>().iHP > 0)
+            if (fDisObj < GameDefine.fSUBArea && itor.Key && itor.Key.GetComponent<AIEnemy>() && itor.Key.GetComponent<AIEnemy>().iHP > 0)
                 itor.Key.GetComponent<AIEnemy>().AddHP(-iDamage, false);            
         }        
     }

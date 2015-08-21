@@ -55,6 +55,8 @@ public class GameDefine
 	public const int iDamageBomb = 300; // 絕招傷害值
 	public const int iDamageShield = 200; // 護盾傷害值
 
+    public const float fSUBArea = 0.3f; // 榴彈攻擊範圍.
+
     public const int iBaseEngry = 3;  // 怪物出怪能量基礎值.
 	public const int iMaxWaitSec = 12; // 怪物出怪最大間隔秒數.
 	public const int iMinWaitSec = 8; // 怪物出怪最小間隔秒數.
