@@ -18,5 +18,5 @@
 {"GUID":"18", "StrID":"2018", "Mode":"6", "Threat":"8", "Gain":"1", "Group":"7", "Value":"4", "Description":"3018"}
 {"GUID":"19", "StrID":"2019", "Mode":"7", "Threat":"2", "Gain":"3", "Group":"8", "Value":"0.03", "Description":"3019"}
 {"GUID":"20", "StrID":"2020", "Mode":"7", "Threat":"2", "Gain":"2", "Group":"8", "Value":"0.06", "Description":"3020"}
-{"GUID":"21", "StrID":"2021", "Mode":"0", "Threat":"-10", "Gain":"3", "Group":"10", "Value":"0", "Description":"3022"}
-{"GUID":"22", "StrID":"2022", "Mode":"0", "Threat":"20", "Gain":"3", "Group":"10", "Value":"0", "Description":"3023"}
+{"GUID":"21", "StrID":"2021", "Mode":"0", "Threat":"-10", "Gain":"3", "Group":"10", "Value":"0", "Description":"3021"}
+{"GUID":"22", "StrID":"2022", "Mode":"0", "Threat":"20", "Gain":"3", "Group":"10", "Value":"0", "Description":"3022"}
