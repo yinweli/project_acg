@@ -7,44 +7,48 @@ public class Bullet_Revolver : MonoBehaviour
 {
     public AIBullet pAI = null;
 
-    public bool bIsCombo = false;
-    public int iCount = 1;
+	public bool FirstHit = true;
+	public int iCountMax = 0;
+    public int iCount = 0;
+	public List<GameObject> History = new List<GameObject>();
     // ------------------------------------------------------------------
     void Start()
     {
-        iCount = Rule.UpgradeWeaponRevolver();
-
-        if (iCount > 1)
-            bIsCombo = true;
+		iCountMax = iCount = Rule.UpgradeWeaponRevolver();
     }
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Tuple<int, bool> Damage;
+		if(other.gameObject.tag == "Enemy")
+		{
+			Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
+			AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
 
-            if (iCount <= Rule.UpgradeWeaponRevolver())
-                Damage = Rule.BulletDamage(pAI.iPlayer, false);
-            else
-                Damage = Rule.BulletDamage(pAI.iPlayer, true);
+			if(pEnemy)
+			{
+				pEnemy.AddHP(-Rule.UpgradeWeaponRevolver(Damage.Item1, iCountMax - iCount), Damage.Item2);
 
-            AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
-            if (pEnemy)
-            {
-                pEnemy.AddHP(-Damage.Item1, Damage.Item2);
-                if (bIsCombo)
-                    pEnemy.HitSfx("G_Combo");
-            }
+				if(FirstHit && Damage.Item2)
+					pEnemy.HitSfx("G_Crit");
 
-            if (Rule.GetWeaponLevel(ENUM_Weapon.Revolver) > 0)
-                iCount--;
+				if(FirstHit == false)
+					pEnemy.HitSfx("G_Combo");
 
-            if (iCount <= 0)
-                Destroy(gameObject);
+				History.Add(other.gameObject);
+			}//if
 
-            pAI.Chace(GetTarget());
-        }
+			if(iCount <= 0)
+				Destroy(gameObject);
+
+			GameObject NewTarget = GetTarget();
+
+			if(NewTarget == null)
+				Destroy(gameObject);
+
+			FirstHit = false;
+			--iCount;
+			pAI.Chace(NewTarget);
+		}//if
     }
     // ------------------------------------------------------------------
     // 取得目標.
@@ -58,6 +62,9 @@ public class Bullet_Revolver : MonoBehaviour
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.AtkEnemy)
         {
+			if(History.Contains(itor.Key))
+				continue;
+
             if (!ObjTarget)
                 ObjTarget = itor.Key;
 

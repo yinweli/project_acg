@@ -781,6 +781,11 @@ public class Rule
 	{
 		return GetWeaponLevel(ENUM_Weapon.Revolver);
 	}
+	// 取得升級左輪手槍:連鎖的傷害值
+	public static int UpgradeWeaponRevolver(int iDamage, int iCount)
+	{
+		return Mathf.Max(iDamage - iCount * 2, 0);
+	}
 	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
 	public static float UpgradeWeaponEagle()
 	{

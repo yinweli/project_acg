@@ -26,7 +26,7 @@ public class EditorDataPlayerMember
 			{
 				GUILayout.BeginHorizontal("box");
 				GUILayout.Label("Equip", GUILayout.Width(100.0f));
-				Temp.iEquip = EditorGUILayout.IntField(Temp.iEquip, GUILayout.Width(100.0f));
+				Temp.iEquip = (int)(ENUM_Weapon)EditorGUILayout.EnumPopup((ENUM_Weapon)Temp.iEquip, GUILayout.Width(100.0f));
 				GUILayout.EndHorizontal();
 			}
 
