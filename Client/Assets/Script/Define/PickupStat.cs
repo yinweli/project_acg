@@ -65,15 +65,4 @@ public class PickupStat : MonoBehaviour
 		else
 			Data[iPos].iUsed += Mathf.Abs(iValue);
 	}
-	public void Report()
-	{
-		string szReport = string.Format("Day{0} [{1}]\n", DataPlayer.pthis.iStage, System.DateTime.Now);
-
-		szReport += string.Format("Name, Initial, Available, Obtain, Used\n");
-
-		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
-			szReport += string.Format("{0}, {1}, {2}, {3}, {4}\n", (ENUM_Pickup)Itor, Data[Itor].iInitial, Data[Itor].iAvailable, Data[Itor].iObtain, Data[Itor].iUsed);
-
-		Debug.Log(szReport);
-	}
 }

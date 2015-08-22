@@ -15,8 +15,6 @@ public class P_Victory : MonoBehaviour
 		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
 		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
 
-		PickupStat.pthis.Report();
-
         // 天數.
         pLb[0].text = DataPlayer.pthis.iStage.ToString();
         // 關卡時間.
