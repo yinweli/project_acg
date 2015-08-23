@@ -63,6 +63,7 @@ public class GameDefine
 
     // 魔王相關區域
 	public const int iBossStage = 5; // 每幾關為魔王關
+	public const int iBossCount = 2; // 魔王數量
     public const int iJellyGrow = 100; // 軟泥損失多少血量會出新軟泥.
 
 	public const int iCrystalStage = 6; // 水晶最小出現關卡
