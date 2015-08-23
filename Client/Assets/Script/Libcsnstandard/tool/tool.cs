@@ -193,6 +193,7 @@ namespace LibCSNStandard
 
             return szResult;
         }
+#if !UNITY_WEBPLAYER
         /**
          * @brief 寫入文字檔案
          * @param szPath 檔案路徑
@@ -218,6 +219,7 @@ namespace LibCSNStandard
                 return null;
             }
         }
+#endif
         /**
          * @brief 執行外部程式
          * @param szFileName 程式名稱
