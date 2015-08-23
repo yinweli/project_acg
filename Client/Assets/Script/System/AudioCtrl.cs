@@ -8,6 +8,8 @@ public class AudioCtrl : MonoBehaviour {
     public AudioSource pSound;
     public AudioSource pMusic;
 
+    //public int iMusic;
+
     void Awake()
     {
         pthis = this;
@@ -42,8 +44,17 @@ public class AudioCtrl : MonoBehaviour {
     {
         pMusic.Stop();
 
-        AudioClip ClipBG = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 3))) as AudioClip;
-        pMusic.clip = ClipBG;
+        pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 8))) as AudioClip;
+        //pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", iMusic)) as AudioClip;
+
+        pMusic.Play();
+    }
+
+    public void Victory()
+    {
+        pMusic.Stop();
+        pMusic.volume = 0.6f;
+        pMusic.clip = Resources.Load("Sound/BG_Victory") as AudioClip;
 
         pMusic.Play();
     }
