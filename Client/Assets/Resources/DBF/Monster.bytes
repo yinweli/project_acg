@@ -29,3 +29,4 @@
 {"GUID":"1007", "Mode":"4", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"700", "MoveSpeed":"0.3"}
 {"GUID":"1008", "Mode":"4", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"700", "MoveSpeed":"0.3"}
 {"GUID":"1009", "Mode":"4", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"700", "MoveSpeed":"0.3"}
+{"GUID":"2001", "Mode":"1", "Threat":"5", "StageID":"9999", "Enegry":"9999", "HP":"30", "MoveSpeed":"0.28"}
