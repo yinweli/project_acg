@@ -30,6 +30,8 @@ public class P_Book : MonoBehaviour
             OpenAchieve();
         else if (pType == ENUM_BookBtn.Record)
             OpenRecord();
+        else if (pType == ENUM_BookBtn.Credits)
+            OpenCredits();
     }
     // ------------------------------------------------------------------    
     public void OpenUpgrade()
@@ -76,6 +78,14 @@ public class P_Book : MonoBehaviour
 
         SetBg(1);
         NowObj.Add(UITool.pthis.CreateUI(gameObject, "Prefab/G_Record"));
+    }
+    // ------------------------------------------------------------------
+    public void OpenCredits()
+    {
+        ClearNowPage();
+
+        SetBg(1);
+        NowObj.Add(UITool.pthis.CreateUI(gameObject, "Prefab/G_Credits"));
     }
     // ------------------------------------------------------------------
     public void ClearNowPage()

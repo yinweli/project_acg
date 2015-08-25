@@ -154,6 +154,7 @@ public enum ENUM_BookBtn
     Update, // 升級
     Achievement, // 成就
     Record, // 記錄
+    Credits, // 製作人員
 
     Count,
 }
