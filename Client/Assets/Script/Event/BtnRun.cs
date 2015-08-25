@@ -1,37 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BtnRun : MonoBehaviour 
+public class BtnRun : MonoBehaviour
 {
     public bool bIsRun = false;
     public float fCoolDown = 1;
+    public UISprite pBg = null;
     // ------------------------------------------------------------------
     public void StartNew()
     {
-		RecoveryTime();
+        RecoveryTime();
         StartCoroutine(StaRecovery());
     }
     // ------------------------------------------------------------------
     void Update()
     {
-		if (!SysMain.pthis.bIsGaming)
-			return;
+        if (!SysMain.pthis.bIsGaming)
+            return;
 
-        if(GetComponent<UIButton>().isEnabled && !CheckCanMove())
+        if (GetComponent<UIButton>().isEnabled && !CheckCanMove())
             GetComponent<UIButton>().isEnabled = false;
         else if (!GetComponent<UIButton>().isEnabled && CheckCanMove())
             GetComponent<UIButton>().isEnabled = true;
+
+        if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Space) && CheckCanMove())
+            PressDownSpace();
+        else if (Input.GetKeyUp(KeyCode.Space))
+            PressUpSpace();
     }
     // ------------------------------------------------------------------
-	void OnPress(bool bDown)
+    void OnPress(bool bDown)
     {
         if (bDown && CheckCanMove())
-        {
-            bIsRun = true;
             StartCoroutine(StaCost());
-        }
         else
             bIsRun = false;
+    }
+    // ------------------------------------------------------------------
+    void PressDownSpace()
+    {
+        if (GetComponent<BoxCollider2D>())
+            GetComponent<BoxCollider2D>().enabled = false;
+
+        NGUITools.PlaySound(Resources.Load("Sound/FX/Run") as AudioClip);
+        pBg.color = new Color(0.72f, 0.64f, 0.48f);
+        StartCoroutine(StaCost());
+    }
+    // ------------------------------------------------------------------
+    void PressUpSpace()
+    {
+        if (GetComponent<BoxCollider2D>())
+            GetComponent<BoxCollider2D>().enabled = true;
+        pBg.color = Color.white;
     }
     // ------------------------------------------------------------------
     public bool CheckCanMove()
@@ -47,22 +67,24 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator StaCost()
     {
+        bIsRun = true;
+
         if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
-			ConsumeTime();
+            ConsumeTime();
             DataGame.pthis.fRunDouble = 3.0f;
             yield return new WaitForSeconds(0.9f);
         }
 
         while (bIsRun && CheckCanMove())
-        {            
+        {
             if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
             else
             {
-				if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
+                if (SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
                     DataGame.pthis.fRunDouble = 3.0f;
-				ConsumeTime();
+                ConsumeTime();
                 yield return new WaitForSeconds(0.9f);
             }
         }
@@ -76,7 +98,7 @@ public class BtnRun : MonoBehaviour
             DataGame.pthis.fRunDouble = 1.0f;
 
         bIsRun = false;
-		RecoveryTime();
+        RecoveryTime();
     }
     // ------------------------------------------------------------------
     IEnumerator StaRecovery()
@@ -85,13 +107,13 @@ public class BtnRun : MonoBehaviour
         {
             if (bIsRun && SysMain.pthis.bCanRun)
                 yield return new WaitForEndOfFrame();
-			else if (DataPlayer.pthis.iStamina >= DataPlayer.pthis.iStaminaLimit)
-				yield return new WaitForEndOfFrame();
+            else if (DataPlayer.pthis.iStamina >= DataPlayer.pthis.iStaminaLimit)
+                yield return new WaitForEndOfFrame();
             else if (fCoolDown > Time.time)
                 yield return new WaitForEndOfFrame();
             else
             {
-				RecoveryTime();
+                RecoveryTime();
 
                 SysMain.pthis.AddStamina(1);
 
@@ -100,17 +122,17 @@ public class BtnRun : MonoBehaviour
             }
         }
     }
-	// ------------------------------------------------------------------
-	void RecoveryTime()
-	{
-		if(DataPlayer.pthis.iStaminaRecovery > 0)
-			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime / DataPlayer.pthis.iStaminaRecovery;
-		else
-			fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime;
-	}
-	// ------------------------------------------------------------------
-	void ConsumeTime()
-	{
-		fCoolDown = Time.time + GameDefine.iStaminaConsumeTime;
-	}
+    // ------------------------------------------------------------------
+    void RecoveryTime()
+    {
+        if (DataPlayer.pthis.iStaminaRecovery > 0)
+            fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime / DataPlayer.pthis.iStaminaRecovery;
+        else
+            fCoolDown = Time.time + (float)GameDefine.iStaminaRecoveryTime;
+    }
+    // ------------------------------------------------------------------
+    void ConsumeTime()
+    {
+        fCoolDown = Time.time + GameDefine.iStaminaConsumeTime;
+    }
 }
