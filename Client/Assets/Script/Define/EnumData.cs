@@ -8,7 +8,7 @@
 
 public enum ENUM_Weapon
 {
-    Null,
+    Null = 0,
     Light, // 手電筒.
     Knife, // 小刀
     Pistol, // 手槍.
