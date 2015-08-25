@@ -145,3 +145,13 @@ public enum ENUM_Achievement
 	Total_Bomb, // 累積拾取絕招數量
 	Total_Kill, // 累積擊敗怪物數量
 }
+
+// 書本介面頁面列舉
+public enum ENUM_BookBtn
+{
+    Update, // 升級
+    Achievement, // 成就
+    Record, // 記錄
+
+    Count,
+}
