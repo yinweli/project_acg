@@ -58,7 +58,7 @@
 {"GUID":"4006", "enUS":"Grenade", "zhTW":""}
 {"GUID":"4007", "enUS":"Spiked", "zhTW":""}
 {"GUID":"4008", "enUS":"Plasma", "zhTW":""}
-{"GUID":"5001", "enUS":"Flashligh's light can burn monster", "zhTW":""}
+{"GUID":"5001", "enUS":"Flashligh can burn monster", "zhTW":""}
 {"GUID":"5002", "enUS":"Knife can throw faster", "zhTW":""}
 {"GUID":"5003", "enUS":"Pistol can freeze monster", "zhTW":""}
 {"GUID":"5004", "enUS":"Revolver can attack multiple monster", "zhTW":""}
@@ -66,11 +66,11 @@
 {"GUID":"5006", "enUS":"Submachine now shoot grenade", "zhTW":""}
 {"GUID":"5007", "enUS":"Assault rifle can attack monster on the line", "zhTW":""}
 {"GUID":"5008", "enUS":"Light machine gun now use battery to shoot plasma", "zhTW":""}
-{"GUID":"6001", "enUS":"Deal [546ef2]{0}[-] damage every 2 second", "zhTW":""}
-{"GUID":"6002", "enUS":"Knife attack every [546ef2]{0}[-] second", "zhTW":""}
-{"GUID":"6003", "enUS":"Reduction [546ef2]{0}%[-] move speed on hit", "zhTW":""}
-{"GUID":"6004", "enUS":"Extra attack [546ef2]{0}[-] target, reduction 2 damage when hit", "zhTW":""}
-{"GUID":"6005", "enUS":"[546ef2]{0}%[-] critical damage", "zhTW":""}
-{"GUID":"6006", "enUS":"Deal [546ef2]{0}[-] area damage", "zhTW":""}
-{"GUID":"6007", "enUS":"Extar attack [546ef2]{0}[-] target", "zhTW":""}
-{"GUID":"6008", "enUS":"[546ef2]+{0}[-] bonus damage", "zhTW":""}
+{"GUID":"6001", "enUS":"Deal [FFFF00]{0}[-] damage / 2 sec", "zhTW":""}
+{"GUID":"6002", "enUS":"Knife attack every [FFFF00]{0}[-] second", "zhTW":""}
+{"GUID":"6003", "enUS":"Reduction [FFFF00]{0}%[-] move speed on hit", "zhTW":""}
+{"GUID":"6004", "enUS":"Extra attack [FFFF00]{0}[-] target\nreduction 2 damage when hit", "zhTW":""}
+{"GUID":"6005", "enUS":"[FFFF00]{0}%[-] critical damage", "zhTW":""}
+{"GUID":"6006", "enUS":"Deal [FFFF00]{0}[-] area damage", "zhTW":""}
+{"GUID":"6007", "enUS":"Extar attack [FFFF00]{0}[-] target", "zhTW":""}
+{"GUID":"6008", "enUS":"[FFFF00]+{0}[-] bonus damage", "zhTW":""}

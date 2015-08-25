@@ -6,7 +6,6 @@ public class G_Upgrade : MonoBehaviour
     public ENUM_Weapon pWeapon = ENUM_Weapon.Null;
 
     public UISprite pS_Icon;
-	public UISprite pS_Check;
     public UISprite pS_AbilityBg;
     public UISprite[] pS_Collection = new UISprite[5];
     public UILabel[] pLb_Collection = new UILabel[5];
@@ -25,20 +24,12 @@ public class G_Upgrade : MonoBehaviour
 	{
 		int iLevel = Mathf.Max(Mathf.Min(Rule.GetWeaponLevel(pWeapon), GameDefine.iMaxCollectionLv), 0);
 		int iLevelNext = iLevel + 1;
-		
-		if(iLevel < GameDefine.iMaxCollectionLv)
-		{
-			pS_Check.enabled = false;
-			pLb_Lv.text = iLevel.ToString();
-		}
-		else
-		{
-			pS_Check.enabled = true;
-			pLb_Lv.enabled = false;
-		}//if
-		
+
 		pLb_Name.text = GameDBF.pthis.GetLanguage(4000 + (int)pWeapon);
+		pLb_Lv.text = iLevel.ToString();
 		pLb_Desc.text = GameDBF.pthis.GetLanguage(5000 + (int)pWeapon);
+		pLb_EffectNow.text = "";
+		pLb_EffectNext.text = "";
 
 		string szHelp = GameDBF.pthis.GetLanguage(6000 + (int)pWeapon);
 		
