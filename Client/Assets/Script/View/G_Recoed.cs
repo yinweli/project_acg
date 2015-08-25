@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class P_Recoed : MonoBehaviour 
+public class G_Recoed : MonoBehaviour 
 {
     public UILabel[] pLb = new UILabel[4];
 
