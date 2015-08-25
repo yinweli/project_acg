@@ -144,6 +144,8 @@ public enum ENUM_Achievement
 	Total_HeavyAmmo, // 累積拾取重型彈藥數量
 	Total_Bomb, // 累積拾取絕招數量
 	Total_Kill, // 累積擊敗怪物數量
+
+    Count,
 }
 
 // 書本介面頁面列舉

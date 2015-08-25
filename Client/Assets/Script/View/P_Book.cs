@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class P_Book : MonoBehaviour 
 {
-    public UIGrid pGrid;
+    public UIGrid pGridAchieve;
+    public UIGrid pGridUpgrade;
     public UISprite pSelect;
+    public UIDragObject pDrag;
     public Btn_BookBtn[] pBookBtn = new Btn_BookBtn[(int)ENUM_BookBtn.Count];
     public GameObject[] BG = new GameObject[2];
 
@@ -37,22 +39,35 @@ public class P_Book : MonoBehaviour
 
         for (int i = 1; i < (int)ENUM_Weapon.Count; i++)
         {
-            GameObject pObj = UITool.pthis.CreateUI(pGrid.gameObject, "Prefab/G_Upgrade");
+            GameObject pObj = UITool.pthis.CreateUI(pGridUpgrade.gameObject, "Prefab/G_Upgrade");
+            pObj.transform.position = Vector3.zero;
             G_Upgrade pScript = pObj.GetComponent<G_Upgrade>();
             if (pScript)
                 pScript.pWeapon = (ENUM_Weapon)i;
 
             NowObj.Add(pObj);
         }
-
-        pGrid.Reposition();
+        pDrag.target = pGridUpgrade.gameObject.transform;
+        pGridUpgrade.Reposition();
     }
     // ------------------------------------------------------------------
     public void OpenAchieve()
     {
         ClearNowPage();
-
         SetBg(0);
+       
+        for (int i = 1; i < (int)ENUM_Achievement.Count; i++)
+        {
+            GameObject pObj = UITool.pthis.CreateUI(pGridAchieve.gameObject.gameObject, "Prefab/G_Achievement");
+            pObj.name = "";
+            G_Achievement pScript = pObj.GetComponent<G_Achievement>();
+            if (pScript)
+                pScript.pAchieve = (ENUM_Achievement)i;
+
+            NowObj.Add(pObj);
+        }
+        pDrag.target = pGridAchieve.gameObject.transform;
+        pGridAchieve.Reposition();
     }
     // ------------------------------------------------------------------
     public void OpenRecord()
