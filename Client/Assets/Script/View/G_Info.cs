@@ -77,7 +77,7 @@ public class G_Info : MonoBehaviour
 			}
 
             // 射擊速度
-			Lb_Value[1].text = string.Format("[ffed00]{0:0.0}[-] per sec", 1 / pDBFEquip.FireRate);
+			Lb_Value[1].text = string.Format("[ffed00]{0:0.0}[-] per sec", 1 / (System.Convert.ToInt32(pDBFEquip.GUID) == (int)ENUM_Weapon.Knife && Rule.GetWeaponLevel(ENUM_Weapon.Knife) > 0 ? Rule.UpgradeWeaponKnife() : pDBFEquip.FireRate));
 
             // 爆擊
 			{

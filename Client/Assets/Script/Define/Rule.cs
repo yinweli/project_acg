@@ -503,7 +503,7 @@ public class Rule
 			if(DataEquip != null && DataEquip.Mode == (int)ENUM_ModeEquip.Damage)
 			{
 				if(System.Convert.ToInt32(DataEquip.GUID) == (int)ENUM_Weapon.Knife && GetWeaponLevel(ENUM_Weapon.Knife) > 0)
-					fResult = UpgradeWeaponKnife(DataEquip.FireRate);
+					fResult = UpgradeWeaponKnife();
 				else
 					fResult = DataEquip.FireRate;
 			}//if
@@ -762,24 +762,46 @@ public class Rule
 		return DataReward.pthis.WeaponLevel.ContainsKey(iWeapon) ? DataReward.pthis.WeaponLevel[iWeapon] : 0;
 	}
 	// 取得升級手電筒:灼燒傷害與下次時間
+	public static Tuple<int, float> UpgradeWeaponLight(int iLevel)
+	{
+		return new Tuple<int, float>(iLevel * 6, Time.realtimeSinceStartup + 2.0f);
+	}
+	// 取得升級手電筒:灼燒傷害與下次時間
 	public static Tuple<int, float> UpgradeWeaponLight()
 	{
-		return new Tuple<int, float>(GetWeaponLevel(ENUM_Weapon.Light) * 6, Time.realtimeSinceStartup + 2.0f);
+		return UpgradeWeaponLight(GetWeaponLevel(ENUM_Weapon.Light));
 	}
 	// 取得升級小刀:加速的攻速值
-	public static float UpgradeWeaponKnife(float fFireRate)
+	public static float UpgradeWeaponKnife(int iLevel)
 	{
-		return Mathf.Max(1.0f - GetWeaponLevel(ENUM_Weapon.Knife) * 0.15f, 0.0f) * fFireRate;
+		DBFEquip DBFTemp = GameDBF.pthis.GetEquip(new Argu((int)ENUM_Weapon.Knife)) as DBFEquip;
+
+		return DBFTemp != null ? (float)System.Math.Round((double)Mathf.Max(1.0f - iLevel * 0.15f, 0.0f) * DBFTemp.FireRate, 1) : 999.0f;
+	}
+	// 取得升級小刀:加速的攻速值
+	public static float UpgradeWeaponKnife()
+	{
+		return UpgradeWeaponKnife(GetWeaponLevel(ENUM_Weapon.Knife));
+	}
+	// 取得升級手槍:冰凍的緩速值
+	public static float UpgradeWeaponPistol(int iLevel)
+	{
+		return (float)System.Math.Round((double)Mathf.Max(1.0f - (0.14f + iLevel * 0.06f), 0.0f), 2);
 	}
 	// 取得升級手槍:冰凍的緩速值
 	public static float UpgradeWeaponPistol()
 	{
-		return Mathf.Max(1.0f - (0.2f + GetWeaponLevel(ENUM_Weapon.Pistol) - 1) * 0.1f, 0.0f);
+		return UpgradeWeaponPistol(GetWeaponLevel(ENUM_Weapon.Pistol));
+	}
+	// 取得升級左輪手槍:連鎖的連鎖次數
+	public static int UpgradeWeaponRevolver(int iLevel)
+	{
+		return iLevel;
 	}
 	// 取得升級左輪手槍:連鎖的連鎖次數
 	public static int UpgradeWeaponRevolver()
 	{
-		return GetWeaponLevel(ENUM_Weapon.Revolver);
+		return UpgradeWeaponRevolver(GetWeaponLevel(ENUM_Weapon.Revolver));
 	}
 	// 取得升級左輪手槍:連鎖的傷害值
 	public static int UpgradeWeaponRevolver(int iDamage, int iCount)
@@ -787,26 +809,46 @@ public class Rule
 		return Mathf.Max(iDamage - iCount * 2, 0);
 	}
 	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
+	public static float UpgradeWeaponEagle(int iLevel)
+	{
+		return Mathf.Max(280.0f + (iLevel - 1) * 10.0f, 0.0f);
+	}
+	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
 	public static float UpgradeWeaponEagle()
 	{
-		return Mathf.Max(280.0f + (GetWeaponLevel(ENUM_Weapon.Eagle) - 1) * 10.0f, 0.0f);
+		return UpgradeWeaponEagle(GetWeaponLevel(ENUM_Weapon.Eagle));
+	}
+	// 取得升級衝鋒槍:榴彈的爆炸傷害值
+	public static int UpgradeWeaponSUB(int iLevel)
+	{
+		return iLevel * 6;
 	}
 	// 取得升級衝鋒槍:榴彈的爆炸傷害值
 	public static int UpgradeWeaponSUB()
 	{
-		return GetWeaponLevel(ENUM_Weapon.SUB) * 6;
+		return UpgradeWeaponSUB(GetWeaponLevel(ENUM_Weapon.SUB));
+	}
+	// 取得升級突擊步槍:穿透的穿透次數
+	public static int UpgradeWeaponRifle(int iLevel)
+	{
+		return iLevel;
 	}
 	// 取得升級突擊步槍:穿透的穿透次數
 	public static int UpgradeWeaponRifle()
 	{
-		return GetWeaponLevel(ENUM_Weapon.Rifle);
+		return UpgradeWeaponRifle(GetWeaponLevel(ENUM_Weapon.Rifle));
+	}
+	// 取得升級輕機槍:電漿的增傷值
+	public static int UpgradeWeaponLMG(int iLevel)
+	{
+		return iLevel;
 	}
 	// 取得升級輕機槍:電漿的增傷值
 	public static int UpgradeWeaponLMG()
 	{
-		return GetWeaponLevel(ENUM_Weapon.LMG);
+		return UpgradeWeaponLMG(GetWeaponLevel(ENUM_Weapon.LMG));
 	}
-	// 取得是否要出現模王關
+	// 取得是否要出現魔王關
 	public static bool AppearBossStage()
 	{
 		return DataPlayer.pthis.iStage % GameDefine.iBossStage == 0;

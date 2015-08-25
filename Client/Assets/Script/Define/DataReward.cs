@@ -86,7 +86,7 @@ public class DataReward : MonoBehaviour
 			iInitBomb = GameInit.iInitBomb;
 			iCrystal = 0;
 		}//if
-		
+
 		return true;
 	}
 	// 清除資料
