@@ -53,7 +53,7 @@ public class Statistics : MonoBehaviour
 	}
 	public void RecordResource(ENUM_Pickup emPickup, int iValue)
 	{
-		if(iValue <= 0)
+		if(iValue == 0)
 			return;
 
 		int iPos = (int)emPickup;
