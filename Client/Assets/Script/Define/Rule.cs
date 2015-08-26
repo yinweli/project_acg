@@ -580,32 +580,58 @@ public class Rule
 		if(DBFTemp == null)
 			return Result;
 
-		int iAchievement = (int)emAchievement;
-		int iOldValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
+		if(iValue <= 0)
+			return Result;
+
+		int iOldValue = DataAchievement.pthis.GetValue(emAchievement);
 		int iNewValue = iOldValue + iValue;
-		int iMaxValue = DBFTemp.MaxValue();
+		int iMaxValue = DBFTemp.GetValue(DBFTemp.MaxLevel);
 
 		iNewValue = iNewValue > iMaxValue ? iMaxValue : iNewValue;
-		DataAchievement.pthis.Data[iAchievement] = iNewValue;
-		
-		if(DBFTemp.MaxLevel >= 1 && DBFTemp.Lv1Value >= iOldValue && DBFTemp.Lv1Value <= iNewValue)
-			Result.Add(1);
-		
-		if(DBFTemp.MaxLevel >= 2 && DBFTemp.Lv2Value >= iOldValue && DBFTemp.Lv2Value <= iNewValue)
-			Result.Add(2);
-		
-		if(DBFTemp.MaxLevel >= 3 && DBFTemp.Lv3Value >= iOldValue && DBFTemp.Lv3Value <= iNewValue)
-			Result.Add(3);
-		
-		if(DBFTemp.MaxLevel >= 4 && DBFTemp.Lv4Value >= iOldValue && DBFTemp.Lv4Value <= iNewValue)
-			Result.Add(4);
-		
-		if(DBFTemp.MaxLevel >= 5 && DBFTemp.Lv5Value >= iOldValue && DBFTemp.Lv5Value <= iNewValue)
-			Result.Add(5);
-		
-		if(DBFTemp.MaxLevel >= 6 && DBFTemp.Lv6Value >= iOldValue && DBFTemp.Lv6Value <= iNewValue)
-			Result.Add(6);
+		DataAchievement.pthis.Data[(int)emAchievement] = iNewValue;
 
+		for(int iLevel = 1; iLevel <= DBFTemp.MaxLevel; ++iLevel)
+		{
+			int iLevelValue = DBFTemp.GetValue(iLevel);
+
+			if(iLevelValue >= iOldValue && iLevelValue <= iNewValue)
+				Result.Add(iLevel);
+		}//for
+
+		return Result;
+	}	
+	// 取得提供給介面顯示用的成就列表(包含成就列舉, 等級)
+	public List<Tuple<ENUM_Achievement, int>> AchievementShow()
+	{
+		List<Tuple<ENUM_Achievement, int>> ResultProgress = new List<Tuple<ENUM_Achievement, int>>();
+		List<Tuple<ENUM_Achievement, int>> ResultFinished = new List<Tuple<ENUM_Achievement, int>>();
+		
+		DBFItor Itor = GameDBF.pthis.GetAchievement();
+		
+		while(Itor.IsEnd() == false)
+		{
+			DBFAchievement DBFTemp = (DBFAchievement)Itor.Data();
+			ENUM_Achievement emAchievement = (ENUM_Achievement)System.Convert.ToInt32(DBFTemp.GUID);
+			int iValue = DataAchievement.pthis.GetValue(emAchievement);
+			
+			for(int iLevel = 1; iLevel <= DBFTemp.MaxLevel; ++iLevel)
+			{
+				Tuple<ENUM_Achievement, int> ResultTemp = new Tuple<ENUM_Achievement, int>(emAchievement, iLevel);
+
+				if(iValue >= DBFTemp.GetValue(iLevel))
+					ResultProgress.Add(ResultTemp);
+				else
+					ResultFinished.Add(ResultTemp);
+			}//for
+			
+			Itor.Next();
+		}//while
+		
+		List<Tuple<ENUM_Achievement, int>> Result = new List<Tuple<ENUM_Achievement, int>>();
+		
+		Result.AddRange(ResultProgress);
+		Result.AddRange(ResultFinished);
+		
 		return Result;
 	}
 	// 拾取收集物品, 傳回是否完成

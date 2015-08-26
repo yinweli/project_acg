@@ -24,10 +24,10 @@ public class DBFAchievement : DBF
 	public int Lv5Reward = 0; // 等級5獎勵編號
 	public int Lv6Reward = 0; // 等級6獎勵編號
 
-	// 取得最大等級的條件值
-	public int MaxValue()
+	// 取得條件值
+	public int GetValue(int iLevel)
 	{
-		switch(MaxLevel)
+		switch(iLevel)
 		{
 		case 1: return Lv1Value;
 		case 2: return Lv2Value;
@@ -38,18 +38,18 @@ public class DBFAchievement : DBF
 		default: return 0;
 		}//switch
 	}
-	// 取得條件值與獎勵編號列表
-	public List<Tuple<int, int>> ToList()
+	// 取得獎勵編號
+	public int GetReward(int iLevel)
 	{
-		List<Tuple<int, int>> Result = new List<Tuple<int, int>>();
-
-		Result.Add(new Tuple<int, int>(Lv1Value, Lv1Reward));
-		Result.Add(new Tuple<int, int>(Lv2Value, Lv2Reward));
-		Result.Add(new Tuple<int, int>(Lv3Value, Lv3Reward));
-		Result.Add(new Tuple<int, int>(Lv4Value, Lv4Reward));
-		Result.Add(new Tuple<int, int>(Lv5Value, Lv5Reward));
-		Result.Add(new Tuple<int, int>(Lv6Value, Lv6Reward));
-
-		return Result;
+		switch(iLevel)
+		{
+		case 1: return Lv1Reward;
+		case 2: return Lv2Reward;
+		case 3: return Lv3Reward;
+		case 4: return Lv4Reward;
+		case 5: return Lv5Reward;
+		case 6: return Lv6Reward;
+		default: return 0;
+		}//switch
 	}
 }
