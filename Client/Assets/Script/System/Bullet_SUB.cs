@@ -22,7 +22,10 @@ public class Bullet_SUB : MonoBehaviour
 			AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
 			
 			if(pEnemy)
+			{
 				pEnemy.AddHP(-Damage.Item1, Damage.Item2);
+				Statistics.pthis.RecordDamage(ENUM_Damage.SUB, Damage.Item1);
+			}//if
 
             if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
 				GroundHurt(other.gameObject, Rule.UpgradeWeaponSUB());

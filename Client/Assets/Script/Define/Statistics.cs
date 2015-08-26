@@ -16,15 +16,16 @@ public class Statistics : MonoBehaviour
 {
 	static public Statistics pthis = null;
 
-	public List<StatPickup> Data = new List<StatPickup>(); // 資源列表
+	public List<StatPickup> DataResource = new List<StatPickup>(); // 拾取資源列表
+	public Dictionary<ENUM_Damage, int> DataDamage = new Dictionary<ENUM_Damage, int>(); // 傷害統計列表
 
 	void Awake()
 	{
 		pthis = this;
 	}
-	public void Reset()
+	public void ResetResource()
 	{
-		Data.Clear();
+		DataResource.Clear();
 
 		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
 		{
@@ -47,22 +48,39 @@ public class Statistics : MonoBehaviour
 					Temp.iAvailable += ItorPickup.iCount;
 			}//for
 
-			Data.Add(Temp);
+			DataResource.Add(Temp);
 		}//for
 	}
-	public void Record(ENUM_Pickup emPickup, int iValue)
+	public void RecordResource(ENUM_Pickup emPickup, int iValue)
 	{
-		if(iValue == 0)
+		if(iValue <= 0)
 			return;
 
 		int iPos = (int)emPickup;
 
-		if(iPos >= Data.Count)
+		if(iPos >= DataResource.Count)
 			return;
 
 		if(iValue > 0)
-			Data[iPos].iObtain += Mathf.Abs(iValue);
+			DataResource[iPos].iObtain += Mathf.Abs(iValue);
 		else
-			Data[iPos].iUsed += Mathf.Abs(iValue);
+			DataResource[iPos].iUsed += Mathf.Abs(iValue);
+	}
+	public void ResetDamage()
+	{
+		DataDamage.Clear();
+
+		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Damage)))
+			DataDamage.Add((ENUM_Damage)Itor, 0);
+	}
+	public void RecordDamage(ENUM_Damage emDamage, int iValue)
+	{
+		if(iValue <= 0)
+			return;
+
+		if(DataDamage.ContainsKey(emDamage))
+			DataDamage[emDamage] += iValue;
+		else
+			DataDamage[emDamage] = iValue;
 	}
 }

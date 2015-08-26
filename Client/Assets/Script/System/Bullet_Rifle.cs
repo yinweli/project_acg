@@ -25,7 +25,10 @@ public class Bullet_Rifle : MonoBehaviour
 			Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
 
             if (other.gameObject.GetComponent<AIEnemy>())
+			{
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Rifle, Damage.Item1);
+			}//if
 
             if (iCount <= 0)
                 Destroy(gameObject);

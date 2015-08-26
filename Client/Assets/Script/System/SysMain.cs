@@ -129,7 +129,8 @@ public class SysMain : MonoBehaviour
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
 
-		Statistics.pthis.Reset();
+		Statistics.pthis.ResetResource();
+		Statistics.pthis.ResetDamage();
 
         // 到數開始.
         StartCoroutine(CountStart(true));
@@ -182,7 +183,8 @@ public class SysMain : MonoBehaviour
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
 
-		Statistics.pthis.Reset();
+		Statistics.pthis.ResetResource();
+		Statistics.pthis.ResetDamage();
 
         // 到數開始.
         StartCoroutine(CountStart(false));

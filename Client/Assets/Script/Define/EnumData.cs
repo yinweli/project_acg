@@ -157,3 +157,18 @@ public enum ENUM_BookBtn
 
     Count,
 }
+
+// 傷害列舉
+public enum ENUM_Damage
+{
+	Light, // 手電筒
+	Knife, // 小刀
+	Pistol, // 手槍
+	Revolver, // 左輪手槍
+	Eagle, // 沙漠之鷹
+	SUB, // 衝鋒槍
+	Rifle, // 突擊步槍
+	LMG, // 輕機槍
+	Bomb, // 絕招
+	Shield, // 護盾
+}

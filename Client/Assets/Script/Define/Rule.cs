@@ -103,7 +103,7 @@ public class Rule
 	public static void CrystalAdd(int iValue)
 	{
 		DataReward.pthis.iCrystal = Value(0, GameDefine.iMaxCrystal, DataReward.pthis.iCrystal + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.Crystal, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.Crystal, iValue);
 	}
 	// 重置通貨值
 	public static void CurrencyReset()
@@ -114,7 +114,7 @@ public class Rule
 	public static void CurrencyAdd(int iValue)
 	{
 		DataPlayer.pthis.iCurrency = Value(0, GameDefine.iMaxCurrency, DataPlayer.pthis.iCurrency + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.Currency, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.Currency, iValue);
 	}
 	// 重置電池
 	public static void BatteryReset()
@@ -125,7 +125,7 @@ public class Rule
 	public static void BatteryAdd(int iValue)
 	{
 		DataPlayer.pthis.iBattery = Value(0, int.MaxValue, DataPlayer.pthis.iBattery + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.Battery, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.Battery, iValue);
 	}
 	// 檢查電池是否足夠
 	public static bool BatteryChk(int iValue)
@@ -141,7 +141,7 @@ public class Rule
 	public static void LightAmmoAdd(int iValue)
 	{
 		DataPlayer.pthis.iLightAmmo = Value(0, GameDefine.iMaxLightAmmo, DataPlayer.pthis.iLightAmmo + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.LightAmmo, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.LightAmmo, iValue);
 	}
 	// 檢查輕型彈藥是否足夠
 	public static bool LightAmmoChk(int iValue)
@@ -157,7 +157,7 @@ public class Rule
 	public static void HeavyAmmoAdd(int iValue)
 	{
 		DataPlayer.pthis.iHeavyAmmo = Value(0, GameDefine.iMaxHeavyAmmo, DataPlayer.pthis.iHeavyAmmo + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.HeavyAmmo, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.HeavyAmmo, iValue);
 	}
 	// 檢查重型彈藥是否足夠
 	public static bool HeavyAmmoChk(int iValue)
@@ -173,7 +173,7 @@ public class Rule
 	public static void BombAdd(int iValue)
 	{
 		DataPlayer.pthis.iBomb = Value(0, GameDefine.iMaxBomb, DataPlayer.pthis.iBomb + iValue);
-		Statistics.pthis.Record(ENUM_Pickup.Bomb, iValue);
+		Statistics.pthis.RecordResource(ENUM_Pickup.Bomb, iValue);
 	}
 	// 重置耐力值
 	public static void StaminaReset()

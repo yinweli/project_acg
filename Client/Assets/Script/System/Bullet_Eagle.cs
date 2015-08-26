@@ -16,6 +16,8 @@ public class Bullet_Eagle : MonoBehaviour
                 Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
                 pEnemy.AddHP(-Damage.Item1, false);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Eagle, Damage.Item1);
+
                 if (Damage.Item2 && Rule.GetWeaponLevel(ENUM_Weapon.Eagle) > 0)
                     pEnemy.HitSfx("G_HeadShot");
                 else if(Damage.Item2)
