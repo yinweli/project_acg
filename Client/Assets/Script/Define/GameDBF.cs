@@ -15,9 +15,8 @@ public class GameDBF : MonoBehaviour
         Add<DBFFeature>(GameDefine.szDBFFeature);
         Add<DBFLanguage>(GameDefine.szDBFLanguage);
         Add<DBFMonster>(GameDefine.szDBFMonster);
-		//Add<DBFAchievement>(GameDefine.szDBFAchievement);
-		//Add<DBFCollection>(GameDefine.szDBFCollection);
-		//Add<DBFReward>(GameDefine.szDBFReward);
+		Add<DBFAchievement>(GameDefine.szDBFAchievement);
+		Add<DBFReward>(GameDefine.szDBFReward);
 	}
 
     public void Add<T>(string szDBFName) where T : DBF
@@ -77,14 +76,6 @@ public class GameDBF : MonoBehaviour
 	public DBFItor GetAchievement()
 	{
 		return m_DBF.Get(GameDefine.szDBFAchievement);
-	}
-	public DBF GetCollection(Argu GUID)
-	{
-		return m_DBF.Get(GameDefine.szDBFCollection, GUID);
-	}
-	public DBFItor GetCollection()
-	{
-		return m_DBF.Get(GameDefine.szDBFCollection);
 	}
 	public DBF GetReward(Argu GUID)
 	{

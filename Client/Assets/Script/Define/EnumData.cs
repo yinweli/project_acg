@@ -121,7 +121,6 @@ public enum ENUM_Reward
 {
 	Null = 0, 
 	Looks, // 角色外觀
-	Upgrade, // 裝備升級
 	Currency, // 初始金錢
 	Battery, // 初始電池
 	LightAmmo, // 初始輕型彈藥

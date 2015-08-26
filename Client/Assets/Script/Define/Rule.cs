@@ -608,60 +608,17 @@ public class Rule
 
 		return Result;
 	}
-	// 拾取收集物品, 傳回完成收集編號, 等級列表
-	public static List<Tuple<int, int>> CollectionAdd(int iItems)
+	// 拾取收集物品, 傳回是否完成
+	public static bool CollectionAdd(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
-		List<Tuple<int, int>> Result = new List<Tuple<int, int>>();
+		DataCollection.pthis.Add(Weapon, iLevel, iIndex);
 
-		if(DataCollection.pthis.IsCollection(iItems) == false)
-			return Result;
+		bool bResult = true;
 
-		if(DataCollection.pthis.Data.Contains(iItems))
-			return Result;
+		for(int iPos = 1; iPos <= GameDefine.iMaxCollectionCount; ++iPos)
+			bResult &= DataCollection.pthis.IsExist(Weapon, iLevel, iPos);
 
-		DataCollection.pthis.Data.Add(iItems);
-
-		DBFItor Itor = GameDBF.pthis.GetCollection();
-
-		while(Itor.IsEnd() == false)
-		{
-			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
-
-			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
-			{
-				List<int> Items = CollectionIndex(System.Convert.ToInt32(DBFTemp.GUID), iLevel);
-
-				if(Items.Contains(iItems) == false)
-					continue;
-
-				if(DataCollection.pthis.IsComplete(Items) == false)
-					continue;
-
-				Result.Add(new Tuple<int, int>(System.Convert.ToInt32(DBFTemp.GUID), iLevel));
-			}//for
-
-			Itor.Next();
-		}//while
-
-		return Result;
-	}
-	// 取得收集物品編號列表
-	public static List<int> CollectionIndex(int iGUID, int iLevel)
-	{
-		List<int> Result = new List<int>();
-		
-		if(iGUID <= 0)
-			return Result;
-		
-		if(iLevel <= 0)
-			return Result;
-		
-		int iIndex = ((iGUID - 1) * GameDefine.iMaxCollectionLv * GameDefine.iMaxCollectionCount) + ((iLevel - 1) * GameDefine.iMaxCollectionCount) + 1;
-		
-		for(int iCount = 0; iCount < GameDefine.iMaxCollectionCount; ++iCount)
-			Result.Add(iIndex + iCount);
-		
-		return Result;
+		return bResult;
 	}
 	// 給予獎勵
 	public static void GetReward(int iReward)
@@ -679,13 +636,6 @@ public class Rule
 			DataReward.pthis.MemberInits.Add(DBFTemp.Value);
 		}//if
 		
-		if(emReward == ENUM_Reward.Upgrade)
-		{
-			int iTemp = DataReward.pthis.WeaponLevel.ContainsKey(DBFTemp.Value) ? DataReward.pthis.WeaponLevel[DBFTemp.Value] : 0;
-			
-			DataReward.pthis.WeaponLevel[DBFTemp.Value] = iTemp + 1;
-		}//if
-		
 		if(emReward == ENUM_Reward.Currency)
 			DataReward.pthis.iInitCurrency += DBFTemp.Value;
 		
@@ -700,6 +650,16 @@ public class Rule
 		
 		if(emReward == ENUM_Reward.Bomb)
 			DataReward.pthis.iInitBomb += DBFTemp.Value;
+	}
+	// 增加武器等級
+	public static void AddWeaponLevel(ENUM_Weapon emWeapon)
+	{
+		int iWeapon = (int)emWeapon;
+
+		if(DataReward.pthis.WeaponLevel.ContainsKey(iWeapon))
+			DataReward.pthis.WeaponLevel[iWeapon]++;
+		else
+			DataReward.pthis.WeaponLevel[iWeapon] = 1;
 	}
 	// 取得武器等級
 	public static int GetWeaponLevel(ENUM_Weapon emWeapon)

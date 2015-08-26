@@ -6,9 +6,10 @@ using System.Collections.Generic;
 [CustomEditor(typeof(DataCollection))]
 public class EditorDataCollection : Editor
 {
-	private int Collection = 0;
-
-	private bool ShowData = false;
+	private ENUM_Weapon WeaponShow = ENUM_Weapon.Null;
+	private ENUM_Weapon Weapon = ENUM_Weapon.Null;
+	private int Level = 0;
+	private int Index = 0;
 	
 	private DataCollection Target
 	{
@@ -27,32 +28,38 @@ public class EditorDataCollection : Editor
 			GUILayout.BeginHorizontal("box");
 			
 			if(GUILayout.Button("Set", GUILayout.Width(60.0f)))
-				Target.Data.Add(Collection);
+				Target.Add(Weapon, Level, Index);
 
 			if(GUILayout.Button("Del", GUILayout.Width(60.0f)))
-				Target.Data.Remove(Collection);
-			
-			Collection = EditorGUILayout.IntField(Collection, GUILayout.Width(150.0f));
+				Target.Del(Weapon, Level, Index);
+
+			Weapon = (ENUM_Weapon)EditorGUILayout.EnumPopup(Weapon, GUILayout.Width(150.0f));
+			Level = EditorGUILayout.IntField(Level, GUILayout.Width(60.0f));
+			Index = EditorGUILayout.IntField(Index, GUILayout.Width(60.0f));
 			
 			GUILayout.EndHorizontal();
 		}
 
-		ShowData = EditorGUILayout.Toggle("Show Collection", ShowData);
-		
-		if(ShowData == false)
-			return;
-		
 		// show content
-		{
-			GUILayout.BeginHorizontal("box");
-			GUILayout.Label("ItemID", GUILayout.Width(100.0f));
-			GUILayout.EndHorizontal();
-		}
+		WeaponShow = (ENUM_Weapon)EditorGUILayout.EnumPopup(WeaponShow, GUILayout.Width(150.0f));
 
-		foreach(int Itor in Target.Data)
+		GUILayout.BeginHorizontal("box");
+		GUILayout.Label("Level", GUILayout.Width(100.0f));
+		GUILayout.Label("A", GUILayout.Width(60.0f));
+		GUILayout.Label("B", GUILayout.Width(60.0f));
+		GUILayout.Label("C", GUILayout.Width(60.0f));
+		GUILayout.Label("D", GUILayout.Width(60.0f));
+		GUILayout.Label("E", GUILayout.Width(60.0f));
+		GUILayout.EndHorizontal();
+
+		for(int iLv = 1; iLv <= GameDefine.iMaxCollectionLv; ++iLv)
 		{
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label(Itor.ToString(), GUILayout.Width(100.0f));
+			GUILayout.Label(iLv.ToString(), GUILayout.Width(100.0f));
+
+			for(int iID = 1; iID <= GameDefine.iMaxCollectionCount; ++iID)
+				GUILayout.Label(Target.IsExist(WeaponShow, iLv, iID) ? "O" : "X", GUILayout.Width(60.0f));
+
 			GUILayout.EndHorizontal();
 		}//for
 	}
