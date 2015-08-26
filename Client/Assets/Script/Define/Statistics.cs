@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class PickupData
+public class StatPickup
 {
 	public int iInitial = 0; // 初始值
 	public int iAvailable = 0; // 可獲得值
@@ -12,11 +12,11 @@ public class PickupData
 	public int iUsed = 0; // 使用值
 }
 
-public class PickupStat : MonoBehaviour
+public class Statistics : MonoBehaviour
 {
-	static public PickupStat pthis = null;
+	static public Statistics pthis = null;
 
-	public List<PickupData> Data = new List<PickupData>(); // 資源列表
+	public List<StatPickup> Data = new List<StatPickup>(); // 資源列表
 
 	void Awake()
 	{
@@ -28,7 +28,7 @@ public class PickupStat : MonoBehaviour
 
 		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Pickup)))
 		{
-			PickupData Temp = new PickupData();
+			StatPickup Temp = new StatPickup();
 
 			switch((ENUM_Pickup)Itor)
 			{

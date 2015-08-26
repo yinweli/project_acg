@@ -3,14 +3,14 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(PickupStat	))]
-public class EditorPickupStat : Editor
+[CustomEditor(typeof(Statistics	))]
+public class EditorStatistics : Editor
 {
-	private PickupStat Target
+	private Statistics Target
 	{
 		get
 		{
-			return (PickupStat)target;
+			return (Statistics)target;
 		}
 	}
 	public override void OnInspectorGUI()
