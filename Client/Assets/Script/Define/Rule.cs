@@ -608,52 +608,6 @@ public class Rule
 
 		return Result;
 	}
-	// 取得進行中成就資訊
-	public static AchievementInfo AchievementRunning(ENUM_Achievement emAchievement)
-	{
-		DBFAchievement DBFTemp = (DBFAchievement)GameDBF.pthis.GetAchievement(emAchievement);
-		
-		if(DBFTemp == null)
-			return new AchievementInfo();
-				
-		int iAchievement = (int)emAchievement;
-		int iValue = DataAchievement.pthis.Data.ContainsKey(iAchievement) ? DataAchievement.pthis.Data[iAchievement] : 0;
-
-		if(DBFTemp.Lv1Value > iValue || DBFTemp.MaxLevel <= 1)
-			return new AchievementInfo(1, iValue);
-		
-		if(DBFTemp.Lv2Value > iValue || DBFTemp.MaxLevel <= 2)
-			return new AchievementInfo(2, iValue);
-		
-		if(DBFTemp.Lv3Value > iValue || DBFTemp.MaxLevel <= 3)
-			return new AchievementInfo(3, iValue);
-		
-		if(DBFTemp.Lv4Value > iValue || DBFTemp.MaxLevel <= 4)
-			return new AchievementInfo(4, iValue);
-		
-		if(DBFTemp.Lv5Value > iValue || DBFTemp.MaxLevel <= 5)
-			return new AchievementInfo(5, iValue);
-
-		return new AchievementInfo(6, iValue);
-	}
-	// 取得收集物品編號列表
-	public static List<int> CollectionIndex(int iGUID, int iLevel)
-	{
-		List<int> Result = new List<int>();
-
-		if(iGUID <= 0)
-			return Result;
-
-		if(iLevel <= 0)
-			return Result;
-
-		int iIndex = ((iGUID - 1) * GameDefine.iMaxCollectionLv * GameDefine.iMaxCollectionCount) + ((iLevel - 1) * GameDefine.iMaxCollectionCount) + 1;
-
-		for(int iCount = 0; iCount < GameDefine.iMaxCollectionCount; ++iCount)
-			Result.Add(iIndex + iCount);
-
-		return Result;
-	}
 	// 拾取收集物品, 傳回完成收集編號, 等級列表
 	public static List<Tuple<int, int>> CollectionAdd(int iItems)
 	{
@@ -691,30 +645,23 @@ public class Rule
 
 		return Result;
 	}
-	// 取得進行中收集資訊
-	public static CollectionInfo CollectionRunning(int iGUID)
+	// 取得收集物品編號列表
+	public static List<int> CollectionIndex(int iGUID, int iLevel)
 	{
-		DBFCollection DBFTemp = (DBFCollection)GameDBF.pthis.GetCollection(iGUID);
+		List<int> Result = new List<int>();
 		
-		if(DBFTemp == null)
-			return new CollectionInfo();
-
-		for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
-		{
-			List<int> Items = CollectionIndex(iGUID, iLevel);
-
-			if(DataCollection.pthis.IsComplete(Items))
-				continue;
-
-			CollectionInfo Result = new CollectionInfo();
-
-			Result.iLevel = iLevel;
-			Result.Items = DataCollection.pthis.GetComplete(Items);
-			
+		if(iGUID <= 0)
 			return Result;
-		}//for
-
-		return new CollectionInfo();
+		
+		if(iLevel <= 0)
+			return Result;
+		
+		int iIndex = ((iGUID - 1) * GameDefine.iMaxCollectionLv * GameDefine.iMaxCollectionCount) + ((iLevel - 1) * GameDefine.iMaxCollectionCount) + 1;
+		
+		for(int iCount = 0; iCount < GameDefine.iMaxCollectionCount; ++iCount)
+			Result.Add(iIndex + iCount);
+		
+		return Result;
 	}
 	// 給予獎勵
 	public static void GetReward(int iReward)

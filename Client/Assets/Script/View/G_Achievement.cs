@@ -7,20 +7,18 @@ public class G_Achievement : MonoBehaviour
 
     public UISprite pS_Icon;
     public UISprite pS_Check;
-    public UILabel pLb_Reward;
 
-    public UILabel pLb_NowProgress;
-    public UILabel pLb_Lv;
+	public UILabel pLb_Name;
+	public UILabel pLb_Progress;
+	public UILabel pLb_Desc;
+	public UILabel pLb_Effect;
 
-    public UILabel pLb_Src;
-
-	// Use this for initialization
-	void Start () {
-	
+	void Start()
+	{
+		Refresh();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void Refresh()
+	{
+
 	}
 }

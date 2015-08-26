@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -147,17 +148,6 @@ public class AchievementInfo
 		iLevel = level;
 		iValue = value;
 	}
-	public bool Empty()
-	{
-		return iLevel <= 0;
-	}
-}
-
-public class CollectionInfo
-{
-	public int iLevel = 0; // 收集等級
-	public List<int> Items = new List<int>(); // 已收集物品列表
-
 	public bool Empty()
 	{
 		return iLevel <= 0;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using LibCSNStandard;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DBFAchievement : DBF
 {
@@ -36,5 +37,19 @@ public class DBFAchievement : DBF
 		case 6: return Lv6Value;
 		default: return 0;
 		}//switch
+	}
+	// 取得條件值與獎勵編號列表
+	public List<Tuple<int, int>> ToList()
+	{
+		List<Tuple<int, int>> Result = new List<Tuple<int, int>>();
+
+		Result.Add(new Tuple<int, int>(Lv1Value, Lv1Reward));
+		Result.Add(new Tuple<int, int>(Lv2Value, Lv2Reward));
+		Result.Add(new Tuple<int, int>(Lv3Value, Lv3Reward));
+		Result.Add(new Tuple<int, int>(Lv4Value, Lv4Reward));
+		Result.Add(new Tuple<int, int>(Lv5Value, Lv5Reward));
+		Result.Add(new Tuple<int, int>(Lv6Value, Lv6Reward));
+
+		return Result;
 	}
 }

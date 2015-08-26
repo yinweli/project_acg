@@ -10,7 +10,7 @@ public class EditorDataReward : Editor
 	private int MemberInits = 0;
 	private int WeaponLevel = 0;
 	private ENUM_Weapon WeaponType = ENUM_Weapon.Null;
-	
+
 	private DataReward Target
 	{
 		get
