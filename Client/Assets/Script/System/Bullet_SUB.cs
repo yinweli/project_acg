@@ -17,16 +17,17 @@ public class Bullet_SUB : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, false);
+            Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 			AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
-			
+
+			if (pEnemy)
+			{
+				pEnemy.AddHP(-Damage.Item1, Damage.Item2);
+				Statistics.pthis.RecordDamage(ENUM_Damage.SUB, Damage.Item1);
+			}
+
             if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
                 GroundHurt(other.gameObject.transform.position, Rule.UpgradeWeaponSUB());
-            else if (pEnemy)
-            {
-                pEnemy.AddHP(-Damage.Item1, Damage.Item2);
-                Statistics.pthis.RecordDamage(ENUM_Damage.SUB, Damage.Item1);
-            }
             else
                 Destroy(gameObject);
         }
