@@ -52,6 +52,7 @@ public class BtnRun : MonoBehaviour
         if (GetComponent<BoxCollider2D>())
             GetComponent<BoxCollider2D>().enabled = true;
         pBg.color = Color.white;
+        bIsRun = false;
     }
     // ------------------------------------------------------------------
     public bool CheckCanMove()
