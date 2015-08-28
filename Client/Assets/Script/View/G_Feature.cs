@@ -65,6 +65,7 @@ public class G_Feature : MonoBehaviour
             ObjHand[i] = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[i].iEquip);
 
             // 顯示升級.
+            NGUITools.PlaySound(Resources.Load("Sound/FX/LevelUp") as AudioClip);
             ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(DataPlayer.pthis.MemberParty[i].iLiveStage);
             yield return new WaitForSeconds(0.5f);
             ObjGroup[i].GetComponent<G_ListRole>().ChangeLevel(DataPlayer.pthis.MemberParty[i].iLiveStage + 1);
