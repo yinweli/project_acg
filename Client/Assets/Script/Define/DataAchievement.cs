@@ -55,6 +55,13 @@ public class DataAchievement : MonoBehaviour
 		
 		return true;
 	}
+	// 取得成就值
+	public int GetValue(ENUM_Achievement emAchievement)
+	{
+		int iGUID = (int)emAchievement;
+
+		return Data.ContainsKey(iGUID) ? Data[iGUID] : 0;
+	}
 	// 清除單輪資料
 	public void ClearSingle()
 	{

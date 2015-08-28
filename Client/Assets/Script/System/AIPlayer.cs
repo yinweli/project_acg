@@ -188,6 +188,7 @@ public class AIPlayer : MonoBehaviour
         {
             ObjMonster.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageShield, false);
             ObjShield.GetComponent<Shield>().CostShield();
+			Statistics.pthis.RecordDamage(ENUM_Damage.Shield, GameDefine.iDamageShield);
         }
 	}
 	// ------------------------------------------------------------------

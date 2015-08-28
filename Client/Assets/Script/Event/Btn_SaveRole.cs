@@ -19,6 +19,7 @@ public class Btn_SaveRole : MonoBehaviour
         {
             NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
             PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
+			Statistics.pthis.RecordResource(ENUM_Pickup.Member, 1);
 			GoogleAnalytics.pthis.LogEvent("Count", "Save Member", "", 0);
             if (DataGame.pthis.PickupList[iItemID] != null)
                 DataGame.pthis.PickupList[iItemID].bPickup = true;

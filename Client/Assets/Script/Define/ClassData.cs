@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using LibCSNStandard;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -133,34 +134,32 @@ public class Member
 	/* [    ] */ public int iAddDamage = 0; // 增傷
 }
 
-public class AchievementInfo
+public class Collection
 {
-	public int iLevel = 0; // 成就等級
-	public int iValue = 0; // 目前值
+	public ENUM_Weapon Weapon = ENUM_Weapon.Null; // 武器列舉
+	public int iLevel = 0; // 武器等級
+	public int iIndex = 0; // 索引編號
 
-	public AchievementInfo()
+	public Collection(string data)
 	{
+		string[] szTemp = data.Split(new char[] { '_' });
 
+		if(szTemp.Length >= 3)
+		{
+			Weapon = (ENUM_Weapon)System.Convert.ToInt32(szTemp[0]);
+			iLevel = System.Convert.ToInt32(szTemp[1]);
+			iIndex = System.Convert.ToInt32(szTemp[2]);
+		}//if
 	}
-	public AchievementInfo(int level, int value)
+	public Collection(ENUM_Weapon weapon, int lv, int id)
 	{
-		iLevel = level;
-		iValue = value;
+		Weapon = weapon;
+		iLevel = lv;
+		iIndex = id;
 	}
-	public bool Empty()
+	public string ToStringData()
 	{
-		return iLevel <= 0;
-	}
-}
-
-public class CollectionInfo
-{
-	public int iLevel = 0; // 收集等級
-	public List<int> Items = new List<int>(); // 已收集物品列表
-
-	public bool Empty()
-	{
-		return iLevel <= 0;
+		return (int)Weapon + "_" + iLevel + "_" + iIndex;
 	}
 }
 
@@ -260,7 +259,7 @@ public class SaveAchievement
 
 public class SaveCollection
 {
-	public int[] Data = new int[0]; // 收集列表
+	public string[] Data = new string[0]; // 收集列表
 }
 
 public class SaveReward

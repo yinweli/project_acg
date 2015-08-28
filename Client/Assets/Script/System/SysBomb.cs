@@ -23,7 +23,10 @@ public class SysBomb : MonoBehaviour
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
             if (itor.Key && itor.Key.GetComponent<AIEnemy>())
+			{
                 itor.Key.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, GameDefine.iDamageBomb);
+			}//if
         }
         SysMain.pthis.SaveGame();
     }

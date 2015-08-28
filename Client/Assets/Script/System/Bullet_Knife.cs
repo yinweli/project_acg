@@ -13,7 +13,10 @@ public class Bullet_Knife : MonoBehaviour
 			Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 			
 			if (other.gameObject.GetComponent<AIEnemy>())
+			{
 				other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Knife, Damage.Item1);
+			}//if
 
 			Destroy(gameObject);
 		}        

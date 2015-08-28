@@ -9,40 +9,21 @@ public class DataCollection : MonoBehaviour
 	static public DataCollection pthis = null;
 	
 	/* Save */
-	public HashSet<int> Data = new HashSet<int>(); // 收集列表
-
-	/* Not Save */
-	public HashSet<int> Collection = new HashSet<int>(); // 收集物品列表, 用來比對物品是否可以收集
+	public List<Collection> Data = new List<Collection>(); // 收集列表
 	
 	void Awake()
 	{
 		pthis = this;
-	}
-	void Start()
-	{
-		DBFItor Itor = GameDBF.pthis.GetCollection();
-		
-		while(Itor.IsEnd() == false)
-		{
-			DBFCollection DBFTemp = (DBFCollection)Itor.Data();
-			
-			for(int iLevel = GameDefine.iMinCollectionLv; iLevel <= GameDefine.iMaxCollectionLv; ++iLevel)
-			{
-				foreach(int ItorItems in Rule.CollectionIndex(System.Convert.ToInt32(DBFTemp.GUID), iLevel))
-					Collection.Add(ItorItems);
-			}//for
-			
-			Itor.Next();
-		}//while
-
-		Debug.Log("Collection list have " + Collection.Count + " items");
 	}
 	// 存檔.
 	public void Save()
 	{
 		SaveCollection Temp = new SaveCollection();
 		
-		Temp.Data = Data.ToList().ToArray();
+		Temp.Data = new string[Data.Count];
+
+		for(int iPos = 0; iPos < Data.Count; ++iPos)
+			Temp.Data[iPos] = Data[iPos].ToStringData();
 		
 		PlayerPrefs.SetString(GameDefine.szSaveCollection, Json.ToString(Temp));
 	}
@@ -57,38 +38,54 @@ public class DataCollection : MonoBehaviour
 		if(Temp == null)
 			return false;
 		
-		foreach(int Itor in Temp.Data)
-			Data.Add(Itor);
+		foreach(string Itor in Temp.Data)
+			Data.Add(new Collection(Itor));
 
 		return true;
 	}
-	// 檢查列表內物品是否都收集了
-	public bool IsComplete(List<int> Items)
+	// 新增收集
+	public void Add(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
-		bool bResult = true;
+		if(Weapon == ENUM_Weapon.Count)
+			return;
 
-		foreach(int Itor in Items)
-			bResult &= Data.Contains(Itor);
+		if(Weapon == ENUM_Weapon.Count)
+			return;
 
-		return bResult;
+		if(iLevel <= 0 || iLevel > GameDefine.iMaxCollectionLv)
+			return;
+
+		if(iIndex <= 0 || iIndex > GameDefine.iMaxCollectionCount)
+			return;
+
+		Data.Add(new Collection(Weapon, iLevel, iIndex));
 	}
-	// 取得比對後已收集的物品列表
-	public List<int> GetComplete(List<int> Items)
+	// 刪除收集
+	public void Del(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
-		List<int> Result = new List<int>();
+		string szTemp = (new Collection(Weapon, iLevel, iIndex)).ToStringData();
 
-		foreach(int Itor in Items)
+		for(int iPos = 0; iPos < Data.Count; ++iPos)
 		{
-			if(Data.Contains(Itor))
-				Result.Add(Itor);
+			if(Data[iPos].ToStringData() == szTemp)
+			{
+				Data.RemoveAt(iPos);
+				return;
+			}//if
+		}//for
+	}
+	// 檢查收集是否存在
+	public bool IsExist(ENUM_Weapon Weapon, int iLevel, int iIndex)
+	{
+		string szTemp = (new Collection(Weapon, iLevel, iIndex)).ToStringData();
+
+		foreach(Collection Itor in Data)
+		{
+			if(Itor.ToStringData() == szTemp)
+				return true;
 		}//for
 
-		return Result;
-	}
-	// 檢查物品是否存在收集列表中
-	public bool IsCollection(int iItems)
-	{
-		return Collection.Contains(iItems);
+		return false;
 	}
 	// 清除資料
 	public void Clear()

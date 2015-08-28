@@ -87,6 +87,7 @@ public class AIEnemy : MonoBehaviour
 
 				fBurnTime = Result.Item2;
 				AddHP(-Result.Item1, false);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Light, Result.Item1);
 
 				// 播放燃燒動畫
 				if(Burn == null)
