@@ -25,9 +25,12 @@ public class SysBomb : MonoBehaviour
             if (itor.Key && itor.Key.GetComponent<AIEnemy>())
 			{
                 itor.Key.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
-				Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, GameDefine.iDamageBomb);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, 0, GameDefine.iDamageBomb);
 			}//if
-        }
+        }//for
+
+		Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, 1, 0);
+
         SysMain.pthis.SaveGame();
     }
 }
