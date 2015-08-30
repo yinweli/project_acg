@@ -35,7 +35,7 @@ public class G_Achievement : MonoBehaviour
 		pS_Check.enabled = bComplete;
 		pLb_Name.text = GameDBF.pthis.GetLanguage(DBFTemp.Name) + " Lv " + iLevel;
 		pLb_Progress.text = bComplete ? "---" : iValueNow + " / " + iValueNeed;
-		pLb_Desc.text = GameDBF.pthis.GetLanguage(7000 + (int)pAchieve);
+		pLb_Desc.text = GameDBF.pthis.GetLanguage(8000 + (int)pAchieve);
 
 		DBFReward DBFTemp2 = (DBFReward)GameDBF.pthis.GetReward(DBFTemp.GetReward(iLevel));
 
@@ -43,9 +43,9 @@ public class G_Achievement : MonoBehaviour
 			return;
 
 		if(DBFTemp2.Reward == (int)ENUM_Reward.Looks)
-			pLb_Effect.text = GameDBF.pthis.GetLanguage(8000 + DBFTemp2.Reward);
+			pLb_Effect.text = GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Reward);
 		else
-			pLb_Effect.text = string.Format(GameDBF.pthis.GetLanguage(8000 + DBFTemp2.Reward), DBFTemp2.Value);
+			pLb_Effect.text = string.Format(GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Reward), DBFTemp2.Value);
 
 	}
 }
