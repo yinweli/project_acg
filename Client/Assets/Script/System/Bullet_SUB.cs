@@ -39,6 +39,9 @@ public class Bullet_SUB : MonoBehaviour
         if(GetComponent<BoxCollider2D>())
             GetComponent<BoxCollider2D>().enabled = false;
 
+        if (GetComponent<Animator>())
+            GetComponent<Animator>().Play("Grenade");
+
         // 沒有可作為目標的怪物.
         if (SysMain.pthis.AtkEnemy.Count <= 0)
             return;
@@ -46,9 +49,6 @@ public class Bullet_SUB : MonoBehaviour
         pAI.bCanMove = false;
         pAI.pRander.material = Resources.Load("Sprite") as Material;
         gameObject.transform.localScale = new Vector3(GameDefine.fSUBArea / 0.1f, GameDefine.fSUBArea / 0.1f, 1);
-
-        if (GetComponent<Animator>())
-            GetComponent<Animator>().Play("Grenade");
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
