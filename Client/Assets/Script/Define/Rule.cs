@@ -618,7 +618,7 @@ public class Rule
 			{
 				Tuple<ENUM_Achievement, int> ResultTemp = new Tuple<ENUM_Achievement, int>(emAchievement, iLevel);
 
-				if(iValue >= DBFTemp.GetValue(iLevel))
+				if(iValue < DBFTemp.GetValue(iLevel))
 					ResultProgress.Add(ResultTemp);
 				else
 					ResultFinished.Add(ResultTemp);
