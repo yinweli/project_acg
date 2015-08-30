@@ -601,7 +601,7 @@ public class Rule
 		return Result;
 	}	
 	// 取得提供給介面顯示用的成就列表(包含成就列舉, 等級)
-	public List<Tuple<ENUM_Achievement, int>> AchievementShow()
+	public static List<Tuple<ENUM_Achievement, int>> AchievementShow()
 	{
 		List<Tuple<ENUM_Achievement, int>> ResultProgress = new List<Tuple<ENUM_Achievement, int>>();
 		List<Tuple<ENUM_Achievement, int>> ResultFinished = new List<Tuple<ENUM_Achievement, int>>();
