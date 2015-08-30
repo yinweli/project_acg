@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using LibCSNStandard;
 
 public class P_Book : MonoBehaviour 
 {
@@ -57,14 +58,17 @@ public class P_Book : MonoBehaviour
     {
         ClearNowPage();
         SetBg(0);
-       
-        for (int i = 1; i < (int)ENUM_Achievement.Count; i++)
+        
+        foreach(Tuple<ENUM_Achievement, int> itor in Rule.AchievementShow())
         {
             GameObject pObj = UITool.pthis.CreateUI(pGridAchieve.gameObject.gameObject, "Prefab/G_Achievement");
             pObj.name = "";
             G_Achievement pScript = pObj.GetComponent<G_Achievement>();
             if (pScript)
-                pScript.pAchieve = (ENUM_Achievement)i;
+            {
+                pScript.pAchieve = itor.Item1;
+                pScript.iLevel = itor.Item2;
+            }
 
             NowObj.Add(pObj);
         }
