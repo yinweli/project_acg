@@ -36,6 +36,8 @@ public class Bullet_SUB : MonoBehaviour
     // 範圍傷害.
     void GroundHurt(Vector3 vPos, int iDamage)
     {
+        pAI.bCanMove = false;
+
         if(GetComponent<BoxCollider2D>())
             GetComponent<BoxCollider2D>().enabled = false;
 
@@ -45,8 +47,7 @@ public class Bullet_SUB : MonoBehaviour
         // 沒有可作為目標的怪物.
         if (SysMain.pthis.AtkEnemy.Count <= 0)
             return;
-
-        pAI.bCanMove = false;
+        
         pAI.pRander.material = Resources.Load("Sprite") as Material;
         gameObject.transform.localScale = new Vector3(GameDefine.fSUBArea / 0.1f, GameDefine.fSUBArea / 0.1f, 1);
 
