@@ -11,13 +11,23 @@ public class StatPickup
 	public int iObtain = 0; // 已獲得值
 	public int iUsed = 0; // 使用值
 }
+public class StatDamage
+{
+	public int iBullet = 0; // 子彈數
+	public int iDamage = 0; // 傷害值
+
+	public float Average()
+	{
+		return iBullet > 0 ? iDamage / iBullet : 0;
+	}
+}
 
 public class Statistics : MonoBehaviour
 {
 	static public Statistics pthis = null;
 
 	public List<StatPickup> DataResource = new List<StatPickup>(); // 拾取資源列表
-	public Dictionary<ENUM_Damage, int> DataDamage = new Dictionary<ENUM_Damage, int>(); // 傷害統計列表
+	public Dictionary<ENUM_Damage, StatDamage> DataDamage = new Dictionary<ENUM_Damage, StatDamage>(); // 傷害統計列表
 
 	void Awake()
 	{
@@ -71,16 +81,19 @@ public class Statistics : MonoBehaviour
 		DataDamage.Clear();
 
 		foreach(int Itor in System.Enum.GetValues(typeof(ENUM_Damage)))
-			DataDamage.Add((ENUM_Damage)Itor, 0);
+			DataDamage.Add((ENUM_Damage)Itor, new StatDamage());
 	}
-	public void RecordDamage(ENUM_Damage emDamage, int iValue)
+	public void RecordDamage(ENUM_Damage emDamage, int iBullet, int iDamage)
 	{
-		if(iValue <= 0)
-			return;
-
 		if(DataDamage.ContainsKey(emDamage))
-			DataDamage[emDamage] += iValue;
+		{
+			DataDamage[emDamage].iBullet += iBullet;
+			DataDamage[emDamage].iDamage += iDamage;
+		}
 		else
-			DataDamage[emDamage] = iValue;
+		{
+			DataDamage[emDamage].iBullet = iBullet;
+			DataDamage[emDamage].iDamage = iDamage;
+		}//if
 	}
 }

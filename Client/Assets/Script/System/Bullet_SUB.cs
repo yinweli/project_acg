@@ -23,7 +23,7 @@ public class Bullet_SUB : MonoBehaviour
 			if (pEnemy)
 			{
 				pEnemy.AddHP(-Damage.Item1, Damage.Item2);
-				Statistics.pthis.RecordDamage(ENUM_Damage.SUB, Damage.Item1);
+				Statistics.pthis.RecordDamage(ENUM_Damage.SUB, 1, Damage.Item1);
 			}
 
             if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
@@ -59,7 +59,7 @@ public class Bullet_SUB : MonoBehaviour
             if (fDisObj < GameDefine.fSUBArea && itor.Key && itor.Key.GetComponent<AIEnemy>() && itor.Key.GetComponent<AIEnemy>().iHP > 0)
             {
                 itor.Key.GetComponent<AIEnemy>().AddHP(-iDamage, false);
-                Statistics.pthis.RecordDamage(ENUM_Damage.SUB, iDamage);
+                Statistics.pthis.RecordDamage(ENUM_Damage.SUB, 0, iDamage);
             }
         }        
     }

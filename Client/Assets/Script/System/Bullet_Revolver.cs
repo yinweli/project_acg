@@ -29,7 +29,7 @@ public class Bullet_Revolver : MonoBehaviour
 				int iDamage = Rule.UpgradeWeaponRevolver(Damage.Item1, iCountMax - iCount);
 
 				pEnemy.AddHP(-iDamage, Damage.Item2);
-				Statistics.pthis.RecordDamage(ENUM_Damage.Revolver, iDamage);
+				Statistics.pthis.RecordDamage(ENUM_Damage.Revolver, FirstHit ? 1 : 0, iDamage);
 
 				if(FirstHit && Damage.Item2)
 					pEnemy.HitSfx("G_Crit");
