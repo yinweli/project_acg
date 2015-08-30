@@ -159,11 +159,9 @@ public class G_Upgrade : MonoBehaviour
                 pS_Collect[i].color = ColorLv[iNextLv];
 
             if (iLv < GameDefine.iMaxCollectionLv && !DataCollection.pthis.IsExist(pWeapon, iNextLv, i + 1))
-            {
-                
+            {                
                 pS_CollectIcon[i].color = Color.gray;
                 pS_Collect[i].color = pS_Collect[i].color * Color.gray;
-                //pS_Collect[i].color = new Color(pS_Collect[i].color.r * 0.5f, pS_Collect[i].color.g * 0.5f, pS_Collect[i].color.b * 0.5f);
                 pLb_Collect[i].color = Color.gray;                
             }
             else
