@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 3944e0b17f3afb44dbdfde1667545a58
+timeCreated: 1441037663
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: M_000_eye
@@ -55,6 +57,24 @@ TextureImporter:
     21300100: M_000_50
     21300102: LED_001
     21300104: LED_000
+    21300106: M_006_b00
+    21300108: M_006_b01
+    21300110: M_006_b02
+    21300112: M_006_b03
+    21300114: M_006_b04
+    21300116: M_007_b00
+    21300118: M_007_b03
+    21300120: M_007_b04
+    21300122: M_007_b05
+    21300124: M_007_b06
+    21300126: M_007_b07
+    21300128: M_007_b08
+    21300130: M_006_b05
+    21300132: M_007_b7
+    21300134: M_007_b8
+    21300136: M_007_b10
+    21300138: M_007_b11
+    21300140: M_007_b12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -627,6 +647,186 @@ TextureImporter:
         y: 351
         width: 50
         height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_006_b00
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 119
+        width: 71
+        height: 56
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 0, z: 0, w: 0}
+    - name: M_006_b01
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 81
+        width: 71
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_006_b02
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 153
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_006_b03
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 95
+        width: 29
+        height: 75
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_006_b04
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 134
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b00
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 112
+        width: 63
+        height: 58
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b03
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 111
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b04
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 91
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b05
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 90
+        width: 21
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b06
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 142
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b07
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 86
+        width: 19
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b08
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 81
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_006_b05
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 124
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b7
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 103
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b8
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 89
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b10
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 89
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b11
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 414
+        width: 59
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: M_007_b12
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 126
+        width: 17
+        height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

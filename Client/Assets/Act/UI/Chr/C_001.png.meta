@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1439903699
+timeCreated: 1441038845
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -65,6 +65,12 @@ TextureImporter:
     21300116: T_015
     21300118: T_016
     21300120: T_017
+    21300122: A_001
+    21300124: A_002
+    21300126: A_003
+    21300128: A_004
+    21300130: A_005
+    21300132: A_006
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -640,83 +646,63 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_010
+    - name: A_001
       rect:
         serializedVersion: 2
-        x: 53
-        y: 109
-        width: 48
-        height: 48
+        x: 248
+        y: 117
+        width: 85
+        height: 109
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_011
+    - name: A_002
       rect:
         serializedVersion: 2
-        x: 103
-        y: 109
-        width: 48
-        height: 48
+        x: 337
+        y: 135
+        width: 76
+        height: 92
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_012
+    - name: A_003
       rect:
         serializedVersion: 2
-        x: 152
-        y: 109
-        width: 48
-        height: 48
+        x: 195
+        y: 162
+        width: 44
+        height: 21
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_013
+    - name: A_004
       rect:
         serializedVersion: 2
-        x: 201
-        y: 109
-        width: 48
-        height: 48
+        x: 195
+        y: 148
+        width: 17
+        height: 11
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_014
+    - name: A_005
       rect:
         serializedVersion: 2
-        x: 250
-        y: 109
-        width: 48
-        height: 48
+        x: 216
+        y: 145
+        width: 17
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_015
+    - name: A_006
       rect:
         serializedVersion: 2
-        x: 299
-        y: 109
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_016
-      rect:
-        serializedVersion: 2
-        x: 348
-        y: 109
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: T_017
-      rect:
-        serializedVersion: 2
-        x: 398
-        y: 109
-        width: 48
-        height: 48
+        x: 215
+        y: 127
+        width: 19
+        height: 17
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
