@@ -83,7 +83,7 @@ public class GameDefine
 	public const int iObjtDec = 2; // 物件遞減機率
 
 	public const int iAdsMoneyBase = 200; // 廣告影片贈送金錢基礎值
-	public const int iAdsMoneyAdd = 16; // 廣告影片贈送金錢增加值
+	public const int iAdsMoneyAdd = 8; // 廣告影片贈送金錢增加值
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPickupMember = 25; // 救援成員出現機率
