@@ -78,7 +78,6 @@ public class SysMain : MonoBehaviour
 		DataReward.pthis.Save();
 		DataEnemy.pthis.Save();
 		DataGame.pthis.Save();
-		DataMap.pthis.Save();
 		DataPlayer.pthis.Save();
 	}
     // ------------------------------------------------------------------
