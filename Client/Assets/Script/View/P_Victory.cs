@@ -5,9 +5,18 @@ using System.Collections.Generic;
 
 public class P_Victory : MonoBehaviour 
 {
+    static public P_Victory pthis = null;
+
+    public G_Feature pFeature = null;
+
     public GameObject[] ObjPage = new GameObject[3];
     public UILabel[] pLb = new UILabel[5];
-	
+    // ------------------------------------------------------------------
+    void Awake()
+    {
+        pthis = this;
+    }
+    // ------------------------------------------------------------------
     void Start()
     {
         SysUI.pthis.pVictory = this;
@@ -29,12 +38,12 @@ public class P_Victory : MonoBehaviour
         AudioCtrl.pthis.Victory();
         NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);
     }
-
+    // ------------------------------------------------------------------
     public void OnDestory()
     {
         AudioCtrl.pthis.pMusic.volume = 1f;
     }
-
+    // ------------------------------------------------------------------
     public void ChangePage(int iPage)
     {
         ObjPage[iPage].SetActive(false);

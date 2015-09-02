@@ -4,7 +4,7 @@ using System.Collections;
 public class Btn_ChrInfo : MonoBehaviour
 {
     public G_ListRole pData = null;
-
+    // ------------------------------------------------------------------
     void OnPress(bool bIsDown)
     {
         if (bIsDown && pData.pInfo)

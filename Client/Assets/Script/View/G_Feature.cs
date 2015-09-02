@@ -12,12 +12,12 @@ public class G_Feature : MonoBehaviour
 
     GameObject[] ObjGroup = null;
     GameObject[] ObjHand = null;
-
+    // ------------------------------------------------------------------
 	void Start()
 	{
 		BtnNext.isEnabled = false;
 	}
-
+    // ------------------------------------------------------------------
 	public void OpenPage()
     {
         ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count];
@@ -53,38 +53,50 @@ public class G_Feature : MonoBehaviour
 
         StartCoroutine(StartGain());
     }
-
+    // ------------------------------------------------------------------
+    public void DelChr(int index)
+    {
+        Destroy(ObjGroup[index]);
+        ObjGrid.GetComponent<UIGrid>().enabled = true;
+        ObjGrid.GetComponent<UIGrid>().Reposition();
+    }
+    // ------------------------------------------------------------------
     IEnumerator StartGain()
     {
         yield return new WaitForSeconds(0.5f);
 
         for (int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
         {
-            // 建立外觀.
-            GameObject ObjHuman = UITool.pthis.CreateRole(ObjGroup[i], DataPlayer.pthis.MemberParty[i].iLooks);
-            ObjHand[i] = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[i].iEquip);
+            G_ListRole pRole = ObjGroup[i].GetComponent<G_ListRole>();
 
             // 顯示升級.
             NGUITools.PlaySound(Resources.Load("Sound/FX/LevelUp") as AudioClip);
-            ObjGroup[i].GetComponent<G_ListRole>().ShowLevelUp(DataPlayer.pthis.MemberParty[i].iLiveStage);
+            pRole.ShowLevelUp(DataPlayer.pthis.MemberParty[i].iLiveStage);
             yield return new WaitForSeconds(0.5f);
-            ObjGroup[i].GetComponent<G_ListRole>().ChangeLevel(DataPlayer.pthis.MemberParty[i].iLiveStage + 1);
+            pRole.ChangeLevel(DataPlayer.pthis.MemberParty[i].iLiveStage + 1);
 
             // 給予角色取得的天賦.
             if (iFeature[i] != 0)
             {
                 yield return new WaitForSeconds(0.5f);
-                ObjGroup[i].GetComponent<G_ListRole>().ShowFeature(iFeature[i]);
+                pRole.ShowFeature(iFeature[i]);
             }
 
             // 給予角色取得的武器.
             if (iEquip[i] != 0)
             {                
                 yield return new WaitForSeconds(0.5f);
-                ObjGroup[i].GetComponent<G_ListRole>().ShowEquip(ObjHand[i], iEquip[i]);
-            }
+                pRole.ShowEquip(iEquip[i]);
+            }                        
             yield return new WaitForSeconds(0.5f);
         }
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
+            ObjGroup[i].GetComponent<G_ListRole>().ObjInfo.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < DataPlayer.pthis.MemberParty.Count; i++)
+            ObjGroup[i].GetComponent<G_ListRole>().ObjFire.SetActive(true);
 
 		BtnNext.isEnabled = true;
     }

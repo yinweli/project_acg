@@ -7,13 +7,30 @@ public class G_ListRole : MonoBehaviour
     public UILabel pLbLv = null;
     public G_Info pInfo = null;
 
+    public GameObject ObjHuman = null;
+    public GameObject ObjHand = null;
+
+    public GameObject ObjInfo = null;
+    public GameObject ObjFire = null;
+    // ------------------------------------------------------------------
     void Start()
     {
+        // 建立外觀.
+        ObjHuman = UITool.pthis.CreateRole(gameObject, DataPlayer.pthis.MemberParty[iPlayerID].iLooks);
+        ObjHand = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip);
+
         pLbLv.gameObject.SetActive(false);
         if (GetComponent<Animation>())
             GetComponent<Animation>().Stop();
     }
-
+    // ------------------------------------------------------------------
+    void Update()
+    {
+        // 檢查隊伍人數 如果只剩1人關閉開除按鈕.
+        if (DataPlayer.pthis.MemberParty.Count <= 1)
+            ObjFire.GetComponent<UIButton>().isEnabled = false;
+    }
+    // ------------------------------------------------------------------
     void OnPress(bool bIsDown)
     {
         if (bIsDown && pInfo)
@@ -27,7 +44,7 @@ public class G_ListRole : MonoBehaviour
             pInfo.gameObject.SetActive(false);
         }
     }
-
+    // ------------------------------------------------------------------
     public void ShowLevelUp(int iLv)
     {
         pLbLv.gameObject.SetActive(true);
@@ -35,27 +52,35 @@ public class G_ListRole : MonoBehaviour
             GetComponent<Animation>().Play();
         ChangeLevel(iLv);
     }
-
+    // ------------------------------------------------------------------
     public void ChangeLevel(int iLv)
     {
         pLbLv.text = "Lv " + iLv;
     }
-
+    // ------------------------------------------------------------------
     public void ShowFeature(int iFeature)
     {
         GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Feature");
         pObj.GetComponent<Lb_Feature>().SetFeature(iFeature);
     }
-
-    public void ShowEquip(GameObject pHand, int iEquip)
+    // ------------------------------------------------------------------
+    public void ShowEquip(int iEquip)
     {
         GameObject pObj = SysUI.pthis.CreateUI(gameObject, "Prefab/S_Weapon");
         pObj.transform.localPosition = new Vector3(0, -73, 0);
 
-        GameObject ObjWeapon = UITool.pthis.CreateUI(pHand, "Prefab/Weapon/" + (ENUM_Weapon)iEquip);
+        GameObject ObjWeapon = UITool.pthis.CreateUI(ObjHand, "Prefab/Weapon/" + (ENUM_Weapon)iEquip);
         SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
         foreach (SpriteRenderer pRender in p2DS)
             ToolKit.ChangeTo2DSprite(pRender);
+    }
+    // ------------------------------------------------------------------
+    public void Layoff()
+    {   
+        DataPlayer.pthis.MemberParty.RemoveAt(iPlayerID);
+        DataPlayer.pthis.Save();
+
+        P_Victory.pthis.pFeature.DelChr(iPlayerID);
     }
 }
