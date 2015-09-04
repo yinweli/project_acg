@@ -12,9 +12,18 @@ public class G_ListRole : MonoBehaviour
 
     public GameObject ObjInfo = null;
     public GameObject ObjFire = null;
+    public GameObject ObjFrame = null;
     // ------------------------------------------------------------------
     void Start()
     {
+        if (iPlayerID == -1)
+        {
+            ObjFrame.SetActive(true);
+            pLbLv.text = "Lv --";
+            GetComponent<BoxCollider2D>().enabled = false;
+            return;
+        }
+
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, DataPlayer.pthis.MemberParty[iPlayerID].iLooks);
         ObjHand = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip);

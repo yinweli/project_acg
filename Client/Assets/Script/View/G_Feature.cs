@@ -20,7 +20,7 @@ public class G_Feature : MonoBehaviour
     // ------------------------------------------------------------------
 	public void OpenPage()
     {
-        ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count];
+        ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count + 1];
         ObjHand = new GameObject[DataPlayer.pthis.MemberParty.Count];
         iFeature = new int[DataPlayer.pthis.MemberParty.Count];
         iEquip = new int[DataPlayer.pthis.MemberParty.Count];
@@ -33,8 +33,6 @@ public class G_Feature : MonoBehaviour
             ObjGroup[i].name = string.Format("Role{0:000}", i);
             ObjGroup[i].GetComponent<G_ListRole>().pInfo = pInfo;
             ObjGroup[i].GetComponent<G_ListRole>().iPlayerID = i;
-            
-            ObjGrid.GetComponent<UIGrid>().Reposition();
 
             if (!DataGame.pthis.bVictory)
             {
@@ -44,6 +42,12 @@ public class G_Feature : MonoBehaviour
 				iEquip[i] = Rule.GainEquip(i);
             }
         }
+
+        ObjGroup[DataPlayer.pthis.MemberParty.Count] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
+        ObjGroup[DataPlayer.pthis.MemberParty.Count].name = "AddRole";
+        ObjGroup[DataPlayer.pthis.MemberParty.Count].GetComponent<G_ListRole>().iPlayerID = -1;
+
+        ObjGrid.GetComponent<UIGrid>().Reposition();
 
 		DataGame.pthis.bVictory = true;
 
