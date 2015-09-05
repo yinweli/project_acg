@@ -51,4 +51,5 @@ public class UITool : MonoBehaviour {
     {
 		return NGUITools.AddChild(Parent, Resources.Load("Prefab/Chr/" + string.Format("Chr_{0:000}", iLooks)) as GameObject);
     }
+    // ------------------------------------------------------------------
 }

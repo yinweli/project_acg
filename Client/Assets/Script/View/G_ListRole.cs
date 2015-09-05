@@ -90,6 +90,7 @@ public class G_ListRole : MonoBehaviour
         DataPlayer.pthis.MemberParty.RemoveAt(iPlayerID);
         DataPlayer.pthis.Save();
 
-        P_Victory.pthis.pFeature.DelChr(iPlayerID);
+        if (P_Victory.pthis != null && P_Victory.pthis.pFeature != null)
+            P_Victory.pthis.pFeature.DelChr(iPlayerID);
     }
 }

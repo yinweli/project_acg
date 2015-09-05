@@ -10,8 +10,8 @@ public class G_Feature : MonoBehaviour
     public int[] iFeature = null;
     public int[] iEquip = null;
 
-    GameObject[] ObjGroup = null;
-    GameObject[] ObjHand = null;
+    GameObject[] ObjGroup = new GameObject[GameDefine.iMaxMemberParty];
+    GameObject ObjAddMember;
     // ------------------------------------------------------------------
 	void Start()
 	{
@@ -20,8 +20,7 @@ public class G_Feature : MonoBehaviour
     // ------------------------------------------------------------------
 	public void OpenPage()
     {
-        ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count + 1];
-        ObjHand = new GameObject[DataPlayer.pthis.MemberParty.Count];
+        ObjGroup = new GameObject[DataPlayer.pthis.MemberParty.Count];
         iFeature = new int[DataPlayer.pthis.MemberParty.Count];
         iEquip = new int[DataPlayer.pthis.MemberParty.Count];
 
@@ -43,9 +42,7 @@ public class G_Feature : MonoBehaviour
             }
         }
 
-        ObjGroup[DataPlayer.pthis.MemberParty.Count] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
-        ObjGroup[DataPlayer.pthis.MemberParty.Count].name = "AddRole";
-        ObjGroup[DataPlayer.pthis.MemberParty.Count].GetComponent<G_ListRole>().iPlayerID = -1;
+        RefreshMember();        
 
         ObjGrid.GetComponent<UIGrid>().Reposition();
 
@@ -58,11 +55,35 @@ public class G_Feature : MonoBehaviour
         StartCoroutine(StartGain());
     }
     // ------------------------------------------------------------------
+    public void AddChr(int index)
+    {
+        ObjGroup[index] = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
+        ObjGroup[index].name = string.Format("Role{0:000}", index);
+        ObjGroup[index].GetComponent<G_ListRole>().pInfo = pInfo;
+        ObjGroup[index].GetComponent<G_ListRole>().iPlayerID = index;
+
+        ObjGrid.GetComponent<UIGrid>().enabled = true;
+    }
+    // ------------------------------------------------------------------
     public void DelChr(int index)
     {
         Destroy(ObjGroup[index]);
+        RefreshMember();
+    }
+    // ------------------------------------------------------------------
+    public void RefreshMember()
+    {
+        if (ObjAddMember)
+            Destroy(ObjAddMember);
+
+        if (DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMemberParty)
+        {
+            ObjAddMember = UITool.pthis.CreateUI(ObjGrid, "Prefab/G_ListRole");
+            ObjAddMember.name = "AddRole";
+            ObjAddMember.GetComponent<G_ListRole>().iPlayerID = -1;
+        }
+
         ObjGrid.GetComponent<UIGrid>().enabled = true;
-        ObjGrid.GetComponent<UIGrid>().Reposition();
     }
     // ------------------------------------------------------------------
     IEnumerator StartGain()
