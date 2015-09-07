@@ -4,47 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-// 隨機方向類別
-public class RandDir
-{
-	private CDice<ENUM_Dir> m_Data = new CDice<ENUM_Dir>(); // 骰子物件
-	private ENUM_Dir m_LastDir = ENUM_Dir.Null; // 上次方向
-	
-	public ENUM_Dir Get()
-	{
-		m_Data.Clear();
-		
-		if(m_LastDir == ENUM_Dir.Null)
-			m_Data.Set(ENUM_Dir.Up, 1);
-		else
-		{
-			switch(m_LastDir)
-			{
-			case ENUM_Dir.Up:
-				m_Data.Set(ENUM_Dir.Up, 2);
-				m_Data.Set(ENUM_Dir.Left, 3);
-				m_Data.Set(ENUM_Dir.Right, 3);
-				break;
-				
-			case ENUM_Dir.Left:
-				m_Data.Set(ENUM_Dir.Up, 3);
-				m_Data.Set(ENUM_Dir.Left, 2);
-				break;
-				
-			case ENUM_Dir.Right:
-				m_Data.Set(ENUM_Dir.Up, 3);
-				m_Data.Set(ENUM_Dir.Right, 2);
-				break;
-				
-			default:
-				break;
-			}//switch
-		}//if
-		
-		return m_LastDir = m_Data.Roll();
-	}
-}
-
 // 地圖座標類別
 public class MapCoor
 {
@@ -216,6 +175,11 @@ public class SaveMap
 {
 	public MapCoor[] DataRoad = new MapCoor[0]; // 地圖道路列表
 	public MapObjt[] DataObjt = new MapObjt[0]; // 地圖物件列表
+}
+
+public class SavePickup
+{
+	public Pickup[] Data = new Pickup[0]; // 拾取列表
 }
 
 public class SaveRecord : IEquatable<SaveRecord>, IComparable<SaveRecord>

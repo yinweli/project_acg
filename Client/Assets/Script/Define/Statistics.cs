@@ -52,7 +52,7 @@ public class Statistics : MonoBehaviour
 			default: break;
 			}//switch
 
-			foreach(Pickup ItorPickup in DataGame.pthis.PickupList)
+			foreach(Pickup ItorPickup in DataPickup.pthis.Data)
 			{
 				if(Itor == ItorPickup.iType)
 					Temp.iAvailable += ItorPickup.iCount;

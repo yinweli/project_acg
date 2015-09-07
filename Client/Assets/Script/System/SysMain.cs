@@ -42,6 +42,7 @@ public class SysMain : MonoBehaviour
 		bIsOld &= DataEnemy.pthis.Load();
 		bIsOld &= DataGame.pthis.Load();
 		bIsOld &= DataMap.pthis.Load();
+		bIsOld &= DataPickup.pthis.Load();
         bIsOld &= DataPlayer.pthis.Load();
 
         if (!bIsOld)
@@ -78,6 +79,7 @@ public class SysMain : MonoBehaviour
 		DataReward.pthis.Save();
 		DataEnemy.pthis.Save();
 		DataGame.pthis.Save();
+		DataPickup.pthis.Save();
 		DataPlayer.pthis.Save();
 	}
     // ------------------------------------------------------------------
@@ -115,9 +117,9 @@ public class SysMain : MonoBehaviour
 		DataGame.pthis.fRunDouble = 1.0f;
 		
 		// 建立地圖物件.
-		MapCreater.pthis.ShowMap(DataGame.pthis.iRoad);
+		MapCreater.pthis.Show(DataGame.pthis.iRoad);
 		// 建立撿取物件.
-		MapCreater.pthis.ShowPickup(DataGame.pthis.iRoad);
+		PickupCreater.pthis.Show(DataGame.pthis.iRoad);
 
         // UI初始化.
         P_UI.pthis.StartNew();
@@ -145,6 +147,7 @@ public class SysMain : MonoBehaviour
         Debug.Log("New Game");
         // 清空遊戲資料.
         DataGame.pthis.Clear();
+		DataPickup.pthis.Clear();
         // 清空物件.
         ClearObj();
 
@@ -162,14 +165,14 @@ public class SysMain : MonoBehaviour
 
         // 選擇關卡風格編號.
 		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
-        // 建立新地圖資料.
+        // 建立地圖資料.
         MapCreater.pthis.Create();
         // 建立地圖物件.
-        MapCreater.pthis.ShowMap(0);
+        MapCreater.pthis.Show(0);
+		// 建立撿取資料.
+		PickupCreater.pthis.Create();
 		// 建立撿取物件.
-		MapCreater.pthis.CreatePickup();
-		// 建立撿取物件.
-		MapCreater.pthis.ShowPickup(0);
+		PickupCreater.pthis.Show(0);
 
         DataMap.pthis.Save();
 

@@ -19,7 +19,7 @@ public class Btn_GetCrystal : MonoBehaviour
 			pSprite.material = Resources.Load("Sprite") as Material;
 			pSprite.sortingLayerName = "Top";
 			// 取得數量.
-			pLbCount.text = "+" + DataGame.pthis.PickupList[iItemID].iCount;
+			pLbCount.text = "+" + DataPickup.pthis.Data[iItemID].iCount;
 			GetComponent<Animator>().Play("GetItem");
 			// 飛行至定位.
 			StartCoroutine(FlyToPos());
@@ -53,8 +53,8 @@ public class Btn_GetCrystal : MonoBehaviour
 		yield return new WaitForSeconds(0.8f);
 
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Crystal", "", 0);
-		DataGame.pthis.PickupList[iItemID].bPickup = true;
-		Rule.CrystalAdd(DataGame.pthis.PickupList[iItemID].iCount);
+		DataPickup.pthis.Data[iItemID].bPickup = true;
+		Rule.CrystalAdd(DataPickup.pthis.Data[iItemID].iCount);
 
 		Destroy(gameObject);
 	}

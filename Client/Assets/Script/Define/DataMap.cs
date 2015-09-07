@@ -2,6 +2,7 @@
 using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class DataMap : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class DataMap : MonoBehaviour
 
 	/* Save */
 	public List<MapCoor> DataRoad = new List<MapCoor>(); // 地圖道路列表
-	public List<MapObjt> DataObjt = new List<MapObjt>(); // 地圖物件列表
+	public Dictionary<Vector2, MapObjt> DataObjt = new Dictionary<Vector2, MapObjt>(); // 地圖物件列表
 
 	void Awake()
 	{
@@ -19,9 +20,9 @@ public class DataMap : MonoBehaviour
 	public void Save()
 	{
 		SaveMap Temp = new SaveMap();
-		
+
 		Temp.DataRoad = DataRoad.ToArray();
-		Temp.DataObjt = DataObjt.ToArray();
+		Temp.DataObjt = DataObjt.Values.ToArray();
 		
 		PlayerPrefs.SetString(GameDefine.szSaveMap, Json.ToString(Temp));
 	}
@@ -35,9 +36,11 @@ public class DataMap : MonoBehaviour
 		
 		if(Temp == null)
 			return false;
-		
+
 		DataRoad = new List<MapCoor>(Temp.DataRoad);
-		DataObjt = new List<MapObjt>(Temp.DataObjt);
+
+		foreach(MapObjt Itor in Temp.DataObjt)
+			DataObjt.Add(Itor.Pos.ToVector2(), Itor);
 		
 		return true;
 	}

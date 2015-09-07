@@ -2,6 +2,7 @@
 using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 // 建立地圖類別
@@ -9,428 +10,279 @@ public class MapCreater : MonoBehaviour
 {
 	public static MapCreater pthis = null;
 
-	private Dictionary<Vector2, GameObject> ObjectList = new Dictionary<Vector2, GameObject>();
-	private List<GameObject> PickupList = new List<GameObject>();
-	private int iWidth = 0;
-	private int iHeight = 0;
+	private Dictionary<Vector2, GameObject> Data = new Dictionary<Vector2, GameObject>();
 
 	void Awake()
 	{
 		pthis = this;
 	}
-
-	// 更新地圖尺寸
-	private void UpdateSize(MapCoor Pos)
-	{
-		iWidth = Mathf.Max(iWidth, Pos.X + 1);
-		iHeight = Mathf.Max(iHeight, Pos.Y + 1);
-	}
 	// 建立地圖道路
 	private void CreateRoad()
 	{
 		int iRoadSize = GameDefine.iRoadSizeBase + (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradeRoad); // 取得地圖道路長度
-		RandDir Dir = new RandDir();
-		
+		ENUM_Dir emGrowDir = ENUM_Dir.Null;
+		int iGrowLength = 0;
+		CDice<ENUM_Dir> DirDiceUp = new CDice<ENUM_Dir>();
+		CDice<ENUM_Dir> DirDiceLeft = new CDice<ENUM_Dir>();
+		CDice<ENUM_Dir> DirDiceRight = new CDice<ENUM_Dir>();
+
+		DirDiceUp.Set(ENUM_Dir.Up, 2);
+		DirDiceUp.Set(ENUM_Dir.Left, 3);
+		DirDiceUp.Set(ENUM_Dir.Right, 3);
+		DirDiceLeft.Set(ENUM_Dir.Up, 3);
+		DirDiceLeft.Set(ENUM_Dir.Left, 2);
+		DirDiceRight.Set(ENUM_Dir.Up, 3);
+		DirDiceRight.Set(ENUM_Dir.Right, 2);
+
 		while(iRoadSize > 0)
 		{
-			foreach(MapCoor Itor in Rule.NextPath(Dir.Get(), DataMap.pthis.DataRoad.Count > 0 ? DataMap.pthis.DataRoad[DataMap.pthis.DataRoad.Count - 1] : null))
+			// 決定成長方向與長度
+			if(emGrowDir == ENUM_Dir.Null)
 			{
-				if(iRoadSize > 0)
-				{
-					UpdateSize(Itor);
-					DataMap.pthis.DataRoad.Add(Itor);
-					--iRoadSize; // 減少還需要產生的地圖道路長度
-				}//if
-			}//for
-		}//while
-	}
-	// 建立地圖起點
-	private void CreateStart()
-	{
-		if(DataMap.pthis.DataRoad.Count > 0)
-		{
-			MapCoor Road = DataMap.pthis.DataRoad[0];
-
-			if(Road.Y > 0)
+				emGrowDir = ENUM_Dir.Up;
+				iGrowLength = GameDefine.iPathStart;
+			}
+			else
 			{
-				MapObjt Data = new MapObjt();
-				
-				Data.Pos = new MapCoor(Road.X, Road.Y - 1);
-				Data.Type = (int)ENUM_Map.MapStart;
-				Data.Width = GameDefine.ObjtStart.X;
-				Data.Height = GameDefine.ObjtStart.Y;
+				if(emGrowDir == ENUM_Dir.Up)
+					emGrowDir = DirDiceUp.Roll();
+				else if(emGrowDir == ENUM_Dir.Left)
+					emGrowDir = DirDiceLeft.Roll();
+				else if(emGrowDir == ENUM_Dir.Right)
+					emGrowDir = DirDiceRight.Roll();
+				else
+					emGrowDir = ENUM_Dir.Up;
 
-				DataMap.pthis.DataObjt.Add(Data);
-				UpdateSize(Data.Pos);
+				iGrowLength = Random.Range(GameDefine.iPathMin, GameDefine.iPathMax);
 			}//if
-		}//if
-	}
-	// 建立地圖終點
-	private void CreateEnd()
-	{
-		if(DataMap.pthis.DataRoad.Count > 0)
-		{
-			MapCoor Road = DataMap.pthis.DataRoad[DataMap.pthis.DataRoad.Count - 1];
-			MapObjt Data = new MapObjt();
-			
-			Data.Pos = new MapCoor(Road.X - 1, Road.Y + 1);
-			Data.Type = (int)ENUM_Map.MapEnd;
-			Data.Width = GameDefine.ObjtEnd.X;
-			Data.Height = GameDefine.ObjtEnd.Y;
-			
-			DataMap.pthis.DataObjt.Add(Data);
-			UpdateSize(Data.Pos);
-		}//if
+
+			// 新增道路
+			while(iGrowLength > 0 && iRoadSize > 0)
+			{
+				MapCoor Pos = null;
+
+				if(DataMap.pthis.DataRoad.Count <= 0)
+					Pos = new MapCoor(Random.Range(GameDefine.iMapRoadXMin, GameDefine.iMapRoadXMax), GameDefine.iMapBorder);
+				else
+					Pos = DataMap.pthis.DataRoad[DataMap.pthis.DataRoad.Count - 1].Add(emGrowDir, 1);
+
+				if(Pos.X >= GameDefine.iMapRoadXMin && Pos.X <= GameDefine.iMapRoadXMax && Pos.Y >= GameDefine.iMapBorder)
+				{
+					DataMap.pthis.DataRoad.Add(Pos);
+					--iGrowLength; // 減少成長次數
+					--iRoadSize; // 減少還需要產生的地圖道路長度
+				}
+				else
+					iGrowLength = 0;
+			}//while
+		}//while
 	}
 	// 建立地圖物件
 	private void CreateObjt()
 	{
+		// 建立道路物件
+		for(int iPos = 0; iPos < DataMap.pthis.DataRoad.Count; ++iPos)
+		{
+			MapCoor Pos = DataMap.pthis.DataRoad[iPos];
+
+			// 判斷是否該建立起點物件
+			if(iPos == 0)
+			{
+				MapObjt Temp = new MapObjt();
+
+				Temp.Pos = new MapCoor(Pos.X, Pos.Y - 1);
+				Temp.Type = (int)ENUM_Map.MapStart;
+				Temp.Width = GameDefine.ObjtStart.X;
+				Temp.Height = GameDefine.ObjtStart.Y;
+
+				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+			}//if
+
+			// 判斷是否該建立終點物件
+			if(iPos == DataMap.pthis.DataRoad.Count - 1)
+			{
+				MapObjt Temp = new MapObjt();
+				
+				Temp.Pos = new MapCoor(Pos.X - 1, Pos.Y + 1);
+				Temp.Type = (int)ENUM_Map.MapEnd;
+				Temp.Width = GameDefine.ObjtEnd.X;
+				Temp.Height = GameDefine.ObjtEnd.Y;
+				
+				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+			}//if
+
+			// 建立道路物件
+			{
+				MapObjt Temp = new MapObjt();
+				
+				Temp.Pos = new MapCoor(Pos.X, Pos.Y);
+				Temp.Type = (int)ENUM_Map.MapRoad;
+				Temp.Width = GameDefine.ObjtBase.X;
+				Temp.Height = GameDefine.ObjtBase.Y;
+				
+				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+			}
+		}//for
+
+		// 建立一般物件
 		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 		{
 			foreach(ENUM_Dir ItorDir in System.Enum.GetValues(typeof(ENUM_Dir)))
 			{
 				int iProb = GameDefine.iObjtProb;
 				int iInterval = 1;
-
+				
 				while(iProb > 0)
 				{
 					if(Random.Range(0, 100) < iProb)
 					{
 						MapCoor Pos = Itor.Add(ItorDir, iInterval);
-
-						if(Pos.X >= 0 && Pos.X < GameDefine.iMapWidth && Pos.Y >= 0)
+						
+						if(Pos.X >= 0 && Pos.Y >= 0)
 						{
-							Tuple<ENUM_Map, MapCoor> Objt = Rule.NextObjt();
-							MapObjt Data = new MapObjt();
+							int iIndex = Random.Range(0, GameDefine.ObjtScale.Count);
+							MapObjt Temp = new MapObjt();
 
-							Data.Pos = Pos;
-							Data.Type = (int)Objt.Item1;
-							Data.Width = Objt.Item2.X;
-							Data.Height = Objt.Item2.Y;
-
+							Temp.Pos = Pos;
+							Temp.Type = iIndex + (int)ENUM_Map.MapObjt_0;
+							Temp.Width = GameDefine.ObjtScale[iIndex].X;
+							Temp.Height = GameDefine.ObjtScale[iIndex].Y;
+							
 							bool bCheck = true;
-							
-							foreach(MapCoor ItorRoad in DataMap.pthis.DataRoad)
+
+							foreach(KeyValuePair<Vector2, MapObjt> ItorObjt in DataMap.pthis.DataObjt)
 							{
-								if(Data.Cover(ItorRoad))
-									bCheck &= false;
-							}//for
-							
-							foreach(MapObjt ItorObjt in DataMap.pthis.DataObjt)
-							{
-								if(Data.Cover(ItorObjt))
+								if(Temp.Cover(ItorObjt.Value))
 									bCheck &= false;
 							}//for
 							
 							if(bCheck)
-							{
-								DataMap.pthis.DataObjt.Add(Data);
-								UpdateSize(Data.Pos);
-							}//if
+								DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 						}//if
 					}//if
-
+					
 					iProb -= GameDefine.iObjtDec;
 					iInterval++;
 				}//while
 			}//for
 		}//for
-	}
-	// 填滿地圖
-	private void Fill()
-	{
-		for(int iY = 0; iY < iHeight; ++iY)
+
+		// 填滿地圖
+		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 		{
-			for(int iX = 0; iX < iWidth; ++iX)
+			for(int iX = -GameDefine.iMapBorder; iX <= GameDefine.iMapBorder; ++iX)
 			{
-				MapObjt Data = new MapObjt();
-				
-				Data.Pos = new MapCoor(iX, iY);
-				Data.Type = (int)ENUM_Map.MapBase;
-				Data.Width = GameDefine.ObjtBase.X;
-				Data.Height = GameDefine.ObjtBase.Y;
-				
-				bool bCheck = true;
-				
-				foreach(MapCoor ItorRoad in DataMap.pthis.DataRoad)
+				for(int iY = -GameDefine.iMapBorder; iY <= GameDefine.iMapBorder; ++iY)
 				{
-					if(Data.Cover(ItorRoad))
-						bCheck &= false;
+					MapCoor Pos = new MapCoor(Itor.X + iX, Itor.Y + iY);
+
+					if(Pos.X < 0 || Pos.Y < 0)
+						continue;
+
+					if(DataMap.pthis.DataObjt.ContainsKey(Pos.ToVector2()))
+					   	continue;
+
+					MapObjt Temp = new MapObjt();
+					
+					Temp.Pos = Pos;
+					Temp.Type = (int)ENUM_Map.MapBase;
+					Temp.Width = GameDefine.ObjtBase.X;
+					Temp.Height = GameDefine.ObjtBase.Y;
+
+					Vector2 PosVec = new Vector2();
+
+					// 左邊檢查
+					PosVec = (new MapCoor(Pos.X - 1, Pos.Y)).ToVector2();
+					
+					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
+						continue;
+
+					// 左下檢查
+					PosVec = (new MapCoor(Pos.X - 1, Pos.Y - 1)).ToVector2();
+					
+					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
+						continue;
+
+					// 下邊檢查
+					PosVec = (new MapCoor(Pos.X, Pos.Y - 1)).ToVector2();
+					
+					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
+						continue;
+
+					DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 				}//for
-				
-				foreach(MapObjt ItorObjt in DataMap.pthis.DataObjt)
-				{
-					if(Data.Cover(ItorObjt))
-						bCheck &= false;
-				}//for
-				
-				if(bCheck)
-					DataMap.pthis.DataObjt.Add(Data);
 			}//for
 		}//for
 	}
-    // ------------------------------------------------------------------
 	// 建立地圖
 	public void Create()
 	{
 		Debug.Log("Create Map");
 
-		iWidth = GameDefine.iMapWidth;
-		iHeight = 0;
-
 		Clear();
 		CreateRoad();
-		CreateStart();
-		CreateEnd();
 		CreateObjt();		
-		Fill();		
-	}
-	// 建立地圖拾取
-	public void CreatePickup()
-	{
-		DataGame.pthis.PickupList.Clear();
-		
-		// 檢查隊伍裡是否沒有光源裝備
-		bool bLight = false;
-		
-		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
-		{
-			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
-			
-			if(Data == null)
-				continue;
-			
-			if(Data.Mode == (int)ENUM_ModeEquip.Light)
-				bLight = true;
-		}//for
-		
-		// 成員拾取
-		if(DataPlayer.pthis.MemberParty.Count < GameDefine.iMaxMemberParty)
-		{
-			if(bLight == false || Random.Range(0, 100) <= (GameDefine.iMaxMemberParty - DataPlayer.pthis.MemberParty.Count) * GameDefine.iPickupMember)
-			{
-				Pickup Data = new Pickup();
-				
-				Data.Pos = Rule.NextPickup();
-				Data.iType = (int)ENUM_Pickup.Member;
-				Data.iCount = 1;
-				Data.iLooks = Rule.RandomMemberLooks();
-				Data.bPickup = false;
-				
-				DataGame.pthis.PickupList.Add(Data);
-			}//if
-		}//if
-		
-		// 總物品拾取次數
-		int iPickupTotal = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems);
-		int iPickupLightAmmo = (int)(iPickupTotal * GameDefine.fPickupPartLightAmmo);
-		int iPickupHeavyAmmo = (int)(iPickupTotal * GameDefine.fPickupPartHeavyAmmo);
-		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
-		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
-		// 額外拾取價值
-		int iExteraValue = (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradePickup);
-		
-		// 輕型彈藥拾取
-		for(int iCount = 0; iCount < iPickupLightAmmo; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.LightAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-		
-		// 重型彈藥拾取
-		for(int iCount = 0; iCount < iPickupHeavyAmmo; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-		
-		// 電池拾取
-		for(int iCount = 0; iCount < iPickupBattery; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Battery;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-		
-		// 通貨拾取
-		for(int iCount = 0; iCount < iPickupCurrency; ++iCount)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Currency;
-			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//for
-		
-		// 絕招拾取
-		if(Random.Range(0, 100) <= GameDefine.iPickupProbBomb)
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Bomb;
-			Data.iCount = 1;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//if
-		
-		// 水晶拾取
-		if(Rule.AppearCrystal())
-		{
-			Pickup Data = new Pickup();
-			
-			Data.Pos = Rule.NextPickup();
-			Data.iType = (int)ENUM_Pickup.Crystal;
-			Data.iCount = GameDefine.iCrystalCount;
-			Data.iLooks = 0;
-			Data.bPickup = false;
-			
-			DataGame.pthis.PickupList.Add(Data);
-		}//if
-	}
-    // ------------------------------------------------------------------
-    public void ShowMap(int iRoad)
-    {
-        Refresh(iRoad);
-        transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
-    }
-	public void ShowPickup(int iRoad)
-	{
-		for(int i = 0; i < DataGame.pthis.PickupList.Count; i++ )
-		{
-			Pickup itor = DataGame.pthis.PickupList[i];
-
-			if(itor.bPickup == false)
-			{
-				Vector2 Pos = itor.Pos.ToVector2();
-				float fPosX = Pos.x + GameDefine.iBlockSize / 2 - GetRoadObj(iRoad).transform.localPosition.x;
-				float fPosY = Pos.y + GameDefine.iBlockSize / 2 - GetRoadObj(iRoad).transform.localPosition.y;
-				GameObject Obj = null;
-				
-				if ((ENUM_Pickup)itor.iType == ENUM_Pickup.Member)
-					PlayerCreater.pthis.AddList(i, fPosX, fPosY, itor.iLooks);
-				else
-				{                
-					Obj = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)itor.iType, fPosX, fPosY);
-
-					if (Obj && Obj.GetComponent<Btn_GetCurrency>())
-						Obj.GetComponent<Btn_GetCurrency>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetBattery>())
-						Obj.GetComponent<Btn_GetBattery>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetLightAmmo>())
-						Obj.GetComponent<Btn_GetLightAmmo>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetHeavyAmmo>())
-						Obj.GetComponent<Btn_GetHeavyAmmo>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetBomb>())
-						Obj.GetComponent<Btn_GetBomb>().iItemID = i;
-					else if (Obj && Obj.GetComponent<Btn_GetCrystal>())
-						Obj.GetComponent<Btn_GetCrystal>().iItemID = i;
-				}
-				
-				if(Obj != null)
-					PickupList.Add(Obj);
-			}//if
-		}//for
-	}
-    // ------------------------------------------------------------------
-	// 清除地圖
-	public void Clear()
-	{
-		foreach(KeyValuePair<Vector2, GameObject> Itor in ObjectList)
-			Destroy(Itor.Value);
-
-		foreach(GameObject Itor in PickupList)
-			Destroy(Itor);
-
-		ObjectList.Clear();
-		PickupList.Clear();
-		DataMap.pthis.DataRoad.Clear();
-        DataMap.pthis.DataObjt.Clear();
 	}
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
 		MapCoor RoadPos = DataMap.pthis.DataRoad.Count > iRoad ? DataMap.pthis.DataRoad[iRoad] : new MapCoor();
-		MapCoor ChkPos = new MapCoor(RoadPos.X - GameDefine.iBlockUpdate / 2, RoadPos.Y - GameDefine.iBlockUpdate / 2);
+		HashSet<Vector2> InvalidPos = new HashSet<Vector2>(Data.Keys);
 
-		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
+		// 建立新物件
+		for(int iX = -GameDefine.iMapBorder; iX <= GameDefine.iMapBorder; ++iX)
 		{
-			Vector2 Pos = Itor.ToVector2();
-			MapObjt Temp = new MapObjt();
-			
-			Temp.Pos = Itor;
-			Temp.Width = 1;
-			Temp.Height = 1;
-
-			if(Temp.Cover(ChkPos, GameDefine.iBlockUpdate, GameDefine.iBlockUpdate))
+			for(int iY = -GameDefine.iMapBorder; iY <= GameDefine.iMapBorder; ++iY)
 			{
-				if(ObjectList.ContainsKey(Pos) == false)
-				{
-					float fPosX = Pos.x + GameDefine.iBlockSize / 2;
-					float fPosY = Pos.y + GameDefine.iBlockSize / 2;
+				MapCoor Pos = new MapCoor(RoadPos.X + iX, RoadPos.Y + iY);
 
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ENUM_Map.MapRoad.ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
-				}//if
-			}
-			else
+				if(Pos.X < 0  || Pos.Y < 0)
+					continue;
+
+				Vector2 PosVec = Pos.ToVector2();
+
+				InvalidPos.Remove(PosVec);
+
+				if(Data.ContainsKey(PosVec))
+					continue;
+
+				if(DataMap.pthis.DataObjt.ContainsKey(PosVec) == false)
+					continue;
+
+				MapObjt pObjt = DataMap.pthis.DataObjt[PosVec];
+
+				float fPosX = PosVec.x + (pObjt.Width * GameDefine.iBlockSize) / 2;
+				float fPosY = PosVec.y + (pObjt.Height * GameDefine.iBlockSize) / 2;
+
+				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)pObjt.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
+			}//for
+		}//for
+
+		// 刪除不需要物件
+		foreach(Vector2 Itor in InvalidPos)
+		{
+			if(Data.ContainsKey(Itor))
 			{
-				if(ObjectList.ContainsKey(Pos))
-				{
-					Destroy(ObjectList[Pos]);
-					ObjectList.Remove(Pos);
-				}//if
+				Destroy(Data[Itor]);
+				Data.Remove(Itor);
 			}//if
 		}//for
+	}
+	// 顯示地圖
+	public void Show(int iRoad)
+	{
+		Refresh(iRoad);
+		transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
+	}
+	// 清除地圖
+	public void Clear()
+	{
+		foreach(KeyValuePair<Vector2, GameObject> Itor in Data)
+			Destroy(Itor.Value);
 		
-		foreach(MapObjt Itor in DataMap.pthis.DataObjt)
-		{
-			Vector2 Pos = Itor.Pos.ToVector2();
-
-			if(Itor.Cover(ChkPos, GameDefine.iBlockUpdate, GameDefine.iBlockUpdate))
-			{
-				if(ObjectList.ContainsKey(Pos) == false)
-				{
-					float fPosX = Pos.x + (Itor.Width * GameDefine.iBlockSize) / 2;
-					float fPosY = Pos.y + (Itor.Height * GameDefine.iBlockSize) / 2;
-
-					ObjectList.Add(Pos, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
-				}//if
-			}
-			else
-			{
-				if(ObjectList.ContainsKey(Pos))
-				{
-					Destroy(ObjectList[Pos]);
-					ObjectList.Remove(Pos);
-				}//if
-			}//if
-		}//for
+		Data.Clear();
+		DataMap.pthis.DataRoad.Clear();
+		DataMap.pthis.DataObjt.Clear();
 	}
 	// 取得道路物件
     public GameObject GetRoadObj(int iRoad)
@@ -443,9 +295,9 @@ public class MapCreater : MonoBehaviour
 
 		Vector2 Pos = DataMap.pthis.DataRoad[iRoad].ToVector2();
 
-		if(ObjectList.ContainsKey(Pos) == false)
+		if(Data.ContainsKey(Pos) == false)
 			return null;
 
-		return ObjectList[Pos];
+		return Data[Pos];
 	}
 }

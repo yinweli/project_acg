@@ -318,64 +318,6 @@ public class Rule
 		for(int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
 			AddDamageReset(iPos);
 	}
-	// 依方向取得座標列表
-	public static List<MapCoor> NextPath(ENUM_Dir emDir, MapCoor Pos)
-	{
-		List<MapCoor> Result = new List<MapCoor>();
-		int iRoadWidthMin = GameDefine.iMapBorderX;
-		int iRoadWidthMax = GameDefine.iMapWidth - GameDefine.iMapBorderX;
-		int iLength = Pos == null ? GameDefine.iPathStart : Random.Range(GameDefine.iPathMin, GameDefine.iPathMax);
-		
-		while(iLength > 0)
-		{
-			if(Pos == null)
-				Pos = new MapCoor(Random.Range(iRoadWidthMin, iRoadWidthMax), GameDefine.iMapBorderY);
-			else
-				Pos = Pos.Add(emDir, 1);
-			
-			if(Pos.X >= iRoadWidthMin && Pos.X < iRoadWidthMax && Pos.Y >= 1)
-			{
-				Result.Add(Pos);
-				--iLength;
-			}
-			else
-				iLength = 0;
-		}//while
-		
-		return Result;
-	}
-	// 取得隨機物件
-	public static Tuple<ENUM_Map, MapCoor> NextObjt()
-	{
-		int iIndex = Random.Range(0, GameDefine.ObjtScale.Count);
-		
-		return new Tuple<ENUM_Map, MapCoor>((ENUM_Map)(iIndex + ENUM_Map.MapObjt_0), GameDefine.ObjtScale[iIndex]);
-	}
-	// 取得隨機地圖拾取位置
-	public static MapCoor NextPickup()
-	{
-		if(DataMap.pthis.DataRoad.Count <= GameDefine.iPickupBorder)
-			return new MapCoor();
-
-		MapCoor Road = DataMap.pthis.DataRoad[Random.Range(GameDefine.iPickupBorder, DataMap.pthis.DataRoad.Count - GameDefine.iPickupBorder)];
-
-		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
-		{
-			MapCoor Result = new MapCoor(Road.X + Tool.RandomPick(GameDefine.PickupRange), Road.Y + Tool.RandomPick(GameDefine.PickupRange));
-			bool bCheck = true;
-
-			foreach(MapCoor Itor in DataMap.pthis.DataRoad)
-				bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
-
-			foreach(Pickup Itor in DataGame.pthis.PickupList)
-				bCheck &= (Result.X == Itor.Pos.X && Result.Y == Itor.Pos.Y) == false;
-
-			if(bCheck)
-				return Result;
-		}//for
-
-		return new MapCoor();
-	}
 	// 執行獲得特性
 	public static int GainFeature(int iPos)
 	{

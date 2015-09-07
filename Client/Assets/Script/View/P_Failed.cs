@@ -28,6 +28,7 @@ public class P_Failed : MonoBehaviour
         // 重設存檔與遊戲檔案.
         DataPlayer.pthis.Clear();
         DataGame.pthis.Clear();
+		DataPickup.pthis.Clear();
 
 		// 設為新遊戲.
 		SysMain.pthis.NewRoleData();        

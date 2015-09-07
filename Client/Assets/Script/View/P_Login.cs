@@ -9,7 +9,7 @@ public class P_Login : MonoBehaviour
         AudioCtrl.pthis.PlayMusic("Start");
 
         // 建立地圖物件.
-        MapCreater.pthis.ShowMap(0);
+        MapCreater.pthis.Show(0);
         // 開始行走
         CameraCtrl.pthis.LoginMove();
     }

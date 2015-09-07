@@ -16,7 +16,6 @@ public class DataGame : MonoBehaviour
     public int iDead = 0; // 死亡數.
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
-	public List<Pickup> PickupList = new List<Pickup>(); // 地圖拾取列表
 
 	/* Not Save */
 	public float fRunDouble = 1.0f; // 跑步速度倍率.
@@ -34,7 +33,6 @@ public class DataGame : MonoBehaviour
 		Temp.iKill = iKill;
 		Temp.iAlive = iAlive;
 		Temp.iDead = iDead;
-		Temp.PickupList = PickupList.ToArray();
 		Temp.iRoad = iRoad;
 		Temp.bVictory = bVictory;
 		
@@ -57,8 +55,7 @@ public class DataGame : MonoBehaviour
 		iDead = Temp.iDead;
 		iRoad = Temp.iRoad;
 		bVictory = Temp.bVictory;
-		PickupList = new List<Pickup>(Temp.PickupList);
-		
+
 		return true;
 	}
 	// 清除資料
@@ -70,7 +67,6 @@ public class DataGame : MonoBehaviour
         iDead = 0;
 		iRoad = 0;
 		bVictory = false;
-		PickupList.Clear();
     }
 	// 清除存檔
 	public void ClearSave()

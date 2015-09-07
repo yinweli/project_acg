@@ -18,7 +18,7 @@ public class Btn_GetBattery : MonoBehaviour
 			pSprite.material = Resources.Load("Sprite") as Material;
 			pSprite.sortingLayerName = "Top";
 			// 取得數量.
-			pLbCount.text = "+" + DataGame.pthis.PickupList[iItemID].iCount;
+			pLbCount.text = "+" + DataPickup.pthis.Data[iItemID].iCount;
 			GetComponent<Animator>().Play("GetItem");
 			// 飛行至定位.
 			StartCoroutine(FlyToPos());
@@ -59,8 +59,8 @@ public class Btn_GetBattery : MonoBehaviour
 			fFrame += 0.05f;
 		}
 		
-		DataGame.pthis.PickupList[iItemID].bPickup = true;
-		Rule.BatteryAdd(DataGame.pthis.PickupList[iItemID].iCount);
+		DataPickup.pthis.Data[iItemID].bPickup = true;
+		Rule.BatteryAdd(DataPickup.pthis.Data[iItemID].iCount);
 		P_UI.pthis.UpdateResource();
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Battery", "", 0);
 		

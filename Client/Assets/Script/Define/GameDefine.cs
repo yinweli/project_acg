@@ -72,11 +72,11 @@ public class GameDefine
 	public const int iCrystalCount = 8; // 水晶出現數量
 
 	public const int iBlockSize = 64; // 格子尺寸
-	public const int iBlockUpdate = 25; // 格子更新距離
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iMapWidth = 41; // 地圖寬度
-	public const int iMapBorderX = 12; // 地圖X軸邊框長度
-	public const int iMapBorderY = 12; // 地圖Y軸邊框長度
+	public const int iMapBorder = 12; // 地圖邊框長度
+	public const int iMapRoadXMin = iMapBorder; // 最小地圖道路X軸位置
+	public const int iMapRoadXMax = iMapWidth + iMapBorder; // 最大地圖道路X軸位置
 	public const int iPathStart = 12; // 起點路徑長度
 	public const int iPathMin = 4; // 最小路徑長度
 	public const int iPathMax = 12; // 最長路徑長度
@@ -111,6 +111,7 @@ public class GameDefine
 	public const string szSavePlayer = "save_player"; // 玩家資料存檔名稱
 	public const string szSaveGame = "save_game"; // 遊戲資料存檔名稱
 	public const string szSaveMap = "save_map"; // 地圖資料存檔名稱
+	public const string szSavePickup = "save_pickup"; // 拾取資料存檔名稱
 	public const string szSaveEnemyCount = "save_enemy_count"; // 怪物資料數量存檔名稱
 	public const string szSaveEnemy = "save_enemy_"; // 怪物資料存檔名稱
 	public const string szSaveRecordCount = "save_record_count"; // 遊戲紀錄數量存檔名稱
