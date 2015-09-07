@@ -12,7 +12,8 @@ public class Btn_Hire : MonoBehaviour
     // ------------------------------------------------------------------
     void OnClick()
     {
-        P_AddMember.pthis.HireSelect();        
+        P_AddMember.pthis.HireSelect();
+        CheckStatu();
     }
     // ------------------------------------------------------------------
     public void CheckStatu()
@@ -29,6 +30,10 @@ public class Btn_Hire : MonoBehaviour
                 GetComponent<UIButton>().isEnabled = true;
             ObjQuestion.SetActive(false);
         }
+
+        if (DataPlayer.pthis.MemberParty.Count >= GameDefine.iMaxMemberParty)
+            if (GetComponent<UIButton>())
+                GetComponent<UIButton>().isEnabled = false;
     }	
     // ------------------------------------------------------------------
     public void MovePos(Vector3 vecTarget)

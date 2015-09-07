@@ -16,21 +16,22 @@ public class G_ListRole : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
+        if (GetComponent<Animation>())
+            GetComponent<Animation>().Stop();
+
         if (iPlayerID == -1)
         {
             ObjFrame.SetActive(true);
             pLbLv.text = "Lv --";
-            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;            
             return;
         }
 
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, DataPlayer.pthis.MemberParty[iPlayerID].iLooks);
-        ObjHand = ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip);
+        ObjHand = ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip);
 
         pLbLv.gameObject.SetActive(false);
-        if (GetComponent<Animation>())
-            GetComponent<Animation>().Stop();
     }
     // ------------------------------------------------------------------
     void Update()
@@ -83,6 +84,15 @@ public class G_ListRole : MonoBehaviour
 
         foreach (SpriteRenderer pRender in p2DS)
             ToolKit.ChangeTo2DSprite(pRender);
+    }
+    // ------------------------------------------------------------------
+    public void ShowNow()
+    {
+        ObjInfo.SetActive(true);
+        ObjFire.SetActive(true);
+
+        pLbLv.gameObject.SetActive(true);
+        ShowLevelUp(0);
     }
     // ------------------------------------------------------------------
     public void Layoff()

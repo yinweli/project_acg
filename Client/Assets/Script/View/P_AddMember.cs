@@ -20,17 +20,19 @@ public class P_AddMember : MonoBehaviour
     }
     // ------------------------------------------------------------------
     public void GetNewRole()
-    {
+    {        
         pRandRole.StartRand();
-        //pAni_RandRole.Play("RandRole");
-        pHireList.Refresh();
+        
+        //pAni_RandRole.enabled = true;
+        pAni_RandRole.speed = 1;
+        pAni_RandRole.Play("RandRole");
     }
     // ------------------------------------------------------------------
     public GameObject CreateRole(GameObject ObjParent, Member pMember)
     {
         // 建立外觀.
         GameObject ObjHuman = UITool.pthis.CreateRole(ObjParent, pMember.iLooks);
-        ObjHuman.AddComponent<G_PLook>().ChangeTo2DSprite((ENUM_Weapon)pMember.iEquip);
+        ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)pMember.iEquip);
         return ObjHuman;
     }
     // ------------------------------------------------------------------
@@ -49,8 +51,18 @@ public class P_AddMember : MonoBehaviour
 
         DataPlayer.pthis.Save();
 
-        //if (P_Victory.pthis != null && P_Victory.pthis.pFeature != null)
-        //P_Victory.pthis.pFeature.AddChr();
+        if (P_Victory.pthis != null && P_Victory.pthis.pFeature != null)
+            P_Victory.pthis.pFeature.AddChr(DataPlayer.pthis.MemberParty.Count - 1);
+    }
+    // ------------------------------------------------------------------
+    public void CheckShowEnd(int iIndex)
+    {
+        Debug.Log("Right: " + pRandRole.iRightIndex + "Now: " + iIndex);
+        if (pRandRole.iRightIndex != iIndex)
+            return;
+
+        pAni_RandRole.speed = 0;
+        pHireList.Refresh();
     }
     // ------------------------------------------------------------------
     public void MoveSelect(int iSelect)
