@@ -191,20 +191,28 @@ public class MapCreater : MonoBehaviour
 
 					Vector2 PosVec = new Vector2();
 
-					// 左邊檢查
-					PosVec = (new MapCoor(Pos.X - 1, Pos.Y)).ToVector2();
-					
+					// 重疊檢查
+					PosVec = (new MapCoor(Pos.X - 2, Pos.Y - 1)).ToVector2();
+
 					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
 						continue;
 
-					// 左下檢查
 					PosVec = (new MapCoor(Pos.X - 1, Pos.Y - 1)).ToVector2();
 					
 					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
 						continue;
 
-					// 下邊檢查
 					PosVec = (new MapCoor(Pos.X, Pos.Y - 1)).ToVector2();
+					
+					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
+						continue;
+
+					PosVec = (new MapCoor(Pos.X - 2, Pos.Y)).ToVector2();
+					
+					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
+						continue;
+
+					PosVec = (new MapCoor(Pos.X - 1, Pos.Y)).ToVector2();
 					
 					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
 						continue;
@@ -227,7 +235,7 @@ public class MapCreater : MonoBehaviour
 	public void Refresh(int iRoad)
 	{
 		MapCoor RoadPos = DataMap.pthis.DataRoad.Count > iRoad ? DataMap.pthis.DataRoad[iRoad] : new MapCoor();
-		HashSet<Vector2> InvalidPos = new HashSet<Vector2>(Data.Keys);
+		//HashSet<Vector2> InvalidPos = new HashSet<Vector2>(Data.Keys);
 
 		// 建立新物件
 		for(int iX = -GameDefine.iMapBorder; iX <= GameDefine.iMapBorder; ++iX)
@@ -241,7 +249,7 @@ public class MapCreater : MonoBehaviour
 
 				Vector2 PosVec = Pos.ToVector2();
 
-				InvalidPos.Remove(PosVec);
+				//InvalidPos.Remove(PosVec);
 
 				if(Data.ContainsKey(PosVec))
 					continue;
@@ -257,7 +265,7 @@ public class MapCreater : MonoBehaviour
 				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)pObjt.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
 			}//for
 		}//for
-
+		/*
 		// 刪除不需要物件
 		foreach(Vector2 Itor in InvalidPos)
 		{
@@ -266,7 +274,7 @@ public class MapCreater : MonoBehaviour
 				Destroy(Data[Itor]);
 				Data.Remove(Itor);
 			}//if
-		}//for
+		}//for*/
 	}
 	// 顯示地圖
 	public void Show(int iRoad)
@@ -299,5 +307,10 @@ public class MapCreater : MonoBehaviour
 			return null;
 
 		return Data[Pos];
+	}
+	// 取得物件數量
+	public int ObjectCount()
+	{
+		return Data.Count;
 	}
 }
