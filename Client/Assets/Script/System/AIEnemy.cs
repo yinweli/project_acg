@@ -51,6 +51,8 @@ public class AIEnemy : MonoBehaviour
             gameObject.AddComponent<EnemyLightStop>();
         else if (ENUM_ModeMonster.Tied == (ENUM_ModeMonster)DBFData.Mode)
             gameObject.AddComponent<EnemyTied>();
+        else if (ENUM_ModeMonster.NoMove == (ENUM_ModeMonster)DBFData.Mode)
+            gameObject.AddComponent<EnemyLeoCat>();            
         else if (ENUM_ModeMonster.Boss == (ENUM_ModeMonster)DBFData.Mode)
 		{
 			iHP += Rule.BossHP(iHP);
@@ -140,6 +142,8 @@ public class AIEnemy : MonoBehaviour
         if(iValue < 0 && GetComponent<EnemyJelly>())
             GetComponent<EnemyJelly>().CreateJelly(iValue);
 
+        AniPlay("Hit");
+
         // 沒血逃跑.
         if (iHP <= 0)
         {
@@ -185,7 +189,7 @@ public class AIEnemy : MonoBehaviour
     // ------------------------------------------------------------------
     public void AniPlay(string Name)
     {
-        if (pAni)
+        if (pAni && pAni.HasState(0, Animator.StringToHash(Name)))
             pAni.Play(Name);
     }
 }

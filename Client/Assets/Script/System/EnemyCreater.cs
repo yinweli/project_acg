@@ -20,7 +20,7 @@ public class EnemyCreater : MonoBehaviour
     public static EnemyCreater pthis = null;
     public Shader pShader;
 
-    public GameObject CameraCtrl;
+    public GameObject ObjCamCtrl;
     // 波數能量.
     public int iEnegry = 0;
 
@@ -114,7 +114,7 @@ public class EnemyCreater : MonoBehaviour
     public void CreateOldEnemy()
     {
         foreach (SaveEnemy itor in DataEnemy.pthis.Data)
-            CreateOneEnemy(itor.iMonster, itor.iHP, itor.fPosX + CameraCtrl.transform.localPosition.x, itor.fPosY + CameraCtrl.transform.localPosition.y);   
+            CreateOneEnemy(itor.iMonster, itor.iHP, itor.fPosX + ObjCamCtrl.transform.localPosition.x, itor.fPosY + ObjCamCtrl.transform.localPosition.y);   
     }
     // ------------------------------------------------------------------
     IEnumerator BossCreater()
@@ -135,7 +135,7 @@ public class EnemyCreater : MonoBehaviour
 				if(iIndex == 0)
 					iIndex = GameDefine.iBossCount;
 
-                CreateOneEnemy(iIndex + 1000, -1, CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));               
+                CreateOneEnemy(iIndex + 1000, -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));               
                 yield return new WaitForSeconds(5.0f);
             }
         }
@@ -154,18 +154,30 @@ public class EnemyCreater : MonoBehaviour
 			yield return new WaitForSeconds(Random.Range(GameDefine.iMinWaitSec, GameDefine.iMaxWaitSec));            
             for (int i = 0; i < ListEnemy.Count; i++)
             {
-                switch (Random.Range(1, 4))
+                DBFMonster DBFData = GameDBF.pthis.GetMonster(ListEnemy[i]) as DBFMonster;
+                // 如果是擋路怪要生在路上.
+                if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.NoMove )
                 {
-                    case 1: //上方.
-                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), CameraCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
-                        break;
-                    case 2: //左方.
-                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f), CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
-                        break;
-                    case 3: //右方.
-                        CreateOneEnemy(ListEnemy[i], -1, CameraCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f), CameraCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
-                        break;
+                    GameObject pObjMap = MapCreater.pthis.GetRoadObj(CameraCtrl.pthis.iNextRoad + Random.Range(7, 10));
+                    if (pObjMap)
+                    {
+                        GameObject pObjMon = CreateOneEnemy(ListEnemy[i], -1, 0, 0);
+                        pObjMon.transform.position = pObjMap.transform.position;
+                    }
                 }
+                else
+                    switch (Random.Range(1, 4))
+                    {
+                        case 1: //上方.
+                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
+                            break;
+                        case 2: //左方.
+                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
+                            break;
+                        case 3: //右方.
+                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
+                            break;
+                    }
                 yield return new WaitForSeconds(0.05f);
             }
         }        
@@ -173,7 +185,7 @@ public class EnemyCreater : MonoBehaviour
     // ------------------------------------------------------------------
     public bool CheckPos(GameObject pObj)
     {
-        if (Vector2.Distance(CameraCtrl.transform.position, pObj.transform.position) > 1.95f)
+        if (Vector2.Distance(ObjCamCtrl.transform.position, pObj.transform.position) > 1.95f)
             return true;
         else
             return false;

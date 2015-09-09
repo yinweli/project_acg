@@ -9,6 +9,8 @@ public class CameraCtrl : MonoBehaviour
     public int iLeaderRoad = 1;
 
     public bool bTestMove = false;
+
+    public GameObject ObjObstacle = null;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -68,6 +70,16 @@ public class CameraCtrl : MonoBehaviour
             ResetPos();
     }
     // ------------------------------------------------------------------
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            AIEnemy pAI = other.gameObject.GetComponent<AIEnemy>();
+            if (pAI && (ENUM_ModeMonster)pAI.DBFData.Mode == ENUM_ModeMonster.NoMove)
+                ObjObstacle = other.gameObject;
+        }
+    }
+    // ------------------------------------------------------------------
     public void LoginMove()
     {
         bTestMove = true;
@@ -113,6 +125,9 @@ public class CameraCtrl : MonoBehaviour
         if (ToolKit.CatchRole.Count <= 0)
             return false;
 
+        if (ObjObstacle)
+            return false;
+        
         return true;
     }
     // ------------------------------------------------------------------
