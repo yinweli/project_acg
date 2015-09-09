@@ -12,6 +12,7 @@ public class GameDefine
 	public const int iPriceDmgLv = 180; // 傷害等級價格
 	public const int iPriceBomb = 300; // 絕招價格
     public const int iPriceLayoff = 300; // 解雇價格.
+    public const int iPriceHire = 300; // 招募價格.
 
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
 	public const int iBatteryCost = iPriceBattery * iBatteryCount; // 電池值價格.

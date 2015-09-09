@@ -25,7 +25,7 @@ public class P_AddMember : MonoBehaviour
         
         //pAni_RandRole.enabled = true;
         pAni_RandRole.speed = 1;
-        pAni_RandRole.Play("RandRole");
+        pAni_RandRole.Play("RandRole", -1, 0f);
     }
     // ------------------------------------------------------------------
     public GameObject CreateRole(GameObject ObjParent, Member pMember)

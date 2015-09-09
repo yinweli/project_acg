@@ -91,8 +91,7 @@ public class G_ListRole : MonoBehaviour
         ObjInfo.SetActive(true);
         ObjFire.SetActive(true);
 
-        pLbLv.gameObject.SetActive(true);
-        ShowLevelUp(0);
+        ShowLevelUp(1);
     }
     // ------------------------------------------------------------------
     public void Layoff()
