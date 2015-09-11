@@ -191,6 +191,19 @@ public class AIPlayer : MonoBehaviour
 			Statistics.pthis.RecordDamage(ENUM_Damage.Shield, 1, GameDefine.iDamageShield);
         }
 	}
+    // ------------------------------------------------------------------
+    // 被魅惑函式.
+    public void BeWitch(GameObject ObjMonster, int iPos)
+    {
+        bBeCaught = true;
+
+        //RoleTalk(true, "Help", 0);
+
+        // 從可抓佇列中移除.
+        ToolKit.CatchRole.Remove(gameObject);
+
+        // 改為走路動作.       
+    }
 	// ------------------------------------------------------------------
 	// 自由函式.
 	public void BeFree()

@@ -13,6 +13,7 @@ public class P_UI : MonoBehaviour
     public GameObject ObjAmmoLight = null;
     public GameObject ObjAmmoHeavy = null;
     public GameObject ObjBomb = null;
+    public GameObject ObjCrystal = null;
 
     public BtnRun pBtn = null;
     public G_Stamina pSta = null;
@@ -23,6 +24,10 @@ public class P_UI : MonoBehaviour
 	public UILabel pLBBattery = null;
 	public UILabel pLBLightAmmo = null;
 	public UILabel pLBHeavyAmmo = null;
+    public UILabel pLbCrystal = null;
+
+    public Animator pCrystalAni = null;
+
     public List<G_Light> pListLight = new List<G_Light>();
 
     float fCoolDown = 1;
@@ -72,7 +77,9 @@ public class P_UI : MonoBehaviour
         UpdateResource();
         UpdateCurrency();
         UpdateStamina();
+        UpdateCrystal();
     }
+    // ------------------------------------------------------------------
     public void StartRecoverSta()
     {
         if (pBtn)
@@ -227,9 +234,24 @@ public class P_UI : MonoBehaviour
         return true;
     }
     // ------------------------------------------------------------------
+    public bool AddCrystal(int iValue)
+    {
+        if (iValue < 0 && DataReward.pthis.iCrystal + iValue < 0)
+            return false;
+
+        Rule.CrystalAdd(iValue);
+        UpdateCrystal();
+        return true;
+    }
+    // ------------------------------------------------------------------
     public void UpdateCurrency()
     {
         pLbCurrency.text = DataPlayer.pthis.iCurrency.ToString();
+    }
+    // ------------------------------------------------------------------
+    public void UpdateCrystal()
+    {
+        pLbCrystal.text = DataReward.pthis.iCrystal.ToString();
     }
     // ------------------------------------------------------------------
     public void UpdateStamina()
@@ -238,4 +260,8 @@ public class P_UI : MonoBehaviour
             pSta.UpdateStamina();
     }
     // ------------------------------------------------------------------
+    public void ShowCrystal()
+    {
+        pCrystalAni.Play("ShowCrystal", -1, 0f);
+    }
 }

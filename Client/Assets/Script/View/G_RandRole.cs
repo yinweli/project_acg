@@ -51,9 +51,6 @@ public class G_RandRole : MonoBehaviour
         {
             Destroy(pObjRoleChild[i]);
             pObjRole[i].SetActive(true);
-        }
-
-        
-    }
-   
+        }        
+    }   
 }

@@ -49,12 +49,22 @@ public class Btn_GetCrystal : MonoBehaviour
 			iCount++;
 			yield return new WaitForEndOfFrame();
 		}
+        P_UI.pthis.ShowCrystal();
+        yield return new WaitForSeconds(0.8f);
 
-		yield return new WaitForSeconds(0.8f);
+        Vector3 VecPos = P_UI.pthis.ObjCrystal.transform.position;
+
+        float fFrame = 1;
+        while (Vector2.Distance(pSprite.transform.position, VecPos) > 0.03f)
+        {
+            yield return new WaitForEndOfFrame();
+            ToolKit.MoveTo(gameObject, VecPos - pSprite.transform.position, 0.82f * fFrame);
+            fFrame += 0.05f;
+        }
 
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Crystal", "", 0);
 		DataPickup.pthis.Data[iItemID].bPickup = true;
-		Rule.CrystalAdd(DataPickup.pthis.Data[iItemID].iCount);
+        P_UI.pthis.AddCrystal(DataPickup.pthis.Data[iItemID].iCount);
 
 		Destroy(gameObject);
 	}

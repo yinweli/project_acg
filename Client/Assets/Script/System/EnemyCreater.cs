@@ -190,5 +190,29 @@ public class EnemyCreater : MonoBehaviour
         else
             return false;
     }
-
+    // ------------------------------------------------------------------
+    public void SetAI(GameObject ObjMoster, ENUM_ModeMonster enumMode)
+    {
+        switch (enumMode)
+        {
+            case ENUM_ModeMonster.ActiveDark:
+                ObjMoster.AddComponent<EnemyLightStop>();
+                break;
+            case ENUM_ModeMonster.Tied:
+                ObjMoster.AddComponent<EnemyTied>();
+                break;
+            case ENUM_ModeMonster.NoMove:
+                ObjMoster.AddComponent<EnemyLeoCat>();
+                break;
+            case ENUM_ModeMonster.Bewitch:
+                ObjMoster.AddComponent<EnemyLeoCat>();
+                break;
+            case ENUM_ModeMonster.Boss:
+                ObjMoster.AddComponent<EnemyBoss>();
+                break;
+            default:
+                ObjMoster.AddComponent<EnemyNormal>();
+                break;
+        }
+    }
 }

@@ -28,8 +28,7 @@ public class AIEnemy : MonoBehaviour
     public Vector3 vecRunDir = Vector3.zero;
 
 	GameObject Burn = null;
-    
-	// Use this for initialization
+    // ------------------------------------------------------------------
 	void Start () 
     {
 		DBFData = GameDBF.pthis.GetMonster(iMonster) as DBFMonster;
@@ -45,22 +44,13 @@ public class AIEnemy : MonoBehaviour
         if (iHP <= 0)
             iHP = DBFData.HP;
 
+        if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.Boss)
+            iHP += Rule.BossHP(iHP);
+
         PosStart = transform.position;
 
-        if (ENUM_ModeMonster.ActiveDark == (ENUM_ModeMonster)DBFData.Mode)
-            gameObject.AddComponent<EnemyLightStop>();
-        else if (ENUM_ModeMonster.Tied == (ENUM_ModeMonster)DBFData.Mode)
-            gameObject.AddComponent<EnemyTied>();
-        else if (ENUM_ModeMonster.NoMove == (ENUM_ModeMonster)DBFData.Mode)
-            gameObject.AddComponent<EnemyLeoCat>();            
-        else if (ENUM_ModeMonster.Boss == (ENUM_ModeMonster)DBFData.Mode)
-		{
-			iHP += Rule.BossHP(iHP);
-            gameObject.AddComponent<EnemyBoss>();
-		}
-        else
-            gameObject.AddComponent<EnemyNormal>();
-	}
+        EnemyCreater.pthis.SetAI(gameObject, (ENUM_ModeMonster)DBFData.Mode);
+    }
     // ------------------------------------------------------------------
     void OnDestroy()
     {
@@ -119,11 +109,11 @@ public class AIEnemy : MonoBehaviour
 		}
     }
     // ------------------------------------------------------------------
-    void OnClick()
+    /*void OnClick()
     {
         if (iHP > 0)
             AddHP(-GameDefine.iDamageClick, false);
-    }
+    }*/
     // ------------------------------------------------------------------
     public void AddHP(int iValue, bool IsCrit)
     {

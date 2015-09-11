@@ -83,6 +83,7 @@ public enum ENUM_ModeMonster
 	ActiveDark, // 黑暗啟動
     Tied, // 綁人.
     NoMove, // 不動.
+    Bewitch, // 迷住.
 	Boss, // 魔王.    
 }
 
