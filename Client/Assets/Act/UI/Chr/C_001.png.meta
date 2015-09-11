@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1441038845
+timeCreated: 1441979061
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -71,6 +71,7 @@ TextureImporter:
     21300128: A_004
     21300130: A_005
     21300132: A_006
+    21300134: C_eye_002
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -703,6 +704,16 @@ TextureImporter:
         y: 127
         width: 19
         height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_eye_002
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 149
+        width: 13
+        height: 11
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
