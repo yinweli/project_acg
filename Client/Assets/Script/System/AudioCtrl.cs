@@ -30,13 +30,14 @@ public class AudioCtrl : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 
-    public void PlayMusic(string Name)
+    public void PlayMusic(string Name, float fVolume)
     {
         pMusic.Stop();
 
         AudioClip ClipBG = Resources.Load("Sound/" + Name) as AudioClip;
         pMusic.clip = ClipBG;
 
+        pMusic.volume = fVolume;
         pMusic.Play();
     }
 
@@ -44,17 +45,8 @@ public class AudioCtrl : MonoBehaviour {
     {
         pMusic.Stop();
 
-        pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 8))) as AudioClip;
+        pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 6))) as AudioClip;
         //pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", iMusic)) as AudioClip;
-
-        pMusic.Play();
-    }
-
-    public void Victory()
-    {
-        pMusic.Stop();
-        pMusic.volume = 0.6f;
-        pMusic.clip = Resources.Load("Sound/BG_Victory") as AudioClip;
 
         pMusic.Play();
     }

@@ -6,7 +6,7 @@ public class P_Login : MonoBehaviour
     void Start()
     {
         // 選音樂.
-        AudioCtrl.pthis.PlayMusic("Start");
+        AudioCtrl.pthis.PlayMusic("Start", 0.9f);
 
         // 建立地圖物件.
         MapCreater.pthis.Show(0);

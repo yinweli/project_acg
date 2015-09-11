@@ -35,7 +35,7 @@ public class P_Victory : MonoBehaviour
         // 死亡人數.
         pLb[4].text = DataGame.pthis.iDead.ToString();
 
-        AudioCtrl.pthis.Victory();
+        AudioCtrl.pthis.PlayMusic("BG_Victory", 0.55f);
         NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);
     }
     // ------------------------------------------------------------------
