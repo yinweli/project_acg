@@ -88,6 +88,7 @@ public class GameDefine
 	public const int iAdsMoneyAdd = 8; // 廣告影片贈送金錢增加值
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
+	public const int iPackupRange = 3; // 拾取物品範圍
 	public const int iPickupMember = 25; // 救援成員出現機率
 	public const int iMaxPickupItems = 24; // 最大拾取物品次數
 	public const int iMinPickupItems = 20; // 最小拾取物品次數
@@ -133,10 +134,6 @@ public class GameDefine
 	public static List<int> StageStyle = new List<int>() // 關卡風格列表
 	{
         0, 1, 2, 3, 
-	};
-	public static List<int> PickupRange = new List<int>() // 拾取範圍列表
-	{
-		-3, -2, -1, 1, 2, 3, 
 	};
 	public static List<MapCoor> ObjtScale = new List<MapCoor>() // 物件尺寸列表
 	{

@@ -23,7 +23,7 @@ public class PickupCreater : MonoBehaviour
 		
 		for(int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
 		{
-			MapCoor Result = new MapCoor(Road.X + Tool.RandomPick(GameDefine.PickupRange), Road.Y + Tool.RandomPick(GameDefine.PickupRange));
+			MapCoor Result = new MapCoor(Road.X + Random.Range(-GameDefine.iPackupRange, GameDefine.iPackupRange), Road.Y + Random.Range(0, GameDefine.iPackupRange));
 			bool bCheck = true;
 			
 			foreach(MapCoor Itor in DataMap.pthis.DataRoad)
