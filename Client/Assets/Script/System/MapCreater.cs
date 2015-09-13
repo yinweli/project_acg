@@ -16,6 +16,25 @@ public class MapCreater : MonoBehaviour
 	{
 		pthis = this;
 	}
+	// 地圖物件覆蓋檢查
+	private bool CheckCover(MapObjt Objt)
+	{
+		if(DataMap.pthis.DataObjt.ContainsKey(Objt.Pos.ToVector2()))
+			return false;
+
+		for(int iX = -2; iX <= 2; ++iX)
+		{
+			for(int iY = -1; iY <= 1; ++iY)
+			{
+				Vector2 Pos = (new MapCoor(Objt.Pos.X + iX, Objt.Pos.Y + iY)).ToVector2();
+
+				if(DataMap.pthis.DataObjt.ContainsKey(Pos) && Objt.Cover(DataMap.pthis.DataObjt[Pos]))
+					return false;
+			}//for
+		}//for
+
+		return true;
+	}
 	// 建立地圖道路
 	private void CreateRoad()
 	{
@@ -95,7 +114,7 @@ public class MapCreater : MonoBehaviour
 				Temp.Width = GameDefine.ObjtStart.X;
 				Temp.Height = GameDefine.ObjtStart.Y;
 
-				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+				DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 			}//if
 
 			// 判斷是否該建立終點物件
@@ -108,7 +127,7 @@ public class MapCreater : MonoBehaviour
 				Temp.Width = GameDefine.ObjtEnd.X;
 				Temp.Height = GameDefine.ObjtEnd.Y;
 				
-				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+				DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 			}//if
 
 			// 建立道路物件
@@ -120,7 +139,7 @@ public class MapCreater : MonoBehaviour
 				Temp.Width = GameDefine.ObjtBase.X;
 				Temp.Height = GameDefine.ObjtBase.Y;
 				
-				DataMap.pthis.DataObjt[Temp.Pos.ToVector2()] = Temp;
+				DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 			}
 		}//for
 
@@ -147,16 +166,8 @@ public class MapCreater : MonoBehaviour
 							Temp.Type = iIndex + (int)ENUM_Map.MapObjt_0;
 							Temp.Width = GameDefine.ObjtScale[iIndex].X;
 							Temp.Height = GameDefine.ObjtScale[iIndex].Y;
-							
-							bool bCheck = true;
 
-							foreach(KeyValuePair<Vector2, MapObjt> ItorObjt in DataMap.pthis.DataObjt)
-							{
-								if(Temp.Cover(ItorObjt.Value))
-									bCheck &= false;
-							}//for
-							
-							if(bCheck)
+							if(CheckCover(Temp))
 								DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 						}//if
 					}//if
@@ -189,35 +200,8 @@ public class MapCreater : MonoBehaviour
 					Temp.Width = GameDefine.ObjtBase.X;
 					Temp.Height = GameDefine.ObjtBase.Y;
 
-					Vector2 PosVec = new Vector2();
-
-					// 重疊檢查
-					PosVec = (new MapCoor(Pos.X - 2, Pos.Y - 1)).ToVector2();
-
-					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
-						continue;
-
-					PosVec = (new MapCoor(Pos.X - 1, Pos.Y - 1)).ToVector2();
-					
-					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
-						continue;
-
-					PosVec = (new MapCoor(Pos.X, Pos.Y - 1)).ToVector2();
-					
-					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
-						continue;
-
-					PosVec = (new MapCoor(Pos.X - 2, Pos.Y)).ToVector2();
-					
-					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
-						continue;
-
-					PosVec = (new MapCoor(Pos.X - 1, Pos.Y)).ToVector2();
-					
-					if(DataMap.pthis.DataObjt.ContainsKey(PosVec) && Temp.Cover(DataMap.pthis.DataObjt[PosVec]))
-						continue;
-
-					DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
+					if(CheckCover(Temp))
+						DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 				}//for
 			}//for
 		}//for
