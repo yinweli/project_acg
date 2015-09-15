@@ -62,6 +62,13 @@ public class Btn_Bomb : MonoBehaviour
         StartCoroutine(CoolDown());
     }
     // ------------------------------------------------------------------
+    public void ResetBomb()
+    {
+        StopAllCoroutines();
+        fCoolDown = 0;
+        pBtn.isEnabled = true;
+    }
+    // ------------------------------------------------------------------
     IEnumerator CoolDown()
     {
         while (fCoolDown > Time.time)

@@ -12,6 +12,13 @@ public class Btn_CrystalShop : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
+        if (DataGame.pthis.iWeaponType[0] == (int)ENUM_Weapon.Null && DataGame.pthis.iWeaponType[1] == (int)ENUM_Weapon.Null)
+        {
+            pLbTime.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            return;
+        }
+
         iTimeCount = GameDefine.iCrystalTime;
         StartCoroutine(IE_CrystalCount());
     }

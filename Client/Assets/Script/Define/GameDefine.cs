@@ -11,6 +11,7 @@ public class GameDefine
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
 	public const int iPriceDmgLv = 180; // 傷害等級價格
 	public const int iPriceBomb = 150; // 絕招價格
+    public const int iPriceWeaponItem = 10; // 武器碎片價格.
     public const int iPriceLayoff = 200; // 解雇價格.
     public const int iPriceHire = 200; // 招募價格.
 

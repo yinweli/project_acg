@@ -169,6 +169,8 @@ public class SaveGame
 	public Pickup[] PickupList = new Pickup[0]; // 地圖拾取列表
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
+    public int[] iWeaponType = new int[2];
+    public int[] iWeaponIndex = new int[2];
 }
 
 public class SaveMap

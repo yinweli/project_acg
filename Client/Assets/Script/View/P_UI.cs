@@ -72,6 +72,9 @@ public class P_UI : MonoBehaviour
         // 設定關卡Title.
         pLbDayNum.text = DataPlayer.pthis.iStage.ToString();
 
+        if (ObjBomb.GetComponent<Btn_Bomb>())
+            ObjBomb.GetComponent<Btn_Bomb>().ResetBomb();
+
         GetComponent<UIPanel>().alpha = 1;
 		AddBattery(0);
         UpdateResource();

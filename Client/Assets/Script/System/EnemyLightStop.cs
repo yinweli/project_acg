@@ -11,6 +11,8 @@ public class EnemyLightStop : MonoBehaviour
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
 
+    GameObject pObjLight = null;
+
     bool bStop = false;
     // ------------------------------------------------------------------
     void Start()
@@ -158,7 +160,13 @@ public class EnemyLightStop : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         if (pAI.iHP > 0 && other.gameObject.tag == "Look")
+        {
+            pObjLight = other.gameObject;
             bStop = true;
+        }
+
+        if(bStop && !pObjLight)
+            bStop = false;
     }
     // ------------------------------------------------------------------
     void OnTriggerExit2D(Collider2D other)

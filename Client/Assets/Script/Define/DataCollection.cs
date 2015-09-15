@@ -46,10 +46,7 @@ public class DataCollection : MonoBehaviour
 	// 新增收集
 	public void Add(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
-		if(Weapon == ENUM_Weapon.Count)
-			return;
-
-		if(Weapon == ENUM_Weapon.Count)
+		if(Weapon == ENUM_Weapon.Null || Weapon == ENUM_Weapon.Count)
 			return;
 
 		if(iLevel <= 0 || iLevel > GameDefine.iMaxCollectionLv)

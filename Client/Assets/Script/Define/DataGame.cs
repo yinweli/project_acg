@@ -16,6 +16,9 @@ public class DataGame : MonoBehaviour
     public int iDead = 0; // 死亡數.
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
+
+    public int[] iWeaponType = new int[2];
+    public int[] iWeaponIndex = new int[2];
         
 	/* Not Save */
 	public float fRunDouble = 1.0f; // 跑步速度倍率.
@@ -35,6 +38,8 @@ public class DataGame : MonoBehaviour
 		Temp.iDead = iDead;
 		Temp.iRoad = iRoad;
 		Temp.bVictory = bVictory;
+        Temp.iWeaponType = iWeaponType;
+        Temp.iWeaponIndex = iWeaponIndex;
 		
 		PlayerPrefs.SetString(GameDefine.szSaveGame, Json.ToString(Temp));
 	}
@@ -55,6 +60,8 @@ public class DataGame : MonoBehaviour
 		iDead = Temp.iDead;
 		iRoad = Temp.iRoad;
 		bVictory = Temp.bVictory;
+        iWeaponType = Temp.iWeaponType;
+        iWeaponIndex = Temp.iWeaponIndex;
 
 		return true;
 	}
@@ -67,6 +74,8 @@ public class DataGame : MonoBehaviour
         iDead = 0;
 		iRoad = 0;
 		bVictory = false;
+        iWeaponType = new int[2];
+        iWeaponIndex = new int[2];
     }
 	// 清除存檔
 	public void ClearSave()

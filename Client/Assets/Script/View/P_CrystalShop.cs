@@ -4,24 +4,35 @@ using System.Collections;
 public class P_CrystalShop : MonoBehaviour
 {
     public Btn_CrystalShop pMan;
+    public UILabel pLbCrystal = null;
     public UILabel pLbTime = null;
+    public UILabel pSrc = null;
 
-    public UISprite[] pS_Weapon = new UISprite[2];
-    public UILabel[] pLb_Index = new UILabel[2];
-    public UISprite[] pS_Box = new UISprite[2];
+    public GameObject[] ObjItem = new GameObject[2];
     // ------------------------------------------------------------------
 	// Use this for initialization
 	void Start () 
     {
-        for (int i = 0; i < SysMain.pthis.pCollect.Length; i++)
+        for (int i = 0; i < DataGame.pthis.iWeaponType.Length; i++)
         {
-            pS_Weapon[i].spriteName = string.Format("ui_w{0:00}", (int)SysMain.pthis.pCollect[i].Weapon);
-            pS_Weapon[i].MakePixelPerfect();
-            pS_Weapon[i].gameObject.transform.localScale = ToolKit.GetWeaponIconScale(SysMain.pthis.pCollect[i].Weapon);
-            pS_Box[i].color = SysMain.pthis.ColorLv[SysMain.pthis.pCollect[i].iLevel];
-            pLb_Index[i].text = WeaponTransIndex(SysMain.pthis.pCollect[i].iIndex);
+            ENUM_Weapon pType = (ENUM_Weapon)DataGame.pthis.iWeaponType[i];
+
+            // 如果沒R到物品就隱藏
+            if (pType == ENUM_Weapon.Null)               
+                continue;
+
+            ObjItem[i].SetActive(true);
+            
+            if (ObjItem[i] && ObjItem[i].GetComponent<G_WeaponItem>())
+                ObjItem[i].GetComponent<G_WeaponItem>().SetInfo(pType, WeaponTransIndex(DataGame.pthis.iWeaponIndex[i]));
         }
-	}
+        // 更動位置.
+        if (ObjItem[0] && ObjItem[0].GetComponent<G_WeaponItem>())
+            ObjItem[0].GetComponent<G_WeaponItem>().SetPos(ObjItem[1].activeSelf);
+
+        if (ObjItem[1] && ObjItem[1].GetComponent<G_WeaponItem>())
+            ObjItem[1].GetComponent<G_WeaponItem>().SetPos(ObjItem[0].activeSelf);
+    }
     // ------------------------------------------------------------------
 	// Update is called once per frame
 	void Update () 
@@ -32,18 +43,22 @@ public class P_CrystalShop : MonoBehaviour
             return;
         }
 
+        if (!ObjItem[0].activeSelf && !ObjItem[1].activeSelf)
+            pSrc.text = "Sold Out!!!";
+
         pLbTime.text = string.Format("{0:00}:{1:00}", pMan.iTimeCount / 60, pMan.iTimeCount % 60);
+        pLbCrystal.text = DataReward.pthis.iCrystal.ToString();
 	}
     // ------------------------------------------------------------------
     public string WeaponTransIndex(int iIndex)
     {
-        if (iIndex == 0)
+        if (iIndex == 1)
             return "A";
-        else if (iIndex == 1)
-            return "B";
         else if (iIndex == 2)
-            return "C";
+            return "B";
         else if (iIndex == 3)
+            return "C";
+        else if (iIndex == 4)
             return "D";
         else
             return "E";

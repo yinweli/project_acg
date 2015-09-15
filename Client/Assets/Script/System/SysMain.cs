@@ -26,8 +26,6 @@ public class SysMain : MonoBehaviour
     bool bIsOld = true;
 
     public float fSaveTime = 0;
-
-    public Collection[] pCollect = new Collection[2];
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -48,6 +46,9 @@ public class SysMain : MonoBehaviour
 		bIsOld &= DataMap.pthis.Load();
 		bIsOld &= DataPickup.pthis.Load();
         bIsOld &= DataPlayer.pthis.Load();
+
+        for (int i = 0; i < DataGame.pthis.iWeaponType.Length; i++)
+            Debug.Log("Index: " + i + "/" + DataGame.pthis.iWeaponType.Length + " Weapon Type: " + (ENUM_Weapon)DataGame.pthis.iWeaponType[i] + " Index: " + DataGame.pthis.iWeaponIndex[i]);
 
         if (!bIsOld)
             CreateNew();
@@ -165,11 +166,11 @@ public class SysMain : MonoBehaviour
         Rule.AddDamageReset();
 		Rule.BombReset();
 		Rule.ShieldReset();
-        for (int i = 0; i < pCollect.Length;i++ )
-        {
-            pCollect[i] = Rule.RandomCollect();
-            Debug.Log(pCollect[i].ToStringData());
-        }
+        Rule.RandomCollect();
+
+        for (int i = 0; i < DataGame.pthis.iWeaponType.Length; i++)
+            Debug.Log("Index: " + i + "/" + DataGame.pthis.iWeaponType.Length + " Weapon Type: " + (ENUM_Weapon)DataGame.pthis.iWeaponType[i] + " Index: " + DataGame.pthis.iWeaponIndex[i]);
+
 
 		DataGame.pthis.fRunDouble = 1.0f;
 

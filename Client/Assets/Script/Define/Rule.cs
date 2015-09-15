@@ -724,25 +724,23 @@ public class Rule
 		return UpgradeWeaponLMG(GetWeaponLevel(ENUM_Weapon.LMG));
 	}
     // 隨機過關的的水晶物品.
-    public static Collection RandomCollect()
+    public static void RandomCollect()
     {
-        Collection pCollect = new Collection("");
-
-        pCollect.Weapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null, (int)ENUM_Weapon.Count);
-
-        if (pCollect.Weapon == ENUM_Weapon.Null)
-            return pCollect;
-
-        if (GetWeaponLevel(pCollect.Weapon) == GameDefine.iMaxCollectionLv)
+        for(int i=0; i < DataGame.pthis.iWeaponType.Length; i++)
         {
-            pCollect.Weapon = ENUM_Weapon.Null;
-            return pCollect;
+            DataGame.pthis.iWeaponType[i] = Random.Range((int)ENUM_Weapon.Null, (int)ENUM_Weapon.Count);
+
+            if (DataGame.pthis.iWeaponType[i] == (int)ENUM_Weapon.Null)
+                continue;
+
+            if (GetWeaponLevel((ENUM_Weapon)DataGame.pthis.iWeaponType[i]) == GameDefine.iMaxCollectionLv)
+            {
+                DataGame.pthis.iWeaponType[i] = (int)ENUM_Weapon.Null;
+                continue;
+            }
+            DataGame.pthis.iWeaponIndex[i] = Random.Range(1, GameDefine.iMaxCollectionCount + 1);
         }
-
-        pCollect.iLevel = GetWeaponLevel(pCollect.Weapon) + 1;
-        pCollect.iIndex = Random.Range(0, GameDefine.iMaxCollectionCount);
-
-        return pCollect;
+        DataGame.pthis.Save();
     }
 	// 取得是否要出現魔王關
 	public static bool AppearBossStage()
