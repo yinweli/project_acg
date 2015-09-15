@@ -5,8 +5,6 @@ public class G_Upgrade : MonoBehaviour
 {
     public ENUM_Weapon pWeapon = ENUM_Weapon.Null;
 
-    public Color[] ColorLv = new Color[7]; 
-
     public UISprite pS_Icon;
     public UISprite pS_AbilityBg;
     public UISprite[] pS_CollectIcon = new UISprite[5];
@@ -46,11 +44,12 @@ public class G_Upgrade : MonoBehaviour
 		string szHelp = GameDBF.pthis.GetLanguage(6000 + (int)pWeapon);
 
         ChangeValue(iLevel, iLevelNext);
-		if(pWeapon == ENUM_Weapon.Light)
-		{            
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1);
 
+        foreach (UISprite itor in pS_CollectIcon)
+            itor.gameObject.transform.localScale = ToolKit.GetWeaponIconScale(pWeapon);
+        
+		if(pWeapon == ENUM_Weapon.Light)
+		{
             //pS_Icon.
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponLight(iLevel).Item1);
@@ -61,9 +60,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.Knife)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.7f, 0.8f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponKnife(iLevel));
 			
@@ -73,9 +69,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.Pistol)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.75f, 0.85f, 1);
-
 			int iValue = (int)((1.0f - Rule.UpgradeWeaponPistol(iLevel)) * 100.0f);
 			int iValueNext = (int)((1.0f - Rule.UpgradeWeaponPistol(iLevelNext)) * 100.0f);
 			
@@ -88,9 +81,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.Revolver)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.7f, 0.8f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponRevolver(iLevel));
 			
@@ -100,9 +90,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.Eagle)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.65f, 0.8f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponEagle(iLevel));
 			
@@ -112,9 +99,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.SUB)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.6f, 0.7f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponSUB(iLevel));
 			
@@ -124,9 +108,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.Rifle)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.43f, 0.6f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponRifle(iLevel));
 			
@@ -136,9 +117,6 @@ public class G_Upgrade : MonoBehaviour
 		
 		if(pWeapon == ENUM_Weapon.LMG)
 		{
-            foreach (UISprite itor in pS_CollectIcon)
-                itor.gameObject.transform.localScale = new Vector3(0.5f, 0.7f, 1);
-
 			if(iLevel > 0)
 				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, Rule.UpgradeWeaponLMG(iLevel));
 			
@@ -149,14 +127,14 @@ public class G_Upgrade : MonoBehaviour
     // ------------------------------------------------------------------
     void ChangeValue(int iLv, int iNextLv)
     {
-        pLb_Lv.color = ColorLv[iLv];
-        pS_AbilityBg.color = ColorLv[iLv];
+        pLb_Lv.color = SysMain.pthis.ColorLv[iLv];
+        pS_AbilityBg.color = SysMain.pthis.ColorLv[iLv];
         for (int i = 0; i < pS_CollectIcon.Length; i++)
         {
-            if (iNextLv >= ColorLv.Length)
-                pS_Collect[i].color = ColorLv[iLv];
+            if (iNextLv >= SysMain.pthis.ColorLv.Length)
+                pS_Collect[i].color = SysMain.pthis.ColorLv[iLv];
             else
-                pS_Collect[i].color = ColorLv[iNextLv];
+                pS_Collect[i].color = SysMain.pthis.ColorLv[iNextLv];
 
             if (iLv < GameDefine.iMaxCollectionLv && !DataCollection.pthis.IsExist(pWeapon, iNextLv, i + 1))
             {                

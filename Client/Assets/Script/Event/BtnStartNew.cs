@@ -11,6 +11,9 @@ public class BtnStartNew : MonoBehaviour
         DataPlayer.pthis.iStage++;
 
         SysMain.pthis.NewStage();
+
+        if (pPanel.GetComponent<P_Victory>())
+            pPanel.GetComponent<P_Victory>().ClearPage();
         Destroy(pPanel);
     }
 }

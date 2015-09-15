@@ -14,6 +14,8 @@ public class GameDefine
     public const int iPriceLayoff = 200; // 解雇價格.
     public const int iPriceHire = 200; // 招募價格.
 
+    public const int iCrystalTime = 120; // 水晶商人出現時間.
+
     public const int iBatteryCount = 30; // 電池值購買一單位數量.
 	public const int iBatteryCost = iPriceBattery * iBatteryCount; // 電池值價格.
 	public const int iLightAmmoCount = 30; // 輕型彈藥購買一單位數量.

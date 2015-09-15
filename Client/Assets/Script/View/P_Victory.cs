@@ -11,6 +11,8 @@ public class P_Victory : MonoBehaviour
 
     public GameObject[] ObjPage = new GameObject[3];
     public UILabel[] pLb = new UILabel[5];
+
+    public GameObject ObjCrystalShop = null;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -18,9 +20,7 @@ public class P_Victory : MonoBehaviour
     }
     // ------------------------------------------------------------------
     void Start()
-    {
-        SysUI.pthis.pVictory = this;
-
+    {        
 		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
 		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
 
@@ -39,11 +39,6 @@ public class P_Victory : MonoBehaviour
         NGUITools.PlaySound(Resources.Load("Sound/FX/Victory") as AudioClip);
     }
     // ------------------------------------------------------------------
-    public void OnDestory()
-    {
-        AudioCtrl.pthis.pMusic.volume = 1f;
-    }
-    // ------------------------------------------------------------------
     public void ChangePage(int iPage)
     {
         ObjPage[iPage].SetActive(false);
@@ -51,5 +46,16 @@ public class P_Victory : MonoBehaviour
 
         if (ObjPage[iPage + 1] && ObjPage[iPage + 1].GetComponent<G_Feature>())
             ObjPage[iPage + 1].GetComponent<G_Feature>().OpenPage();
+
+        if (iPage + 1 == 2)
+            ObjCrystalShop = SysUI.pthis.CreatePanel("Prefab/P_CrystalMan");
+    }
+    // ------------------------------------------------------------------
+    public void ClearPage()
+    {
+        AudioCtrl.pthis.pMusic.volume = 1f;
+
+        if (ObjCrystalShop)
+            Destroy(ObjCrystalShop);
     }
 }

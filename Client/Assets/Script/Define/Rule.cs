@@ -723,6 +723,27 @@ public class Rule
 	{
 		return UpgradeWeaponLMG(GetWeaponLevel(ENUM_Weapon.LMG));
 	}
+    // 隨機過關的的水晶物品.
+    public static Collection RandomCollect()
+    {
+        Collection pCollect = new Collection("");
+
+        pCollect.Weapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null, (int)ENUM_Weapon.Count);
+
+        if (pCollect.Weapon == ENUM_Weapon.Null)
+            return pCollect;
+
+        if (GetWeaponLevel(pCollect.Weapon) == GameDefine.iMaxCollectionLv)
+        {
+            pCollect.Weapon = ENUM_Weapon.Null;
+            return pCollect;
+        }
+
+        pCollect.iLevel = GetWeaponLevel(pCollect.Weapon) + 1;
+        pCollect.iIndex = Random.Range(0, GameDefine.iMaxCollectionCount);
+
+        return pCollect;
+    }
 	// 取得是否要出現魔王關
 	public static bool AppearBossStage()
 	{

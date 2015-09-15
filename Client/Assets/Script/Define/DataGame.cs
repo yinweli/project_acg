@@ -16,7 +16,7 @@ public class DataGame : MonoBehaviour
     public int iDead = 0; // 死亡數.
 	public int iRoad = 0; // 目前位置
 	public bool bVictory = false; // 勝利旗標
-
+        
 	/* Not Save */
 	public float fRunDouble = 1.0f; // 跑步速度倍率.
     

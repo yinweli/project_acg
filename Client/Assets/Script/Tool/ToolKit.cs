@@ -97,4 +97,25 @@ public class ToolKit : MonoBehaviour
 
         return ObjRHand;
     }
+    // ------------------------------------------------------------------
+    static public Vector3 GetWeaponIconScale(ENUM_Weapon pWeapon)
+    {        
+        if (pWeapon == ENUM_Weapon.Knife)
+            return new Vector3(0.7f, 0.8f, 1);
+        else if (pWeapon == ENUM_Weapon.Pistol)
+            return new Vector3(0.75f, 0.85f, 1);
+        else if (pWeapon == ENUM_Weapon.Revolver)
+            return new Vector3(0.7f, 0.8f, 1);
+        else if (pWeapon == ENUM_Weapon.Eagle)
+            return new Vector3(0.65f, 0.8f, 1);
+        else if (pWeapon == ENUM_Weapon.SUB)
+            return new Vector3(0.6f, 0.7f, 1);
+        else if (pWeapon == ENUM_Weapon.Rifle)
+            return new Vector3(0.43f, 0.6f, 1);
+        else if (pWeapon == ENUM_Weapon.LMG)
+            return new Vector3(0.5f, 0.7f, 1);
+        else
+            return new Vector3(1.2f, 1.2f, 1);
+    }
+    // ------------------------------------------------------------------
 }

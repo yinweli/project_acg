@@ -4,7 +4,6 @@ using System.Collections;
 public class SysUI : MonoBehaviour 
 {
     static public SysUI pthis = null;
-    public P_Victory pVictory = null;
     // ------------------------------------------------------------------
     void Awake()
     {

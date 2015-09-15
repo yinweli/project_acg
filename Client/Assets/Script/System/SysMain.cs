@@ -12,6 +12,8 @@ public class SysMain : MonoBehaviour
     // 跑步是否為冷卻中
     public bool bCanRun = true;
 
+    public Color[] ColorLv = new Color[7]; 
+
     // 人物佇列.
     public Dictionary<GameObject, int> Role = new Dictionary<GameObject, int>();
     // 死亡人物佇列.
@@ -24,6 +26,8 @@ public class SysMain : MonoBehaviour
     bool bIsOld = true;
 
     public float fSaveTime = 0;
+
+    public Collection[] pCollect = new Collection[2];
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -161,6 +165,12 @@ public class SysMain : MonoBehaviour
         Rule.AddDamageReset();
 		Rule.BombReset();
 		Rule.ShieldReset();
+        for (int i = 0; i < pCollect.Length;i++ )
+        {
+            pCollect[i] = Rule.RandomCollect();
+            Debug.Log(pCollect[i].ToStringData());
+        }
+
 		DataGame.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.
