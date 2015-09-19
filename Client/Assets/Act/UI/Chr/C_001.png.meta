@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1442068165
+timeCreated: 1442667688
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -79,6 +79,10 @@ TextureImporter:
     21300144: C_001_0
     21300146: C_mouth_001
     21300148: C_Adorn_B_010
+    21300150: C_Adorn_B_012
+    21300152: C_Adorn_B_013
+    21300154: C_Adorn_B_014
+    21300156: C_Adorn_B_015
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -791,6 +795,46 @@ TextureImporter:
         y: 108
         width: 32
         height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_012
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 142
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_013
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 118
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_014
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 49
+        width: 67
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: C_Adorn_B_015
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 81
+        width: 68
+        height: 33
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
