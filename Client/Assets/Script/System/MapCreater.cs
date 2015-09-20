@@ -146,35 +146,24 @@ public class MapCreater : MonoBehaviour
 		// 建立一般物件
 		foreach(MapCoor Itor in DataMap.pthis.DataRoad)
 		{
-			foreach(ENUM_Dir ItorDir in System.Enum.GetValues(typeof(ENUM_Dir)))
+			for(int iCount = 0; iCount < GameDefine.iObjDensity; ++iCount)
 			{
-				int iProb = GameDefine.iObjtProb;
-				int iInterval = 1;
+				MapCoor Pos = new MapCoor(Itor.X + Random.Range(-GameDefine.iMapBorder, GameDefine.iMapBorder + 1), 
+				                          Itor.Y + Random.Range(-GameDefine.iMapBorder, GameDefine.iMapBorder + 1));
+
+				if(Itor.X == Pos.X && Itor.Y == Pos.Y)
+					continue;
+
+				int iIndex = Random.Range(0, GameDefine.ObjtScale.Count);
+				MapObjt Temp = new MapObjt();
 				
-				while(iProb > 0)
-				{
-					if(Random.Range(0, 100) < iProb)
-					{
-						MapCoor Pos = Itor.Add(ItorDir, iInterval);
-						
-						if(Pos.X >= 0 && Pos.Y >= 0)
-						{
-							int iIndex = Random.Range(0, GameDefine.ObjtScale.Count);
-							MapObjt Temp = new MapObjt();
+				Temp.Pos = Pos;
+				Temp.Type = iIndex + (int)ENUM_Map.MapObjt_0;
+				Temp.Width = GameDefine.ObjtScale[iIndex].X;
+				Temp.Height = GameDefine.ObjtScale[iIndex].Y;
 
-							Temp.Pos = Pos;
-							Temp.Type = iIndex + (int)ENUM_Map.MapObjt_0;
-							Temp.Width = GameDefine.ObjtScale[iIndex].X;
-							Temp.Height = GameDefine.ObjtScale[iIndex].Y;
-
-							if(CheckCover(Temp))
-								DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
-						}//if
-					}//if
-					
-					iProb -= GameDefine.iObjtDec;
-					iInterval++;
-				}//while
+				if(CheckCover(Temp))
+					DataMap.pthis.DataObjt.Add(Temp.Pos.ToVector2(), Temp);
 			}//for
 		}//for
 
@@ -214,30 +203,31 @@ public class MapCreater : MonoBehaviour
 		Clear();
 		CreateRoad();
 		CreateObjt();
+		RefreshRoad();
 	}
+	public void RefreshRoad()
+	{
+		foreach(KeyValuePair<Vector2, MapObjt> Itor in DataMap.pthis.DataObjt)
+		{
+			if(Data.ContainsKey(Itor.Value.Pos.ToVector2()))
+				continue;
 
-    public void CreateAll()
-    {
-        foreach (KeyValuePair<Vector2, MapObjt> Itor in DataMap.pthis.DataObjt)
-        {
-            if (Data.ContainsKey(Itor.Value.Pos.ToVector2()))
-                continue;
+			ENUM_Map emType = (ENUM_Map)Itor.Value.Type;
 
-            if (DataMap.pthis.DataObjt.ContainsKey(Itor.Value.Pos.ToVector2()) == false)
-                continue;
+			if(emType != ENUM_Map.MapRoad)
+				continue;
 
-            float fPosX = Itor.Value.Pos.ToVector2().x + (Itor.Value.Width * GameDefine.iBlockSize) / 2;
-            float fPosY = Itor.Value.Pos.ToVector2().y + (Itor.Value.Height * GameDefine.iBlockSize) / 2;
-
-            Data.Add(Itor.Value.Pos.ToVector2(), UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Value.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
-        }
-    }
-
+			Vector2 PosVec = Itor.Value.Pos.ToVector2();
+			float fPosX = PosVec.x + (Itor.Value.Width * GameDefine.iBlockSize) / 2;
+			float fPosY = PosVec.y + (Itor.Value.Height * GameDefine.iBlockSize) / 2;
+			
+			Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, emType.ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
+		}
+	}
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
 		MapCoor RoadPos = DataMap.pthis.DataRoad.Count > iRoad ? DataMap.pthis.DataRoad[iRoad] : new MapCoor();
-		//HashSet<Vector2> InvalidPos = new HashSet<Vector2>(Data.Keys);
 
 		// 建立新物件
 		for(int iX = -GameDefine.iMapBorder; iX <= GameDefine.iMapBorder; ++iX)
@@ -250,8 +240,6 @@ public class MapCreater : MonoBehaviour
 					continue;
 
 				Vector2 PosVec = Pos.ToVector2();
-
-				//InvalidPos.Remove(PosVec);
 
 				if(Data.ContainsKey(PosVec))
 					continue;
@@ -267,22 +255,11 @@ public class MapCreater : MonoBehaviour
 				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)pObjt.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
 			}//for
 		}//for
-		/*
-		// 刪除不需要物件
-		foreach(Vector2 Itor in InvalidPos)
-		{
-			if(Data.ContainsKey(Itor))
-			{
-				Destroy(Data[Itor]);
-				Data.Remove(Itor);
-			}//if
-		}//for*/
 	}
 	// 顯示地圖
 	public void Show(int iRoad)
 	{
-		//Refresh(iRoad);
-        CreateAll();
+		Refresh(iRoad);
 		transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
 	}
 	// 清除地圖

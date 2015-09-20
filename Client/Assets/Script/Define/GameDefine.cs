@@ -74,6 +74,7 @@ public class GameDefine
 	public const int iCrystalStage = 6; // 水晶最小出現關卡
 	public const int iCrystalRatio = 20; // 水晶出現機率
 	public const int iCrystalCount = 8; // 水晶出現數量
+	public const int iCollectionRatio = 20; // 收集物品出現機率
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
@@ -84,8 +85,7 @@ public class GameDefine
 	public const int iPathStart = 12; // 起點路徑長度
 	public const int iPathMin = 4; // 最小路徑長度
 	public const int iPathMax = 12; // 最長路徑長度
-	public const int iObjtProb = 50; // 物件出現機率
-	public const int iObjtDec = 2; // 物件遞減機率
+	public const int iObjDensity = 12; // 物件密度
 
 	public const int iAdsMoneyBase = 200; // 廣告影片贈送金錢基礎值
 	public const int iAdsMoneyAdd = 8; // 廣告影片贈送金錢增加值

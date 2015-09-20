@@ -579,7 +579,8 @@ public class Rule
 	// 拾取收集物品, 傳回是否完成
 	public static bool CollectionAdd(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
-		DataCollection.pthis.Add(Weapon, iLevel, iIndex);
+		if(DataCollection.pthis.Add(Weapon, iLevel, iIndex) == false)
+			return false;
 
 		bool bResult = true;
 
@@ -726,20 +727,28 @@ public class Rule
     // 隨機過關的的水晶物品.
     public static void RandomCollect()
     {
-        for(int i=0; i < DataGame.pthis.iWeaponType.Length; i++)
+        for(int i = 0; i < DataGame.pthis.iWeaponType.Length; ++i)
         {
-            DataGame.pthis.iWeaponType[i] = Random.Range((int)ENUM_Weapon.Null, (int)ENUM_Weapon.Count);
+			DataGame.pthis.iWeaponType[i] = (int)ENUM_Weapon.Null;
+			DataGame.pthis.iWeaponIndex[i] = 0;
 
-            if (DataGame.pthis.iWeaponType[i] == (int)ENUM_Weapon.Null)
-                continue;
+			if(Random.Range(0, 100) <= GameDefine.iCollectionRatio)
+			{
+				ENUM_Weapon emWeapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null + 1, (int)ENUM_Weapon.Count);
+				int iLevel = System.Math.Min(GetWeaponLevel(emWeapon) + 1, GameDefine.iMaxCollectionLv);
+				List<int> Temp = new List<int>();
 
-            if (GetWeaponLevel((ENUM_Weapon)DataGame.pthis.iWeaponType[i]) == GameDefine.iMaxCollectionLv)
-            {
-                DataGame.pthis.iWeaponType[i] = (int)ENUM_Weapon.Null;
-                continue;
-            }
-            DataGame.pthis.iWeaponIndex[i] = Random.Range(1, GameDefine.iMaxCollectionCount + 1);
-        }
+				for(int iPos = 0; iPos < GameDefine.iMaxCollectionCount; ++iPos)
+				{
+					if(DataCollection.pthis.IsExist(emWeapon, iLevel, iPos) == false)
+						Temp.Add(iPos);
+				}//for
+
+				DataGame.pthis.iWeaponType[i] = (int)emWeapon;
+				DataGame.pthis.iWeaponIndex[i] = Tool.RandomPick(Temp);
+			}//if
+        }//for
+
         DataGame.pthis.Save();
     }
 	// 取得是否要出現魔王關

@@ -44,45 +44,42 @@ public class DataCollection : MonoBehaviour
 		return true;
 	}
 	// 新增收集
-	public void Add(ENUM_Weapon Weapon, int iLevel, int iIndex)
+	public bool Add(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
 		if(Weapon == ENUM_Weapon.Null || Weapon == ENUM_Weapon.Count)
-			return;
+			return false;
 
 		if(iLevel <= 0 || iLevel > GameDefine.iMaxCollectionLv)
-			return;
+			return false;
 
 		if(iIndex <= 0 || iIndex > GameDefine.iMaxCollectionCount)
-			return;
+			return false;
+
+		Collection Temp = new Collection(Weapon, iLevel, iIndex);
+		string szTemp = Temp.ToStringData();
+
+		if(Data.Any((Itor) => Itor.ToStringData() == szTemp))
+			return false;
 
 		Data.Add(new Collection(Weapon, iLevel, iIndex));
+
+		return true;
 	}
 	// 刪除收集
 	public void Del(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
 		string szTemp = (new Collection(Weapon, iLevel, iIndex)).ToStringData();
+		int iPos = Data.FindIndex((Itor) => Itor.ToStringData() == szTemp);
 
-		for(int iPos = 0; iPos < Data.Count; ++iPos)
-		{
-			if(Data[iPos].ToStringData() == szTemp)
-			{
-				Data.RemoveAt(iPos);
-				return;
-			}//if
-		}//for
+		if(iPos > 0 && iPos < Data.Count)
+			Data.RemoveAt(iPos);
 	}
 	// 檢查收集是否存在
 	public bool IsExist(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{
 		string szTemp = (new Collection(Weapon, iLevel, iIndex)).ToStringData();
 
-		foreach(Collection Itor in Data)
-		{
-			if(Itor.ToStringData() == szTemp)
-				return true;
-		}//for
-
-		return false;
+		return Data.Any((Itor) => Itor.ToStringData() == szTemp);
 	}
 	// 清除資料
 	public void Clear()
