@@ -213,8 +213,26 @@ public class MapCreater : MonoBehaviour
 
 		Clear();
 		CreateRoad();
-		CreateObjt();		
+		CreateObjt();
 	}
+
+    public void CreateAll()
+    {
+        foreach (KeyValuePair<Vector2, MapObjt> Itor in DataMap.pthis.DataObjt)
+        {
+            if (Data.ContainsKey(Itor.Value.Pos.ToVector2()))
+                continue;
+
+            if (DataMap.pthis.DataObjt.ContainsKey(Itor.Value.Pos.ToVector2()) == false)
+                continue;
+
+            float fPosX = Itor.Value.Pos.ToVector2().x + (Itor.Value.Width * GameDefine.iBlockSize) / 2;
+            float fPosY = Itor.Value.Pos.ToVector2().y + (Itor.Value.Height * GameDefine.iBlockSize) / 2;
+
+            Data.Add(Itor.Value.Pos.ToVector2(), UITool.pthis.CreateMap(gameObject, ((ENUM_Map)Itor.Value.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
+        }
+    }
+
 	// 更新地圖
 	public void Refresh(int iRoad)
 	{
@@ -263,7 +281,8 @@ public class MapCreater : MonoBehaviour
 	// 顯示地圖
 	public void Show(int iRoad)
 	{
-		Refresh(iRoad);
+		//Refresh(iRoad);
+        CreateAll();
 		transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
 	}
 	// 清除地圖

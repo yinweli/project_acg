@@ -22,11 +22,11 @@ public class EnemyBewitch : MonoBehaviour
             return;
 
         // 沒血逃跑.
-        if (pAI.iHP <= 0)
+        /*if (pAI.iHP <= 0)
         {
             Run();
             return;
-        }
+        }*/
 
         // 已有抓人逃跑模式.
         if (pAI.bHasTarget)
@@ -35,37 +35,14 @@ public class EnemyBewitch : MonoBehaviour
             return;
         }
 
-        // 如果有目標且沒抓人時，追蹤目標
         Chace();
     }
-    // ------------------------------------------------------------------
-    // 逃跑.
-    void Run()
-    {
-        // 播放逃跑動作.
-        pAI.AniPlay("Escape");
-
-        if (vecRunDir == Vector3.zero)
-            GetDir();
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 4);
-
-        if (EnemyCreater.pthis.CheckPos(gameObject))
-            Destroy(gameObject);
-    }
-    // ------------------------------------------------------------------
+     // ------------------------------------------------------------------
     // 把人帶走.
     void Take()
     {
         // 播放抓人動作.
         pAI.AniPlay("Catch");
-
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 0.55f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
@@ -102,38 +79,21 @@ public class EnemyBewitch : MonoBehaviour
             Catch();
             // 調整面向.
             pAI.FaceTo(ObjTarget.transform.position - transform.position);
-            // 追追追.
-            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.GetSpeed());
         }
         // 沒有目標可抓就慢速追個角色.
-        else if (SysMain.pthis.Role.Count > 0)
-        {
-            GameObject pTempObj = null;
-            foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Role)
-            {
-                if (!pTempObj || Vector2.Distance(transform.position, itor.Key.transform.position) < Vector2.Distance(transform.position, pTempObj.transform.position))
-                    pTempObj = itor.Key;
-            }
-            if (pTempObj != null)
-            {
-                // 調整面向.
-                pAI.FaceTo(pTempObj.transform.position - transform.position);
-                ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.GetSpeed() * 0.4f);
-            }
-            return;
-        }
+        else
+            pAI.AniPlay("Wait");
     }
     // ------------------------------------------------------------------
     // 施放魅惑抓人.
     void Catch()
     {
         // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 0.175f)
+        if (GetDistance(gameObject, ObjTarget) < 1.0f)
         {
             pAI.bHasTarget = true;
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, 1);
-            GetDir();
+                ObjTarget.GetComponent<AIPlayer>().BeWitch(gameObject, 1);
         }
     }
     // ------------------------------------------------------------------
@@ -141,19 +101,6 @@ public class EnemyBewitch : MonoBehaviour
     float GetDistance(GameObject ObjMe, GameObject ObjYou)
     {
         return Vector2.Distance(ObjMe.transform.position, ObjYou.transform.position);
-    }
-    // ------------------------------------------------------------------
-    // 取得移動向量.
-    void GetDir()
-    {
-        if (pAI.bHasTarget)
-        {
-            vecRunDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
-            if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
-                ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
-        }
-        else
-            vecRunDir = pAI.PosStart - transform.position;
     }
     // ------------------------------------------------------------------
 }

@@ -166,31 +166,68 @@ public class EnemyCreater : MonoBehaviour
             {
                 DBFMonster DBFData = GameDBF.pthis.GetMonster(ListEnemy[i]) as DBFMonster;
                 // 如果是擋路怪要生在路上.
-                if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.NoMove )
-                {
-                    GameObject pObjMap = MapCreater.pthis.GetRoadObj(CameraCtrl.pthis.iNextRoad + Random.Range(7, 10));
-                    if (pObjMap)
-                    {
-                        GameObject pObjMon = CreateOneEnemy(ListEnemy[i], -1, 0, 0);
-                        pObjMon.transform.position = pObjMap.transform.position;
-                    }
-                }
+                if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.NoMove)
+                    CreateByRoad(ListEnemy[i]);
+                // 魅惑怪需要生在路附近.
+                else if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.Bewitch)
+                    CreateByStandOutRoad(ListEnemy[i]);
                 else
-                    switch (Random.Range(1, 4))
-                    {
-                        case 1: //上方.
-                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
-                            break;
-                        case 2: //左方.
-                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-470.0f, -520.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
-                            break;
-                        case 3: //右方.
-                            CreateOneEnemy(ListEnemy[i], -1, ObjCamCtrl.transform.localPosition.x + Random.Range(470.0f, 520.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(-300.0f, 400.0f));
-                            break;
-                    }
+                    CreateByNormal(ListEnemy[i]);
                 yield return new WaitForSeconds(0.05f);
             }
         }        
+    }
+    // ------------------------------------------------------------------
+    void CreateByNormal(int iMonster)
+    {
+        Vector2 pCamPos = ObjCamCtrl.transform.localPosition;
+        switch (Random.Range(1, 4))
+        {
+            case 1: //上方.
+                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(-500.0f, 500.0f), pCamPos.y + Random.Range(380.0f, 450.0f));
+                break;
+            case 2: //左方.
+                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(-470.0f, -520.0f), pCamPos.y + Random.Range(-300.0f, 400.0f));
+                break;
+            case 3: //右方.
+                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(470.0f, 520.0f), pCamPos.y + Random.Range(-300.0f, 400.0f));
+                break;
+        }
+    }
+    // ------------------------------------------------------------------
+    void CreateByRoad(int iMonster)
+    {
+        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
+
+        if (DataMap.pthis.DataRoad.Count > iRoad)
+        {
+            GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
+            pObjMon.transform.position = GetRoadPos(iRoad);
+        }
+    }
+    // ------------------------------------------------------------------
+    void CreateByStandOutRoad(int iMonster)
+    {
+        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
+        if (DataMap.pthis.DataRoad.Count > iRoad)
+        {
+            GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
+            pObjMon.transform.position = GetRoadPos(iRoad);
+
+            int iRand = Random.Range(3, 11);
+            float fPosX = 0;
+            if (iRand < 7)
+                fPosX = pObjMon.transform.localPosition.x + (GameDefine.iBlockSize * iRand);
+            else
+                fPosX = pObjMon.transform.localPosition.x + (-GameDefine.iBlockSize * (iRand - 4));
+
+            pObjMon.transform.localPosition = new Vector2(fPosX, pObjMon.transform.localPosition.y);
+        }
+    }
+    // ------------------------------------------------------------------
+    public Vector2 GetRoadPos(int iRoad)
+    {
+        return MapCreater.pthis.GetRoadObj(iRoad).transform.position;
     }
     // ------------------------------------------------------------------
     public bool CheckPos(GameObject pObj)
@@ -215,7 +252,7 @@ public class EnemyCreater : MonoBehaviour
                 ObjMoster.AddComponent<EnemyLeoCat>();
                 break;
             case ENUM_ModeMonster.Bewitch:
-                ObjMoster.AddComponent<EnemyLeoCat>();
+                ObjMoster.AddComponent<EnemyBewitch>();
                 break;
             case ENUM_ModeMonster.Boss:
                 ObjMoster.AddComponent<EnemyBoss>();

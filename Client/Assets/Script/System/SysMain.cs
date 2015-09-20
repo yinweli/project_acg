@@ -47,9 +47,6 @@ public class SysMain : MonoBehaviour
 		bIsOld &= DataPickup.pthis.Load();
         bIsOld &= DataPlayer.pthis.Load();
 
-        for (int i = 0; i < DataGame.pthis.iWeaponType.Length; i++)
-            Debug.Log("Index: " + i + "/" + DataGame.pthis.iWeaponType.Length + " Weapon Type: " + (ENUM_Weapon)DataGame.pthis.iWeaponType[i] + " Index: " + DataGame.pthis.iWeaponIndex[i]);
-
         if (!bIsOld)
             CreateNew();
     }
@@ -111,8 +108,6 @@ public class SysMain : MonoBehaviour
         // 選音樂.
         AudioCtrl.pthis.RedomMusic();
 
-        Debug.Log("Old Game");
-
         bCanRun = true;
         // 重新計算數值.
         DataPlayer.pthis.iStaminaLimit = Rule.StaminaLimit();
@@ -147,9 +142,10 @@ public class SysMain : MonoBehaviour
     // 建立新關卡.
     public void NewStage()
     {
+        System.GC.Collect();
+
         // 選音樂.
         AudioCtrl.pthis.RedomMusic();
-        Debug.Log("New Game");
         // 清空遊戲資料.
         DataGame.pthis.Clear();
 		DataPickup.pthis.Clear();
@@ -168,11 +164,7 @@ public class SysMain : MonoBehaviour
 		Rule.ShieldReset();
         Rule.RandomCollect();
 
-        for (int i = 0; i < DataGame.pthis.iWeaponType.Length; i++)
-            Debug.Log("Index: " + i + "/" + DataGame.pthis.iWeaponType.Length + " Weapon Type: " + (ENUM_Weapon)DataGame.pthis.iWeaponType[i] + " Index: " + DataGame.pthis.iWeaponIndex[i]);
-
-
-		DataGame.pthis.fRunDouble = 1.0f;
+ 		DataGame.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.
 		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);

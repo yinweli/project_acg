@@ -10,6 +10,8 @@ public class CameraCtrl : MonoBehaviour
 
     public bool bTestMove = false;
 
+    public bool bTest = false;
+
     public GameObject ObjObstacle = null;
     // ------------------------------------------------------------------
     void Awake()
@@ -89,7 +91,7 @@ public class CameraCtrl : MonoBehaviour
     void ResetPos()
     {
         iNextRoad = 1;
-        MapCreater.pthis.Refresh(iNextRoad);
+        //MapCreater.pthis.Refresh(iNextRoad);
         transform.localPosition = Vector3.zero;
         Camera.main.gameObject.transform.localPosition = Vector3.zero;
     }
@@ -114,11 +116,14 @@ public class CameraCtrl : MonoBehaviour
         transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
 
 		Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime * Camera.main.gameObject.transform.localScale.x;
-        MapCreater.pthis.Refresh(iNextRoad);
+        //MapCreater.pthis.Refresh(iNextRoad);
     }
     // ------------------------------------------------------------------
     public bool CheckCanMove()
     {
+        if (bTest)
+            return false;
+
         if (bTestMove)
             return true;
 

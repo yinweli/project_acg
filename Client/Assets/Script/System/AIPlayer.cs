@@ -195,14 +195,21 @@ public class AIPlayer : MonoBehaviour
     // 被魅惑函式.
     public void BeWitch(GameObject ObjMonster, int iPos)
     {
+        Debug.Log(gameObject.name + " be Charm.");
         bBeCaught = true;
 
         //RoleTalk(true, "Help", 0);
+        // 拿手電筒的不需要改目標.
+        if (pWeapon != ENUM_Weapon.Light)
+            ObjTarget = ObjMonster;
 
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
 
-        // 改為走路動作.       
+        gameObject.AddComponent<PlayerCharm>().ObjTarget = ObjMonster;
+
+        // 改為走路動作.
+        pAction.PlayRun();
     }
 	// ------------------------------------------------------------------
 	// 自由函式.
@@ -214,7 +221,11 @@ public class AIPlayer : MonoBehaviour
             ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer) - 20);
         else
             ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
-		Destroy(gameObject.GetComponent<PlayerFollow>());
+
+        if (GetComponent<PlayerFollow>())
+		    Destroy(GetComponent<PlayerFollow>());
+        if (GetComponent<PlayerCharm>())
+            Destroy(GetComponent<PlayerCharm>());
 
         StartCoroutine(ResetDeadPos());
         pAction.PlayRun();
@@ -244,11 +255,13 @@ public class AIPlayer : MonoBehaviour
             fMyMoveSpeed = GameDefine.fBaseSpeed * 3; 
 		
 		Vector3 vecDirection = MapCreater.pthis.GetRoadObj(iRoad).transform.position - transform.position;
-		
+
+        ToolKit.LocalMoveTo(gameObject, vecDirection, fMyMoveSpeed);
+        /*
 		// 把z歸零, 因為沒有要動z值.
 		vecDirection.z = 0;
 		// 把物件位置朝目標向量(玩家方向)移動.
-		transform.localPosition += vecDirection.normalized * fMyMoveSpeed * Time.deltaTime;
+		transform.localPosition += vecDirection.normalized * fMyMoveSpeed * Time.deltaTime;*/
 		
 		if (iPlayer == 0)
 		{

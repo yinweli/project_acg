@@ -52,6 +52,14 @@ public class ToolKit : MonoBehaviour
         pObj.transform.position += vecDirection.normalized * fSpeed * Time.deltaTime;
     }
     // ------------------------------------------------------------------
+    static public void LocalMoveTo(GameObject pObj, Vector3 vecDirection, float fSpeed)
+    {
+        // 把z歸零, 因為沒有要動z值.
+        vecDirection.z = 0;
+        // 把物件位置朝目標向量(玩家方向)移動.
+        pObj.transform.localPosition += vecDirection.normalized * fSpeed * Time.deltaTime;
+    }
+    // ------------------------------------------------------------------
     static public UI2DSprite ChangeTo2DSprite(SpriteRenderer pRender)
     {
         pRender.gameObject.transform.localScale = Vector3.one;
