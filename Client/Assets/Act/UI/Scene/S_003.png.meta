@@ -1,6 +1,25 @@
 fileFormatVersion: 2
 guid: b1aaa6eb2592c0040b45430a44202add
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: S_003_0
+    21300002: S_003_1
+    21300004: S_003_2
+    21300006: S_003_3
+    21300008: S_003_4
+    21300010: S_003_5
+    21300012: S_003_6
+    21300014: S_003_7
+    21300016: S_003_8
+    21300018: S_003_9
+    21300020: S_003_10
+    21300022: S_003_11
+    21300024: S_003_Road
+    21300026: S_003_Base
+    21300028: S_003_Start
+    21300030: S_003_End
+    21300032: S_003_ExitBg
+    21300034: S_003_Exit
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -19,6 +38,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -29,6 +51,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -224,3 +247,5 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

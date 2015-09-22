@@ -31,7 +31,9 @@ public class P_Failed : MonoBehaviour
 		DataPickup.pthis.Clear();
 
 		// 設為新遊戲.
-		SysMain.pthis.NewRoleData();        
+		SysMain.pthis.NewRoleData();
+
+        SysMain.pthis.SaveGame();
     }
 
     public void OnDestory()

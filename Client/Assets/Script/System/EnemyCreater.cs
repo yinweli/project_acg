@@ -199,7 +199,7 @@ public class EnemyCreater : MonoBehaviour
     {
         int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
 
-        if (DataMap.pthis.DataRoad.Count > iRoad)
+        if (iRoad < DataMap.pthis.DataRoad.Count)
         {
             GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
             pObjMon.transform.position = GetRoadPos(iRoad);
@@ -227,7 +227,14 @@ public class EnemyCreater : MonoBehaviour
     // ------------------------------------------------------------------
     public Vector2 GetRoadPos(int iRoad)
     {
-        return MapCreater.pthis.GetRoadObj(iRoad).transform.position;
+
+        if (MapCreater.pthis.GetRoadObj(iRoad))
+            return MapCreater.pthis.GetRoadObj(iRoad).transform.position;
+        else
+        {
+            Debug.Log("iRoad: " + iRoad + " Obj: " + MapCreater.pthis.GetRoadObj(iRoad));
+            return Vector2.zero;
+        }
     }
     // ------------------------------------------------------------------
     public bool CheckPos(GameObject pObj)
@@ -253,6 +260,8 @@ public class EnemyCreater : MonoBehaviour
                 break;
             case ENUM_ModeMonster.Bewitch:
                 ObjMoster.AddComponent<EnemyBewitch>();
+                break;
+            case ENUM_ModeMonster.Shield:
                 break;
             case ENUM_ModeMonster.Boss:
                 ObjMoster.AddComponent<EnemyBoss>();

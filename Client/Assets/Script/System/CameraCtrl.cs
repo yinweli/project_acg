@@ -136,6 +136,11 @@ public class CameraCtrl : MonoBehaviour
         return true;
     }
     // ------------------------------------------------------------------
+    public GameObject GetMyObj()
+    {
+        return gameObject;
+    }
+    // ------------------------------------------------------------------
     IEnumerator ReStart()
     {
         yield return new WaitForSeconds(2);

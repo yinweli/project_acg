@@ -65,6 +65,15 @@ public class SysMain : MonoBehaviour
         // 沒有玩家資料就算失敗了.
         if (bIsGaming && DataPlayer.pthis.MemberParty.Count <= DeadRole.Count)
             Failed();
+
+        // 檢查是否所有成員都被魅惑.
+        foreach(KeyValuePair<GameObject, int> itor in Role)
+        {
+            if (!itor.Key.GetComponent<PlayerCharm>())
+                return;            
+        }
+        if (bIsGaming)
+            Failed();
 	}
     // ------------------------------------------------------------------
     void OnApplicationQuit()

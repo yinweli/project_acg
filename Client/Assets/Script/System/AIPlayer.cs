@@ -85,6 +85,9 @@ public class AIPlayer : MonoBehaviour
 	{
 		if (pWeapon == ENUM_Weapon.Null || pWeapon == ENUM_Weapon.Light)
 			return;
+
+        if (GetComponent<PlayerCharm>())
+            return;
 		
 		// 確認目標.
         if (!bBeCaught)
@@ -195,13 +198,12 @@ public class AIPlayer : MonoBehaviour
     // 被魅惑函式.
     public void BeWitch(GameObject ObjMonster, int iPos)
     {
-        Debug.Log(gameObject.name + " be Charm.");
         bBeCaught = true;
 
         //RoleTalk(true, "Help", 0);
-        // 拿手電筒的不需要改目標.
-        if (pWeapon != ENUM_Weapon.Light)
-            ObjTarget = ObjMonster;
+        // 拿手電筒的不能再拖動光線方向.
+        if (pWeapon == ENUM_Weapon.Light && ObjTarget)
+            ObjTarget.SetActive(false);
 
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
@@ -209,7 +211,7 @@ public class AIPlayer : MonoBehaviour
         gameObject.AddComponent<PlayerCharm>().ObjTarget = ObjMonster;
 
         // 改為走路動作.
-        pAction.PlayRun();
+        pAction.PlayCharm();
     }
 	// ------------------------------------------------------------------
 	// 自由函式.
@@ -226,6 +228,10 @@ public class AIPlayer : MonoBehaviour
 		    Destroy(GetComponent<PlayerFollow>());
         if (GetComponent<PlayerCharm>())
             Destroy(GetComponent<PlayerCharm>());
+
+        // 恢復手電筒控制權.
+        if (pWeapon == ENUM_Weapon.Light && ObjTarget)
+            ObjTarget.SetActive(true);
 
         StartCoroutine(ResetDeadPos());
         pAction.PlayRun();
@@ -296,7 +302,10 @@ public class AIPlayer : MonoBehaviour
     // ------------------------------------------------------------------
 	public void FaceTo(int iFaceTo, GameObject FaceObj)
 	{
-        if (transform.position.x < ObjTarget.transform.position.x)
+        if (!FaceObj)
+            return;
+
+        if (transform.position.x < FaceObj.transform.position.x)
             ObjHuman.transform.localScale = new Vector3(1 * iFaceTo, 1, 1);
         else
             ObjHuman.transform.localScale = new Vector3(-1 * iFaceTo, 1, 1);

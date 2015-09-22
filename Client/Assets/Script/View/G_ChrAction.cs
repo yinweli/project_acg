@@ -24,7 +24,7 @@ public class G_ChrAction : MonoBehaviour
     public void PlayRun()
     {
         if (pAni)
-            pAni.Play("Run");
+            pAni.Play("Run",-1,0);
     }
     // ------------------------------------------------------------------
     public void PlayAtk(GameObject ObjTarget)
@@ -32,15 +32,21 @@ public class G_ChrAction : MonoBehaviour
         FaceTo(1, ObjTarget);
 
         if (pAni)
-            pAni.Play("Shot");
+            pAni.Play("Shot", -1, 0);
         if (pWAni)
-            pWAni.Play("Fire");	
+            pWAni.Play("Fire", -1, 0);	
     }
     // ------------------------------------------------------------------
     public void PlayBreak()
     {
         if (pAni)
             pAni.Play("Break");
+    }
+    // ------------------------------------------------------------------
+    public void PlayCharm()
+    {
+        if (pAni)
+            pAni.Play("Charm", -1, 0);
     }
     // ------------------------------------------------------------------
     public void FaceTo(int iFaceTo, GameObject FaceObj)

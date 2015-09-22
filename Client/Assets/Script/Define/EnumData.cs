@@ -84,6 +84,7 @@ public enum ENUM_ModeMonster
     Tied, // 綁人.
     NoMove, // 不動.
     Bewitch, // 迷住.
+    Shield, // 迷惑盾
 	Boss, // 魔王.    
 }
 

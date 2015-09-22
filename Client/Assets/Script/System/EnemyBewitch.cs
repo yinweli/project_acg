@@ -8,8 +8,7 @@ public class EnemyBewitch : MonoBehaviour
 
     // 目標.
     public GameObject ObjTarget = null;
-    // 方向.
-    public Vector3 vecRunDir = Vector3.zero;
+    public GameObject ObjBullet = null;
     // ------------------------------------------------------------------
     void Start()
     {
@@ -22,14 +21,14 @@ public class EnemyBewitch : MonoBehaviour
             return;
 
         // 沒血逃跑.
-        /*if (pAI.iHP <= 0)
+        if (pAI.iHP <= 0)
         {
             Run();
             return;
-        }*/
+        }
 
         // 已有抓人逃跑模式.
-        if (pAI.bHasTarget)
+        if (ObjBullet != null || pAI.bHasTarget)
         {
             Take();
             return;
@@ -37,14 +36,29 @@ public class EnemyBewitch : MonoBehaviour
 
         Chace();
     }
-     // ------------------------------------------------------------------
+    // ------------------------------------------------------------------
+    // 逃跑.
+    void Run()
+    {
+        // 播放逃跑動作.
+        pAI.AniPlay("Escape");
+
+        // 調整面向.
+        pAI.FaceTo(transform.position - CameraCtrl.pthis.GetMyObj().transform.position);
+
+        ToolKit.MoveTo(gameObject, transform.position - CameraCtrl.pthis.GetMyObj().transform.position, pAI.GetSpeed() * 4);
+
+        if (EnemyCreater.pthis.CheckPos(gameObject))
+            Destroy(gameObject);
+    }
+    // ------------------------------------------------------------------
     // 把人帶走.
     void Take()
     {
         // 播放抓人動作.
         pAI.AniPlay("Catch");
 
-        if (EnemyCreater.pthis.CheckPos(gameObject))
+        if (EnemyCreater.pthis.CheckPos(gameObject) && GetDistance(gameObject, ObjTarget) < 0.3f)
         {
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
                 ObjTarget.GetComponent<AIPlayer>().BeKill();
@@ -89,11 +103,15 @@ public class EnemyBewitch : MonoBehaviour
     void Catch()
     {
         // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 1.0f)
+        if (GetDistance(gameObject, ObjTarget) < 1.5f)
         {
             pAI.bHasTarget = true;
+
             if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeWitch(gameObject, 1);
+            {
+                ObjBullet = UITool.pthis.CreateUIByPos(gameObject.transform.parent.gameObject, "G_Love", gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
+                ObjBullet.GetComponent<AIBullet_Bewitch>().InitBullet(ObjTarget, pAI, this);
+            }
         }
     }
     // ------------------------------------------------------------------
