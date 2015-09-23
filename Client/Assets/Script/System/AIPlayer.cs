@@ -219,10 +219,14 @@ public class AIPlayer : MonoBehaviour
 	{
 		bBeCaught = false;
         // 重新加入可抓佇列中.
-        if (ObjCatch)
-            ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer) - 20);
-        else
-            ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
+
+        if (!ToolKit.CatchRole.ContainsKey(gameObject))
+        {
+            if (ObjCatch)
+                ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer) - 20);
+            else
+                ToolKit.CatchRole.Add(gameObject, Rule.MemberThreat(iPlayer));
+        }        
 
         if (GetComponent<PlayerFollow>())
 		    Destroy(GetComponent<PlayerFollow>());

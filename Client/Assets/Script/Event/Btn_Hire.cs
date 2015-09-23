@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Btn_Hire : MonoBehaviour
 {
-    public GameObject ObjQuestion = null;
+    public UISprite pS_Check = null;
     // ------------------------------------------------------------------
     void Start()
     {
@@ -22,24 +22,27 @@ public class Btn_Hire : MonoBehaviour
         {
             if (GetComponent<UIButton>())
                 GetComponent<UIButton>().isEnabled = false;
-            ObjQuestion.SetActive(true);
+            pS_Check.color = Color.gray;
         }
         else
         {
             if (GetComponent<UIButton>())
                 GetComponent<UIButton>().isEnabled = true;
-            ObjQuestion.SetActive(false);
+            pS_Check.color = Color.white;
         }
 
         if (DataPlayer.pthis.MemberParty.Count >= GameDefine.iMaxMemberParty)
             if (GetComponent<UIButton>())
+            {
                 GetComponent<UIButton>().isEnabled = false;
+                pS_Check.color = Color.gray;
+            }
     }	
     // ------------------------------------------------------------------
     public void MovePos(Vector3 vecTarget)
     {
         transform.position = vecTarget;
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 50, 0);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - 43, 0);
         CheckStatu();
     }
 }

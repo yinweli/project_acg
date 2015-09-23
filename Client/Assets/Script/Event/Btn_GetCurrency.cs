@@ -63,9 +63,12 @@ public class Btn_GetCurrency : MonoBehaviour {
 
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Currency", "", 0);
 
-        DataPickup.pthis.Data[iItemID].bPickup = true;
-		Rule.CurrencyAdd(DataPickup.pthis.Data[iItemID].iCount);
-        P_UI.pthis.UpdateCurrency();
+        if (iItemID < DataPickup.pthis.Data.Count)
+        {
+            DataPickup.pthis.Data[iItemID].bPickup = true;
+            Rule.CurrencyAdd(DataPickup.pthis.Data[iItemID].iCount);
+            P_UI.pthis.UpdateCurrency();
+        }       
 
         Destroy(gameObject);
     }

@@ -15,7 +15,7 @@ public class AIBullet_Bewitch : MonoBehaviour
             Destroy(gameObject);
 
         // 追追追.
-        ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, fSpeed * 1.5f);
+        ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, fSpeed * 1.8f);
 
         // 距離夠近就魅惑.
         if (Vector2.Distance(gameObject.transform.position, ObjTarget.transform.position) < 0.015f)

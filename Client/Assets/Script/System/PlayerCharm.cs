@@ -19,9 +19,6 @@ public class PlayerCharm : MonoBehaviour
         if (!SysMain.pthis.bIsGaming)
             return;
 
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) < 0.15f)
-            return;
-
         WalktoTarget();
     }
     // ------------------------------------------------------------------
@@ -33,15 +30,15 @@ public class PlayerCharm : MonoBehaviour
     // ------------------------------------------------------------------
     void WalktoTarget()
     {
-        vecRunDir = ObjTarget.transform.position - transform.position;
-
         if (!ObjTarget)
         {
             Destroy(this);
             return;
         }
+        vecRunDir = ObjTarget.transform.position - transform.position;
 
-        ToolKit.LocalMoveTo(gameObject, vecRunDir, GameDefine.fBaseSpeed * 1.5f);
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) > 0.15f)          
+            ToolKit.LocalMoveTo(gameObject, vecRunDir, GameDefine.fBaseSpeed * 1.5f);
 
         if (vecRunDir.x > 0)
             GetComponent<AIPlayer>().FaceTo(-1, ObjTarget);

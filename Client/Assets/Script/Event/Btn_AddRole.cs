@@ -10,7 +10,7 @@ public class Btn_AddRole : MonoBehaviour
     {
         Lb_Money.text = GameDefine.iPriceHire.ToString();
 
-        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire || DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepot)
             pBtn.isEnabled = false;
         else
             pBtn.isEnabled = true;
@@ -18,7 +18,7 @@ public class Btn_AddRole : MonoBehaviour
     // ------------------------------------------------------------------
 	void OnClick()
     {
-        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire)
+        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire || DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepot)
             return;
 
         DataPlayer.pthis.iCurrency -= GameDefine.iPriceHire;

@@ -57,12 +57,13 @@ public class P_AddMember : MonoBehaviour
     // ------------------------------------------------------------------
     public void CheckShowEnd(int iIndex)
     {
-        Debug.Log("Right: " + pRandRole.iRightIndex + "Now: " + iIndex);
         if (pRandRole.iRightIndex != iIndex)
             return;
 
+        pAni_RandRole.Play("Normal", -1, 0f);
         pAni_RandRole.speed = 0;
         pHireList.Refresh();
+        pHireList.PickNew();
     }
     // ------------------------------------------------------------------
     public void MoveSelect(int iSelect)

@@ -55,6 +55,9 @@ public class EnemyBewitch : MonoBehaviour
     // 把人帶走.
     void Take()
     {
+        if (!ObjTarget)
+            return;
+
         // 播放抓人動作.
         pAI.AniPlay("Catch");
 
@@ -102,6 +105,9 @@ public class EnemyBewitch : MonoBehaviour
     // 施放魅惑抓人.
     void Catch()
     {
+        if (!ObjTarget)
+            return;
+
         // 檢查距離是否可抓抓.
         if (GetDistance(gameObject, ObjTarget) < 1.5f)
         {
