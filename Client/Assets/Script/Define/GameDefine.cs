@@ -73,7 +73,8 @@ public class GameDefine
 
 	public const int iCrystalStage = 6; // 水晶最小出現關卡
 	public const int iCrystalRatio = 20; // 水晶出現機率
-	public const int iCrystalCount = 8; // 水晶出現數量
+	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
+	public const int iCrystalNormal = 3; // 一般關卡水晶出現數量
 	public const int iCollectionRatio = 20; // 收集物品出現機率
 
 	public const int iBlockSize = 64; // 格子尺寸

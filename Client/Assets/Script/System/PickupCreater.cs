@@ -160,7 +160,7 @@ public class PickupCreater : MonoBehaviour
 			
 			Data.Pos = NextPickup();
 			Data.iType = (int)ENUM_Pickup.Crystal;
-			Data.iCount = GameDefine.iCrystalCount;
+			Data.iCount = Rule.AppearBossStage() ? GameDefine.iCrystalBoss : GameDefine.iCrystalNormal;
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
