@@ -756,15 +756,4 @@ public class Rule
 	{
 		return DataPlayer.pthis.iStage % GameDefine.iBossStage == 0;
 	}
-	// 取得是否要出現水晶
-	public static bool AppearCrystal()
-	{
-		if(AppearBossStage())
-			return true;
-
-		if(DataPlayer.pthis.iStage >= GameDefine.iCrystalStage && Random.Range(0, 100) <= GameDefine.iCrystalRatio)
-			return true;
-
-		return false;
-	}
 }
