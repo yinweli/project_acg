@@ -732,6 +732,9 @@ public class Rule
 			DataGame.pthis.iWeaponType[i] = (int)ENUM_Weapon.Null;
 			DataGame.pthis.iWeaponIndex[i] = 0;
 
+			if(DataReward.pthis.iCrystal <= 0 && DataPlayer.pthis.iStage <= GameDefine.iCrystalStage)
+				continue;
+
 			if(Random.Range(0, 100) <= GameDefine.iCollectionRatio)
 			{
 				ENUM_Weapon emWeapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null + 1, (int)ENUM_Weapon.Count);

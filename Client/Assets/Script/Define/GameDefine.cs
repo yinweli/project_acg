@@ -72,7 +72,6 @@ public class GameDefine
     public const int iJellyGrow = 60; // 軟泥損失多少血量會出新軟泥.
 
 	public const int iCrystalStage = 6; // 水晶最小出現關卡
-	public const int iCrystalRatio = 20; // 水晶出現機率
 	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
 	public const int iCrystalNormal = 3; // 一般關卡水晶出現數量
 	public const int iCollectionRatio = 20; // 收集物品出現機率
@@ -99,9 +98,9 @@ public class GameDefine
 	public const int iMaxPickupValue = 24; // 最大拾取物品價值
 	public const int iMinPickupValue = 20; // 最小拾取物品價值
 	public const int iPickupProbBomb = 15; // 拾取物品(絕招)出現機率
-	public const float fPickupPartLightAmmo = 0.15f; // 拾取物品(輕型彈藥)比例
-	public const float fPickupPartHeavyAmmo = 0.15f; // 拾取物品(重型彈藥)比例
-	public const float fPickupPartBattery = 0.2f; // 拾取物品(電池)比例
+	public const float fPickupPartLightAmmo = 0.25f; // 拾取物品(輕型彈藥)比例
+	public const float fPickupPartHeavyAmmo = 0.25f; // 拾取物品(重型彈藥)比例
+	public const float fPickupPartBattery = 0.1f; // 拾取物品(電池)比例
 
 	public const int iEquipExtraParty = 20; // 隊伍額外裝備機率值
 	public const int iEquipExtraDepot = 40; // 角色庫額外裝備機率值

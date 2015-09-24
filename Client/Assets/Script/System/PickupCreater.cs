@@ -154,7 +154,7 @@ public class PickupCreater : MonoBehaviour
 		}//if
 		
 		// 水晶拾取
-		if(Rule.AppearBossStage() || (DataPlayer.pthis.iStage >= GameDefine.iCrystalStage && Random.Range(0, 100) <= GameDefine.iCrystalRatio))
+		if(DataPlayer.pthis.iStage >= GameDefine.iCrystalStage)
 		{
 			Pickup Data = new Pickup();
 			

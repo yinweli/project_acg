@@ -71,4 +71,15 @@ public class DataRecord : MonoBehaviour
 	{
 		Data.Clear();
 	}
+	// 清除存檔
+	public void ClearSave()
+	{
+		Clear();
+		PlayerPrefs.DeleteKey(GameDefine.szSaveReward);
+
+		for(int iPos = 0, iMax = PlayerPrefs.GetInt(GameDefine.szSaveRecordCount); iPos < iMax; ++iPos)
+			PlayerPrefs.DeleteKey(GameDefine.szSaveRecord + iPos);
+
+		PlayerPrefs.DeleteKey(GameDefine.szSaveRecordCount);
+	}
 }
