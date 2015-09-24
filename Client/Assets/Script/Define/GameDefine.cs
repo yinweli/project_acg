@@ -71,7 +71,7 @@ public class GameDefine
 	public const int iBossCount = 2; // 魔王數量
     public const int iJellyGrow = 60; // 軟泥損失多少血量會出新軟泥.
 
-	public const int iCrystalStage = 6; // 水晶最小出現關卡
+	public const int iCrystalStage = 5; // 水晶最小出現關卡
 	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
 	public const int iCrystalNormal = 3; // 一般關卡水晶出現數量
 	public const int iCollectionRatio = 20; // 收集物品出現機率
