@@ -68,7 +68,8 @@ public class EnemyCreater : MonoBehaviour
         List<int> pEnemy = Rule.MonsterList();
         
         int iTempEnegry = iEnegry;
-		bool bNoMove = false;
+		bool bRoadblock = false;
+		bool bSuccubus = false;
 		
 		while (iTempEnegry > 0)
 		{
@@ -84,8 +85,17 @@ public class EnemyCreater : MonoBehaviour
 			// 只產生一隻擋路怪
 			if((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.NoMove)
 			{
-				if(bNoMove == false)
-					bNoMove = true;
+				if(bRoadblock == false)
+					bRoadblock = true;
+				else 
+					continue;
+			}//if
+
+			// 只產生一隻魅魔
+			if((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.Bewitch)
+			{
+				if(bSuccubus == false)
+					bSuccubus = true;
 				else 
 					continue;
 			}//if
