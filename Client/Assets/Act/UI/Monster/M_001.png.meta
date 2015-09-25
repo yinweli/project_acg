@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3944e0b17f3afb44dbdfde1667545a58
-timeCreated: 1442072693
+timeCreated: 1443193276
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -76,6 +76,10 @@ TextureImporter:
     21300138: M_007_b11
     21300140: M_007_b12
     21300142: M_007_b15
+    21300144: item_001
+    21300146: item_002
+    21300148: item_003
+    21300150: item_004
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -838,6 +842,46 @@ TextureImporter:
         y: 70
         width: 53
         height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: item_001
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 263
+        width: 51
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: item_002
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 263
+        width: 45
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: item_003
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 339
+        width: 71
+        height: 53
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: item_004
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 283
+        width: 8
+        height: 34
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
