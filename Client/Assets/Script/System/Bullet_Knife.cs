@@ -15,7 +15,7 @@ public class Bullet_Knife : MonoBehaviour
 			if (other.gameObject.GetComponent<AIEnemy>())
 			{
 				other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
-				Statistics.pthis.RecordDamage(ENUM_Damage.Knife, 1, Damage.Item1);
+				Statistics.pthis.RecordHit(ENUM_Damage.Knife, Damage.Item1, true);
 			}//if
 
 			Destroy(gameObject);

@@ -52,19 +52,23 @@ public class EditorStatistics : Editor
 			GUILayout.BeginVertical("box");
 
 			GUILayout.BeginHorizontal("box");
-			GUILayout.Label("Type", GUILayout.Width(80.0f));
-			GUILayout.Label("Bullet", GUILayout.Width(80.0f));
-			GUILayout.Label("Damage", GUILayout.Width(80.0f));
-			GUILayout.Label("Average", GUILayout.Width(80.0f));
+			GUILayout.Label("Type", GUILayout.Width(65.0f));
+			GUILayout.Label("Shot", GUILayout.Width(65.0f));
+			GUILayout.Label("Hit", GUILayout.Width(65.0f));
+			GUILayout.Label("Rate", GUILayout.Width(65.0f));
+			GUILayout.Label("Dmg", GUILayout.Width(65.0f));
+			GUILayout.Label("Avg", GUILayout.Width(65.0f));
 			GUILayout.EndHorizontal();
 
 			foreach(KeyValuePair<ENUM_Damage, StatDamage> Itor in Target.DataDamage)
 			{
 				GUILayout.BeginHorizontal("box");
-				GUILayout.Label(Itor.Key.ToString(), GUILayout.Width(80.0f));
-				GUILayout.Label(Itor.Value.iBullet.ToString(), GUILayout.Width(80.0f));
-				GUILayout.Label(Itor.Value.iDamage.ToString(), GUILayout.Width(80.0f));
-				GUILayout.Label(Itor.Value.Average().ToString(), GUILayout.Width(80.0f));
+				GUILayout.Label(Itor.Key.ToString(), GUILayout.Width(65.0f));
+				GUILayout.Label(Itor.Value.iShot.ToString(), GUILayout.Width(65.0f));
+				GUILayout.Label(Itor.Value.iHit.ToString(), GUILayout.Width(65.0f));
+				GUILayout.Label(Itor.Value.HitRate().ToString("F"), GUILayout.Width(65.0f));
+				GUILayout.Label(Itor.Value.iDamage.ToString(), GUILayout.Width(65.0f));
+				GUILayout.Label(Itor.Value.Average().ToString("F"), GUILayout.Width(65.0f));
 				GUILayout.EndHorizontal();
 			}//for
 

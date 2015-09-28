@@ -22,7 +22,7 @@ public class Bullet_Pistol : MonoBehaviour
             if (other.gameObject.GetComponent<AIEnemy>())
 			{
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
-				Statistics.pthis.RecordDamage(ENUM_Damage.Pistol, 1, Damage.Item1);
+				Statistics.pthis.RecordHit(ENUM_Damage.Pistol, Damage.Item1, true);
 			}//if
 
             if(Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)

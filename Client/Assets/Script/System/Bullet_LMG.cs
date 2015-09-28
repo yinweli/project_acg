@@ -20,7 +20,7 @@ public class Bullet_LMG : MonoBehaviour
             if (other.gameObject.GetComponent<AIEnemy>())
 			{
                 other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1 - Rule.GetWeaponLevel(ENUM_Weapon.LMG), Damage.Item2);
-				Statistics.pthis.RecordDamage(ENUM_Damage.LMG, 1, Damage.Item1);
+				Statistics.pthis.RecordHit(ENUM_Damage.LMG, Damage.Item1, true);
 			}//if
 
             Destroy(gameObject);

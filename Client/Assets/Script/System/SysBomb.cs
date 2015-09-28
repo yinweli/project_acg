@@ -14,10 +14,13 @@ public class SysBomb : MonoBehaviour
     public void StartBomb()
     {
         SysUI.pthis.CreateUI(gameObject, "Prefab/G_SuperBomb");
+		Statistics.pthis.RecordShot(ENUM_Damage.Bomb);
     }
 
     public void BombDamage()
     {
+		int iDmage = 0;
+
 		Rule.BombAdd(-1);
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
@@ -25,12 +28,11 @@ public class SysBomb : MonoBehaviour
             if (itor.Key && itor.Key.GetComponent<AIEnemy>())
 			{
                 itor.Key.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageBomb, false);
-				Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, 0, GameDefine.iDamageBomb);
+				iDmage += GameDefine.iDamageBomb;
 			}//if
         }//for
 
-		Statistics.pthis.RecordDamage(ENUM_Damage.Bomb, 1, 0);
-
-        SysMain.pthis.SaveGame();
+		SysMain.pthis.SaveGame();
+		Statistics.pthis.RecordHit(ENUM_Damage.Bomb, iDmage, iDmage > 0);
     }
 }

@@ -152,6 +152,8 @@ public class AIPlayer : MonoBehaviour
 		pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
         pObj.GetComponent<AIBullet>().Chace(ObjTarget);
         pObj.GetComponent<AIBullet>().iPlayer = iPlayer;
+
+		Statistics.pthis.RecordShot(pWeapon);
 	}
     // ------------------------------------------------------------------
     // 被抓函式.
@@ -191,7 +193,8 @@ public class AIPlayer : MonoBehaviour
         {
             ObjMonster.GetComponent<AIEnemy>().AddHP(-GameDefine.iDamageShield, false);
             ObjShield.GetComponent<Shield>().CostShield();
-			Statistics.pthis.RecordDamage(ENUM_Damage.Shield, 1, GameDefine.iDamageShield);
+			Statistics.pthis.RecordShot(ENUM_Damage.Shield);
+			Statistics.pthis.RecordHit(ENUM_Damage.Shield, GameDefine.iDamageShield, true);
         }
 	}
     // ------------------------------------------------------------------
