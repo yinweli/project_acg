@@ -288,7 +288,7 @@ public class SysMain : MonoBehaviour
             AllRoleTalk("Run");
 
         // 冷卻後須等待耐力回復至10%才能移動.
-        if (iValue > 0 && !bCanRun && DataPlayer.pthis.iStamina + iValue > DataPlayer.pthis.iStaminaLimit / 10)
+		if (iValue > 0 && !bCanRun && DataPlayer.pthis.iStamina + iValue > GameDefine.iStaminaMoveable)
         {
             bCanRun = true;
             DataGame.pthis.fRunDouble = 1.0f;

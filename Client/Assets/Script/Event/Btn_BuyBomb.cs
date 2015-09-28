@@ -36,6 +36,7 @@ public class Btn_BuyBomb : MonoBehaviour
         DataPlayer.pthis.iCurrency -= GameDefine.iPriceBomb;
 		Rule.BombAdd(GameDefine.iBombCount);
         P_UI.pthis.UpdateCurrency();
+		P_UI.pthis.UpdateResource();
         DataPlayer.pthis.Save();
     }
     // ------------------------------------------------------------------

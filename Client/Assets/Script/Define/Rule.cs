@@ -747,8 +747,11 @@ public class Rule
 						Temp.Add(iPos);
 				}//for
 
-				DataGame.pthis.iWeaponType[i] = (int)emWeapon;
-				DataGame.pthis.iWeaponIndex[i] = Tool.RandomPick(Temp);
+				if(Temp.Count > 0)
+				{
+					DataGame.pthis.iWeaponType[i] = (int)emWeapon;
+					DataGame.pthis.iWeaponIndex[i] = Tool.RandomPick(Temp);
+				}//if
 			}//if
         }//for
 

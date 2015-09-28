@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Btn_Bomb : MonoBehaviour
 {
-    public UILabel pLbCount;
     // 冷卻.
     public float fCoolDown = 0;
     UIButton pBtn;
@@ -23,8 +22,6 @@ public class Btn_Bomb : MonoBehaviour
             pBtn.isEnabled = false;
             return;
         }
-
-        pLbCount.text = DataPlayer.pthis.iBomb.ToString();
 
         if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.LeftControl))
             PressDownLCtrl();

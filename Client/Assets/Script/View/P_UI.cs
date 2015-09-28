@@ -24,6 +24,7 @@ public class P_UI : MonoBehaviour
 	public UILabel pLBBattery = null;
 	public UILabel pLBLightAmmo = null;
 	public UILabel pLBHeavyAmmo = null;
+	public UILabel pLBBomb = null;
     public UILabel pLbCrystal = null;
 
     public Animator pCrystalAni = null;
@@ -155,6 +156,7 @@ public class P_UI : MonoBehaviour
 		pLBBattery.text = DataPlayer.pthis.iBattery.ToString();
 		pLBLightAmmo.text = DataPlayer.pthis.iLightAmmo.ToString();
 		pLBHeavyAmmo.text = DataPlayer.pthis.iHeavyAmmo.ToString();
+		pLBBomb.text = DataPlayer.pthis.iBomb.ToString();
     }
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)

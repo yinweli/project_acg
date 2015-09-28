@@ -33,6 +33,7 @@ public class SysBomb : MonoBehaviour
         }//for
 
 		SysMain.pthis.SaveGame();
+		P_UI.pthis.UpdateResource();
 		Statistics.pthis.RecordHit(ENUM_Damage.Bomb, iDmage, iDmage > 0);
     }
 }

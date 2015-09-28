@@ -55,6 +55,7 @@ public class GameDefine
 	public const int iStaminaConsume = 5; // 耐力消耗值
 	public const int iStaminaRecoveryTime = 5; // 耐力回復時間
 	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
+	public const int iStaminaMoveable = 4; // 可移動耐力
 	public const int iDamageUpgrade = 1; // 升級傷害值
 	public const int iDamageClick = 3; // 點擊傷害值
 	public const int iDamageBomb = 300; // 絕招傷害值
@@ -74,7 +75,7 @@ public class GameDefine
 	public const int iCrystalStage = 5; // 水晶最小出現關卡
 	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
 	public const int iCrystalNormal = 4; // 一般關卡水晶出現數量
-	public const int iCollectionRatio = 20; // 收集物品出現機率
+	public const int iCollectionRatio = 50; // 收集物品出現機率
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
@@ -108,7 +109,7 @@ public class GameDefine
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
 	public const float fUpgradePickup = 2.5f; // 拾取物品價值升級值
-	public const float fUpgradeDmgLv = 0.05f; // 傷害等級升級值
+	public const float fUpgradeDmgLv = 0.2f; // 傷害等級升級值
 	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
