@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1442925808
+timeCreated: 1443450118
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -84,6 +84,7 @@ TextureImporter:
     21300154: C_Adorn_B_014
     21300156: C_Adorn_B_015
     21300158: ui_Crystal
+    21300160: E_104_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -622,10 +623,10 @@ TextureImporter:
     - name: E_102
       rect:
         serializedVersion: 2
-        x: 235
-        y: 187
-        width: 7
-        height: 40
+        x: 153
+        y: 184
+        width: 15
+        height: 44
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -642,20 +643,20 @@ TextureImporter:
     - name: E_104_1
       rect:
         serializedVersion: 2
-        x: 154
-        y: 187
-        width: 38
-        height: 38
+        x: 249
+        y: 51
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: E_104_2
       rect:
         serializedVersion: 2
-        x: 195
-        y: 187
-        width: 38
-        height: 38
+        x: 316
+        y: 51
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -846,6 +847,16 @@ TextureImporter:
         y: 50
         width: 61
         height: 65
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: E_104_3
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 51
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
