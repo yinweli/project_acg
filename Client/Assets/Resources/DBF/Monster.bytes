@@ -3,11 +3,11 @@
 {"GUID":"3", "Mode":"1", "Threat":"2", "StageID":"21", "Enegry":"3", "HP":"90", "MoveSpeed":"0.28"}
 {"GUID":"4", "Mode":"1", "Threat":"2", "StageID":"31", "Enegry":"4", "HP":"120", "MoveSpeed":"0.28"}
 {"GUID":"5", "Mode":"1", "Threat":"2", "StageID":"41", "Enegry":"5", "HP":"150", "MoveSpeed":"0.28"}
-{"GUID":"11", "Mode":"1", "Threat":"5", "StageID":"2", "Enegry":"2", "HP":"60", "MoveSpeed":"0.22"}
-{"GUID":"12", "Mode":"1", "Threat":"5", "StageID":"12", "Enegry":"3", "HP":"120", "MoveSpeed":"0.22"}
-{"GUID":"13", "Mode":"1", "Threat":"5", "StageID":"22", "Enegry":"4", "HP":"180", "MoveSpeed":"0.22"}
-{"GUID":"14", "Mode":"1", "Threat":"5", "StageID":"32", "Enegry":"5", "HP":"240", "MoveSpeed":"0.22"}
-{"GUID":"15", "Mode":"1", "Threat":"5", "StageID":"42", "Enegry":"6", "HP":"300", "MoveSpeed":"0.22"}
+{"GUID":"11", "Mode":"1", "Threat":"5", "StageID":"2", "Enegry":"2", "HP":"60", "MoveSpeed":"0.24"}
+{"GUID":"12", "Mode":"1", "Threat":"5", "StageID":"12", "Enegry":"3", "HP":"120", "MoveSpeed":"0.24"}
+{"GUID":"13", "Mode":"1", "Threat":"5", "StageID":"22", "Enegry":"4", "HP":"180", "MoveSpeed":"0.24"}
+{"GUID":"14", "Mode":"1", "Threat":"5", "StageID":"32", "Enegry":"5", "HP":"240", "MoveSpeed":"0.24"}
+{"GUID":"15", "Mode":"1", "Threat":"5", "StageID":"42", "Enegry":"6", "HP":"300", "MoveSpeed":"0.24"}
 {"GUID":"21", "Mode":"1", "Threat":"4", "StageID":"3", "Enegry":"2", "HP":"60", "MoveSpeed":"0.6"}
 {"GUID":"22", "Mode":"1", "Threat":"4", "StageID":"13", "Enegry":"3", "HP":"80", "MoveSpeed":"0.6"}
 {"GUID":"23", "Mode":"1", "Threat":"4", "StageID":"23", "Enegry":"4", "HP":"100", "MoveSpeed":"0.6"}

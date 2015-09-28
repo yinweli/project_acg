@@ -9,11 +9,11 @@ public class GameDefine
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
-	public const int iPriceDmgLv = 180; // 傷害等級價格
+	public const int iPriceDmgLv = 60; // 傷害等級價格
 	public const int iPriceBomb = 150; // 絕招價格
     public const int iPriceWeaponItem = 10; // 武器碎片價格.
-    public const int iPriceLayoff = 200; // 解雇價格.
-    public const int iPriceHire = 200; // 招募價格.
+    public const int iPriceLayoff = 150; // 解雇價格.
+    public const int iPriceHire = 100; // 招募價格.
 
     public const int iCrystalTime = 120; // 水晶商人出現時間.
 
@@ -73,7 +73,7 @@ public class GameDefine
 
 	public const int iCrystalStage = 5; // 水晶最小出現關卡
 	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
-	public const int iCrystalNormal = 3; // 一般關卡水晶出現數量
+	public const int iCrystalNormal = 4; // 一般關卡水晶出現數量
 	public const int iCollectionRatio = 20; // 收集物品出現機率
 
 	public const int iBlockSize = 64; // 格子尺寸
@@ -87,7 +87,7 @@ public class GameDefine
 	public const int iPathMax = 12; // 最長路徑長度
 	public const int iObjDensity = 12; // 物件密度
 
-	public const int iAdsMoneyBase = 200; // 廣告影片贈送金錢基礎值
+	public const int iAdsMoneyBase = 100; // 廣告影片贈送金錢基礎值
 	public const int iAdsMoneyAdd = 8; // 廣告影片贈送金錢增加值
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
