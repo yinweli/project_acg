@@ -9,11 +9,11 @@ public class GameDefine
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
-	public const int iPriceDmgLv = 60; // 傷害等級價格
-	public const int iPriceBomb = 150; // 絕招價格
+	public const int iPriceDmgLv = 80; // 傷害等級價格
+	public const int iPriceBomb = 250; // 絕招價格
     public const int iPriceWeaponItem = 10; // 武器碎片價格.
     public const int iPriceLayoff = 150; // 解雇價格.
-    public const int iPriceHire = 100; // 招募價格.
+    public const int iPriceHire = 150; // 招募價格.
 
     public const int iCrystalTime = 120; // 水晶商人出現時間.
 
@@ -108,7 +108,7 @@ public class GameDefine
 
 	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
-	public const float fUpgradePickup = 2.5f; // 拾取物品價值升級值
+	public const float fUpgradePickup = 2.2f; // 拾取物品價值升級值
 	public const float fUpgradeDmgLv = 0.2f; // 傷害等級升級值
 	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
 
