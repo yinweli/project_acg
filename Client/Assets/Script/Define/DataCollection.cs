@@ -71,7 +71,7 @@ public class DataCollection : MonoBehaviour
 		string szTemp = (new Collection(Weapon, iLevel, iIndex)).ToStringData();
 		int iPos = Data.FindIndex((Itor) => Itor.ToStringData() == szTemp);
 
-		if(iPos > 0 && iPos < Data.Count)
+		if(iPos >= 0 && iPos < Data.Count)
 			Data.RemoveAt(iPos);
 	}
 	// 檢查收集是否存在
