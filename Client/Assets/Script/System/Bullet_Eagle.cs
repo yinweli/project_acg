@@ -8,23 +8,29 @@ public class Bullet_Eagle : MonoBehaviour
     // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
-            if (pEnemy)
-            {
-                Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
+		if(other.gameObject.tag != "Enemy")
+			return;
 
-                pEnemy.AddHP(-Damage.Item1, false);
-				Statistics.pthis.RecordHit(ENUM_Damage.Eagle, Damage.Item1, true);
+		AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
 
-                if (Damage.Item2 && Rule.GetWeaponLevel(ENUM_Weapon.Eagle) > 0)
-                    pEnemy.HitSfx("G_HeadShot");
-                else if(Damage.Item2)
-                    pEnemy.HitSfx("G_Crit");
-            }
-            Destroy(gameObject);
-        }
+		if(pEnemy == null)
+			return;
+
+		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
+
+		pEnemy.AddHP(-Damage.Item1, false);
+		Statistics.pthis.RecordHit(ENUM_Damage.Eagle, Damage.Item1, true);
+
+		// 播放爆擊特效
+		if(Damage.Item2)
+		{
+			if(Rule.GetWeaponLevel(ENUM_Weapon.Eagle) > 0)
+				pEnemy.HitSfx("G_HeadShot");
+			else
+				pEnemy.HitSfx("G_Crit");
+		}//if
+
+		Destroy(gameObject);
     }
     // ------------------------------------------------------------------
 }

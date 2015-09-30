@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class Bullet_Revolver : MonoBehaviour 
 {
     public AIBullet pAI = null;
-
 	public bool FirstHit = true;
 	public int iCountMax = 0;
     public int iCount = 0;
@@ -16,44 +15,42 @@ public class Bullet_Revolver : MonoBehaviour
     {
 		iCountMax = iCount = Rule.UpgradeWeaponRevolver();
     }
-    // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-		if(other.gameObject.tag == "Enemy")
-		{
-			Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
-			AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
+		if(other.gameObject.tag != "Enemy")
+			return;
 
-			if(pEnemy)
-			{
-				int iDamage = Rule.UpgradeWeaponRevolver(Damage.Item1, iCountMax - iCount);
+		AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
 
-				pEnemy.AddHP(-iDamage, Damage.Item2);
-				Statistics.pthis.RecordHit(ENUM_Damage.Revolver, Damage.Item1, FirstHit);
+		if(pEnemy == null)
+			return;
 
-				if(FirstHit && Damage.Item2)
-					pEnemy.HitSfx("G_Crit");
+		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
+		int iDamage = Rule.UpgradeWeaponRevolver(Damage.Item1, iCountMax - iCount);
+		
+		pEnemy.AddHP(-iDamage, Damage.Item2);
+		Statistics.pthis.RecordHit(ENUM_Damage.Revolver, Damage.Item1, FirstHit);
+		
+		if(FirstHit && Damage.Item2)
+			pEnemy.HitSfx("G_Crit");
+		
+		if(FirstHit == false)
+			pEnemy.HitSfx("G_Combo");
 
-				if(FirstHit == false)
-					pEnemy.HitSfx("G_Combo");
+		History.Add(other.gameObject);
 
-				History.Add(other.gameObject);
-			}//if
-
-			if(iCount <= 0)
-				Destroy(gameObject);
-
-			GameObject NewTarget = GetTarget();
-
-			if(NewTarget == null)
-				Destroy(gameObject);
-
-			FirstHit = false;
-			--iCount;
-			pAI.Chace(NewTarget);
-		}//if
+		if(iCount <= 0)
+			Destroy(gameObject);
+		
+		GameObject NewTarget = GetTarget();
+		
+		if(NewTarget == null)
+			Destroy(gameObject);
+		
+		FirstHit = false;
+		--iCount;
+		pAI.Chace(NewTarget);
     }
-    // ------------------------------------------------------------------
     // 取得目標.
     GameObject GetTarget()
     {

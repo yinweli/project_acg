@@ -9,30 +9,36 @@ public class Bullet_SUB : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
-        if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0 && GetComponent<Animator>())
-            GetComponent<Animator>().Play("NewBullet");
+		if(Rule.GetWeaponLevel(ENUM_Weapon.SUB) <= 0)
+			return;
+
+		Animator pAnimator = GetComponent<Animator>();
+
+		if(pAnimator == null)
+			return;
+
+		GetComponent<Animator>().Play("NewBullet");
     }
-    // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
-			AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
+        if(other.gameObject.tag != "Enemy")
+			return;
 
-			if (pEnemy)
-			{
-				pEnemy.AddHP(-Damage.Item1, Damage.Item2);
-				Statistics.pthis.RecordHit(ENUM_Damage.SUB, Damage.Item1, true);
-			}
+		AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
+		
+		if(pEnemy == null)
+			return;
 
-            if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
-                GroundHurt(other.gameObject.transform.position, Rule.UpgradeWeaponSUB());
-            else
-                Destroy(gameObject);
-        }
+		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
+
+		pEnemy.AddHP(-Damage.Item1, Damage.Item2);
+		Statistics.pthis.RecordHit(ENUM_Damage.SUB, Damage.Item1, true);
+
+		if (Rule.GetWeaponLevel(ENUM_Weapon.SUB) > 0)
+			GroundHurt(other.gameObject.transform.position, Rule.UpgradeWeaponSUB());
+		else
+			Destroy(gameObject);
     }
-    // ------------------------------------------------------------------
     // 範圍傷害.
     void GroundHurt(Vector3 vPos, int iDamage)
     {
@@ -53,19 +59,30 @@ public class Bullet_SUB : MonoBehaviour
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)
         {
+			if(itor.Key == null)
+				continue;
+
+			AIEnemy pEnemy = itor.Key.GetComponent<AIEnemy>();
+
+			if(pEnemy == null)
+				continue;
+
+			if(pEnemy.iHP <= 0)
+				continue;
+
             float fDisObj = Vector2.Distance(vPos, itor.Key.transform.position);
 
-            // 比較距離.
-            if (fDisObj < GameDefine.fSUBArea && itor.Key && itor.Key.GetComponent<AIEnemy>() && itor.Key.GetComponent<AIEnemy>().iHP > 0)
-            {
-                itor.Key.GetComponent<AIEnemy>().AddHP(-iDamage, false);
-				Statistics.pthis.RecordHit(ENUM_Damage.SUB, iDamage, false);
-            }
+			// 比較距離.
+			if(fDisObj >= GameDefine.fSUBArea)
+				continue;
+
+			pEnemy.AddHP(-iDamage, false);
+			Statistics.pthis.RecordHit(ENUM_Damage.SUB, iDamage, false);
         }        
     }
-    // ------------------------------------------------------------------
     public void DelSelf()
     {
         Destroy(gameObject);
     }
+	// ------------------------------------------------------------------
 }

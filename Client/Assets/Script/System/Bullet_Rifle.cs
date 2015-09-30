@@ -6,7 +6,6 @@ public class Bullet_Rifle : MonoBehaviour
 {
     public AIBullet pAI = null;
 	public Sprite pSprite = null;
-
 	public bool FirstHit = true;
 	public int iCount = 0;
     // ------------------------------------------------------------------
@@ -17,25 +16,26 @@ public class Bullet_Rifle : MonoBehaviour
 		if(iCount > 0)
             pAI.pRander.sprite = pSprite;
     }
-    // ------------------------------------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-			Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
+        if(other.gameObject.tag != "Enemy")
+			return;
 
-            if (other.gameObject.GetComponent<AIEnemy>())
-			{
-                other.gameObject.GetComponent<AIEnemy>().AddHP(-Damage.Item1, Damage.Item2);
-				Statistics.pthis.RecordHit(ENUM_Damage.Rifle, Damage.Item1, FirstHit);
-			}//if
+		AIEnemy pEnemy = other.gameObject.GetComponent<AIEnemy>();
+		
+		if(pEnemy == null)
+			return;
 
-            if (iCount <= 0)
-                Destroy(gameObject);
+		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, FirstHit);
 
-			FirstHit = false;
-			--iCount;
-        }        
+		pEnemy.AddHP(-Damage.Item1, Damage.Item2);
+		Statistics.pthis.RecordHit(ENUM_Damage.Rifle, Damage.Item1, FirstHit);
+
+		if (iCount <= 0)
+			Destroy(gameObject);
+		
+		FirstHit = false;
+		--iCount;
     }
     // ------------------------------------------------------------------
 }
