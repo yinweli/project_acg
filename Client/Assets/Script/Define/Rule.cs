@@ -740,9 +740,9 @@ public class Rule
 			int iLevel = 0;
 			int iRatio = 0;
 
-			if(GetWeaponLevel(ENUM_Weapon.Light) <= 0)
+			if(GetWeaponLevel(ENUM_Weapon.Pistol) <= 0)
 			{
-				emWeapon = ENUM_Weapon.Light;
+				emWeapon = ENUM_Weapon.Pistol;
 				iLevel = 1;
 				iRatio = 0;
 			}
