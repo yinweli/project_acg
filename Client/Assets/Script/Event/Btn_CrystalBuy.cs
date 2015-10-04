@@ -41,6 +41,8 @@ public class Btn_CrystalBuy : MonoBehaviour
 		// 新增收集物品, 並且判斷是否完成收集
 		if(Rule.CollectionAdd(pType, iLevel, iPos))
 		{
+			// 增加武器等級
+			Rule.AddWeaponLevel(pType);
 			// 如果完成收集, 要顯示通知
 		}//if
 

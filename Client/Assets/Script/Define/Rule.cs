@@ -2,6 +2,7 @@
 using LibCSNStandard;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Rule
 {
@@ -735,16 +736,36 @@ public class Rule
 			if(DataReward.pthis.iCrystal <= 0 && DataPlayer.pthis.iStage <= GameDefine.iCrystalStage)
 				continue;
 
-			if(Random.Range(0, 100) <= GameDefine.iCollectionRatio)
+			ENUM_Weapon emWeapon = ENUM_Weapon.Null;
+			int iLevel = 0;
+			int iRatio = 0;
+
+			if(GetWeaponLevel(ENUM_Weapon.Light) <= 0)
 			{
-				ENUM_Weapon emWeapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null + 1, (int)ENUM_Weapon.Count);
-				int iLevel = System.Math.Min(GetWeaponLevel(emWeapon) + 1, GameDefine.iMaxCollectionLv);
+				emWeapon = ENUM_Weapon.Light;
+				iLevel = 1;
+				iRatio = 0;
+			}
+			else
+			{
+				emWeapon = (ENUM_Weapon)Random.Range((int)ENUM_Weapon.Null + 1, (int)ENUM_Weapon.Count);
+				iLevel = System.Math.Min(GetWeaponLevel(emWeapon) + 1, GameDefine.iMaxCollectionLv);
+				iRatio = Random.Range(0, 100);
+			}//if
+
+			if(iRatio <= GameDefine.iCollectionRatio)
+			{
 				List<int> Temp = new List<int>();
 
-				for(int iPos = 0; iPos < GameDefine.iMaxCollectionCount; ++iPos)
+				for(int iPos = 1; iPos <= GameDefine.iMaxCollectionCount; ++iPos)
 				{
-					if(DataCollection.pthis.IsExist(emWeapon, iLevel, iPos) == false)
-						Temp.Add(iPos);
+					if(DataGame.pthis.iWeaponIndex.Any(id => iPos == id))
+						continue;
+
+					if(DataCollection.pthis.IsExist(emWeapon, iLevel, iPos))
+						continue;
+
+					Temp.Add(iPos);
 				}//for
 
 				if(Temp.Count > 0)
