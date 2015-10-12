@@ -68,7 +68,7 @@
 {"GUID":"5008", "enUS":"Light machine gun now use battery to shoot plasma", "zhTW":""}
 {"GUID":"6001", "enUS":"Deal [FFFF00]{0}[-] damage / 2 sec", "zhTW":""}
 {"GUID":"6002", "enUS":"Knife attack every [FFFF00]{0}[-] second", "zhTW":""}
-{"GUID":"6003", "enUS":"Reduction [FFFF00]{0}%[-] move speed on hit", "zhTW":""}
+{"GUID":"6003", "enUS":"Reduction [FFFF00]{0}%[-] move speed on hit\n[FFFF00]+{1}[-] bonus damage", "zhTW":""}
 {"GUID":"6004", "enUS":"Extra attack [FFFF00]{0}[-] target\nreduction 2 damage when hit", "zhTW":""}
 {"GUID":"6005", "enUS":"[FFFF00]{0}%[-] critical damage", "zhTW":""}
 {"GUID":"6006", "enUS":"Deal [FFFF00]{0}[-] area damage", "zhTW":""}

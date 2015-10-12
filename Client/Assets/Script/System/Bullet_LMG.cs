@@ -30,7 +30,7 @@ public class Bullet_LMG : MonoBehaviour
 
 		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
-		pEnemy.AddHP(-Damage.Item1 - Rule.GetWeaponLevel(ENUM_Weapon.LMG), Damage.Item2);
+		pEnemy.AddHP(-Damage.Item1 - Rule.UpgradeWeaponLMG(), Damage.Item2);
 		Statistics.pthis.RecordHit(ENUM_Damage.LMG, Damage.Item1, true);
 
 		Destroy(gameObject);
