@@ -26,7 +26,7 @@ public class AIPlayer : MonoBehaviour
 	// 是否被抓住.
 	public bool bBeCaught = false;
     // 是否被綁住.
-    public bool bBeTied = false;
+    public int iTied = 0;
 	// 武器冷卻.
 	public float fCoolDown = 0;
 
@@ -76,7 +76,7 @@ public class AIPlayer : MonoBehaviour
             Attack();
 
         // 移動.
-        if (!bBeCaught)
+        if (!bBeCaught || iTied <= 0 || !GetComponent<PlayerCharm>())
             MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
 	}
 	// ------------------------------------------------------------------
@@ -159,13 +159,15 @@ public class AIPlayer : MonoBehaviour
     // 被抓函式.
     public void BeTied()
     {
-        bBeCaught = true;
+       // 增加被綁次數.
+        iTied++;
         // 減少被抓機率.
         ToolKit.CatchRole[gameObject] -= 20;
 
         pAction.PlayRun();
 
         ObjCatch = UITool.pthis.CreateUI(gameObject, "Prefab/G_Tied");
+
         ObjCatch.transform.localPosition = new Vector3(0, 0, -0.01f);
     }
 	// ------------------------------------------------------------------
@@ -199,7 +201,7 @@ public class AIPlayer : MonoBehaviour
 	}
     // ------------------------------------------------------------------
     // 被魅惑函式.
-    public void BeWitch(GameObject ObjMonster, int iPos)
+    public void BeWitch(GameObject ObjMonster, GameObject pCharmShield, int iPos)
     {
         bBeCaught = true;
 
@@ -211,9 +213,15 @@ public class AIPlayer : MonoBehaviour
         // 從可抓佇列中移除.
         ToolKit.CatchRole.Remove(gameObject);
 
-        gameObject.AddComponent<PlayerCharm>().ObjTarget = ObjMonster;
+        PlayerCharm pCharm = gameObject.AddComponent<PlayerCharm>();
+        
+        if(pCharm)
+        {
+            pCharm.ObjTarget = ObjMonster;
+            pCharm.ObjShield = pCharmShield;
+        }
 
-        // 改為走路動作.
+        // 改為魅惑動作.
         pAction.PlayCharm();
     }
 	// ------------------------------------------------------------------

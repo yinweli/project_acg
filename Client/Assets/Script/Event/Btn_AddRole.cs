@@ -9,12 +9,8 @@ public class Btn_AddRole : MonoBehaviour
     void Start()
     {
         Lb_Money.text = GameDefine.iPriceHire.ToString();
-
-        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire || DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepot)
-            pBtn.isEnabled = false;
-        else
-            pBtn.isEnabled = true;
-    }
+        CheckStatu();
+    }    
     // ------------------------------------------------------------------
 	void OnClick()
     {
@@ -26,6 +22,14 @@ public class Btn_AddRole : MonoBehaviour
         DataPlayer.pthis.Save();
 
         P_AddMember.pthis.GetNewRole();
+        CheckStatu();
     }
     // ------------------------------------------------------------------
+    void CheckStatu()
+    {
+        if (DataPlayer.pthis.iCurrency < GameDefine.iPriceHire || DataPlayer.pthis.MemberDepot.Count >= GameDefine.iMaxMemberDepot)
+            pBtn.isEnabled = false;
+        else
+            pBtn.isEnabled = true;
+    }
 }

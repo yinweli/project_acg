@@ -51,7 +51,7 @@ public class G_HireList : MonoBehaviour
         S_Weapon pScript =pObj.GetComponent<S_Weapon>();
         if (pScript)
         {
-            pScript.SetLb("New");
+            pScript.SetLbActive(false);
             pScript.pS_Bg.gameObject.transform.localPosition = new Vector2(0, 30);
             pScript.pLb_Src.gameObject.transform.localPosition = new Vector2(0, 30);
         }

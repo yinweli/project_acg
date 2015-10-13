@@ -18,11 +18,14 @@ public class Btn_SaveRole : MonoBehaviour
         if (bIsPress)
         {
             NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
-            PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
-			Statistics.pthis.RecordResource(ENUM_Pickup.Member, 1);
-			GoogleAnalytics.pthis.LogEvent("Count", "Save Member", "", 0);
-            if (DataPickup.pthis.Data[iItemID] != null)
-                DataPickup.pthis.Data[iItemID].bPickup = true;
+            if (pPlayer.iTied <= 0)
+            {
+                PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
+                Statistics.pthis.RecordResource(ENUM_Pickup.Member, 1);
+                GoogleAnalytics.pthis.LogEvent("Count", "Save Member", "", 0);
+                if (DataPickup.pthis.Data[iItemID] != null)
+                    DataPickup.pthis.Data[iItemID].bPickup = true;
+            }            
             Destroy(gameObject);
         }
     }

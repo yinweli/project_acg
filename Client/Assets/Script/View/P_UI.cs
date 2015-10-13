@@ -161,7 +161,7 @@ public class P_UI : MonoBehaviour
     // ------------------------------------------------------------------
     public bool AddBattery(int iValue)
     {
-        if (iValue <= 0 && pListLight.Count <= 0)
+        if (iValue < 0 && pListLight.Count <= 0)
 			return false;
 
 		Rule.BatteryAdd(iValue);

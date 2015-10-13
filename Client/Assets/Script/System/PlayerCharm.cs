@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerCharm : MonoBehaviour 
 {
     public GameObject ObjTarget = null;
+    public GameObject ObjShield = null;
     public Vector3 vecRunDir;
 
     public GameObject ObjSfx = null;
@@ -37,8 +38,15 @@ public class PlayerCharm : MonoBehaviour
         }
         vecRunDir = ObjTarget.transform.position - transform.position;
 
-        if (Vector2.Distance(transform.position, ObjTarget.transform.position) > 0.15f)          
-            ToolKit.LocalMoveTo(gameObject, vecRunDir, GameDefine.fBaseSpeed * 1.5f);
+        if (Vector2.Distance(transform.position, ObjTarget.transform.position) > 0.15f)
+        {
+            float fSpeed = GameDefine.fBaseSpeed * 1.5f;
+
+            if (ObjShield & ObjShield.GetComponent<Freeze>())
+                fSpeed = GameDefine.fBaseSpeed * 1.5f * Rule.UpgradeWeaponPistol();
+
+            ToolKit.LocalMoveTo(gameObject, vecRunDir, fSpeed);
+        }
 
         if (vecRunDir.x > 0)
             GetComponent<AIPlayer>().FaceTo(-1, ObjTarget);

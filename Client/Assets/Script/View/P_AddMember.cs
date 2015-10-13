@@ -10,7 +10,9 @@ public class P_AddMember : MonoBehaviour
 
     public Btn_Hire pBtn_Hire = null;
 
-    public Animator pAni_RandRole;
+    public UILabel Lb_Currency = null;
+
+    public Animator pAni_RandRole;    
 
     public int iNowSelect = -1;
     // ------------------------------------------------------------------
@@ -19,8 +21,14 @@ public class P_AddMember : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
+    void Start()
+    {
+        UpdateCurrency();
+    }
+    // ------------------------------------------------------------------
     public void GetNewRole()
-    {        
+    {
+        UpdateCurrency();
         pRandRole.StartRand();
         
         //pAni_RandRole.enabled = true;
@@ -34,6 +42,11 @@ public class P_AddMember : MonoBehaviour
         GameObject ObjHuman = UITool.pthis.CreateRole(ObjParent, pMember.iLooks);
         ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)pMember.iEquip);
         return ObjHuman;
+    }
+    // ------------------------------------------------------------------
+    public void UpdateCurrency()
+    {
+        Lb_Currency.text = DataPlayer.pthis.iCurrency.ToString();
     }
     // ------------------------------------------------------------------
     public void HireSelect()

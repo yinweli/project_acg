@@ -39,6 +39,8 @@ public class G_ListRole : MonoBehaviour
         // 檢查隊伍人數 如果只剩1人關閉開除按鈕.
         if (DataPlayer.pthis.MemberParty.Count <= 1)
             ObjFire.GetComponent<UIButton>().isEnabled = false;
+        else
+            ObjFire.GetComponent<UIButton>().isEnabled = true;
     }
     // ------------------------------------------------------------------
     void OnPress(bool bIsDown)

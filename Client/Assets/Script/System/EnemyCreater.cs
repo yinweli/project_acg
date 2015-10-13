@@ -220,14 +220,15 @@ public class EnemyCreater : MonoBehaviour
             GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
             pObjMon.transform.position = GetRoadPos(iRoad);
 
-            int iRand = Random.Range(3, 11);
+            int iRandX = Random.Range(3, 11);
+            int iRandY = Random.Range(1, 4);
             float fPosX = 0;
-            if (iRand < 7)
-                fPosX = pObjMon.transform.localPosition.x + (GameDefine.iBlockSize * iRand);
+            if (iRandX < 7)
+                fPosX = pObjMon.transform.localPosition.x + (GameDefine.iBlockSize * iRandX);
             else
-                fPosX = pObjMon.transform.localPosition.x + (-GameDefine.iBlockSize * (iRand - 4));
+                fPosX = pObjMon.transform.localPosition.x + (-GameDefine.iBlockSize * (iRandX - 4));
 
-            pObjMon.transform.localPosition = new Vector2(fPosX, pObjMon.transform.localPosition.y);
+            pObjMon.transform.localPosition = new Vector2(fPosX, pObjMon.transform.localPosition.y + (GameDefine.iBlockSize * iRandY));
         }
     }
     // ------------------------------------------------------------------

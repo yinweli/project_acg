@@ -22,12 +22,16 @@ public class Btn_SaveTied : MonoBehaviour
         if (bIsPress)
         {
             NGUITools.PlaySound(Resources.Load("Sound/FX/SaveRole") as AudioClip);
-            // 減少被抓機率.
-            if (ToolKit.CatchRole.ContainsKey(pPlayer.gameObject))
-                ToolKit.CatchRole[pPlayer.gameObject] += 20;
 
-			GoogleAnalytics.pthis.LogEvent("Count", "Untied Member", "", 0);
-            pPlayer.bBeCaught = false;
+            pPlayer.iTied--;
+            if (pPlayer.iTied <= 0)
+            {
+                // 加回被抓機率.
+                if (ToolKit.CatchRole.ContainsKey(pPlayer.gameObject))
+                    ToolKit.CatchRole[pPlayer.gameObject] += 20;
+
+                GoogleAnalytics.pthis.LogEvent("Count", "Untied Member", "", 0);
+            }            
             Destroy(gameObject);
         }
     }

@@ -20,11 +20,11 @@ public class AIBullet_Bewitch : MonoBehaviour
         // 距離夠近就魅惑.
         if (Vector2.Distance(gameObject.transform.position, ObjTarget.transform.position) < 0.015f)
         {
-            ObjTarget.GetComponent<AIPlayer>().BeWitch(pMaster.gameObject, 1);
-
             GameObject pObj = EnemyCreater.pthis.CreateOneEnemy(71, -1, 0, 0);
             pObj.GetComponent<EnemyShield>().InitShield(ObjTarget, pMaster, pAIBewitch);
 
+            ObjTarget.GetComponent<AIPlayer>().BeWitch(pMaster.gameObject, pObj, 1);
+            
             pAIBewitch.ObjBullet = null;
             Destroy(gameObject);
         }

@@ -27,9 +27,13 @@ public class Bullet_Pistol : MonoBehaviour
 		pEnemy.AddHP(-Damage.Item1 - Rule.UpgradeWeaponPistolDamage(), Damage.Item2);
 		Statistics.pthis.RecordHit(ENUM_Damage.Pistol, Damage.Item1, true);
 
-		if(Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)
-			other.gameObject.AddComponent<Freeze>().FreezeNow();
-		
+        if (Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)
+        {
+            if (!other.gameObject.GetComponent<Freeze>())
+                other.gameObject.AddComponent<Freeze>().FreezeNow();
+            else
+                other.gameObject.GetComponent<Freeze>().fTime = 2;
+        }		
 		Destroy(gameObject);
     }
     // ------------------------------------------------------------------

@@ -84,7 +84,7 @@ public class AIEnemy : MonoBehaviour
 
 				// 播放燃燒動畫
 				if(Burn == null)
-					Burn = UITool.pthis.CreateUI(gameObject, "Prefab/G_Burn");
+					Burn = UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/G_Burn");
 			}//if
         }
     }
@@ -109,12 +109,6 @@ public class AIEnemy : MonoBehaviour
 			}//if
 		}
     }
-    // ------------------------------------------------------------------
-    /*void OnClick()
-    {
-        if (iHP > 0)
-            AddHP(-GameDefine.iDamageClick, false);
-    }*/
     // ------------------------------------------------------------------
     public void AddHP(int iValue, bool IsCrit)
     {

@@ -28,6 +28,9 @@ public class EnemyLeoCat : MonoBehaviour
     {
         // 播放死亡動作.
         pAI.AniPlay("Dead");
+
+        if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
+            SysMain.pthis.AtkEnemy.Remove(gameObject);
     }
     // ------------------------------------------------------------------
 }

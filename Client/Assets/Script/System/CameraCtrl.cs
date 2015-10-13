@@ -78,7 +78,11 @@ public class CameraCtrl : MonoBehaviour
         {
             AIEnemy pAI = other.gameObject.GetComponent<AIEnemy>();
             if (pAI && (ENUM_ModeMonster)pAI.DBFData.Mode == ENUM_ModeMonster.NoMove)
+            {
                 ObjObstacle = other.gameObject;
+                if (SysMain.pthis.AtkEnemy.ContainsKey(other.gameObject) == false)
+                    SysMain.pthis.AtkEnemy.Add(other.gameObject, pAI.GetTheat());
+            }
         }
     }
     // ------------------------------------------------------------------
