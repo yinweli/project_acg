@@ -42,7 +42,7 @@ public class PlayerCharm : MonoBehaviour
         {
             float fSpeed = GameDefine.fBaseSpeed * 1.5f;
 
-            if (ObjShield & ObjShield.GetComponent<Freeze>())
+            if (ObjShield && ObjShield.GetComponent<Freeze>())
                 fSpeed = GameDefine.fBaseSpeed * 1.5f * Rule.UpgradeWeaponPistol();
 
             ToolKit.LocalMoveTo(gameObject, vecRunDir, fSpeed);
