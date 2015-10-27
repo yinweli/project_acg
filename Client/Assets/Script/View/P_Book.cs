@@ -62,12 +62,13 @@ public class P_Book : MonoBehaviour
         foreach(Tuple<ENUM_Achievement, int> itor in Rule.AchievementShow())
         {
             GameObject pObj = UITool.pthis.CreateUI(pGridAchieve.gameObject.gameObject, "Prefab/G_Achievement");
-            pObj.name = "";
             G_Achievement pScript = pObj.GetComponent<G_Achievement>();
             if (pScript)
             {
                 pScript.pAchieve = itor.Item1;
                 pScript.iLevel = itor.Item2;
+
+                pObj.name = pScript.pAchieve.ToString() + pScript.iLevel.ToString();
             }
 
             NowObj.Add(pObj);

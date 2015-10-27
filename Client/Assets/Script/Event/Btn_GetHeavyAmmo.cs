@@ -62,7 +62,9 @@ public class Btn_GetHeavyAmmo : MonoBehaviour
 		DataPickup.pthis.Data[iItemID].bPickup = true;
 		Rule.HeavyAmmoAdd(DataPickup.pthis.Data[iItemID].iCount);
 		P_UI.pthis.UpdateResource();
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup HeavyAmmo", "", 0);
+
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_HeavyAmmo, DataPickup.pthis.Data[iItemID].iCount);
+		GoogleAnalytics.pthis.LogEvent("Count", "Pickup HeavyAmmo", "", 0);       
 		
 		Destroy(gameObject);
 	}

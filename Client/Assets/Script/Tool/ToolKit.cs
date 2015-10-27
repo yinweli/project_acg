@@ -74,7 +74,7 @@ public class ToolKit : MonoBehaviour
         return pSprite;
     }
     // ------------------------------------------------------------------
-    static public GameObject AddWeaponTo2DSprite(GameObject pObj, ENUM_Weapon pWeapon)
+    static public GameObject AddWeaponTo2DSprite(GameObject pObj, ENUM_Weapon pWeapon, int iBaseLayer)
     {
         GameObject ObjRHand = null;
         SpriteRenderer[] Role = pObj.GetComponentsInChildren<SpriteRenderer>();
@@ -92,6 +92,8 @@ public class ToolKit : MonoBehaviour
                 pSprite.width = 12;
                 pSprite.height = 12;
             }
+
+            pSprite.depth = iBaseLayer + pRender.sortingOrder;
         }
 
         if (pWeapon != ENUM_Weapon.Null)
@@ -100,7 +102,10 @@ public class ToolKit : MonoBehaviour
             SpriteRenderer[] p2DS = ObjWeapon.GetComponentsInChildren<SpriteRenderer>();
 
             foreach (SpriteRenderer pRender in p2DS)
-                ToolKit.ChangeTo2DSprite(pRender);
+            {
+                UI2DSprite pSprite = ToolKit.ChangeTo2DSprite(pRender);
+                pSprite.depth = iBaseLayer + pRender.sortingOrder;
+            }            
         }
 
         return ObjRHand;

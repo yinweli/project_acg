@@ -62,6 +62,8 @@ public class Btn_GetBattery : MonoBehaviour
 		DataPickup.pthis.Data[iItemID].bPickup = true;
 		Rule.BatteryAdd(DataPickup.pthis.Data[iItemID].iCount);
 		P_UI.pthis.UpdateResource();
+
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Battery, DataPickup.pthis.Data[iItemID].iCount);
 		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Battery", "", 0);
 		
 		Destroy(gameObject);

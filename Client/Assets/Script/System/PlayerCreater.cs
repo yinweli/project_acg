@@ -55,6 +55,9 @@ public class PlayerCreater : MonoBehaviour
 		DataPlayer.pthis.MemberParty.Add(CatchList[pObj]);        
         SysMain.pthis.Role.Add(pObj, iCount);
         ToolKit.CatchRole.Add(pObj, Rule.MemberThreat(iCount));
+
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Single_MemberSave, 1);
+
         SysMain.pthis.SaveGame();
 
 		iCount++;

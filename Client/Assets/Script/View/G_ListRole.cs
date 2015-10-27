@@ -29,7 +29,7 @@ public class G_ListRole : MonoBehaviour
 
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, DataPlayer.pthis.MemberParty[iPlayerID].iLooks);
-        ObjHand = ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip);
+        ObjHand = ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)DataPlayer.pthis.MemberParty[iPlayerID].iEquip, 15);
 
         pLbLv.gameObject.SetActive(false);
     }
@@ -100,6 +100,8 @@ public class G_ListRole : MonoBehaviour
     {   
         DataPlayer.pthis.MemberParty.RemoveAt(iPlayerID);
         DataPlayer.pthis.Save();
+
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Single_MemberFire, 1);
 
         if (P_Victory.pthis != null && P_Victory.pthis.pFeature != null)
             P_Victory.pthis.pFeature.DelChr(iPlayerID);

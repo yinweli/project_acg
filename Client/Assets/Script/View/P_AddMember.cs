@@ -40,7 +40,7 @@ public class P_AddMember : MonoBehaviour
     {
         // 建立外觀.
         GameObject ObjHuman = UITool.pthis.CreateRole(ObjParent, pMember.iLooks);
-        ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)pMember.iEquip);
+        ToolKit.AddWeaponTo2DSprite(ObjHuman, (ENUM_Weapon)pMember.iEquip, 15);
         return ObjHuman;
     }
     // ------------------------------------------------------------------

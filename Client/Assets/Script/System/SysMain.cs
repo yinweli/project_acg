@@ -84,7 +84,6 @@ public class SysMain : MonoBehaviour
 	// 儲存遊戲.
 	public void SaveGame()
 	{
-		DataAchievement.pthis.Save();
 		DataCollection.pthis.Save();
 		DataRecord.pthis.Save();
 		DataReward.pthis.Save();
@@ -315,6 +314,11 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
         DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
 
+        // 檢查成就.
+        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Single_Stage, DataPlayer.pthis.iStage);
+        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Total_Stage, DataPlayer.pthis.iStage);
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Kill, DataGame.pthis.iKill);
+
         SaveGame();
 
         EnemyCreater.pthis.StopCreate();
@@ -330,6 +334,11 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
         DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
         DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
+
+        // 檢查成就.
+        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Single_Stage, DataPlayer.pthis.iStage);
+        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Total_Stage, DataPlayer.pthis.iStage);
+        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Kill, DataGame.pthis.iKill);
 
         EnemyCreater.pthis.StopCreate();
 

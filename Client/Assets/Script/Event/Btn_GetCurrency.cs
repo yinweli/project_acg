@@ -68,6 +68,8 @@ public class Btn_GetCurrency : MonoBehaviour {
             DataPickup.pthis.Data[iItemID].bPickup = true;
             Rule.CurrencyAdd(DataPickup.pthis.Data[iItemID].iCount);
             P_UI.pthis.UpdateCurrency();
+
+            SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Currency, DataPickup.pthis.Data[iItemID].iCount);
         }       
 
         Destroy(gameObject);

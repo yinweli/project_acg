@@ -62,6 +62,17 @@ public class DataAchievement : MonoBehaviour
 
 		return Data.ContainsKey(iGUID) ? Data[iGUID] : 0;
 	}
+    // 更動成就值.
+    public void SetValue(ENUM_Achievement emAchievement, int iValue)
+    {
+        int iGUID = (int)emAchievement;
+
+        if (!Data.ContainsKey(iGUID))
+            Data.Add(iGUID, iValue);
+        else
+            Data[iGUID] = iValue;
+    }
+
 	// 清除單輪資料
 	public void ClearSingle()
 	{
