@@ -74,28 +74,28 @@
 {"GUID":"6006", "enUS":"Deal [FFFF00]{0}[-] area damage", "zhTW":""}
 {"GUID":"6007", "enUS":"Extar attack [FFFF00]{0}[-] target", "zhTW":""}
 {"GUID":"6008", "enUS":"[FFFF00]+{0}[-] bonus damage", "zhTW":""}
-{"GUID":"7001", "enUS":"Achievement1", "zhTW":""}
-{"GUID":"7002", "enUS":"Achievement2", "zhTW":""}
-{"GUID":"7003", "enUS":"Achievement3", "zhTW":""}
-{"GUID":"7004", "enUS":"Achievement4", "zhTW":""}
-{"GUID":"7005", "enUS":"Achievement5", "zhTW":""}
-{"GUID":"7006", "enUS":"Achievement6", "zhTW":""}
-{"GUID":"7007", "enUS":"Achievement7", "zhTW":""}
-{"GUID":"7008", "enUS":"Achievement8", "zhTW":""}
-{"GUID":"7009", "enUS":"Achievement9", "zhTW":""}
-{"GUID":"7010", "enUS":"Achievement10", "zhTW":""}
-{"GUID":"7011", "enUS":"Achievement11", "zhTW":""}
+{"GUID":"7001", "enUS":"Night Runner", "zhTW":""}
+{"GUID":"7002", "enUS":"Ambulance", "zhTW":""}
+{"GUID":"7003", "enUS":"You are fire!", "zhTW":""}
+{"GUID":"7004", "enUS":"Great Escape", "zhTW":""}
+{"GUID":"7005", "enUS":"Crystal Collector", "zhTW":""}
+{"GUID":"7006", "enUS":"Rich Man", "zhTW":""}
+{"GUID":"7007", "enUS":"Power Plant", "zhTW":""}
+{"GUID":"7008", "enUS":"Light Infantry", "zhTW":""}
+{"GUID":"7009", "enUS":"Heavy infantry", "zhTW":""}
+{"GUID":"7010", "enUS":"Crazy Bomber", "zhTW":""}
+{"GUID":"7011", "enUS":"Defender", "zhTW":""}
 {"GUID":"8001", "enUS":"Stage clear in single round", "zhTW":""}
 {"GUID":"8002", "enUS":"Save member in single round", "zhTW":""}
 {"GUID":"8003", "enUS":"Fire member in single round", "zhTW":""}
 {"GUID":"8004", "enUS":"Total stage clear", "zhTW":""}
-{"GUID":"8005", "enUS":"Total crystal", "zhTW":""}
-{"GUID":"8006", "enUS":"Total gold", "zhTW":""}
-{"GUID":"8007", "enUS":"Total battery", "zhTW":""}
-{"GUID":"8008", "enUS":"Total light ammo", "zhTW":""}
-{"GUID":"8009", "enUS":"Total heavy ammo", "zhTW":""}
-{"GUID":"8010", "enUS":"Total bomb", "zhTW":""}
-{"GUID":"8011", "enUS":"Total monster kill", "zhTW":""}
+{"GUID":"8005", "enUS":"Total pickup crystal", "zhTW":""}
+{"GUID":"8006", "enUS":"Total pickup gold", "zhTW":""}
+{"GUID":"8007", "enUS":"Total pickup battery", "zhTW":""}
+{"GUID":"8008", "enUS":"Total pickup light ammo", "zhTW":""}
+{"GUID":"8009", "enUS":"Total pickup heavy ammo", "zhTW":""}
+{"GUID":"8010", "enUS":"Total pickup bomb", "zhTW":""}
+{"GUID":"8011", "enUS":"Total kill monster", "zhTW":""}
 {"GUID":"9001", "enUS":"Get new member look", "zhTW":""}
 {"GUID":"9002", "enUS":"Start gold [FFFF00]+{0}[-]", "zhTW":""}
 {"GUID":"9003", "enUS":"Start battery [FFFF00]+{0}[-]", "zhTW":""}

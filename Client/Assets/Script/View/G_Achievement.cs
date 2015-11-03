@@ -45,9 +45,9 @@ public class G_Achievement : MonoBehaviour
 			return;
 
         if (DBFTemp2.Reward == (int)ENUM_Reward.Looks)
-            pLb_Effect.text = GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Reward);
+            pLb_Effect.text = GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Note);
         else
-            pLb_Effect.text = string.Format(GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Reward), DBFTemp2.Value);
+			pLb_Effect.text = string.Format(GameDBF.pthis.GetLanguage(9000 + DBFTemp2.Note), DBFTemp2.Value);
 
         RefreshIcon(DBFTemp2);
 	}
