@@ -514,6 +514,11 @@ public class Rule
 	{
 		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
+	// 重設成就內容
+	public void AchievementReset(ENUM_Achievement emAchievement)
+	{
+		DataAchievement.pthis.Data[(int)emAchievement] = 0;
+	}
 	// 增加成就內容, 傳回完成成就等級列表
 	public static List<int> AchievementAdd(ENUM_Achievement emAchievement, int iValue)
 	{
