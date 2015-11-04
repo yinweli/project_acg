@@ -44,6 +44,9 @@ public class Btn_CrystalBuy : MonoBehaviour
 			// 增加武器等級
 			Rule.AddWeaponLevel(pType);
 			// 如果完成收集, 要顯示通知
+            GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_WeaponLvUp");
+            if (pObj.GetComponent<P_WeaponLvUp>())
+                pObj.GetComponent<P_WeaponLvUp>().pWeapon = pType;
 		}//if
 
         if (GetComponent<UIButton>())

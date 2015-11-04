@@ -42,7 +42,7 @@ public class P_Book : MonoBehaviour
 
         for (int i = 1; i < (int)ENUM_Weapon.Count; i++)
         {
-            GameObject pObj = UITool.pthis.CreateUI(pGridUpgrade.gameObject, "Prefab/G_Upgrade");
+            GameObject pObj = SysUI.pthis.CreateUI(pGridUpgrade.gameObject, "Prefab/G_Upgrade");
             pObj.transform.position = Vector3.zero;
             G_Upgrade pScript = pObj.GetComponent<G_Upgrade>();
             if (pScript)
@@ -61,7 +61,7 @@ public class P_Book : MonoBehaviour
         
         foreach(Tuple<ENUM_Achievement, int> itor in Rule.AchievementShow())
         {
-            GameObject pObj = UITool.pthis.CreateUI(pGridAchieve.gameObject.gameObject, "Prefab/G_Achievement");
+            GameObject pObj = SysUI.pthis.CreateUI(pGridAchieve.gameObject.gameObject, "Prefab/G_Achievement");
             G_Achievement pScript = pObj.GetComponent<G_Achievement>();
             if (pScript)
             {
@@ -82,7 +82,7 @@ public class P_Book : MonoBehaviour
         ClearNowPage();
 
         SetBg(1);
-        NowObj.Add(UITool.pthis.CreateUI(gameObject, "Prefab/G_Record"));
+        NowObj.Add(SysUI.pthis.CreateUI(gameObject, "Prefab/G_Record"));
     }
     // ------------------------------------------------------------------
     public void OpenCredits()
@@ -90,7 +90,7 @@ public class P_Book : MonoBehaviour
         ClearNowPage();
 
         SetBg(1);
-        NowObj.Add(UITool.pthis.CreateUI(gameObject, "Prefab/G_Credits"));
+        NowObj.Add(SysUI.pthis.CreateUI(gameObject, "Prefab/G_Credits"));
     }
     // ------------------------------------------------------------------
     public void ClearNowPage()
