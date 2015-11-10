@@ -106,7 +106,7 @@ public class GameDefine
 	public const int iEquipExtraParty = 20; // 隊伍額外裝備機率值
 	public const int iEquipExtraDepot = 40; // 角色庫額外裝備機率值
 
-	public const float fUpgradeRoad = 1.5f; // 地圖道路升級值
+	public const float fUpgradeRoad = 1.25f; // 地圖道路升級值
 	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
 	public const float fUpgradePickup = 2.2f; // 拾取物品價值升級值
 	public const float fUpgradeDmgLv = 0.2f; // 傷害等級升級值
