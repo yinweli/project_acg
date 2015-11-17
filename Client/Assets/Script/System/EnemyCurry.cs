@@ -15,8 +15,12 @@ public class EnemyCurry : MonoBehaviour
         pAI = GetComponent<AIEnemy>();
         // 播放抓人動作.
         pAI.AniPlay("Catch");
-        EnemyCurry[] temp = GetComponents<EnemyCurry>();
-        iReleaseHp = pAI.iHP - (pAI.iHP / 10 * temp.Length);
+        
+        if (pAI.iMonster == 1001 || pAI.iMonster == 1004 || pAI.iMonster == 1007)
+        {
+            EnemyCurry[] temp = GetComponents<EnemyCurry>();
+            iReleaseHp = pAI.iHP - (pAI.iHP / 10 * temp.Length);
+        }
     }
     // ------------------------------------------------------------------
     void Update()
