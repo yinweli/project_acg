@@ -16,4 +16,9 @@ public class P_WeaponLvUp : MonoBehaviour
 
         Lb_Lv.text = string.Format("- [20ff00]{0}[-] -", Rule.GetWeaponLevel(pWeapon));
     }
+
+    public void PlayWaveSound()
+    {
+        NGUITools.PlaySound(Resources.Load("Sound/FX/W_LvUp") as AudioClip, 1, 1);
+    }
 }

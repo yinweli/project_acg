@@ -73,10 +73,7 @@ public class P_AddMember : MonoBehaviour
         if (pRandRole.iRightIndex != iIndex)
             return;
 
-        pAni_RandRole.Play("Normal", -1, 0f);
-        pAni_RandRole.speed = 0;
-        pHireList.Refresh();
-        pHireList.PickNew();
+        StartCoroutine(WaitforShow());
     }
     // ------------------------------------------------------------------
     public void MoveSelect(int iSelect)
@@ -89,4 +86,15 @@ public class P_AddMember : MonoBehaviour
         pBtn_Hire.MovePos(pHireList.ObjHire[iSelect].transform.position);        
     }
     // ------------------------------------------------------------------
+    IEnumerator WaitforShow()
+    {
+        pAni_RandRole.speed = 0;
+        yield return new WaitForSeconds(1.5f);
+
+        NGUITools.PlaySound(Resources.Load("Sound/FX/RRoleEnd") as AudioClip, 1, 1);
+        pAni_RandRole.Play("Normal", -1, 0f);
+        pAni_RandRole.speed = 0;
+        pHireList.Refresh();
+        pHireList.PickNew();
+    }
 }
