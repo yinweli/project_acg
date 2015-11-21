@@ -29,11 +29,11 @@ public class P_AddMember : MonoBehaviour
     public void GetNewRole()
     {
         UpdateCurrency();
+        pRandRole.gameObject.SetActive(true);
         pRandRole.StartRand();
         
-        //pAni_RandRole.enabled = true;
         pAni_RandRole.speed = 1;
-        pAni_RandRole.Play("RandRole", -1, 0f);
+        pAni_RandRole.Play("RandRole", -1, 0);
     }
     // ------------------------------------------------------------------
     public GameObject CreateRole(GameObject ObjParent, Member pMember)
@@ -92,8 +92,7 @@ public class P_AddMember : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/RRoleEnd") as AudioClip, 1, 1);
-        pAni_RandRole.Play("Normal", -1, 0f);
-        pAni_RandRole.speed = 0;
+        pRandRole.gameObject.SetActive(false);
         pHireList.Refresh();
         pHireList.PickNew();
     }
