@@ -43,10 +43,8 @@ public class EnemyBewitch : MonoBehaviour
         // 播放逃跑動作.
         pAI.AniPlay("Escape");
 
-        // 調整面向.
-        pAI.FaceTo(transform.position - CameraCtrl.pthis.GetMyObj().transform.position);
-
-        ToolKit.MoveTo(gameObject, transform.position - CameraCtrl.pthis.GetMyObj().transform.position, pAI.GetSpeed() * 4);
+        // 調整面向但不前進.
+        pAI.FaceAndMove(transform.position - CameraCtrl.pthis.GetMyObj().transform.position, true, 4);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -95,7 +93,7 @@ public class EnemyBewitch : MonoBehaviour
         {
             Catch();
             // 調整面向.
-            pAI.FaceTo(ObjTarget.transform.position - transform.position);
+            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, false, 0);
         }
         // 沒有目標可抓就慢速追個角色.
         else
@@ -109,16 +107,16 @@ public class EnemyBewitch : MonoBehaviour
             return;
 
         // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 1.5f)
-        {
-            pAI.bHasTarget = true;
+        if (GetDistance(gameObject, ObjTarget) > 1.5f)
+            return;
+        
+        pAI.bHasTarget = true;
 
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-            {
-                ObjBullet = UITool.pthis.CreateUIByPos(gameObject.transform.parent.gameObject, "G_Love", gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
-                ObjBullet.GetComponent<AIBullet_Bewitch>().InitBullet(ObjTarget, pAI, this);
-            }
-        }
+        if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+        {
+            ObjBullet = UITool.pthis.CreateUIByPos(gameObject.transform.parent.gameObject, "G_Love", gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
+            ObjBullet.GetComponent<AIBullet_Bewitch>().InitBullet(ObjTarget, pAI, this);
+        }        
     }
     // ------------------------------------------------------------------
     // 取得距離.

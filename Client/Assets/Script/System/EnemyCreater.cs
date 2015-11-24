@@ -271,7 +271,7 @@ public class EnemyCreater : MonoBehaviour
             case ENUM_ModeMonster.Shield:
                 break;
             case ENUM_ModeMonster.Boss:
-                ObjMoster.AddComponent<EnemyBoss>();
+                //ObjMoster.AddComponent<EnemyBoss>();
                 break;
             default:
                 ObjMoster.AddComponent<EnemyNormal>();

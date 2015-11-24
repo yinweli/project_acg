@@ -164,12 +164,15 @@ public class AIEnemy : MonoBehaviour
             return DBFData.MoveSpeed;
     }
     // ------------------------------------------------------------------
-    public void FaceTo(Vector3 vecDir)
+    public void FaceAndMove(Vector3 vecDir, bool bMove, float fValue)
     {
         if (vecDir.x < 0)
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         else
-            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);        
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+ 
+        if(bMove)
+            ToolKit.MoveTo(gameObject, vecDir, GetSpeed() * fValue);
     }
     // ------------------------------------------------------------------
     public void AniPlay(string Name)

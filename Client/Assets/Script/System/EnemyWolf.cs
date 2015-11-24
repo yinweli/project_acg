@@ -87,10 +87,8 @@ public class EnemyWolf : MonoBehaviour
         pAI.bHasTarget = false;
         if (vecRunDir == Vector3.zero)
             GetDir();
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 4);
+        // 調整面向前進.
+        pAI.FaceAndMove(vecRunDir, true, 3.5f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -102,10 +100,8 @@ public class EnemyWolf : MonoBehaviour
         // 播放抓人動作.
         pAI.AniPlay("Catch");
 
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 0.55f);
+        // 調整面向前進.
+        pAI.FaceAndMove(vecRunDir, true, 0.55f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
@@ -145,10 +141,8 @@ public class EnemyWolf : MonoBehaviour
         if (FindTarget())
         {
             Catch();
-            // 調整面向.
-            pAI.FaceTo(ObjTarget.transform.position - transform.position);
-            // 追追追.
-            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.GetSpeed());
+            // 調整面向前進.
+            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, true, 0);
         }
         // 沒有目標可抓就慢速追個角色.
         else if (SysMain.pthis.Role.Count > 0)
@@ -159,12 +153,9 @@ public class EnemyWolf : MonoBehaviour
                 if (!pTempObj || Vector2.Distance(transform.position, itor.Key.transform.position) < Vector2.Distance(transform.position, pTempObj.transform.position))
                     pTempObj = itor.Key;
             }
+            // 調整面向前進.
             if (pTempObj != null)
-            {
-                // 調整面向.
-                pAI.FaceTo(pTempObj.transform.position - transform.position);
-                ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.GetSpeed() * 0.4f);
-            }
+                pAI.FaceAndMove(pTempObj.transform.position - transform.position, true, 0.4f);
             return;
         }
     }
@@ -173,36 +164,34 @@ public class EnemyWolf : MonoBehaviour
     void Catch()
     {
         // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 0.175f)
+        if (GetDistance(gameObject, ObjTarget) > 0.175f)
+            return;
+        
+        for (int i = 0; i < pCarry.Length; i++)
         {
-            for (int i = 0; i < pCarry.Length; i++)
+            if (!pCarry[i])
             {
-                if (!pCarry[i])
-                {
-                    pCarry[i] = gameObject.AddComponent<EnemyCurry>();
-                    pCarry[i].ObjTarget = ObjTarget;
+                pCarry[i] = gameObject.AddComponent<EnemyCurry>();
+                pCarry[i].ObjTarget = ObjTarget;
 
-                    if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                    {
-                        ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, i);
-                        ObjTarget.GetComponent<PlayerFollow>().vecDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
-                    }
-                    if (CheckGet())
-                        GetDir();
-					return;
-                }                                
-            }
-        }
+                if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                {
+                    ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, i);
+                    ObjTarget.GetComponent<PlayerFollow>().vecDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
+                }
+                if (CheckGet())
+                    GetDir();
+				return;
+            }                                
+        }        
     }
     // ------------------------------------------------------------------
     bool CheckFood()
     {
         if (Food.Count > 0 && Food[0])
         {
-            // 調整面向.
-            pAI.FaceTo(Food[0].transform.position - transform.position);
-            // 追追追.
-            ToolKit.MoveTo(gameObject, Food[0].transform.position - transform.position, pAI.GetSpeed());
+            // 調整面向前進.
+            pAI.FaceAndMove(Food[0].transform.position - transform.position, true, 0);
 
             // 拿到肉以後待2秒.
             if (GetDistance(gameObject, ObjTarget) < 0.175f)

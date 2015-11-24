@@ -55,10 +55,8 @@ public class EnemyTied : MonoBehaviour
 
         if (vecRunDir == Vector3.zero)
             GetDir();
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 4);
+        // 調整面向前進.
+        pAI.FaceAndMove(vecRunDir, true, 3.5f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -70,10 +68,8 @@ public class EnemyTied : MonoBehaviour
         // 播放抓人動作.
         pAI.AniPlay("Catch");
 
-        // 調整面向.
-        pAI.FaceTo(vecRunDir);
-
-        ToolKit.MoveTo(gameObject, vecRunDir, pAI.GetSpeed() * 0.55f);
+        // 調整面向前進.
+        pAI.FaceAndMove(vecRunDir, true, 0.55f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
@@ -109,10 +105,8 @@ public class EnemyTied : MonoBehaviour
         if (FindTarget())
         {
             Catch();
-            // 調整面向.
-            pAI.FaceTo(ObjTarget.transform.position - transform.position);
-            // 追追追.
-            ToolKit.MoveTo(gameObject, ObjTarget.transform.position - transform.position, pAI.GetSpeed());
+            // 調整面向前進.
+            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, true, 0);
         }
         // 沒有目標可抓就慢速追個角色.
         else if (SysMain.pthis.Role.Count > 0)
@@ -123,12 +117,9 @@ public class EnemyTied : MonoBehaviour
                 if (!pTempObj || Vector2.Distance(transform.position, itor.Key.transform.position) < Vector2.Distance(transform.position, pTempObj.transform.position))
                     pTempObj = itor.Key;
             }
+            // 調整面向前進.
             if (pTempObj != null)
-            {
-                // 調整面向.
-                pAI.FaceTo(pTempObj.transform.position - transform.position);
-                ToolKit.MoveTo(gameObject, pTempObj.transform.position - transform.position, pAI.GetSpeed() * 0.4f);
-            }
+                pAI.FaceAndMove(pTempObj.transform.position - transform.position, true, 0.4f);
             return;
         }
     }
@@ -137,13 +128,13 @@ public class EnemyTied : MonoBehaviour
     void Catch()
     {
         // 檢查距離是否可抓抓.
-        if (GetDistance(gameObject, ObjTarget) < 0.175f)
-        {
-            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                ObjTarget.GetComponent<AIPlayer>().BeTied();
+        if (GetDistance(gameObject, ObjTarget) > 0.175f)
+            return;
 
-			Destroy(gameObject);
-        }
+        if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+            ObjTarget.GetComponent<AIPlayer>().BeTied();
+
+		Destroy(gameObject);        
     }
     // ------------------------------------------------------------------
     // 取得距離.
