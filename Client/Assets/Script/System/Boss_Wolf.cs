@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyWolf : MonoBehaviour
+public class Boss_Wolf : MonoBehaviour
 {
     AIEnemy pAI = null;
 
