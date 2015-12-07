@@ -88,7 +88,7 @@ public class Boss_Normal : MonoBehaviour
         if (vecRunDir == Vector3.zero)
             GetDir();
         // 調整面向前進.
-        pAI.FaceAndMove(vecRunDir, true, 3.5f);
+        pAI.FaceAndMove(vecRunDir, 3.5f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -101,7 +101,7 @@ public class Boss_Normal : MonoBehaviour
         pAI.AniPlay("Catch");
 
         // 調整面向前進.
-        pAI.FaceAndMove(vecRunDir, true, 0.55f);
+        pAI.FaceAndMove(vecRunDir, 0.55f);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
@@ -138,7 +138,7 @@ public class Boss_Normal : MonoBehaviour
         {
             Catch();
             // 調整面向前進.
-            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, true, 0);
+            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, 1);
         }
         // 沒有目標可抓就慢速追個角色.
         else if (SysMain.pthis.Role.Count > 0)
@@ -151,7 +151,7 @@ public class Boss_Normal : MonoBehaviour
             }
             // 調整面向前進.
             if (pTempObj != null)                
-                pAI.FaceAndMove(pTempObj.transform.position - transform.position, true, 0.4f);
+                pAI.FaceAndMove(pTempObj.transform.position - transform.position, 0.4f);
             return;
         }
     }

@@ -44,7 +44,7 @@ public class EnemyBewitch : MonoBehaviour
         pAI.AniPlay("Escape");
 
         // 調整面向但不前進.
-        pAI.FaceAndMove(transform.position - CameraCtrl.pthis.GetMyObj().transform.position, true, 4);
+        pAI.FaceAndMove(transform.position - CameraCtrl.pthis.GetMyObj().transform.position, 4);
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
             Destroy(gameObject);
@@ -93,7 +93,7 @@ public class EnemyBewitch : MonoBehaviour
         {
             Catch();
             // 調整面向.
-            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, false, 0);
+            pAI.FaceAndMove(ObjTarget.transform.position - transform.position, 0);
         }
         // 沒有目標可抓就慢速追個角色.
         else
