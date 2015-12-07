@@ -12,8 +12,8 @@ public class GameDefine
 	public const int iPriceDmgLv = 80; // 傷害等級價格
 	public const int iPriceBomb = 250; // 絕招價格
     public const int iPriceWeaponItem = 10; // 武器碎片價格.
-    public const int iPriceLayoff = 150; // 解雇價格.
-    public const int iPriceHire = 150; // 招募價格.
+    public const int iPriceLayoff = 100; // 解雇價格.
+    public const int iPriceHire = 100; // 招募價格.
 
     public const int iCrystalTime = 120; // 水晶商人出現時間.
 
@@ -94,23 +94,21 @@ public class GameDefine
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPackupRange = 3; // 拾取物品範圍
 	public const int iPickupMember = 25; // 救援成員出現機率
-	public const int iMaxPickupItems = 24; // 最大拾取物品次數
-	public const int iMinPickupItems = 20; // 最小拾取物品次數
-	public const int iMaxPickupValue = 24; // 最大拾取物品價值
-	public const int iMinPickupValue = 20; // 最小拾取物品價值
+	public const int iPickupItems = 20; // 拾取物品次數
+	public const int iPickupValue = 20; // 拾取物品價值
 	public const int iPickupProbBomb = 15; // 拾取物品(絕招)出現機率
-	public const float fPickupPartLightAmmo = 0.25f; // 拾取物品(輕型彈藥)比例
-	public const float fPickupPartHeavyAmmo = 0.25f; // 拾取物品(重型彈藥)比例
+	public const float fPickupPartLightAmmo = 0.2f; // 拾取物品(輕型彈藥)比例
+	public const float fPickupPartHeavyAmmo = 0.2f; // 拾取物品(重型彈藥)比例
 	public const float fPickupPartBattery = 0.1f; // 拾取物品(電池)比例
 
 	public const int iEquipExtraParty = 20; // 隊伍額外裝備機率值
 	public const int iEquipExtraDepot = 40; // 角色庫額外裝備機率值
 
 	public const float fUpgradeRoad = 0.75f; // 地圖道路升級值
-	public const float fUpgradeEnegry = 1.5f; // 怪物能量升級值
-	public const float fUpgradePickup = 2.2f; // 拾取物品價值升級值
+	public const float fUpgradeEnegry = 1.55f; // 怪物能量升級值
+	public const float fUpgradePickup = 1.60f; // 拾取物品價值升級值
 	public const float fUpgradeDmgLv = 0.2f; // 傷害等級升級值
-	public const float fUpgradeBossHP = 0.04f; // 魔王血量升級值
+	public const float fUpgradeBossHP = 0.06f; // 魔王血量升級值
 
 	public const string szSaveMusic = "save_music"; // 音樂開關存檔
 	public const string szSaveSound = "save_sound"; // 音效開關存檔

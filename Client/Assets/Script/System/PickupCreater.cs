@@ -75,11 +75,10 @@ public class PickupCreater : MonoBehaviour
 		}//if
 		
 		// 總物品拾取次數
-		int iPickupTotal = Random.Range(GameDefine.iMinPickupItems, GameDefine.iMaxPickupItems);
-		int iPickupLightAmmo = (int)(iPickupTotal * GameDefine.fPickupPartLightAmmo);
-		int iPickupHeavyAmmo = (int)(iPickupTotal * GameDefine.fPickupPartHeavyAmmo);
-		int iPickupBattery = (int)(iPickupTotal * GameDefine.fPickupPartBattery);
-		int iPickupCurrency = iPickupTotal - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
+		int iPickupLightAmmo = (int)(GameDefine.iPickupItems * GameDefine.fPickupPartLightAmmo);
+		int iPickupHeavyAmmo = (int)(GameDefine.iPickupItems * GameDefine.fPickupPartHeavyAmmo);
+		int iPickupBattery = (int)(GameDefine.iPickupItems * GameDefine.fPickupPartBattery);
+		int iPickupCurrency = GameDefine.iPickupItems - iPickupLightAmmo - iPickupHeavyAmmo - iPickupBattery;
 		// 額外拾取價值
 		int iExteraValue = (int)(DataPlayer.pthis.iStage * GameDefine.fUpgradePickup);
 		
@@ -90,7 +89,7 @@ public class PickupCreater : MonoBehaviour
 			
 			Data.Pos = NextPickup();
 			Data.iType = (int)ENUM_Pickup.LightAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceLightAmmo;
+			Data.iCount = (GameDefine.iPickupValue + iExteraValue) / GameDefine.iPriceLightAmmo;
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
@@ -104,7 +103,7 @@ public class PickupCreater : MonoBehaviour
 			
 			Data.Pos = NextPickup();
 			Data.iType = (int)ENUM_Pickup.HeavyAmmo;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceHeavyAmmo;
+			Data.iCount = (GameDefine.iPickupValue + iExteraValue) / GameDefine.iPriceHeavyAmmo;
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
@@ -118,7 +117,7 @@ public class PickupCreater : MonoBehaviour
 			
 			Data.Pos = NextPickup();
 			Data.iType = (int)ENUM_Pickup.Battery;
-			Data.iCount = (Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue) / GameDefine.iPriceBattery;
+			Data.iCount = (GameDefine.iPickupValue + iExteraValue) / GameDefine.iPriceBattery;
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			
@@ -132,7 +131,7 @@ public class PickupCreater : MonoBehaviour
 			
 			Data.Pos = NextPickup();
 			Data.iType = (int)ENUM_Pickup.Currency;
-			Data.iCount = Random.Range(GameDefine.iMinPickupValue, GameDefine.iMaxPickupValue) + iExteraValue;
+			Data.iCount = GameDefine.iPickupValue + iExteraValue;
 			Data.iLooks = 0;
 			Data.bPickup = false;
 			

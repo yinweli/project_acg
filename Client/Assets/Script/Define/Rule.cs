@@ -675,16 +675,6 @@ public class Rule
 	{
 		return UpgradeWeaponPistol(GetWeaponLevel(ENUM_Weapon.Pistol));
 	}
-	// 取得升級手槍:冰凍的增傷值
-	public static int UpgradeWeaponPistolDamage(int iLevel)
-	{
-		return iLevel;
-	}
-	// 取得升級手槍:冰凍的增傷值
-	public static int UpgradeWeaponPistolDamage()
-	{
-		return UpgradeWeaponPistolDamage(GetWeaponLevel(ENUM_Weapon.Pistol));
-	}
 	// 取得升級左輪手槍:連鎖的連鎖次數
 	public static int UpgradeWeaponRevolver(int iLevel)
 	{

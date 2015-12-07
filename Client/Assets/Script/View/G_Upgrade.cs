@@ -71,14 +71,12 @@ public class G_Upgrade : MonoBehaviour
 		{
 			int iValue = (int)((1.0f - Rule.UpgradeWeaponPistol(iLevel)) * 100.0f);
 			int iValueNext = (int)((1.0f - Rule.UpgradeWeaponPistol(iLevelNext)) * 100.0f);
-			int iBonus = Rule.UpgradeWeaponPistolDamage(iLevel);
-			int iBonusNext = Rule.UpgradeWeaponPistolDamage(iLevelNext);
-			
+
 			if(iLevel > 0)
-				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, iValue, iBonus);
+				pLb_EffectNow.text = string.Format("Effect\n" + szHelp, iValue);
 			
 			if(iLevelNext <= GameDefine.iMaxCollectionLv)
-				pLb_EffectNext.text = string.Format("Next Level\n" + szHelp, iValueNext, iBonusNext);
+				pLb_EffectNext.text = string.Format("Next Level\n" + szHelp, iValueNext);
 		}//if
 		
 		if(pWeapon == ENUM_Weapon.Revolver)

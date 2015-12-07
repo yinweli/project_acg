@@ -24,7 +24,7 @@ public class Bullet_Pistol : MonoBehaviour
 
 		Tuple<int, bool> Damage = Rule.BulletDamage(pAI.iPlayer, true);
 
-		pEnemy.AddHP(-Damage.Item1 - Rule.UpgradeWeaponPistolDamage(), Damage.Item2);
+		pEnemy.AddHP(-Damage.Item1, Damage.Item2);
 		Statistics.pthis.RecordHit(ENUM_Damage.Pistol, Damage.Item1, true);
 
         if (Rule.GetWeaponLevel(ENUM_Weapon.Pistol) > 0)
