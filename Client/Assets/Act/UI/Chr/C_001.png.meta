@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1443450118
+timeCreated: 1449905042
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -85,6 +85,24 @@ TextureImporter:
     21300156: C_Adorn_B_015
     21300158: ui_Crystal
     21300160: E_104_3
+    21300162: A_008
+    21300164: A_009
+    21300166: A_007
+    21300168: A_010
+    21300170: A_011
+    21300172: A_012
+    21300174: A_013
+    21300176: A_014
+    21300178: A_015
+    21300180: A_016
+    21300182: A_017
+    21300184: A_018
+    21300186: A_019
+    21300188: A_020
+    21300190: A_021
+    21300192: A_022
+    21300194: A_023
+    21300196: A_024
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -314,7 +332,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 423
+        y: 425
         width: 58
         height: 28
       alignment: 0
@@ -857,6 +875,186 @@ TextureImporter:
         y: 51
         width: 64
         height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_008
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 460
+        width: 71
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_009
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 438
+        width: 73
+        height: 68
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_007
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 459
+        width: 64
+        height: 52
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_010
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 425
+        width: 42
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_011
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 428
+        width: 10
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_012
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 426
+        width: 35
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_013
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 434
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_014
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 424
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_015
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 427
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_016
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 429
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_017
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 457
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_018
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 472
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_019
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 331
+        width: 51
+        height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_020
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 355
+        width: 31
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_021
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 260
+        width: 56
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_022
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 206
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_023
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 134
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_024
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 188
+        width: 39
+        height: 26
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
