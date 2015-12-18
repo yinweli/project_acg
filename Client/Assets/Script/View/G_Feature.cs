@@ -120,7 +120,7 @@ public class G_Feature : MonoBehaviour
             // 顯示升級.
             NGUITools.PlaySound(Resources.Load("Sound/FX/LevelUp") as AudioClip);
             pRole.ShowLevelUp(DataPlayer.pthis.MemberParty[i].iLiveStage);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.35f);
             pRole.ChangeLevel(DataPlayer.pthis.MemberParty[i].iLiveStage + 1);
 
             // 給予角色取得的天賦.

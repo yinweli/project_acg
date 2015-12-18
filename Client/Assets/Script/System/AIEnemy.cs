@@ -84,7 +84,7 @@ public class AIEnemy : MonoBehaviour
 
 				// 播放燃燒動畫
 				if(Burn == null)
-					Burn = UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/G_Burn");
+                    Burn = HitSfx("G_Burn");
 			}//if
         }
     }
@@ -119,10 +119,10 @@ public class AIEnemy : MonoBehaviour
 
 		// 播放受擊特效.
 		if(iValue < 0)
-			UITool.pthis.CreateUI(gameObject,"Prefab/S_Hit");
+            HitSfx("S_Hit");
 
-        if(IsCrit)
-            UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/G_Crit");
+        if (IsCrit)
+            HitSfx("G_Crit");
 
         if(iValue < 0 && GetComponent<EnemyJelly>())
             GetComponent<EnemyJelly>().CreateJelly(iValue);
@@ -143,9 +143,9 @@ public class AIEnemy : MonoBehaviour
             NGUITools.PlaySound(ClipHurt, 0.8f);
     }
     // ------------------------------------------------------------------
-    public void HitSfx(string sSfxName)
+    public GameObject HitSfx(string sSfxName)
     {
-        UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/" + sSfxName);
+        return UITool.pthis.CreateUI(gameObject, "Prefab/Sfx/" + sSfxName);
     }
     // ------------------------------------------------------------------
     public int GetTheat()

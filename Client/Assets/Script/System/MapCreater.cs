@@ -288,6 +288,14 @@ public class MapCreater : MonoBehaviour
 
 		return Data[Pos];
 	}
+    // 取得地圖物件
+    public GameObject GetMapObj(Vector2 vPos)
+    {
+        if (Data.ContainsKey(vPos) == false)
+            return null;
+
+        return Data[vPos];
+    }
 	// 取得物件數量
 	public int ObjectCount()
 	{

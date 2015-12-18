@@ -45,7 +45,7 @@ public class EnemyCreater : MonoBehaviour
         }
     }
     // ------------------------------------------------------------------
-    // 開始新的關卡.
+    // 停止所有的協同程序.
     public void StopCreate()
     {
         StopAllCoroutines();
@@ -111,9 +111,12 @@ public class EnemyCreater : MonoBehaviour
     }
     // ------------------------------------------------------------------
     // 產生一隻怪物.
-    public GameObject CreateOneEnemy(int iMonster, int iHP, float fPosX, float fPosY)
+    public GameObject CreateOneEnemy(int iMonster, int iHP, Vector2 vPos)
     {
-        GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", iMonster), fPosX, fPosY);
+        GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", iMonster), vPos.x, vPos.y);
+
+        if (iMonster == 61)
+            pEnemy.transform.localPosition = new Vector2(pEnemy.transform.localPosition.x -18, pEnemy.transform.localPosition.y -50);
 
         if (pEnemy && pEnemy.GetComponent<AIEnemy>())
         {
@@ -130,7 +133,7 @@ public class EnemyCreater : MonoBehaviour
     public void CreateOldEnemy()
     {
         foreach (SaveEnemy itor in DataEnemy.pthis.Data)
-            CreateOneEnemy(itor.iMonster, itor.iHP, itor.fPosX + ObjCamCtrl.transform.localPosition.x, itor.fPosY + ObjCamCtrl.transform.localPosition.y);   
+            CreateOneEnemy(itor.iMonster, itor.iHP, new Vector2(itor.fPosX + ObjCamCtrl.transform.localPosition.x, itor.fPosY + ObjCamCtrl.transform.localPosition.y));
     }
     // ------------------------------------------------------------------
     IEnumerator BossCreater()
@@ -151,7 +154,8 @@ public class EnemyCreater : MonoBehaviour
 				if(iIndex == 0)
 					iIndex = GameDefine.iBossCount;
 
-                CreateOneEnemy(iIndex + 1000, -1, ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));               
+                Vector2 vPos = new Vector2(ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
+                CreateOneEnemy(iIndex + 1000, -1, vPos);               
                 yield return new WaitForSeconds(5.0f);
             }
         }
@@ -186,61 +190,66 @@ public class EnemyCreater : MonoBehaviour
     // ------------------------------------------------------------------
     void CreateByNormal(int iMonster)
     {
-        Vector2 pCamPos = ObjCamCtrl.transform.localPosition;
+        Vector2 vPos = ObjCamCtrl.transform.localPosition;
         switch (Random.Range(1, 4))
         {
             case 1: //上方.
-                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(-500.0f, 500.0f), pCamPos.y + Random.Range(380.0f, 450.0f));
+                vPos = new Vector2(vPos.x + Random.Range(-500.0f, 500.0f), vPos.y + Random.Range(380.0f, 450.0f));
                 break;
             case 2: //左方.
-                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(-470.0f, -520.0f), pCamPos.y + Random.Range(-300.0f, 400.0f));
+                vPos = new Vector2(vPos.x + Random.Range(-470.0f, -520.0f), vPos.y + Random.Range(-300.0f, 400.0f));
                 break;
             case 3: //右方.
-                CreateOneEnemy(iMonster, -1, pCamPos.x + Random.Range(470.0f, 520.0f), pCamPos.y + Random.Range(-300.0f, 400.0f));
+                vPos = new Vector2(vPos.x + Random.Range(470.0f, 520.0f), vPos.y + Random.Range(-300.0f, 400.0f));
                 break;
         }
+        CreateOneEnemy(iMonster, -1, vPos);
+    }
+    // ------------------------------------------------------------------
+    int RandRoad()
+    {
+        return CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
     }
     // ------------------------------------------------------------------
     void CreateByRoad(int iMonster)
     {
-        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
+        int iRoad = RandRoad();
 
-        if (iRoad < DataMap.pthis.DataRoad.Count)
-        {
-            GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
-            pObjMon.transform.position = GetRoadPos(iRoad);
-        }
+        if (iRoad > DataMap.pthis.DataRoad.Count || MapCreater.pthis.GetRoadObj(iRoad) == null)
+            return;
+
+        GameObject pObjMon = CreateOneEnemy(iMonster, -1, Vector2.zero);
+        pObjMon.transform.position = MapCreater.pthis.GetRoadObj(iRoad).transform.position;
     }
     // ------------------------------------------------------------------
     void CreateByStandOutRoad(int iMonster)
     {
-        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
-        if (DataMap.pthis.DataRoad.Count > iRoad)
+        // 取得路編號.
+        int iRoad = RandRoad();
+
+        if (iRoad > DataMap.pthis.DataRoad.Count)
+            return;
+        
+        // 取得路資料.
+        MapCoor Road = DataMap.pthis.DataRoad[iRoad];
+
+        for (int iCount = 0; iCount < GameDefine.iPickupSearch; ++iCount)
         {
-            GameObject pObjMon = CreateOneEnemy(iMonster, -1, 0, 0);
-            pObjMon.transform.position = GetRoadPos(iRoad);
+            MapCoor Result = new MapCoor(Road.X + Random.Range(-5, 6), Road.Y + Random.Range(0, 3));
+            bool bCheck = true;
 
-            int iRandX = Random.Range(3, 11);
-            int iRandY = Random.Range(1, 4);
-            float fPosX = 0;
-            if (iRandX < 7)
-                fPosX = pObjMon.transform.localPosition.x + (GameDefine.iBlockSize * iRandX);
-            else
-                fPosX = pObjMon.transform.localPosition.x + (-GameDefine.iBlockSize * (iRandX - 4));
+            // 確認是否為道路.
+            foreach (MapCoor Itor in DataMap.pthis.DataRoad)
+                bCheck &= (Result.X == Itor.X && Result.Y == Itor.Y) == false;
 
-            pObjMon.transform.localPosition = new Vector2(fPosX, pObjMon.transform.localPosition.y + (GameDefine.iBlockSize * iRandY));
-        }
-    }
-    // ------------------------------------------------------------------
-    public Vector2 GetRoadPos(int iRoad)
-    {
+            bCheck &= (MapCreater.pthis.GetMapObj(Result.ToVector2()) != null);
 
-        if (MapCreater.pthis.GetRoadObj(iRoad))
-            return MapCreater.pthis.GetRoadObj(iRoad).transform.position;
-        else
-        {
-            Debug.Log("iRoad: " + iRoad + " Obj: " + MapCreater.pthis.GetRoadObj(iRoad));
-            return Vector2.zero;
+            if (bCheck)
+            {
+                GameObject pObjMon = CreateOneEnemy(iMonster, -1, Vector2.zero);
+                pObjMon.transform.position = MapCreater.pthis.GetMapObj(Result.ToVector2()).transform.position;
+                return;
+            }            
         }
     }
     // ------------------------------------------------------------------

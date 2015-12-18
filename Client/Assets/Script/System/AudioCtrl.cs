@@ -45,8 +45,8 @@ public class AudioCtrl : MonoBehaviour {
     {
         pMusic.Stop();
 
-        pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 6))) as AudioClip;
-        //pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", iMusic)) as AudioClip;
+       // pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 6))) as AudioClip;
+        pMusic.clip = Resources.Load("Sound/BG_005") as AudioClip;
 
         pMusic.Play();
     }
