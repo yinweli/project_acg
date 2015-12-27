@@ -75,9 +75,13 @@ public class AIPlayer : MonoBehaviour
         else
             Attack();
 
+		if (bBeCaught)
+			return;
+		if (iTied > 0)
+			return;
+
         // 移動.
-        if (!bBeCaught || iTied <= 0 || !GetComponent<PlayerCharm>())
-            MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
+        MoveTo(CameraCtrl.pthis.iNextRoad - iPlayer);
 	}
 	// ------------------------------------------------------------------
 	// 射擊函式.
