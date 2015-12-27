@@ -117,6 +117,7 @@ public enum ENUM_Pickup
 	HeavyAmmo, // 重型彈藥
 	Bomb, // 絕招
 	Crystal, // 水晶
+    Meet, // 肉肉.
 }
 
 // 獎勵列舉

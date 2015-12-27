@@ -21,6 +21,7 @@ public class EnemyCreater : MonoBehaviour
     public int iEnegry = 0;
 
     int iCount = 0;
+    // ------------------------------------------------------------------
     void Awake()
     {
         pthis = this;
@@ -180,7 +181,7 @@ public class EnemyCreater : MonoBehaviour
                     CreateByRoad(ListEnemy[i]);
                 // 魅惑怪需要生在路附近.
                 else if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.Bewitch)
-                    CreateByStandOutRoad(ListEnemy[i]);
+                    CreateByStandOutRoad(ListEnemy[i], 7, 15);
                 else
                     CreateByNormal(ListEnemy[i]);
                 yield return new WaitForSeconds(0.05f);
@@ -206,14 +207,9 @@ public class EnemyCreater : MonoBehaviour
         CreateOneEnemy(iMonster, -1, vPos);
     }
     // ------------------------------------------------------------------
-    int RandRoad()
-    {
-        return CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
-    }
-    // ------------------------------------------------------------------
     void CreateByRoad(int iMonster)
     {
-        int iRoad = RandRoad();
+        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(7, 15);
 
         if (iRoad > DataMap.pthis.DataRoad.Count || MapCreater.pthis.GetRoadObj(iRoad) == null)
             return;
@@ -222,10 +218,10 @@ public class EnemyCreater : MonoBehaviour
         pObjMon.transform.position = MapCreater.pthis.GetRoadObj(iRoad).transform.position;
     }
     // ------------------------------------------------------------------
-    void CreateByStandOutRoad(int iMonster)
+    public void CreateByStandOutRoad(int iMonster, int iRoad_Min, int iRoad_Max)
     {
         // 取得路編號.
-        int iRoad = RandRoad();
+        int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(iRoad_Min, iRoad_Max);
 
         if (iRoad > DataMap.pthis.DataRoad.Count)
             return;
@@ -246,8 +242,13 @@ public class EnemyCreater : MonoBehaviour
 
             if (bCheck)
             {
-                GameObject pObjMon = CreateOneEnemy(iMonster, -1, Vector2.zero);
-                pObjMon.transform.position = MapCreater.pthis.GetMapObj(Result.ToVector2()).transform.position;
+                if (iMonster == 0)
+                    PickupCreater.pthis.CreateMeet(Result);
+                else
+                {
+                    GameObject pObjMon = CreateOneEnemy(iMonster, -1, Vector2.zero);
+                    pObjMon.transform.position = MapCreater.pthis.GetMapObj(Result.ToVector2()).transform.position;
+                }                
                 return;
             }            
         }

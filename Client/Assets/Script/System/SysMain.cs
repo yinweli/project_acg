@@ -21,7 +21,10 @@ public class SysMain : MonoBehaviour
     // 敵人佇列.
     public Dictionary<GameObject, int> Enemy = new Dictionary<GameObject, int>();
     // 可打敵人佇列.
-    public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();    
+    public Dictionary<GameObject, int> AtkEnemy = new Dictionary<GameObject, int>();
+
+    // 肉肉!!!.
+    public List<GameObject> ListMeet = new List<GameObject>();
 
     bool bIsOld = true;
 
@@ -366,6 +369,8 @@ public class SysMain : MonoBehaviour
         // 清空 敵人佇列.
         Enemy.Clear();
         AtkEnemy.Clear();
+
+        ListMeet.Clear();
     }
     // ------------------------------------------------------------------
     public void AllRoleTalk(string pTalk)

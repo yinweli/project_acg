@@ -166,6 +166,27 @@ public class PickupCreater : MonoBehaviour
 			DataPickup.pthis.Data.Add(Data);
 		}//if
 	}
+    // ------------------------------------------------------------------
+    // 產生肉肉.
+    public void CreateMeet(MapCoor pMapCoor)
+    {
+        Pickup pData = new Pickup();
+
+        pData.Pos = pMapCoor;
+        pData.iType = (int)ENUM_Pickup.Meet;
+        pData.iCount = 1;
+        pData.iLooks = 0;
+        pData.bPickup = false;
+
+        DataPickup.pthis.Data.Add(pData);
+
+        GameObject pObjPickup = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)pData.iType, 0, 0);
+        pObjPickup.transform.position = MapCreater.pthis.GetMapObj(pMapCoor.ToVector2()).transform.position;
+
+        Data.Add(pObjPickup);
+        DataPickup.pthis.Save();
+    }
+    // ------------------------------------------------------------------
 	// 顯示拾取
 	public void Show(int iRoad)
 	{
@@ -184,26 +205,26 @@ public class PickupCreater : MonoBehaviour
 				float fPosX = Pos.x + GameDefine.iBlockSize / 2 - pObjRoad.transform.localPosition.x;
 				float fPosY = Pos.y + GameDefine.iBlockSize / 2 - pObjRoad.transform.localPosition.y;
 				GameObject pObjPickup = null;
-				
-				if ((ENUM_Pickup)Itor.iType == ENUM_Pickup.Member)
-					PlayerCreater.pthis.AddList(iItemID, fPosX, fPosY, Itor.iLooks);
-				else
-				{                
-					pObjPickup = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)Itor.iType, fPosX, fPosY);
-					
-					if(pObjPickup && pObjPickup.GetComponent<Btn_GetCurrency>())
-						pObjPickup.GetComponent<Btn_GetCurrency>().iItemID = iItemID;
-					else if(pObjPickup && pObjPickup.GetComponent<Btn_GetBattery>())
-						pObjPickup.GetComponent<Btn_GetBattery>().iItemID = iItemID;
-					else if(pObjPickup && pObjPickup.GetComponent<Btn_GetLightAmmo>())
-						pObjPickup.GetComponent<Btn_GetLightAmmo>().iItemID = iItemID;
-					else if(pObjPickup && pObjPickup.GetComponent<Btn_GetHeavyAmmo>())
-						pObjPickup.GetComponent<Btn_GetHeavyAmmo>().iItemID = iItemID;
-					else if(pObjPickup && pObjPickup.GetComponent<Btn_GetBomb>())
-						pObjPickup.GetComponent<Btn_GetBomb>().iItemID = iItemID;
-					else if(pObjPickup && pObjPickup.GetComponent<Btn_GetCrystal>())
-						pObjPickup.GetComponent<Btn_GetCrystal>().iItemID = iItemID;
-				}
+
+                if ((ENUM_Pickup)Itor.iType == ENUM_Pickup.Member)
+                    PlayerCreater.pthis.AddList(iItemID, fPosX, fPosY, Itor.iLooks);
+                else
+                {
+                    pObjPickup = UITool.pthis.CreatePickup(PlayerCreater.pthis.gameObject, (ENUM_Pickup)Itor.iType, fPosX, fPosY);
+
+                    if (pObjPickup && pObjPickup.GetComponent<Btn_GetCurrency>())
+                        pObjPickup.GetComponent<Btn_GetCurrency>().iItemID = iItemID;
+                    else if (pObjPickup && pObjPickup.GetComponent<Btn_GetBattery>())
+                        pObjPickup.GetComponent<Btn_GetBattery>().iItemID = iItemID;
+                    else if (pObjPickup && pObjPickup.GetComponent<Btn_GetLightAmmo>())
+                        pObjPickup.GetComponent<Btn_GetLightAmmo>().iItemID = iItemID;
+                    else if (pObjPickup && pObjPickup.GetComponent<Btn_GetHeavyAmmo>())
+                        pObjPickup.GetComponent<Btn_GetHeavyAmmo>().iItemID = iItemID;
+                    else if (pObjPickup && pObjPickup.GetComponent<Btn_GetBomb>())
+                        pObjPickup.GetComponent<Btn_GetBomb>().iItemID = iItemID;
+                    else if (pObjPickup && pObjPickup.GetComponent<Btn_GetCrystal>())
+                        pObjPickup.GetComponent<Btn_GetCrystal>().iItemID = iItemID;
+                }
 				
 				if(pObjPickup != null)
 					Data.Add(pObjPickup);

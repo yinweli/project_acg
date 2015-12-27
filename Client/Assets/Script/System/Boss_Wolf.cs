@@ -7,16 +7,21 @@ public class Boss_Wolf : MonoBehaviour
     AIEnemy pAI = null;
 
     public GameObject ObjTarget = null;
-    // 目標.
-    public EnemyCurry[] pCarry = new EnemyCurry[3];
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
-    // 檢查是否有肉肉可吃.
-    public List<GameObject> Food = new List<GameObject>();
+
+	public float fMeetDis = 1.25f;
+
+    public int iMaxHP = 0;
+	public float fNextHP = 0;
+    public float fMeetpercent = 0.28f;
+    public int iMeetCount = 3;
     // ------------------------------------------------------------------
     void Start()
     {
         pAI = GetComponent<AIEnemy>();
+        iMaxHP = Rule.BossHP(pAI.DBFData.HP);
+		fNextHP = iMaxHP * (fMeetpercent * iMeetCount);
     }
     // ------------------------------------------------------------------
     // Update is called once per frame
@@ -32,54 +37,33 @@ public class Boss_Wolf : MonoBehaviour
             return;
         }
 
-        // 已有抓人逃跑模式.
-        if (CheckGet())
+        // 檢查是否要產生肉肉.
+        if (pAI.iHP < iMaxHP * (fMeetpercent * iMeetCount))
+        {
+			fNextHP = iMaxHP * (fMeetpercent * iMeetCount);
+            EnemyCreater.pthis.CreateByStandOutRoad(0, -2, 12);
+            iMeetCount--;
+        }
+
+        // 確認是否追肉肉.
+        if (CheckMeet())
+            HuntMeet();
+        else if (pAI.bHasTarget) // 已有抓人逃跑模式.
             Take();
         else  // 如果有目標且沒抓人時，追蹤目標
             Chace();
-    }
-    // ------------------------------------------------------------------
-    // 取得是否該逃跑.
-    bool CheckGet()
-    {
-        // 如果已經沒人可抓.
-        if (ToolKit.CatchRole.Count == 0)
-        {
-            pAI.bHasTarget = true;
-            return true;
-        }
-
-        // 抓人旗標關閉.
-        if (!pAI.bHasTarget)
-        {
-            // 檢查是否抓滿三人.
-            for (int i = 0; i < pCarry.Length; i++)
-                if (!pCarry[i])
-                    return false;
-
-            pAI.bHasTarget = true;
-            return true;
-        }
-        // 抓人旗標開啟.
-        else
-        {
-            // 檢查手上是否還有人.
-            for (int i = 0; i < pCarry.Length; i++)
-                if (pCarry[i])
-                    return true;
-
-            pAI.bHasTarget = false;
-            return false;
-        }
     }
     // ------------------------------------------------------------------
     // 逃跑.
     void Run()
     {
         // 如果有抓目標就丟下目標.
-        for (int i = 0; i < pCarry.Length; i++)
-            if (pCarry[i])
-                pCarry[i].ReleaseWarriors();
+        if (pAI.bHasTarget)
+        {
+            pAI.bHasTarget = false;
+            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                ObjTarget.GetComponent<AIPlayer>().BeFree();
+        }
 
         // 播放逃跑動作.
         pAI.AniPlay("Escape");
@@ -105,9 +89,8 @@ public class Boss_Wolf : MonoBehaviour
 
         if (EnemyCreater.pthis.CheckPos(gameObject))
         {
-            for (int i = 0; i < pCarry.Length; i++)
-                if (pCarry[i])
-                    pCarry[i].KillJames();
+            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                ObjTarget.GetComponent<AIPlayer>().BeKill();
             Destroy(gameObject);
         }
     }
@@ -129,10 +112,6 @@ public class Boss_Wolf : MonoBehaviour
     // 追人.
     void Chace()
     {
-        // 檢查有沒有肉肉.
-        if (CheckFood())
-            return;        
-
         // 如果沒人或已經抓了人.
         if (SysMain.pthis.Role.Count == 0 || pAI.bHasTarget)
             return;
@@ -166,42 +145,55 @@ public class Boss_Wolf : MonoBehaviour
         // 檢查距離是否可抓抓.
         if (GetDistance(gameObject, ObjTarget) > 0.175f)
             return;
-        
-        for (int i = 0; i < pCarry.Length; i++)
-        {
-            if (!pCarry[i])
-            {
-                pCarry[i] = gameObject.AddComponent<EnemyCurry>();
-                pCarry[i].ObjTarget = ObjTarget;
 
-                if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
-                {
-                    ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, i);
-                    ObjTarget.GetComponent<PlayerFollow>().vecDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
-                }
-                if (CheckGet())
-                    GetDir();
-				return;
-            }                                
-        }        
+        pAI.bHasTarget = true;
+        if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+            ObjTarget.GetComponent<AIPlayer>().BeCaught(gameObject, 1);
+        GetDir();      
     }
     // ------------------------------------------------------------------
-    bool CheckFood()
+    // 確認是否有可以追的肉肉.
+    bool CheckMeet()
     {
-        if (Food.Count > 0 && Food[0])
+        if (SysMain.pthis.ListMeet.Count <= 0)
+            return false;
+
+        foreach (GameObject pObj in SysMain.pthis.ListMeet)
         {
-            // 調整面向前進.
-            pAI.FaceAndMove(Food[0].transform.position - transform.position, 1);
-
-            // 拿到肉以後待2秒.
-            if (GetDistance(gameObject, ObjTarget) < 0.175f)
-            {
-
-            }
-            return true;
+			if (GetDistance(gameObject, pObj) < fMeetDis)
+                return true;
         }
         return false;
     }
+    // ------------------------------------------------------------------
+    // 追肉肉!!!.
+    void HuntMeet()
+    {
+        if (SysMain.pthis.ListMeet.Count <= 0)
+            return;
+
+        // 如果有抓目標就丟下目標.
+        if (pAI.bHasTarget)
+        {
+            pAI.bHasTarget = false;
+            if (ObjTarget && ObjTarget.GetComponent<AIPlayer>())
+                ObjTarget.GetComponent<AIPlayer>().BeFree();
+        }
+
+        GameObject ObjMeet = null;
+        foreach (GameObject pObj in SysMain.pthis.ListMeet)
+        {
+            if (!ObjMeet || GetDistance(gameObject, pObj) < GetDistance(gameObject, ObjMeet))
+                ObjMeet = pObj;
+        }
+        // 調整面向前進.
+        if (ObjMeet != null)
+        {
+            pAI.FaceAndMove(ObjMeet.transform.position - transform.position, 1.3f);
+            if (GetDistance(gameObject, ObjMeet) < 0.175f)
+                SysMain.pthis.ListMeet.Remove(ObjMeet);
+        }        
+    }    
     // ------------------------------------------------------------------
     // 取得距離.
     float GetDistance(GameObject ObjMe, GameObject ObjYou)
@@ -213,9 +205,12 @@ public class Boss_Wolf : MonoBehaviour
     void GetDir()
     {
         if (pAI.bHasTarget)
+        {
             vecRunDir = ObjTarget.GetComponent<AIPlayer>().GetDeadPos() - transform.position;
+            if (ObjTarget && ObjTarget.GetComponent<PlayerFollow>())
+                ObjTarget.GetComponent<PlayerFollow>().vecDir = vecRunDir;
+        }
         else
             vecRunDir = pAI.PosStart - transform.position;
     }
-    // ------------------------------------------------------------------
 }
