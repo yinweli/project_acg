@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1449905042
+timeCreated: 1451723164
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -103,6 +103,9 @@ TextureImporter:
     21300192: A_022
     21300194: A_023
     21300196: A_024
+    21300198: A_030
+    21300200: A_031
+    21300202: A_032
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1055,6 +1058,36 @@ TextureImporter:
         y: 188
         width: 39
         height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_030
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 435
+        width: 86
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 1, y: 0, z: 0, w: 0}
+    - name: A_031
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 358
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_032
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 332
+        width: 42
+        height: 27
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
