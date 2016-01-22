@@ -132,15 +132,15 @@ public class AIEnemy : MonoBehaviour
         // 沒血逃跑.
         if (iHP <= 0)
         {
-            NGUITools.PlaySound(ClipDead, 0.8f);
+            NGUITools.PlaySound(ClipDead);
             DataGame.pthis.iKill++;
 
             // 從可攻擊陣列移除.
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
-                SysMain.pthis.AtkEnemy.Remove(gameObject);       
+                SysMain.pthis.AtkEnemy.Remove(gameObject);
         }
         else
-            NGUITools.PlaySound(ClipHurt, 0.8f);
+            NGUITools.PlaySound(ClipHurt);
     }
     // ------------------------------------------------------------------
     public GameObject HitSfx(string sSfxName)

@@ -104,7 +104,7 @@ public class AIPlayer : MonoBehaviour
             if (!bBeCaught)
                 pAction.PlayAtk(ObjTarget);
 		
-			NGUITools.PlaySound(audioClip, 0.8f);
+			NGUITools.PlaySound(audioClip);
 			// 發射子彈.
 			CreateBullet();
 			// 計算冷卻.

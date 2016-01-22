@@ -25,7 +25,7 @@ public class EnemyShield : MonoBehaviour
 
         if (pAI.iHP <= 0)
         {
-            pMaster.iHP -= pAI.DBFData.HP;
+            pMaster.AddHP(-pAI.DBFData.HP, false);
             pAIBewitch.ObjTarget = null;
             pMaster.bHasTarget = false;
 
