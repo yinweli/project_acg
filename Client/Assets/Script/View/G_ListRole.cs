@@ -101,7 +101,7 @@ public class G_ListRole : MonoBehaviour
         DataPlayer.pthis.MemberParty.RemoveAt(iPlayerID);
         DataPlayer.pthis.Save();
 
-        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Single_MemberFire, 1);
+        SysAchieve.pthis.Add(ENUM_Achievement.Single_MemberFire, 1);
 
         if (P_Victory.pthis != null && P_Victory.pthis.pFeature != null)
             P_Victory.pthis.pFeature.DelChr(iPlayerID);

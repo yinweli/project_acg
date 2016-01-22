@@ -515,7 +515,7 @@ public class Rule
 		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
 	// 重設成就內容
-	public void AchievementReset(ENUM_Achievement emAchievement)
+	public static void AchievementReset(ENUM_Achievement emAchievement)
 	{
 		DataAchievement.pthis.Data[(int)emAchievement] = 0;
 	}
@@ -534,6 +534,9 @@ public class Rule
 		int iOldValue = DataAchievement.pthis.GetValue(emAchievement);
 		int iNewValue = iOldValue + iValue;
 		int iMaxValue = DBFTemp.GetValue(DBFTemp.MaxLevel);
+
+		if(iOldValue >= iMaxValue)
+			return Result;
 
 		iNewValue = iNewValue > iMaxValue ? iMaxValue : iNewValue;
 		DataAchievement.pthis.Data[(int)emAchievement] = iNewValue;

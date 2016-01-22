@@ -312,17 +312,15 @@ public class SysMain : MonoBehaviour
 				NewMember.Add(DataPlayer.pthis.MemberParty[iPos]);
 		}//for
 
-		DataPlayer.pthis.MemberParty = NewMember;
-        DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
-        DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
-        DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
-
-        // 檢查成就.
-        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Single_Stage, DataPlayer.pthis.iStage);
-        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Total_Stage, DataPlayer.pthis.iStage);
-        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Kill, DataGame.pthis.iKill);
-
-        SaveGame();
+		if(DataGame.pthis.bVictory == false)
+		{
+			DataPlayer.pthis.MemberParty = NewMember;
+			DataPlayer.pthis.iPlayTime += DataGame.pthis.iStageTime;
+			DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
+			DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
+			SysAchieve.pthis.Add(ENUM_Achievement.Single_Stage, 1);
+			SysAchieve.pthis.Add(ENUM_Achievement.Total_Stage, 1);
+		}//if
 
         EnemyCreater.pthis.StopCreate();
 
@@ -338,10 +336,9 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
         DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
 
-        // 檢查成就.
-        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Single_Stage, DataPlayer.pthis.iStage);
-        SysAchieve.pthis.UpdateReplace(ENUM_Achievement.Total_Stage, DataPlayer.pthis.iStage);
-        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Total_Kill, DataGame.pthis.iKill);
+		Rule.AchievementReset(ENUM_Achievement.Single_Stage);
+		Rule.AchievementReset(ENUM_Achievement.Single_MemberSave);
+		Rule.AchievementReset(ENUM_Achievement.Single_MemberFire);
 
         EnemyCreater.pthis.StopCreate();
 

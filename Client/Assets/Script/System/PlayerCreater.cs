@@ -56,7 +56,7 @@ public class PlayerCreater : MonoBehaviour
         SysMain.pthis.Role.Add(pObj, iCount);
         ToolKit.CatchRole.Add(pObj, Rule.MemberThreat(iCount));
 
-        SysAchieve.pthis.UpdateTotal(ENUM_Achievement.Single_MemberSave, 1);
+        SysAchieve.pthis.Add(ENUM_Achievement.Single_MemberSave, 1);
 
         SysMain.pthis.SaveGame();
 

@@ -135,6 +135,8 @@ public class AIEnemy : MonoBehaviour
             NGUITools.PlaySound(ClipDead, 0.9f);
             DataGame.pthis.iKill++;
 
+			SysAchieve.pthis.Add(ENUM_Achievement.Total_Kill, 1);
+
             // 從可攻擊陣列移除.
             if (SysMain.pthis.AtkEnemy.ContainsKey(gameObject))
                 SysMain.pthis.AtkEnemy.Remove(gameObject);
