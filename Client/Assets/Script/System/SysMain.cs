@@ -117,7 +117,7 @@ public class SysMain : MonoBehaviour
     public void OldStage()
     {
         // 選音樂.
-        AudioCtrl.pthis.RedomMusic();
+        AudioCtrl.pthis.PlayBG();
 
         bCanRun = true;
         // 重新計算數值.
@@ -155,8 +155,6 @@ public class SysMain : MonoBehaviour
     {
         System.GC.Collect();
 
-        // 選音樂.
-        AudioCtrl.pthis.RedomMusic();
         // 清空遊戲資料.
         DataGame.pthis.Clear();
 		DataPickup.pthis.Clear();
@@ -179,6 +177,8 @@ public class SysMain : MonoBehaviour
 
         // 選擇關卡風格編號.
 		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
+        // 選音樂.
+        AudioCtrl.pthis.PlayBG();
         // 建立地圖資料.
         MapCreater.pthis.Create();
         // 建立地圖物件.

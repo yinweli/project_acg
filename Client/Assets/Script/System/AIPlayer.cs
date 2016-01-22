@@ -62,7 +62,7 @@ public class AIPlayer : MonoBehaviour
             ObjHuman.AddComponent<G_PLook>().SetLook(this, iPlayer, pWeapon);
         // 設定武器音效
         if (pWeapon != ENUM_Weapon.Null && pWeapon != ENUM_Weapon.Light)
-            audioClip = Resources.Load("Sound/FX/" + pWeapon) as AudioClip;
+            audioClip = Resources.Load("Sound/FX/W_" + pWeapon) as AudioClip;
 	}
 	// ------------------------------------------------------------------
 	void Update () 

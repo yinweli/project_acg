@@ -41,12 +41,14 @@ public class AudioCtrl : MonoBehaviour {
         pMusic.Play();
     }
 
-    public void RedomMusic()
+    public void PlayBG()
     {
         pMusic.Stop();
 
-        pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", Random.Range(0, 6))) as AudioClip;
-        //pMusic.clip = Resources.Load("Sound/untitled3") as AudioClip;
+        if (Rule.AppearBossStage())
+            pMusic.clip = Resources.Load("Sound/BG_Boss") as AudioClip;
+        else
+            pMusic.clip = Resources.Load(string.Format("Sound/BG_{0:000}", DataPlayer.pthis.iStyle)) as AudioClip;
 
         pMusic.Play();
     }
