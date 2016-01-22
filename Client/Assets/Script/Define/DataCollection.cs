@@ -65,6 +65,12 @@ public class DataCollection : MonoBehaviour
 
 		return true;
 	}
+	// 新增收集
+	public void Add(ENUM_Weapon Weapon, int iLevel)
+	{
+		for(int iIndex = 0; iIndex <= GameDefine.iMaxCollectionCount; ++iIndex)
+			Add(Weapon, iLevel, iIndex);
+	}
 	// 刪除收集
 	public void Del(ENUM_Weapon Weapon, int iLevel, int iIndex)
 	{

@@ -336,9 +336,7 @@ public class SysMain : MonoBehaviour
         DataPlayer.pthis.iEnemyKill += DataGame.pthis.iKill;
         DataPlayer.pthis.iPlayerLost += DataGame.pthis.iDead;
 
-		Rule.AchievementReset(ENUM_Achievement.Single_Stage);
-		Rule.AchievementReset(ENUM_Achievement.Single_MemberSave);
-		Rule.AchievementReset(ENUM_Achievement.Single_MemberFire);
+		DataAchievement.pthis.ClearSingle();
 
         EnemyCreater.pthis.StopCreate();
 

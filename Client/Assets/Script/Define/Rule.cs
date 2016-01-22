@@ -540,6 +540,7 @@ public class Rule
 
 		iNewValue = iNewValue > iMaxValue ? iMaxValue : iNewValue;
 		DataAchievement.pthis.Data[(int)emAchievement] = iNewValue;
+		DataAchievement.pthis.Save();
 
 		for(int iLevel = 1; iLevel <= DBFTemp.MaxLevel; ++iLevel)
 		{

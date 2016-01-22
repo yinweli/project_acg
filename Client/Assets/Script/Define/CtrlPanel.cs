@@ -15,17 +15,22 @@ public class CtrlPanel : MonoBehaviour
 	public void ClearAchievement()
 	{
 		DataAchievement.pthis.ClearSave();
+		SysMain.pthis.SaveGame();
 	}
 	public void ClearCollection()
 	{
 		DataCollection.pthis.ClearSave();
+		SysMain.pthis.SaveGame();
 	}
 	public void ClearRecord()
 	{
 		DataRecord.pthis.ClearSave();
+		SysMain.pthis.SaveGame();
 	}
 	public void ClearReward()
 	{
 		DataReward.pthis.ClearSave();
+		DataReward.pthis.Load();
+		SysMain.pthis.SaveGame();
 	}
 }

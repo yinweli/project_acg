@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using LibCSNStandard;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -101,6 +102,9 @@ public class DataAchievement : MonoBehaviour
 	public void ClearSave()
 	{
 		Clear();
-		PlayerPrefs.DeleteKey(GameDefine.szSaveAchievement);
+		PlayerPrefs.DeleteKey(GameDefine.szSaveAchievementCount);
+
+		foreach(ENUM_Achievement Itor in Enum.GetValues(typeof(ENUM_Achievement)))
+			PlayerPrefs.DeleteKey(GameDefine.szSaveAchievement + (int)Itor);
 	}
 }

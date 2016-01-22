@@ -30,6 +30,9 @@ public class EditorDataCollection : Editor
 			if(GUILayout.Button("Set", GUILayout.Width(60.0f)))
 				Target.Add(Weapon, Level, Index);
 
+			if(GUILayout.Button("Set All", GUILayout.Width(60.0f)))
+				Target.Add(Weapon, Level);
+
 			if(GUILayout.Button("Del", GUILayout.Width(60.0f)))
 				Target.Del(Weapon, Level, Index);
 
