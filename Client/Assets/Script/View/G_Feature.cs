@@ -127,6 +127,7 @@ public class G_Feature : MonoBehaviour
             if (iFeature[i] != 0)
             {
                 yield return new WaitForSeconds(0.5f);
+                NGUITools.PlaySound(Resources.Load("Sound/FX/GetTelent") as AudioClip);
                 pRole.ShowFeature(iFeature[i]);
             }
 
@@ -134,6 +135,7 @@ public class G_Feature : MonoBehaviour
             if (iEquip[i] != 0)
             {                
                 yield return new WaitForSeconds(0.5f);
+                NGUITools.PlaySound(Resources.Load("Sound/FX/GetWeapon") as AudioClip);
                 pRole.ShowEquip(iEquip[i]);
             }                        
             yield return new WaitForSeconds(0.5f);

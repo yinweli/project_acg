@@ -132,7 +132,7 @@ public class AIEnemy : MonoBehaviour
         // 沒血逃跑.
         if (iHP <= 0)
         {
-            NGUITools.PlaySound(ClipDead);
+            NGUITools.PlaySound(ClipDead, 0.9f);
             DataGame.pthis.iKill++;
 
             // 從可攻擊陣列移除.
@@ -140,7 +140,7 @@ public class AIEnemy : MonoBehaviour
                 SysMain.pthis.AtkEnemy.Remove(gameObject);
         }
         else
-            NGUITools.PlaySound(ClipHurt);
+            NGUITools.PlaySound(ClipHurt, 0.9f);
     }
     // ------------------------------------------------------------------
     public GameObject HitSfx(string sSfxName)
