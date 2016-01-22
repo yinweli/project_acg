@@ -87,6 +87,7 @@ public class SysMain : MonoBehaviour
 	// 儲存遊戲.
 	public void SaveGame()
 	{
+		DataAchievement.pthis.Save();
 		DataCollection.pthis.Save();
 		DataRecord.pthis.Save();
 		DataReward.pthis.Save();
