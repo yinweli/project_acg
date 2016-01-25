@@ -34,7 +34,7 @@ public class PlayerCreater : MonoBehaviour
     // ------------------------------------------------------------------
     public void AddList(int iItemID, float fPosX, float fPosY, int iLooks)
     {
-        // 增加玩家資料.
+        // 增加待救玩家資料.
         Member temp = new Member();
 
         temp.iLooks = iLooks;

@@ -7,8 +7,6 @@ public class AIPlayer : MonoBehaviour
 {
     // 角色編號.
     public int iPlayer;
-    // 角色隊伍站位.
-    public int iTeamPos = 0;
 	// 角色動畫.
     public G_ChrAction pAction = null;
 	public Animator pAni = null;
@@ -19,8 +17,6 @@ public class AIPlayer : MonoBehaviour
 	public GameObject ObjHuman = null;
 	// 目標.
 	public GameObject ObjTarget = null;
-	// 武器物件.
-	public GameObject pSWeapon = null;
     // 盾盾.
     public GameObject ObjShield = null;
 	// 是否被抓住.

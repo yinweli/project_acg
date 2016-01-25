@@ -31,6 +31,7 @@ public class P_AddMember : MonoBehaviour
         UpdateCurrency();
         pRandRole.gameObject.SetActive(true);
         pRandRole.StartRand();
+        DataPlayer.pthis.Save();
         
         pAni_RandRole.speed = 1;
         pAni_RandRole.Play("RandRole", -1, 0);

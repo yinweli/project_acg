@@ -19,8 +19,6 @@ public class EnemyCreater : MonoBehaviour
     public GameObject ObjCamCtrl;
     // 波數能量.
     public int iEnegry = 0;
-
-    int iCount = 0;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -30,8 +28,6 @@ public class EnemyCreater : MonoBehaviour
     // 開始新的關卡.
     public void StartNew()
     {
-        iCount = 0;
-
         // 每5關為魔王關
 		Debug.Log(Rule.AppearBossStage() ? "Boss Stage" : "Normal Stage");
 
@@ -121,11 +117,10 @@ public class EnemyCreater : MonoBehaviour
 
         if (pEnemy && pEnemy.GetComponent<AIEnemy>())
         {
-            ToolKit.SetLayer(iCount, pEnemy.GetComponentsInChildren<SpriteRenderer>());
+            ToolKit.SetLayer(SysMain.pthis.Enemy.Count, pEnemy.GetComponentsInChildren<SpriteRenderer>());
             pEnemy.GetComponent<AIEnemy>().iMonster = iMonster;
             pEnemy.GetComponent<AIEnemy>().iHP = iHP;
         }
-        iCount++;
 
         return pEnemy;
     }
@@ -223,7 +218,7 @@ public class EnemyCreater : MonoBehaviour
         // 取得路編號.
         int iRoad = CameraCtrl.pthis.iNextRoad + Random.Range(iRoad_Min, iRoad_Max);
 
-        if (iRoad > DataMap.pthis.DataRoad.Count)
+        if (iRoad > DataMap.pthis.DataRoad.Count - 1)
             return;
         
         // 取得路資料.

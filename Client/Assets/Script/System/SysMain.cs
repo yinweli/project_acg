@@ -81,6 +81,10 @@ public class SysMain : MonoBehaviour
     // ------------------------------------------------------------------
     void OnApplicationQuit()
     {
+        // 關掉時記得存入隊伍及時檔案.
+        MemberSave();
+        DataPlayer.pthis.Save();
+
         PlayerPrefs.Save();
     }
 	// ------------------------------------------------------------------
@@ -362,11 +366,26 @@ public class SysMain : MonoBehaviour
         // 刪除 敵人.
         foreach (KeyValuePair<GameObject,int> itor in Enemy)
             Destroy(itor.Key);
+
+        // 刪除 肉肉.
+        ListMeet.Clear();
+
         // 清空 敵人佇列.
         Enemy.Clear();
         AtkEnemy.Clear();
+    }
+    // ------------------------------------------------------------------
+    public void MemberSave()
+    {
+        List<Member> NewMember = new List<Member>();
 
-        ListMeet.Clear();
+        for (int iPos = 0; iPos < DataPlayer.pthis.MemberParty.Count; ++iPos)
+        {
+            if (DeadRole.Contains(iPos) == false)
+                NewMember.Add(DataPlayer.pthis.MemberParty[iPos]);
+        }//for
+
+        DataPlayer.pthis.MemberParty = NewMember;
     }
     // ------------------------------------------------------------------
     public void AllRoleTalk(string pTalk)
