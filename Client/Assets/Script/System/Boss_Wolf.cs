@@ -190,8 +190,8 @@ public class Boss_Wolf : MonoBehaviour
         if (ObjMeet != null)
         {
             pAI.FaceAndMove(ObjMeet.transform.position - transform.position, 1.3f);
-            if (GetDistance(gameObject, ObjMeet) < 0.175f)
-                SysMain.pthis.ListMeet.Remove(ObjMeet);
+            if (GetDistance(gameObject, ObjMeet) < 0.08f && ObjMeet.GetComponent<Btn_Meet>())
+                ObjMeet.GetComponent<Btn_Meet>().DelAMeet();
         }        
     }    
     // ------------------------------------------------------------------
