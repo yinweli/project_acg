@@ -87,6 +87,7 @@ public class Member
 	/* [Save] */ public int iEquip = 0; // 裝備編號
 	/* [Save] */ public int iLiveStage = 0; // 生存關卡數
 	/* [Save] */ public int iShield = 0; // 護盾次數
+    /* [Save] */ public float fReactTime = 0; // 反應時間.
 	/* [Save] */ public List<int> Feature = new List<int>(); // 特性列表
 	/* [    ] */ public int iInvincibleTime = 0; // 無敵時間
 	/* [    ] */ public float fCriticalStrike = 0.0f; // 致命
@@ -128,6 +129,7 @@ public class SaveMember
 	public int iEquip = 0; // 裝備編號
 	public int iLiveStage = 0; // 生存關卡數
 	public int iShield = 0; // 護盾次數
+    public float fReactTime = 0; // 角色反應時間.
 	public int[] Feature = new int[0]; // 特性列表
 }
 

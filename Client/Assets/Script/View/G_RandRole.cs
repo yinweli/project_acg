@@ -39,6 +39,8 @@ public class G_RandRole : MonoBehaviour
         ptempMember.iLooks = Rule.RandomMemberLooks();
         // 裝備.
         ptempMember.iEquip = Rule.RandomEquipParty(false, 0);
+        // 角色反應時間.
+        ptempMember.fReactTime = Random.Range(0.00f, 0.20f);
 
         pObjRoleChild[iIndex] = P_AddMember.pthis.CreateRole(pObjRole[iIndex], ptempMember);
 

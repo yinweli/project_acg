@@ -249,6 +249,7 @@ public class Rule
 		
 		Temp.iLooks = iLooks;
 		Temp.iEquip = iEquip;
+        Temp.fReactTime = Random.Range(0.00f,0.25f);
 
 		DataPlayer.pthis.MemberParty.Add(Temp);
 	}
@@ -277,6 +278,7 @@ public class Rule
 		
 		Temp.iLooks = iLooks;
 		Temp.iEquip = iEquip;
+        Temp.fReactTime = Random.Range(0.00f, 0.20f);
 		
 		DataPlayer.pthis.MemberDepot.Add(Temp);
 	}

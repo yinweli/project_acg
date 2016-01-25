@@ -25,6 +25,10 @@ public class AIPlayer : MonoBehaviour
     public int iTied = 0;
 	// 武器冷卻.
 	public float fCoolDown = 0;
+    // 角色反應時間.
+    public float fRectTime = 0;
+    // 角色反應剩餘時間.
+    public float fRectCount = 0;
 
 	public AudioClip audioClip;
 
@@ -48,6 +52,7 @@ public class AIPlayer : MonoBehaviour
 		if (iPlayer < DataPlayer.pthis.MemberParty.Count && DataPlayer.pthis.MemberParty[iPlayer].iShield > 0)
             ObjShield = UITool.pthis.CreateUI(gameObject, "Prefab/G_Shield");
 
+        fRectTime = pMember.fReactTime;
         pWeapon = (ENUM_Weapon)pMember.iEquip;
         // 建立外觀.
         ObjHuman = UITool.pthis.CreateRole(gameObject, pMember.iLooks);
@@ -89,6 +94,10 @@ public class AIPlayer : MonoBehaviour
         if (GetComponent<PlayerCharm>())
             return;
 		
+        // 確認有無反應時間.
+        if (fRectCount > Time.time)
+            return;
+
 		// 確認目標.
         if (!bBeCaught)
     		GetTarget();
@@ -112,8 +121,11 @@ public class AIPlayer : MonoBehaviour
 	void GetTarget()
 	{
 		// 沒有可作為目標的怪物.
-		if (SysMain.pthis.AtkEnemy.Count == 0)
-			ObjTarget = null;
+        if (SysMain.pthis.AtkEnemy.Count == 0)
+        {
+            ObjTarget = null;
+            fRectCount = Time.time + fRectTime;
+        }
 		
 		foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.AtkEnemy)
 		{
