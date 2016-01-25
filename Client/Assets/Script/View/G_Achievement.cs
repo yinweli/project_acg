@@ -68,7 +68,7 @@ public class G_Achievement : MonoBehaviour
         else if (pReward.Reward == (int)ENUM_Reward.Currency)
             pS_Icon.spriteName = "ui_027";
         else if (pReward.Reward == (int)ENUM_Reward.Battery)
-            pS_Icon.spriteName = "ui_com_001";
+            pS_Icon.spriteName = "ui_com_001_full";
         else if (pReward.Reward == (int)ENUM_Reward.LightAmmo)
             pS_Icon.spriteName = "ui_wpn_001";
         else if (pReward.Reward == (int)ENUM_Reward.HeavyAmmo)

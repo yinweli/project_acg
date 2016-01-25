@@ -22,7 +22,7 @@ public class SysAchieve : MonoBehaviour
     public void ShowTip(ENUM_Achievement pAchieve)
     {
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_AchieveTip");
-        G_AchieveTip pScript = pObj.GetComponentInChildren<G_AchieveTip>();
+        P_AchieveTip pScript = pObj.GetComponent<P_AchieveTip>();
 
         if (!pScript)
             return;
