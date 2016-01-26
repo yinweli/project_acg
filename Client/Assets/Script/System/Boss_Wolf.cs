@@ -10,11 +10,11 @@ public class Boss_Wolf : MonoBehaviour
     // 方向.
     public Vector3 vecRunDir = Vector3.zero;
 
-	public float fMeetDis = 1.25f;
+	public float fMeetDis = 1.3f;
 
     public int iMaxHP = 0;
 	public float fNextHP = 0;
-    public float fMeetpercent = 0.28f;
+    public float fMeetpercent = 0.3f;
     public int iMeetCount = 3;
     // ------------------------------------------------------------------
     void Start()

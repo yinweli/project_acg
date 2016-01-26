@@ -26,7 +26,7 @@ public class SysMain : MonoBehaviour
     // 肉肉!!!.
     public List<GameObject> ListMeet = new List<GameObject>();
 
-    bool bIsOld = true;
+    public bool bIsOld = true;
 
     public float fSaveTime = 0;
     // ------------------------------------------------------------------

@@ -45,7 +45,7 @@ public class AIEnemy : MonoBehaviour
             iHP = DBFData.HP;
 
         if ((ENUM_ModeMonster)DBFData.Mode == ENUM_ModeMonster.Boss)
-            iHP += Rule.BossHP(iHP);
+            iHP = Rule.BossHP(iHP);
 
         PosStart = transform.position;
 

@@ -514,7 +514,7 @@ public class Rule
 	// 取得魔王血量加成
 	public static int BossHP(int iHP)
 	{
-		return (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
+		return iHP + (int)(iHP * GameDefine.fUpgradeBossHP * DataPlayer.pthis.iStage);
 	}
 	// 重設成就內容
 	public static void AchievementReset(ENUM_Achievement emAchievement)

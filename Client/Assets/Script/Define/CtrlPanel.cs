@@ -9,8 +9,10 @@ public class CtrlPanel : MonoBehaviour
 	{
 		DataEnemy.pthis.ClearSave();
 		DataGame.pthis.ClearSave();
+		DataPickup.pthis.Clear();
 		DataPlayer.pthis.ClearSave();
-		SysMain.pthis.NewRoleData();
+		SysMain.pthis.SaveGame();
+		SysMain.pthis.bIsOld = false;
 	}
 	public void ClearAchievement()
 	{
