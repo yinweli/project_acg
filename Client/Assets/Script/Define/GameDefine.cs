@@ -73,14 +73,14 @@ public class GameDefine
     public const int iJellyGrow = 60; // 軟泥損失多少血量會出新軟泥.
 
 	public const int iCrystalStage = 5; // 水晶最小出現關卡
-	public const int iCrystalBoss = 6; // 魔王關卡水晶出現數量
-	public const int iCrystalNormal = 4; // 一般關卡水晶出現數量
+	public const int iCrystalBoss = 10; // 魔王關卡水晶出現數量
+	public const int iCrystalNormal = 6; // 一般關卡水晶出現數量
 	public const int iCollectionRatio = 50; // 收集物品出現機率
 
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iMapWidth = 41; // 地圖寬度
-	public const int iMapBorder = 12; // 地圖邊框長度
+	public const int iMapBorder = 8; // 地圖邊框長度
 	public const int iMapRoadXMin = iMapBorder; // 最小地圖道路X軸位置
 	public const int iMapRoadXMax = iMapWidth + iMapBorder; // 最大地圖道路X軸位置
 	public const int iPathStart = 12; // 起點路徑長度
