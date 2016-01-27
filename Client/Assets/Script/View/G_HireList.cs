@@ -26,6 +26,7 @@ public class G_HireList : MonoBehaviour
                 ObjHire.Add(i, P_AddMember.pthis.CreateRole(gameObject, DataPlayer.pthis.MemberDepot[i]));
                 ObjHire[i].transform.localPosition = new Vector3(120 * (i % 7), -145 * (i / 7), 0);
                 BoxCollider2D pCollider = ObjHire[i].AddComponent<BoxCollider2D>();
+                pCollider.offset = new Vector2(0, 32);
                 pCollider.size = new Vector2(100, 100);
                 ObjHire[i].AddComponent<Btn_SelectMember>().iListID = i;
             }
