@@ -89,7 +89,7 @@ public class GameDefine
 	public const int iObjDensity = 12; // 物件密度
 
 	public const int iAdsMoneyBase = 80; // 廣告影片贈送金錢基礎值
-	public const int iAdsMoneyAdd = 8; // 廣告影片贈送金錢增加值
+	public const int iAdsMoneyAdd = 4; // 廣告影片贈送金錢增加值
 	public const int iPickupSearch = 100; // 拾取物品建立嘗試次數
 	public const int iPickupBorder = 10; // 拾取物品出現邊界
 	public const int iPackupRange = 3; // 拾取物品範圍
