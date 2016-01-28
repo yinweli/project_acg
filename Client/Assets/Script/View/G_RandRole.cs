@@ -34,11 +34,21 @@ public class G_RandRole : MonoBehaviour
     // ------------------------------------------------------------------
     Member CreateNewMember(int iIndex)
     {
+		bool bLight = false;
+		
+		foreach(Member ItorMember in DataPlayer.pthis.MemberParty)
+		{
+			DBFEquip Data = GameDBF.pthis.GetEquip(ItorMember.iEquip) as DBFEquip;
+			
+			if(Data != null && Data.Mode == (int)ENUM_ModeEquip.Light)
+				bLight = true;
+		}//for
+
         Member ptempMember = new Member();
         // 角色外觀.
         ptempMember.iLooks = Rule.RandomMemberLooks();
         // 裝備.
-        ptempMember.iEquip = Rule.RandomEquipParty(false, 0);
+		ptempMember.iEquip = Rule.RandomEquipParty(bLight == false, 0);
         // 角色反應時間.
         ptempMember.fReactTime = Random.Range(0.00f, 0.20f);
 

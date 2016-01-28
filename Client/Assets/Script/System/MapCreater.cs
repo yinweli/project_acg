@@ -228,6 +228,7 @@ public class MapCreater : MonoBehaviour
 	public void Refresh(int iRoad)
 	{
 		MapCoor RoadPos = DataMap.pthis.DataRoad.Count > iRoad ? DataMap.pthis.DataRoad[iRoad] : new MapCoor();
+		HashSet<Vector2> ValidPos = new HashSet<Vector2>();
 
 		// 建立新物件
 		for(int iX = -GameDefine.iMapBorder; iX <= GameDefine.iMapBorder; ++iX)
@@ -240,6 +241,8 @@ public class MapCreater : MonoBehaviour
 					continue;
 
 				Vector2 PosVec = Pos.ToVector2();
+
+				ValidPos.Add(PosVec);
 
 				if(Data.ContainsKey(PosVec))
 					continue;
@@ -254,6 +257,17 @@ public class MapCreater : MonoBehaviour
 
 				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)pObjt.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
 			}//for
+		}//for
+
+		foreach(KeyValuePair<Vector2, GameObject> Itor in Data)
+		{
+			if(Itor.Value == null || Itor.Value.activeSelf == false)
+				continue;
+
+			if(ValidPos.Contains(Itor.Key))
+				continue;
+
+			Itor.Value.SetActive(false);
 		}//for
 	}
 	// 顯示地圖
