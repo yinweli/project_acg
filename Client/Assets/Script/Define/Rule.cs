@@ -543,15 +543,9 @@ public class Rule
 		iNewValue = iNewValue > iMaxValue ? iMaxValue : iNewValue;
 		DataAchievement.pthis.Data[(int)emAchievement] = iNewValue;
 
-		Debug.Log("O : " + iOldValue);
-		Debug.Log("N : " + iNewValue);
-		Debug.Log("M : " + iMaxValue);
-
 		for(int iLevel = 1; iLevel <= DBFTemp.MaxLevel; ++iLevel)
 		{
 			int iLevelValue = DBFTemp.GetValue(iLevel);
-
-			Debug.Log("X : " + iLevelValue);
 
 			if(iLevelValue > iOldValue && iLevelValue <= iNewValue)
 				Result.Add(iLevel);
