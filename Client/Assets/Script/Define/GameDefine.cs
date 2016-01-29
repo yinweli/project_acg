@@ -80,7 +80,7 @@ public class GameDefine
 	public const int iBlockSize = 64; // 格子尺寸
 	public const int iRoadSizeBase = 100; // 地圖道路基礎長度
 	public const int iMapWidth = 41; // 地圖寬度
-	public const int iMapBorder = 8; // 地圖邊框長度
+	public const int iMapBorder = 9; // 地圖邊框長度
 	public const int iMapRoadXMin = iMapBorder; // 最小地圖道路X軸位置
 	public const int iMapRoadXMax = iMapWidth + iMapBorder; // 最大地圖道路X軸位置
 	public const int iPathStart = 12; // 起點路徑長度
