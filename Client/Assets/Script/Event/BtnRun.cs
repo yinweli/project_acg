@@ -31,9 +31,10 @@ public class BtnRun : MonoBehaviour
     // ------------------------------------------------------------------
     void OnPress(bool bDown)
     {
-        if (bDown && CheckCanMove())
-            StartCoroutine(StaCost());
-        else
+        if (bDown && CheckCanMove ()) {
+			NGUITools.PlaySound(Resources.Load("Sound/FX/Run") as AudioClip);
+			StartCoroutine (StaCost ());
+		}else
             bIsRun = false;
     }
     // ------------------------------------------------------------------
