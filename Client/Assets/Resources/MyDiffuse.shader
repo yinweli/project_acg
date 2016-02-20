@@ -10,7 +10,7 @@
 	SubShader
 	{
 		Tags
-		{ 
+		{
 			"IgnoreProjector"="True" 
 			"RenderType"="Transparent" 
 			"PreviewType"="Plane"
