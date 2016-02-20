@@ -19,8 +19,12 @@ public class CameraCtrl : MonoBehaviour
         pthis = this;
     }
     // ------------------------------------------------------------------
-    // Update is called once per frame
-    void Update()
+    void Start()
+    {
+        InvokeRepeating("CheckMove", 1, GameDefine.fRunRefreshTime);
+    }
+    // ------------------------------------------------------------------
+    void CheckMove()
     {
         if (!bTestMove && !SysMain.pthis.bIsGaming)
             return;
@@ -39,7 +43,7 @@ public class CameraCtrl : MonoBehaviour
 
         // 檢查隊伍是否為停滯狀態.
         if (!CheckCanMove())
-            return;        
+            return;
 
         MoveTo(iNextRoad);
     }
@@ -117,9 +121,9 @@ public class CameraCtrl : MonoBehaviour
         // 把z歸零, 因為沒有要動z值.
         vecDirection.z = 0;
         // 把物件位置朝目標向量(玩家方向)移動.
-        transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime;
+        transform.localPosition += vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * GameDefine.fRunRefreshTime;
 
-		Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * Time.deltaTime * Camera.main.gameObject.transform.localScale.x;
+        Camera.main.gameObject.transform.localPosition += -1 * vecDirection.normalized * SysMain.pthis.GetMoveSpeed() * GameDefine.fRunRefreshTime * Camera.main.gameObject.transform.localScale.x;
         MapCreater.pthis.Refresh(iNextRoad);
     }
     // ------------------------------------------------------------------

@@ -29,6 +29,8 @@ public class SysMain : MonoBehaviour
     public bool bIsOld = true;
 
     public float fSaveTime = 0;
+
+    bool bShowCount;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -150,7 +152,8 @@ public class SysMain : MonoBehaviour
 		Statistics.pthis.ResetDamage();
 
         // 到數開始.
-        StartCoroutine(CountStart(true));
+        bShowCount = true;
+        Invoke("CountStart", 3);
 
         bIsOld = false;
     }
@@ -158,14 +161,17 @@ public class SysMain : MonoBehaviour
     // 建立新關卡.
     public void NewStage()
     {
-        System.GC.Collect();
-
+        P_Loading.pthis.Show();
+        P_Loading.pthis.SetText("Counting Data");
         // 清空遊戲資料.
         DataGame.pthis.Clear();
 		DataPickup.pthis.Clear();
+        P_Loading.pthis.SetText("Reset Object");
         // 清空物件.
         ClearObj();
 
+        System.GC.Collect();
+        P_Loading.pthis.SetText("Reset Data");
         // 重置跑步旗標.
         bCanRun = true;
         // 重新計算數值.
@@ -184,22 +190,30 @@ public class SysMain : MonoBehaviour
 		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
         // 選音樂.
         AudioCtrl.pthis.PlayBG();
+
+        P_Loading.pthis.SetText("Creating Map");
         // 建立地圖資料.
         MapCreater.pthis.Create();
         // 建立地圖物件.
         MapCreater.pthis.Show(0);
+
+        P_Loading.pthis.SetText("Creating Pickup");
 		// 建立撿取資料.
 		PickupCreater.pthis.Create();
 		// 建立撿取物件.
 		PickupCreater.pthis.Show(0);
 
+        P_Loading.pthis.SetText("Save Map");
         DataMap.pthis.Save();
 
+        P_Loading.pthis.SetText("Start Game");
         // UI初始化.
         P_UI.pthis.StartNew();
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
+
+        P_Loading.pthis.Hide();
 
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
@@ -208,7 +222,8 @@ public class SysMain : MonoBehaviour
 		Statistics.pthis.ResetDamage();
 
         // 到數開始.
-        StartCoroutine(CountStart(false));
+        bShowCount = false;
+        Invoke("CountStart", 3);
     }
     // ------------------------------------------------------------------
     // 新遊戲資料.
@@ -244,16 +259,8 @@ public class SysMain : MonoBehaviour
 			Rule.MemberDepotAdd(Itor);
     }
     // ------------------------------------------------------------------
-    IEnumerator CountStart(bool bShowCount)
+    void CountStart()
     {
-        int iCount = 3;
-        while (iCount > 0)
-        {
-            if (bShowCount)
-            { }
-            yield return new WaitForSeconds(1);
-            iCount--;
-        }
         bIsGaming = true;
         P_UI.pthis.StartRecoverSta();
         // 創建人物.

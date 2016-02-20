@@ -6,6 +6,8 @@ public class GameDefine
 {
     public const int iSaveSec = 2; // 存檔秒數.
 
+    public const float fRunRefreshTime = 0.01f; // 跑步函式調用速度.
+
 	public const int iPriceBattery = 1; // 電池價格
 	public const int iPriceLightAmmo = 3; // 輕型彈藥價格
 	public const int iPriceHeavyAmmo = 3; // 重型彈藥價格
@@ -54,7 +56,7 @@ public class GameDefine
 	public const int iBaseStaminaRecovery = 5; // 基礎耐力回復值
 	public const int iStaminaConsume = 5; // 耐力消耗值
 	public const int iStaminaRecoveryTime = 5; // 耐力回復時間
-	public const int iStaminaConsumeTime = 1; // 耐力消耗時間
+	public const float fStaminaConsumeTime = 1; // 耐力消耗時間
 	public const int iStaminaMoveable = 4; // 可移動耐力
 	public const int iDamageUpgrade = 1; // 升級傷害值
 	public const int iDamageClick = 3; // 點擊傷害值
