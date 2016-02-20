@@ -17,7 +17,6 @@ public class EditorMapCreater : Editor
 	{
 		if(EditorApplication.isPlaying == false)
 			return;
-		
 
 		{
 			GUILayout.BeginHorizontal("box");

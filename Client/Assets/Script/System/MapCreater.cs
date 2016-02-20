@@ -11,6 +11,7 @@ public class MapCreater : MonoBehaviour
 	public static MapCreater pthis = null;
 
 	private Dictionary<Vector2, GameObject> Data = new Dictionary<Vector2, GameObject>();
+	private bool CreateOnce = false;
 
 	void Awake()
 	{
@@ -259,7 +260,16 @@ public class MapCreater : MonoBehaviour
 	// 顯示地圖
 	public void Show(int iRoad)
 	{
-		Refresh(iRoad);
+		if(CreateOnce)
+		{
+			for(int i = 0; i < DataMap.pthis.DataRoad.Count; ++i)
+				Refresh(i);
+
+			CreateOnce = false;
+		}
+		else
+			Refresh(iRoad);
+
 		transform.localPosition = new Vector3(-GetRoadObj(iRoad).transform.localPosition.x, -GetRoadObj(iRoad).transform.localPosition.y, 0);
 	}
 	// 清除地圖
