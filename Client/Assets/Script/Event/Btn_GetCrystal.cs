@@ -66,7 +66,7 @@ public class Btn_GetCrystal : MonoBehaviour
         P_UI.pthis.AddCrystal(DataPickup.pthis.Data[iItemID].iCount);
 
         SysAchieve.pthis.Add(ENUM_Achievement.Total_Crystal, DataPickup.pthis.Data[iItemID].iCount);
-        GoogleAnalytics.pthis.LogEvent("Count", "Pickup Crystal", "", 0);
+        GoogleAnalyticsV3.getInstance().LogEvent("Count", "Pickup Crystal", "", 0);
 
 		Destroy(gameObject);
 	}

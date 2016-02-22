@@ -23,6 +23,7 @@ public class P_AddMember : MonoBehaviour
     // ------------------------------------------------------------------
     void Start()
     {
+        GoogleAnalyticsV3.getInstance().LogScreen("AddMember");
         UpdateCurrency();
     }
     // ------------------------------------------------------------------

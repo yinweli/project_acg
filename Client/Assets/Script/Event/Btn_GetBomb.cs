@@ -63,7 +63,7 @@ public class Btn_GetBomb : MonoBehaviour
 		P_UI.pthis.UpdateResource();
 
         SysAchieve.pthis.Add(ENUM_Achievement.Total_Bomb, DataPickup.pthis.Data[iItemID].iCount);
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Bomb", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Pickup Bomb", "", 0);
 
         Destroy(gameObject);
     }

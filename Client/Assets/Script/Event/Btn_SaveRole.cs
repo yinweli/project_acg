@@ -22,7 +22,7 @@ public class Btn_SaveRole : MonoBehaviour
             {
                 PlayerCreater.pthis.SaveRole(pPlayer.gameObject);
                 Statistics.pthis.RecordResource(ENUM_Pickup.Member, 1);
-                GoogleAnalytics.pthis.LogEvent("Count", "Save Member", "", 0);
+                GoogleAnalyticsV3.getInstance().LogEvent("Count", "Save Member", "", 0);
                 if (DataPickup.pthis.Data[iItemID] != null)
                     DataPickup.pthis.Data[iItemID].bPickup = true;
             }            

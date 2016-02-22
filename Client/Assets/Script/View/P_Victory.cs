@@ -20,9 +20,11 @@ public class P_Victory : MonoBehaviour
     }
     // ------------------------------------------------------------------
     void Start()
-    {        
-		GoogleAnalytics.pthis.LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
-		GoogleAnalytics.pthis.LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
+    {
+        GoogleAnalyticsV3.getInstance().LogScreen("Victory");
+
+		GoogleAnalyticsV3.getInstance().LogEvent("PlayTime", "Day" + DataPlayer.pthis.iStage, "", DataGame.pthis.iStageTime);
+		GoogleAnalyticsV3.getInstance().LogEvent("Victory", "Day" + DataPlayer.pthis.iStage, "", 1);
 
         // 天數.
         pLb[0].text = DataPlayer.pthis.iStage.ToString();
@@ -48,7 +50,10 @@ public class P_Victory : MonoBehaviour
             ObjPage[iPage + 1].GetComponent<G_Feature>().OpenPage();
 
         if (iPage + 1 == 2)
+        {
+            GoogleAnalyticsV3.getInstance().LogScreen("Shop");
             ObjCrystalShop = SysUI.pthis.CreatePanel("Prefab/P_CrystalMan");
+        }
     }
     // ------------------------------------------------------------------
     public void ClearPage()

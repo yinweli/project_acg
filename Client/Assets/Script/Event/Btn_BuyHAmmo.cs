@@ -30,7 +30,7 @@ public class Btn_BuyHAmmo : MonoBehaviour
             return;
         }
 
-		GoogleAnalytics.pthis.LogEvent("Count", "Buy HeavyAmmo", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Buy HeavyAmmo", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         DataPlayer.pthis.iCurrency -= GameDefine.iHeavyAmmoCost;

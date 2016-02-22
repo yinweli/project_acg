@@ -64,7 +64,7 @@ public class Btn_GetLightAmmo : MonoBehaviour
 		P_UI.pthis.UpdateResource();
 
         SysAchieve.pthis.Add(ENUM_Achievement.Total_LightAmmo, DataPickup.pthis.Data[iItemID].iCount);
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup LightAmmo", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Pickup LightAmmo", "", 0);
 		
 		Destroy(gameObject);
 	}

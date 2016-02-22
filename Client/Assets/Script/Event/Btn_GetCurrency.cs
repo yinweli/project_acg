@@ -61,7 +61,7 @@ public class Btn_GetCurrency : MonoBehaviour {
             fFrame += 0.05f;
         }
 
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Currency", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Pickup Currency", "", 0);
 
         if (iItemID < DataPickup.pthis.Data.Count)
         {

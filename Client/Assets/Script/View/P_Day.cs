@@ -8,7 +8,9 @@ public class P_Day : MonoBehaviour
 
     void Start()
     {
-        GoogleAnalytics.pthis.LogEvent("Play", "Day" + DataPlayer.pthis.iStage, "", 1);
+        GoogleAnalyticsV3.getInstance().LogScreen("Stage");
+
+        GoogleAnalyticsV3.getInstance().LogEvent("Play", "Day" + DataPlayer.pthis.iStage, "", 1);
         LbDay.text = "Day [e92121]" + DataPlayer.pthis.iStage;
 
         if(Rule.AppearBossStage())

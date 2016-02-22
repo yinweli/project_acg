@@ -47,14 +47,14 @@ public class Btn_GetBattery : MonoBehaviour
 			pSprite.transform.Rotate(0, 0, -10);
 			pSprite.transform.localScale = new Vector3(pSprite.transform.localScale.x + (0.01f * iCount), pSprite.transform.localScale.y + (0.01f * iCount), 1);
 			iCount++;
-			yield return new WaitForEndOfFrame();
+			yield return new WaitForFixedUpdate();
 		}
 		
 		yield return new WaitForSeconds(0.8f);
 		
 		while (Vector2.Distance(pSprite.transform.position, P_UI.pthis.ObjBattery.transform.position) > 0.03f)
 		{
-			yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
 			ToolKit.MoveTo(gameObject, P_UI.pthis.ObjBattery.transform.position - pSprite.transform.position, 0.8f * fFrame);
 			fFrame += 0.05f;
 		}
@@ -64,7 +64,7 @@ public class Btn_GetBattery : MonoBehaviour
 		P_UI.pthis.UpdateResource();
 
         SysAchieve.pthis.Add(ENUM_Achievement.Total_Battery, DataPickup.pthis.Data[iItemID].iCount);
-		GoogleAnalytics.pthis.LogEvent("Count", "Pickup Battery", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Pickup Battery", "", 0);
 		
 		Destroy(gameObject);
 	}

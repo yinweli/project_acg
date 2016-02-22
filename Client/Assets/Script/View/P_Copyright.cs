@@ -5,6 +5,7 @@ public class P_Copyright : MonoBehaviour
 {
     void Start()
     {
+        GoogleAnalyticsV3.getInstance().LogScreen("Copyright");
         SysMain.pthis.ReadyStart();
     }
     public void DelCopyright()

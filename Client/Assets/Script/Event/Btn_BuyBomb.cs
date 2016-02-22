@@ -30,7 +30,7 @@ public class Btn_BuyBomb : MonoBehaviour
             return;
         }
 
-		GoogleAnalytics.pthis.LogEvent("Count", "Buy Bomb", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Buy Bomb", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         DataPlayer.pthis.iCurrency -= GameDefine.iPriceBomb;

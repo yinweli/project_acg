@@ -29,7 +29,7 @@ public class Btn_BuyLAmmo : MonoBehaviour
             return;
         }
 
-		GoogleAnalytics.pthis.LogEvent("Count", "Buy LightAmmo", "", 0);
+		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Buy LightAmmo", "", 0);
 
         NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
         DataPlayer.pthis.iCurrency -= GameDefine.iLightAmmoCost;

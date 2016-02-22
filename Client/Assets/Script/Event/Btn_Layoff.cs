@@ -18,7 +18,7 @@ public class Btn_Layoff : MonoBehaviour
         if (DataPlayer.pthis.iCurrency < GameDefine.iPriceLayoff)
             return;
 
-        GoogleAnalytics.pthis.LogEvent("Count", "Layoff", "", 0);
+        GoogleAnalyticsV3.getInstance().LogEvent("Count", "Layoff", "", 0);
 
         DataPlayer.pthis.iCurrency -= GameDefine.iPriceLayoff;
         pData.pData.Layoff();
