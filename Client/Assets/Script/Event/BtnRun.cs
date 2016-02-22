@@ -11,7 +11,7 @@ public class BtnRun : MonoBehaviour
     {
         CancelInvoke();
         CheckBtnEnble();
-        InvokeRepeating("StaRecovery", RecoveryTime(), RecoveryTime());
+        InvokeRepeating("StaRecovery", 0, RecoveryTime());
     }
     // ------------------------------------------------------------------
     void Update()
@@ -73,7 +73,7 @@ public class BtnRun : MonoBehaviour
     void StopRun()
     {
         // 還可以繼續跑.
-        if (bIsRun && CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
+        if (bIsRun && CheckCanMove() &&  SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
             Invoke("StopRun", GameDefine.fStaminaConsumeTime);
             return;

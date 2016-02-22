@@ -25,6 +25,8 @@ public class G_Feature : MonoBehaviour
     // ------------------------------------------------------------------
 	public void OpenPage()
     {
+        GoogleAnalyticsV3.getInstance().LogScreen("Member List");
+
         iFeature = new int[DataPlayer.pthis.MemberParty.Count];
         iEquip = new int[DataPlayer.pthis.MemberParty.Count];
 

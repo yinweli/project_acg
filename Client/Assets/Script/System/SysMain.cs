@@ -30,6 +30,8 @@ public class SysMain : MonoBehaviour
 
     public float fSaveTime = 0;
 
+    public GoogleAnalyticsV3 GAnalytics = new GoogleAnalyticsV3();
+
     bool bShowCount;
     // ------------------------------------------------------------------
     void Awake()
@@ -161,17 +163,13 @@ public class SysMain : MonoBehaviour
     // 建立新關卡.
     public void NewStage()
     {
-        P_Loading.pthis.Show();
-        P_Loading.pthis.SetText("Counting Data");
         // 清空遊戲資料.
         DataGame.pthis.Clear();
 		DataPickup.pthis.Clear();
-        P_Loading.pthis.SetText("Reset Object");
         // 清空物件.
         ClearObj();
 
         System.GC.Collect();
-        P_Loading.pthis.SetText("Reset Data");
         // 重置跑步旗標.
         bCanRun = true;
         // 重新計算數值.
@@ -184,6 +182,9 @@ public class SysMain : MonoBehaviour
 		Rule.ShieldReset();
         Rule.RandomCollect();
 
+        // 資料存檔.
+        DataPlayer.pthis.Save();
+
  		DataGame.pthis.fRunDouble = 1.0f;
 
         // 選擇關卡風格編號.
@@ -191,35 +192,31 @@ public class SysMain : MonoBehaviour
         // 選音樂.
         AudioCtrl.pthis.PlayBG();
 
-        P_Loading.pthis.SetText("Creating Map");
         // 建立地圖資料.
         MapCreater.pthis.Create();
+        // 建立撿取資料.
+        PickupCreater.pthis.Create();
+
+        SaveGame();
+
         // 建立地圖物件.
         MapCreater.pthis.Show(0);
-
-        P_Loading.pthis.SetText("Creating Pickup");
-		// 建立撿取資料.
-		PickupCreater.pthis.Create();
 		// 建立撿取物件.
-		PickupCreater.pthis.Show(0);
+		PickupCreater.pthis.Show(0);        
 
-        P_Loading.pthis.SetText("Save Map");
         DataMap.pthis.Save();
 
-        P_Loading.pthis.SetText("Start Game");
         // UI初始化.
         P_UI.pthis.StartNew();
 
         // 鏡頭位置調整.
         CameraCtrl.pthis.StartNew();
 
-        P_Loading.pthis.Hide();
-
         // 新遊戲 - 淡出淡入天數後開始遊戲.
         SysUI.pthis.ShowDay();
 
-		Statistics.pthis.ResetResource();
-		Statistics.pthis.ResetDamage();
+        Statistics.pthis.ResetResource();
+        Statistics.pthis.ResetDamage();
 
         // 到數開始.
         bShowCount = false;
@@ -338,6 +335,8 @@ public class SysMain : MonoBehaviour
 
         GameObject pObj = SysUI.pthis.CreatePanel("Prefab/P_Victory");
         pObj.transform.localPosition = new Vector3(0, 0, -1000);
+
+        ClearEnemyObj();
     }
     // ------------------------------------------------------------------
     public void Failed()
@@ -369,17 +368,24 @@ public class SysMain : MonoBehaviour
         DeadRole.Clear();
         // 刪除待救人物.
         PlayerCreater.pthis.ClearList();
-
-        // 刪除 敵人.
-        foreach (KeyValuePair<GameObject,int> itor in Enemy)
-            Destroy(itor.Key);
-
+        
         // 刪除 肉肉.
         ListMeet.Clear();
+
+        ClearEnemyObj();
+    }
+    // ------------------------------------------------------------------
+    void ClearEnemyObj()
+    {
+        // 刪除 敵人.
+        foreach (KeyValuePair<GameObject, int> itor in Enemy)
+            Destroy(itor.Key);
 
         // 清空 敵人佇列.
         Enemy.Clear();
         AtkEnemy.Clear();
+
+        DataEnemy.pthis.Save();
     }
     // ------------------------------------------------------------------
     public void MemberSave()
