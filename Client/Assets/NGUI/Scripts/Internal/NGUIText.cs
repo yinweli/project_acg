@@ -1,6 +1,6 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2015 Tasharen Entertainment
+// Copyright © 2011-2016 Tasharen Entertainment
 //----------------------------------------------
 
 #if !UNITY_3_5
@@ -103,16 +103,18 @@ static public class NGUIText
 		useSymbols = (bitmapFont != null && bitmapFont.hasSymbols) && encoding && symbolStyle != SymbolStyle.None;
 
 #if DYNAMIC_FONT
-		if (dynamicFont != null && request)
-		{
-			dynamicFont.RequestCharactersInTexture(")_-", finalSize, fontStyle);
+		Font font = dynamicFont;
 
-#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6
-			if (!dynamicFont.GetCharacterInfo(')', out mTempChar, finalSize, fontStyle) || mTempChar.vert.height == 0f)
+		if (font != null && request)
+		{
+			font.RequestCharactersInTexture(")_-", finalSize, fontStyle);
+
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+			if (!font.GetCharacterInfo(')', out mTempChar, finalSize, fontStyle) || mTempChar.vert.height == 0f)
 			{
-				dynamicFont.RequestCharactersInTexture("A", finalSize, fontStyle);
+				font.RequestCharactersInTexture("A", finalSize, fontStyle);
 				{
-					if (!dynamicFont.GetCharacterInfo('A', out mTempChar, finalSize, fontStyle))
+					if (!font.GetCharacterInfo('A', out mTempChar, finalSize, fontStyle))
 					{
 						baseline = 0f;
 						return;
@@ -123,11 +125,11 @@ static public class NGUIText
 			float y0 = mTempChar.vert.yMax;
 			float y1 = mTempChar.vert.yMin;
 #else
-			if (!dynamicFont.GetCharacterInfo(')', out mTempChar, finalSize, fontStyle) || mTempChar.maxY == 0f)
+			if (!font.GetCharacterInfo(')', out mTempChar, finalSize, fontStyle) || mTempChar.maxY == 0f)
 			{
-				dynamicFont.RequestCharactersInTexture("A", finalSize, fontStyle);
+				font.RequestCharactersInTexture("A", finalSize, fontStyle);
 				{
-					if (!dynamicFont.GetCharacterInfo('A', out mTempChar, finalSize, fontStyle))
+					if (!font.GetCharacterInfo('A', out mTempChar, finalSize, fontStyle))
 					{
 						baseline = 0f;
 						return;
@@ -193,7 +195,7 @@ static public class NGUIText
 		else if (dynamicFont != null)
 		{
 			if (dynamicFont.GetCharacterInfo((char)ch, out mTempChar, finalSize, fontStyle))
- #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6
+ #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
 				return mTempChar.width * fontScale * pixelDensity;
  #else
 				return mTempChar.advance * fontScale * pixelDensity;
@@ -261,7 +263,7 @@ static public class NGUIText
 		{
 			if (dynamicFont.GetCharacterInfo((char)ch, out mTempChar, finalSize, fontStyle))
 			{
- #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6
+ #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
 				glyph.v0.x = mTempChar.vert.xMin;
 				glyph.v1.x = glyph.v0.x + mTempChar.vert.width;
 
@@ -347,7 +349,7 @@ static public class NGUIText
 
 	[System.Diagnostics.DebuggerHidden]
 	[System.Diagnostics.DebuggerStepThrough]
-	static public Color ParseColor (string text, int offset) { return ParseColor24(text, offset); }
+	static public Color ParseColor (string text, int offset = 0) { return ParseColor24(text, offset); }
 
 	/// <summary>
 	/// Parse a RrGgBb color encoded in the string.
@@ -355,7 +357,7 @@ static public class NGUIText
 
 	[System.Diagnostics.DebuggerHidden]
 	[System.Diagnostics.DebuggerStepThrough]
-	static public Color ParseColor24 (string text, int offset)
+	static public Color ParseColor24 (string text, int offset = 0)
 	{
 		int r = (NGUIMath.HexToDecimal(text[offset])     << 4) | NGUIMath.HexToDecimal(text[offset + 1]);
 		int g = (NGUIMath.HexToDecimal(text[offset + 2]) << 4) | NGUIMath.HexToDecimal(text[offset + 3]);
@@ -1060,7 +1062,7 @@ static public class NGUIText
 	/// Text wrapping functionality. The 'width' and 'height' should be in pixels.
 	/// </summary>
 
-	static public bool WrapText (string text, out string finalText, bool keepCharCount, bool wrapLineColors)
+	static public bool WrapText (string text, out string finalText, bool keepCharCount, bool wrapLineColors, bool useEllipsis = false)
 	{
 		if (regionWidth < 1 || regionHeight < 1 || finalLineHeight < 1f)
 		{
@@ -1098,7 +1100,13 @@ static public class NGUIText
 		bool ignoreColor = false;
 
 		if (!useSymbols) wrapLineColors = false;
-		if (wrapLineColors) mColors.Add(c);
+		if (wrapLineColors)
+		{
+			mColors.Add(c);
+			sb.Append("[");
+			sb.Append(NGUIText.EncodeColor(c));
+			sb.Append("]");
+		}
 
 		// Run through all characters
 		for (; offset < textLength; ++offset)
@@ -1179,7 +1187,7 @@ static public class NGUIText
 			{
 				// Find the glyph for this character
 				float w = GetGlyphWidth(ch, prev);
-				if (w == 0f) continue;
+				if (w == 0f && !IsSpace(ch)) continue;
 				glyphWidth = finalSpacingX + w;
 			}
 			else glyphWidth = finalSpacingX + symbol.advance * fontScale;
@@ -1211,6 +1219,44 @@ static public class NGUIText
 				// Can't start a new line
 				if (lineIsEmpty || lineCount == maxLineCount)
 				{
+					// Adds "..." at the end of text that doesn't fit. Contributed by Jason Nollan.
+					if (useEllipsis && lineCount == maxLineCount && offset > 1)
+					{
+						float ellipsisWidth = GetGlyphWidth('.', '.') * 3f;
+
+						if (ellipsisWidth < regionWidth)
+						{
+							remainingWidth += glyphWidth;
+							int tempOffset = offset;
+							int removeCount = 0;
+
+							while (tempOffset > 1 && remainingWidth < ellipsisWidth)
+							{
+								--tempOffset;
+								char prevCh = text[tempOffset - 1];
+								char characterToRemove = text[tempOffset];
+								bool isCaseWhereSpaceShouldBeInStringBuilderButIsnt = (remainingWidth == 0 && IsSpace(characterToRemove));
+								remainingWidth += GetGlyphWidth(characterToRemove, prevCh);
+								if (tempOffset < start && !isCaseWhereSpaceShouldBeInStringBuilderButIsnt)
+									++removeCount;
+							}
+
+							if (remainingWidth >= ellipsisWidth)
+							{
+								if (removeCount > 0)
+									sb.Length = Mathf.Max(0, sb.Length - removeCount);
+
+								sb.Append(text.Substring(start, Mathf.Max(0, tempOffset - start)));
+								while (sb.Length > 0 && IsSpace(sb[sb.Length - 1])) --sb.Length;
+								sb.Append("...");
+
+								++lineCount;
+								start = offset = tempOffset;
+								break;
+							}
+						}
+					}
+
 					// This is the first word on the line -- add it up to the character that fits
 					sb.Append(text.Substring(start, Mathf.Max(0, offset - start)));
 					bool space = IsSpace(ch);
@@ -1550,6 +1596,9 @@ static public class NGUIText
 				// Advance the position
 				x += (subscriptMode == 0) ? finalSpacingX + glyph.advance :
 					(finalSpacingX + glyph.advance) * sizeShrinkage;
+
+				// Subscript may cause pixels to no longer be aligned
+				if (subscriptMode != 0) x = Mathf.Round(x);
 
 				// No need to continue if this is a space character
 				if (IsSpace(ch)) continue;
@@ -2220,6 +2269,76 @@ static public class NGUIText
 			// Align the highlight
 			if (alignment != Alignment.Left && highlightOffset < highlight.size)
 				Align(highlight, highlightOffset, x - finalSpacingX);
+		}
+	}
+
+	/// <summary>
+	/// Replace the specified link.
+	/// </summary>
+
+	static public bool ReplaceLink (ref string text, ref int index, string prefix)
+	{
+		if (index == -1) return false;
+		index = text.IndexOf(prefix, index);
+		if (index == -1) return false;
+
+		int domainStart = index + prefix.Length;
+		int end = text.IndexOf(' ', domainStart);
+		if (end == -1) end = text.Length;
+
+		int domainEnd = text.IndexOfAny(new char[] { '/', ' ' }, domainStart);
+
+		if (domainEnd == -1 || domainEnd == domainStart)
+		{
+			index += 7;
+			return true;
+		}
+
+		string left = text.Substring(0, index);
+		string link = text.Substring(index, end - index);
+		string right = text.Substring(end);
+		string urlName = text.Substring(domainStart, domainEnd - domainStart);
+
+		text = left + "[url=" + link + "][u]" + urlName + "[/u][/url]";
+		index = text.Length;
+		text += right;
+		return true;
+	}
+
+	/// <summary>
+	/// Insert a hyperlink around the specified keyword.
+	/// </summary>
+
+	static public bool InsertHyperlink (ref string text, ref int index, string keyword, string link)
+	{
+		int patchStart = text.IndexOf(keyword, index, System.StringComparison.CurrentCultureIgnoreCase);
+		if (patchStart == -1) return false;
+
+		string left = text.Substring(0, patchStart);
+		string url = "[url=" + link + "][u]";
+		string middle = text.Substring(patchStart, keyword.Length) + "[/u][/url]";
+		string right = text.Substring(patchStart + keyword.Length);
+
+		text = left + url + middle;
+		index = text.Length;
+		text += right;
+		return true;
+	}
+
+	/// <summary>
+	/// Helper function that replaces links within text with clickable ones.
+	/// </summary>
+
+	static public void ReplaceLinks (ref string text)
+	{
+		for (int index = 0; index < text.Length; )
+		{
+			if (!ReplaceLink(ref text, ref index, "http://")) break;
+		}
+
+		for (int index = 0; index < text.Length; )
+		{
+			if (!ReplaceLink(ref text, ref index, "https://")) break;
 		}
 	}
 }
