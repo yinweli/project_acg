@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 68c15046c5cf56b4c990f3e6dc7ea2c6
-timeCreated: 1451723164
+timeCreated: 1457281826
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -344,9 +344,9 @@ TextureImporter:
     - name: C_Adorn_B_000
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 335
-        width: 62
+        width: 61
         height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -807,7 +807,7 @@ TextureImporter:
         x: 111
         y: 146
         width: 41
-        height: 11
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -894,10 +894,10 @@ TextureImporter:
     - name: A_009
       rect:
         serializedVersion: 2
-        x: 238
-        y: 438
-        width: 73
-        height: 68
+        x: 406
+        y: 425
+        width: 78
+        height: 87
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
