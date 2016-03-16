@@ -19,6 +19,8 @@ public class EnemyCreater : MonoBehaviour
     public GameObject ObjCamCtrl;
     // 波數能量.
     public int iEnegry = 0;
+
+    public GameObject Obj_Boss;
     // ------------------------------------------------------------------
     void Awake()
     {
@@ -134,24 +136,25 @@ public class EnemyCreater : MonoBehaviour
     // ------------------------------------------------------------------
     IEnumerator BossCreater()
     {
+        // 計算魔王ID.
+        int iIndex = DataPlayer.pthis.iStage / GameDefine.iBossStage % GameDefine.iBossCount;
+
+        if (iIndex == 0)
+            iIndex = GameDefine.iBossCount;
+
         yield return new WaitForSeconds(Random.Range(GameDefine.iMinWaitSec, GameDefine.iMaxWaitSec));
         while (SysMain.pthis.bIsGaming)
         {
             // 魔王還在不出怪.
-            if (SysMain.pthis.Enemy.Count > 0)
+            if (Obj_Boss != null)
                 yield return new WaitForSeconds(0.1f);
             else
             {
                 // 等待1.8秒後出新魔王.
-                yield return new WaitForSeconds(1.8f);
-
-				int iIndex = DataPlayer.pthis.iStage / GameDefine.iBossStage % GameDefine.iBossCount;
-
-				if(iIndex == 0)
-					iIndex = GameDefine.iBossCount;
+                yield return new WaitForSeconds(1.8f);				
 
                 Vector2 vPos = new Vector2(ObjCamCtrl.transform.localPosition.x + Random.Range(-500.0f, 500.0f), ObjCamCtrl.transform.localPosition.y + Random.Range(380.0f, 450.0f));
-                CreateOneEnemy(iIndex + 1000, -1, vPos);               
+                Obj_Boss = CreateOneEnemy(iIndex + 1000, -1, vPos);               
                 yield return new WaitForSeconds(5.0f);
             }
         }

@@ -4,6 +4,8 @@ using System.Collections;
 public class EnemyJelly : MonoBehaviour
 {
     public int iShotHurt = 0;
+
+    public SpriteRenderer S_Face;
 	// 產生小軟泥.
     public void CreateJelly(int iHurt)
     {
@@ -15,6 +17,7 @@ public class EnemyJelly : MonoBehaviour
 
         GameObject ObjJelly = UITool.pthis.CreateUIByPos(gameObject, "G_SmallJelly", gameObject.transform.position.x, gameObject.transform.position.y);
         ObjJelly.transform.parent = gameObject.transform.parent;
+        ObjJelly.GetComponent<ChangeColor>().Change_Color = S_Face.color;
 
         float PosX = gameObject.transform.position.x + Random.Range(-0.2f, 0.2f);
         float PosY = gameObject.transform.position.y + Random.Range(-0.015f, 0.45f);
