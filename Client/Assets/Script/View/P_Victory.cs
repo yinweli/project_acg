@@ -13,6 +13,9 @@ public class P_Victory : MonoBehaviour
     public UILabel[] pLb = new UILabel[5];
 
     public GameObject ObjCrystalShop = null;
+
+    public AudioClip Clip_Buy;
+    public AudioClip Clip_CantBuy;
     // ------------------------------------------------------------------
     void Awake()
     {

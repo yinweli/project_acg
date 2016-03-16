@@ -135,9 +135,9 @@ public class SysMain : MonoBehaviour
         Rule.CriticalStrikeReset();
         Rule.AddDamageReset();
 		DataGame.pthis.fRunDouble = 1.0f;
-		
-		// 建立地圖物件.
-		MapCreater.pthis.Show(DataGame.pthis.iRoad);
+
+        // 建立地圖物件.
+        MapCreater.pthis.Show(DataGame.pthis.iRoad);
 		// 建立撿取物件.
 		PickupCreater.pthis.Show(DataGame.pthis.iRoad);
 
@@ -168,8 +168,7 @@ public class SysMain : MonoBehaviour
 		DataPickup.pthis.Clear();
         // 清空物件.
         ClearObj();
-
-        System.GC.Collect();
+        
         // 重置跑步旗標.
         bCanRun = true;
         // 重新計算數值.
@@ -191,6 +190,9 @@ public class SysMain : MonoBehaviour
 		DataPlayer.pthis.iStyle = Tool.RandomPick(GameDefine.StageStyle);
         // 選音樂.
         AudioCtrl.pthis.PlayBG();
+
+        // 預先載入地圖物件.
+        UITool.pthis.PreLoadMapObj(DataPlayer.pthis.iStyle);
 
         // 建立地圖資料.
         MapCreater.pthis.Create();
@@ -373,6 +375,8 @@ public class SysMain : MonoBehaviour
         ListMeet.Clear();
 
         ClearEnemyObj();
+
+        System.GC.Collect();
     }
     // ------------------------------------------------------------------
     void ClearEnemyObj()

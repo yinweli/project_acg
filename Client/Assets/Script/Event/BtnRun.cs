@@ -6,6 +6,8 @@ public class BtnRun : MonoBehaviour
     public bool bIsRun = false;
     public float fCoolDown = 1;
     public UISprite pBg = null;
+
+    public AudioClip Clip_Run;
     // ------------------------------------------------------------------
     public void StartNew()
     {
@@ -64,7 +66,7 @@ public class BtnRun : MonoBehaviour
 
         if (CheckCanMove() && SysMain.pthis.AddStamina(-GameDefine.iStaminaConsume))
         {
-            NGUITools.PlaySound(Resources.Load("Sound/FX/Run") as AudioClip);
+            NGUITools.PlaySound(Clip_Run);
             DataGame.pthis.fRunDouble = 3.0f;
             Invoke("StopRun", GameDefine.fStaminaConsumeTime);
         }

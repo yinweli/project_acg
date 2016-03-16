@@ -222,7 +222,7 @@ public class MapCreater : MonoBehaviour
 			float fPosX = PosVec.x + (Itor.Value.Width * GameDefine.iBlockSize) / 2;
 			float fPosY = PosVec.y + (Itor.Value.Height * GameDefine.iBlockSize) / 2;
 			
-			Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, emType.ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
+			Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, (int)emType, DataPlayer.pthis.iStyle, fPosX, fPosY));
 		}
 	}
 	// 更新地圖
@@ -253,7 +253,7 @@ public class MapCreater : MonoBehaviour
 				float fPosX = PosVec.x + (pObjt.Width * GameDefine.iBlockSize) / 2;
 				float fPosY = PosVec.y + (pObjt.Height * GameDefine.iBlockSize) / 2;
 
-				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, ((ENUM_Map)pObjt.Type).ToString(), DataPlayer.pthis.iStyle, fPosX, fPosY));
+				Data.Add(PosVec, UITool.pthis.CreateMap(gameObject, pObjt.Type, DataPlayer.pthis.iStyle, fPosX, fPosY));
 			}//for
 		}//for
 	}

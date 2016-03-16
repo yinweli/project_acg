@@ -31,7 +31,7 @@ public class Btn_BuyBattery : MonoBehaviour
         }
         GoogleAnalyticsV3.getInstance().LogEvent("Count", "Buy Battery", "", 0);
 
-        NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
+        NGUITools.PlaySound(P_Victory.pthis.Clip_Buy);
         DataPlayer.pthis.iCurrency -= GameDefine.iBatteryCost;
 		Rule.BatteryAdd(GameDefine.iBatteryCount);
         P_UI.pthis.UpdateCurrency();
@@ -42,7 +42,7 @@ public class Btn_BuyBattery : MonoBehaviour
 
     public void PlaySound()
     {
-        NGUITools.PlaySound(Resources.Load("Sound/FX/CantBuy") as AudioClip);
+        NGUITools.PlaySound(P_Victory.pthis.Clip_CantBuy);
     }
 }
 

@@ -9,6 +9,9 @@ public class P_Login : MonoBehaviour
         // 選音樂.
         AudioCtrl.pthis.PlayMusic("Start", 0.9f);
 
+        // 預先載入地圖物件.
+        UITool.pthis.PreLoadMapObj(DataPlayer.pthis.iStyle);
+
         // 建立地圖物件.
         MapCreater.pthis.Show(0);
         // 開始行走

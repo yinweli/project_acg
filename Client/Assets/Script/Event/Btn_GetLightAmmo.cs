@@ -15,7 +15,7 @@ public class Btn_GetLightAmmo : MonoBehaviour
 			GetComponent<BoxCollider2D>().enabled = false;
 			NGUITools.PlaySound(Resources.Load("Sound/FX/GetItem") as AudioClip);
 			// 變更為不受光.
-			pSprite.material = Resources.Load("Sprite") as Material;
+			pSprite.material = UITool.pthis.M_Sprite;
 			pSprite.sortingLayerName = "Top";
 			// 取得數量.
 			pLbCount.text = "+" + DataPickup.pthis.Data[iItemID].iCount;

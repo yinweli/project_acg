@@ -51,7 +51,7 @@ public class Btn_OpenAds : MonoBehaviour
         if (DataPlayer.pthis.iStage - DataPlayer.pthis.iAdsWatch > 0)
         {
             // 播給錢聲音.
-            NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
+            NGUITools.PlaySound(P_Victory.pthis.Clip_Buy);
             // 給錢.
             Rule.CurrencyAdd(Rule.AdsMoney());
 			// 已觀看次數增加.

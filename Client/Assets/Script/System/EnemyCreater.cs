@@ -110,7 +110,7 @@ public class EnemyCreater : MonoBehaviour
     // 產生一隻怪物.
     public GameObject CreateOneEnemy(int iMonster, int iHP, Vector2 vPos)
     {
-        GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("Enemy/{0:000}", iMonster), vPos.x, vPos.y);
+        GameObject pEnemy = UITool.pthis.CreateUIByPos(gameObject, string.Format("{0:000}", iMonster), vPos.x, vPos.y);
 
         if (iMonster == 61)
             pEnemy.transform.localPosition = new Vector2(pEnemy.transform.localPosition.x -18, pEnemy.transform.localPosition.y -50);

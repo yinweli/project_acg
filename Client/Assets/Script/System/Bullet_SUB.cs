@@ -54,7 +54,7 @@ public class Bullet_SUB : MonoBehaviour
         if (SysMain.pthis.AtkEnemy.Count <= 0)
             return;
         
-        pAI.pRander.material = Resources.Load("Sprite") as Material;
+        pAI.pRander.material = UITool.pthis.M_Sprite;
         gameObject.transform.localScale = new Vector3(GameDefine.fSUBArea / 0.1f, GameDefine.fSUBArea / 0.1f, 1);
 
         foreach (KeyValuePair<GameObject, int> itor in SysMain.pthis.Enemy)

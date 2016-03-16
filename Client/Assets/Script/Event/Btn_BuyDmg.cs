@@ -32,7 +32,7 @@ public class Btn_BuyDmg : MonoBehaviour
 
 		GoogleAnalyticsV3.getInstance().LogEvent("Count", "Buy AddDmg", "", 0);
 
-        NGUITools.PlaySound(Resources.Load("Sound/FX/Buy") as AudioClip);
+        NGUITools.PlaySound(P_Victory.pthis.Clip_Buy);
         DataPlayer.pthis.iCurrency -= Rule.DmgLvMoney();
         DataPlayer.pthis.iDamageLv++;
         P_UI.pthis.UpdateCurrency();
@@ -43,6 +43,6 @@ public class Btn_BuyDmg : MonoBehaviour
     // ------------------------------------------------------------------
     public void PlaySound()
     {
-        NGUITools.PlaySound(Resources.Load("Sound/FX/CantBuy") as AudioClip);
+        NGUITools.PlaySound(P_Victory.pthis.Clip_CantBuy);
     }
 }

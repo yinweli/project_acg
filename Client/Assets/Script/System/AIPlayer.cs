@@ -158,9 +158,12 @@ public class AIPlayer : MonoBehaviour
 	// 建立子彈函式.
 	public void CreateBullet()
 	{
-		GameObject pObj = NGUITools.AddChild(gameObject, Resources.Load("Prefab/Bullet/Bullet_" + pWeapon) as GameObject);
+        GameObject pObj = UITool.pthis.CreateBullet(gameObject, pWeapon);
 
-		pObj.transform.parent = transform.parent;
+        if (pObj == null)
+            return;
+
+        pObj.transform.parent = transform.parent;
 		pObj.transform.localPosition = new Vector3(transform.localPosition.x + 5.0f, transform.localPosition.y);
         pObj.GetComponent<AIBullet>().Chace(ObjTarget);
         pObj.GetComponent<AIBullet>().iPlayer = iPlayer;
