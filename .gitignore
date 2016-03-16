@@ -24,3 +24,6 @@ Client/Assembly-CSharp-vs.csproj
 Client/Client.userprefs
 *.suo
 Client/pickupstat.log
+/0001-lag.patch
+/0002-lag.patch
+/0003-boss.patch
