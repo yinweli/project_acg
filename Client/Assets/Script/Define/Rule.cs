@@ -698,7 +698,7 @@ public class Rule
 	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
 	public static float UpgradeWeaponEagle(int iLevel)
 	{
-		return Mathf.Max(280.0f + (iLevel - 1) * 10.0f, 0.0f);
+		return Mathf.Max(200.0f + (iLevel - 1) * 10.0f, 0.0f);
 	}
 	// 取得升級沙漠之鷹:爆頭的致命傷害倍數
 	public static float UpgradeWeaponEagle()
@@ -728,7 +728,7 @@ public class Rule
 	// 取得升級輕機槍:電漿的增傷值
 	public static int UpgradeWeaponLMG(int iLevel)
 	{
-		return iLevel;
+		return iLevel / 2;
 	}
 	// 取得升級輕機槍:電漿的增傷值
 	public static int UpgradeWeaponLMG()

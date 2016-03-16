@@ -24,13 +24,13 @@
 {"GUID":"52", "Mode":"4", "Threat":"5", "StageID":"54", "Enegry":"12", "HP":"1200", "MoveSpeed":"0"}
 {"GUID":"61", "Mode":"5", "Threat":"4", "StageID":"16", "Enegry":"20", "HP":"1200", "MoveSpeed":"0.5"}
 {"GUID":"71", "Mode":"6", "Threat":"8", "StageID":"9999", "Enegry":"0", "HP":"400", "MoveSpeed":"0.2"}
-{"GUID":"1001", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
+{"GUID":"1001", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1200", "MoveSpeed":"0.4"}
 {"GUID":"1002", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
 {"GUID":"1003", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1800", "MoveSpeed":"0.6"}
-{"GUID":"1004", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
+{"GUID":"1004", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1200", "MoveSpeed":"0.4"}
 {"GUID":"1005", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
 {"GUID":"1006", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1800", "MoveSpeed":"0.6"}
-{"GUID":"1007", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
+{"GUID":"1007", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1200", "MoveSpeed":"0.4"}
 {"GUID":"1008", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"800", "MoveSpeed":"0.4"}
 {"GUID":"1009", "Mode":"7", "Threat":"6", "StageID":"9999", "Enegry":"9999", "HP":"1800", "MoveSpeed":"0.6"}
 {"GUID":"2001", "Mode":"1", "Threat":"5", "StageID":"9999", "Enegry":"9999", "HP":"30", "MoveSpeed":"0.35"}
